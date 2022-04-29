@@ -292,6 +292,12 @@ begin
   mniBarCode.Visible := True;
   btnRestartClick(nil);
   edtDevice.SetFocus;
+
+// скрытие ненужный пунктов меню
+  mniBarCode.Visible := True;
+  mniBarCodeLong.Visible := True;
+  mniQRIDMAC.Visible := True;
+  mniLoadSoft.Visible := True;
 end;
 
 procedure TfrmMAC.mniPrintMacClick(Sender: TObject);
@@ -323,6 +329,11 @@ begin
   mniExport.Visible := False;
   mniBarCode.Visible := False;
   medtBit_4.SetFocus;
+// скрытие ненужный пунктов меню
+  mniBarCode.Visible := False;
+  mniBarCodeLong.Visible := False;
+  mniQRIDMAC.Visible := False;
+  mniLoadSoft.Visible := False;
 end;
 
 
