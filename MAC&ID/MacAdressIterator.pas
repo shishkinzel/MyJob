@@ -149,6 +149,7 @@ type
     mniGen_QR_PDF: TMenuItem;
     mniGen_QR_DOC: TMenuItem;
     mniGen_QR_XML: TMenuItem;
+    chkMacAdress: TCheckBox;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -195,6 +196,7 @@ type
     procedure mniGen_QR_PDFClick(Sender: TObject);
     procedure mniGen_QR_DOCClick(Sender: TObject);
     procedure mniGen_QR_XMLClick(Sender: TObject);
+    procedure chkMacAdressClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -266,11 +268,39 @@ begin
     CloseFile(fileBarCodeLong);
   end;
 
+// скрываем расширенные окна
+  mniBarCode.Visible := False;
+  mniQRIDMAC.Visible := False;
+  mniLoadSoft.Visible := False;
 end;
+
+// сокрытие лишних пунктов меню
+procedure TfrmMAC.chkMacAdressClick(Sender: TObject);
+begin
+  if chkMacAdress.Checked then
+  begin
+  // показываем расширенные окна
+    mniBarCode.Visible := True;
+    mniQRIDMAC.Visible := True;
+    mniLoadSoft.Visible := True;
+  end
+  else
+  begin
+ // скрываем расширенные окна
+    mniBarCode.Visible := False;
+    mniQRIDMAC.Visible := False;
+    mniLoadSoft.Visible := False;
+  end;
+
+end;
+
+
 // выбор утилиты *************************************************
 
 procedure TfrmMAC.mniIteratorClick(Sender: TObject);
 begin
+// активируем checkBox
+  chkMacAdress.Enabled := True;
   utilityMAC := True;
   mniPrintMac.Enabled := True;
   mniIterator.Enabled := False;
@@ -294,14 +324,17 @@ begin
   edtDevice.SetFocus;
 
 // скрытие ненужный пунктов меню
-  mniBarCode.Visible := True;
+  mniBarCode.Visible := False;
   mniBarCodeLong.Visible := True;
-  mniQRIDMAC.Visible := True;
-  mniLoadSoft.Visible := True;
+  mniQRIDMAC.Visible := False;
+  mniLoadSoft.Visible := False;
 end;
 
 procedure TfrmMAC.mniPrintMacClick(Sender: TObject);
 begin
+// гасим флажок
+  chkMacAdress.Enabled := False;
+  chkMacAdress.Checked := False;
 
   utilityMAC := False;
 
@@ -598,9 +631,6 @@ begin
     edtDevice.SetFocus
     else medtBit_4.SetFocus;
 end;
-
-
-
 
 
 // печать штрих кода *******************************************************

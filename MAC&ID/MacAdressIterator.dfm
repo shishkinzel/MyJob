@@ -2,7 +2,7 @@ object frmMAC: TfrmMAC
   Left = 0
   Top = 0
   Caption = 'MacAdress'
-  ClientHeight = 402
+  ClientHeight = 421
   ClientWidth = 704
   Color = clHighlight
   Font.Charset = DEFAULT_CHARSET
@@ -7809,6 +7809,21 @@ object frmMAC: TfrmMAC
     ParentFont = False
     TabOrder = 12
     OnClick = btnRestartClick
+  end
+  object chkMacAdress: TCheckBox
+    Left = 8
+    Top = 377
+    Width = 161
+    Height = 36
+    Caption = #1055#1086#1083#1085#1072#1103' '#1074#1077#1088#1089#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 13
+    OnClick = chkMacAdressClick
   end
   object mmMAC: TMainMenu
     Left = 16
