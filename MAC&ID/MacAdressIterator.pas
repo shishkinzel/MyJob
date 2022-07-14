@@ -150,6 +150,8 @@ type
     mniGen_QR_DOC: TMenuItem;
     mniGen_QR_XML: TMenuItem;
     chkMacAdress: TCheckBox;
+    chkPrintTab: TCheckBox;
+    edtMod: TEdit;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -197,6 +199,7 @@ type
     procedure mniGen_QR_DOCClick(Sender: TObject);
     procedure mniGen_QR_XMLClick(Sender: TObject);
     procedure chkMacAdressClick(Sender: TObject);
+    procedure chkPrintTabClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -291,14 +294,78 @@ begin
     mniQRIDMAC.Visible := False;
     mniLoadSoft.Visible := False;
   end;
-
 end;
+
+// Выбор режима печати этикеток
+
+procedure TfrmMAC.chkPrintTabClick(Sender: TObject);
+begin
+  if chkPrintTab.Checked then
+  begin
+  // переименовываем надписи
+    lblTitle.Caption := 'Печать этикетки';
+    lblMAC.Caption := 'Название модуля';
+    edtMod.Visible := True;
+  // деактивируем группу mac adress
+    lblHighOrderBit.Enabled := False;
+    medtBit_4.Enabled := False;
+    medtBit_5.Enabled := False;
+    medtBit_6.Enabled := False;
+
+    lblStepIterator.Enabled := False;
+    seStepIterator.Enabled := False;
+
+    // гасим печать mac -адресов
+    mniPrintMac.Enabled := False;
+
+    // гасим ненужные пункты меню и полную версию
+    chkMacAdress.Visible := False;
+    mniReport.Visible := False;
+    mniGen_QR.Visible := False;
+    mniBarCodeLong.Visible := False;
+  end
+  else
+  begin
+    lblTitle.Caption := 'MAC - адрес Итератор';
+    lblMAC.Caption := 'MAC - адресс';
+    edtMod.Visible := False;
+       // активируем группу mac adress
+    lblHighOrderBit.Enabled := True;
+    medtBit_4.Enabled := True;
+    medtBit_5.Enabled := True;
+    medtBit_6.Enabled := True;
+
+    lblStepIterator.Enabled := True;
+    seStepIterator.Enabled := True;
+
+       // активируем печать mac -адресов
+    mniPrintMac.Enabled := True;
+
+        // активируем ненужные пункты меню и полную версию
+    chkMacAdress.Visible := True;
+    mniReport.Visible := True;
+    mniGen_QR.Visible := True;
+    mniBarCodeLong.Visible := True;
+  end;
+end;
+
+
+
+
+
+
+
+
+
+
 
 
 // выбор утилиты *************************************************
 
 procedure TfrmMAC.mniIteratorClick(Sender: TObject);
 begin
+// включаем checkBox Печать этикетки
+  chkPrintTab.Enabled := True;
 // активируем checkBox
   chkMacAdress.Enabled := True;
   utilityMAC := True;
@@ -332,6 +399,8 @@ end;
 
 procedure TfrmMAC.mniPrintMacClick(Sender: TObject);
 begin
+// выключаем checkBox Печать этикетки
+  chkPrintTab.Enabled := False;
 // гасим флажок
   chkMacAdress.Enabled := False;
   chkMacAdress.Checked := False;

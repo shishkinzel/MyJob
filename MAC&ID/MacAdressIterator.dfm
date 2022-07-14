@@ -7415,9 +7415,9 @@ object frmMAC: TfrmMAC
   object lblTitle: TLabel
     Left = 230
     Top = 32
-    Width = 194
+    Width = 196
     Height = 23
-    Caption = 'MAC - '#1072#1076#1088#1077#1089' '#1080#1090#1077#1088#1072#1090#1086#1088
+    Caption = 'MAC - '#1072#1076#1088#1077#1089' '#1048#1090#1077#1088#1072#1090#1086#1088
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
@@ -7595,6 +7595,20 @@ object frmMAC: TfrmMAC
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    Visible = False
+  end
+  object edtMod: TEdit
+    Left = 188
+    Top = 120
+    Width = 200
+    Height = 27
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 15
     Visible = False
   end
   object edtDevice: TEdit
@@ -7824,6 +7838,21 @@ object frmMAC: TfrmMAC
     ParentFont = False
     TabOrder = 13
     OnClick = chkMacAdressClick
+  end
+  object chkPrintTab: TCheckBox
+    Left = 519
+    Top = 377
+    Width = 177
+    Height = 36
+    Caption = #1055#1077#1095#1072#1090#1100' '#1101#1090#1080#1082#1077#1090#1086#1082
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 14
+    OnClick = chkPrintTabClick
   end
   object mmMAC: TMainMenu
     Left = 16
