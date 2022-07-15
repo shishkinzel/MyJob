@@ -153,16 +153,6 @@ type
     chkMacAdress: TCheckBox;
     chkPrintTab: TCheckBox;
     edtMod: TEdit;
-    fdmtbPicture: TFDMemTable;
-    fdmtblOneTitle: TFDMemTable;
-    intgrfldPicturenumber: TIntegerField;
-    blbfldPicturebarcodeBig: TBlobField;
-    blbfldPicturebarcodeSmall: TBlobField;
-    strngfldPictureserialnumber: TStringField;
-    intgrfldOneTitlenumber: TIntegerField;
-    blbfldOneTitletitlepicture: TBlobField;
-    strngfldOneTitletitlebig: TStringField;
-    strngfldOneTitletitlesmall: TStringField;
     mniLabel: TMenuItem;
     mniLabelBig: TMenuItem;
     mniLabelSmall: TMenuItem;
@@ -171,6 +161,10 @@ type
     mniShowSmall: TMenuItem;
     mniPrintSmall: TMenuItem;
     ilAngtel: TImageList;
+    fdmtbLabel: TFDMemTable;
+    strngfldLabelsn: TStringField;
+    tbLabelbcBig: TBlobField;
+    tbLabelbcSmall: TBlobField;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -220,6 +214,9 @@ type
     procedure chkMacAdressClick(Sender: TObject);
     procedure chkPrintTabClick(Sender: TObject);
     procedure mniShowBigClick(Sender: TObject);
+    procedure mniPrintBigClick(Sender: TObject);
+    procedure mniShowSmallClick(Sender: TObject);
+    procedure mniPrintSmallClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -666,54 +663,33 @@ begin
     end;
 // закрытие файла
       CloseFile(fileId);
-
-// заполняем fdmtblOneTitle
-with  fdmtblOneTitle do
-    begin
-      Open;
-      Table.Clear;
-      Append;
-      Fields[0].AsInteger := 1;
-//    (fdmtblOneTitle.FieldByName('titlepicture') as TBlobField) )    )
-      Fields[2].AsString := edtDevice.Text;
-      Fields[3].AsString := edtMod.Text;
-    end;
-    // Прикидываем для barcode ******************************
-    // работа с длинным штрих-кодом
     Reset(fileId);
-    fdmtbPicture.Open;
-    fdmtbPicture.Table.Clear;
+    fdmtbLabel.Open;
+    fdmtbLabel.Table.Clear;
 
     while (not EOF(fileId)) do
     begin
-    fdmtbPicture.Append;
+    fdmtbLabel.Append;
     Readln(fileId, s1);
- // пишем в другую таблицу
-//      fdmtblOneTitle.Fields[2].AsString := edtDevice.Text;
-//      fdmtblOneTitle.Fields[3].AsString := edtMod.Text;
-
     tmp := Trim(Fetch(s1, '|'));
-
-    fdmtbPicture.FieldByName('number').AsString := tmp;
 // создаем поток и трансоформируем в barcode
 
     brcdMAC.InputText :=s1;
     brcdMAC.Height := 15;
     brcdMAC.Symbology := syCode128;
-    fdmtbPicture.Fields[3].AsString := s1;
+    fdmtbLabel.Fields[0].AsString := s1;
     brcdMAC.Bitmap.SaveToStream(barCodeStream);
     barCodeStream.Position := 0;
-    (fdmtbPicture.FieldByName('barcodeBig') as TBlobField).LoadFromStream(barCodeStream);
+    (fdmtbLabel.FieldByName('bcBig') as TBlobField).LoadFromStream(barCodeStream);
     barCodeStream.Clear;
 
     brcdMAC.Height := 15;
-      brcdMAC.Symbology := syCode128SubsetB;
+      brcdMAC.Symbology := syCode128;
       brcdMAC.Bitmap.SaveToStream(barCodeStream);
       barCodeStream.Position := 0;
-      (fdmtbPicture.FieldByName('barcodeSmall') as TBlobField).LoadFromStream(barCodeStream);
+      (fdmtbLabel.FieldByName('bcSmall') as TBlobField).LoadFromStream(barCodeStream);
       barCodeStream.Clear;
-      fdmtbPicture.Post;
-  //  fdBarCodeLong.Next;
+      fdmtbLabel.Post;
   end;
     CloseFile(fileId);
 // разрушение потока
@@ -1355,14 +1331,6 @@ begin
   frmFR_IDandMAC.reportIDandMAC.Print;
 end;
 
-// BarCode для большой этикетки
-  procedure TfrmMAC.mniShowBigClick(Sender: TObject);
-begin
- frmFRBigLabel.Show;
- (frmFRBigLabel.rpBigLabel.FindObject('Memo2') as TFrxMemoView).Text := edtDevice.text;
- frmFRBigLabel.rpBigLabel.ShowReport();
-end;
-
 // предосмотр BarCode
 procedure TfrmMAC.mniPreviewClick(Sender: TObject);
 begin
@@ -1502,6 +1470,37 @@ begin
   if (StrToIntDef(medtNumber.Text, -1) >= 0) and (Length(medtNumber.Text) = 3) then
     btnApply.SetFocus
 end;
+
+// BarCode для большой этикетки ***********************************************
+  procedure TfrmMAC.mniShowBigClick(Sender: TObject);
+begin
+  frmFRBigLabel.Show;
+  (frmFRBigLabel.rpBigLabel.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
+  frmFRBigLabel.rpBigLabel.ShowReport();
+end;
+// печать большой этикетки
+
+procedure TfrmMAC.mniPrintBigClick(Sender: TObject);
+begin
+  frmFRBigLabel.rpBigLabel.ShowReport;
+  frmFRBigLabel.rpBigLabel.Print;
+end;
+
+// BarCode для маленькой этикетки ***********************************************
+procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
+begin
+  frmFRSmallLabel.Show;
+  (frmFRSmallLabel.rpSmallLabel.FindObject('lbLittle') as TFrxMemoView).Text := edtmod.text;
+  frmFRSmallLabel.rpSmallLabel.ShowReport();
+end;
+
+// печать маленькой этикетки
+procedure TfrmMAC.mniPrintSmallClick(Sender: TObject);
+begin
+  frmFRSmallLabel.rpSmallLabel.ShowReport;
+  frmFRSmallLabel.rpSmallLabel.Print;
+end;
+
 end.
 
 

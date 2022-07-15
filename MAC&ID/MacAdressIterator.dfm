@@ -8148,15 +8148,18 @@ object frmMAC: TfrmMAC
         end
         object mniPrintBig: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          OnClick = mniPrintBigClick
         end
       end
       object mniLabelSmall: TMenuItem
         Caption = #1052#1072#1083#1072#1103' '#1101#1090#1080#1082#1077#1090#1082#1072
         object mniShowSmall: TMenuItem
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mniShowSmallClick
         end
         object mniPrintSmall: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          OnClick = mniPrintSmallClick
         end
       end
     end
@@ -8552,101 +8555,6 @@ object frmMAC: TfrmMAC
       DisplayWidth = 32
       FieldName = 'Other'
       Size = 500
-    end
-  end
-  object fdmtbPicture: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'number'
-        DataType = ftInteger
-      end
-      item
-        Name = 'barcodeBig'
-        DataType = ftBlob
-      end
-      item
-        Name = 'barcodeSmall'
-        DataType = ftBlob
-      end
-      item
-        Name = 'serialnumber'
-        DataType = ftString
-        Size = 20
-      end>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 448
-    Top = 376
-    object intgrfldPicturenumber: TIntegerField
-      FieldName = 'number'
-    end
-    object blbfldPicturebarcodeBig: TBlobField
-      FieldName = 'barcodeBig'
-    end
-    object blbfldPicturebarcodeSmall: TBlobField
-      FieldName = 'barcodeSmall'
-    end
-    object strngfldPictureserialnumber: TStringField
-      FieldName = 'serialnumber'
-    end
-  end
-  object fdmtblOneTitle: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'number'
-        DataType = ftInteger
-      end
-      item
-        Name = 'titlepicture'
-        DataType = ftBlob
-      end
-      item
-        Name = 'titlebig'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'titlesmall'
-        DataType = ftString
-        Size = 50
-      end>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 488
-    Top = 376
-    object intgrfldOneTitlenumber: TIntegerField
-      DisplayWidth = 10
-      FieldName = 'number'
-    end
-    object blbfldOneTitletitlepicture: TBlobField
-      DisplayWidth = 9
-      FieldName = 'titlepicture'
-    end
-    object strngfldOneTitletitlebig: TStringField
-      DisplayWidth = 32
-      FieldName = 'titlebig'
-      Size = 100
-    end
-    object strngfldOneTitletitlesmall: TStringField
-      DisplayWidth = 32
-      FieldName = 'titlesmall'
-      Size = 50
     end
   end
   object ilAngtel: TImageList
@@ -17109,5 +17017,41 @@ object frmMAC: TfrmMAC
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object fdmtbLabel: TFDMemTable
+    FieldDefs = <
+      item
+        Name = 'sn'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'bcBig'
+        DataType = ftBlob
+      end
+      item
+        Name = 'bcSmall'
+        DataType = ftBlob
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 456
+    Top = 376
+    object strngfldLabelsn: TStringField
+      FieldName = 'sn'
+    end
+    object tbLabelbcBig: TBlobField
+      FieldName = 'bcBig'
+    end
+    object tbLabelbcSmall: TBlobField
+      FieldName = 'bcSmall'
+    end
   end
 end

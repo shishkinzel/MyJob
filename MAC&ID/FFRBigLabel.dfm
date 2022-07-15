@@ -26,9 +26,6 @@ object frmFRBigLabel: TfrmFRBigLabel
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = -8
-    ExplicitTop = -8
-    ExplicitWidth = 287
   end
   object rpBigLabel: TfrxReport
     Version = '6.9.3'
@@ -40,7 +37,7 @@ object frmFRBigLabel: TfrmFRBigLabel
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.609931226800000000
-    ReportOptions.LastChange = 44757.741372800930000000
+    ReportOptions.LastChange = 44757.847312928240000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -52,11 +49,7 @@ object frmFRBigLabel: TfrmFRBigLabel
     Datasets = <
       item
         DataSet = dbBigLabel
-        DataSetName = 'dbBigLabel'
-      end
-      item
-        DataSet = dbSmallLabel
-        DataSetName = 'dbSmallLabel'
+        DataSetName = 'dbLabel'
       end>
     Variables = <>
     Style = <>
@@ -77,12 +70,12 @@ object frmFRBigLabel: TfrmFRBigLabel
         Top = 18.897650000000000000
         Width = 226.771800000000000000
         DataSet = dbBigLabel
-        DataSetName = 'dbBigLabel'
+        DataSetName = 'dbLabel'
         RowCount = 0
-        object Picture1: TfrxPictureView
+        object Angtel: TfrxPictureView
           AllowVectorExport = True
           Width = 226.771800000000000000
-          Height = 37.795300000000000000
+          Height = 49.133890000000000000
           Center = True
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Picture.Data = {
@@ -52743,24 +52736,24 @@ object frmFRBigLabel: TfrmFRBigLabel
           Transparent = False
           TransparentColor = clWhite
         end
-        object Picture2: TfrxPictureView
+        object BarCode: TfrxPictureView
           AllowVectorExport = True
-          Top = 64.252010000000000000
+          Top = 83.149660000000000000
           Width = 230.551330000000000000
           Height = 26.456710000000000000
           Center = True
-          DataField = 'barcodeBig'
+          DataField = 'bcBig'
           DataSet = dbBigLabel
-          DataSetName = 'dbBigLabel'
+          DataSetName = 'dbLabel'
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HightQuality = False
           Transparent = False
           TransparentColor = clWhite
         end
-        object Memo1: TfrxMemoView
+        object TextSN: TfrxMemoView
           Anchors = [fraLeft, fraTop, fraRight]
           AllowVectorExport = True
-          Top = 113.385900000000000000
+          Top = 128.504020000000000000
           Width = 226.771800000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -52775,15 +52768,11 @@ object frmFRBigLabel: TfrmFRBigLabel
           ParentFont = False
           VAlign = vaCenter
         end
-        object dbBigLabelserialnumber: TfrxMemoView
-          IndexTag = 1
+        object lbBig: TfrxMemoView
           AllowVectorExport = True
-          Top = 98.267780000000000000
+          Top = 49.133890000000000000
           Width = 226.771800000000000000
-          Height = 11.338590000000000000
-          DataField = 'serialnumber'
-          DataSet = dbBigLabel
-          DataSetName = 'dbBigLabel'
+          Height = 34.015770000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -52792,37 +52781,41 @@ object frmFRBigLabel: TfrmFRBigLabel
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[dbBigLabel."serialnumber"]')
+            '123123')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo2: TfrxMemoView
+        object SN: TfrxMemoView
+          IndexTag = 1
           AllowVectorExport = True
-          Left = 11.338590000000000000
-          Top = 45.354360000000000000
-          Width = 207.874150000000000000
-          Height = 15.118120000000000000
-          Frame.Typ = []
+          Top = 109.606370000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          DataField = 'sn'
+          DataSet = dbBigLabel
+          DataSetName = 'dbLabel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
-            '123123')
+            '[dbLabel."sn"]')
+          ParentFont = False
+          VAlign = vaCenter
         end
       end
     end
   end
   object dbBigLabel: TfrxDBDataset
-    UserName = 'dbBigLabel'
+    UserName = 'dbLabel'
     CloseDataSource = False
-    DataSet = frmMAC.fdmtbPicture
+    DataSet = frmMAC.fdmtbLabel
     BCDToCurrency = False
     Left = 24
     Top = 150
-  end
-  object dbSmallLabel: TfrxDBDataset
-    UserName = 'dbSmallLabel'
-    CloseDataSource = False
-    DataSet = frmMAC.fdmtblOneTitle
-    BCDToCurrency = False
-    Left = 24
-    Top = 222
   end
 end
