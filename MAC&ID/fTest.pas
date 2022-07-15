@@ -18,6 +18,10 @@ type
     grdIDandMAC: TDBGrid;
     dsGen_OR: TDataSource;
     grdGen_OR: TDBGrid;
+    dbgrd3: TDBGrid;
+    ds3: TDataSource;
+    dbgrd4: TDBGrid;
+    ds4: TDataSource;
   private
     { Private declarations }
   public

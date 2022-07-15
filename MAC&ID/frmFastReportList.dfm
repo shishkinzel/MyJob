@@ -93,6 +93,14 @@ object frmFRList: TfrmFRList
           VAlign = vaCenter
         end
       end
+      object DetailData1: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 64.252010000000000000
+        Width = 226.771800000000000000
+        RowCount = 0
+      end
     end
   end
   object frxdbdtstList: TfrxDBDataset

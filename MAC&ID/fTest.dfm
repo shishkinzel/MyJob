@@ -43,7 +43,7 @@ object frmTestGrid: TfrmTestGrid
     Left = 8
     Top = 175
     Width = 529
-    Height = 120
+    Height = 66
     DataSource = dsLoad
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
@@ -53,8 +53,8 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object grdIDandMAC: TDBGrid
-    Left = 0
-    Top = 301
+    Left = 8
+    Top = 247
     Width = 377
     Height = 68
     DataSource = dsIDandMAC
@@ -66,12 +66,38 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object grdGen_OR: TDBGrid
-    Left = 0
-    Top = 375
+    Left = 8
+    Top = 321
     Width = 657
-    Height = 66
+    Height = 50
     DataSource = dsGen_OR
     TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dbgrd3: TDBGrid
+    Left = 8
+    Top = 377
+    Width = 657
+    Height = 66
+    DataSource = ds3
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dbgrd4: TDBGrid
+    Left = 8
+    Top = 449
+    Width = 657
+    Height = 66
+    DataSource = ds4
+    TabOrder = 6
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -102,5 +128,15 @@ object frmTestGrid: TfrmTestGrid
     DataSet = frmMAC.fmTab_Gen_OR
     Left = 264
     Top = 504
+  end
+  object ds3: TDataSource
+    DataSet = frmMAC.fdmtblOneTitle
+    Left = 440
+    Top = 512
+  end
+  object ds4: TDataSource
+    DataSet = frmMAC.fdmtbPicture
+    Left = 448
+    Top = 520
   end
 end

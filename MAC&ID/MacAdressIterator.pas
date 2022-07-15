@@ -5,12 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, Vcl.Mask, Vcl.Samples.Spin, dmMacIterator, frmFastReportMac,
-  frmFReportIDandMAC, frmFReportBarCodeLong, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Data.DB, Barcode, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.Menus, frmFReportBarCode , FShowSoft, FLoadSoft, frmFReportGen_QR,
-  FireDAC.Stan.StorageJSON, frmFastReportList, fTest;
+  Vcl.StdCtrls, Vcl.Mask, Vcl.Samples.Spin, dmMacIterator,
+  frmFastReportMac, FFRBigLabel, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel,
+  frmFReportIDandMAC, frmFReportBarCodeLong, frmFReportBarCode , FShowSoft, FLoadSoft, frmFReportGen_QR,
+  FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
 
 
 type
@@ -152,6 +153,24 @@ type
     chkMacAdress: TCheckBox;
     chkPrintTab: TCheckBox;
     edtMod: TEdit;
+    fdmtbPicture: TFDMemTable;
+    fdmtblOneTitle: TFDMemTable;
+    intgrfldPicturenumber: TIntegerField;
+    blbfldPicturebarcodeBig: TBlobField;
+    blbfldPicturebarcodeSmall: TBlobField;
+    strngfldPictureserialnumber: TStringField;
+    intgrfldOneTitlenumber: TIntegerField;
+    blbfldOneTitletitlepicture: TBlobField;
+    strngfldOneTitletitlebig: TStringField;
+    strngfldOneTitletitlesmall: TStringField;
+    mniLabel: TMenuItem;
+    mniLabelBig: TMenuItem;
+    mniLabelSmall: TMenuItem;
+    mniShowBig: TMenuItem;
+    mniPrintBig: TMenuItem;
+    mniShowSmall: TMenuItem;
+    mniPrintSmall: TMenuItem;
+    ilAngtel: TImageList;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -200,6 +219,7 @@ type
     procedure mniGen_QR_XMLClick(Sender: TObject);
     procedure chkMacAdressClick(Sender: TObject);
     procedure chkPrintTabClick(Sender: TObject);
+    procedure mniShowBigClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -234,7 +254,7 @@ type
     var
       barCodeStream : TMemoryStream;
       idMAC: array[0..2] of Byte;
-      idMACBarCode : array[0..2] of Byte;
+      idMACBarCode: array[0..2] of Byte;
   end;
 
 var
@@ -243,7 +263,7 @@ var
 implementation
 
 uses
-  IdGlobal;
+  IdGlobal, frxClass;
 {$R *.dfm}
 // создание формы начальные настройки
 
@@ -259,13 +279,13 @@ begin
     CloseFile(fileId);
   end;
 
-    if not FileExists(nameBarCodeFile) then
+  if not FileExists(nameBarCodeFile) then
   begin
     Rewrite(fileBarCode);
     CloseFile(fileBarCode);
   end;
 
-      if not FileExists(nameFileBarCodeLong) then
+  if not FileExists(nameFileBarCodeLong) then
   begin
     Rewrite(fileBarCodeLong);
     CloseFile(fileBarCodeLong);
@@ -302,6 +322,8 @@ procedure TfrmMAC.chkPrintTabClick(Sender: TObject);
 begin
   if chkPrintTab.Checked then
   begin
+  // активация пункта меню печать этикетки
+    mniLabel.Visible := True;
   // переименовываем надписи
     lblTitle.Caption := 'Печать этикетки';
     lblMAC.Caption := 'Название модуля';
@@ -326,6 +348,9 @@ begin
   end
   else
   begin
+    // гасим пункт меню печать этикетки
+    mniLabel.Visible := False;
+
     lblTitle.Caption := 'MAC - адрес Итератор';
     lblMAC.Caption := 'MAC - адресс';
     edtMod.Visible := False;
@@ -348,15 +373,6 @@ begin
     mniBarCodeLong.Visible := True;
   end;
 end;
-
-
-
-
-
-
-
-
-
 
 
 
@@ -438,10 +454,9 @@ begin
   mniLoadSoft.Visible := False;
 end;
 
-
 procedure TfrmMAC.mniShowWindowClick(Sender: TObject);
 begin
-frmShowSoft.ShowModal;
+  frmShowSoft.ShowModal;
 end;
 
 // приминение выбора  *********************************************
@@ -469,7 +484,6 @@ begin
   mniResetBarCodeLong.Enabled := True;
   mniResetLoadSoft.Enabled := True;
   mniFrReset.Enabled := True;
-
 
   stepMac := 1;
   stepIteration := StrToIntDef(seStepIterator.Text, 0);
@@ -507,7 +521,7 @@ begin
   fstepIterator := seStepIterator.Text;
   ffirstIdDevice := medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text + ' ' + medtNumber.Text;
   fquantityDevice := seQuantity.Text;
-  numberDeviceHigh :=  medtModule.Text + medtDate.Text + medtGroup.Text;
+  numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;
 //  ffirstIdDeviceBarCode := numberDeviceHigh + medtNumber.Text;
 //  ffirstIdDeveceBarCodeLong := '--serial:' +  ffirstIdDeviceBarCode;
 //*******************************************************
@@ -519,124 +533,207 @@ begin
   idGroup := StrToIntDef(medtGroup.Text, 0);
   idNumber := StrToIntDef(medtNumber.Text, 0);
 
-//
-  if utilityMAC then
+// изменяем на печать этикетки
+  if not (chkPrintTab.Checked) then
   begin
+//
+    if utilityMAC then
+    begin
 //   формирование файла
-    Rewrite(fileId);
-    for i := 1 to quantity do
-    begin
-      beginNumberDevice := idNumber + (i - 1);
-      numberS := Format('  ' + '%.3d', [beginNumberDevice]);
-      s := Format('%.4d', [i]);
-      Write(fileId, s);
-      Write(fileId, DataModuleMacIterator.ArrayToString(idMAC));
-      Write(fileId, numberS);
-      while stepMac <= stepIteration do
+      Rewrite(fileId);
+      for i := 1 to quantity do
       begin
-        DataModuleMacIterator.IncArrayOne(idMAC);
-        Inc(stepMac);
-      end;
-      stepMac := 1;
-      Writeln(fileId);
-    end;
-// закрытие файла
-    CloseFile(fileId);
-
-// заполняем FDMemTable
-    fdmtblTitle.Open;
-    fdmtblTitle.Table.Clear;
-    fdmtblTitle.Append;
-
-//    fdmtblTitle.Insert;
-    fdmtblTitle.FieldByName('nameDevice').AsString := fnameDevice;
-    fdmtblTitle.FieldByName('firstOrderBit').AsString := ffirstOrderBit;
-    fdmtblTitle.FieldByName('stepIterator').AsString := fstepIterator;
-    fdmtblTitle.FieldByName('firstIdDevice').AsString := ffirstIdDevice;
-    fdmtblTitle.FieldByName('quantityDevice').AsString := fquantityDevice;
-
-    fdmtblMac.Open;
-    fdmtblMac.Table.Clear;
-    fdmtblMac.Append;
-//
-    fdmtblMac.FieldByName('Number').AsString := '';
-    fdmtblMac.FieldByName('MAC - adress').AsString := '';
-    fdmtblMac.FieldByName('id - number').AsString := '';
-//
-    Reset(fileId);
-    fdmtblMac.First;
-    while (not EOF(fileId)) do
-    begin
-      fdmtblMac.Insert;
-      Readln(fileId, s1);
-      tmp := Trim(Fetch(s1, '|'));
-      tmp1 := Trim(Fetch(s1, '|'));
-      fdmtblMac.FieldByName('Number').AsString := tmp;
-      fdmtblMac.FieldByName('MAC - adress').AsString := tmp1;
-      fdmtblMac.FieldByName('id - number').AsString := s1;
-      fdmtblMac.Post;
-      fdmtblMac.Next;
-    end;
-    CloseFile(fileId);
-  end
-  else
-  begin
-  //   формирование файла
-    Rewrite(fileId);
-    for i := 1 to quantity do
-    begin
-      s := DataModuleMacIterator.ArrayToStringShort(idMAC);
-      Delete(s, 9, 3);
-      s := '68:EB:C5:' + s;
-      Write(fileId, s);
-      if stepIteration <> 1 then
-      begin
+        beginNumberDevice := idNumber + (i - 1);
+        numberS := Format('  ' + '%.3d', [beginNumberDevice]);
+        s := Format('%.4d', [i]);
+        Write(fileId, s);
+        Write(fileId, DataModuleMacIterator.ArrayToString(idMAC));
+        Write(fileId, numberS);
         while stepMac <= stepIteration do
         begin
           DataModuleMacIterator.IncArrayOne(idMAC);
           Inc(stepMac);
-          Dec(range);
-          if range = 1 then
-          begin
-            rangeLast := '-' + IntToHex(idMAC[2]);
-            write(fileId, rangeLast);
-          end;
         end;
-      end
-      else
-        DataModuleMacIterator.IncArrayOne(idMAC);
-      stepMac := 1;
-      range := stepIteration;
+        stepMac := 1;
+        Writeln(fileId);
+      end;
+// закрытие файла
+      CloseFile(fileId);
+
+// заполняем FDMemTable
+      fdmtblTitle.Open;
+      fdmtblTitle.Table.Clear;
+      fdmtblTitle.Append;
+
+//    fdmtblTitle.Insert;
+      fdmtblTitle.FieldByName('nameDevice').AsString := fnameDevice;
+      fdmtblTitle.FieldByName('firstOrderBit').AsString := ffirstOrderBit;
+      fdmtblTitle.FieldByName('stepIterator').AsString := fstepIterator;
+      fdmtblTitle.FieldByName('firstIdDevice').AsString := ffirstIdDevice;
+      fdmtblTitle.FieldByName('quantityDevice').AsString := fquantityDevice;
+
+      fdmtblMac.Open;
+      fdmtblMac.Table.Clear;
+      fdmtblMac.Append;
+//
+      fdmtblMac.FieldByName('Number').AsString := '';
+      fdmtblMac.FieldByName('MAC - adress').AsString := '';
+      fdmtblMac.FieldByName('id - number').AsString := '';
+//
+      Reset(fileId);
+      fdmtblMac.First;
+      while (not EOF(fileId)) do
+      begin
+        fdmtblMac.Insert;
+        Readln(fileId, s1);
+        tmp := Trim(Fetch(s1, '|'));
+        tmp1 := Trim(Fetch(s1, '|'));
+        fdmtblMac.FieldByName('Number').AsString := tmp;
+        fdmtblMac.FieldByName('MAC - adress').AsString := tmp1;
+        fdmtblMac.FieldByName('id - number').AsString := s1;
+        fdmtblMac.Post;
+        fdmtblMac.Next;
+      end;
+      CloseFile(fileId);
+    end
+    else
+    begin
+  //   формирование файла
+      Rewrite(fileId);
+      for i := 1 to quantity do
+      begin
+        s := DataModuleMacIterator.ArrayToStringShort(idMAC);
+        Delete(s, 9, 3);
+        s := '68:EB:C5:' + s;
+        Write(fileId, s);
+        if stepIteration <> 1 then
+        begin
+          while stepMac <= stepIteration do
+          begin
+            DataModuleMacIterator.IncArrayOne(idMAC);
+            Inc(stepMac);
+            Dec(range);
+            if range = 1 then
+            begin
+              rangeLast := '-' + IntToHex(idMAC[2]);
+              write(fileId, rangeLast);
+            end;
+          end;
+        end
+        else
+          DataModuleMacIterator.IncArrayOne(idMAC);
+        stepMac := 1;
+        range := stepIteration;
+        Writeln(fileId);
+      end;
+// закрытие файла
+      CloseFile(fileId);
+
+// заполняем FDMemTable
+      fdmtblMac.Open;
+      fdmtblMac.Table.Clear;
+      fdmtblMac.Append;
+      fdmtblMac.FieldByName('MAC - adress').AsString := '';
+//
+      Reset(fileId);
+      fdmtblMac.First;
+      while (not EOF(fileId)) do
+      begin
+        fdmtblMac.Insert;
+        Readln(fileId, s);
+        fdmtblMac.FieldByName('MAC - adress').AsString := s;
+        fdmtblMac.Post;
+        fdmtblMac.Next;
+      end;
+      CloseFile(fileId);
+    end;
+  end
+  else
+  begin
+   //   формирование файла для этикетки
+    barCodeStream := TMemoryStream.Create;
+    Rewrite(fileId);
+    for i := 1 to quantity do
+    begin
+      beginNumberDevice := idNumber + (i - 1);
+      numberS := Format('%.3d', [beginNumberDevice]);
+      s := Format('%.4d', [i]);
+      Write(fileId, s);
+      s := ' |' + medtModule.Text + medtDate.Text + medtGroup.Text;
+      Write(fileId, s);
+      Write(fileId, numberS);
       Writeln(fileId);
     end;
 // закрытие файла
-    CloseFile(fileId);
+      CloseFile(fileId);
 
-// заполняем FDMemTable
-    fdmtblMac.Open;
-    fdmtblMac.Table.Clear;
-    fdmtblMac.Append;
-    fdmtblMac.FieldByName('MAC - adress').AsString := '';
-//
+// заполняем fdmtblOneTitle
+with  fdmtblOneTitle do
+    begin
+      Open;
+      Table.Clear;
+      Append;
+      Fields[0].AsInteger := 1;
+//    (fdmtblOneTitle.FieldByName('titlepicture') as TBlobField) )    )
+      Fields[2].AsString := edtDevice.Text;
+      Fields[3].AsString := edtMod.Text;
+    end;
+    // Прикидываем для barcode ******************************
+    // работа с длинным штрих-кодом
     Reset(fileId);
-    fdmtblMac.First;
+    fdmtbPicture.Open;
+    fdmtbPicture.Table.Clear;
+
     while (not EOF(fileId)) do
     begin
-      fdmtblMac.Insert;
-      Readln(fileId, s);
-      fdmtblMac.FieldByName('MAC - adress').AsString := s;
-      fdmtblMac.Post;
-      fdmtblMac.Next;
-    end;
-    CloseFile(fileId);
+    fdmtbPicture.Append;
+    Readln(fileId, s1);
+ // пишем в другую таблицу
+//      fdmtblOneTitle.Fields[2].AsString := edtDevice.Text;
+//      fdmtblOneTitle.Fields[3].AsString := edtMod.Text;
+
+    tmp := Trim(Fetch(s1, '|'));
+
+    fdmtbPicture.FieldByName('number').AsString := tmp;
+// создаем поток и трансоформируем в barcode
+
+    brcdMAC.InputText :=s1;
+    brcdMAC.Height := 15;
+    brcdMAC.Symbology := syCode128;
+    fdmtbPicture.Fields[3].AsString := s1;
+    brcdMAC.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (fdmtbPicture.FieldByName('barcodeBig') as TBlobField).LoadFromStream(barCodeStream);
+    barCodeStream.Clear;
+
+    brcdMAC.Height := 15;
+      brcdMAC.Symbology := syCode128SubsetB;
+      brcdMAC.Bitmap.SaveToStream(barCodeStream);
+      barCodeStream.Position := 0;
+      (fdmtbPicture.FieldByName('barcodeSmall') as TBlobField).LoadFromStream(barCodeStream);
+      barCodeStream.Clear;
+      fdmtbPicture.Post;
+  //  fdBarCodeLong.Next;
   end;
-//   frmTestGrid.Show;
+    CloseFile(fileId);
+// разрушение потока
+  barCodeStream.Free;
+
+  end;
+
+//  frmTestGrid.Show;
 end;
+
+
+
+
 // окончание блока выбора  **********************************************************
 
 // процедура сброса
 
 procedure TfrmMAC.btnRestartClick(Sender: TObject);
+begin
+if not(chkPrintTab.Checked) then
 begin
   if utilityMAC then
     edtDevice.SetFocus
@@ -689,17 +786,28 @@ begin
     medtNumber.Text := '000';
   end;
 // сброс команды прошивки из модуля FShowSoft
-  frmShowSoft.fTextSoft := '';
+    frmShowSoft.fTextSoft := '';
 // запрещение пунктов "Сброс" в главном меню
-  mniReset.Enabled := False;
-  mniResetBarCode.Enabled := False;
-  mniResetBarCodeLong.Enabled := False;
-  mniResetLoadSoft.Enabled := False;
-  mniFrReset.Enabled := False;
+    mniReset.Enabled := False;
+    mniResetBarCode.Enabled := False;
+    mniResetBarCodeLong.Enabled := False;
+    mniResetLoadSoft.Enabled := False;
+    mniFrReset.Enabled := False;
     if utilityMAC then
-    edtDevice.SetFocus
-    else medtBit_4.SetFocus;
+      edtDevice.SetFocus
+    else
+      medtBit_4.SetFocus;
+  end
+  else
+  begin
+       ShowMessage('Привет');
+       btnApply.Enabled := True;
+       btnRestart.Enabled := False;
+  end;
+
 end;
+
+
 
 
 // печать штрих кода *******************************************************
@@ -1210,6 +1318,8 @@ begin
   frmFReport.frxrprtMac.Export(frmFReport.frxmlxprtMac);
 end;
 
+
+
 procedure TfrmMAC.doc1Click(Sender: TObject);
 begin
   frmFReport.frxrprtMac.ShowReport();
@@ -1245,6 +1355,13 @@ begin
   frmFR_IDandMAC.reportIDandMAC.Print;
 end;
 
+// BarCode для большой этикетки
+  procedure TfrmMAC.mniShowBigClick(Sender: TObject);
+begin
+ frmFRBigLabel.Show;
+ (frmFRBigLabel.rpBigLabel.FindObject('Memo2') as TFrxMemoView).Text := edtDevice.text;
+ frmFRBigLabel.rpBigLabel.ShowReport();
+end;
 
 // предосмотр BarCode
 procedure TfrmMAC.mniPreviewClick(Sender: TObject);

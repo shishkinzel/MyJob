@@ -12,7 +12,9 @@ uses
   FShowSoft in 'FShowSoft.pas' {frmShowSoft},
   FLoadSoft in 'FLoadSoft.pas' {frmFReportLoadSoft},
   frmFReportIDandMAC in 'frmFReportIDandMAC.pas' {frmFR_IDandMAC},
-  frmFReportGen_QR in 'frmFReportGen_QR.pas' {frmGen_OR};
+  frmFReportGen_QR in 'frmFReportGen_QR.pas' {frmGen_OR},
+  FFRBigLabel in 'FFRBigLabel.pas' {frmFRBigLabel},
+  FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel};
 
 {$R *.res}
 
@@ -30,5 +32,7 @@ begin
   Application.CreateForm(TfrmFReportLoadSoft, frmFReportLoadSoft);
   Application.CreateForm(TfrmFR_IDandMAC, frmFR_IDandMAC);
   Application.CreateForm(TfrmGen_OR, frmGen_OR);
+  Application.CreateForm(TfrmFRBigLabel, frmFRBigLabel);
+  Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
   Application.Run;
 end.
