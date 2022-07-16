@@ -7415,7 +7415,7 @@ object frmMAC: TfrmMAC
   TextHeight = 13
   object lblTitle: TLabel
     Left = 230
-    Top = 32
+    Top = 12
     Width = 196
     Height = 23
     Caption = 'MAC - '#1072#1076#1088#1077#1089' '#1048#1090#1077#1088#1072#1090#1086#1088
@@ -7428,7 +7428,7 @@ object frmMAC: TfrmMAC
     StyleName = 'lblName'
   end
   object lblMAC: TLabel
-    Left = 22
+    Left = 55
     Top = 120
     Width = 116
     Height = 23
@@ -7454,11 +7454,11 @@ object frmMAC: TfrmMAC
     ParentFont = False
   end
   object lblDevice: TLabel
-    Left = 47
-    Top = 80
-    Width = 192
+    Left = 75
+    Top = 81
+    Width = 186
     Height = 19
-    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+    Caption = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1079#1074#1072#1085#1080#1077' '#1091#1089#1090'-'#1074#1072':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -7559,7 +7559,7 @@ object frmMAC: TfrmMAC
     ParentFont = False
   end
   object lblStepIterator: TLabel
-    Left = 8
+    Left = 10
     Top = 253
     Width = 142
     Height = 16
@@ -7572,7 +7572,7 @@ object frmMAC: TfrmMAC
     ParentFont = False
   end
   object lblQuantity: TLabel
-    Left = 8
+    Left = 10
     Top = 301
     Width = 190
     Height = 16
@@ -7586,7 +7586,7 @@ object frmMAC: TfrmMAC
   end
   object lblPrintMac: TLabel
     Left = 245
-    Top = 52
+    Top = 32
     Width = 159
     Height = 19
     Caption = #1055#1077#1095#1072#1090#1100' '#1052#1040#1057'- '#1072#1076#1088#1077#1089#1086#1074
@@ -7598,8 +7598,23 @@ object frmMAC: TfrmMAC
     ParentFont = False
     Visible = False
   end
+  object lblSGP: TLabel
+    Left = 344
+    Top = 52
+    Width = 270
+    Height = 19
+    Alignment = taCenter
+    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1085#1072' '#1057#1043#1055'  '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsItalic]
+    ParentFont = False
+    Visible = False
+  end
   object edtMod: TEdit
-    Left = 188
+    Left = 230
     Top = 120
     Width = 200
     Height = 27
@@ -7613,9 +7628,9 @@ object frmMAC: TfrmMAC
     Visible = False
   end
   object edtDevice: TEdit
-    Left = 394
+    Left = 390
     Top = 77
-    Width = 297
+    Width = 300
     Height = 27
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -7761,7 +7776,7 @@ object frmMAC: TfrmMAC
     OnClick = mnifrViewClick
   end
   object btnApply: TButton
-    Left = 8
+    Left = 10
     Top = 340
     Width = 150
     Height = 25
@@ -7826,7 +7841,7 @@ object frmMAC: TfrmMAC
     OnClick = btnRestartClick
   end
   object chkMacAdress: TCheckBox
-    Left = 8
+    Left = 10
     Top = 377
     Width = 161
     Height = 36
@@ -8160,6 +8175,15 @@ object frmMAC: TfrmMAC
         object mniPrintSmall: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
           OnClick = mniPrintSmallClick
+        end
+      end
+      object mniShild: TMenuItem
+        Caption = #1064#1080#1083#1100#1076
+        object mniShowShild: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        end
+        object mniPrintShild: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
         end
       end
     end

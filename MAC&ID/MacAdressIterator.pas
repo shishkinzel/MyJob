@@ -165,6 +165,10 @@ type
     strngfldLabelsn: TStringField;
     tbLabelbcBig: TBlobField;
     tbLabelbcSmall: TBlobField;
+    mniShild: TMenuItem;
+    mniShowShild: TMenuItem;
+    mniPrintShild: TMenuItem;
+    lblSGP: TLabel;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -323,7 +327,13 @@ begin
     mniLabel.Visible := True;
   // переименовываем надписи
     lblTitle.Caption := 'Печать этикетки';
-    lblMAC.Caption := 'Название модуля';
+  // изменяем размер окна модуля
+     edtDevice.Left := 230;
+     edtDevice.Width := 460;
+     lblDevice.Left := 10;
+     lblSGP.Visible := True;
+
+    lblMAC.Caption := 'Название модуля:';
     edtMod.Visible := True;
   // деактивируем группу mac adress
     lblHighOrderBit.Enabled := False;
@@ -347,6 +357,11 @@ begin
   begin
     // гасим пункт меню печать этикетки
     mniLabel.Visible := False;
+      // возвращаем размер окна модуля
+    edtDevice.Left := 390;
+    edtDevice.Width := 300;
+    lblDevice.Left := 75;
+    lblSGP.Visible := False;
 
     lblTitle.Caption := 'MAC - адрес Итератор';
     lblMAC.Caption := 'MAC - адресс';
