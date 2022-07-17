@@ -5,11 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, Vcl.Mask, Vcl.Samples.Spin, dmMacIterator,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.Samples.Spin, dmMacIterator, FShild,
   frmFastReportMac, FFRBigLabel, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong, frmFReportBarCode , FShowSoft, FLoadSoft, frmFReportGen_QR,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
 
@@ -160,7 +160,6 @@ type
     mniPrintBig: TMenuItem;
     mniShowSmall: TMenuItem;
     mniPrintSmall: TMenuItem;
-    ilAngtel: TImageList;
     fdmtbLabel: TFDMemTable;
     strngfldLabelsn: TStringField;
     tbLabelbcBig: TBlobField;
@@ -169,6 +168,7 @@ type
     mniShowShild: TMenuItem;
     mniPrintShild: TMenuItem;
     lblSGP: TLabel;
+    mniListDevice: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
@@ -221,6 +221,9 @@ type
     procedure mniPrintBigClick(Sender: TObject);
     procedure mniShowSmallClick(Sender: TObject);
     procedure mniPrintSmallClick(Sender: TObject);
+    procedure mniShowShildClick(Sender: TObject);
+    procedure mniPrintShildClick(Sender: TObject);
+    procedure mniListDeviceClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -332,7 +335,8 @@ begin
      edtDevice.Width := 460;
      lblDevice.Left := 10;
      lblSGP.Visible := True;
-
+  // гасим ненужные кнопки
+    btnStart.Enabled := False;
     lblMAC.Caption := 'Название модуля:';
     edtMod.Visible := True;
   // деактивируем группу mac adress
@@ -485,7 +489,8 @@ begin
   mniLoadSoft.Enabled := True;
   mniBarCode.Enabled := True;
   mniBarCodeLong.Enabled := True;
-  btnStart.Enabled := True;
+  if not (chkPrintTab.Checked) then
+    btnStart.Enabled := True;
   mniApply.Enabled := False;
   btnApply.Enabled := False;
   btnRestart.Enabled := True;
@@ -1514,6 +1519,32 @@ procedure TfrmMAC.mniPrintSmallClick(Sender: TObject);
 begin
   frmFRSmallLabel.rpSmallLabel.ShowReport;
   frmFRSmallLabel.rpSmallLabel.Print;
+end;
+
+// BarCode для шильда
+procedure TfrmMAC.mniShowShildClick(Sender: TObject);
+begin
+   frmShild.Show;
+//  (frmShild.rpShild.FindObject('MShild') as TFrxMemoView).Text := edtmod.text;
+  frmShild.rpShild.ShowReport();
+end;
+
+// печать для шильда
+procedure TfrmMAC.mniPrintShildClick(Sender: TObject);
+begin
+  frmShild.rpShild.ShowReport;
+  frmShild.rpShild.Print;
+end;
+
+// открытие формы со списком модулей и устройств
+
+procedure TfrmMAC.mniListDeviceClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  frmMAC.Top := 10;
+  frmMAC.Left := 10;
+  frmListDevice.Show;
 end;
 
 end.

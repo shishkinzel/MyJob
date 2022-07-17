@@ -14,7 +14,9 @@ uses
   frmFReportIDandMAC in 'frmFReportIDandMAC.pas' {frmFR_IDandMAC},
   frmFReportGen_QR in 'frmFReportGen_QR.pas' {frmGen_OR},
   FFRBigLabel in 'FFRBigLabel.pas' {frmFRBigLabel},
-  FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel};
+  FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel},
+  FShild in 'FShild.pas' {frmShild},
+  FListDevece in 'FListDevece.pas' {frmListDevice};
 
 {$R *.res}
 
@@ -34,5 +36,7 @@ begin
   Application.CreateForm(TfrmGen_OR, frmGen_OR);
   Application.CreateForm(TfrmFRBigLabel, frmFRBigLabel);
   Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
+  Application.CreateForm(TfrmShild, frmShild);
+  Application.CreateForm(TfrmListDevice, frmListDevice);
   Application.Run;
 end.
