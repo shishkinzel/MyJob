@@ -37,7 +37,7 @@ object frmFRBigLabel: TfrmFRBigLabel
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.609931226800000000
-    ReportOptions.LastChange = 44760.750349386570000000
+    ReportOptions.LastChange = 44760.738416655100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -61,7 +61,7 @@ object frmFRBigLabel: TfrmFRBigLabel
       PaperWidth = 60.000000000000000000
       PaperHeight = 40.000000000000000000
       PaperSize = 256
-      Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+      Frame.Typ = []
       MirrorMode = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
@@ -74,10 +74,8 @@ object frmFRBigLabel: TfrmFRBigLabel
         RowCount = 0
         object Angtel: TfrxPictureView
           AllowVectorExport = True
-          Left = 7.559060000000000000
-          Top = 3.779530000000000000
-          Width = 211.653680000000000000
-          Height = 34.015770000000000000
+          Width = 226.771800000000000000
+          Height = 41.574830000000000000
           Center = True
           Frame.Typ = []
           Picture.Data = {
@@ -52740,7 +52738,7 @@ object frmFRBigLabel: TfrmFRBigLabel
         end
         object BarCode: TfrxPictureView
           AllowVectorExport = True
-          Top = 71.811070000000000000
+          Top = 75.590600000000000000
           Width = 230.551330000000000000
           Height = 30.236240000000000000
           Center = True
@@ -52772,7 +52770,7 @@ object frmFRBigLabel: TfrmFRBigLabel
         end
         object lbBig: TfrxMemoView
           AllowVectorExport = True
-          Top = 37.795300000000000000
+          Top = 41.574830000000000000
           Width = 226.771800000000000000
           Height = 34.015770000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -52790,7 +52788,7 @@ object frmFRBigLabel: TfrmFRBigLabel
         object dbLabelsn: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Top = 102.047310000000000000
+          Top = 105.826840000000000000
           Width = 230.551330000000000000
           Height = 22.677180000000000000
           DataField = 'sn'
