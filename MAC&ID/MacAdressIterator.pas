@@ -696,6 +696,7 @@ begin
 
     brcdMAC.InputText :=s1;
     brcdMAC.Height := 15;
+    brcdMAC.OutputOptions := brcdMAC.OutputOptions - [opBoldText];
     brcdMAC.Symbology := syCode128;
     fdmtbLabel.Fields[0].AsString := s1;
     brcdMAC.Bitmap.SaveToStream(barCodeStream);
@@ -703,7 +704,9 @@ begin
     (fdmtbLabel.FieldByName('bcBig') as TBlobField).LoadFromStream(barCodeStream);
     barCodeStream.Clear;
 
-    brcdMAC.Height := 15;
+    brcdMAC.Height := 25;
+    brcdMAC.Scale  := 0.5;
+//     brcdMAC.OutputOptions := brcdMAC.OutputOptions - [opBoldText];
       brcdMAC.Symbology := syCode128;
       brcdMAC.Bitmap.SaveToStream(barCodeStream);
       barCodeStream.Position := 0;
@@ -1510,7 +1513,7 @@ end;
 procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
 begin
   frmFRSmallLabel.Show;
-  (frmFRSmallLabel.rpSmallLabel.FindObject('lbLittle') as TFrxMemoView).Text := edtmod.text;
+  (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
   frmFRSmallLabel.rpSmallLabel.ShowReport();
 end;
 

@@ -8354,7 +8354,7 @@ object frmMAC: TfrmMAC
   object brcdMAC: TBarcode
     OutputOptions = [opBoldText, opBpp1, opStdout, opCompliantHeight]
     ShowText = False
-    Symbology = syCode128
+    Symbology = syCode128SubsetB
     Ultracode = ucCompress
     Left = 64
     Top = 8
@@ -8588,6 +8588,7 @@ object frmMAC: TfrmMAC
     end
   end
   object fdmtbLabel: TFDMemTable
+    Active = True
     FieldDefs = <
       item
         Name = 'sn'
