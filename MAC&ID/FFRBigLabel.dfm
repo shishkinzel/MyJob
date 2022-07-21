@@ -34,10 +34,10 @@ object frmFRBigLabel: TfrmFRBigLabel
     Preview = pvBigLabel
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'ZDesigner TLP 2824_big'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.609931226800000000
-    ReportOptions.LastChange = 44760.738416655100000000
+    ReportOptions.LastChange = 44761.749949467590000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -58,7 +58,7 @@ object frmFRBigLabel: TfrmFRBigLabel
       Width = 1000.000000000000000000
     end
     object LabelBig: TfrxReportPage
-      PaperWidth = 60.000000000000000000
+      PaperWidth = 56.000000000000000000
       PaperHeight = 40.000000000000000000
       PaperSize = 256
       Frame.Typ = []
@@ -66,16 +66,17 @@ object frmFRBigLabel: TfrmFRBigLabel
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 151.181200000000000000
+        Height = 147.401670000000000000
         Top = 18.897650000000000000
-        Width = 226.771800000000000000
+        Width = 211.653680000000000000
         DataSet = dbBigLabel
         DataSetName = 'dbLabel'
         RowCount = 0
         object Angtel: TfrxPictureView
           AllowVectorExport = True
-          Width = 226.771800000000000000
-          Height = 41.574830000000000000
+          Top = 3.779530000000000000
+          Width = 211.653543307086600000
+          Height = 37.795300000000000000
           Center = True
           Frame.Typ = []
           Picture.Data = {
@@ -52738,8 +52739,9 @@ object frmFRBigLabel: TfrmFRBigLabel
         end
         object BarCode: TfrxPictureView
           AllowVectorExport = True
+          Left = 3.779527560000000000
           Top = 75.590600000000000000
-          Width = 230.551330000000000000
+          Width = 211.653543310000000000
           Height = 30.236240000000000000
           Center = True
           DataField = 'bcBig'
@@ -52753,8 +52755,8 @@ object frmFRBigLabel: TfrmFRBigLabel
         object TextSN: TfrxMemoView
           Anchors = [fraLeft, fraTop, fraRight]
           AllowVectorExport = True
-          Top = 136.063080000000000000
-          Width = 226.771800000000000000
+          Top = 132.283550000000000000
+          Width = 204.094483307086600000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -52771,7 +52773,7 @@ object frmFRBigLabel: TfrmFRBigLabel
         object lbBig: TfrxMemoView
           AllowVectorExport = True
           Top = 41.574830000000000000
-          Width = 226.771800000000000000
+          Width = 204.094488188976400000
           Height = 34.015770000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -52789,7 +52791,7 @@ object frmFRBigLabel: TfrmFRBigLabel
           IndexTag = 1
           AllowVectorExport = True
           Top = 105.826840000000000000
-          Width = 230.551330000000000000
+          Width = 219.212598430000000000
           Height = 22.677180000000000000
           DataField = 'sn'
           DataSet = dbBigLabel

@@ -26,10 +26,6 @@ object frmShild: TfrmShild
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = 72
-    ExplicitTop = 80
-    ExplicitWidth = 100
-    ExplicitHeight = 100
   end
   object rpShild: TfrxReport
     Version = '6.9.3'
@@ -38,10 +34,10 @@ object frmShild: TfrmShild
     Preview = prShild
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44758.596319733800000000
+    ReportOptions.LastChange = 44762.431707557900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -63,14 +59,14 @@ object frmShild: TfrmShild
     end
     object PShild: TfrxReportPage
       PaperWidth = 60.000000000000000000
-      PaperHeight = 11.000000000000000000
+      PaperHeight = 12.000000000000000000
       PaperSize = 256
       Frame.Typ = []
       MirrorMode = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 41.574830000000000000
+        Height = 38.062989690000000000
         Top = 18.897650000000000000
         Width = 226.771800000000000000
         DataSet = db_Shild
@@ -78,10 +74,10 @@ object frmShild: TfrmShild
         RowCount = 0
         object Picture1: TfrxPictureView
           AllowVectorExport = True
-          Width = 226.771800000000000000
-          Height = 26.456710000000000000
+          Width = 219.212598430000000000
+          Height = 18.897650000000000000
           Center = True
-          DataField = 'bcSmall'
+          DataField = 'bcBig'
           DataSet = db_Shild
           DataSetName = 'db_Shild'
           Frame.Typ = []
@@ -91,9 +87,11 @@ object frmShild: TfrmShild
         end
         object MShild: TfrxMemoView
           AllowVectorExport = True
-          Top = 24.944881889763780000
-          Width = 226.771800000000000000
+          Left = 7.559060000000000000
+          Top = 19.165351890000000000
+          Width = 204.094620000000000000
           Height = 18.897637800000000000
+          AutoWidth = True
           DataField = 'sn'
           DataSet = db_Shild
           DataSetName = 'db_Shild'

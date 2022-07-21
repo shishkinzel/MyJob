@@ -34,10 +34,10 @@ object frmFRList: TfrmFRList
     Preview = frxprvwList
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44529.624252025460000000
+    ReportOptions.LastChange = 44762.440141458330000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -75,7 +75,7 @@ object frmFRList: TfrmFRList
         object frxDBDataset1MACadress: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Width = 207.874150000000000000
+          Width = 204.094488188976400000
           Height = 22.677180000000000000
           DataField = 'MAC - adress'
           DataSet = frxdbdtstList

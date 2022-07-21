@@ -37,6 +37,5 @@ begin
   Application.CreateForm(TfrmFRBigLabel, frmFRBigLabel);
   Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
   Application.CreateForm(TfrmShild, frmShild);
-  Application.CreateForm(TfrmListDevice, frmListDevice);
   Application.Run;
 end.

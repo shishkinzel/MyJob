@@ -696,7 +696,7 @@ begin
 
     brcdMAC.InputText :=s1;
     brcdMAC.Height := 15;
-    brcdMAC.OutputOptions := brcdMAC.OutputOptions - [opBoldText];
+//    brcdMAC.OutputOptions := brcdMAC.OutputOptions - [opBoldText];
     brcdMAC.Symbology := syCode128;
     fdmtbLabel.Fields[0].AsString := s1;
     brcdMAC.Bitmap.SaveToStream(barCodeStream);
@@ -1547,6 +1547,7 @@ var
 begin
   frmMAC.Top := 10;
   frmMAC.Left := 10;
+  frmListDevice := TfrmListDevice.Create(nil);
   frmListDevice.Show;
 end;
 
