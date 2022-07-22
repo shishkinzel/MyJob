@@ -44,7 +44,6 @@ object frmListDevice: TfrmListDevice
     Height = 147
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 742
     object edtMod: TEdit
       Left = 56
       Top = 75
@@ -167,7 +166,6 @@ object frmListDevice: TfrmListDevice
     Height = 194
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 742
     object dbgrdDev: TDBGrid
       Left = 1
       Top = 19
@@ -190,7 +188,6 @@ object frmListDevice: TfrmListDevice
       DataSource = dsDev
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 740
     end
     object btnApplay: TBitBtn
       Left = 32
@@ -224,7 +221,6 @@ object frmListDevice: TfrmListDevice
     Height = 271
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 742
     object splcenter: TSplitter
       Left = 427
       Top = 1
@@ -283,7 +279,6 @@ object frmListDevice: TfrmListDevice
       Height = 269
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 311
       object bvlRight: TBevel
         Left = 1
         Top = 1
@@ -316,7 +311,6 @@ object frmListDevice: TfrmListDevice
         Height = 217
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 309
       end
     end
   end
@@ -341,8 +335,8 @@ object frmListDevice: TfrmListDevice
   end
   object dsDev: TDataSource
     DataSet = fdmtblDev
-    Left = 16
-    Top = 588
+    Left = 8
+    Top = 228
   end
   object fdmtblDev: TFDMemTable
     Active = True
@@ -354,12 +348,12 @@ object frmListDevice: TfrmListDevice
       item
         Name = 'ndev'
         DataType = ftString
-        Size = 100
+        Size = 200
       end
       item
         Name = 'nmod'
         DataType = ftString
-        Size = 20
+        Size = 50
       end
       item
         Name = 'idmod'
@@ -374,33 +368,36 @@ object frmListDevice: TfrmListDevice
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 152
-    Top = 572
+    Left = 64
+    Top = 228
     object fdmtblDevnum: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = #8470
-      DisplayWidth = 10
+      DisplayWidth = 6
       FieldName = 'num'
       ProviderFlags = [pfInUpdate, pfInWhere]
+      AutoIncrementSeed = 1
+      AutoIncrementStep = 1
       IdentityInsert = True
     end
     object fdmtblDevndev: TStringField
       Alignment = taCenter
-      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090'-'#1074#1072
-      DisplayWidth = 66
+      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+      DisplayWidth = 74
       FieldName = 'ndev'
-      Size = 100
+      Size = 200
     end
     object fdmtblDevnmod: TStringField
       Alignment = taCenter
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1084#1086#1076#1091#1083#1103
-      DisplayWidth = 32
+      DisplayWidth = 30
       FieldName = 'nmod'
+      Size = 50
     end
     object fdmtblDevidmod: TIntegerField
       Alignment = taCenter
-      DisplayLabel = #1053#1086#1084#1077#1088' '#1084#1086#1076#1091#1083#1103
-      DisplayWidth = 12
+      DisplayLabel = #1040#1088#1090#1080#1082#1091#1083
+      DisplayWidth = 9
       FieldName = 'idmod'
     end
   end

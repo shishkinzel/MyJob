@@ -38,7 +38,6 @@ type
     btnReset: TBitBtn;
     btnExit: TBitBtn;
     dsDev: TDataSource;
-    fdmtblDev: TFDMemTable;
     edtDev: TEdit;
     edtMod: TEdit;
     edtNMod: TEdit;
@@ -48,6 +47,7 @@ type
     btnUpApp: TBitBtn;
     btnUpRes: TBitBtn;
     btnUpClose: TBitBtn;
+    fdmtblDev: TFDMemTable;
     fdmtblDevnum: TFDAutoIncField;
     fdmtblDevndev: TStringField;
     fdmtblDevnmod: TStringField;
@@ -85,6 +85,16 @@ procedure TfrmListDevice.FormCreate(Sender: TObject);
 var
 s : string;
 begin
+   // проверка наличия файла  'dev_json.fds' - при отсутствии создать пустой
+
+  if not (FileExists(FTabDev)) then
+  begin
+    fdmtblDev.EmptyDataSet;
+    fdmtblDev.SaveToFile(FTabDev, sfJSON);
+  end;
+
+  fdmtblDev.Open;
+  fdmtblDev.LoadFromFile(FTabDev, sfJSON);
   AssignFile(fileDevice, FDevice);
   AssignFile(fileModule, FModule);
 
@@ -116,28 +126,30 @@ begin
   end;
   CloseFile(fileModule);
 
-// проверка наличия файла  'dev_json.fds' - при отсутствии создать пустой
 
-if not(FileExists(FTabDev)) then
+
+
+end;
+// показ формы
+
+procedure TfrmListDevice.FormShow(Sender: TObject);
 begin
-  fdmtblDev.EmptyDataSet;
-  fdmtblDev.SaveToFile(FTabDev, sfJSON);
+  frmListDevice.Top := 10;
+  frmListDevice.Left := 750;
 end;
 
-
-end;
 
 // перед закрытие формы
 procedure TfrmListDevice.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var
-s : string;
-status : Integer;
-i : Integer;
+  s: string;
+  status: Integer;
+  i: Integer;
 begin
-  status :=  Application.MessageBox(PWideChar('Записать файлы?'),PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
-   case status of
-    6 :
-    begin
+  status := Application.MessageBox(PWideChar('Записать файлы?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
+  case status of
+    6:
+      begin
  // записываем файлы
         Rewrite(fileDevice);
         for i := 0 to mmoDevice.Lines.Count - 1 do
@@ -151,21 +163,21 @@ begin
 
         CanClose := True;
       end;
-    7 :
-    begin
+    7:
+      begin
 
         CanClose := False;
-    end;
-   end;
+      end;
+  end;
+
+  fdmtblDev.SaveToFile(FTabDev, sfJSON);
+  fdmtblDev.Close;
   // CanClose := True;
 end;
 
 
-procedure TfrmListDevice.FormShow(Sender: TObject);
-begin
-frmListDevice.Top := 10;
-frmListDevice.Left := 750;
-end;
+
+
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 
