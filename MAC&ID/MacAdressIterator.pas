@@ -799,14 +799,20 @@ begin
   end
   else
   begin
-       ShowMessage('Привет');
-       btnApply.Enabled := True;
-       btnRestart.Enabled := False;
+    ShowMessage('Привет');
+    btnApply.Enabled := True;
+    btnRestart.Enabled := False;
+// закрытие отчетов
+    frmFRBigLabel.Close;
+    frmFRSmallLabel.Close;
+    frmShild.Close;
+// очистка отчетов
+    frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
+    frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
+    frmShild.rpShild.PreviewPages.Clear;
   end;
 
 end;
-
-
 
 
 // печать штрих кода *******************************************************
