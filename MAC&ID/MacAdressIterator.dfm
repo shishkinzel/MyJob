@@ -8154,6 +8154,7 @@ object frmMAC: TfrmMAC
     end
     object mniLabel: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1072
+      Enabled = False
       Visible = False
       object mniLabelBig: TMenuItem
         Caption = #1041#1086#1083#1100#1096#1072#1103' '#1101#1090#1080#1082#1077#1090#1082#1072

@@ -717,7 +717,8 @@ begin
     CloseFile(fileId);
 // разрушение потока
   barCodeStream.Free;
-
+// активация кнопки "Этикетка"
+   mniLabel.Enabled := True;
   end;
 
 //  frmTestGrid.Show;
@@ -799,7 +800,8 @@ begin
   end
   else
   begin
-    ShowMessage('Привет');
+    mniLabel.Enabled := False;
+    ShowMessage('Сбрасываем отчеты');
     btnApply.Enabled := True;
     btnRestart.Enabled := False;
 // закрытие отчетов
