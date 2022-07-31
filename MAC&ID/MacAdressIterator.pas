@@ -310,6 +310,7 @@ begin
     mniBarCode.Visible := True;
     mniQRIDMAC.Visible := True;
     mniLoadSoft.Visible := True;
+    chkPrintTab.Enabled := False;
   end
   else
   begin
@@ -317,8 +318,10 @@ begin
     mniBarCode.Visible := False;
     mniQRIDMAC.Visible := False;
     mniLoadSoft.Visible := False;
+    chkPrintTab.Enabled := True;
   end;
 end;
+
 
 // Выбор режима печати этикеток
 
@@ -328,6 +331,7 @@ begin
   begin
   // активация пункта меню печать этикетки
     mniLabel.Visible := True;
+    mniListDevice.Visible := True;
   // переименовываем надписи
     lblTitle.Caption := 'Печать этикетки';
   // изменяем размер окна модуля
@@ -361,6 +365,7 @@ begin
   begin
     // гасим пункт меню печать этикетки
     mniLabel.Visible := False;
+    mniListDevice.Visible := False;
       // возвращаем размер окна модуля
     edtDevice.Left := 390;
     edtDevice.Width := 300;

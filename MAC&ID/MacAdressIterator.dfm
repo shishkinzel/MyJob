@@ -8189,10 +8189,11 @@ object frmMAC: TfrmMAC
           OnClick = mniPrintShildClick
         end
       end
-      object mniListDevice: TMenuItem
-        Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
-        OnClick = mniListDeviceClick
-      end
+    end
+    object mniListDevice: TMenuItem
+      Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
+      Visible = False
+      OnClick = mniListDeviceClick
     end
   end
   object fdmtblMac: TFDMemTable
