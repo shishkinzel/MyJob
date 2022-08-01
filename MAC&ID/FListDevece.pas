@@ -34,8 +34,8 @@ type
     mniOther: TMenuItem;
     dbgrdDev: TDBGrid;
     dbnvgrDev: TDBNavigator;
-    btnApplay: TBitBtn;
-    btnReset: TBitBtn;
+    btnTitleMemo: TBitBtn;
+    btnTitleIn: TBitBtn;
     btnExit: TBitBtn;
     dsDev: TDataSource;
     edtDev: TEdit;
@@ -44,18 +44,26 @@ type
     txtTDev: TStaticText;
     txtMod: TStaticText;
     txtNMod: TStaticText;
-    btnUpApp: TBitBtn;
-    btnUpRes: TBitBtn;
-    btnUpClose: TBitBtn;
+    btnInMemo: TBitBtn;
+    btnInTab: TBitBtn;
+    btnInForm: TBitBtn;
     fdmtblDev: TFDMemTable;
     fdmtblDevnum: TFDAutoIncField;
     fdmtblDevndev: TStringField;
     fdmtblDevnmod: TStringField;
-    fdmtblDevidmod: TIntegerField;
+    lblBtnTitle: TLabel;
+    edtLot: TEdit;
+    txtLot: TStaticText;
+    fdmtblLot: TStringField;
+    lblBtnTitleUp: TLabel;
+    fdmtblDevidmod: TStringField;
+    mniClose: TMenuItem;
+    mniSepFile: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure mniCloseClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -138,6 +146,11 @@ begin
   frmListDevice.Left := 750;
 end;
 
+
+procedure TfrmListDevice.mniCloseClick(Sender: TObject);
+begin
+Close;
+end;
 
 // перед закрытие формы
 procedure TfrmListDevice.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
