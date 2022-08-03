@@ -44,18 +44,18 @@ object frmListDevice: TfrmListDevice
     Height = 147
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 12
+    OnClick = btnInMemoClick
     object lblBtnTitle: TLabel
       Left = 312
       Top = 100
-      Width = 241
+      Width = 205
       Height = 13
       Alignment = taCenter
       Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1080#1079' '#1087#1086#1083#1077#1081' '#1074#1074#1086#1076#1072' '#1074' :'
     end
     object edtMod: TEdit
       Left = 12
-      Top = 75
+      Top = 76
       Width = 325
       Height = 24
       Alignment = taCenter
@@ -67,21 +67,6 @@ object frmListDevice: TfrmListDevice
       ParentFont = False
       TabOrder = 1
       Text = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1084#1086#1076#1091#1083#1103' '#1085#1072' '#1057#1050
-    end
-    object edtNMod: TEdit
-      Left = 381
-      Top = 74
-      Width = 120
-      Height = 24
-      Alignment = taRightJustify
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-      Text = '000'
     end
     object edtDev: TEdit
       Left = 12
@@ -110,7 +95,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
     end
     object txtMod: TStaticText
       Left = 12
@@ -127,7 +112,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object txtNMod: TStaticText
       Left = 381
@@ -144,7 +129,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
     end
     object btnInMemo: TBitBtn
       Left = 12
@@ -152,7 +137,8 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1056#1077#1076#1072#1082#1090#1086#1088
-      TabOrder = 6
+      TabOrder = 5
+      OnClick = btnInMemoClick
     end
     object btnInTab: TBitBtn
       Left = 381
@@ -160,7 +146,8 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1058#1072#1073#1083#1080#1094#1072
-      TabOrder = 7
+      TabOrder = 6
+      OnClick = btnInMemoClick
     end
     object btnInForm: TBitBtn
       Left = 662
@@ -168,22 +155,8 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1060#1086#1088#1084#1072
-      TabOrder = 8
-    end
-    object edtLot: TEdit
-      Left = 662
-      Top = 76
-      Width = 120
-      Height = 24
-      Alignment = taRightJustify
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 9
-      Text = '000'
+      TabOrder = 7
+      OnClick = btnInMemoClick
     end
     object txtLot: TStaticText
       Left = 662
@@ -200,7 +173,31 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      TabOrder = 8
+    end
+    object btnedMod: TButtonedEdit
+      Left = 381
+      Top = 75
+      Width = 120
+      Height = 21
+      Alignment = taRightJustify
+      MaxLength = 3
+      NumbersOnly = True
+      TabOrder = 9
+      Text = '000'
+      StyleName = 'choiceNum'
+    end
+    object btnedLot: TButtonedEdit
+      Left = 661
+      Top = 75
+      Width = 120
+      Height = 21
+      Alignment = taRightJustify
+      MaxLength = 3
+      NumbersOnly = True
       TabOrder = 10
+      Text = '000'
+      StyleName = 'choiceNum'
     end
   end
   object pnldown: TPanel
@@ -210,8 +207,6 @@ object frmListDevice: TfrmListDevice
     Height = 194
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 420
-    ExplicitWidth = 765
     object lblBtnTitleUp: TLabel
       Left = 160
       Top = 135
@@ -242,7 +237,6 @@ object frmListDevice: TfrmListDevice
       DataSource = dsDev
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 763
     end
     object btnTitleMemo: TBitBtn
       Left = 56
@@ -276,9 +270,6 @@ object frmListDevice: TfrmListDevice
     Height = 299
     Align = alClient
     TabOrder = 2
-    ExplicitLeft = -1
-    ExplicitTop = 153
-    ExplicitHeight = 271
     object splcenter: TSplitter
       Left = 427
       Top = 1
@@ -292,7 +283,6 @@ object frmListDevice: TfrmListDevice
       Height = 297
       Align = alLeft
       TabOrder = 0
-      ExplicitHeight = 269
       object bvlleft: TBevel
         Left = 1
         Top = 1
@@ -328,9 +318,6 @@ object frmListDevice: TfrmListDevice
         Height = 245
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 0
-        ExplicitTop = 49
-        ExplicitHeight = 217
       end
     end
     object pnlRight: TPanel
@@ -340,8 +327,6 @@ object frmListDevice: TfrmListDevice
       Height = 297
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 334
-      ExplicitHeight = 269
       object bvlRight: TBevel
         Left = 1
         Top = 1
@@ -374,9 +359,6 @@ object frmListDevice: TfrmListDevice
         Height = 245
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 2
-        ExplicitTop = 50
-        ExplicitHeight = 217
       end
     end
   end
