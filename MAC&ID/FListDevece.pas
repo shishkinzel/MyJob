@@ -65,6 +65,10 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure mniCloseClick(Sender: TObject);
     procedure btnInMemoClick(Sender: TObject);
+    procedure mmoDeviceClick(Sender: TObject);
+    procedure mmoDeviceDblClick(Sender: TObject);
+    procedure mmoModuleClick(Sender: TObject);
+    procedure mmoModuleDblClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -149,9 +153,86 @@ procedure TfrmListDevice.FormShow(Sender: TObject);
 begin
   frmListDevice.Top := 10;
   frmListDevice.Left := 750;
+
 end;
 
+// опишем выделение цветом строку  в mmoDevice
+procedure TfrmListDevice.mmoDeviceClick(Sender: TObject);
+var
+Line : Integer;
+begin
+Line := mmoDevice.CaretPos.Y;
+// выделение строки в mmoDevice
+ with (Sender as TMemo) do
+begin
+   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
+   SelStart:=Perform(EM_LINEINDEX, Line, 0);
+   SelLength:=Length(Lines[Line]);
+end;
+end;
 
+procedure TfrmListDevice.mmoDeviceDblClick(Sender: TObject);
+var
+  Line: Integer;
+begin
+  Line := mmoDevice.CaretPos.Y;
+  edtDev.Text := '';
+  edtDev.Text := mmoDevice.Lines.Strings[Line];
+  with (Sender as TMemo) do
+  begin
+    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
+    SelStart := Perform(EM_LINEINDEX, Line, 0);
+    SelLength := Length(Lines[Line]);
+  end;
+end;
+//**********************************
+
+// опишем выделение цветом строку  в mmoModule
+procedure TfrmListDevice.mmoModuleClick(Sender: TObject);
+var
+Line : Integer;
+begin
+Line := mmoModule.CaretPos.Y;
+// выделение строки в mmoModule
+ with (Sender as TMemo) do
+begin
+   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
+   SelStart:=Perform(EM_LINEINDEX, Line, 0);
+   SelLength:=Length(Lines[Line]);
+end;
+end;
+
+procedure TfrmListDevice.mmoModuleDblClick(Sender: TObject);
+var
+  Line: Integer;
+  tmp, tmp1 : string;
+begin
+  btnedMod.Text := '000';
+  btnedLot.Text := '000';
+  Line := mmoModule.CaretPos.Y;
+  tmp := mmoModule.Lines.Strings[Line];
+  tmp1 := Trim(Fetch(tmp, '*'));
+  edtMod.Text := '';
+  edtMod.Text := tmp1;
+  if tmp <> '' then
+  begin
+    tmp1 := Trim(Fetch(tmp, '*'));
+    if tmp1 <> '' then
+      btnedMod.Text := tmp1;
+    if tmp <> '' then
+      btnedLot.Text := tmp;
+  end;
+
+
+  with (Sender as TMemo) do
+  begin
+    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
+    SelStart := Perform(EM_LINEINDEX, Line, 0);
+    SelLength := Length(Lines[Line]);
+  end;
+end;
+
+//**********************************
 procedure TfrmListDevice.mniCloseClick(Sender: TObject);
 begin
 Close;

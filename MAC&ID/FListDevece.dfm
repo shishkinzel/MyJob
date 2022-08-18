@@ -228,6 +228,37 @@ object frmListDevice: TfrmListDevice
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'num'
+          Title.Alignment = taCenter
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ndev'
+          Title.Alignment = taCenter
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'nmod'
+          Title.Alignment = taCenter
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'idmod'
+          Title.Alignment = taCenter
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'lot'
+          Title.Alignment = taCenter
+          Visible = True
+        end>
     end
     object dbnvgrDev: TDBNavigator
       Left = 1
@@ -316,8 +347,13 @@ object frmListDevice: TfrmListDevice
         Top = 51
         Width = 424
         Height = 245
+        Cursor = crHandPoint
         Align = alClient
         TabOrder = 1
+        OnClick = mmoDeviceClick
+        OnDblClick = mmoDeviceDblClick
+        ExplicitLeft = -1
+        ExplicitTop = 50
       end
     end
     object pnlRight: TPanel
@@ -357,8 +393,11 @@ object frmListDevice: TfrmListDevice
         Top = 51
         Width = 361
         Height = 245
+        Cursor = crHandPoint
         Align = alClient
         TabOrder = 1
+        OnClick = mmoModuleClick
+        OnDblClick = mmoModuleDblClick
       end
     end
   end
