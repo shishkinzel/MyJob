@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  FMessage;
+  FMessage, System.ImageList, Vcl.ImgList;
 
 type
   TfrmListDevice = class(TForm)
@@ -59,6 +59,12 @@ type
     mniSepFile: TMenuItem;
     btnedMod: TButtonedEdit;
     btnedLot: TButtonedEdit;
+    mniSearch: TMenuItem;
+    mniSearchDev: TMenuItem;
+    mniSearchMod: TMenuItem;
+    mniSearchNumMod: TMenuItem;
+    ilPictureMainMenu: TImageList;
+    ilPictureBtn: TImageList;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -69,6 +75,9 @@ type
     procedure mmoDeviceDblClick(Sender: TObject);
     procedure mmoModuleClick(Sender: TObject);
     procedure mmoModuleDblClick(Sender: TObject);
+    procedure btnTitleInClick(Sender: TObject);
+    procedure dbgrdDevDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
+      Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     const
@@ -78,7 +87,7 @@ type
     var
       fileDevice: TextFile;
       fileModule: TextFile;
-
+      fCanClose : Boolean;
   public
     { Public declarations }
     const
@@ -104,7 +113,7 @@ procedure TfrmListDevice.FormCreate(Sender: TObject);
 var
 s : string;
 begin
-
+   fCanClose := False;
    // проверка наличия файла  'dev_json.fds' - при отсутствии создать пустой
 
   if not (FileExists(FTabDev)) then
@@ -235,39 +244,48 @@ end;
 //**********************************
 procedure TfrmListDevice.mniCloseClick(Sender: TObject);
 begin
-Close;
+  Close;
 end;
-
 // перед закрытие формы
+
 procedure TfrmListDevice.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var
   s: string;
   status: Integer;
   i: Integer;
 begin
-  status := Application.MessageBox(PWideChar('Записать файлы?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
-  case status of
-    6:
-      begin
+  if fCanClose then
+  begin
+    CanClose := True;
+    fCanClose := False;
+  end
+  else
+  begin
+    status := Application.MessageBox(PWideChar('Записать файлы?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
+    case status of
+      6:
+        begin
       // записываем файлы
-        Rewrite(fileDevice);
-        for i := 0 to mmoDevice.Lines.Count - 1 do
-          Writeln(fileDevice, mmoDevice.Lines[i]);
-        CloseFile(fileDevice);
+          Rewrite(fileDevice);
+          for i := 0 to mmoDevice.Lines.Count - 1 do
+            Writeln(fileDevice, mmoDevice.Lines[i]);
+          CloseFile(fileDevice);
 
-        Rewrite(fileModule);
-        for i := 0 to mmoDevice.Lines.Count - 1 do
-          Writeln(fileModule, mmoModule.Lines[i]);
-        CloseFile(fileModule);
+          Rewrite(fileModule);
+          for i := 0 to mmoDevice.Lines.Count - 1 do
+            Writeln(fileModule, mmoModule.Lines[i]);
+          CloseFile(fileModule);
 
-        CanClose := True;
-      end;
-    7:
-      begin
+          CanClose := True;
+        end;
+      7:
+        begin
 
-        CanClose := False;
-      end;
+          CanClose := False;
+        end;
+    end;
   end;
+
 
   fdmtblDev.SaveToFile(FTabDev, sfJSON);
   fdmtblDev.Close;
@@ -275,17 +293,18 @@ begin
 end;
 //
 // обработка кнопок
+
 procedure TfrmListDevice.btnInMemoClick(Sender: TObject);
 var
   i: Integer;
   tmp, tmp1: string;
-  devEdit, modEdit: string;
+  devEdit, modEdit, modAll: string;
 begin
 // проверка ввода
   if (MatchText(edtDev.Text, ['', csDev])) or (MatchText(edtMod.Text, ['', csMod])) then
   begin
-     ShowMessage('Проверте правильность ввода');
-     exit;
+    ShowMessage('Проверте правильность ввода');
+    exit;
   end;
 
 // считываем состояние полей ввода
@@ -293,50 +312,107 @@ begin
   modEdit := Trim(edtMod.Text);
   tmp := Format('%.3d', [StrToInt(btnedMod.Text)]);
   tmp1 := Format('%.3d', [StrToInt(btnedLot.Text)]);
-  if not (Sender is TBitBtn) then Exit;
+  modAll := modEdit + '*' + tmp + '*' + tmp1;
+  if not (Sender is TBitBtn) then
+    Exit;
 
-  if (Sender as TBitBtn).Name = btnInMemo.Name then
+  if (Sender as TBitBtn).Name = btnInMemo.Name then  // нажата кнопка "Запись в Редактор"
   // кнопка "Редактор" верхняя панель
   begin
-    ShowMessage('нажал кнопку Редактор');
+//    ShowMessage('нажал кнопку Редактор');
+    for i := 0 to mmoDevice.Lines.Count - 1 do
+      if devEdit = mmoDevice.Lines.Strings[i] then
+      begin
+        ShowMessage('Данное устройство существует.' + #10#13 + 'Проверте правильность ввода');
+        Abort;
+      end;
+
+    for i := 0 to mmoModule.Lines.Count - 1 do
+      if modAll = mmoModule.Lines.Strings[i] then
+      begin
+        ShowMessage('Модуль уже существует.' + #10#13 + 'Проверте правильность ввода');
+        Abort;
+      end;
+  // если все прошло записываем в memo
+     mmoDevice.Lines.Add(devEdit);
+     mmoModule.Lines.Add(modAll);
+     ShowMessage('Вы сделали запись в редакторе!');
   end
-  else if (Sender as TBitBtn).Name = btnInTab.Name then
+  else if (Sender as TBitBtn).Name = btnInTab.Name then   // нажата кнопка "Запись в таблицу"
   begin
-    ShowMessage('нажал кнопку Таблица');
+//  Проверим на наличие повторяющихся записей устройств
+    dbgrdDev.DataSource.DataSet.Open;
+    fdmtblDev.First;
+    while not fdmtblDev.Eof do
+    begin
+      if devEdit = Trim(dbgrdDev.Fields[1].AsString) then
+      begin
+        ShowMessage('Данное устройство существует.' + #10#13 + 'Проверте правильность ввода');
+        Abort;
+      end;
+      fdmtblDev.Next;
+    end;
+    dbgrdDev.DataSource.DataSet.Last;
+    dbgrdDev.DataSource.DataSet.Insert;
+    with dbgrdDev do
+    begin
+      Fields[1].AsString := Trim(edtDev.Text);
+      Fields[2].AsString := Trim(edtMod.Text);
+      Fields[3].AsString := Trim(btnedMod.Text);
+      Fields[4].AsString := Trim(btnedLot.Text);
+    end;
+    dbgrdDev.DataSource.DataSet.Post;
   end
-  else if (Sender as TBitBtn).Name = btnInForm.Name then
+  else if (Sender as TBitBtn).Name = btnInForm.Name then  // нажата кнопка "Запись в форму"
   begin
-    ShowMessage('нажал кнопку Форма');
+//    ShowMessage('нажал кнопку Форма');
+    fCanClose := True;
+    frmMAC.edtDevice.Text := Trim(edtDev.Text);
+    frmMAC.edtMod.Text := Trim(edtMod.Text);
+    frmMAC.medtModule.Text := btnedMod.Text;
+    Close;
+    frmMAC.seQuantity.TabOrder := 11;
+    frmMAC.btnApply.TabOrder := 12;
+    frmMAC.medtDate.SetFocus;
+
   end;
 
 end;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// кнопка "Таблица" верхняя панель
-
-// кнопка "Форма" верхняя панель
-procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
+// выделение цветом строки
+procedure TfrmListDevice.dbgrdDevDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-
-  frmMAC.Position := poScreenCenter;
-  Free;
+    if gdFocused in State then
+    begin
+      with TDBGrid(Sender).Canvas do
+      begin
+        Font.Color := clYellow;
+        Font.Size := 10;
+        Brush.Color := clRed;
+      end;
+    end;
+    TDBGrid(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 
+// перенос из таблицы в форму ввода
+procedure TfrmListDevice.btnTitleInClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  edtDev.Text := dbgrdDev.Fields[1].AsString;
+  edtMod.Text := dbgrdDev.Fields[2].AsString;
+  btnedMod.Text := dbgrdDev.Fields[3].AsString;
+  btnedLot.Text := dbgrdDev.Fields[4].AsString;
 
+end;
+
+
+procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmMAC.Position := poScreenCenter;
+  Free;
+end;
 end.
 
