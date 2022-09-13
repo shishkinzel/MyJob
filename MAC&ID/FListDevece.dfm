@@ -300,6 +300,7 @@ object frmListDevice: TfrmListDevice
       Height = 25
       Caption = #1047#1072#1082#1088#1099#1090#1100
       TabOrder = 4
+      OnClick = mniCloseClick
     end
   end
   object pnlCentr: TPanel

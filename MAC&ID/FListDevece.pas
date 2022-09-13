@@ -261,7 +261,7 @@ begin
   end
   else
   begin
-    status := Application.MessageBox(PWideChar('Записать файлы?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
+    status := Application.MessageBox(PWideChar('Вы действительно хотите закрыть окно?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
     case status of
       6:
         begin
@@ -289,7 +289,6 @@ begin
 
   fdmtblDev.SaveToFile(FTabDev, sfJSON);
   fdmtblDev.Close;
-  // CanClose := True;
 end;
 //
 // обработка кнопок
