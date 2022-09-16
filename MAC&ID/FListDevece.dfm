@@ -228,6 +228,7 @@ object frmListDevice: TfrmListDevice
       Height = 110
       Align = alTop
       DataSource = dsDev
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -235,6 +236,8 @@ object frmListDevice: TfrmListDevice
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnDrawColumnCell = dbgrdDevDrawColumnCell
+      OnMouseEnter = dbgrdDevMouseEnter
+      OnMouseLeave = dbgrdDevMouseLeave
       Columns = <
         item
           Expanded = False
@@ -282,7 +285,9 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1056#1077#1076#1072#1082#1090#1086#1088
+      Enabled = False
       TabOrder = 2
+      OnClick = btnTitleMemoClick
     end
     object btnTitleIn: TBitBtn
       Left = 381
@@ -290,6 +295,7 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1055#1086#1083#1077' '#1074#1074#1086#1076#1072
+      Enabled = False
       TabOrder = 3
       OnClick = btnTitleInClick
     end

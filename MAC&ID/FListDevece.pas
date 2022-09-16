@@ -78,6 +78,9 @@ type
     procedure btnTitleInClick(Sender: TObject);
     procedure dbgrdDevDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
       Column: TColumn; State: TGridDrawState);
+    procedure btnTitleMemoClick(Sender: TObject);
+    procedure dbgrdDevMouseEnter(Sender: TObject);
+    procedure dbgrdDevMouseLeave(Sender: TObject);
   private
     { Private declarations }
     const
@@ -394,6 +397,32 @@ begin
     TDBGrid(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
+// активируем и деактивируем кнопки при наведении на таблицу
+procedure TfrmListDevice.dbgrdDevMouseEnter(Sender: TObject);
+var
+  i: Integer;
+begin
+  btnTitleMemo.Enabled := True;
+  btnTitleIn.Enabled := True;
+end;
+
+procedure TfrmListDevice.dbgrdDevMouseLeave(Sender: TObject);
+var
+  i: Integer;
+  fChose_str: Boolean;
+begin
+  if dbgrdDev.SelectedRows.Count = 0 then
+  begin
+    btnTitleMemo.Enabled := False;
+    btnTitleIn.Enabled := False;
+
+  end;
+end;
+
+
+
+
+
 
 // перенос из таблицы в форму ввода
 procedure TfrmListDevice.btnTitleInClick(Sender: TObject);
@@ -404,9 +433,21 @@ begin
   edtMod.Text := dbgrdDev.Fields[2].AsString;
   btnedMod.Text := dbgrdDev.Fields[3].AsString;
   btnedLot.Text := dbgrdDev.Fields[4].AsString;
-
+  dbgrdDev.SelectedRows.Clear;
+  btnTitleMemo.Enabled := False;
+  btnTitleIn.Enabled := False;
 end;
 
+
+// перенос из таблицы в редактор
+procedure TfrmListDevice.btnTitleMemoClick(Sender: TObject);
+var
+i : Integer;
+f_dev_str, f_mod_str : string;
+begin
+f_dev_str := dbgrdDev.Fields[1].AsString;
+f_mod_str := dbgrdDev.Fields[2].AsString + '*' +  dbgrdDev.Fields[3].AsString+ '*' +  dbgrdDev.Fields[4].AsString;
+end;
 
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
