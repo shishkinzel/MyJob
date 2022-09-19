@@ -438,15 +438,40 @@ begin
   btnTitleIn.Enabled := False;
 end;
 
-
 // перенос из таблицы в редактор
 procedure TfrmListDevice.btnTitleMemoClick(Sender: TObject);
 var
-i : Integer;
-f_dev_str, f_mod_str : string;
+  i: Integer;
+  f_dev_str, f_mod_str: string;
 begin
-f_dev_str := dbgrdDev.Fields[1].AsString;
-f_mod_str := dbgrdDev.Fields[2].AsString + '*' +  dbgrdDev.Fields[3].AsString+ '*' +  dbgrdDev.Fields[4].AsString;
+  f_dev_str := dbgrdDev.Fields[1].AsString;
+  f_mod_str := dbgrdDev.Fields[2].AsString + '*' + dbgrdDev.Fields[3].AsString + '*' + dbgrdDev.Fields[4].AsString;
+// провер€ем на повтор€емость
+  for i := 0 to mmoDevice.Lines.Count - 1 do
+  begin
+    if f_dev_str = mmoDevice.Lines.Strings[i] then
+    begin
+      ShowMessage('ƒанное устройство уже внесено в редактор!');
+      Abort;
+    end;
+  end;
+  for i := 0 to mmoModule.Lines.Count - 1 do
+  begin
+    if f_mod_str = mmoModule.Lines.Strings[i] then
+    begin
+      ShowMessage('ƒанный модуль уже внесено в редактор!');
+      Abort;
+    end;
+
+  end;
+// если все хорошо пишем в редактор
+  mmoDevice.Lines.Add(f_dev_str);
+  mmoModule.Lines.Add(f_mod_str);
+// деактивируем кнопки и снимаем выделение строки
+  dbgrdDev.SelectedRows.Clear;
+  btnTitleMemo.Enabled := False;
+  btnTitleIn.Enabled := False;
+
 end;
 
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);

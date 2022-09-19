@@ -8164,6 +8164,7 @@ object frmMAC: TfrmMAC
         end
         object mniPrintBig: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           OnClick = mniPrintBigClick
         end
       end
@@ -8175,6 +8176,7 @@ object frmMAC: TfrmMAC
         end
         object mniPrintSmall: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           OnClick = mniPrintSmallClick
         end
       end
@@ -8186,6 +8188,7 @@ object frmMAC: TfrmMAC
         end
         object mniPrintShild: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           OnClick = mniPrintShildClick
         end
       end

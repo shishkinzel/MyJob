@@ -813,13 +813,19 @@ begin
     frmFRBigLabel.Close;
     frmFRSmallLabel.Close;
     frmShild.Close;
+
 // очистка отчетов
     frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
     frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
     frmShild.rpShild.PreviewPages.Clear;
+// гасим окна печати
+    mniPrintBig.Enabled := False;
+    mniPrintSmall.Enabled := False;
+    mniPrintShild.Enabled := False;
   end;
-
 end;
+
+
 
 
 // печать штрих кода *******************************************************
@@ -1511,6 +1517,7 @@ end;
   procedure TfrmMAC.mniShowBigClick(Sender: TObject);
 begin
   frmFRBigLabel.Show;
+  mniPrintBig.Enabled := True;
   (frmFRBigLabel.rpBigLabel.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
   frmFRBigLabel.rpBigLabel.ShowReport();
 end;
@@ -1526,6 +1533,7 @@ end;
 procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
 begin
   frmFRSmallLabel.Show;
+   mniPrintSmall.Enabled := True;
   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
   frmFRSmallLabel.rpSmallLabel.ShowReport();
 end;
@@ -1542,6 +1550,7 @@ procedure TfrmMAC.mniShowShildClick(Sender: TObject);
 begin
    frmShild.Show;
 //  (frmShild.rpShild.FindObject('MShild') as TFrxMemoView).Text := edtmod.text;
+  mniPrintShild.Enabled := True;
   frmShild.rpShild.ShowReport();
 end;
 
