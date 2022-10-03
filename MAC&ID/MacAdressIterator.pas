@@ -721,9 +721,10 @@ begin
   end;
     CloseFile(fileId);
 // разрушение потока
-  barCodeStream.Free;
+    barCodeStream.Free;
+    brcdMAC.Scale := 1;
 // активация кнопки "Этикетка"
-   mniLabel.Enabled := True;
+    mniLabel.Enabled := True;
   end;
 
 //  frmTestGrid.Show;
