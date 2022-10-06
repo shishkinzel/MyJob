@@ -37,7 +37,7 @@ object frmShild: TfrmShild
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44840.523813252320000000
+    ReportOptions.LastChange = 44840.622780208330000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -59,7 +59,7 @@ object frmShild: TfrmShild
     end
     object PShild: TfrxReportPage
       PaperWidth = 40.000000000000000000
-      PaperHeight = 14.000000000000000000
+      PaperHeight = 12.000000000000000000
       PaperSize = 256
       LeftMargin = 1.000000000000000000
       RightMargin = 1.000000000000000000
@@ -80,7 +80,7 @@ object frmShild: TfrmShild
         object bcSmall: TfrxPictureView
           AllowVectorExport = True
           Width = 143.622140000000000000
-          Height = 26.456692913385830000
+          Height = 18.897637795275590000
           Center = True
           DataField = 'bcSmall'
           DataSet = db_Shild
@@ -95,7 +95,7 @@ object frmShild: TfrmShild
           IndexTag = 1
           Align = baWidth
           AllowVectorExport = True
-          Top = 26.456692910000000000
+          Top = 18.897637795275590000
           Width = 143.622140000000000000
           Height = 18.897640240000000000
           StretchMode = smActualHeight

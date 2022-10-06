@@ -37,7 +37,7 @@ object frmFRList: TfrmFRList
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44840.410050509260000000
+    ReportOptions.LastChange = 44840.628147847220000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -101,7 +101,13 @@ object frmFRList: TfrmFRList
       object DetailData1: TfrxDetailData
         FillType = ftBrush
         Frame.Typ = []
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         Height = 22.677180000000000000
+        ParentFont = False
         Top = 86.929190000000000000
         Width = 158.740260000000000000
         RowCount = 0
