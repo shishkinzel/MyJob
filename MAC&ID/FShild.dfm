@@ -37,7 +37,7 @@ object frmShild: TfrmShild
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44840.486418113430000000
+    ReportOptions.LastChange = 44840.523813252320000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -59,11 +59,10 @@ object frmShild: TfrmShild
     end
     object PShild: TfrxReportPage
       PaperWidth = 40.000000000000000000
-      PaperHeight = 12.000000000000000000
+      PaperHeight = 14.000000000000000000
       PaperSize = 256
       LeftMargin = 1.000000000000000000
       RightMargin = 1.000000000000000000
-      TopMargin = 1.000000000000000000
       BottomMargin = 1.000000000000000000
       Frame.Typ = []
       Frame.Width = 0.100000000000000000
@@ -71,7 +70,7 @@ object frmShild: TfrmShild
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 30.236220472440940000
+        Height = 41.574803150000000000
         Top = 18.897650000000000000
         Width = 143.622140000000000000
         DataSet = db_Shild
@@ -80,15 +79,13 @@ object frmShild: TfrmShild
         Stretched = True
         object bcSmall: TfrxPictureView
           AllowVectorExport = True
-          Top = -18.897659760000000000
           Width = 143.622140000000000000
-          Height = 18.897640240000000000
-          AutoSize = True
+          Height = 26.456692913385830000
           Center = True
           DataField = 'bcSmall'
           DataSet = db_Shild
           DataSetName = 'db_Shild'
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = []
           Frame.Width = 0.100000000000000000
           HightQuality = False
           Transparent = False
@@ -96,8 +93,9 @@ object frmShild: TfrmShild
         end
         object db_Shildsn: TfrxMemoView
           IndexTag = 1
+          Align = baWidth
           AllowVectorExport = True
-          Top = -0.000009769999999999
+          Top = 26.456692910000000000
           Width = 143.622140000000000000
           Height = 18.897640240000000000
           StretchMode = smActualHeight
@@ -107,10 +105,10 @@ object frmShild: TfrmShild
           DataSetName = 'db_Shild'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Tahoma'
           Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = []
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
