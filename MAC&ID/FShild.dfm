@@ -37,7 +37,7 @@ object frmShild: TfrmShild
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44840.622780208330000000
+    ReportOptions.LastChange = 44853.755840856480000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -82,7 +82,7 @@ object frmShild: TfrmShild
           Width = 143.622140000000000000
           Height = 18.897637795275590000
           Center = True
-          DataField = 'bcSmall'
+          DataField = 'bcBig'
           DataSet = db_Shild
           DataSetName = 'db_Shild'
           Frame.Typ = []
@@ -105,7 +105,7 @@ object frmShild: TfrmShild
           DataSetName = 'db_Shild'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
