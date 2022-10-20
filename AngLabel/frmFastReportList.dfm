@@ -37,7 +37,7 @@ object frmFRList: TfrmFRList
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44762.440141458330000000
+    ReportOptions.LastChange = 44840.628147847220000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -57,26 +57,31 @@ object frmFRList: TfrmFRList
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
-    object Page1: TfrxReportPage
-      PaperWidth = 60.000000000000000000
-      PaperHeight = 9.000000000000000000
+    object PageMAC: TfrxReportPage
+      PaperWidth = 44.000000000000000000
+      PaperHeight = 12.000000000000000000
       PaperSize = 256
+      LeftMargin = 1.000000000000000000
+      RightMargin = 1.000000000000000000
+      TopMargin = 1.000000000000000000
+      BottomMargin = 1.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 45.354330710000000000
         Top = 18.897650000000000000
-        Width = 226.771800000000000000
+        Width = 158.740260000000000000
         DataSet = frxdbdtstList
         DataSetName = 'frxDBDataset1'
         RowCount = 0
         object frxDBDataset1MACadress: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Width = 204.094488188976400000
-          Height = 22.677180000000000000
+          Left = 1.889763779527559000
+          Width = 154.960637240000000000
+          Height = 37.795275590000000000
           DataField = 'MAC - adress'
           DataSet = frxdbdtstList
           DataSetName = 'frxDBDataset1'
@@ -96,9 +101,15 @@ object frmFRList: TfrmFRList
       object DetailData1: TfrxDetailData
         FillType = ftBrush
         Frame.Typ = []
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         Height = 22.677180000000000000
-        Top = 64.252010000000000000
-        Width = 226.771800000000000000
+        ParentFont = False
+        Top = 86.929190000000000000
+        Width = 158.740260000000000000
         RowCount = 0
       end
     end

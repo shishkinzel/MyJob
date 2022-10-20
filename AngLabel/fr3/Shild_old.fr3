@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="ZDesigner TLP 2824_little" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44758,5737345833" ReportOptions.Description.Text="" ReportOptions.LastChange="44840,3907340625" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="db_Shild" DataSetName="db_Shild"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="PShild" HGuides.Text="" VGuides.Text="" PaperWidth="60" PaperHeight="12" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="38,06298969" Left="0" Top="18,89765" Width="226,7718" ColumnWidth="0" ColumnGap="0" DataSet="db_Shild" DataSetName="db_Shild" RowCount="0">
+      <TfrxPictureView Name="Picture1" AllowVectorExport="True" Left="0" Top="0" Width="219,21259843" Height="18,89765" Center="True" DataField="bcBig" DataSet="db_Shild" DataSetName="db_Shild" Frame.Typ="0" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+      <TfrxMemoView Name="MShild" AllowVectorExport="True" Left="7,55906" Top="19,16535189" Width="204,09462" Height="18,8976378" AutoWidth="True" DataField="sn" DataSet="db_Shild" DataSetName="db_Shild" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[db_Shild.&#34;sn&#34;]"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>

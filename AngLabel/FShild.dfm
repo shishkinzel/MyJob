@@ -37,7 +37,7 @@ object frmShild: TfrmShild
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44762.431707557900000000
+    ReportOptions.LastChange = 44853.755840856480000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -58,49 +58,58 @@ object frmShild: TfrmShild
       Width = 1000.000000000000000000
     end
     object PShild: TfrxReportPage
-      PaperWidth = 60.000000000000000000
+      PaperWidth = 40.000000000000000000
       PaperHeight = 12.000000000000000000
       PaperSize = 256
+      LeftMargin = 1.000000000000000000
+      RightMargin = 1.000000000000000000
+      BottomMargin = 1.000000000000000000
       Frame.Typ = []
+      Frame.Width = 0.100000000000000000
       MirrorMode = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 38.062989690000000000
+        Height = 41.574803150000000000
         Top = 18.897650000000000000
-        Width = 226.771800000000000000
+        Width = 143.622140000000000000
         DataSet = db_Shild
         DataSetName = 'db_Shild'
         RowCount = 0
-        object Picture1: TfrxPictureView
+        Stretched = True
+        object bcSmall: TfrxPictureView
           AllowVectorExport = True
-          Width = 219.212598430000000000
-          Height = 18.897650000000000000
+          Width = 143.622140000000000000
+          Height = 18.897637795275590000
           Center = True
           DataField = 'bcBig'
           DataSet = db_Shild
           DataSetName = 'db_Shild'
           Frame.Typ = []
+          Frame.Width = 0.100000000000000000
           HightQuality = False
           Transparent = False
           TransparentColor = clWhite
         end
-        object MShild: TfrxMemoView
+        object db_Shildsn: TfrxMemoView
+          IndexTag = 1
+          Align = baWidth
           AllowVectorExport = True
-          Left = 7.559060000000000000
-          Top = 19.165351890000000000
-          Width = 204.094620000000000000
-          Height = 18.897637800000000000
+          Top = 18.897637795275590000
+          Width = 143.622140000000000000
+          Height = 18.897640240000000000
+          StretchMode = smActualHeight
           AutoWidth = True
           DataField = 'sn'
           DataSet = db_Shild
           DataSetName = 'db_Shild'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
+          Font.Height = -15
+          Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
+          Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
             '[db_Shild."sn"]')
