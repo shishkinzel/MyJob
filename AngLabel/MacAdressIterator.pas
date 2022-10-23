@@ -150,9 +150,9 @@ type
     mniPrintShild: TMenuItem;
     lblSGP: TLabel;
     mniListDevice: TMenuItem;
+    tbLabellsnbig: TStringField;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure mnifrViewClick(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure pdf1Click(Sender: TObject);
@@ -197,6 +197,7 @@ type
     procedure mniShowShildClick(Sender: TObject);
     procedure mniPrintShildClick(Sender: TObject);
     procedure mniListDeviceClick(Sender: TObject);
+    procedure mnifrViewClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -217,6 +218,7 @@ type
       fquantityDevice: string;       // количество устройств
       stepPrintBarCode : Integer;     // шаг печати штрих-кода
       numberDeviceHigh : string;     // три старших разряда серийного номера
+      fnumberDeviceHigh :  string;   // три старших разряда серийного номера с пробелами между триадами
       fbitBarCode : string;           // для печати mac в barcode
       ffirstIdDeviceBarCode : string; // для печати id в barcode
   public
@@ -439,7 +441,9 @@ var
 begin
   mniBarCodeLong.Enabled := True;
   if not (chkPrintTab.Checked) then
-    btnStart.Enabled := True;
+    btnStart.Enabled := False
+    else chkPrintTab.Enabled := False;
+  mniReport.Enabled := True;
   mniApply.Enabled := False;
   btnApply.Enabled := False;
   btnRestart.Enabled := True;
@@ -449,9 +453,9 @@ begin
   mniResetBarCodeLong.Enabled := True;
   mniFrReset.Enabled := True;
   stepMac := 1;
-  stepIteration := StrToIntDef(seStepIterator.Text, 0);
-  quantity := StrToIntDef(seQuantity.Text, 0);
-  range := stepIteration;
+  stepIteration := StrToIntDef(seStepIterator.Text, 0);    // шаг итерации
+  quantity := StrToIntDef(seQuantity.Text, 0);             // количество устройств
+  range := stepIteration;                                  // шаг итерации второй?
 //  заполнение массива
   try
     idMAC[0] := DataModuleMacIterator.HexStrToInt(medtBit_4.Text);
@@ -474,26 +478,28 @@ begin
   bit1 := IntToHex(idMAC[1]) + '';
   bit0 := IntToHex(idMAC[2]) + '';
   bit2 := bit2 + ' : ' + bit1 + ' : ' + bit0;
-  fbitBarCode := '68:EB:C5:' + bit2 + ':' + bit1 + ':' + bit0;
+//  fbitBarCode := '68:EB:C5:' + bit2 + ':' + bit1 + ':' + bit0;
 //************************************************************
 // установка системных переменных для формирования отчета
-  fnameDevice := edtDevice.Text;
-  ffirstOrderBit := '68 : EB : C5 : ' + bit2;
-  fstepIterator := seStepIterator.Text;
-  ffirstIdDevice := medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text + ' ' + medtNumber.Text;
-  fquantityDevice := seQuantity.Text;
-  numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;
+  fnameDevice := edtDevice.Text;    // наименование устройства
+  ffirstOrderBit := '68 : EB : C5 : ' + bit2;   // начальный МАС-адрес для итерации
+  fstepIterator := seStepIterator.Text;  //   шаг итерации МАС-адреса
+  ffirstIdDevice := medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text + ' ' + medtNumber.Text; // начальный серийный номер комплекта
+  fquantityDevice := seQuantity.Text;    // количество устройств
+  numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;  // три старших разряда серийного номера
+  fnumberDeviceHigh := medtModule.Text + ' ' + medtDate.Text  + ' ' + medtGroup.Text;  // три старших разряда серийного номера с пробелами между триадами
+
 //*******************************************************
   idModule := StrToIntDef(medtModule.Text, 0);
   idDate := StrToIntDef(medtDate.Text, 0);
   idGroup := StrToIntDef(medtGroup.Text, 0);
   idNumber := StrToIntDef(medtNumber.Text, 0);
 
-// изменяем на печать этикетки
-  if not (chkPrintTab.Checked) then
+// *******************************************************
+  if not (chkPrintTab.Checked) then    // флажок печать этикетки снят
   begin
 //
-    if utilityMAC then
+    if utilityMAC then           // утилита печати МАС-адресов выключена
     begin
 //   формирование файла
       Rewrite(fileId);
@@ -503,8 +509,8 @@ begin
         numberS := Format('  ' + '%.3d', [beginNumberDevice]);
         s := Format('%.4d', [i]);
         Write(fileId, s);
-        Write(fileId, DataModuleMacIterator.ArrayToString(idMAC));
-        Write(fileId, numberS);
+        Write(fileId,DataModuleMacIterator.ArrayToString(idMAC));
+        Write(fileId, fnumberDeviceHigh +  numberS);
         while stepMac <= stepIteration do
         begin
           DataModuleMacIterator.IncArrayOne(idMAC);
@@ -553,7 +559,7 @@ begin
       CloseFile(fileId);
     end
     else
-    begin
+    begin            // утилита печати МАС-адресов включена
   //   формирование файла
       Rewrite(fileId);
       for i := 1 to quantity do
@@ -604,6 +610,7 @@ begin
       CloseFile(fileId);
     end;
   end
+  //****************************** флажок активирован
   else
   begin
    //   формирование файла для этикетки
@@ -616,8 +623,11 @@ begin
       s := Format('%.4d', [i]);
       Write(fileId, s);
       s := ' |' + medtModule.Text + medtDate.Text + medtGroup.Text;
+      s1 := ' |' + medtModule.Text + ' ' + medtDate.Text  + ' ' + medtGroup.Text;
       Write(fileId, s);
       Write(fileId, numberS);
+      Write(fileId, s1);
+      Write(fileId, ' ' + numberS);
       Writeln(fileId);
     end;
 // закрытие файла
@@ -631,8 +641,9 @@ begin
     fdmtbLabel.Append;
     Readln(fileId, s1);
     tmp := Trim(Fetch(s1, '|'));
+    tmp := Trim(Fetch(s1, '|'));
 // создаем поток и трансоформируем в barcode
-      brcdMAC.InputText := s1;
+      brcdMAC.InputText := tmp;
       brcdMAC.Height := 15;
       brcdMAC.Symbology := syCode128;
       fdmtbLabel.Fields[0].AsString := s1;
@@ -648,6 +659,9 @@ begin
       barCodeStream.Position := 0;
       (fdmtbLabel.FieldByName('bcSmall') as TBlobField).LoadFromStream(barCodeStream);
       barCodeStream.Clear;
+
+//      fdmtbLabel.FieldByName('snbig').AsString := s1;
+
       fdmtbLabel.Post;
   end;
     CloseFile(fileId);
@@ -658,9 +672,6 @@ begin
     mniLabel.Enabled := True;
   end;
 end;
-
-
-
 
 // окончание блока выбора  **********************************************************
 
@@ -674,6 +685,7 @@ if not(chkPrintTab.Checked) then
       edtDevice.SetFocus
     else
       medtBit_4.SetFocus;
+    mniReport.Enabled := False;
     mniApply.Enabled := True;
     btnApply.Enabled := True;
     btnRestart.Enabled := False;
@@ -694,15 +706,21 @@ if not(chkPrintTab.Checked) then
     medtBit_4.Text := '00';
     medtBit_5.Text := '00';
     medtBit_6.Text := '00';
-// для barCode
+  // для barCode
+    mniBarCodeLong.Enabled := False;
     mniPreviewLong.Enabled := False;
     mniExportBarCodeLong.Enabled := False;
     mniPrintBarCodeLong.Enabled := False;
-// для ID&MAC
+  // зажигаем пунк -"Применить"
+    mniApplyBarCodeLong.Enabled := True;
+  // для ID&MAC
+    mniQRIDMAC.Enabled := False;
     mniShow_IDandMAC.Enabled := False;
     mniExport_IDandMAC.Enabled := False;
     mniPrint_IDandMAC.Enabled := False;
     mniReset_IDandMAC.Enabled := False;
+  // зажигаем пунк -"Применить"
+    mniApplay_IDandMAC.Enabled := True;
 // для серийного номера
     if utilityMAC then
     begin
@@ -727,6 +745,7 @@ if not(chkPrintTab.Checked) then
   else
   begin
     mniLabel.Enabled := False;
+    chkPrintTab.Enabled := True;
     ShowMessage('Сбрасываем отчеты');
     btnApply.Enabled := True;
     btnRestart.Enabled := False;
@@ -753,6 +772,10 @@ var
   s, numberS, numberSLong, rangeLast: string;
   s1, tmp, tmp1: string;
 begin
+// отключаем пунк меню "Применить"
+   mniApplyBarCodeLong.Enabled := False;
+// отключаем пункт QR-код семейство Топаз
+  mniQRIDMAC.Enabled := False;
 // открываем таблицу для заполниния **************************************
   range := stepIteration;
   stepMac := 1;
@@ -893,6 +916,8 @@ var
   s, s1, tmp, tmp1: string;
   hardWare: string;
 begin
+// гасим пунк -"Применить"
+  mniApplay_IDandMAC.Enabled := False;
 // открываем таблицу для заполниния **************************************
   range := stepIteration;
   stepMac := 1;
@@ -1167,6 +1192,19 @@ end;
 // окончание блока генератора QR-кода **************************************************************
 
 // обработка кнопок главного меню  *****************************************************************
+procedure TfrmMAC.mnifrPrintClick(Sender: TObject);
+begin
+  if utilityMAC then
+  begin
+    frmFReport.frxrprtMac.ShowReport();
+    frmFReport.frxrprtMac.Print;
+  end
+  else
+  begin
+    frmFRList.frxrprtList.ShowReport();
+    frmFRList.frxrprtList.Print;
+  end;
+end;
 procedure TfrmMAC.mnifrViewClick(Sender: TObject);
 begin
   if utilityMAC then
@@ -1183,19 +1221,6 @@ begin
   end;
 end;
 
-procedure TfrmMAC.mnifrPrintClick(Sender: TObject);
-begin
-  if utilityMAC then
-  begin
-    frmFReport.frxrprtMac.ShowReport();
-    frmFReport.frxrprtMac.Print;
-  end
-  else
-  begin
-    frmFRList.frxrprtList.ShowReport();
-    frmFRList.frxrprtList.Print;
-  end;
-end;
 procedure TfrmMAC.pdf1Click(Sender: TObject);
 begin
   frmFReport.frxrprtMac.ShowReport();

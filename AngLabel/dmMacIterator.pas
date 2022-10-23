@@ -44,14 +44,14 @@ var
 s : string;
 i : Integer;
 begin
-s := ' | ';
+s := ' | 68 : EB : C5 : ';
    for I := 0 to 2 do
    begin
      s := s  + inArray[i].ToHexString + ' : ';
 
    end;
-        Delete(s, 16, 5);
-   Result := s + ' | ';
+        Delete(s, 32, 5);
+   Result :=s + ' | ';
 end;
 
 function TDataModuleMacIterator.ArrayToStringShort(var inArray: array of Byte): string;
@@ -65,7 +65,8 @@ s := '';
      s :=s + inArray[i].ToHexString + ':';
 
    end;
-        Delete(s, 16, 5);
+//        Delete(s, 16, 5);
+         Delete(s, 9, 1);
    Result := s;
 end;
 
