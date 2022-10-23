@@ -7845,10 +7845,11 @@ object frmMAC: TfrmMAC
     Top = 377
     Width = 161
     Height = 36
-    Caption = #1055#1086#1083#1085#1072#1103' '#1074#1077#1088#1089#1080#1103
+    Caption = #1047#1072#1088#1077#1079#1077#1088#1074#1080#1088#1086#1074#1072#1085#1086
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -19
+    Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -7942,50 +7943,8 @@ object frmMAC: TfrmMAC
         OnClick = btnRestartClick
       end
     end
-    object mniBarCode: TMenuItem
-      Caption = #1064#1090#1088#1080#1093'-'#1082#1086#1076' '
-      Enabled = False
-      object mniApplyBarCode: TMenuItem
-        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
-        OnClick = mniApplyBarCodeClick
-      end
-      object mniPreview: TMenuItem
-        Caption = #1055#1088#1077#1076#1086#1089#1084#1086#1090#1088
-        Enabled = False
-        OnClick = mniPreviewClick
-      end
-      object mniSeparator5: TMenuItem
-        Caption = '-'
-      end
-      object mniExportBarCode: TMenuItem
-        Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072
-        Enabled = False
-        object mniDOCBarCode: TMenuItem
-          Caption = 'DOC'
-          OnClick = mniDOCBarCodeClick
-        end
-        object mniPDFBarCode: TMenuItem
-          Caption = 'PDF'
-          OnClick = mniPDFBarCodeClick
-        end
-        object mniXMLBarCode: TMenuItem
-          Caption = 'XML'
-          OnClick = mniXMLBarCodeClick
-        end
-      end
-      object mniPrintBarCode: TMenuItem
-        Caption = #1055#1077#1095#1072#1090#1100
-        Enabled = False
-        OnClick = mniPrintBarCodeClick
-      end
-      object mniResetBarCode: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        Enabled = False
-        OnClick = btnRestartClick
-      end
-    end
     object mniBarCodeLong: TMenuItem
-      Caption = 'QR-'#1082#1086#1076' '#1084#1072#1083#1099#1081
+      Caption = 'QR-SOFT'
       Enabled = False
       object mniApplyBarCodeLong: TMenuItem
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
@@ -8026,7 +7985,7 @@ object frmMAC: TfrmMAC
       end
     end
     object mniQRIDMAC: TMenuItem
-      Caption = 'QR-'#1082#1086#1076' IDandMAC'
+      Caption = 'QR-'#1082#1086#1076' '#1089#1077#1084#1077#1081#1089#1090#1074#1086' '#1058#1086#1087#1072#1079
       Enabled = False
       object mniApplay_IDandMAC: TMenuItem
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
@@ -8062,42 +8021,6 @@ object frmMAC: TfrmMAC
         OnClick = mniPrint_IDandMACClick
       end
       object mniReset_IDandMAC: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        Enabled = False
-        OnClick = btnRestartClick
-      end
-    end
-    object mniLoadSoft: TMenuItem
-      Caption = 'QR-'#1082#1086#1076' '#1089' '#1087#1088#1086#1096#1080#1074#1082#1086#1081
-      Enabled = False
-      object mniShowWindow: TMenuItem
-        Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1086#1082#1085#1086
-        OnClick = mniShowWindowClick
-      end
-      object mniSeparator6: TMenuItem
-        Caption = '-'
-      end
-      object mniShowApply: TMenuItem
-        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
-        Enabled = False
-        OnClick = mniShowApplyClick
-      end
-      object mniShowPrev: TMenuItem
-        Caption = #1055#1088#1077#1076#1086#1089#1084#1086#1090#1088
-        Enabled = False
-        OnClick = mniShowPrevClick
-      end
-      object mnimniSeparator7: TMenuItem
-        Caption = '-'
-      end
-      object mniExportLoadSoft: TMenuItem
-        Caption = #1069#1082#1089#1087#1086#1088#1090
-      end
-      object mniPrintLoadSoft: TMenuItem
-        Caption = #1055#1077#1095#1072#1090#1100
-        OnClick = mniPrintLoadSoftClick
-      end
-      object mniResetLoadSoft: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         Enabled = False
         OnClick = btnRestartClick
