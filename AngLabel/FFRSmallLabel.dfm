@@ -26,7 +26,6 @@ object frmFRSmallLabel: TfrmFRSmallLabel
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitWidth = 227
   end
   object rpSmallLabel: TfrxReport
     Version = '6.9.3'
@@ -38,7 +37,7 @@ object frmFRSmallLabel: TfrmFRSmallLabel
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.859132928200000000
-    ReportOptions.LastChange = 44762.461194537030000000
+    ReportOptions.LastChange = 44858.679444247680000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -75,46 +74,46 @@ object frmFRSmallLabel: TfrmFRSmallLabel
         RowCount = 0
         object MTitle: TfrxMemoView
           AllowVectorExport = True
-          Top = 3.779527559055118000
+          Top = 3.779527560000000000
           Width = 113.385900000000000000
-          Height = 18.897650000000000000
+          Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
+          Frame.Width = 0.500000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
             'Module')
           ParentFont = False
           WordWrap = False
-          VAlign = vaCenter
+          VAlign = vaBottom
         end
         object Picture1: TfrxPictureView
           AllowVectorExport = True
-          Left = 3.779527559055118000
-          Top = 26.456710000000000000
+          Left = 3.779527560000000000
+          Top = 22.677180000000000000
           Width = 113.385900000000000000
-          Height = 22.677180000000000000
+          Height = 18.897637800000000000
           AutoSize = True
           Center = True
           DataField = 'bcSmall'
           DataSet = frmFRBigLabel.dbBigLabel
           DataSetName = 'dbLabel'
           Frame.Typ = []
-          Stretched = False
+          Frame.Width = 0.500000000000000000
           HightQuality = False
           Transparent = False
           TransparentColor = clWhite
         end
         object dbLabelsn: TfrxMemoView
           IndexTag = 1
-          Align = baCenter
           AllowVectorExport = True
-          Left = 0.000036615000000000
-          Top = 52.913395590000000000
-          Width = 113.385826770000000000
+          Left = 20.787451620000000000
+          Top = 49.133858270000000000
+          Width = 86.929116770000000000
           Height = 15.118120000000000000
           AutoWidth = True
           DataField = 'sn'
@@ -122,15 +121,31 @@ object frmFRSmallLabel: TfrmFRSmallLabel
           DataSetName = 'dbLabel'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
+          Font.Height = -11
+          Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
-          HAlign = haCenter
+          Frame.Width = 0.500000000000000000
           Memo.UTF8W = (
             '[dbLabel."sn"]')
           ParentFont = False
           VAlign = vaCenter
+        end
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Top = 49.133858267716540000
+          Width = 18.897650000000000000
+          Height = 15.118120000000000000
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Frame.Width = 0.500000000000000000
+          Memo.UTF8W = (
+            's/n')
+          ParentFont = False
         end
       end
     end

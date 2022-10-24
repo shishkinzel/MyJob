@@ -117,10 +117,6 @@
             <Form>frmFRList</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="frmFReportBarCode.pas">
-            <Form>frmFRBarCode</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="fTest.pas">
             <Form>frmTestGrid</Form>
             <FormType>dfm</FormType>
@@ -131,10 +127,6 @@
         </DCCReference>
         <DCCReference Include="FShowSoft.pas">
             <Form>frmShowSoft</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="FLoadSoft.pas">
-            <Form>frmFReportLoadSoft</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="frmFReportIDandMAC.pas">

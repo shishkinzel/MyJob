@@ -116,7 +116,7 @@ object frmFReport: TfrmFReport
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44525.630604537000000000
-    ReportOptions.LastChange = 44529.623948958330000000
+    ReportOptions.LastChange = 44858.389396365740000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

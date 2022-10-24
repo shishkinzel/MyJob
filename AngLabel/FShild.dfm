@@ -37,7 +37,7 @@ object frmShild: TfrmShild
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44853.755840856480000000
+    ReportOptions.LastChange = 44858.399352187500000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

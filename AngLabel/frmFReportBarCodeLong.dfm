@@ -37,7 +37,7 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44579.424410057870000000
+    ReportOptions.LastChange = 44858.391082685190000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

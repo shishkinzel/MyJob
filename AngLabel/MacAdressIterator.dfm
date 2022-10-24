@@ -7839,21 +7839,21 @@ object frmMAC: TfrmMAC
     TabOrder = 12
     OnClick = btnRestartClick
   end
-  object chkMacAdress: TCheckBox
+  object chkAdvanceSetting: TCheckBox
     Left = 10
     Top = 377
-    Width = 161
+    Width = 251
     Height = 36
-    Caption = #1047#1072#1088#1077#1079#1077#1088#1074#1080#1088#1086#1074#1072#1085#1086
+    Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -19
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 13
-    OnClick = chkMacAdressClick
+    OnClick = chkAdvanceSettingClick
   end
   object chkPrintTab: TCheckBox
     Left = 519
@@ -8134,7 +8134,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 184
+    Left = 384
     Top = 376
     object fdmtblMacNumber: TStringField
       FieldName = 'Number'
@@ -8196,7 +8196,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 448
+    Left = 464
     Top = 8
     object fdmtblTitlenameDevice: TStringField
       DisplayWidth = 9
@@ -8262,7 +8262,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 608
+    Left = 648
     Top = 8
     object smlntfldBarCodeNumber: TSmallintField
       FieldName = 'Number'
@@ -8303,7 +8303,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 384
+    Left = 368
     Top = 152
     object fdBarCodeLongnumber: TIntegerField
       FieldName = 'number'
@@ -8341,8 +8341,8 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 232
-    Top = 152
+    Left = 16
+    Top = 64
     object fdmtblLoadSoftnumber: TIntegerField
       FieldName = 'number'
     end
@@ -8383,7 +8383,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 312
+    Left = 248
     Top = 152
     object fdIDandMACnumber: TIntegerField
       FieldName = 'number'
@@ -8438,7 +8438,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 520
+    Left = 552
     Top = 8
     object fmTab_Gen_ORnumber: TIntegerField
       DisplayWidth = 7
@@ -8484,9 +8484,9 @@ object frmMAC: TfrmMAC
         DataType = ftBlob
       end
       item
-        Name = 'snbig'
+        Name = 'mac'
         DataType = ftString
-        Size = 20
+        Size = 40
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -8497,7 +8497,7 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 456
+    Left = 288
     Top = 376
     object strngfldLabelsn: TStringField
       FieldName = 'sn'
@@ -8508,8 +8508,9 @@ object frmMAC: TfrmMAC
     object tbLabelbcSmall: TBlobField
       FieldName = 'bcSmall'
     end
-    object tbLabellsnbig: TStringField
-      FieldName = 'snbig'
+    object tbLabellmac: TStringField
+      FieldName = 'mac'
+      Size = 40
     end
   end
 end

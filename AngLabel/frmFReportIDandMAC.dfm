@@ -37,7 +37,7 @@ object frmFR_IDandMAC: TfrmFR_IDandMAC
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44601.417100798610000000
+    ReportOptions.LastChange = 44858.393685034720000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

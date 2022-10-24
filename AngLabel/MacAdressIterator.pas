@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
-  frmFReportIDandMAC, frmFReportBarCodeLong, frmFReportBarCode , FShowSoft, FLoadSoft, frmFReportGen_QR,
+  frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
 
 
@@ -131,7 +131,7 @@ type
     mniGen_QR_PDF: TMenuItem;
     mniGen_QR_DOC: TMenuItem;
     mniGen_QR_XML: TMenuItem;
-    chkMacAdress: TCheckBox;
+    chkAdvanceSetting: TCheckBox;
     chkPrintTab: TCheckBox;
     edtMod: TEdit;
     mniLabel: TMenuItem;
@@ -150,7 +150,7 @@ type
     mniPrintShild: TMenuItem;
     lblSGP: TLabel;
     mniListDevice: TMenuItem;
-    tbLabellsnbig: TStringField;
+    tbLabellmac: TStringField;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -166,7 +166,7 @@ type
     procedure mniPreviewLongClick(Sender: TObject);
     procedure mniPrintBarCodeLongClick(Sender: TObject);
     procedure mniPDFBarCodeLongClick(Sender: TObject);
-    procedure mniShowApplyClick(Sender: TObject);
+//    procedure mniShowApplyClick(Sender: TObject);
     procedure mniApplay_IDandMACClick(Sender: TObject);
     procedure mniShow_IDandMACClick(Sender: TObject);
     procedure mniPrint_IDandMACClick(Sender: TObject);
@@ -188,7 +188,7 @@ type
     procedure mniGen_QR_PDFClick(Sender: TObject);
     procedure mniGen_QR_DOCClick(Sender: TObject);
     procedure mniGen_QR_XMLClick(Sender: TObject);
-    procedure chkMacAdressClick(Sender: TObject);
+    procedure chkAdvanceSettingClick(Sender: TObject);
     procedure chkPrintTabClick(Sender: TObject);
     procedure mniShowBigClick(Sender: TObject);
     procedure mniPrintBigClick(Sender: TObject);
@@ -272,21 +272,30 @@ begin
 end;
 
   // сокрытие лишних пунктов меню
-procedure TfrmMAC.chkMacAdressClick(Sender: TObject);
+procedure TfrmMAC.chkAdvanceSettingClick(Sender: TObject);
 begin
-//  if chkMacAdress.Checked then
-//  begin
-//  // показываем расширенные окна
-//    mniQRIDMAC.Visible := True;
-//    chkPrintTab.Enabled := False;
-//  end
-//  else
-//  begin
-//  // скрываем расширенные окна
-//    mniQRIDMAC.Visible := False;
-//    chkPrintTab.Enabled := True;
-//  end;
+  if chkAdvanceSetting.Checked then
+  begin
+  // показываем расширенные окна
+    lblHighOrderBit.Enabled := True;
+    medtBit_4.Enabled := True;
+    medtBit_5.Enabled := True;
+    medtBit_6.Enabled := True;
+    seStepIterator.Enabled := True;
+  end
+  else
+  begin
+  // скрываем расширенные окна
+    lblHighOrderBit.Enabled := False;
+    medtBit_4.Enabled := False;
+    medtBit_5.Enabled := False;
+    medtBit_6.Enabled := False;
+    seStepIterator.Enabled := False;
+  end;
 end;
+
+
+
 
   // Выбор режима печати этикеток
 procedure TfrmMAC.chkPrintTabClick(Sender: TObject);
@@ -296,9 +305,11 @@ begin
   // активация пункта меню печать этикетки
     mniLabel.Visible := True;
     mniListDevice.Visible := True;
+  // активируем checkbox "Расширенные настройки"
+    chkAdvanceSetting.Enabled := True;
   // переименовываем надписи
     lblTitle.Caption := 'Печать этикетки';
-  // изменяем размер окна модуля
+    // изменяем размер окна модуля
      edtDevice.Left := 230;
      edtDevice.Width := 460;
      lblDevice.Left := 10;
@@ -320,7 +331,7 @@ begin
     mniPrintMac.Enabled := False;
 
   // гасим ненужные пункты меню и полную версию
-    chkMacAdress.Visible := False;
+//    chkAdvanceSetting.Visible := False;
     mniReport.Visible := False;
     mniGen_QR.Visible := False;
     mniBarCodeLong.Visible := False;
@@ -329,10 +340,13 @@ begin
   end
   else
   begin
-    // гасим пункт меню печать этикетки
+  // гасим пункт меню печать этикетки
     mniLabel.Visible := False;
     mniListDevice.Visible := False;
-      // возвращаем размер окна модуля
+  // деактивируем checkbox "Расширенные настройки"
+    chkAdvanceSetting.Enabled := False;
+    chkAdvanceSetting.Checked := False;
+  // возвращаем размер окна модуля
     edtDevice.Left := 390;
     edtDevice.Width := 300;
     lblDevice.Left := 75;
@@ -350,11 +364,11 @@ begin
     lblStepIterator.Enabled := True;
     seStepIterator.Enabled := True;
 
-       // активируем печать mac -адресов
+  // активируем печать mac -адресов
     mniPrintMac.Enabled := True;
 
-        // активируем ненужные пункты меню и полную версию
-    chkMacAdress.Visible := True;
+  // активируем ненужные пункты меню и полную версию
+//    chkAdvanceSetting.Visible := True;
     mniReport.Visible := True;
     mniGen_QR.Visible := True;
     mniBarCodeLong.Visible := True;
@@ -369,7 +383,7 @@ begin
 // включаем checkBox Печать этикетки
   chkPrintTab.Enabled := True;
 // активируем checkBox
-//  chkMacAdress.Enabled := True;
+//  chkAdvanceSetting.Enabled := True;
   utilityMAC := True;
   mniPrintMac.Enabled := True;
   mniIterator.Enabled := False;
@@ -401,8 +415,8 @@ begin
 // выключаем checkBox Печать этикетки
   chkPrintTab.Enabled := False;
 // гасим флажок
-  chkMacAdress.Enabled := False;
-  chkMacAdress.Checked := False;
+//  chkAdvanceSetting.Enabled := False;
+//  chkAdvanceSetting.Checked := False;
   utilityMAC := False;
   mniPrintMac.Enabled := False;
   mniIterator.Enabled := True;
@@ -591,7 +605,7 @@ begin
 // закрытие файла
       CloseFile(fileId);
 
-// заполняем FDMemTable
+// заполняем FDMemTable   включить в расширенном режиме
       fdmtblMac.Open;
       fdmtblMac.Table.Clear;
       fdmtblMac.Append;
@@ -641,10 +655,11 @@ begin
     fdmtbLabel.Append;
     Readln(fileId, s1);
     tmp := Trim(Fetch(s1, '|'));
-    tmp := Trim(Fetch(s1, '|'));
+    tmp := Trim(Fetch(s1, '|'));     // s1 - расширенный номер с пробелами
 // создаем поток и трансоформируем в barcode
       brcdMAC.InputText := tmp;
-      brcdMAC.Height := 15;
+      brcdMAC.Scale := 1;
+      brcdMAC.Height := 20;
       brcdMAC.Symbology := syCode128;
       fdmtbLabel.Fields[0].AsString := s1;
       brcdMAC.Bitmap.SaveToStream(barCodeStream);
@@ -842,7 +857,7 @@ begin
 // закрытие файла
   CloseFile(fileBarCode);
   CloseFile(fileBarCodeLong);
-// чтение из файла и получение BarCode и запись в таблицу ******************
+// чтение из файла и получение BarCode и запись в таблицу ****************** 24/10/2022
   barCodeStream := TMemoryStream.Create;
   Reset(fileBarCode);
   fdmtblBarCode.Open;
@@ -872,10 +887,10 @@ begin
     fdmtblBarCode.Post;
   end;
 
-// работа с длинным штрих-кодом
+// работа с длинным штрих-кодом        // 24/10/2022
   Reset(fileBarCodeLong);
   fdBarCodeLong.Open;
-  fdmtblLoadSoft.Open;
+//  fdmtblLoadSoft.Open;
   fdBarCodeLong.Table.Clear;
 
   while (not EOF(fileBarCodeLong)) do
@@ -1056,38 +1071,38 @@ end;
 
 //**************************************************************************************************
 // работа с qr-кодом полной загрузки прошивки LoadSoft
-procedure TfrmMAC.mniShowApplyClick(Sender: TObject);
-var
-  i: Integer;
-  tmp, s1: string;
-begin
-  barCodeStream := TMemoryStream.Create;
-  Reset(fileBarCodeLong);
-  fdmtblLoadSoft.Open;
-  brcdMAC.Height := 50;
-  brcdMAC.Symbology := syQRCode;
-
-    while (not EOF(fileBarCodeLong)) do
-  begin
-    fdmtblLoadSoft.Append;
-    Readln(fileBarCodeLong, s1);
-    tmp := Trim(Fetch(s1, '|'));
-
-    fdmtblLoadSoft.FieldByName('Number').AsString := tmp;
-// создаем поток и трансоформируем в barcode
-    brcdMAC.InputText := frmShowSoft.fTextSoft + '     ' + s1;
-    fdmtblLoadSoft.FieldByName('MacAndId').AsString := s1;
-    brcdMAC.Bitmap.SaveToStream(barCodeStream);
-    barCodeStream.Position := 0;
-    (fdmtblLoadSoft.FieldByName('LoadSoft') as TBlobField).LoadFromStream(barCodeStream);
-    barCodeStream.Clear;
-    fdmtblLoadSoft.Post;
-  end;
-
-// разрушение потока
-  barCodeStream.Free;
-  CloseFile(fileBarCodeLong);
-end;
+//procedure TfrmMAC.mniShowApplyClick(Sender: TObject);
+//var
+//  i: Integer;
+//  tmp, s1: string;
+//begin
+//  barCodeStream := TMemoryStream.Create;
+//  Reset(fileBarCodeLong);
+//  fdmtblLoadSoft.Open;
+//  brcdMAC.Height := 50;
+//  brcdMAC.Symbology := syQRCode;
+//
+//    while (not EOF(fileBarCodeLong)) do
+//  begin
+//    fdmtblLoadSoft.Append;
+//    Readln(fileBarCodeLong, s1);
+//    tmp := Trim(Fetch(s1, '|'));
+//
+//    fdmtblLoadSoft.FieldByName('Number').AsString := tmp;
+//// создаем поток и трансоформируем в barcode
+//    brcdMAC.InputText := frmShowSoft.fTextSoft + '     ' + s1;
+//    fdmtblLoadSoft.FieldByName('MacAndId').AsString := s1;
+//    brcdMAC.Bitmap.SaveToStream(barCodeStream);
+//    barCodeStream.Position := 0;
+//    (fdmtblLoadSoft.FieldByName('LoadSoft') as TBlobField).LoadFromStream(barCodeStream);
+//    barCodeStream.Clear;
+//    fdmtblLoadSoft.Post;
+//  end;
+//
+//// разрушение потока
+//  barCodeStream.Free;
+//  CloseFile(fileBarCodeLong);
+//end;
 
 
 // процедура обработки генерации QR-кода
@@ -1413,6 +1428,7 @@ begin
 end;
 
 end.
+
 
 
 
