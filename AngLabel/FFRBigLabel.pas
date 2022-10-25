@@ -11,6 +11,7 @@ type
     pvBigLabel: TfrxPreview;
     rpBigLabel: TfrxReport;
     dbBigLabel: TfrxDBDataset;
+    rpBigLabel_mac: TfrxReport;
   private
     { Private declarations }
   public

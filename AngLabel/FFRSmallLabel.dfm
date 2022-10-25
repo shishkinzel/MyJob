@@ -37,7 +37,7 @@ object frmFRSmallLabel: TfrmFRSmallLabel
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.859132928200000000
-    ReportOptions.LastChange = 44858.679444247680000000
+    ReportOptions.LastChange = 44858.679444247700000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -133,7 +133,7 @@ object frmFRSmallLabel: TfrmFRSmallLabel
         end
         object Memo1: TfrxMemoView
           AllowVectorExport = True
-          Top = 49.133858267716540000
+          Top = 49.133858267716500000
           Width = 18.897650000000000000
           Height = 15.118120000000000000
           Font.Charset = RUSSIAN_CHARSET

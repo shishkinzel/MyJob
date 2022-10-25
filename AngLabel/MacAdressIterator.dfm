@@ -7411,6 +7411,7 @@ object frmMAC: TfrmMAC
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object lblTitle: TLabel
@@ -7845,7 +7846,6 @@ object frmMAC: TfrmMAC
     Width = 251
     Height = 36
     Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
@@ -7861,12 +7861,14 @@ object frmMAC: TfrmMAC
     Width = 177
     Height = 36
     Caption = #1055#1077#1095#1072#1090#1100' '#1101#1090#1080#1082#1077#1090#1086#1082
+    Checked = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    State = cbChecked
     TabOrder = 14
     OnClick = chkPrintTabClick
   end

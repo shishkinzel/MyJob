@@ -198,6 +198,7 @@ type
     procedure mniPrintShildClick(Sender: TObject);
     procedure mniListDeviceClick(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     var
@@ -266,12 +267,15 @@ begin
     Rewrite(fileBarCodeLong);
     CloseFile(fileBarCodeLong);
   end;
-
-  // скрываем расширенные окна
-//  mniQRIDMAC.Visible := False;
 end;
 
-  // сокрытие лишних пунктов меню
+
+  procedure TfrmMAC.FormShow(Sender: TObject);
+begin
+   chkPrintTabClick(Self);
+end;
+
+// сокрытие лишних пунктов меню
 procedure TfrmMAC.chkAdvanceSettingClick(Sender: TObject);
 begin
   if chkAdvanceSetting.Checked then
@@ -1410,6 +1414,10 @@ begin
   frmFRBigLabel.Show;
   mniPrintBig.Enabled := True;
   (frmFRBigLabel.rpBigLabel.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
+  (frmFRBigLabel.rpBigLabel_mac.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
+  if chkAdvanceSetting.Checked   then
+  frmFRBigLabel.rpBigLabel_mac.ShowReport()
+  else
   frmFRBigLabel.rpBigLabel.ShowReport();
 end;
 // печать большой этикетки
