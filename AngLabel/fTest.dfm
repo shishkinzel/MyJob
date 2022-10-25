@@ -14,10 +14,10 @@ object frmTestGrid: TfrmTestGrid
   PixelsPerInch = 96
   TextHeight = 13
   object dbgrd1: TDBGrid
-    Left = 0
+    Left = 8
     Top = 0
-    Width = 585
-    Height = 73
+    Width = 753
+    Height = 315
     DataSource = dstt
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -27,8 +27,8 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object dbgrd2: TDBGrid
-    Left = 0
-    Top = 79
+    Left = 216
+    Top = 377
     Width = 569
     Height = 90
     DataSource = ds2
@@ -40,8 +40,8 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object grdLoad: TDBGrid
-    Left = 8
-    Top = 175
+    Left = 232
+    Top = 449
     Width = 529
     Height = 66
     DataSource = dsLoad
@@ -53,8 +53,8 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object grdIDandMAC: TDBGrid
-    Left = 8
-    Top = 247
+    Left = 240
+    Top = 431
     Width = 377
     Height = 68
     DataSource = dsIDandMAC
@@ -105,7 +105,7 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object dstt: TDataSource
-    DataSet = frmMAC.fdmtblBarCode
+    DataSet = frmMAC.fdmtbLabel
     Left = 120
     Top = 520
   end
@@ -121,8 +121,8 @@ object frmTestGrid: TfrmTestGrid
   end
   object dsIDandMAC: TDataSource
     DataSet = frmMAC.fdIDandMAC
-    Left = 192
-    Top = 528
+    Left = 176
+    Top = 520
   end
   object dsGen_OR: TDataSource
     DataSet = frmMAC.fmTab_Gen_OR
@@ -130,13 +130,11 @@ object frmTestGrid: TfrmTestGrid
     Top = 504
   end
   object ds3: TDataSource
-    DataSet = frmMAC.fdmtblOneTitle
     Left = 440
     Top = 512
   end
   object ds4: TDataSource
-    DataSet = frmMAC.fdmtbPicture
-    Left = 448
+    Left = 496
     Top = 520
   end
 end

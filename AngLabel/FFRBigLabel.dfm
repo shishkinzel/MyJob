@@ -37,7 +37,7 @@ object frmFRBigLabel: TfrmFRBigLabel
     PrintOptions.Printer = 'ZDesigner TLP 2824_big'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.609931226800000000
-    ReportOptions.LastChange = 44858.645225532400000000
+    ReportOptions.LastChange = 44859.448167719900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -52755,19 +52755,22 @@ object frmFRBigLabel: TfrmFRBigLabel
         object TextSN: TfrxMemoView
           Anchors = [fraLeft, fraTop, fraRight]
           AllowVectorExport = True
+          Left = 56.692950000000000000
           Top = 124.724409450000000000
-          Width = 211.653543310000000000
-          Height = 15.118120000000000000
+          Width = 154.960629921260000000
+          Height = 11.338582680000000000
+          DataField = 'mac'
+          DataSet = dbBigLabel
+          DataSetName = 'dbLabel'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
+          Font.Height = -11
+          Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
           Frame.Width = 0.500000000000000000
-          HAlign = haCenter
           Memo.UTF8W = (
-            #1057#1076#1077#1083#1072#1085#1086' '#1074' '#1056#1086#1089#1089#1080#1080)
+            '[dbLabel."mac"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -52827,6 +52830,43 @@ object frmFRBigLabel: TfrmFRBigLabel
           HAlign = haCenter
           Memo.UTF8W = (
             's/n :')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 15.118120000000000000
+          Top = 124.724490000000000000
+          Width = 30.236240000000000000
+          Height = 11.338582680000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Frame.Width = 0.500000000000000000
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'mac:')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Top = 136.063080000000000000
+          Width = 211.653680000000000000
+          Height = 11.338582680000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Frame.Width = 0.500000000000000000
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #1057#1076#1077#1083#1072#1085#1086' '#1074' '#1056#1086#1089#1089#1080#1080)
           ParentFont = False
           VAlign = vaCenter
         end

@@ -8500,15 +8500,19 @@ object frmMAC: TfrmMAC
     Left = 288
     Top = 376
     object strngfldLabelsn: TStringField
+      DisplayWidth = 26
       FieldName = 'sn'
     end
     object tbLabelbcBig: TBlobField
+      DisplayWidth = 10
       FieldName = 'bcBig'
     end
     object tbLabelbcSmall: TBlobField
+      DisplayWidth = 10
       FieldName = 'bcSmall'
     end
     object tbLabellmac: TStringField
+      DisplayWidth = 40
       FieldName = 'mac'
       Size = 40
     end

@@ -683,8 +683,58 @@ begin
 // разрушение потока
     barCodeStream.Free;
     brcdMAC.Scale := 1;
+// работа с расширенными настройками ******************************************
+   if chkAdvanceSetting.Checked  then
+   begin
+     Rewrite(fileId);
+      for i := 1 to quantity do
+      begin
+        s := DataModuleMacIterator.ArrayToStringShort(idMAC);
+        Delete(s, 9, 3);
+        s := '68:EB:C5:' + s;
+        Write(fileId, s);
+        if stepIteration <> 1 then
+        begin
+          while stepMac <= stepIteration do
+          begin
+            DataModuleMacIterator.IncArrayOne(idMAC);
+            Inc(stepMac);
+            Dec(range);
+            if range = 1 then
+            begin
+              rangeLast := '-' + IntToHex(idMAC[2]);
+              write(fileId, rangeLast);
+            end;
+          end;
+        end
+        else
+          DataModuleMacIterator.IncArrayOne(idMAC);
+        stepMac := 1;
+        range := stepIteration;
+        Writeln(fileId);
+      end;
+   // закрытие файла
+      CloseFile(fileId);
+   // запись в таблицу fdmtbLabel
+      Reset(fileId);
+      fdmtbLabel.Open;
+      fdmtbLabel.First;
+
+      while (not EOF(fileId)) do
+      begin
+        fdmtbLabel.Edit;
+        Readln(fileId, s1);
+        tmp := Trim(Fetch(s1, '|'));
+        fdmtbLabel.Fields[3].AsString := tmp;
+        fdmtbLabel.Next;
+      end;
+//      fdmtbLabel.Post;
+      CloseFile(fileId);
+    end;
+// ****************************************************************************
 // активация кнопки "Этикетка"
     mniLabel.Enabled := True;
+//    frmTestGrid.Show;           // активация тестовой формы
   end;
 end;
 
