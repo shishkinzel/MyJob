@@ -7906,6 +7906,57 @@ object frmMAC: TfrmMAC
         OnClick = mniExitClick
       end
     end
+    object mniLabel: TMenuItem
+      Caption = #1069#1090#1080#1082#1077#1090#1082#1072
+      Enabled = False
+      Visible = False
+      object mniLabelBig: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'40_2824'
+        object mniShowBig: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mniShowBigClick
+        end
+        object mniPrintBig: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniPrintBigClick
+        end
+      end
+      object mniLabelSmall: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30'#1093'20_940'
+        object mniShowSmall: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mniShowSmallClick
+        end
+        object mniPrintSmall: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniPrintSmallClick
+        end
+      end
+      object mniShild: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 40'#1093'12_924'
+        object mniShowShild: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mniShowShildClick
+        end
+        object mniPrintShild: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniPrintShildClick
+        end
+      end
+    end
+    object mniLabelAdvance: TMenuItem
+      Caption = #1069#1090#1080#1082#1077#1090#1082#1080'('#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077')'
+      Enabled = False
+      Visible = False
+    end
+    object mniListDevice: TMenuItem
+      Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
+      Visible = False
+      OnClick = mniListDeviceClick
+    end
     object mniReport: TMenuItem
       Caption = #1054#1090#1095#1077#1090
       Enabled = False
@@ -8076,52 +8127,6 @@ object frmMAC: TfrmMAC
         Enabled = False
         OnClick = mniGen_QR_ResetClick
       end
-    end
-    object mniLabel: TMenuItem
-      Caption = #1069#1090#1080#1082#1077#1090#1082#1072
-      Enabled = False
-      Visible = False
-      object mniLabelBig: TMenuItem
-        Caption = #1041#1086#1083#1100#1096#1072#1103' '#1101#1090#1080#1082#1077#1090#1082#1072
-        object mniShowBig: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-          OnClick = mniShowBigClick
-        end
-        object mniPrintBig: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1100
-          Enabled = False
-          OnClick = mniPrintBigClick
-        end
-      end
-      object mniLabelSmall: TMenuItem
-        Caption = #1052#1072#1083#1072#1103' '#1101#1090#1080#1082#1077#1090#1082#1072
-        object mniShowSmall: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-          OnClick = mniShowSmallClick
-        end
-        object mniPrintSmall: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1100
-          Enabled = False
-          OnClick = mniPrintSmallClick
-        end
-      end
-      object mniShild: TMenuItem
-        Caption = #1064#1080#1083#1100#1076
-        object mniShowShild: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-          OnClick = mniShowShildClick
-        end
-        object mniPrintShild: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1100
-          Enabled = False
-          OnClick = mniPrintShildClick
-        end
-      end
-    end
-    object mniListDevice: TMenuItem
-      Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
-      Visible = False
-      OnClick = mniListDeviceClick
     end
   end
   object fdmtblMac: TFDMemTable

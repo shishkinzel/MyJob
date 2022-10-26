@@ -74,7 +74,7 @@ object frmFRSmallLabel: TfrmFRSmallLabel
         RowCount = 0
         object MTitle: TfrxMemoView
           AllowVectorExport = True
-          Top = 3.779527560000000000
+          Top = 3.779527559999998000
           Width = 113.385900000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -112,8 +112,8 @@ object frmFRSmallLabel: TfrmFRSmallLabel
           IndexTag = 1
           AllowVectorExport = True
           Left = 20.787451620000000000
-          Top = 49.133858270000000000
-          Width = 86.929116770000000000
+          Top = 49.133858269999990000
+          Width = 86.929116769999990000
           Height = 15.118120000000000000
           AutoWidth = True
           DataField = 'sn'

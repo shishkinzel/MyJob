@@ -151,6 +151,7 @@ type
     lblSGP: TLabel;
     mniListDevice: TMenuItem;
     tbLabellmac: TStringField;
+    mniLabelAdvance: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -222,6 +223,7 @@ type
       fnumberDeviceHigh :  string;   // три старших разряда серийного номера с пробелами между триадами
       fbitBarCode : string;           // для печати mac в barcode
       ffirstIdDeviceBarCode : string; // для печати id в barcode
+      macSize : Boolean;              // флаг для печати этикеток увеличенного mac-адреса
   public
   { Public declarations }
     const
@@ -286,6 +288,7 @@ begin
     medtBit_5.Enabled := True;
     medtBit_6.Enabled := True;
     seStepIterator.Enabled := True;
+    mniLabelAdvance.Visible := True;
   end
   else
   begin
@@ -295,6 +298,7 @@ begin
     medtBit_5.Enabled := False;
     medtBit_6.Enabled := False;
     seStepIterator.Enabled := False;
+    mniLabelAdvance.Visible := False;
   end;
 end;
 
@@ -384,6 +388,9 @@ end;
  // выбор утилиты *************************************************
 procedure TfrmMAC.mniIteratorClick(Sender: TObject);
 begin
+ // меняем название  "Печать_МАС_924" на "Печать"
+   mnifrPrint.Caption := 'Печать';
+
 // включаем checkBox Печать этикетки
   chkPrintTab.Enabled := True;
 // активируем checkBox
@@ -418,9 +425,8 @@ procedure TfrmMAC.mniPrintMacClick(Sender: TObject);
 begin
 // выключаем checkBox Печать этикетки
   chkPrintTab.Enabled := False;
-// гасим флажок
-//  chkAdvanceSetting.Enabled := False;
-//  chkAdvanceSetting.Checked := False;
+// меняем название "Печать" на "Печать_МАС_924"
+   mnifrPrint.Caption := 'Печать_МАС_924';
   utilityMAC := False;
   mniPrintMac.Enabled := False;
   mniIterator.Enabled := True;
@@ -457,10 +463,14 @@ var
   bit0, bit1, bit2: string;
   img: BITMAP;
 begin
+// установить шрифт отчета печати mac-адреса по умолчанию
+  macSize := False;
+
   mniBarCodeLong.Enabled := True;
   if not (chkPrintTab.Checked) then
     btnStart.Enabled := False
-    else chkPrintTab.Enabled := False;
+  else
+    chkPrintTab.Enabled := False;
   mniReport.Enabled := True;
   mniApply.Enabled := False;
   btnApply.Enabled := False;
@@ -579,6 +589,11 @@ begin
     else
     begin            // утилита печати МАС-адресов включена
   //   формирование файла
+            // утилита печати МАС-адресов включена
+  //   формирование файла
+  //  если шаг итерации mac-адреса больше одного переводим флаг в состояние true
+      if stepIteration <> 1 then
+        macSize := True;
       Rewrite(fileId);
       for i := 1 to quantity do
       begin
@@ -609,7 +624,7 @@ begin
 // закрытие файла
       CloseFile(fileId);
 
-// заполняем FDMemTable   включить в расширенном режиме
+// заполняем FDMemTable
       fdmtblMac.Open;
       fdmtblMac.Table.Clear;
       fdmtblMac.Append;
@@ -736,8 +751,9 @@ begin
       CloseFile(fileId);
     end;
 // ****************************************************************************
-// активация кнопки "Этикетка"
+// активация кнопки "Этикетка"  и "Этикетка(расширенная)"
     mniLabel.Enabled := True;
+    mniLabelAdvance.Enabled := True;
 //    frmTestGrid.Show;           // активация тестовой формы
   end;
 end;
@@ -810,10 +826,17 @@ if not(chkPrintTab.Checked) then
       edtDevice.SetFocus
     else
       medtBit_4.SetFocus;
+// сбрасываем отчеты
+   // закрытие отчетов
+    frmFRList.Close;
+   // очистка отчетов
+    frmFRList.frxrprtList.PreviewPages.Clear;
+
   end
   else
   begin
     mniLabel.Enabled := False;
+    mniLabelAdvance.Enabled := False;
     chkPrintTab.Enabled := True;
     ShowMessage('Сбрасываем отчеты');
     btnApply.Enabled := True;
@@ -822,14 +845,20 @@ if not(chkPrintTab.Checked) then
     frmFRBigLabel.Close;
     frmFRSmallLabel.Close;
     frmShild.Close;
+    frmFRList.Close;
 // очистка отчетов
     frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
     frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
     frmShild.rpShild.PreviewPages.Clear;
+    frmFRList.frxrprtList.PreviewPages.Clear;
 // гасим окна печати
     mniPrintBig.Enabled := False;
     mniPrintSmall.Enabled := False;
     mniPrintShild.Enabled := False;
+// зажигаем окна просмотра
+     mniShowBig.Enabled := True;
+     mniShowSmall.Enabled := True;
+     mniShowShild.Enabled := True;
   end;
 end;
 
@@ -1274,21 +1303,7 @@ begin
     frmFRList.frxrprtList.Print;
   end;
 end;
-procedure TfrmMAC.mnifrViewClick(Sender: TObject);
-begin
-  if utilityMAC then
-  begin
-    frmFReport.Show;
-    frmFReport.frxprvwMac.Clear;
-    frmFReport.frxrprtMac.ShowReport();
-  end
-  else
-  begin
-    frmFRList.Show;
-    frmFRList.frxprvwList.Clear;
-    frmFRList.frxrprtList.ShowReport();
-  end;
-end;
+
 
 procedure TfrmMAC.pdf1Click(Sender: TObject);
 begin
@@ -1411,14 +1426,22 @@ end;
 // BarCode для большой этикетки ***********************************************
 procedure TfrmMAC.mniShowBigClick(Sender: TObject);
 begin
+// задаем место открытие окна
+  frmFRBigLabel.Top := 5;
+  frmFRBigLabel.Left := 5;
   frmFRBigLabel.Show;
+  Self.SetFocus;
+
+  // гасим и зажигаем пункты на главном меню
   mniPrintBig.Enabled := True;
+  mniShowBig.Enabled := False;
+
   (frmFRBigLabel.rpBigLabel.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
   (frmFRBigLabel.rpBigLabel_mac.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
-  if chkAdvanceSetting.Checked   then
-  frmFRBigLabel.rpBigLabel_mac.ShowReport()
+  if chkAdvanceSetting.Checked then
+    frmFRBigLabel.rpBigLabel_mac.ShowReport()
   else
-  frmFRBigLabel.rpBigLabel.ShowReport();
+    frmFRBigLabel.rpBigLabel.ShowReport();
 end;
 // печать большой этикетки
 
@@ -1431,8 +1454,16 @@ end;
 // BarCode для маленькой этикетки ***********************************************
 procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
 begin
+ // задаем место открытие окна
+  frmFRSmallLabel.Top := 5;
+  frmFRSmallLabel.Left := 5;
+
   frmFRSmallLabel.Show;
+  self.SetFocus;
+// гасим и зажигаем пункты на главном меню
   mniPrintSmall.Enabled := True;
+  mniShowSmall.Enabled := False;
+
   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
   frmFRSmallLabel.rpSmallLabel.ShowReport();
 end;
@@ -1448,9 +1479,18 @@ end;
 // BarCode для шильда
 procedure TfrmMAC.mniShowShildClick(Sender: TObject);
 begin
+   // задаем место открытие окна
+  frmShild.Top := 5;
+  frmShild.Left := 5;
+
   frmShild.Show;
+  self.SetFocus;
 //  (frmShild.rpShild.FindObject('MShild') as TFrxMemoView).Text := edtmod.text;
+
+// гасим и зажигаем пункты на главном меню
   mniPrintShild.Enabled := True;
+  mniShowShild.Enabled := False;
+
   frmShild.rpShild.ShowReport();
 end;
 
@@ -1460,6 +1500,38 @@ begin
   frmShild.rpShild.ShowReport;
   frmShild.rpShild.Print;
 end;
+// открытие отчета печати mac-адреса или общий отчет
+
+procedure TfrmMAC.mnifrViewClick(Sender: TObject);
+begin
+  if utilityMAC then       // утилита mac адресов отключена true
+  begin
+    frmFReport.Show;
+    frmFReport.frxprvwMac.Clear;
+    frmFReport.frxrprtMac.ShowReport();
+  end
+  else
+  begin
+   // меняем размер шрифта при печати mac-адреса
+//  ((frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
+    if macSize then
+      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 10
+    else
+      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 12;
+   // задаем место открытие окна
+    frmFRList.Top := 5;
+    frmFRList.Left := 5;
+
+    frmFRList.Show;
+    Self.SetFocus;
+    frmFRList.frxprvwList.Clear;
+    frmFRList.frxrprtList.ShowReport();
+  end;
+end;
+
+
+
+
 // открытие формы со списком модулей и устройств
 
 procedure TfrmMAC.mniListDeviceClick(Sender: TObject);

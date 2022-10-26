@@ -37,7 +37,7 @@ object frmFRList: TfrmFRList
     PrintOptions.Printer = 'ZDesigner TLP 2824_little'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44858.388304803240000000
+    ReportOptions.LastChange = 44860.676762870370000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -76,10 +76,10 @@ object frmFRList: TfrmFRList
         DataSet = frxdbdtstList
         DataSetName = 'frxDBDataset1'
         RowCount = 0
-        object frxDBDataset1MACadress: TfrxMemoView
+        object MACadress: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Left = 1.889763779527559000
+          Left = 1.889763780000000000
           Width = 154.960637240000000000
           Height = 37.795275590000000000
           DataField = 'MAC - adress'
@@ -87,7 +87,7 @@ object frmFRList: TfrmFRList
           DataSetName = 'frxDBDataset1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
+          Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
