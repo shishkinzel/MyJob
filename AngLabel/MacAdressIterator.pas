@@ -1447,8 +1447,17 @@ end;
 
 procedure TfrmMAC.mniPrintBigClick(Sender: TObject);
 begin
-  frmFRBigLabel.rpBigLabel.ShowReport;
-  frmFRBigLabel.rpBigLabel.Print;
+  if chkAdvanceSetting.Checked then
+  begin
+    frmFRBigLabel.rpBigLabel_mac.ShowReport();
+    frmFRBigLabel.rpBigLabel_mac.Print;
+  end
+  else
+  begin
+    frmFRBigLabel.rpBigLabel.ShowReport();
+    frmFRBigLabel.rpBigLabel.Print;
+  end;
+
 end;
 
 // BarCode для маленькой этикетки ***********************************************
@@ -1515,9 +1524,9 @@ begin
    // меняем размер шрифта при печати mac-адреса
 //  ((frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
     if macSize then
-      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 10
+      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 11
     else
-      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 12;
+      (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 13;
    // задаем место открытие окна
     frmFRList.Top := 5;
     frmFRList.Left := 5;

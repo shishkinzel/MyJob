@@ -34,10 +34,14 @@ object frmShild: TfrmShild
     Preview = prShild
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'ZDesigner TLP 2824_little'
+    PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44858.399352187500000000
+    ReportOptions.LastChange = 44862.676166087960000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

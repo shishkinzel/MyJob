@@ -34,10 +34,14 @@ object frmFRSmallLabel: TfrmFRSmallLabel
     Preview = pvSmallLabel
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'ZDesigner TLP 2824_little'
+    PrintOptions.Printer = '\\Angwork_print\te200_940'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44757.859132928200000000
-    ReportOptions.LastChange = 44858.679444247700000000
+    ReportOptions.LastChange = 44862.675554016200000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -112,8 +116,8 @@ object frmFRSmallLabel: TfrmFRSmallLabel
           IndexTag = 1
           AllowVectorExport = True
           Left = 20.787451620000000000
-          Top = 49.133858269999990000
-          Width = 86.929116769999990000
+          Top = 49.133858270000000000
+          Width = 86.929116770000000000
           Height = 15.118120000000000000
           AutoWidth = True
           DataField = 'sn'
@@ -122,7 +126,7 @@ object frmFRSmallLabel: TfrmFRSmallLabel
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
-          Font.Name = 'Tahoma'
+          Font.Name = 'Roboto'
           Font.Style = []
           Frame.Typ = []
           Frame.Width = 0.500000000000000000
@@ -133,7 +137,8 @@ object frmFRSmallLabel: TfrmFRSmallLabel
         end
         object Memo1: TfrxMemoView
           AllowVectorExport = True
-          Top = 49.133858267716500000
+          Left = 3.779530000000000000
+          Top = 49.133858270000000000
           Width = 18.897650000000000000
           Height = 15.118120000000000000
           Font.Charset = RUSSIAN_CHARSET

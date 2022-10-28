@@ -34,10 +34,14 @@ object frmFRList: TfrmFRList
     Preview = frxprvwList
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'ZDesigner TLP 2824_little'
+    PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44860.676762870370000000
+    ReportOptions.LastChange = 44862.677109641200000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -88,7 +92,7 @@ object frmFRList: TfrmFRList
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -17
-          Font.Name = 'Tahoma'
+          Font.Name = 'Roboto'
           Font.Style = []
           Frame.Typ = []
           HAlign = haCenter

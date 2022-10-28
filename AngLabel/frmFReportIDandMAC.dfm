@@ -34,10 +34,14 @@ object frmFR_IDandMAC: TfrmFR_IDandMAC
     Preview = frPrevIDandMAC
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44858.393685034720000000
+    ReportOptions.LastChange = 44862.678127928240000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
