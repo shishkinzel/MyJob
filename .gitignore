@@ -63,7 +63,7 @@
 # Игнорирование директорий
 Release/
 Debug/
-
+Picture/
 # Delphi history and backups
 __history/
 __recovery/
