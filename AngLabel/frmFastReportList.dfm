@@ -37,7 +37,7 @@ object frmFRList: TfrmFRList
     PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44862.677109641200000000
+    ReportOptions.LastChange = 44867.629970312500000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'

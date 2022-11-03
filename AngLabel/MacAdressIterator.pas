@@ -11,6 +11,7 @@ uses
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
+  FfrAdvacedLabel,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
 
 
@@ -152,6 +153,21 @@ type
     mniListDevice: TMenuItem;
     tbLabellmac: TStringField;
     mniLabelAdvance: TMenuItem;
+    mniLb58_60: TMenuItem;
+    mniLb100_72: TMenuItem;
+    mniLb100_150: TMenuItem;
+    mniLbSep1: TMenuItem;
+    mniLbReset1: TMenuItem;
+    mniLbSep2: TMenuItem;
+    mniLbReset2: TMenuItem;
+    mniLbShow_58_60: TMenuItem;
+    mniLbShow_100_72: TMenuItem;
+    mniLbShow_100_150: TMenuItem;
+    mniLbPrint58_50: TMenuItem;
+    mniLbPrint100_72: TMenuItem;
+    mniLbPrint100_150: TMenuItem;
+    pmMacAddress: TPopupMenu;
+    pmmiClose: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -200,6 +216,8 @@ type
     procedure mniListDeviceClick(Sender: TObject);
     procedure mnifrViewClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure pmmiCloseClick(Sender: TObject);
+    procedure mniLbShow_58_60Click(Sender: TObject);
   private
     { Private declarations }
     var
@@ -1311,6 +1329,11 @@ begin
   frmFReport.frxrprtMac.Export(frmFReport.frxpdfxprtMac);
 end;
 
+procedure TfrmMAC.pmmiCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure TfrmMAC.xml1Click(Sender: TObject);
 begin
   frmFReport.frxrprtMac.ShowReport();
@@ -1542,6 +1565,27 @@ end;
 
 
 // открытие формы со списком модулей и устройств
+
+procedure TfrmMAC.mniLbShow_58_60Click(Sender: TObject);
+begin
+  if not (Sender is TMenuItem) then
+    Exit;
+  case (Sender as TMenuItem).Tag  of
+    0:
+      begin
+          ShowMessage('открыт 58х60');
+      end;
+    1:
+      begin
+           ShowMessage('открыт 100х72');
+      end;
+    2:
+      begin
+           ShowMessage('открыт 100х150');
+      end;
+
+  end;
+end;
 
 procedure TfrmMAC.mniListDeviceClick(Sender: TObject);
 var

@@ -14,7 +14,8 @@ uses
   FFRBigLabel in 'FFRBigLabel.pas' {frmFRBigLabel},
   FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel},
   FShild in 'FShild.pas' {frmShild},
-  FListDevece in 'FListDevece.pas' {frmListDevice};
+  FListDevece in 'FListDevece.pas' {frmListDevice},
+  FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel};
 
 {$R *.res}
 
@@ -33,5 +34,6 @@ begin
   Application.CreateForm(TfrmFRBigLabel, frmFRBigLabel);
   Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
   Application.CreateForm(TfrmShild, frmShild);
+  Application.CreateForm(TfrmAdvancedLabel, frmAdvancedLabel);
   Application.Run;
 end.

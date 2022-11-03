@@ -4,7 +4,7 @@
         <ProjectVersion>19.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -85,6 +85,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>MainMacAdressIterator_Icon6.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -158,6 +161,10 @@
             <Form>frmListDevice</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="FfrAdvacedLabel.pas">
+            <Form>frmAdvancedLabel</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -179,18 +186,25 @@
                     <Source Name="MainSource">MainMacAdressIterator.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfrxIBX27.bpl">FastReport 6.0 IBX Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfsIBX27.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfrxTee27.bpl">FastReport 6.0 Tee Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfsTee27.bpl">FastScript 1.9 Tee Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfrxIBX27.bpl">FastReport 6.0 IBX Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfsIBX27.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Release\MainMacAdressIterator.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MainMacAdressIterator.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
