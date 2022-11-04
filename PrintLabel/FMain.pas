@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin;
+  Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
+  // ***************************** подсоединЄные формы
+  FdbmPrintLabel, FSelection;
 
 type
   TfrmMain = class(TForm)
@@ -25,8 +27,12 @@ type
     btnStart_Reset: TBitBtn;
     seStep: TSpinEdit;
     seCount: TSpinEdit;
+    btnSelection: TBitBtn;
+    chkStiker: TCheckBox;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
     procedure btnStart_ResetClick(Sender: TObject);
+    procedure btnSelectionClick(Sender: TObject);
+    procedure chkStikerClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,7 +69,33 @@ begin
     ShowMessage('—бросить данные');
   end;
 
+end;
+// отключение режима стикера
+procedure TfrmMain.chkStikerClick(Sender: TObject);
+begin
+  if not (chkStiker.Checked) then
+  begin
+    redtDevice.Enabled := True;
+    edtPackage.Enabled := True;
+    redtDevice.SetFocus;
+  end
+  else
+  begin
+    redtDevice.Enabled := False;
+    edtPackage.Enabled := False;
+    medtID.SetFocus;
+  end;
 
 end;
 
+
+// переход на форму выбора утилиты печати
+procedure TfrmMain.btnSelectionClick(Sender: TObject);
+begin
+  frmSelection := TfrmSelection.Create(nil);
+  frmMain.Hide;
+  frmSelection.Show;
+end;
+
 end.
+
