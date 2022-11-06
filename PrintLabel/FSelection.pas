@@ -34,6 +34,7 @@ type
     lblMACnumber: TLabel;
     btnSOFT: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnLabel1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +49,14 @@ uses
   FMain;
 
 {$R *.dfm}
+
+procedure TfrmSelection.btnLabel1Click(Sender: TObject);
+begin
+frmPrintSection := TfrmPrintSection.Create(nil);
+frmPrintSection.ShowModal;
+if ModalResult = 0 then
+  frmPrintSection.Free;
+end;
 
 procedure TfrmSelection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

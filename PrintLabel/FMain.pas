@@ -77,13 +77,15 @@ begin
   begin
     redtDevice.Enabled := True;
     edtPackage.Enabled := True;
-    redtDevice.SetFocus;
+    if redtDevice.CanFocus then
+      redtDevice.SetFocus;
   end
   else
   begin
     redtDevice.Enabled := False;
     edtPackage.Enabled := False;
-    medtID.SetFocus;
+    if medtID.CanFocus then
+      medtID.SetFocus;
   end;
 
 end;

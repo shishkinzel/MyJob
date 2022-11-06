@@ -33,6 +33,7 @@ type
     mniNResetLab4: TMenuItem;
     mniNShowmac: TMenuItem;
     mniNPrintmac: TMenuItem;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -48,5 +49,11 @@ uses
   FSelection;
 
 {$R *.dfm}
+
+procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ModalResult := 0;
+Close;
+end;
 
 end.

@@ -12,6 +12,8 @@ object frmPrintSection: TfrmPrintSection
   Font.Style = []
   Menu = mmPrintSection
   OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object imgPrintSection: TImage
