@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
   // ***************************** подсоединёные формы
-  FdbmPrintLabel, FSelection;
+  FdbmPrintLabel, FSelection, Data.DB;
 
 type
   TfrmMain = class(TForm)
@@ -20,7 +20,6 @@ type
     lblID: TLabel;
     lblMAC: TLabel;
     medtID: TMaskEdit;
-    lblMAChigt: TLabel;
     medtMAC: TMaskEdit;
     lblStep: TLabel;
     lblCount: TLabel;
@@ -35,6 +34,8 @@ type
     procedure chkStikerClick(Sender: TObject);
   private
     { Private declarations }
+    const
+    cnMAC = '68:EB:C5:';
   public
     { Public declarations }
   end;
@@ -62,11 +63,19 @@ begin
   begin
     (Sender as TBitBtn).Caption := 'Сбросить данные';
     ShowMessage('Принять данные');
+    Print_mac_id(medtID.Text, medtMAC.text, seStep.Value, seCount.Value, dbmPrintLabel.fdmtblPrint);
   end
   else
   begin
     (Sender as TBitBtn).Caption := 'Принять данные';
     ShowMessage('Сбросить данные');
+// очищаем окна
+  redtDevice.Clear;
+  edtPackage.Clear;
+  medtID.Text := '000_000_000_000';
+  medtMAC.Text := '68:EB:C5:00:00:00';
+  seStep.Value := 1;
+  seCount.Value := 1;
   end;
 
 end;
