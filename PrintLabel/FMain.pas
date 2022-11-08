@@ -76,6 +76,16 @@ begin
   medtMAC.Text := '68:EB:C5:00:00:00';
   seStep.Value := 1;
   seCount.Value := 1;
+  if chkStiker.Checked then
+  begin
+    if medtID.CanFocus then
+       medtID.SetFocus;
+  end
+  else
+     begin
+       if redtDevice.CanFocus then
+        redtDevice.SetFocus;
+     end;
   end;
 
 end;

@@ -139,20 +139,21 @@ begin
   fstep := k1;
   fcount := k2;
 // отделяем последнюю триаду для работы с ней
-  for i := 0 to 1 do
+  for i := 0 to 2 do
   begin
     tmp_id_1 := Trim(Fetch(f_id, '_'));
-    f_id_long := f_id_long + f_id + ' ';
-    f_id_small := f_id_small + f_id;
+    f_id_long := f_id_long + tmp_id_1 + ' ';
+    f_id_small := f_id_small + tmp_id_1;
   end;
 // берем последнюю триаду проверяем на выход из диапазона 999
-  f_id_num := StrToIntDef(tmp_id_1, -1000);
+  f_id_num := StrToIntDef(f_id, -1000);
   if ((f_id_num + fcount) > 999) or ((f_id_num + fcount) < 0) then
   begin
     raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств' + #10#13 + 'Или ошибка ввода серийного номера');
   end;
 // работаем с mac-адресом
-  f_mac := Trim(Fetch(f_mac, cnMAC));
+//  f_mac := Trim(Fetch(f_mac, cnMAC));
+    Delete(f_mac, 1, 9);
   for i := 0 to 1 do
   begin
     fbit[i] := HexStrToInt(Trim(Fetch(f_mac, ':')));
