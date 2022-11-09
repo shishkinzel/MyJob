@@ -44,6 +44,8 @@ var
   frmMain: TfrmMain;
 
 implementation
+uses
+FTest;
 
 {$R *.dfm}
 // ограничение ввода символов в mac-адрес
@@ -64,6 +66,7 @@ begin
     (Sender as TBitBtn).Caption := 'Сбросить данные';
     ShowMessage('Принять данные');
     Print_mac_id(medtID.Text, medtMAC.text, seStep.Value, seCount.Value, dbmPrintLabel.fdmtblPrint);
+//    frmTest.Show;
   end
   else
   begin

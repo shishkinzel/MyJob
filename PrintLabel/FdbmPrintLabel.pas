@@ -18,6 +18,7 @@ type
     ssPrintmac: TStringField;
     ssPrintmac_extended: TStringField;
     ssPrintid_mac: TStringField;
+    blid_mac_blob: TBlobField;
   private
     { Private declarations }
   public
@@ -33,13 +34,14 @@ function ArrayToString_MAC(var inArray: array of Byte): string;
 
 procedure IncArrayOne(var inArray: array of Byte);
 procedure Print_mac_id (const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable);
+
 var
   dbmPrintLabel: TdbmPrintLabel;
 
 implementation
 
 uses
-  FMain , IdGlobal;
+  FMain , FTest, IdGlobal;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -96,7 +98,7 @@ s := '';
 
    end;
         Delete(s, 9, 1);
-   Result := '68:EB:C5:' + s + '|';
+   Result := '68:EB:C5:' + s;
 end;
 
 function ArrayToString_MAC(var inArray: array of Byte): string;
@@ -120,7 +122,9 @@ procedure Print_mac_id(const s1, s2: string; const k1, k2: Integer; fdtbl: TFDMe
 var
   f_mac, f_id, f_id_long, f_id_small: string;
   f_id_small_all, f_id_long_all : string;
+  rangeLast, f_id_string : string;
   fstep, fcount: Integer;
+  fstep_flag : Boolean;
   f_id_num: Integer;
   fbit: array[0..2] of Byte;
   fd_tblPrint: TFDMemTable;
@@ -132,12 +136,21 @@ const
   mac = ' --mac ';
   serial = ' --serial ';
 begin
+// создаем поток
+  barCodeStream := TMemoryStream.Create;
+
   f_id_long := '';
   f_id_small := '';
+  rangeLast := '';
   f_id := s1;
   f_mac := s2;
   fstep := k1;
   fcount := k2;
+  if fstep = 1 then
+    fstep_flag := False
+  else
+    fstep_flag := True;
+
 // отделяем последнюю триаду для работы с ней
   for i := 0 to 2 do
   begin
@@ -152,7 +165,6 @@ begin
     raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств' + #10#13 + 'Или ошибка ввода серийного номера');
   end;
 // работаем с mac-адресом
-//  f_mac := Trim(Fetch(f_mac, cnMAC));
     Delete(f_mac, 1, 9);
   for i := 0 to 1 do
   begin
@@ -166,11 +178,13 @@ begin
 // организация цикла - по количеству устройств
   for i := 0 to fcount - 1 do
   begin
+    f_id_small_all := '';
+    f_id_long_all := '';
     fdtbl.Append;
 // серийные номера
-    f_id_num := f_id_num + i;
-    f_id_small_all := f_id_small + f_id_num.ToString;
-    f_id_long_all := f_id_long + f_id_num.ToString;
+     f_id_string := Format('%.3d', [f_id_num]);
+    f_id_small_all := f_id_small + f_id_string;
+    f_id_long_all := f_id_long + f_id_string;
     fdtbl.Fields[0].AsString := f_id_small_all;
     fdtbl.Fields[3].AsString := f_id_long_all;
 // создаем поток и трансформируем в barcode
@@ -192,14 +206,51 @@ begin
     barCodeStream.Position := 0;
     (fdtbl.Fields[1] as TBlobField).LoadFromStream(barCodeStream);
     barCodeStream.Clear;
+// увеличиваем серийный номер на единицу - последнюю триаду
+    Inc(f_id_num);
 // mac-адреса для записи в таблицу fdtbl
+    fdtbl.Fields[4].AsString := ArrayToString(fbit);
+    if fstep_flag then
+    begin
+      while fstep > 0 do
+      begin
+        IncArrayOne(fbit);
+        Dec(fstep);
+        if fstep = 1 then
+        begin
+          rangeLast := '-' + IntToHex(fbit[2]);
+          fdtbl.Fields[5].AsString := fdtbl.Fields[4].AsString + rangeLast;
+        end;
+      end;
 
+      fstep := k1;
+    end
+    else
+    begin
+      fdtbl.Fields[5].AsString := ArrayToString(fbit);
+      IncArrayOne(fbit);
+    end;
+
+    fdtbl.Fields[6].AsString := mac + fdtbl.Fields[4].AsString + serial + fdtbl.Fields[0].AsString;
+      // qr-code для заливки софта
+    dbmPrintLabel.brcdPrintLabel.InputText := fdtbl.Fields[6].AsString;
+    dbmPrintLabel.brcdPrintLabel.Height := 50;
+    dbmPrintLabel.brcdPrintLabel.Scale := 1;
+    dbmPrintLabel.brcdPrintLabel.Symbology := syQRCode;
+    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (fdtbl.Fields[7] as TBlobField).LoadFromStream(barCodeStream);
+    barCodeStream.Clear;
+// перемещаемся по таблице на шаг
+    fdtbl.Next;
   end;
-
+  barCodeStream.Free;
 end;
 
 
 
 
 end.
+
+
 

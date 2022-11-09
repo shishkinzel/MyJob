@@ -3,6 +3,7 @@ object dbmPrintLabel: TdbmPrintLabel
   Height = 215
   Width = 355
   object fdmtblPrint: TFDMemTable
+    Active = True
     FieldDefs = <
       item
         Name = 'id'
@@ -35,7 +36,11 @@ object dbmPrintLabel: TdbmPrintLabel
       item
         Name = 'id_mac'
         DataType = ftString
-        Size = 20
+        Size = 50
+      end
+      item
+        Name = 'id_mac_blob'
+        DataType = ftBlob
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -67,7 +72,12 @@ object dbmPrintLabel: TdbmPrintLabel
       FieldName = 'mac_extended'
     end
     object ssPrintid_mac: TStringField
+      DisplayWidth = 50
       FieldName = 'id_mac'
+      Size = 50
+    end
+    object blid_mac_blob: TBlobField
+      FieldName = 'id_mac_blob'
     end
   end
   object brcdPrintLabel: TBarcode
