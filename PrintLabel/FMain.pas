@@ -15,7 +15,7 @@ type
     txtTitle: TStaticText;
     lblDevice: TLabel;
     lblPackage: TLabel;
-    redtDevice: TRichEdit;
+    edtDevice: TEdit;
     edtPackage: TEdit;
     lblID: TLabel;
     lblMAC: TLabel;
@@ -32,6 +32,13 @@ type
     procedure btnStart_ResetClick(Sender: TObject);
     procedure btnSelectionClick(Sender: TObject);
     procedure chkStikerClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtDeviceChange(Sender: TObject);
+    procedure edtPackageChange(Sender: TObject);
+
+
+
+
   private
     { Private declarations }
     const
@@ -48,11 +55,40 @@ uses
 FTest;
 
 {$R *.dfm}
-// ограничение ввода символов в mac-адрес
+// работа над автоматическим переходом в окнах  ****************************************************
+procedure TfrmMain.edtDeviceChange(Sender: TObject);
+begin
+ if Length(edtDevice.Text) = 70 then
+   begin
+    if edtPackage.CanFocus then
+      edtPackage.SetFocus;
+  end;
+end;
 
+procedure TfrmMain.edtPackageChange(Sender: TObject);
+begin
+  if Length(edtPackage.Text) = 16 then
+  begin
+    if medtID.CanFocus then
+      medtID.SetFocus;
+  end;
+end;
+
+
+// переход по нажатию кнопки "Ввод" - enter
+procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+if (Key = VK_RETURN)
+ then
+    FindNextControl(ActiveControl, True, True, false).SetFocus;
+end;
+
+//**************************************************************************************************
+
+// ограничение ввода символов в mac-адрес
 procedure TfrmMain.medtMACKeyPress(Sender: TObject; var Key: Char);
 begin
- if not(Key in ['0' ..'9', 'a' ..'f', 'A' .. 'F']) then
+  if not (Key in ['0'..'9', 'a'..'f', 'A'..'F']) then
     Key := #0;
 end;
 
@@ -66,29 +102,37 @@ begin
     (Sender as TBitBtn).Caption := 'Сбросить данные';
     ShowMessage('Принять данные');
     Print_mac_id(medtID.Text, medtMAC.text, seStep.Value, seCount.Value, dbmPrintLabel.fdmtblPrint);
-//    frmTest.Show;
+  // зажигаем кнопку  "Выбор утилиты печати"
+    btnSelection.Enabled := True;
+    //    frmTest.Show;
   end
   else
   begin
     (Sender as TBitBtn).Caption := 'Принять данные';
     ShowMessage('Сбросить данные');
 // очищаем окна
-  redtDevice.Clear;
-  edtPackage.Clear;
-  medtID.Text := '000_000_000_000';
-  medtMAC.Text := '68:EB:C5:00:00:00';
-  seStep.Value := 1;
-  seCount.Value := 1;
-  if chkStiker.Checked then
-  begin
-    if medtID.CanFocus then
-       medtID.SetFocus;
-  end
-  else
-     begin
-       if redtDevice.CanFocus then
-        redtDevice.SetFocus;
-     end;
+    edtDevice.Clear;
+    edtPackage.Clear;
+    medtID.Text := '000_000_000_000';
+    medtMAC.Text := '68:EB:C5:00:00:00';
+    seStep.Value := 1;
+    seCount.Value := 1;
+    edtDevice.Text := 'Не задано';
+    edtPackage.Text := 'Не задано';
+    chkStiker.Checked := True;
+
+  // гасим кнопку  "Выбор утилиты печати"
+    btnSelection.Enabled := False;
+    if chkStiker.Checked then
+    begin
+      if medtID.CanFocus then
+        medtID.SetFocus;
+    end
+    else
+    begin
+      if edtDevice.CanFocus then
+        edtDevice.SetFocus;
+    end;
   end;
 
 end;
@@ -97,14 +141,14 @@ procedure TfrmMain.chkStikerClick(Sender: TObject);
 begin
   if not (chkStiker.Checked) then
   begin
-    redtDevice.Enabled := True;
+    edtDevice.Enabled := True;
     edtPackage.Enabled := True;
-    if redtDevice.CanFocus then
-      redtDevice.SetFocus;
+    if edtDevice.CanFocus then
+      edtDevice.SetFocus;
   end
   else
   begin
-    redtDevice.Enabled := False;
+    edtDevice.Enabled := False;
     edtPackage.Enabled := False;
     if medtID.CanFocus then
       medtID.SetFocus;
@@ -122,4 +166,5 @@ begin
 end;
 
 end.
+
 

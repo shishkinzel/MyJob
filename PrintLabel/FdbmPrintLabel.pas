@@ -162,7 +162,9 @@ begin
   f_id_num := StrToIntDef(f_id, -1000);
   if ((f_id_num + fcount) > 999) or ((f_id_num + fcount) < 0) then
   begin
-    raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств' + #10#13 + 'Или ошибка ввода серийного номера');
+    barCodeStream.Free;
+    raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств!' + #10#13 + 'Или ошибка ввода серийного номера!');
+
   end;
 // работаем с mac-адресом
     Delete(f_mac, 1, 9);
