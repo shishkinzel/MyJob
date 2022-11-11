@@ -33,6 +33,7 @@ type
     mniNResetLab4: TMenuItem;
     mniNShowmac: TMenuItem;
     mniNPrintmac: TMenuItem;
+    mniNbig_mac: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
@@ -46,7 +47,7 @@ var
 implementation
 
 uses
-  FSelection;
+  FSelection, F_FR_Label;
 
 {$R *.dfm}
 

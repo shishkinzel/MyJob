@@ -85,9 +85,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>PrintLabel_Icon.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>PrintLabel_Icon6.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>G:\Label_shishkin\png\LabelPrint_v_0_2.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>G:\Label_shishkin\png\LabelPrint_v_0_2.png</UWP_DelphiLogo150>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Build>1</VerInfo_Build>
@@ -129,6 +129,10 @@
             <Form>frmTest</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="F_FR_Label.pas">
+            <Form>frmFR_Label</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -159,7 +163,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="G:\Label_shishkin\png\LabelPrint_v_0_2.png" Configuration="Debug" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>

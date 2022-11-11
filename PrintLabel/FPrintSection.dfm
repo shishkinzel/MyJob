@@ -39650,11 +39650,15 @@ object frmPrintSection: TfrmPrintSection
     Top = 16
     object mniLabel: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1072
+      Enabled = False
       object mniNlittle: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30_20'
       end
       object mniNbig: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58_40'
+      end
+      object mniNbig_mac: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58_40_mac'
       end
       object sepLab1: TMenuItem
         Caption = '-'
@@ -39665,6 +39669,7 @@ object frmPrintSection: TfrmPrintSection
     end
     object mniLabelAdvanced: TMenuItem
       Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1072#1103' '#1069#1090#1080#1082#1077#1090#1082#1072
+      Enabled = False
       object mniNbig58_60: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58_60'
       end
@@ -39690,6 +39695,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object mniNPrintID: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
         end
       end
       object mniNLab3: TMenuItem
@@ -39708,6 +39714,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object mniNPrintmac: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
         end
       end
       object mniNLab4: TMenuItem

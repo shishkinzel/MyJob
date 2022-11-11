@@ -14,7 +14,7 @@ type
     imgSelection: TImage;
     txtSelection: TStaticText;
     btnAdvacedLabel: TSpeedButton;
-    btnLabel1: TSpeedButton;
+    btnLabel: TSpeedButton;
     btnMAC: TSpeedButton;
     btnID: TSpeedButton;
     txtOtherUtill: TStaticText;
@@ -34,8 +34,9 @@ type
     lblCount_num: TLabel;
     btnSOFT: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btnLabel1Click(Sender: TObject);
+    procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnMACClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,12 +52,20 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSelection.btnLabel1Click(Sender: TObject);
+procedure TfrmSelection.btnLabelClick(Sender: TObject);
 begin
 frmPrintSection := TfrmPrintSection.Create(nil);
 frmPrintSection.ShowModal;
 if ModalResult = 0 then
   frmPrintSection.Free;
+end;
+
+procedure TfrmSelection.btnMACClick(Sender: TObject);
+var
+i : integer;
+begin
+// обязательно выбор шрифта при печати mac адреса
+
 end;
 
 procedure TfrmSelection.FormClose(Sender: TObject; var Action: TCloseAction);
