@@ -36,7 +36,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btnMACClick(Sender: TObject);
+    procedure btnPrint_QRClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,27 +45,49 @@ type
 
 var
   frmSelection: TfrmSelection;
+
 implementation
 
 uses
-  FMain;
+  FMain, FShowSoft;
 
 {$R *.dfm}
-
 procedure TfrmSelection.btnLabelClick(Sender: TObject);
 begin
-frmPrintSection := TfrmPrintSection.Create(nil);
-frmPrintSection.ShowModal;
-if ModalResult = 0 then
-  frmPrintSection.Free;
+  frmPrintSection := TfrmPrintSection.Create(nil);
+
+  if not (Sender is TSpeedButton) then
+    exit;
+  case (Sender as TSpeedButton).Tag of
+    1:
+      begin
+        frmPrintSection.mniLabel.Enabled := True;
+      end;
+    2:
+      begin
+        frmPrintSection.mniLabelAdvanced.Enabled := True;
+      end;
+    3:
+      begin
+        frmPrintSection.mniMAC.Enabled := True;
+      end;
+    4:
+      begin
+        frmPrintSection.mniID.Enabled := True;
+      end;
+  end;
+
+  frmPrintSection.ShowModal;
+  if ModalResult = 0 then
+    frmPrintSection.Free;
 end;
 
-procedure TfrmSelection.btnMACClick(Sender: TObject);
-var
-i : integer;
-begin
-// обязательно выбор шрифта при печати mac адреса
 
+
+
+procedure TfrmSelection.btnPrint_QRClick(Sender: TObject);
+begin
+frmShowSoft.Show;
 end;
 
 procedure TfrmSelection.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -83,6 +105,10 @@ begin
 
   lblStep_num.Caption  := frmMain.seStep.Value.ToString;
   lblCount_num.Caption := frmMain.seCount.Value.ToString;
+
+  // активация кнопки
+  if frmMain.f_Soft then
+     btnPrint_QR.Enabled := True;
 end;
 
 end.

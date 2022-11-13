@@ -38,6 +38,7 @@ type
     procedure edtPackageChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure seStepChange(Sender: TObject);
+    procedure chkQR_SOFTClick(Sender: TObject);
 
 
 
@@ -51,6 +52,7 @@ type
     f_size_sticker : Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
   public
     { Public declarations }
+    f_Soft : Boolean;
   end;
 
 var
@@ -65,6 +67,7 @@ FTest;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
  f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
+ f_Soft := False;                  // активация дополнительного пункта меню
 end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);
@@ -204,6 +207,14 @@ begin
   end;
 
 end;
+// включение расширенного режима
+procedure TfrmMain.chkQR_SOFTClick(Sender: TObject);
+begin
+     if chkQR_SOFT.Checked then
+      f_Soft := True;
+end;
+
+
 // переход на форму выбора утилиты печати
 procedure TfrmMain.btnSelectionClick(Sender: TObject);
 begin
@@ -220,11 +231,11 @@ begin
     MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
   end;
 
-  if chkQR_SOFT.Checked then
-  begin
-    frmSelection.btnPrint_QR.Enabled := True;
-    frmSelection.btnSOFT.Enabled := True;
-  end;
+//  if chkQR_SOFT.Checked then
+//  begin
+//    frmSelection.btnPrint_QR.Enabled := True;
+//    frmSelection.btnSOFT.Enabled := True;
+//  end;
 
   frmMain.Hide;
   frmSelection.Show;
