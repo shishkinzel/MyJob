@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Menus,
+  System.ImageList, Vcl.ImgList;
 
 type
   TfrmPrintSection = class(TForm)
@@ -34,7 +35,23 @@ type
     mniNShowmac: TMenuItem;
     mniNPrintmac: TMenuItem;
     mniNbig_mac: TMenuItem;
+    ilPrintSection: TImageList;
+    ilPrintSection_48: TImageList;
+    ilPrintSection_64: TImageList;
+    pmmiSh30_20: TMenuItem;
+    pmmiPr30_20: TMenuItem;
+    pmmiSh58_40: TMenuItem;
+    pmmiPr58_40: TMenuItem;
+    pmmiSh58_40_mac: TMenuItem;
+    pmmiPr58_40_mac: TMenuItem;
+    pmmiSh58_60: TMenuItem;
+    pmmiPr58_60: TMenuItem;
+    pmmiSh100_72: TMenuItem;
+    pmmiPr100_72: TMenuItem;
+    pmmiSh100_150: TMenuItem;
+    pmmiPr100_150: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +72,12 @@ procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 ModalResult := 0;
 Close;
+end;
+//   изменение шрифта главного меню
+procedure TfrmPrintSection.FormCreate(Sender: TObject);
+begin
+ Screen.MenuFont.Size := 12;
+ Screen.MenuFont.Name := 'Roboto';
 end;
 
 end.

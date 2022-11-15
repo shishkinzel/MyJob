@@ -31,7 +31,7 @@ type
     mniReset: TMenuItem;
     mniSeparator3: TMenuItem;
     procedure btnCountClick(Sender: TObject);
-    procedure mniExitLoadSoftClick(Sender: TObject);
+//    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
     procedure mniOpenLoadSoftClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -41,6 +41,7 @@ type
     procedure cbb_rmpChange(Sender: TObject);
     procedure mniResetClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnApplyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +61,8 @@ uses
 
 
 {$R *.dfm}
+
+
 
 procedure TfrmShowSoft.btnCountClick(Sender: TObject);
 var
@@ -147,22 +150,18 @@ ShowMessage('Вы выбрали "Рабочее место программирования"' + #10#13 + cbb_rmp.Tex
   btnApply.Enabled :=True;
 
 end;
-
 procedure TfrmShowSoft.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  cbb_rmp.Visible := False;
-  mniExitLoadSoftClick(nil);
-
+  mmoShowSoft.Clear;
 end;
 procedure TfrmShowSoft.FormShow(Sender: TObject);
 begin
 cbb_rmp.Enabled := True;
 end;
 
-procedure TfrmShowSoft.mniExitLoadSoftClick(Sender: TObject);
+procedure TfrmShowSoft.btnApplyClick(Sender: TObject);
 begin
-  mmoShowSoft.Clear;
-  frmShowSoft.Close;
+Close;
 end;
 
 end.

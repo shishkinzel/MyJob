@@ -41,7 +41,7 @@ object frmShowSoft: TfrmShowSoft
   end
   object btnApply: TButton
     Left = 426
-    Top = 290
+    Top = 292
     Width = 120
     Height = 27
     Caption = #1047#1072#1082#1088#1099#1090#1100
@@ -53,6 +53,7 @@ object frmShowSoft: TfrmShowSoft
     ModalResult = 8
     ParentFont = False
     TabOrder = 3
+    OnClick = btnApplyClick
   end
   object cbb_rmp: TComboBox
     Left = 216
@@ -95,7 +96,7 @@ object frmShowSoft: TfrmShowSoft
       object mniExitLoadSoft: TMenuItem
         Caption = #1042#1099#1093#1086#1076
         ShortCut = 16465
-        OnClick = mniExitLoadSoftClick
+        OnClick = btnApplyClick
       end
     end
     object mniApplyLoadSoft: TMenuItem

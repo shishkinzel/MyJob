@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.Buttons,
 //  подсоединёные формы
-   FPrintSection;
+   FPrintSection, System.ImageList, Vcl.ImgList;
 
 type
   TfrmSelection = class(TForm)

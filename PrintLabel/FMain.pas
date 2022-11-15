@@ -128,7 +128,6 @@ begin
   if (Sender as TBitBtn).Caption = 'Принять данные' then
   begin
     (Sender as TBitBtn).Caption := 'Сбросить данные';
-    ShowMessage('Принять данные');
     Print_mac_id(medtID.Text, medtMAC.text, seStep.Value, seCount.Value, dbmPrintLabel.fdmtblPrint);
   // зажигаем кнопку  "Выбор утилиты печати"
     btnSelection.Enabled := True;
@@ -147,7 +146,6 @@ begin
   else
   begin
     (Sender as TBitBtn).Caption := 'Принять данные';
-    ShowMessage('Сбросить данные');
 // очищаем окна
     edtDevice.Clear;
     edtPackage.Clear;
