@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
   // ***************************** подсоединёные формы
-  FdbmPrintLabel, FSelection, Data.DB;
+  FdbmPrintLabel, FSelection, Data.DB, System.ImageList, Vcl.ImgList;
 
 type
   TfrmMain = class(TForm)
@@ -29,6 +29,7 @@ type
     btnSelection: TBitBtn;
     chkStiker: TCheckBox;
     chkQR_SOFT: TCheckBox;
+    ilMain: TImageList;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
     procedure btnStart_ResetClick(Sender: TObject);
     procedure btnSelectionClick(Sender: TObject);

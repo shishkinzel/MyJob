@@ -33,6 +33,7 @@ type
     lblStep_num: TLabel;
     lblCount_num: TLabel;
     btnSOFT: TSpeedButton;
+    ilSelection: TImageList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -50,6 +50,7 @@ type
     pmmiPr100_72: TMenuItem;
     pmmiSh100_150: TMenuItem;
     pmmiPr100_150: TMenuItem;
+    ilPrintSection_svg: TImageList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
