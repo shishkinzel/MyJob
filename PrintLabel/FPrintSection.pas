@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Menus,
-  System.ImageList, Vcl.ImgList;
+  System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
+  Vcl.ActnMenus;
 
 type
   TfrmPrintSection = class(TForm)
@@ -35,9 +36,6 @@ type
     mniNShowmac: TMenuItem;
     mniNPrintmac: TMenuItem;
     mniNbig_mac: TMenuItem;
-    ilPrintSection: TImageList;
-    ilPrintSection_48: TImageList;
-    ilPrintSection_64: TImageList;
     pmmiSh30_20: TMenuItem;
     pmmiPr30_20: TMenuItem;
     pmmiSh58_40: TMenuItem;
@@ -50,7 +48,22 @@ type
     pmmiPr100_72: TMenuItem;
     pmmiSh100_150: TMenuItem;
     pmmiPr100_150: TMenuItem;
-    ilPrintSection_svg: TImageList;
+    ilPrintSelection_16: TImageList;
+    ilPrintSelection_24_sub: TImageList;
+    labMAC: TLabel;
+    labMAC1: TLabel;
+    labCount: TLabel;
+    labStep_num: TLabel;
+    labID: TLabel;
+    labStep: TLabel;
+    labID1: TLabel;
+    labPackage: TLabel;
+    labPackage1: TLabel;
+    labDevice: TLabel;
+    labDevice1: TLabel;
+    txtDevice: TStaticText;
+    labCount_num: TLabel;
+    labID2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
@@ -77,7 +90,7 @@ end;
 //   изменение шрифта главного меню
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
 begin
- Screen.MenuFont.Size := 12;
+ Screen.MenuFont.Size := 14;
  Screen.MenuFont.Name := 'Roboto';
 end;
 

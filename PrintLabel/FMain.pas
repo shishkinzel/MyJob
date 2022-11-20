@@ -53,12 +53,12 @@ type
     f_size_sticker : Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
   public
     { Public declarations }
-    f_Soft : Boolean;
+//    f_Soft : Boolean;
   end;
 
 var
   frmMain: TfrmMain;
-
+  f_showPrintForm : Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
 implementation
 uses
 FTest;
@@ -68,7 +68,8 @@ FTest;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
  f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
- f_Soft := False;                  // активация дополнительного пункта меню
+// f_Soft := False;                  // активация дополнительного пункта меню
+ f_showPrintForm := True;
 end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);
@@ -184,6 +185,9 @@ begin
       if edtDevice.CanFocus then
         edtDevice.SetFocus;
     end;
+// если включен чекбокс "Режим установки ПО" - включаем доступ к "Наименованию комплекта"
+    if chkQR_SOFT.Checked then
+      edtPackage.Enabled := True;
   end;
 
 end;
@@ -210,31 +214,46 @@ end;
 procedure TfrmMain.chkQR_SOFTClick(Sender: TObject);
 begin
      if chkQR_SOFT.Checked then
-      f_Soft := True;
+     begin
+//      f_Soft := True;
+    f_showPrintForm := False;
+    chkStiker.Enabled := False;
+    chkStiker.Checked := True;
+    edtPackage.Enabled := True;
+  end
+  else
+  begin
+    f_showPrintForm := True;
+    chkStiker.Enabled := True;
+    edtPackage.Enabled := False;
+  end;
 end;
+
 
 
 // переход на форму выбора утилиты печати
 procedure TfrmMain.btnSelectionClick(Sender: TObject);
 begin
   frmSelection := TfrmSelection.Create(nil);
-// проверяем состояния чекбокса - если стоит галочка не зажигаем печать этикеток
-  if chkStiker.Checked then
+
+  if chkQR_SOFT.Checked then
   begin
-    MessageBox(Handle, Pchar('Доступна только печать стикеров!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+   MessageBox(Handle, Pchar('Прочие утилиты!'), cnAttention, MB_ICONINFORMATION + MB_OK);
   end
   else
   begin
-    frmSelection.btnAdvacedLabel.Enabled := True;
-    frmSelection.btnLabel.Enabled := True;
-    MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+   // проверяем состояния чекбокса - если стоит галочка не зажигаем печать этикеток
+    if chkStiker.Checked then
+    begin
+      MessageBox(Handle, Pchar('Доступна только печать стикеров!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+    end
+    else
+    begin
+      frmSelection.btnAdvacedLabel.Enabled := True;
+      frmSelection.btnLabel.Enabled := True;
+      MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+    end;
   end;
-
-//  if chkQR_SOFT.Checked then
-//  begin
-//    frmSelection.btnPrint_QR.Enabled := True;
-//    frmSelection.btnSOFT.Enabled := True;
-//  end;
 
   frmMain.Hide;
   frmSelection.Show;

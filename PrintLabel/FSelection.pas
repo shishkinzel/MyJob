@@ -24,16 +24,18 @@ type
     lblPackage: TLabel;
     lblID: TLabel;
     lblMAC: TLabel;
-    edtDevice: TEdit;
-    edtPackage: TEdit;
-    edtID: TEdit;
-    edtMAC: TEdit;
     lblStep: TLabel;
     lblCount: TLabel;
     lblStep_num: TLabel;
     lblCount_num: TLabel;
     btnSOFT: TSpeedButton;
     ilSelection: TImageList;
+    pnlPrintSelection: TPanel;
+    pnlPrintSelection_qr: TPanel;
+    labDevice: TLabel;
+    labPackage: TLabel;
+    labID: TLabel;
+    labMAC: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -97,20 +99,37 @@ begin
   frmMain.Show;
 end;
 // прорисовка формы
+
 procedure TfrmSelection.FormShow(Sender: TObject);
 begin
-  edtDevice.Text := frmMain.edtDevice.Text;
-  edtPackage.Text := frmMain.edtPackage.Text;
-  edtID.Text := frmMain.medtID.Text;
-  edtMAC.Text := frmMain.medtMAC.Text;
+// активация меню выбора печати
+  if f_showPrintForm then
+  begin
+    pnlPrintSelection.Visible := True;
+    pnlPrintSelection_qr.Visible := False;
+  end
+  else
+  begin
+    pnlPrintSelection.Visible := False;
+    pnlPrintSelection_qr.Visible := True;
+  end;
+
+  labDevice.Caption := frmMain.edtDevice.Text;
+  labPackage.Caption := frmMain.edtPackage.Text;
+  labID.Caption := frmMain.medtID.Text;
+  labMAC.Caption := frmMain.medtMAC.Text;
 
   lblStep_num.Caption  := frmMain.seStep.Value.ToString;
   lblCount_num.Caption := frmMain.seCount.Value.ToString;
 
   // активация кнопки
-  if frmMain.f_Soft then
-     btnPrint_QR.Enabled := True;
+//  if frmMain.f_Soft then
+//     btnPrint_QR.Enabled := True;
 end;
 
 end.
+
+
+
+
 
