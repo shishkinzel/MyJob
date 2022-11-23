@@ -10,7 +10,6 @@ uses
 
 type
   TfrmPrintSection = class(TForm)
-    imgPrintSection: TImage;
     mmPrintSection: TMainMenu;
     mniLabel: TMenuItem;
     mniLabelAdvanced: TMenuItem;
@@ -50,20 +49,7 @@ type
     pmmiPr100_150: TMenuItem;
     ilPrintSelection_16: TImageList;
     ilPrintSelection_24_sub: TImageList;
-    labMAC: TLabel;
-    labMAC1: TLabel;
-    labCount: TLabel;
-    labStep_num: TLabel;
-    labID: TLabel;
-    labStep: TLabel;
-    labID1: TLabel;
-    labPackage: TLabel;
-    labPackage1: TLabel;
-    labDevice: TLabel;
-    labDevice1: TLabel;
-    txtDevice: TStaticText;
-    labCount_num: TLabel;
-    labID2: TLabel;
+    fonPrintSection: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private

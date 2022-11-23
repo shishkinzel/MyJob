@@ -11,31 +11,14 @@ uses
 
 type
   TfrmSelection = class(TForm)
-    imgSelection: TImage;
-    txtSelection: TStaticText;
     btnAdvacedLabel: TSpeedButton;
     btnLabel: TSpeedButton;
     btnMAC: TSpeedButton;
     btnID: TSpeedButton;
-    txtOtherUtill: TStaticText;
     btnPrint_QR: TSpeedButton;
-    txtDevice: TStaticText;
-    lblDevice: TLabel;
-    lblPackage: TLabel;
-    lblID: TLabel;
-    lblMAC: TLabel;
-    lblStep: TLabel;
-    lblCount: TLabel;
-    lblStep_num: TLabel;
-    lblCount_num: TLabel;
     btnSOFT: TSpeedButton;
     ilSelection: TImageList;
-    pnlPrintSelection: TPanel;
-    pnlPrintSelection_qr: TPanel;
-    labDevice: TLabel;
-    labPackage: TLabel;
-    labID: TLabel;
-    labMAC: TLabel;
+    fonSelection: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -105,22 +88,22 @@ begin
 // активаци€ меню выбора печати
   if f_showPrintForm then
   begin
-    pnlPrintSelection.Visible := True;
-    pnlPrintSelection_qr.Visible := False;
+//    pnlPrintSelection.Visible := True;
+//    pnlPrintSelection_qr.Visible := False;
   end
   else
   begin
-    pnlPrintSelection.Visible := False;
-    pnlPrintSelection_qr.Visible := True;
+//    pnlPrintSelection.Visible := False;
+//    pnlPrintSelection_qr.Visible := True;
   end;
-
-  labDevice.Caption := frmMain.edtDevice.Text;
-  labPackage.Caption := frmMain.edtPackage.Text;
-  labID.Caption := frmMain.medtID.Text;
-  labMAC.Caption := frmMain.medtMAC.Text;
-
-  lblStep_num.Caption  := frmMain.seStep.Value.ToString;
-  lblCount_num.Caption := frmMain.seCount.Value.ToString;
+//
+//  labDevice.Caption := frmMain.edtDevice.Text;
+//  labPackage.Caption := frmMain.edtPackage.Text;
+//  labID.Caption := frmMain.medtID.Text;
+//  labMAC.Caption := frmMain.medtMAC.Text;
+//
+//  lblStep_num.Caption  := frmMain.seStep.Value.ToString;
+//  lblCount_num.Caption := frmMain.seCount.Value.ToString;
 
   // активаци€ кнопки
 //  if frmMain.f_Soft then

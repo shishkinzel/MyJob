@@ -12,17 +12,10 @@ uses
 type
   TfrmMain = class(TForm)
     fonMain: TImage;
-    txtTitle: TStaticText;
-    lblDevice: TLabel;
-    lblPackage: TLabel;
     edtDevice: TEdit;
     edtPackage: TEdit;
-    lblID: TLabel;
-    lblMAC: TLabel;
     medtID: TMaskEdit;
     medtMAC: TMaskEdit;
-    lblStep: TLabel;
-    lblCount: TLabel;
     btnStart_Reset: TBitBtn;
     seStep: TSpinEdit;
     seCount: TSpinEdit;
