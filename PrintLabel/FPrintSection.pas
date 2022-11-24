@@ -50,8 +50,15 @@ type
     ilPrintSelection_16: TImageList;
     ilPrintSelection_24_sub: TImageList;
     fonPrintSection: TImage;
+    lbl_count: TLabel;
+    lbl_dev: TLabel;
+    lbl_id: TLabel;
+    lbl_mac: TLabel;
+    lbl_pac: TLabel;
+    lbl_step: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,7 +71,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label;
+  FSelection, F_FR_Label, FMain;
 
 {$R *.dfm}
 
@@ -78,6 +85,34 @@ procedure TfrmPrintSection.FormCreate(Sender: TObject);
 begin
  Screen.MenuFont.Size := 14;
  Screen.MenuFont.Name := 'Roboto';
+end;
+
+procedure TfrmPrintSection.FormShow(Sender: TObject);
+var
+  i: Integer;
+begin
+// Заполняем поля "Введеные данные устройства"
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if (Self.Components[i] is TLabel) then
+    begin
+      case (Self.Components[i] as TLabel).Tag of
+        100:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[0];
+        101:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[1];
+        102:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[2];
+        103:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[3];
+        104:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[4];
+        105:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[5];
+      end;
+    end;
+  end;
+
 end;
 
 end.

@@ -16,6 +16,7 @@ object frmPrintSection: TfrmPrintSection
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object fonPrintSection: TImage
@@ -13161,6 +13162,90 @@ object frmPrintSection: TfrmPrintSection
     ExplicitTop = 352
     ExplicitWidth = 105
     ExplicitHeight = 105
+  end
+  object lbl_count: TLabel
+    Tag = 105
+    Left = 464
+    Top = 430
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
+  end
+  object lbl_dev: TLabel
+    Tag = 100
+    Left = 176
+    Top = 321
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
+  end
+  object lbl_id: TLabel
+    Tag = 102
+    Left = 136
+    Top = 393
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
+  end
+  object lbl_mac: TLabel
+    Tag = 103
+    Left = 408
+    Top = 393
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
+  end
+  object lbl_pac: TLabel
+    Tag = 101
+    Left = 176
+    Top = 358
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
+  end
+  object lbl_step: TLabel
+    Tag = 104
+    Left = 112
+    Top = 430
+    Width = 40
+    Height = 15
+    Caption = 'lbl_dev'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
   end
   object mmPrintSection: TMainMenu
     Images = ilPrintSelection_16

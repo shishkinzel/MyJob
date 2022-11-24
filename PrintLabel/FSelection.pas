@@ -19,6 +19,12 @@ type
     btnSOFT: TSpeedButton;
     ilSelection: TImageList;
     fonSelection: TImage;
+    lbl_dev: TLabel;
+    lbl_pac: TLabel;
+    lbl_id: TLabel;
+    lbl_mac: TLabel;
+    lbl_step: TLabel;
+    lbl_count: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -84,30 +90,31 @@ end;
 // прорисовка формы
 
 procedure TfrmSelection.FormShow(Sender: TObject);
+var
+  i: Integer;
 begin
-// активаци€ меню выбора печати
-  if f_showPrintForm then
+// «аполн€ем пол€ "¬веденые данные устройства"
+  for i := 0 to Self.ComponentCount - 1 do
   begin
-//    pnlPrintSelection.Visible := True;
-//    pnlPrintSelection_qr.Visible := False;
-  end
-  else
-  begin
-//    pnlPrintSelection.Visible := False;
-//    pnlPrintSelection_qr.Visible := True;
+    if (Self.Components[i] is TLabel) then
+    begin
+      case (Self.Components[i] as TLabel).Tag of
+        100:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[0];
+        101:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[1];
+        102:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[2];
+        103:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[3];
+        104:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[4];
+        105:
+          (Self.Components[i] as TLabel).Caption := frmMain.f_myarray[5];
+      end;
+    end;
   end;
-//
-//  labDevice.Caption := frmMain.edtDevice.Text;
-//  labPackage.Caption := frmMain.edtPackage.Text;
-//  labID.Caption := frmMain.medtID.Text;
-//  labMAC.Caption := frmMain.medtMAC.Text;
-//
-//  lblStep_num.Caption  := frmMain.seStep.Value.ToString;
-//  lblCount_num.Caption := frmMain.seCount.Value.ToString;
 
-  // активаци€ кнопки
-//  if frmMain.f_Soft then
-//     btnPrint_QR.Enabled := True;
 end;
 
 end.

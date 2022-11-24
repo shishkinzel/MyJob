@@ -34,7 +34,7 @@ function ArrayToString_MAC(var inArray: array of Byte): string;
 
 procedure IncArrayOne(var inArray: array of Byte);
 procedure Print_mac_id (const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable);
-
+procedure ClearArr(var f_arr : array of string);
 var
   dbmPrintLabel: TdbmPrintLabel;
 
@@ -247,6 +247,15 @@ begin
     fdtbl.Next;
   end;
   barCodeStream.Free;
+end;
+// чистим строковой массив
+
+procedure ClearArr(var f_arr: array of string);
+var
+  i: Integer;
+begin
+  for i := 0 to Length(f_arr) - 1 do
+    f_arr[i] := '';
 end;
 
 

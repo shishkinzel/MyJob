@@ -34,35 +34,35 @@ type
     procedure seStepChange(Sender: TObject);
     procedure chkQR_SOFTClick(Sender: TObject);
 
-
-
-
   private
     { Private declarations }
     const
-    cnMAC = '68:EB:C5:';
-    cnAttention = 'Внимание';
+      cnMAC = '68:EB:C5:';
+      cnAttention = 'Внимание';
     var
-    f_size_sticker : Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
+      f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
   public
     { Public declarations }
 //    f_Soft : Boolean;
+    f_myarray: array[0..5] of string;
   end;
 
 var
   frmMain: TfrmMain;
-  f_showPrintForm : Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
+//  f_showPrintForm: Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
 implementation
+
 uses
-FTest;
+  FTest, IdGlobal;
 
 {$R *.dfm}
 // начальные установки в форме
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
- f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
+  ClearArr(f_myarray);
+  f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
 // f_Soft := False;                  // активация дополнительного пункта меню
- f_showPrintForm := True;
+//  f_showPrintForm := True;
 end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);
@@ -77,8 +77,8 @@ end;
 // работа над автоматическим переходом в окнах  ****************************************************
 procedure TfrmMain.edtDeviceChange(Sender: TObject);
 begin
- if Length(edtDevice.Text) = 70 then
-   begin
+  if Length(edtDevice.Text) = 70 then
+  begin
     if edtPackage.CanFocus then
       edtPackage.SetFocus;
   end;
@@ -97,8 +97,7 @@ end;
 // переход по нажатию кнопки "Ввод" - enter
 procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if (Key = VK_RETURN)
- then
+  if (Key = VK_RETURN) then
     FindNextControl(ActiveControl, True, True, false).SetFocus;
 end;
 
@@ -116,16 +115,55 @@ end;
 // кнопка ввода и сброса данных
 procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
 var
-i : Integer;
+  i, j: Integer;
+  tmp, tmp1: string;
 begin
   if not (Sender is TBitBtn) then
     exit;
   if (Sender as TBitBtn).Caption = 'Принять данные' then
   begin
+    for i := 0 to Self.ComponentCount - 1 do
+      case Self.Components[i].Tag of
+        0:
+          begin
+            f_myarray[0] := edtDevice.Text;
+          end;
+        1:
+          begin
+             f_myarray[1] := edtPackage.Text;
+          end;
+        2:
+          begin
+            tmp := medtID.Text;
+            tmp1 := '';
+            for j := 0 to 2 do
+            begin
+              tmp1 := tmp1 + Trim(Fetch(tmp, '_')) + ' ';
+            end;
+              tmp1 := tmp1 + tmp;
+            f_myarray[2] := tmp1;
+          end;
+        3:
+          begin
+            f_myarray[3] := medtMAC.Text;
+          end;
+        4:
+          begin
+            f_myarray[4] := seStep.Value.ToString;
+          end;
+        5:
+          begin
+            f_myarray[5] := seCount.Value.ToString;
+          end;
+      else
+        Continue;
+      end;
+
     (Sender as TBitBtn).Caption := 'Сбросить данные';
     Print_mac_id(medtID.Text, medtMAC.text, seStep.Value, seCount.Value, dbmPrintLabel.fdmtblPrint);
   // зажигаем кнопку  "Выбор утилиты печати"
     btnSelection.Enabled := True;
+
     //    frmTest.Show;
   // гасим поля ввода данных
     for i := 0 to Self.ComponentCount - 1 do
@@ -141,6 +179,7 @@ begin
   else
   begin
     (Sender as TBitBtn).Caption := 'Принять данные';
+    ClearArr(f_myarray);
 // очищаем окна
     edtDevice.Clear;
     edtPackage.Clear;
@@ -209,14 +248,14 @@ begin
      if chkQR_SOFT.Checked then
      begin
 //      f_Soft := True;
-    f_showPrintForm := False;
+//    f_showPrintForm := False;
     chkStiker.Enabled := False;
     chkStiker.Checked := True;
     edtPackage.Enabled := True;
   end
   else
   begin
-    f_showPrintForm := True;
+//    f_showPrintForm := True;
     chkStiker.Enabled := True;
     edtPackage.Enabled := False;
   end;
@@ -252,6 +291,7 @@ begin
   frmSelection.Show;
 end;
 
+// закрытие формы
 end.
 
 
