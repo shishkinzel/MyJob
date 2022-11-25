@@ -1372,7 +1372,11 @@ end;
 procedure TfrmMAC.mniPreviewLongClick(Sender: TObject);
 begin
   frmFRBarCodeLong.Show;
+
   frmFRBarCodeLong.frPrevBarCodeLong.Clear;
+//   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
+// добавляем в отчет количество устройств
+ (frmFRBarCodeLong.reportBarCodeLong.FindObject('LabelCountDevice') as TFrxMemoView).Text := quantity.ToString;
   frmFRBarCodeLong.reportBarCodeLong.ShowReport();
 end;
 

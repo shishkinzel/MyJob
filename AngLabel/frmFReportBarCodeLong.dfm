@@ -37,7 +37,7 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44858.391082685190000000
+    ReportOptions.LastChange = 44890.622238634260000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -164,6 +164,40 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
           HAlign = haRight
           Memo.UTF8W = (
             ' [DATE] ')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object TitleCountDevice: TfrxMemoView
+          AllowVectorExport = True
+          Left = 408.189240000000000000
+          Top = 30.236240000000000000
+          Width = 188.976500000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074':')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object LabelCountDevice: TfrxMemoView
+          AllowVectorExport = True
+          Left = 634.961040000000000000
+          Top = 30.236240000000000000
+          Width = 71.811070000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '000')
           ParentFont = False
           VAlign = vaCenter
         end
