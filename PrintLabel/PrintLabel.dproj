@@ -85,9 +85,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>PrintLabel_Icon7.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>PrintLabel_Icon9.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_2.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_2.png</UWP_DelphiLogo150>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Build>6</VerInfo_Build>
@@ -105,9 +105,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>PrintLabel_Icon8.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>PrintLabel_Icon11.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_2.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_2.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -176,37 +176,37 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png" Configuration="Release" Class="UWP_DelphiLogo44">
-                    <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo44x44.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Debug" Class="UWP_DelphiLogo150">
-                    <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo150x150.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\PrintLabel.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PrintLabel.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="icon_shishkin\PNG\gr_logo_144_2.png" Configuration="Debug" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="icon_shishkin\PNG\gr_logo_48_2.png" Configuration="Release" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Release" Class="UWP_DelphiLogo150">
+                <DeployFile LocalName="icon_shishkin\PNG\gr_logo_144_2.png" Configuration="Release" Class="UWP_DelphiLogo150">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="icon_shishkin\PNG\gr_logo_48_2.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
