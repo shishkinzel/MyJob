@@ -15,7 +15,8 @@ uses
   FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel},
   FShild in 'FShild.pas' {frmShild},
   FListDevece in 'FListDevece.pas' {frmListDevice},
-  FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel};
+  FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel},
+  FStickCheck in 'FStickCheck.pas' {frmStickCheck};
 
 {$R *.res}
 
@@ -37,5 +38,6 @@ begin
   Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
   Application.CreateForm(TfrmShild, frmShild);
   Application.CreateForm(TfrmAdvancedLabel, frmAdvancedLabel);
+  Application.CreateForm(TfrmStickCheck, frmStickCheck);
   Application.Run;
 end.

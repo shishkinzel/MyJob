@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
-  FfrAdvacedLabel,
+  FfrAdvacedLabel, FStickCheck,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
 
 
@@ -168,6 +168,12 @@ type
     mniLbPrint100_150: TMenuItem;
     pmMacAddress: TPopupMenu;
     pmmiClose: TMenuItem;
+    mniNStick: TMenuItem;
+    mniNLabel30x10: TMenuItem;
+    mniNSeparator_stick: TMenuItem;
+    mniNStick_reset: TMenuItem;
+    mniNSticker_show: TMenuItem;
+    mniNSticker_printer: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -218,6 +224,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure pmmiCloseClick(Sender: TObject);
     procedure mniLbShow_58_60Click(Sender: TObject);
+    procedure mniNSticker_showClick(Sender: TObject);
+    procedure mniNSticker_printerClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -242,6 +250,7 @@ type
       fbitBarCode : string;           // для печати mac в barcode
       ffirstIdDeviceBarCode : string; // для печати id в barcode
       macSize : Boolean;              // флаг для печати этикеток увеличенного mac-адреса
+      f_sticker : Boolean;            // флаг для печати стикера верификации
   public
   { Public declarations }
     const
@@ -267,6 +276,7 @@ uses
 procedure TfrmMAC.FormCreate(Sender: TObject);
 begin
   utilityMAC := True;
+  f_sticker := False;
   AssignFile(fileId, nameFile);
   AssignFile(fileBarCode, nameBarCodeFile);
   AssignFile(fileBarCodeLong, nameFileBarCodeLong);
@@ -331,6 +341,7 @@ begin
   // активация пункта меню печать этикетки
     mniLabel.Visible := True;
     mniListDevice.Visible := True;
+     mniNStick.Visible := True;
   // активируем checkbox "Расширенные настройки"
     chkAdvanceSetting.Enabled := True;
   // переименовываем надписи
@@ -369,6 +380,7 @@ begin
   // гасим пункт меню печать этикетки
     mniLabel.Visible := False;
     mniListDevice.Visible := False;
+    mniNStick.Visible := False;
   // деактивируем checkbox "Расширенные настройки"
     chkAdvanceSetting.Enabled := False;
     chkAdvanceSetting.Checked := False;
@@ -494,6 +506,7 @@ begin
   btnApply.Enabled := False;
   btnRestart.Enabled := True;
   mniQRIDMAC.Enabled := True;
+  mniNStick.Enabled := True;
 // разрешения пунктов "Сброс" в главном меню
   mniReset.Enabled := True;
   mniResetBarCodeLong.Enabled := True;
@@ -794,6 +807,7 @@ if not(chkPrintTab.Checked) then
     btnRestart.Enabled := False;
     btnStart.Enabled := False;
     mniQRIDMAC.Enabled := False;
+
 // сбрасываем все окна
     edtDevice.Clear;
     medtBit_4.Clear;
@@ -803,7 +817,6 @@ if not(chkPrintTab.Checked) then
     medtDate.Clear;
     medtGroup.Clear;
     medtNumber.Clear;
-    mniBarCodeLong.Enabled := False;
     seStepIterator.Value := 1;
     seQuantity.Value := 1;
     medtBit_4.Text := '00';
@@ -859,16 +872,23 @@ if not(chkPrintTab.Checked) then
     ShowMessage('Сбрасываем отчеты');
     btnApply.Enabled := True;
     btnRestart.Enabled := False;
+    mniNStick.Enabled := False;
+// перезаряжаем печать стикера верификации
+  mniNSticker_show.Enabled := True;
+  mniNSticker_printer.Enabled := False;
+
 // закрытие отчетов
     frmFRBigLabel.Close;
     frmFRSmallLabel.Close;
     frmShild.Close;
     frmFRList.Close;
+    frmStickCheck.Close;
 // очистка отчетов
     frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
     frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
     frmShild.rpShild.PreviewPages.Clear;
     frmFRList.frxrprtList.PreviewPages.Clear;
+    frmStickCheck.frpStickCheck.PreviewPages.Clear;
 // гасим окна печати
     mniPrintBig.Enabled := False;
     mniPrintSmall.Enabled := False;
@@ -1518,6 +1538,8 @@ begin
    // задаем место открытие окна
   frmShild.Top := 5;
   frmShild.Left := 5;
+  // выбираем отчет стикера верификации
+
 
   frmShild.Show;
   self.SetFocus;
@@ -1565,6 +1587,36 @@ begin
   end;
 end;
 
+// открытие отчета стикер верификация  !!!!!!! new 12.2022
+procedure TfrmMAC.mniNSticker_showClick(Sender: TObject);
+var
+  i: Integer;
+  f_checked: string;
+begin
+// запрос на вводимую запись
+ f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 00.00.00');
+ (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
+
+ frmStickCheck.Show;
+ frmStickCheck.frpStickCheck.ShowReport();
+// гасим и зажигаем нужные окна
+  mniNSticker_show.Enabled := False;
+  mniNSticker_printer.Enabled := True;
+// переносим фокус на стикер верификации
+if Self.CanFocus then
+      Self.SetFocus;
+
+end;
+// печать стикера верификации
+
+procedure TfrmMAC.mniNSticker_printerClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  frmStickCheck.frpStickCheck.ShowReport();
+  frmStickCheck.frpStickCheck.Print;
+end;
+
 
 
 
@@ -1600,6 +1652,7 @@ begin
   frmListDevice := TfrmListDevice.Create(nil);
   frmListDevice.Show;
 end;
+
 // процедура закрытия формы
 procedure TfrmMAC.mniExitClick(Sender: TObject);
 begin
