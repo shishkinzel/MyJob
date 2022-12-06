@@ -1594,7 +1594,7 @@ var
   f_checked: string;
 begin
 // запрос на вводимую запись
- f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 00.00.00');
+ f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 3.8.13');
  (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
 
  frmStickCheck.Show;

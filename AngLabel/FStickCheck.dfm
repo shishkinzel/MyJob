@@ -26,10 +26,6 @@ object frmStickCheck: TfrmStickCheck
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = 48
-    ExplicitTop = 96
-    ExplicitWidth = 100
-    ExplicitHeight = 100
   end
   object frpStickCheck: TfrxReport
     Version = '6.9.3'
@@ -41,7 +37,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44899.690666643520000000
+    ReportOptions.LastChange = 44900.352035370370000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -84,13 +80,13 @@ object frmStickCheck: TfrmStickCheck
         AutoWidth = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -17
+        Font.Height = -19
         Font.Name = 'Roboto'
         Font.Style = []
         Frame.Typ = []
         HAlign = haCenter
         Memo.UTF8W = (
-          'v 00.00.00')
+          'v 03.08.13')
         ParentFont = False
         VAlign = vaCenter
       end
