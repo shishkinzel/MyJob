@@ -12,6 +12,7 @@ object frmListDevice: TfrmListDevice
   Font.Style = []
   Menu = mmDev
   OldCreateOrder = False
+  Position = poScreenCenter
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -154,7 +155,7 @@ object frmListDevice: TfrmListDevice
       OnClick = btnInMemoClick
     end
     object btnInForm: TBitBtn
-      Left = 662
+      Left = 661
       Top = 116
       Width = 120
       Height = 25

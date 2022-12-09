@@ -298,12 +298,13 @@ begin
     CloseFile(fileBarCodeLong);
   end;
 end;
-
-
-  procedure TfrmMAC.FormShow(Sender: TObject);
+procedure TfrmMAC.FormShow(Sender: TObject);
 begin
-   chkPrintTabClick(Self);
+  chkPrintTabClick(Self);
 end;
+
+
+
 
 // сокрытие лишних пунктов меню
 procedure TfrmMAC.chkAdvanceSettingClick(Sender: TObject);
@@ -1594,7 +1595,7 @@ var
   f_checked: string;
 begin
 // запрос на вводимую запись
- f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 3.8.13');
+ f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 3.8.15');
  (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
 
  frmStickCheck.Show;
@@ -1647,11 +1648,13 @@ procedure TfrmMAC.mniListDeviceClick(Sender: TObject);
 var
   i: Integer;
 begin
-  frmMAC.Top := 10;
-  frmMAC.Left := 10;
+//  frmMAC.Top := 10;
+//  frmMAC.Left := 10;
+  frmMAC.Hide;
   frmListDevice := TfrmListDevice.Create(nil);
   frmListDevice.Show;
 end;
+
 
 // процедура закрытия формы
 procedure TfrmMAC.mniExitClick(Sender: TObject);

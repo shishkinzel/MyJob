@@ -34,10 +34,10 @@ object frmStickCheck: TfrmStickCheck
     Preview = fpStickCheck
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = '\\Angwork_print\te200_924'
+    PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44900.352035370370000000
+    ReportOptions.LastChange = 44903.432846875000000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -61,8 +61,8 @@ object frmStickCheck: TfrmStickCheck
       Width = 1000.000000000000000000
     end
     object PShild: TfrxReportPage
-      PaperWidth = 28.000000000000000000
-      PaperHeight = 8.000000000000000000
+      PaperWidth = 32.000000000000000000
+      PaperHeight = 12.000000000000000000
       PaperSize = 256
       LeftMargin = 1.000000000000000000
       RightMargin = 1.000000000000000000
@@ -72,22 +72,23 @@ object frmStickCheck: TfrmStickCheck
       Frame.Width = 0.100000000000000000
       MirrorMode = []
       object memStickCheck: TfrxMemoView
-        Align = baClient
+        Align = baCenter
         AllowVectorExport = True
-        Width = 98.267780000000000000
-        Height = 22.677180000000000000
-        StretchMode = smActualHeight
-        AutoWidth = True
+        ShiftMode = smDontShift
+        Width = 113.385900000000000000
+        Height = 37.795300000000000000
+        StretchMode = smMaxHeight
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -19
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         Frame.Typ = []
         HAlign = haCenter
         Memo.UTF8W = (
-          'v 03.08.13')
+          'v 03.08.15')
         ParentFont = False
+        WordWrap = False
         VAlign = vaCenter
       end
     end

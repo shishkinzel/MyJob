@@ -162,9 +162,11 @@ end;
 // показ формы
 
 procedure TfrmListDevice.FormShow(Sender: TObject);
+var
+i : Integer;
 begin
-  frmListDevice.Top := 10;
-  frmListDevice.Left := 750;
+//  frmListDevice.Top := 10;
+//  frmListDevice.Left := 750;
 
 end;
 
@@ -244,56 +246,6 @@ begin
   end;
 end;
 
-//**********************************
-procedure TfrmListDevice.mniCloseClick(Sender: TObject);
-begin
-  Close;
-end;
-// перед закрытие формы
-
-procedure TfrmListDevice.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-var
-  s: string;
-  status: Integer;
-  i: Integer;
-begin
-  if fCanClose then
-  begin
-    CanClose := True;
-    fCanClose := False;
-  end
-  else
-  begin
-    status := Application.MessageBox(PWideChar('Вы действительно хотите закрыть окно?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
-    case status of
-      6:
-        begin
-      // записываем файлы
-          Rewrite(fileDevice);
-          for i := 0 to mmoDevice.Lines.Count - 1 do
-            Writeln(fileDevice, mmoDevice.Lines[i]);
-          CloseFile(fileDevice);
-
-          Rewrite(fileModule);
-          for i := 0 to mmoDevice.Lines.Count - 1 do
-            Writeln(fileModule, mmoModule.Lines[i]);
-          CloseFile(fileModule);
-
-          CanClose := True;
-        end;
-      7:
-        begin
-
-          CanClose := False;
-        end;
-    end;
-  end;
-
-
-  fdmtblDev.SaveToFile(FTabDev, sfJSON);
-  fdmtblDev.Close;
-end;
-//
 // обработка кнопок
 
 procedure TfrmListDevice.btnInMemoClick(Sender: TObject);
@@ -366,16 +318,19 @@ begin
     dbgrdDev.DataSource.DataSet.Post;
   end
   else if (Sender as TBitBtn).Name = btnInForm.Name then  // нажата кнопка "Запись в форму"
+  // нажата кнопка "Запись в форму"
   begin
 //    ShowMessage('нажал кнопку Форма');
+    frmMAC.Show;
     fCanClose := True;
     frmMAC.edtDevice.Text := Trim(edtDev.Text);
     frmMAC.edtMod.Text := Trim(edtMod.Text);
     frmMAC.medtModule.Text := btnedMod.Text;
-    Close;
+// вставить бокс для вопроса закрыть форму?
+   ShowMessage('Вы перенесли данные!');
     frmMAC.seQuantity.TabOrder := 11;
     frmMAC.btnApply.TabOrder := 12;
-    frmMAC.medtDate.SetFocus;
+    Close;
 
   end;
 
@@ -418,10 +373,6 @@ begin
 
   end;
 end;
-
-
-
-
 
 
 // перенос из таблицы в форму ввода
@@ -474,10 +425,66 @@ begin
 
 end;
 
+// кнопка закрытия
+//**********************************
+procedure TfrmListDevice.mniCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+
+// перед закрытие формы
+
+procedure TfrmListDevice.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+var
+  s: string;
+  status: Integer;
+  i: Integer;
+begin
+  if fCanClose then
+  begin
+    CanClose := True;
+    fCanClose := False;
+  end
+  else
+  begin
+    status := Application.MessageBox(PWideChar('Вы действительно хотите закрыть окно?'), PWideChar('Внимание?'), MB_ICONWARNING + MB_YESNO);
+    case status of
+      6:
+        begin
+      // записываем файлы
+          Rewrite(fileDevice);
+          for i := 0 to mmoDevice.Lines.Count - 1 do
+            Writeln(fileDevice, mmoDevice.Lines[i]);
+          CloseFile(fileDevice);
+
+          Rewrite(fileModule);
+          for i := 0 to mmoDevice.Lines.Count - 1 do
+            Writeln(fileModule, mmoModule.Lines[i]);
+          CloseFile(fileModule);
+          CanClose := True;
+        end;
+      7:
+        begin
+
+          CanClose := False;
+        end;
+    end;
+  end;
+
+
+  fdmtblDev.SaveToFile(FTabDev, sfJSON);
+  fdmtblDev.Close;
+end;
+//
+
+
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmMAC.Position := poScreenCenter;
-  Free;
+  frmMAC.Show;
+  frmMAC.medtDate.SetFocus;
+  Action := caFree;
 end;
+
 end.
 
