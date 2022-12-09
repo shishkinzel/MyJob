@@ -3,7 +3,7 @@ object frmFR_Label: TfrmFR_Label
   Top = 0
   Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1087#1077#1095#1072#1090#1080' '#1101#1090#1080#1082#1077#1090#1086#1082
   ClientHeight = 598
-  ClientWidth = 527
+  ClientWidth = 320
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmFR_Label: TfrmFR_Label
   object prLabel: TfrxPreview
     Left = 0
     Top = 0
-    Width = 527
+    Width = 320
     Height = 598
     Align = alClient
     OutlineVisible = False
@@ -26,10 +26,7 @@ object frmFR_Label: TfrmFR_Label
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = 168
-    ExplicitTop = 144
-    ExplicitWidth = 100
-    ExplicitHeight = 100
+    ExplicitWidth = 527
   end
   object frLabel_30_20: TfrxReport
     Version = '6.9.3'
@@ -47,7 +44,7 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 200
+    Left = 8
     Top = 30
     Datasets = <>
     Variables = <>
@@ -69,7 +66,7 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 272
+    Left = 56
     Top = 30
     Datasets = <>
     Variables = <>
@@ -91,13 +88,13 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 344
+    Left = 88
     Top = 30
     Datasets = <>
     Variables = <>
     Style = <>
   end
-  object frStic_id40_12: TfrxReport
+  object frStic_id_40_12: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -118,8 +115,8 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 200
-    Top = 118
+    Left = 8
+    Top = 86
     Datasets = <
       item
         DataSet = frdbLabel
@@ -189,7 +186,7 @@ object frmFR_Label: TfrmFR_Label
       end
     end
   end
-  object frStic_mac40_12: TfrxReport
+  object frStic_mac_40_12: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -199,7 +196,7 @@ object frmFR_Label: TfrmFR_Label
     PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44876.463747141210000000
+    ReportOptions.LastChange = 44876.463747141220000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -210,8 +207,8 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 288
-    Top = 118
+    Left = 48
+    Top = 86
     Datasets = <
       item
         DataSet = frdbLabel
@@ -279,7 +276,7 @@ object frmFR_Label: TfrmFR_Label
       end
     end
   end
-  object frLabel58_60: TfrxReport
+  object frLabel_58_60: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -295,13 +292,13 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 224
-    Top = 198
+    Left = 8
+    Top = 142
     Datasets = <>
     Variables = <>
     Style = <>
   end
-  object frLabel100_72: TfrxReport
+  object frLabel_100_72: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -317,13 +314,13 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 296
-    Top = 198
+    Left = 48
+    Top = 142
     Datasets = <>
     Variables = <>
     Style = <>
   end
-  object frLabel100_150: TfrxReport
+  object frLabel_100_150: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -339,8 +336,8 @@ object frmFR_Label: TfrmFR_Label
       'begin'
       ''
       'end.')
-    Left = 376
-    Top = 198
+    Left = 96
+    Top = 142
     Datasets = <>
     Variables = <>
     Style = <>

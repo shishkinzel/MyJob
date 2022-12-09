@@ -59,6 +59,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure mniNShowmacClick(Sender: TObject);
+    procedure mniNResetLab4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,6 +79,7 @@ uses
 
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+ mniNResetLab4Click(Self);
 ModalResult := 0;
 Close;
 end;
@@ -115,4 +118,34 @@ begin
 
 end;
 
+// вызываем отчеты
+
+procedure TfrmPrintSection.mniNShowmacClick(Sender: TObject);
+begin
+  frmFR_Label.Top := 10;
+  frmFR_Label.Left := 10;
+  // гасим и зажигаем необходимые пункты меню
+  mniNShowmac.Enabled := False;
+  mniNPrintmac.Enabled := True;
+
+  frmFR_Label.Show;
+  frmFR_Label.frStic_mac_40_12.ShowReport();
+end;
+
+
+
+// сбрасываем все
+procedure TfrmPrintSection.mniNResetLab4Click(Sender: TObject);
+begin
+// сбрасываем отчеты
+ frmFR_Label.Close;
+ frmFR_Label.frStic_mac_40_12.PreviewPages.Clear;
+
+
+ // гасим и зажигаем необходимые пункты меню
+ mniNShowmac.Enabled := True;
+ mniNPrintmac.Enabled := False;
+end;
+
 end.
+

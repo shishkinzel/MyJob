@@ -12,11 +12,11 @@ type
     frLabel_30_20: TfrxReport;
     frLabel_58_40: TfrxReport;
     frLabel_58_40_adv: TfrxReport;
-    frStic_id40_12: TfrxReport;
-    frStic_mac40_12: TfrxReport;
-    frLabel58_60: TfrxReport;
-    frLabel100_72: TfrxReport;
-    frLabel100_150: TfrxReport;
+    frStic_id_40_12: TfrxReport;
+    frStic_mac_40_12: TfrxReport;
+    frLabel_58_60: TfrxReport;
+    frLabel_100_72: TfrxReport;
+    frLabel_100_150: TfrxReport;
     frdbLabel: TfrxDBDataset;
   private
     { Private declarations }

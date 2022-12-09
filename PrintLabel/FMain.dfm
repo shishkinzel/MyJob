@@ -13708,7 +13708,7 @@ object frmMain: TfrmMain
   object edtPackage: TEdit
     Tag = 1
     Left = 208
-    Top = 99
+    Top = 91
     Width = 245
     Height = 23
     Enabled = False

@@ -13298,6 +13298,7 @@ object frmPrintSection: TfrmPrintSection
       object mniNResetLab1: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 13
+        OnClick = mniNResetLab4Click
       end
     end
     object mniLabelAdvanced: TMenuItem
@@ -13347,6 +13348,7 @@ object frmPrintSection: TfrmPrintSection
       object mniNResetLab2: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 13
+        OnClick = mniNResetLab4Click
       end
     end
     object mniID: TMenuItem
@@ -13373,6 +13375,7 @@ object frmPrintSection: TfrmPrintSection
       object mniNResetLab3: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 13
+        OnClick = mniNResetLab4Click
       end
     end
     object mniMAC: TMenuItem
@@ -13386,6 +13389,7 @@ object frmPrintSection: TfrmPrintSection
         object mniNShowmac: TMenuItem
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
           ImageIndex = 6
+          OnClick = mniNShowmacClick
         end
         object mniNPrintmac: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
@@ -13399,6 +13403,7 @@ object frmPrintSection: TfrmPrintSection
       object mniNResetLab4: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 13
+        OnClick = mniNResetLab4Click
       end
     end
   end
