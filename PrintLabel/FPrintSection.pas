@@ -61,6 +61,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure mniNShowmacClick(Sender: TObject);
     procedure mniNResetLab4Click(Sender: TObject);
+    procedure mniNPrintmacClick(Sender: TObject);
+    procedure mniNPrintIDClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,7 +75,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain;
+  FSelection, F_FR_Label, FMain, frxClass;
 
 {$R *.dfm}
 
@@ -121,15 +123,90 @@ end;
 // вызываем отчеты
 
 procedure TfrmPrintSection.mniNShowmacClick(Sender: TObject);
+var
+  i: Integer;
 begin
+  if not (Sender is TMenuItem) then
+    exit;
+
   frmFR_Label.Top := 10;
   frmFR_Label.Left := 10;
-  // гасим и зажигаем необходимые пункты меню
-  mniNShowmac.Enabled := False;
-  mniNPrintmac.Enabled := True;
 
-  frmFR_Label.Show;
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[i].Tag = (Sender as TMenuItem).Tag then
+    begin
+      case Self.Components[i].Tag of
+        101:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+          // гасим и зажигаем необходимые пункты меню
+            mniNShowID.Enabled := False;
+            mniNPrintID.Enabled := True;
+            frmFR_Label.Show;
+            frmFR_Label.frStic_id_40_12.ShowReport();
+          end;
+        102:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            mniNShowmac.Enabled := False;
+            mniNPrintmac.Enabled := True;
+
+                  // выбираем шрифт печати
+            if frmMain.f_size_sticker then
+              (frmFR_Label.frStic_mac_40_12.FindObject('mac') as TfrxMemoView).Font.Size := 11
+            else
+              (frmFR_Label.frStic_mac_40_12.FindObject('mac') as TfrxMemoView).Font.Size := 13;
+
+            frmFR_Label.Show;
+            frmFR_Label.frStic_mac_40_12.ShowReport();
+
+          end;
+        3020:
+        begin
+
+        end;
+      5840:
+        begin
+
+        end;
+      5841:
+        begin
+
+        end;
+      5860:
+        begin
+
+        end;
+      10072:
+        begin
+
+        end;
+      100150:
+        begin
+
+        end;
+        else
+        Continue ;
+    end;
+    end;
+  end;
+
+end;
+// вызываем печать
+procedure TfrmPrintSection.mniNPrintIDClick(Sender: TObject);
+begin
+  frmFR_Label.frStic_id_40_12.ShowReport();
+  frmFR_Label.frStic_id_40_12.Print;
+end;
+
+procedure TfrmPrintSection.mniNPrintmacClick(Sender: TObject);
+begin
   frmFR_Label.frStic_mac_40_12.ShowReport();
+  frmFR_Label.frStic_mac_40_12.Print;
 end;
 
 
@@ -138,13 +215,17 @@ end;
 procedure TfrmPrintSection.mniNResetLab4Click(Sender: TObject);
 begin
 // сбрасываем отчеты
- frmFR_Label.Close;
- frmFR_Label.frStic_mac_40_12.PreviewPages.Clear;
-
+  frmFR_Label.Close;
+  frmFR_Label.frStic_mac_40_12.PreviewPages.Clear;
 
  // гасим и зажигаем необходимые пункты меню
- mniNShowmac.Enabled := True;
- mniNPrintmac.Enabled := False;
+  // серийный номер
+  mniNShowID.Enabled := True;
+  mniNPrintID.Enabled := False;
+  // mac-адресс
+  mniNShowmac.Enabled := True;
+  mniNPrintmac.Enabled := False;
+  //
 end;
 
 end.

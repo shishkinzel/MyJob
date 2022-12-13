@@ -39,12 +39,12 @@ type
     const
       cnMAC = '68:EB:C5:';
       cnAttention = 'Внимание';
-    var
-      f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
+
   public
     { Public declarations }
 //    f_Soft : Boolean;
     f_myarray: array[0..5] of string;
+    f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
   end;
 
 var
@@ -164,7 +164,7 @@ begin
   // зажигаем кнопку  "Выбор утилиты печати"
     btnSelection.Enabled := True;
 
-    //    frmTest.Show;
+//        frmTest.Show;
   // гасим поля ввода данных
     for i := 0 to Self.ComponentCount - 1 do
     begin

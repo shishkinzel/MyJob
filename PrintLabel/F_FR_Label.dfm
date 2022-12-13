@@ -26,7 +26,6 @@ object frmFR_Label: TfrmFR_Label
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitWidth = 527
   end
   object frLabel_30_20: TfrxReport
     Version = '6.9.3'
@@ -104,7 +103,7 @@ object frmFR_Label: TfrmFR_Label
     PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44876.469953009260000000
+    ReportOptions.LastChange = 44908.426033784720000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -132,9 +131,6 @@ object frmFR_Label: TfrmFR_Label
       PaperWidth = 40.000000000000000000
       PaperHeight = 12.000000000000000000
       PaperSize = 256
-      LeftMargin = 1.000000000000000000
-      RightMargin = 1.000000000000000000
-      BottomMargin = 1.000000000000000000
       Frame.Typ = []
       Frame.Width = 0.100000000000000000
       MirrorMode = []
@@ -143,45 +139,51 @@ object frmFR_Label: TfrmFR_Label
         Frame.Typ = []
         Height = 41.574803150000000000
         Top = 18.897650000000000000
-        Width = 143.622140000000000000
-        DataSetName = 'db_Shild'
+        Width = 151.181200000000000000
+        DataSet = frdbLabel
+        DataSetName = 'dbLabel'
         RowCount = 0
         Stretched = True
         object bcSmall: TfrxPictureView
+          Align = baCenter
           AllowVectorExport = True
-          Width = 143.622140000000000000
-          Height = 18.897637795275600000
+          ShiftMode = smWhenOverlapped
+          Left = 3.779576377952756000
+          Width = 143.622047244094500000
+          Height = 22.677165350000000000
           Center = True
-          DataField = 'bcBig'
-          DataSetName = 'db_Shild'
+          DataField = 'id_blob_scale'
+          DataSet = frdbLabel
+          DataSetName = 'dbLabel'
           Frame.Typ = []
           Frame.Width = 0.100000000000000000
           HightQuality = False
           Transparent = False
           TransparentColor = clWhite
         end
-        object db_Shildsn: TfrxMemoView
+        object dbLabelid_space: TfrxMemoView
           IndexTag = 1
+          Align = baCenter
           AllowVectorExport = True
-          Top = 18.897650000000000000
+          Left = -3.779530000000000000
+          Top = 22.677162910000000000
           Width = 158.740260000000000000
           Height = 18.897650000000000000
-          StretchMode = smActualHeight
-          AutoWidth = True
+          StretchMode = smMaxHeight
           DataField = 'id_space'
           DataSet = frdbLabel
           DataSetName = 'dbLabel'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Tahoma'
+          Font.Height = -16
+          Font.Name = 'Roboto'
           Font.Style = []
           Frame.Typ = []
+          Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
             '[dbLabel."id_space"]')
           ParentFont = False
-          VAlign = vaCenter
         end
       end
     end
@@ -196,7 +198,7 @@ object frmFR_Label: TfrmFR_Label
     PrintOptions.Printer = '\\Angwork_print\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 44876.463747141220000000
+    ReportOptions.LastChange = 44907.459239606480000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -221,13 +223,9 @@ object frmFR_Label: TfrmFR_Label
       Width = 1000.000000000000000000
     end
     object PageMAC: TfrxReportPage
-      PaperWidth = 44.000000000000000000
+      PaperWidth = 40.000000000000000000
       PaperHeight = 12.000000000000000000
       PaperSize = 256
-      LeftMargin = 1.000000000000000000
-      RightMargin = 1.000000000000000000
-      TopMargin = 1.000000000000000000
-      BottomMargin = 1.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object MasterData1: TfrxMasterData
@@ -235,15 +233,20 @@ object frmFR_Label: TfrmFR_Label
         Frame.Typ = []
         Height = 45.354330710000000000
         Top = 18.897650000000000000
-        Width = 158.740260000000000000
-        DataSetName = 'frxDBDataset1'
+        Width = 151.181200000000000000
+        DataSet = frdbLabel
+        DataSetName = 'dbLabel'
         RowCount = 0
-        object MACadress: TfrxMemoView
+        object mac: TfrxMemoView
           IndexTag = 1
+          Align = baCenter
           AllowVectorExport = True
-          Left = 1.889763779527559000
-          Width = 154.960629921259800000
-          Height = 37.795275590551180000
+          ShiftMode = smDontShift
+          Left = 0.944930708661417300
+          Width = 149.291338582677200000
+          Height = 37.795275590000000000
+          StretchMode = smMaxHeight
+          AutoWidth = True
           DataField = 'mac_extended'
           DataSet = frdbLabel
           DataSetName = 'dbLabel'
@@ -259,20 +262,6 @@ object frmFR_Label: TfrmFR_Label
           ParentFont = False
           VAlign = vaCenter
         end
-      end
-      object DetailData1: TfrxDetailData
-        FillType = ftBrush
-        Frame.Typ = []
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Height = 22.677180000000000000
-        ParentFont = False
-        Top = 86.929190000000000000
-        Width = 158.740260000000000000
-        RowCount = 0
       end
     end
   end

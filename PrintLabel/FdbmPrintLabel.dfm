@@ -81,6 +81,7 @@ object dbmPrintLabel: TdbmPrintLabel
     end
   end
   object brcdPrintLabel: TBarcode
+    ShowText = False
     Left = 88
     Top = 24
   end
