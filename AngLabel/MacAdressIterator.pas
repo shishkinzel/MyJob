@@ -1398,6 +1398,7 @@ begin
 //   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
 // добавляем в отчет количество устройств
  (frmFRBarCodeLong.reportBarCodeLong.FindObject('LabelCountDevice') as TFrxMemoView).Text := quantity.ToString;
+  (frmFRBarCodeLong.reportBarCodeLong.FindObject('memStepIter') as TFrxMemoView).Text :=  stepIteration.ToString;
   frmFRBarCodeLong.reportBarCodeLong.ShowReport();
 end;
 

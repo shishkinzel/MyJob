@@ -37,7 +37,7 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44890.622238634260000000
+    ReportOptions.LastChange = 44908.674468044000000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -99,11 +99,11 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
           AllowVectorExport = True
           Left = 11.338590000000000000
           Top = 30.236240000000000000
-          Width = 192.756030000000000000
+          Width = 181.417440000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
@@ -114,7 +114,7 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
         object frxDBDatasetTitleStepPrintBarCode: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Left = 222.992270000000000000
+          Left = 192.756030000000000000
           Top = 30.236240000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
@@ -123,13 +123,14 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
           DataSetName = 'frxDBDatasetTitle'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
             '[frxDBDatasetTitle."StepPrintBarCode"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object frxDBDatasetTitlenameDevice: TfrxMemoView
           IndexTag = 1
@@ -169,13 +170,13 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
         end
         object TitleCountDevice: TfrxMemoView
           AllowVectorExport = True
-          Left = 408.189240000000000000
+          Left = 461.102660000000000000
           Top = 30.236240000000000000
-          Width = 188.976500000000000000
+          Width = 166.299320000000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
@@ -192,12 +193,45 @@ object frmFRBarCodeLong: TfrmFRBarCodeLong
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
             '000')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo8: TfrxMemoView
+          AllowVectorExport = True
+          Left = 291.023810000000000000
+          Top = 30.236240000000000000
+          Width = 109.606370000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            #1064#1072#1075' '#1080#1090#1077#1088#1072#1094#1080#1080':')
+          ParentFont = False
+        end
+        object memStepIter: TfrxMemoView
+          AllowVectorExport = True
+          Left = 408.189240000000000000
+          Top = 30.236240000000000000
+          Width = 45.354360000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '00')
           ParentFont = False
           VAlign = vaCenter
         end
