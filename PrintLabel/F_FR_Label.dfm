@@ -242,7 +242,7 @@ object frmFR_Label: TfrmFR_Label
           Align = baCenter
           AllowVectorExport = True
           ShiftMode = smDontShift
-          Left = 0.944930708661417300
+          Left = 0.944930708661400000
           Width = 149.291338582677200000
           Height = 37.795275590000000000
           StretchMode = smMaxHeight

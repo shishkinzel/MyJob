@@ -50,6 +50,8 @@ type
 var
   frmMain: TfrmMain;
 //  f_showPrintForm: Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
+  f_print_config: string;
+
 implementation
 
 uses
@@ -63,6 +65,9 @@ begin
   f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
 // f_Soft := False;                  // активация дополнительного пункта меню
 //  f_showPrintForm := True;
+// определяем путь до файла конфигурации
+f_print_config :=  ExtractFilePath(Application.ExeName) + 'print_config.ini';
+
 end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);

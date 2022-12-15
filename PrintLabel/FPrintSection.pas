@@ -65,6 +65,10 @@ type
     procedure mniNPrintIDClick(Sender: TObject);
   private
     { Private declarations }
+    var
+      f_print_924: string;
+      f_print_940: string;
+      f_print_2824: string;
   public
     { Public declarations }
   end;
@@ -75,7 +79,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, frxClass;
+  FSelection, F_FR_Label, FMain, frxClass, unit_ini, IniFiles;
 
 {$R *.dfm}
 
@@ -86,10 +90,20 @@ ModalResult := 0;
 Close;
 end;
 //   изменение шрифта главного меню
+
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
+var
+  f_ini: TIniFile;
 begin
- Screen.MenuFont.Size := 14;
- Screen.MenuFont.Name := 'Roboto';
+  Screen.MenuFont.Size := 14;
+  Screen.MenuFont.Name := 'Roboto';
+ // принтеры по умолчанию
+//  f_ini := TIniFile.Create(f_print_config);
+  IniOptions.LoadFromFile(f_print_config);
+  f_print_924 := IniOptions.f_print_924;
+  f_print_940 := IniOptions.f_print_940;
+  f_print_2824 := IniOptions.f_print_2824;
+//  f_ini.Free;
 end;
 
 procedure TfrmPrintSection.FormShow(Sender: TObject);
@@ -166,48 +180,86 @@ begin
 
           end;
         3020:
-        begin
-
-        end;
-      5840:
-        begin
-
-        end;
-      5841:
-        begin
-
-        end;
-      5860:
-        begin
-
-        end;
-      10072:
-        begin
-
-        end;
-      100150:
-        begin
-
-        end;
-        else
-        Continue ;
-    end;
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh30_20.Enabled := False;
+            pmmiPr30_20.Enabled := True;
+          end;
+        5840:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh58_40.Enabled := False;
+            pmmiPr58_40.Enabled := True;
+          end;
+        5841:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh58_40_mac.Enabled := False;
+            pmmiPr58_40_mac.Enabled := True;
+          end;
+        5860:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh58_60.Enabled := False;
+            pmmiPr58_60.Enabled := True;
+          end;
+        10072:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh100_72.Enabled := False;
+            pmmiPr100_72.Enabled := True;
+          end;
+        100150:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+                    // гасим и зажигаем необходимые пункты меню
+            pmmiSh100_150.Enabled := False;
+            pmmiPr100_150.Enabled := True;
+          end;
+      else
+        Continue;
+      end;
     end;
   end;
 
 end;
 // вызываем печать
+
 procedure TfrmPrintSection.mniNPrintIDClick(Sender: TObject);
 begin
+  frmFR_Label.frStic_id_40_12.Report.PrintOptions.Printer := f_print_924;
+
   frmFR_Label.frStic_id_40_12.ShowReport();
   frmFR_Label.frStic_id_40_12.Print;
 end;
 
 procedure TfrmPrintSection.mniNPrintmacClick(Sender: TObject);
 begin
+  frmFR_Label.frStic_mac_40_12.Report.PrintOptions.Printer := f_print_924;
+
   frmFR_Label.frStic_mac_40_12.ShowReport();
   frmFR_Label.frStic_mac_40_12.Print;
 end;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -225,7 +277,25 @@ begin
   // mac-адресс
   mniNShowmac.Enabled := True;
   mniNPrintmac.Enabled := False;
-  //
+  //label 30_20
+  pmmiSh30_20.Enabled := True;
+  pmmiPr30_20.Enabled := False;
+  //label 58_40
+  pmmiSh58_40.Enabled := True;
+  pmmiPr58_40.Enabled := False;
+  //label 58_40_mac
+  pmmiSh58_40_mac.Enabled := True;
+  pmmiPr58_40_mac.Enabled := False;
+
+  //label 58_60
+  pmmiSh58_60.Enabled := True;
+  pmmiPr58_60.Enabled := False;
+  //label 100_72
+  pmmiSh100_72.Enabled := True;
+  pmmiPr100_72.Enabled := False;
+  //label 100_150
+  pmmiSh100_150.Enabled := True;
+  pmmiPr100_150.Enabled := False;
 end;
 
 end.

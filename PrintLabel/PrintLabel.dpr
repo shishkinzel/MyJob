@@ -9,7 +9,8 @@ uses
   FTest in 'FTest.pas' {frmTest},
   F_FR_Label in 'F_FR_Label.pas' {frmFR_Label},
   FListDevece in 'FListDevece.pas' {frmListDevice},
-  FShowSoft in 'FShowSoft.pas' {frmShowSoft};
+  FShowSoft in 'FShowSoft.pas' {frmShowSoft},
+  unit_ini in 'unit_ini.pas';
 
 {$R *.res}
 begin

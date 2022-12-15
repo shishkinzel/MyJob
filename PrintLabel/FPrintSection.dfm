@@ -13267,6 +13267,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr30_20: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
@@ -13281,6 +13282,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr58_40: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
@@ -13295,6 +13297,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr58_40_mac: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
@@ -13323,6 +13326,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr58_60: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
@@ -13337,6 +13341,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr100_72: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
@@ -13351,6 +13356,7 @@ object frmPrintSection: TfrmPrintSection
         end
         object pmmiPr100_150: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
           ImageIndex = 11
         end
       end
