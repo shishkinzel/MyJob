@@ -248,9 +248,9 @@ type
       numberDeviceHigh : string;     // три старших разряда серийного номера
       fnumberDeviceHigh :  string;   // три старших разряда серийного номера с пробелами между триадами
       fbitBarCode : string;           // для печати mac в barcode
-      ffirstIdDeviceBarCode : string; // для печати id в barcode
-      macSize : Boolean;              // флаг для печати этикеток увеличенного mac-адреса
-      f_sticker : Boolean;            // флаг для печати стикера верификации
+      ffirstIdDeviceBarCode: string; // для печати id в barcode
+      macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
+      f_sticker: Boolean;            // флаг для печати стикера верификации
   public
   { Public declarations }
     const
@@ -258,9 +258,16 @@ type
       nameBarCodeFile = 'bar_code.txt';
       nameFileBarCodeLong = 'bar_code_long.txt';
     var
-      barCodeStream : TMemoryStream;
+      barCodeStream: TMemoryStream;
       idMAC: array[0..2] of Byte;
       idMACBarCode: array[0..2] of Byte;
+// переменные для чтения конфигурации притеров по умолчанию
+      f_print_924: string;
+      f_print_940: string;
+      f_print_2824: string;
+
+      f_iniPath : string;
+
   end;
 
 var
@@ -269,11 +276,13 @@ var
 implementation
 
 uses
-  IdGlobal, frxClass;
+  IdGlobal, frxClass, unit_ini, IniFiles;
 {$R *.dfm}
   // создание формы начальные настройки
 
 procedure TfrmMAC.FormCreate(Sender: TObject);
+var
+  f_ini: TIniFile;
 begin
   utilityMAC := True;
   f_sticker := False;
@@ -297,7 +306,21 @@ begin
     Rewrite(fileBarCodeLong);
     CloseFile(fileBarCodeLong);
   end;
+// описать загрузку ini-файла конфигурации print_config.ini
+  f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
+  f_ini := TIniFile.Create(f_iniPath);
+
+// чтение конфигурации
+  IniOptions.LoadFromFile(f_iniPath);
+// запись из файла конфигурации
+  f_print_924 := IniOptions.f_print_924;
+  f_print_940 := IniOptions.f_print_940;
+  f_print_2824 := IniOptions.f_print_2824;
+// очищаем память
+  f_ini.Free;
+
 end;
+
 procedure TfrmMAC.FormShow(Sender: TObject);
 begin
   chkPrintTabClick(Self);
@@ -457,7 +480,7 @@ begin
 // выключаем checkBox Печать этикетки
   chkPrintTab.Enabled := False;
 // меняем название "Печать" на "Печать_МАС_924"
-   mnifrPrint.Caption := 'Печать_МАС_924';
+  mnifrPrint.Caption := 'Печать_МАС_924';
   utilityMAC := False;
   mniPrintMac.Enabled := False;
   mniIterator.Enabled := True;
@@ -1331,13 +1354,18 @@ end;
 // обработка кнопок главного меню  *****************************************************************
 procedure TfrmMAC.mnifrPrintClick(Sender: TObject);
 begin
+
   if utilityMAC then
   begin
+  // задаем принтер по умолчанию
+//    frmFReport.frxprvwMac.Report.PrintOptions.Printer := 'TE200_924';
     frmFReport.frxrprtMac.ShowReport();
     frmFReport.frxrprtMac.Print;
   end
   else
   begin
+  // задаем принтер по умолчанию
+    frmFRList.frxrprtList.Report.PrintOptions.Printer := f_print_924;
     frmFRList.frxrprtList.ShowReport();
     frmFRList.frxrprtList.Print;
   end;
@@ -1496,13 +1524,20 @@ end;
 
 procedure TfrmMAC.mniPrintBigClick(Sender: TObject);
 begin
+
   if chkAdvanceSetting.Checked then
   begin
+     // задаем принтер по умолчанию
+    frmFRBigLabel.rpBigLabel_mac.Report.PrintOptions.Printer := f_print_2824;
+
     frmFRBigLabel.rpBigLabel_mac.ShowReport();
     frmFRBigLabel.rpBigLabel_mac.Print;
   end
   else
   begin
+     // задаем принтер по умолчанию
+    frmFRBigLabel.rpBigLabel.Report.PrintOptions.Printer := f_print_2824;
+
     frmFRBigLabel.rpBigLabel.ShowReport();
     frmFRBigLabel.rpBigLabel.Print;
   end;
@@ -1530,9 +1565,13 @@ end;
 // печать маленькой этикетки
 procedure TfrmMAC.mniPrintSmallClick(Sender: TObject);
 begin
+// задаем принтер по умолчанию
+  frmFRSmallLabel.rpSmallLabel.Report.PrintOptions.Printer := f_print_940;
+
   frmFRSmallLabel.rpSmallLabel.ShowReport;
   frmFRSmallLabel.rpSmallLabel.Print;
 end;
+
 
 // BarCode для шильда
 procedure TfrmMAC.mniShowShildClick(Sender: TObject);
@@ -1552,11 +1591,15 @@ begin
   mniShowShild.Enabled := False;
 
   frmShild.rpShild.ShowReport();
+
 end;
 
 // печать для шильда
 procedure TfrmMAC.mniPrintShildClick(Sender: TObject);
 begin
+// задаем принтер по умолчанию
+  frmShild.rpShild.Report.PrintOptions.Printer := f_print_924;
+
   frmShild.rpShild.ShowReport;
   frmShild.rpShild.Print;
 end;
