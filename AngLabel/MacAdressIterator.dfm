@@ -607,6 +607,18 @@ object frmMAC: TfrmMAC
           OnClick = mniPrintBigClick
         end
       end
+      object mni_43_25: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43_25_908'
+        object mni_sh_43_25: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_sh_43_25Click
+        end
+        object mni_Pr_43_25: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_Pr_43_25Click
+        end
+      end
       object mniLabelSmall: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30'#1093'20_940'
         object mniShowSmall: TMenuItem
@@ -720,6 +732,7 @@ object frmMAC: TfrmMAC
       end
       object mniExport: TMenuItem
         Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         object pdf1: TMenuItem
           Caption = #1069#1082#1089#1087#1086#1088#1090' '#1074' pdf'
           OnClick = pdf1Click
@@ -735,6 +748,7 @@ object frmMAC: TfrmMAC
       end
       object mnifrPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100
+        Enabled = False
         OnClick = mnifrPrintClick
       end
       object mniSeparator3: TMenuItem

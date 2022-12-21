@@ -174,6 +174,9 @@ type
     mniNStick_reset: TMenuItem;
     mniNSticker_show: TMenuItem;
     mniNSticker_printer: TMenuItem;
+    mni_43_25: TMenuItem;
+    mni_sh_43_25: TMenuItem;
+    mni_Pr_43_25: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -226,6 +229,8 @@ type
     procedure mniLbShow_58_60Click(Sender: TObject);
     procedure mniNSticker_showClick(Sender: TObject);
     procedure mniNSticker_printerClick(Sender: TObject);
+    procedure mni_sh_43_25Click(Sender: TObject);
+    procedure mni_Pr_43_25Click(Sender: TObject);
   private
     { Private declarations }
     var
@@ -825,6 +830,12 @@ if not(chkPrintTab.Checked) then
       edtDevice.SetFocus
     else
       medtBit_4.SetFocus;
+
+  // зажигаем пунк меню "Просмотр отчета" и гасим "Экспорт отчета" и "Печать"
+    mnifrView.Enabled := True;
+    mniExport.Enabled := False;
+    mnifrPrint.Enabled := False;
+
     mniReport.Enabled := False;
     mniApply.Enabled := True;
     btnApply.Enabled := True;
@@ -917,10 +928,12 @@ if not(chkPrintTab.Checked) then
     mniPrintBig.Enabled := False;
     mniPrintSmall.Enabled := False;
     mniPrintShild.Enabled := False;
+    mni_Pr_43_25.Enabled := False;
 // зажигаем окна просмотра
-     mniShowBig.Enabled := True;
-     mniShowSmall.Enabled := True;
-     mniShowShild.Enabled := True;
+    mniShowBig.Enabled := True;
+    mniShowSmall.Enabled := True;
+    mniShowShild.Enabled := True;
+    mni_sh_43_25.Enabled := True;
   end;
 end;
 
@@ -1543,6 +1556,39 @@ begin
   end;
 
 end;
+// новая этикетка размер 43х25
+procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
+begin
+// задаем место открытие окна
+  frmFRBigLabel.Top := 5;
+  frmFRBigLabel.Left := 5;
+
+  frmFRBigLabel.Show;
+  Self.SetFocus;
+  frmFRBigLabel.rp_43_25.ShowReport();
+  // гасим и зажигаем нужные пункты меню
+    mni_sh_43_25.Enabled := False;
+    mni_Pr_43_25.Enabled := True;
+
+end;
+// печать
+
+procedure TfrmMAC.mni_Pr_43_25Click(Sender: TObject);
+begin
+  frmFRBigLabel.rp_43_25.ShowReport();
+  frmFRBigLabel.rp_43_25.Print;
+end;
+
+
+
+
+
+
+
+
+
+
+
 
 // BarCode для маленькой этикетки ***********************************************
 procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
@@ -1607,15 +1653,26 @@ end;
 
 procedure TfrmMAC.mnifrViewClick(Sender: TObject);
 begin
+// гасим пунк меню "Просмотр отчета" и зажигаем "Экспорт отчета" и "Печать"
+  mnifrView.Enabled := False;
+  mniExport.Enabled := True;
+  mnifrPrint.Enabled := True;
+
+
   if utilityMAC then       // утилита mac адресов отключена true
+       // утилита mac адресов отключена true
   begin
+    frmFReport.Top := 5;
+    frmFReport.Left := 5;
+
     frmFReport.Show;
+    Self.SetFocus;
     frmFReport.frxprvwMac.Clear;
     frmFReport.frxrprtMac.ShowReport();
   end
   else
   begin
-   // меняем размер шрифта при печати mac-адреса
+      // меняем размер шрифта при печати mac-адреса
 //  ((frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
     if macSize then
       (frmFRList.frxrprtList.FindObject('MACadress') as TfrxMemoView).Font.Size := 11

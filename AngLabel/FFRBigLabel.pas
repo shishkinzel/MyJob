@@ -12,6 +12,7 @@ type
     rpBigLabel: TfrxReport;
     dbBigLabel: TfrxDBDataset;
     rpBigLabel_mac: TfrxReport;
+    rp_43_25: TfrxReport;
   private
     { Private declarations }
   public
