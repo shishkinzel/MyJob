@@ -346,6 +346,7 @@ begin
     medtBit_6.Enabled := True;
     seStepIterator.Enabled := True;
     mniLabelAdvance.Visible := True;
+    lblStepIterator.Enabled := True;
   end
   else
   begin
@@ -356,11 +357,9 @@ begin
     medtBit_6.Enabled := False;
     seStepIterator.Enabled := False;
     mniLabelAdvance.Visible := False;
+    lblStepIterator.Enabled := False;
   end;
 end;
-
-
-
 
   // Выбор режима печати этикеток
 procedure TfrmMAC.chkPrintTabClick(Sender: TObject);
@@ -524,6 +523,9 @@ var
 begin
 // установить шрифт отчета печати mac-адреса по умолчанию
   macSize := False;
+
+// отключаем выбор расширенного режима
+  chkAdvanceSetting.Enabled := False;
 
   mniBarCodeLong.Enabled := True;
   if not (chkPrintTab.Checked) then
@@ -824,7 +826,11 @@ end;
 
 procedure TfrmMAC.btnRestartClick(Sender: TObject);
 begin
-if not(chkPrintTab.Checked) then
+
+// включаем выбор расширенного режима
+  chkAdvanceSetting.Enabled := True;
+
+  if not (chkPrintTab.Checked) then
   begin
     if utilityMAC then
       edtDevice.SetFocus
@@ -1562,11 +1568,16 @@ begin
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
+// присваеваем переменной memNameDevice  имя устройства
+  if edtMod.Text = '' then
+
+  else
+    (frmFRBigLabel.rp_43_25.FindObject('memNameDevice') as TFrxMemoView).Text := edtMod.text;
 
   frmFRBigLabel.Show;
   Self.SetFocus;
   frmFRBigLabel.rp_43_25.ShowReport();
-  // гасим и зажигаем нужные пункты меню
+    // гасим и зажигаем нужные пункты меню
     mni_sh_43_25.Enabled := False;
     mni_Pr_43_25.Enabled := True;
 

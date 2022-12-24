@@ -607,18 +607,6 @@ object frmMAC: TfrmMAC
           OnClick = mniPrintBigClick
         end
       end
-      object mni_43_25: TMenuItem
-        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43_25_908'
-        object mni_sh_43_25: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-          OnClick = mni_sh_43_25Click
-        end
-        object mni_Pr_43_25: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1100
-          Enabled = False
-          OnClick = mni_Pr_43_25Click
-        end
-      end
       object mniLabelSmall: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30'#1093'20_940'
         object mniShowSmall: TMenuItem
@@ -655,6 +643,18 @@ object frmMAC: TfrmMAC
       Caption = #1069#1090#1080#1082#1077#1090#1082#1080'('#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077')'
       Enabled = False
       Visible = False
+      object mni_43_25: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43_25_908'
+        object mni_sh_43_25: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_sh_43_25Click
+        end
+        object mni_Pr_43_25: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_Pr_43_25Click
+        end
+      end
       object mniLb58_60: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'60'
         object mniLbShow_58_60: TMenuItem
