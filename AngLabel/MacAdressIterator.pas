@@ -1564,10 +1564,18 @@ begin
 end;
 // новая этикетка размер 43х25
 procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
+var
+f_memPower : string;
 begin
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
+// запрос на ввод характеристик пиания устройства - образец "Вход 24В, 0.7А, 16.8 Вт максимально"
+  f_memPower := InputBox('Характеристики ИП устройства', 'Введите Характеристики ИП устройства', 'Вход 24В, 0.7А, 16.8 Вт максимально');
+  if f_memPower = '' then
+  else
+  (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
+
 // присваеваем переменной memNameDevice  имя устройства
   if edtMod.Text = '' then
 
