@@ -66,7 +66,7 @@ begin
   fTextSoft := '';
   for i := 0 to mmoShowSoft.Lines.Count - 1 do
   begin
-    fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i];
+    fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i] + #13;
     fText_rmp := cbb_rmp.Text;
   end;
   if fTextSoft <> '' then
