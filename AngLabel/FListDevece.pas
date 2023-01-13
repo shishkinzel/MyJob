@@ -51,20 +51,20 @@ type
     fdmtblDevndev: TStringField;
     fdmtblDevnmod: TStringField;
     lblBtnTitle: TLabel;
-    txtLot: TStaticText;
-    fdmtblLot: TStringField;
+    txtPower: TStaticText;
     lblBtnTitleUp: TLabel;
     fdmtblDevidmod: TStringField;
     mniClose: TMenuItem;
     mniSepFile: TMenuItem;
     btnedMod: TButtonedEdit;
-    btnedLot: TButtonedEdit;
     mniSearch: TMenuItem;
     mniSearchDev: TMenuItem;
     mniSearchMod: TMenuItem;
     mniSearchNumMod: TMenuItem;
     ilPictureMainMenu: TImageList;
     ilPictureBtn: TImageList;
+    fdmtblDevpower: TStringField;
+    edtPower: TEdit;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -81,6 +81,9 @@ type
     procedure btnTitleMemoClick(Sender: TObject);
     procedure dbgrdDevMouseEnter(Sender: TObject);
     procedure dbgrdDevMouseLeave(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+
+
   private
     { Private declarations }
     const
@@ -159,6 +162,18 @@ begin
   CloseFile(fileModule);
 
 end;
+
+procedure TfrmListDevice.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (Key = VK_RETURN) then
+  begin
+    FindNextControl(ActiveControl, True, True, false).SetFocus;
+  end;
+
+end;
+
+
+
 // показ формы
 
 procedure TfrmListDevice.FormShow(Sender: TObject);
@@ -222,7 +237,7 @@ var
   tmp, tmp1 : string;
 begin
   btnedMod.Text := '000';
-  btnedLot.Text := '000';
+  edtPower.Text := 'Ќет данных';
   Line := mmoModule.CaretPos.Y;
   tmp := mmoModule.Lines.Strings[Line];
   tmp1 := Trim(Fetch(tmp, '*'));
@@ -234,7 +249,7 @@ begin
     if tmp1 <> '' then
       btnedMod.Text := tmp1;
     if tmp <> '' then
-      btnedLot.Text := tmp;
+      edtPower.Text := tmp;
   end;
 
 
@@ -265,7 +280,7 @@ begin
   devEdit := Trim(edtDev.Text);
   modEdit := Trim(edtMod.Text);
   tmp := Format('%.3d', [StrToInt(btnedMod.Text)]);
-  tmp1 := Format('%.3d', [StrToInt(btnedLot.Text)]);
+  tmp1 := Format('%.s', [edtPower.Text]);
   modAll := modEdit + '*' + tmp + '*' + tmp1;
   if not (Sender is TBitBtn) then
     Exit;
@@ -313,7 +328,7 @@ begin
       Fields[1].AsString := Trim(edtDev.Text);
       Fields[2].AsString := Trim(edtMod.Text);
       Fields[3].AsString := Trim(btnedMod.Text);
-      Fields[4].AsString := Trim(btnedLot.Text);
+      Fields[4].AsString := Trim(edtPower.Text);
     end;
     dbgrdDev.DataSource.DataSet.Post;
   end
@@ -326,6 +341,7 @@ begin
     frmMAC.edtDevice.Text := Trim(edtDev.Text);
     frmMAC.edtMod.Text := Trim(edtMod.Text);
     frmMAC.medtModule.Text := btnedMod.Text;
+    frmMAC.f_power := edtPower.Text;
 // вставить бокс дл€ вопроса закрыть форму?
    ShowMessage('¬ы перенесли данные!');
     frmMAC.seQuantity.TabOrder := 11;
@@ -375,6 +391,7 @@ begin
 end;
 
 
+
 // перенос из таблицы в форму ввода
 procedure TfrmListDevice.btnTitleInClick(Sender: TObject);
 var
@@ -383,7 +400,7 @@ begin
   edtDev.Text := dbgrdDev.Fields[1].AsString;
   edtMod.Text := dbgrdDev.Fields[2].AsString;
   btnedMod.Text := dbgrdDev.Fields[3].AsString;
-  btnedLot.Text := dbgrdDev.Fields[4].AsString;
+  edtPower.Text := dbgrdDev.Fields[4].AsString;
   dbgrdDev.SelectedRows.Clear;
   btnTitleMemo.Enabled := False;
   btnTitleIn.Enabled := False;

@@ -270,9 +270,11 @@ type
       f_print_924: string;
       f_print_940: string;
       f_print_2824: string;
+      f_print_908 : string;
 
-      f_iniPath : string;
-
+      f_iniPath: string;
+// питание устройства
+      f_power: string;       // печать характеристик источника питания устройства
   end;
 
 var
@@ -321,8 +323,12 @@ begin
   f_print_924 := IniOptions.f_print_924;
   f_print_940 := IniOptions.f_print_940;
   f_print_2824 := IniOptions.f_print_2824;
+  f_print_908 := IniOptions.f_print_908;
 // очищаем память
   f_ini.Free;
+
+// назначаем переменной  f_power - запись по умолчанию
+  f_power := 'Значение ИП не выбранно';
 
 end;
 
@@ -1571,7 +1577,7 @@ begin
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
 // запрос на ввод характеристик пиания устройства - образец "Вход 24В, 0.7А, 16.8 Вт максимально"
-  f_memPower := InputBox('Характеристики ИП устройства', 'Введите Характеристики ИП устройства', 'Вход 24В, 0.7А, 16.8 Вт максимально');
+  f_memPower := InputBox('Характеристики ИП устройства', 'Введите Характеристики ИП устройства', f_power);
   if f_memPower = '' then
   else
   (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
@@ -1594,19 +1600,12 @@ end;
 
 procedure TfrmMAC.mni_Pr_43_25Click(Sender: TObject);
 begin
+     // задаем принтер по умолчанию
+  frmFRBigLabel.rp_43_25.Report.PrintOptions.Printer := f_print_908;
+
   frmFRBigLabel.rp_43_25.ShowReport();
   frmFRBigLabel.rp_43_25.Print;
 end;
-
-
-
-
-
-
-
-
-
-
 
 
 // BarCode для маленькой этикетки ***********************************************

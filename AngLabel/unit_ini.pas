@@ -19,6 +19,7 @@ type
   f_print_924 : string;
   f_print_940 : string;
   f_print_2824 : string;
+  f_print_908 : string;
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -42,6 +43,7 @@ begin
   begin
   f_print_924 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_924','\\AngWork_print\TE200_924');
   f_print_940 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_940','\\AngWork_print\TE200_940');
+  f_print_908 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_908','\\AngWork_print\TE200_908');
   f_print_2824 := Ini.ReadString(csIniSectionPathPrint, 'Print_TLP 2824','\\AngWork_print\TLP 2824');
   end;
 end;
