@@ -270,11 +270,15 @@ type
       f_print_924: string;
       f_print_940: string;
       f_print_2824: string;
-      f_print_908 : string;
+      f_print_908: string;
 
       f_iniPath: string;
 // питание устройства
       f_power: string;       // печать характеристик источника питания устройства
+// переменные для хранения bar-кода
+      f_syte: TBitmap;
+      f_pow: TBitmap;
+
   end;
 
 var
@@ -1580,7 +1584,7 @@ begin
   f_memPower := InputBox('Характеристики ИП устройства', 'Введите Характеристики ИП устройства', f_power);
   if f_memPower = '' then
   else
-  (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
+    (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
 
 // присваеваем переменной memNameDevice  имя устройства
   if edtMod.Text = '' then
@@ -1588,12 +1592,15 @@ begin
   else
     (frmFRBigLabel.rp_43_25.FindObject('memNameDevice') as TFrxMemoView).Text := edtMod.text;
 
+//  Задать вопрос о печати логотипа - в противном случае печатать qr-cod
+  ShowMessage('Приятной работы');
+
   frmFRBigLabel.Show;
   Self.SetFocus;
   frmFRBigLabel.rp_43_25.ShowReport();
     // гасим и зажигаем нужные пункты меню
-    mni_sh_43_25.Enabled := False;
-    mni_Pr_43_25.Enabled := True;
+  mni_sh_43_25.Enabled := False;
+  mni_Pr_43_25.Enabled := True;
 
 end;
 // печать
