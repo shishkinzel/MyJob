@@ -279,6 +279,8 @@ type
       f_syte: TBitmap;
       f_pow: TBitmap;
 
+      f_logo : Boolean;   // флаг печати логотипа
+
   end;
 
 var
@@ -1576,13 +1578,16 @@ end;
 procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
 var
 f_memPower : string;
+f_qr : string;
 begin
+f_qr := 'www.angtel.ru';
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
 // запрос на ввод характеристик пиания устройства - образец "Вход 24В, 0.7А, 16.8 Вт максимально"
   f_memPower := InputBox('Характеристики ИП устройства', 'Введите Характеристики ИП устройства', f_power);
   if f_memPower = '' then
+
   else
     (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
 
@@ -1590,14 +1595,41 @@ begin
   if edtMod.Text = '' then
 
   else
+  begin
+    (frmFRBigLabel.rp_43_25_qr.FindObject('memNameDevice') as TFrxMemoView).Text := edtMod.text;
     (frmFRBigLabel.rp_43_25.FindObject('memNameDevice') as TFrxMemoView).Text := edtMod.text;
+  end;
 
-//  Задать вопрос о печати логотипа - в противном случае печатать qr-cod
-  ShowMessage('Приятной работы');
+//  Задать вопрос о печати qr-кода - в противном случае печатать логотип
+  f_logo := InputQuery('Печать qr-кода', 'Введите ссылку', f_qr);
+//
+  if f_logo then
+  begin
+// формируем поток
+    brcdMAC.Height := 50;
+//    brcdMAC.Scale := 0.5;
+    brcdMAC.Symbology := syQRCode;
+    barCodeStream := TMemoryStream.Create;
 
-  frmFRBigLabel.Show;
-  Self.SetFocus;
-  frmFRBigLabel.rp_43_25.ShowReport();
+    brcdMAC.InputText := f_qr;
+    brcdMAC.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (frmFRBigLabel.rp_43_25_qr.FindObject('pLogo') as TfrxPictureView).LoadPictureFromStream(barCodeStream);
+    barCodeStream.Free;
+
+    frmFRBigLabel.Show;
+    Self.SetFocus;
+    frmFRBigLabel.rp_43_25_qr.ShowReport();
+
+    //     (fdmtblTitle.Fields[6] as TBlobField).LoadFromStream(barCodeStream);
+  end
+  else
+  begin
+
+    frmFRBigLabel.Show;
+    Self.SetFocus;
+    frmFRBigLabel.rp_43_25.ShowReport();
+  end;
     // гасим и зажигаем нужные пункты меню
   mni_sh_43_25.Enabled := False;
   mni_Pr_43_25.Enabled := True;
@@ -1607,12 +1639,29 @@ end;
 
 procedure TfrmMAC.mni_Pr_43_25Click(Sender: TObject);
 begin
-     // задаем принтер по умолчанию
-  frmFRBigLabel.rp_43_25.Report.PrintOptions.Printer := f_print_908;
 
-  frmFRBigLabel.rp_43_25.ShowReport();
-  frmFRBigLabel.rp_43_25.Print;
+  if f_logo then
+  begin
+  // задаем принтер по умолчанию
+    frmFRBigLabel.rp_43_25_qr.Report.PrintOptions.Printer := f_print_908;
+    frmFRBigLabel.rp_43_25_qr.ShowReport();
+    frmFRBigLabel.rp_43_25_qr.Print;
+  end
+  else
+  begin
+  // задаем принтер по умолчанию
+    frmFRBigLabel.rp_43_25.Report.PrintOptions.Printer := f_print_908;
+    frmFRBigLabel.rp_43_25.ShowReport();
+    frmFRBigLabel.rp_43_25.Print;
+  end;
+
 end;
+
+
+
+
+
+
 
 
 // BarCode для маленькой этикетки ***********************************************
