@@ -1580,7 +1580,7 @@ var
 f_memPower : string;
 f_qr : string;
 begin
-f_qr := 'www.angtel.ru';
+  f_qr := 'www.angtel.ru';
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
@@ -1589,7 +1589,10 @@ f_qr := 'www.angtel.ru';
   if f_memPower = '' then
 
   else
+  begin
     (frmFRBigLabel.rp_43_25.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
+    (frmFRBigLabel.rp_43_25_qr.FindObject('memPower') as TFrxMemoView).Text := f_memPower;
+  end;
 
 // присваеваем переменной memNameDevice  имя устройства
   if edtMod.Text = '' then
@@ -1621,7 +1624,6 @@ f_qr := 'www.angtel.ru';
     Self.SetFocus;
     frmFRBigLabel.rp_43_25_qr.ShowReport();
 
-    //     (fdmtblTitle.Fields[6] as TBlobField).LoadFromStream(barCodeStream);
   end
   else
   begin
