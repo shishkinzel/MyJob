@@ -690,6 +690,21 @@ object frmMAC: TfrmMAC
       object mniLbSep2: TMenuItem
         Caption = '-'
       end
+      object mniShild_43_25_908: TMenuItem
+        Caption = #1053#1086#1074#1099#1081' '#1096#1080#1083#1100#1076' 43_25'
+        object mni_sh_shild_43_25: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_sh_shild_43_25Click
+        end
+        object mni_Pr_shild_43_25: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_Pr_shild_43_25Click
+        end
+      end
+      object mniLbSep3: TMenuItem
+        Caption = '-'
+      end
       object mniLbReset2: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         OnClick = btnRestartClick

@@ -177,6 +177,10 @@ type
     mni_43_25: TMenuItem;
     mni_sh_43_25: TMenuItem;
     mni_Pr_43_25: TMenuItem;
+    mniLbSep3: TMenuItem;
+    mniShild_43_25_908: TMenuItem;
+    mni_sh_shild_43_25: TMenuItem;
+    mni_Pr_shild_43_25: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -231,6 +235,8 @@ type
     procedure mniNSticker_printerClick(Sender: TObject);
     procedure mni_sh_43_25Click(Sender: TObject);
     procedure mni_Pr_43_25Click(Sender: TObject);
+    procedure mni_sh_shild_43_25Click(Sender: TObject);
+    procedure mni_Pr_shild_43_25Click(Sender: TObject);
   private
     { Private declarations }
     var
@@ -1574,7 +1580,7 @@ begin
   end;
 
 end;
-// новая этикетка размер 43х25
+// новая этикетка размер 43х25 *************************************************************
 procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
 var
 f_memPower : string;
@@ -1637,6 +1643,7 @@ begin
   mni_Pr_43_25.Enabled := True;
 
 end;
+
 // печать
 
 procedure TfrmMAC.mni_Pr_43_25Click(Sender: TObject);
@@ -1659,12 +1666,45 @@ begin
 
 end;
 
+// новая этикетка размер 43х25 _ для нового шильда на корпус изделия *************************
+
+procedure TfrmMAC.mni_sh_shild_43_25Click(Sender: TObject);
+var
+f_nameDevice : string;
+begin
+// задаем место открытие окна
+  frmFRBigLabel.Top := 5;
+  frmFRBigLabel.Left := 5;
+
+  f_nameDevice := edtDevice.Text; // полное название устройства
+
+ // присваеваем переменной memNameDevice  полное название устройства
+   (frmFRBigLabel.rp_43_25_shild.FindObject('memNameDevice') as TFrxMemoView).Text := f_nameDevice;
+
+ // выводим на экран отчет
+  frmFRBigLabel.Show;
+  Self.SetFocus;
+  frmFRBigLabel.rp_43_25_shild.ShowReport();
+end;
+
+ // печать
+
+procedure TfrmMAC.mni_Pr_shild_43_25Click(Sender: TObject);
+begin
+   // задаем принтер по умолчанию
+  frmFRBigLabel.rp_43_25_shild.Report.PrintOptions.Printer := f_print_908;
+  frmFRBigLabel.rp_43_25_shild.ShowReport();
+  frmFRBigLabel.rp_43_25_shild.Print;
+end;
 
 
 
 
 
 
+
+
+// конец блока размер 43х25 ********************************************************************
 
 // BarCode для маленькой этикетки ***********************************************
 procedure TfrmMAC.mniShowSmallClick(Sender: TObject);
