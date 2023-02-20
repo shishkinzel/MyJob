@@ -526,7 +526,7 @@ object frmMAC: TfrmMAC
     OnClick = btnRestartClick
   end
   object chkAdvanceSetting: TCheckBox
-    Left = 10
+    Left = 8
     Top = 377
     Width = 251
     Height = 36

@@ -401,14 +401,29 @@ begin
     btnStart.Enabled := False;
     lblMAC.Caption := 'Название модуля:';
     edtMod.Visible := True;
-  // деактивируем группу mac adress
-    lblHighOrderBit.Enabled := False;
-    medtBit_4.Enabled := False;
-    medtBit_5.Enabled := False;
-    medtBit_6.Enabled := False;
 
-    lblStepIterator.Enabled := False;
-    seStepIterator.Enabled := False;
+    if chkAdvanceSetting.Checked then
+    begin
+      lblHighOrderBit.Enabled := True;
+      medtBit_4.Enabled := True;
+      medtBit_5.Enabled := True;
+      medtBit_6.Enabled := True;
+
+      lblStepIterator.Enabled := True;
+      seStepIterator.Enabled := True;
+    end
+    else
+     begin
+  // деактивируем группу mac adress
+      lblHighOrderBit.Enabled := False;
+      medtBit_4.Enabled := False;
+      medtBit_5.Enabled := False;
+      medtBit_6.Enabled := False;
+
+      lblStepIterator.Enabled := False;
+      seStepIterator.Enabled := False;
+     end;
+
 
   // гасим печать mac -адресов
     mniPrintMac.Enabled := False;
