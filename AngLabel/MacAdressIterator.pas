@@ -953,11 +953,14 @@ begin
     mniPrintSmall.Enabled := False;
     mniPrintShild.Enabled := False;
     mni_Pr_43_25.Enabled := False;
+    mni_Pr_shild_43_25.Enabled := False;
 // зажигаем окна просмотра
     mniShowBig.Enabled := True;
     mniShowSmall.Enabled := True;
     mniShowShild.Enabled := True;
     mni_sh_43_25.Enabled := True;
+    mni_sh_shild_43_25.Enabled := True;
+
   end;
 end;
 
@@ -1671,21 +1674,34 @@ end;
 procedure TfrmMAC.mni_sh_shild_43_25Click(Sender: TObject);
 var
 f_nameDevice : string;
+f_font_size : Integer;
 begin
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
   frmFRBigLabel.Left := 5;
 
+// запрашиваем размер шрифта для ввода наименования устройства
+  f_font_size := StrToIntDef(InputBox('Размер печати шрифта устройства', 'Введите размер от 6 до 12', '8'), 10);
+// проверяем корректность ввода шрифта
+  if f_font_size in [6..12] then
+    (frmFRBigLabel.rp_43_25_shild.FindObject('memNameDevice') as TFrxMemoView).Font.Size := f_font_size
+  else
+    (frmFRBigLabel.rp_43_25_shild.FindObject('memNameDevice') as TFrxMemoView).Font.Size := 8;
   f_nameDevice := edtDevice.Text; // полное название устройства
 
  // присваеваем переменной memNameDevice  полное название устройства
-   (frmFRBigLabel.rp_43_25_shild.FindObject('memNameDevice') as TFrxMemoView).Text := f_nameDevice;
+  (frmFRBigLabel.rp_43_25_shild.FindObject('memNameDevice') as TFrxMemoView).Text := f_nameDevice;
 
  // выводим на экран отчет
   frmFRBigLabel.Show;
   Self.SetFocus;
   frmFRBigLabel.rp_43_25_shild.ShowReport();
+
+ // гасим и зажигаем нужные пункты меню
+  mni_sh_shild_43_25.Enabled := False;
+  mni_Pr_shild_43_25.Enabled := True;
 end;
+
 
  // печать
 
