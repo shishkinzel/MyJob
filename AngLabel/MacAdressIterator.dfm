@@ -571,6 +571,24 @@ object frmMAC: TfrmMAC
         Enabled = False
         OnClick = mniIteratorClick
       end
+      object mniSeparator0: TMenuItem
+        Caption = '-'
+      end
+      object mniService: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1072#1090#1100' '#1085#1086#1084#1077#1088#1082#1080' '#1076#1083#1103' '#1088#1077#1084#1086#1085#1090#1072
+        object mniRange: TMenuItem
+          Caption = #1042#1074#1077#1089#1090#1080' '#1076#1080#1072#1087#1072#1079#1086#1085
+          OnClick = mniRangeClick
+        end
+        object mniSh_range: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          Enabled = False
+        end
+        object mniPr_range: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1072#1090#1100
+          Enabled = False
+        end
+      end
       object mniSeparator1: TMenuItem
         Caption = '-'
       end
@@ -1337,6 +1355,30 @@ object frmMAC: TfrmMAC
     object pmmiClose: TMenuItem
       Caption = #1047#1072#1082#1088#1099#1090#1100' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077
       OnClick = pmmiCloseClick
+    end
+  end
+  object fdService: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'number'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 656
+    Top = 120
+    object fdServicenumber: TStringField
+      FieldName = 'number'
+      Size = 10
     end
   end
 end

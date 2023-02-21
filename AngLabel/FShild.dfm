@@ -48,8 +48,8 @@ object frmShild: TfrmShild
       'begin'
       ''
       'end.')
-    Left = 48
-    Top = 118
+    Left = 8
+    Top = 62
     Datasets = <
       item
         DataSet = db_Shild
@@ -128,7 +128,7 @@ object frmShild: TfrmShild
     CloseDataSource = False
     DataSet = frmMAC.fdmtbLabel
     BCDToCurrency = False
-    Left = 56
-    Top = 198
+    Left = 8
+    Top = 134
   end
 end

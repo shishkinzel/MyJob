@@ -188,6 +188,13 @@ type
     mni_Shild_43_25_908_small: TMenuItem;
     mni_sh_shild_43_25_small: TMenuItem;
     mni_Pr_shild_43_25_small: TMenuItem;
+    mniSeparator0: TMenuItem;
+    mniService: TMenuItem;
+    mniRange: TMenuItem;
+    mniSh_range: TMenuItem;
+    mniPr_range: TMenuItem;
+    fdService: TFDMemTable;
+    fdServicenumber: TStringField;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -246,6 +253,7 @@ type
     procedure mni_Pr_shild_43_25Click(Sender: TObject);
     procedure mni_ShowSmall_newClick(Sender: TObject);
     procedure mni_PrintSmall_newClick(Sender: TObject);
+    procedure mniRangeClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -1484,6 +1492,7 @@ begin
   frmFR_IDandMAC.reportIDandMAC.Print;
 end;
 
+
 procedure TfrmMAC.mniPreviewLongClick(Sender: TObject);
 begin
   frmFRBarCodeLong.Show;
@@ -1902,8 +1911,38 @@ begin
   frmStickCheck.frpStickCheck.Print;
 end;
 
+// блок печати номера ремонта
+procedure TfrmMAC.mniRangeClick(Sender: TObject);
+var
+  f_range: Integer;
+  f_startNumber: Integer;
+  i: Integer;
+begin
+ // гасим и зажигаем необходимые функции
+  mniRange.Enabled := False;
+  mniSh_range.Enabled := True;
+// выбираем начальный номер и диапазон
+  f_startNumber := StrToIntDef(InputBox('Ввод начального номера ремонта', 'Введите номер ремонта', '0'), 0);
+  f_range := StrToIntDef(InputBox('Ввод диапазона ремонта', 'Введите диапазон от 1 до 100', '0'), 0);
+  // открываем таблицу для записи
+  fdService.Close;
+  fdService.Open;
+  fdService.First;
+  if f_range in [1..100] then
+  begin
+    for i := 0 to f_range - 1 do
+    begin
+      fdService.Append;
+      fdService.Fields[0].AsString := IntToStr(f_startNumber + i);
+    end;
 
-
+  end
+  else
+  begin
+    ShowMessage('Не корректный ввод');
+  end;
+end;
+// конец блока печати номера ремонта ************************************************
 
 // открытие формы со списком модулей и устройств
 
