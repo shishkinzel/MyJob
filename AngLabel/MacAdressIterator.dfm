@@ -631,6 +631,30 @@ object frmMAC: TfrmMAC
           OnClick = mniPrintShildClick
         end
       end
+      object mniLbSep0: TMenuItem
+        Caption = '-'
+      end
+      object mniLabelSmall_new: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30'#1093'20_940_new'
+        object mni_ShowSmall_new: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_ShowSmall_newClick
+        end
+        object mni_PrintSmall_new: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_PrintSmall_newClick
+        end
+      end
+      object mni_Shild_43_25_908_small: TMenuItem
+        Caption = #1064#1080#1083#1100#1076' 43_25'
+        object mni_sh_shild_43_25_small: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        end
+        object mni_Pr_shild_43_25_small: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+        end
+      end
       object mniLbSep1: TMenuItem
         Caption = '-'
       end

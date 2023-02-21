@@ -181,6 +181,13 @@ type
     mniShild_43_25_908: TMenuItem;
     mni_sh_shild_43_25: TMenuItem;
     mni_Pr_shild_43_25: TMenuItem;
+    mniLbSep0: TMenuItem;
+    mniLabelSmall_new: TMenuItem;
+    mni_ShowSmall_new: TMenuItem;
+    mni_PrintSmall_new: TMenuItem;
+    mni_Shild_43_25_908_small: TMenuItem;
+    mni_sh_shild_43_25_small: TMenuItem;
+    mni_Pr_shild_43_25_small: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -237,6 +244,8 @@ type
     procedure mni_Pr_43_25Click(Sender: TObject);
     procedure mni_sh_shild_43_25Click(Sender: TObject);
     procedure mni_Pr_shild_43_25Click(Sender: TObject);
+    procedure mni_ShowSmall_newClick(Sender: TObject);
+    procedure mni_PrintSmall_newClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -969,13 +978,15 @@ begin
     mniPrintShild.Enabled := False;
     mni_Pr_43_25.Enabled := False;
     mni_Pr_shild_43_25.Enabled := False;
+    mni_PrintSmall_new.Enabled := False;
+
 // зажигаем окна просмотра
     mniShowBig.Enabled := True;
     mniShowSmall.Enabled := True;
     mniShowShild.Enabled := True;
     mni_sh_43_25.Enabled := True;
     mni_sh_shild_43_25.Enabled := True;
-
+    mni_ShowSmall_new.Enabled := True;
   end;
 end;
 
@@ -1663,7 +1674,6 @@ begin
 end;
 
 // печать
-
 procedure TfrmMAC.mni_Pr_43_25Click(Sender: TObject);
 begin
 
@@ -1730,11 +1740,6 @@ end;
 
 
 
-
-
-
-
-
 // конец блока размер 43х25 ********************************************************************
 
 // BarCode для маленькой этикетки ***********************************************
@@ -1753,6 +1758,37 @@ begin
   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
   frmFRSmallLabel.rpSmallLabel.ShowReport();
 end;
+// новая маленькая этикетка 30_20
+
+procedure TfrmMAC.mni_ShowSmall_newClick(Sender: TObject);
+begin
+ // задаем место открытие окна
+  frmFRSmallLabel.Top := 5;
+  frmFRSmallLabel.Left := 5;
+
+  frmFRSmallLabel.Show;
+  self.SetFocus;
+
+  (frmFRSmallLabel.rpSmallLabel_new.FindObject('mDevice') as TFrxMemoView).Text := edtmod.text;
+  frmFRSmallLabel.rpSmallLabel_new.ShowReport();
+ // гасим и зажигаем пункты на главном меню
+  mni_PrintSmall_new.Enabled := True;
+  mni_ShowSmall_new.Enabled := False;
+
+end;
+ // печать
+
+procedure TfrmMAC.mni_PrintSmall_newClick(Sender: TObject);
+begin
+ // задаем принтер по умолчанию
+  frmFRSmallLabel.rpSmallLabel_new.Report.PrintOptions.Printer := f_print_940;
+
+  frmFRSmallLabel.rpSmallLabel_new.ShowReport;
+  frmFRSmallLabel.rpSmallLabel_new.Print;
+end;
+
+// конец блока   новая маленькая этикетка 30_20
+
 
 
 // печать маленькой этикетки

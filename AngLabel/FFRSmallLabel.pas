@@ -11,6 +11,7 @@ type
     pvSmallLabel: TfrxPreview;
     rpSmallLabel: TfrxReport;
     dbSmallLabel: TfrxDBDataset;
+    rpSmallLabel_new: TfrxReport;
   private
     { Private declarations }
   public
