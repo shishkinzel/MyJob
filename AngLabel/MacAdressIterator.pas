@@ -195,6 +195,8 @@ type
     mniPr_range: TMenuItem;
     fdService: TFDMemTable;
     fdServicenumber: TStringField;
+    mniSeparator01: TMenuItem;
+    mniResetRange: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -254,6 +256,9 @@ type
     procedure mni_ShowSmall_newClick(Sender: TObject);
     procedure mni_PrintSmall_newClick(Sender: TObject);
     procedure mniRangeClick(Sender: TObject);
+    procedure mniSh_rangeClick(Sender: TObject);
+    procedure mniPr_rangeClick(Sender: TObject);
+    procedure mniResetRangeClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -294,6 +299,7 @@ type
       f_print_940: string;
       f_print_2824: string;
       f_print_908: string;
+      f_print_576: string;
 
       f_iniPath: string;
 // питание устройства
@@ -353,6 +359,7 @@ begin
   f_print_940 := IniOptions.f_print_940;
   f_print_2824 := IniOptions.f_print_2824;
   f_print_908 := IniOptions.f_print_908;
+  f_print_576 := IniOptions.f_print_576;
 // очищаем память
   f_ini.Free;
 
@@ -1904,8 +1911,6 @@ end;
 // печать стикера верификации
 
 procedure TfrmMAC.mniNSticker_printerClick(Sender: TObject);
-var
-  i: Integer;
 begin
   frmStickCheck.frpStickCheck.ShowReport();
   frmStickCheck.frpStickCheck.Print;
@@ -1921,8 +1926,9 @@ begin
  // гасим и зажигаем необходимые функции
   mniRange.Enabled := False;
   mniSh_range.Enabled := True;
+  mniResetRange.Enabled := True;
 // выбираем начальный номер и диапазон
-  f_startNumber := StrToIntDef(InputBox('Ввод начального номера ремонта', 'Введите номер ремонта', '0'), 0);
+  f_startNumber := StrToIntDef(InputBox('Ввод начального номера ремонта', 'Введите номер ремонта', '1'), 1);
   f_range := StrToIntDef(InputBox('Ввод диапазона ремонта', 'Введите диапазон от 1 до 100', '0'), 0);
   // открываем таблицу для записи
   fdService.Close;
@@ -1934,14 +1940,65 @@ begin
     begin
       fdService.Append;
       fdService.Fields[0].AsString := IntToStr(f_startNumber + i);
+      fdService.Next;
     end;
 
   end
   else
   begin
-    ShowMessage('Не корректный ввод');
+    ShowMessage('Некорректный ввод');
   end;
+//  frmTestGrid.Show;
 end;
+// просмотр
+
+procedure TfrmMAC.mniSh_rangeClick(Sender: TObject);
+begin
+     // задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+  // гасим и зажигаем необходимые пункты меню
+  mniSh_range.Enabled := False;
+  mniPr_range.Enabled := True;
+
+  // позже реализуем выбор шрифта       &&&&&&&&&&&&&&&&&&&&&&&&??????????????????????
+   {  TODO
+   }
+  frmStickCheck.Show;
+  frmStickCheck.rpLabService.ShowReport();
+
+end;
+
+
+// печать
+procedure TfrmMAC.mniPr_rangeClick(Sender: TObject);
+begin
+  // задаем принтер по умолчанию
+  frmStickCheck.rpLabService.Report.PrintOptions.Printer := f_print_576;
+
+  frmStickCheck.rpLabService.ShowReport();
+  frmStickCheck.rpLabService.Print;
+end;
+
+// сброс
+procedure TfrmMAC.mniResetRangeClick(Sender: TObject);
+begin
+ // гасим и зажигаем необхдимые пункты меня
+  mniRange.Enabled := True;
+  mniSh_range.Enabled := False;
+  mniPr_range.Enabled := False;
+  mniResetRange.Enabled := False;
+
+ // закрытие отчетов
+    frmStickCheck.Close;
+ // очистка отчетов
+    frmStickCheck.rpLabService.PreviewPages.Clear;
+
+end;
+
+
+
+
 // конец блока печати номера ремонта ************************************************
 
 // открытие формы со списком модулей и устройств

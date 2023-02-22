@@ -583,10 +583,20 @@ object frmMAC: TfrmMAC
         object mniSh_range: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
           Enabled = False
+          OnClick = mniSh_rangeClick
         end
         object mniPr_range: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1072#1090#1100
+          Caption = #1055#1077#1095#1072#1090#1100' '#1085#1086#1084#1077#1088#1082#1086#1074
           Enabled = False
+          OnClick = mniPr_rangeClick
+        end
+        object mniSeparator01: TMenuItem
+          Caption = '-'
+        end
+        object mniResetRange: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          Enabled = False
+          OnClick = mniResetRangeClick
         end
       end
       object mniSeparator1: TMenuItem

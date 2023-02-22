@@ -105,7 +105,7 @@ object frmTestGrid: TfrmTestGrid
     TitleFont.Style = []
   end
   object dstt: TDataSource
-    DataSet = frmMAC.fdmtbLabel
+    DataSet = frmMAC.fdService
     Left = 120
     Top = 520
   end

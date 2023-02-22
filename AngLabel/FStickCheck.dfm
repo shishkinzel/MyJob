@@ -37,7 +37,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44903.432846875000000000
+    ReportOptions.LastChange = 44979.679096296300000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -75,9 +75,11 @@ object frmStickCheck: TfrmStickCheck
         Align = baCenter
         AllowVectorExport = True
         ShiftMode = smDontShift
+        Top = 7.559055118110236000
         Width = 113.385900000000000000
         Height = 37.795300000000000000
-        StretchMode = smMaxHeight
+        StretchMode = smActualHeight
+        AutoWidth = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -23
@@ -92,5 +94,95 @@ object frmStickCheck: TfrmStickCheck
         VAlign = vaCenter
       end
     end
+  end
+  object rpLabService: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = fpStickCheck
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = '\\Angwork_print\TE200_576'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44758.573734583300000000
+    ReportOptions.LastChange = 44979.657073865740000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 32
+    Top = 190
+    Datasets = <
+      item
+        DataSet = frdbService
+        DataSetName = 'frxService'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pLabService: TfrxReportPage
+      PaperWidth = 27.000000000000000000
+      PaperHeight = 9.900000000000000000
+      PaperSize = 256
+      LeftMargin = 0.500000000000000000
+      RightMargin = 0.500000000000000000
+      TopMargin = 2.000000000000000000
+      BottomMargin = 0.500000000000000000
+      Frame.Typ = []
+      Frame.Width = 0.100000000000000000
+      MirrorMode = []
+      object mData: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 98.267780000000000000
+        DataSet = frdbService
+        DataSetName = 'frxService'
+        RowCount = 0
+        object frxServicenumber: TfrxMemoView
+          IndexTag = 1
+          Align = baClient
+          AllowVectorExport = True
+          Width = 98.267780000000000000
+          Height = 22.677180000000000000
+          StretchMode = smMaxHeight
+          AutoWidth = True
+          DataField = 'number'
+          DataSet = frdbService
+          DataSetName = 'frxService'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Roboto'
+          Font.Style = []
+          Frame.Typ = []
+          Frame.Width = 0.100000000000000000
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxService."number"]')
+          ParentFont = False
+          WordWrap = False
+          VAlign = vaCenter
+        end
+      end
+    end
+  end
+  object frdbService: TfrxDBDataset
+    UserName = 'frxService'
+    CloseDataSource = False
+    DataSet = frmMAC.fdService
+    BCDToCurrency = False
+    Left = 32
+    Top = 294
   end
 end
