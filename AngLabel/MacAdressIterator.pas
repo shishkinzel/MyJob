@@ -1330,6 +1330,8 @@ end;
 //  CloseFile(fileBarCodeLong);
 //end;
 
+ // работаю сейчас
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // процедура обработки генерации QR-кода
 //начало блока *************************************************************************************
@@ -1339,21 +1341,32 @@ procedure TfrmMAC.mniShow_ORClick(Sender: TObject);
 begin
   mniGen_QR_Apply.Enabled := True;
   frmShowSoft.cbb_rmp.Visible := True;
-  frmShowSoft.mmoShowSoft.Enabled := False;
-  frmShowSoft.btnCount.Enabled := False;
-  frmShowSoft.btnApply.Enabled := False;
+  // гасим и зажигаем необходимые пункты меню
+  mniShow_OR.Enabled := False;
+
+//  frmShowSoft.mmoShowSoft.Enabled := False;
+//  frmShowSoft.btnCount.Enabled := False;
+//  frmShowSoft.btnApply.Enabled := False;
+
   frmShowSoft.ShowModal;
 end;
-
+// генератор qr-кода
 procedure TfrmMAC.mniGen_QR_ApplyClick(Sender: TObject);
 var
   i: Integer;
   tmp, s1: string;
 begin
+  if frmShowSoft.flag_fTextSoft then
+  begin
+    frmShowSoft.flag_fTextSoft := False;
+    mniGen_QR_Apply.Enabled := False;
+    ShowMessage('Вы не ввели не каких данных!!!');
+    mniShow_OR.Enabled := True;
+    Abort;
+  end;
 // активируем инструменты для  QR-кода
   mniGen_QR_ShowPrev.Enabled := True;
-  mniGen_QR_Export.Enabled := True;
-  mniGen_QR_Print.Enabled := True;
+  mniGen_QR_Apply.Enabled := False;
   mniGen_QR_Reset.Enabled := True;
   fmTab_Gen_OR.Open;
   barCodeStream := TMemoryStream.Create;
@@ -1404,22 +1417,32 @@ begin
   frmGen_OR.frR_Gen_QR.ShowReport();
   frmGen_OR.frR_Gen_QR.Export(frmGen_OR.fr_Gen_QR_Ex_PDF);
 end;
+/// Смотреть!!!!!!!
 // предосмотр отчета генератора QR-кода
 procedure TfrmMAC.mniGen_QR_ShowPrevClick(Sender: TObject);
 begin
+// заносим в поле mGen_qr_nameDevice -наименование устройства
+   (frmGen_OR.frR_Gen_QR.FindObject('mGen_qr_nameDevice') as TFrxMemoView).Text := edtDevice.text;
+
+// гасим и зажигаем необходимые пункты меню
+  mniShow_OR.Enabled := False;
+  mniGen_QR_Apply.Enabled := False;
+  mniGen_QR_Print.Enabled := True;
+
   frmGen_OR.Show;
   frmGen_OR.frP_Gen_QR.Clear;
   frmGen_OR.frR_Gen_QR.ShowReport();
 end;
-// печать  отчета для QR-кода
 
+
+// печать  отчета для QR-кода
 procedure TfrmMAC.mniGen_QR_PrintClick(Sender: TObject);
 begin
   frmGen_OR.frR_Gen_QR.ShowReport;
   frmGen_OR.frR_Gen_QR.Print;
 end;
-// сброс для  генератора QR-кода
 
+// сброс для  генератора QR-кода
 procedure TfrmMAC.mniGen_QR_ResetClick(Sender: TObject);
 begin
   fmTab_Gen_OR.Close;
@@ -1429,6 +1452,18 @@ begin
   mniGen_QR_Reset.Enabled := False;
   frmShowSoft.cbb_rmp.ItemIndex := 0;
   mniGen_QR_Apply.Enabled := False;
+ // уничтожение отчета
+  // закрываем форму отчета
+  frmGen_OR.Close;
+  // очищаем отчет
+  frmGen_OR.frR_Gen_QR.PreviewPages.Clear;
+
+// гасим и зажигаем необходимые пункты меню
+    mniShow_OR.Enabled := True;
+
+// сбрасываем поле  frmShowSoft.fTextSoft
+  frmShowSoft.fTextSoft := '';
+  frmShowSoft.flag_fTextSoft := False;
 end;
 // окончание блока генератора QR-кода **************************************************************
 

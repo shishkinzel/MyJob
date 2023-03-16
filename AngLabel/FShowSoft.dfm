@@ -2,7 +2,7 @@ object frmShowSoft: TfrmShowSoft
   Left = 0
   Top = 0
   Caption = #1054#1082#1085#1086' '#1074#1074#1086#1076#1072' '#1090#1077#1082#1089#1090#1072
-  ClientHeight = 327
+  ClientHeight = 391
   ClientWidth = 554
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,6 +17,19 @@ object frmShowSoft: TfrmShowSoft
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object lbl_NameDevice: TLabel
+    Left = 8
+    Top = 276
+    Width = 155
+    Height = 16
+    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object mmoShowSoft: TMemo
     Left = 8
     Top = 32
@@ -26,7 +39,7 @@ object frmShowSoft: TfrmShowSoft
   end
   object btnCount: TButton
     Left = 8
-    Top = 290
+    Top = 354
     Width = 120
     Height = 27
     Caption = #1057#1095#1080#1090#1072#1090#1100
@@ -41,7 +54,7 @@ object frmShowSoft: TfrmShowSoft
   end
   object btnApply: TButton
     Left = 426
-    Top = 290
+    Top = 354
     Width = 120
     Height = 27
     Caption = #1047#1072#1082#1088#1099#1090#1100
@@ -56,7 +69,7 @@ object frmShowSoft: TfrmShowSoft
   end
   object cbb_rmp: TComboBox
     Left = 216
-    Top = 290
+    Top = 354
     Width = 120
     Height = 27
     Style = csDropDownList
@@ -75,6 +88,38 @@ object frmShowSoft: TfrmShowSoft
       #1056#1052#1055' '#8470'1'
       #1056#1052#1055' '#8470'2'
       #1056#1052#1055' '#8470'3')
+  end
+  object chkOrd_13: TCheckBox
+    Left = 8
+    Top = 323
+    Width = 289
+    Height = 17
+    Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1080#1084#1074#1086#1083' '#1087#1077#1088#1077#1074#1086#1076#1072' '#1082#1072#1088#1077#1090#1082#1080' ('#1057#1050')#13'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+  end
+  object txtNameDevice: TStaticText
+    Left = 8
+    Top = 298
+    Width = 232
+    Height = 20
+    Alignment = taCenter
+    BevelInner = bvLowered
+    BevelOuter = bvRaised
+    BorderStyle = sbsSingle
+    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1086#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
   end
   object mmLoadSoft: TMainMenu
     object mniFileLoadSoft: TMenuItem

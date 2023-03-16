@@ -37,7 +37,7 @@ object frmGen_OR: TfrmGen_OR
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 44858.395218182870000000
+    ReportOptions.LastChange = 45001.656857164350000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -203,6 +203,41 @@ object frmGen_OR: TfrmGen_OR
           HightQuality = False
           Transparent = False
           TransparentColor = clWhite
+        end
+        object mNameDevice: TfrxMemoView
+          AllowVectorExport = True
+          Left = 18.897650000000000000
+          Top = 136.063080000000000000
+          Width = 222.992270000000000000
+          Height = 37.795275590551180000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' :')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object mGen_qr_nameDevice: TfrxMemoView
+          AllowVectorExport = True
+          Left = 249.448980000000000000
+          Top = 136.063080000000000000
+          Width = 457.323130000000000000
+          Height = 37.795275590551180000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' - '#1086#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090)
+          ParentFont = False
+          VAlign = vaCenter
         end
       end
       object PageFooter1: TfrxPageFooter

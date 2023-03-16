@@ -30,6 +30,9 @@ type
     cbb_rmp: TComboBox;
     mniReset: TMenuItem;
     mniSeparator3: TMenuItem;
+    chkOrd_13: TCheckBox;
+    txtNameDevice: TStaticText;
+    lbl_NameDevice: TLabel;
     procedure btnCountClick(Sender: TObject);
     procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -47,6 +50,7 @@ type
     { Public declarations }
     fTextSoft: string;         // текст в окне
     fText_rmp : string;        // выбор рабочего места программирования
+    flag_fTextSoft : Boolean;  // наличие данных в окне
   end;
 
 var
@@ -59,6 +63,25 @@ uses
 
 {$R *.dfm}
 
+// показываем форму
+procedure TfrmShowSoft.FormShow(Sender: TObject);
+begin
+// выставляем необходимые флаги
+cbb_rmp.Enabled := True;
+flag_fTextSoft := False;
+// отображаем название устройства
+  if frmMAC.edtDevice.Text = '' then
+
+  else
+    txtNameDevice.Caption := frmMAC.edtDevice.Text;
+
+// начальная конфигурация формы
+  mmoShowSoft.Enabled := False;
+  btnCount.Enabled := False;
+  btnApply.Enabled := False;
+
+end;
+
 procedure TfrmShowSoft.btnCountClick(Sender: TObject);
 var
   i: Integer;
@@ -66,8 +89,16 @@ begin
   fTextSoft := '';
   for i := 0 to mmoShowSoft.Lines.Count - 1 do
   begin
-    fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i] + #13;
-    fText_rmp := cbb_rmp.Text;
+    if chkOrd_13.Checked then
+    begin
+      fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i] + #13;
+      fText_rmp := cbb_rmp.Text;
+    end
+    else
+    begin
+      fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i];
+      fText_rmp := cbb_rmp.Text;
+    end;
   end;
   if fTextSoft <> '' then
     ShowMessage('Информация считана' + #13 + 'Можно закрыть окно')
@@ -148,13 +179,12 @@ end;
 
 procedure TfrmShowSoft.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  if fTextSoft = '' then
+    flag_fTextSoft := True;   // данных нет
+
   cbb_rmp.Visible := False;
   mniExitLoadSoftClick(nil);
 
-end;
-procedure TfrmShowSoft.FormShow(Sender: TObject);
-begin
-cbb_rmp.Enabled := True;
 end;
 
 procedure TfrmShowSoft.mniExitLoadSoftClick(Sender: TObject);
