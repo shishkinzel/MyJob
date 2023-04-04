@@ -37,7 +37,7 @@ object frmGen_OR: TfrmGen_OR
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 45001.656857164350000000
+    ReportOptions.LastChange = 45001.656857164400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -209,7 +209,7 @@ object frmGen_OR: TfrmGen_OR
           Left = 18.897650000000000000
           Top = 136.063080000000000000
           Width = 222.992270000000000000
-          Height = 37.795275590551180000
+          Height = 37.795275590551200000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -226,7 +226,7 @@ object frmGen_OR: TfrmGen_OR
           Left = 249.448980000000000000
           Top = 136.063080000000000000
           Width = 457.323130000000000000
-          Height = 37.795275590551180000
+          Height = 37.795275590551200000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16

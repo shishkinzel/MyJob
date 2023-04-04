@@ -1075,7 +1075,6 @@ object frmMAC: TfrmMAC
   object brcdMAC: TBarcode
     OutputOptions = [opBoldText, opBpp1, opStdout, opCompliantHeight]
     ShowText = False
-    Symbology = syCode128SubsetB
     Ultracode = ucCompress
     Left = 64
     Top = 8

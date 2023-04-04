@@ -5,7 +5,6 @@ object frmShowSoft: TfrmShowSoft
   ClientHeight = 460
   ClientWidth = 740
   Color = clBtnFace
-  TransparentColor = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,7 +14,6 @@ object frmShowSoft: TfrmShowSoft
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object fonShowSoft: TImage
@@ -12899,16 +12897,29 @@ object frmShowSoft: TfrmShowSoft
       3B58FF09084FB841C1F6D586E353FBE32CDC899C2FED6FE1FDA18C68DA675796
       DA7D9DEF6761482FA3FAFFB2BCD37626F2D5400000000049454E44AE426082}
     Stretch = True
-    ExplicitWidth = 600
-    ExplicitHeight = 327
+    ExplicitLeft = 80
+    ExplicitTop = -8
+  end
+  object lbl_Place: TLabel
+    Left = 152
+    Top = 10
+    Width = 141
+    Height = 13
+    Caption = #1056#1072#1073#1086#1095#1077#1077' '#1084#1077#1089#1090#1086' '#1085#1077' '#1074#1099#1073#1088#1072#1085#1086
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = cl3DLight
+    Font.Height = -11
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentFont = False
   end
   object mmoShowSoft: TMemo
     Left = 0
-    Top = 56
+    Top = 64
     Width = 740
-    Height = 97
+    Height = 153
     Color = cl3DDkShadow
-    TabOrder = 1
+    TabOrder = 0
   end
   object btnCount: TButton
     Left = 40
@@ -12922,7 +12933,7 @@ object frmShowSoft: TfrmShowSoft
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     OnClick = btnCountClick
   end
   object btnApply: TButton
@@ -12938,32 +12949,62 @@ object frmShowSoft: TfrmShowSoft
     Font.Style = []
     ModalResult = 8
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btnApplyClick
   end
-  object cbb_rmp: TComboBox
-    Left = 312
-    Top = 354
-    Width = 120
-    Height = 27
-    Style = csDropDownList
+  object txtPlace: TStaticText
+    Left = 8
+    Top = 8
+    Width = 122
+    Height = 17
+    Alignment = taCenter
+    AutoSize = False
+    BevelKind = bkTile
+    BevelOuter = bvRaised
+    BorderStyle = sbsSunken
+    Caption = #1056#1072#1073#1086#1095#1077#1077' '#1084#1077#1089#1090#1086
+    Color = clBlack
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ItemIndex = 0
+    Font.Color = clHighlightText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentColor = False
     ParentFont = False
-    TabOrder = 0
-    Text = #1056#1052#1055' '#8470'1'
-    Visible = False
-    OnChange = cbb_rmpChange
-    Items.Strings = (
-      #1056#1052#1055' '#8470'1'
-      #1056#1052#1055' '#8470'2'
-      #1056#1052#1055' '#8470'3')
+    TabOrder = 3
+  end
+  object txtDevice: TStaticText
+    Left = 8
+    Top = 37
+    Width = 185
+    Height = 21
+    Alignment = taCenter
+    AutoSize = False
+    BevelKind = bkTile
+    BevelOuter = bvRaised
+    BorderStyle = sbsSunken
+    Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHighlightText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 4
+  end
+  object edtDevice: TEdit
+    Left = 195
+    Top = 37
+    Width = 487
+    Height = 21
+    TabOrder = 5
+    Text = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1086' '#1085#1077' '#1074#1099#1073#1088#1072#1085#1086
   end
   object mmLoadSoft: TMainMenu
+    Left = 8
+    Top = 64
     object mniFileLoadSoft: TMenuItem
       Caption = #1060#1072#1081#1083
       object mniOpenLoadSoft: TMenuItem
@@ -12987,6 +13028,11 @@ object frmShowSoft: TfrmShowSoft
     end
     object mniApplyLoadSoft: TMenuItem
       Caption = #1044#1077#1081#1089#1090#1074#1080#1103
+      object mniSetPlace: TMenuItem
+        Caption = #1042#1099#1073#1088#1072#1090#1100' '#1088#1072#1073#1086#1095#1077#1077' '#1084#1077#1089#1090#1086
+        ShortCut = 16458
+        OnClick = mniSetPlaceClick
+      end
       object mniReadingLostSoft: TMenuItem
         Caption = #1057#1095#1080#1090#1072#1090#1100
         ShortCut = 16449
@@ -13018,17 +13064,23 @@ object frmShowSoft: TfrmShowSoft
     end
   end
   object dlgSaveLoadSoft: TSaveDialog
+    DefaultExt = 'code_txt'
     Filter = 
-      ' '#1060#1072#1081#1083' '#1076#1083#1103' '#1079#1072#1075#1088#1091#1079#1082#1080' (*.load_txt)|*.load_txt|'#1058#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083' (*.txt' +
-      ')|*.txt|'#1042#1089#1077' '#1092#1072#1081#1083#1099' (*.*)| *.*'
+      ' '#1050#1086#1084#1072#1085#1076#1085#1099#1081' '#1092#1072#1081#1083' (*.code_txt)|*.code_txt|'#1058#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083' (*.txt)|*' +
+      '.txt|'#1042#1089#1077' '#1092#1072#1081#1083#1099' (*.*)| *.*'
+    InitialDir = 'DIR_code'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 32
+    Left = 16
+    Top = 112
   end
   object dlgOpenLostSoft: TOpenDialog
+    DefaultExt = 'code_txt'
     Filter = 
-      ' '#1060#1072#1081#1083' '#1076#1083#1103' '#1079#1072#1075#1088#1091#1079#1082#1080' (*.load_txt)|*.load_txt|'#1058#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083' (*.txt' +
-      ')|*.txt|'#1042#1089#1077' '#1092#1072#1081#1083#1099' (*.*)| *.*'
-    Left = 64
+      ' '#1050#1086#1084#1072#1085#1076#1085#1099#1081' '#1092#1072#1081#1083' (*.code_txt)|*.code_txt|'#1058#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083' (*.txt)|*' +
+      '.txt|'#1042#1089#1077' '#1092#1072#1081#1083#1099' (*.*)| *.*'
+    InitialDir = 'DIR_code'
+    Left = 16
+    Top = 160
   end
   object dlgFont: TFontDialog
     Font.Charset = DEFAULT_CHARSET
@@ -13036,9 +13088,11 @@ object frmShowSoft: TfrmShowSoft
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Left = 104
+    Left = 608
+    Top = 424
   end
   object dlgColor: TColorDialog
-    Left = 152
+    Left = 584
+    Top = 432
   end
 end

@@ -36,6 +36,9 @@ type
 
   private
     { Private declarations }
+    F_Path: string;
+    function GetPath: string;            // функция получения пути до исполняемого файла
+
     const
       cnMAC = '68:EB:C5:';
       cnAttention = 'Внимание';
@@ -43,8 +46,13 @@ type
   public
     { Public declarations }
 //    f_Soft : Boolean;
-    f_myarray: array[0..5] of string;
-    f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
+{прописываем свойства private данных}
+    property Path: string read GetPath;
+
+    var
+      f_myarray: array[0..5] of string;
+      f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
+
   end;
 
 var
@@ -55,9 +63,10 @@ var
 implementation
 
 uses
-  FTest, IdGlobal;
+  FTest, FShowSoft, IdGlobal;
 
 {$R *.dfm}
+
 // начальные установки в форме
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
@@ -65,9 +74,18 @@ begin
   f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
 // f_Soft := False;                  // активация дополнительного пункта меню
 //  f_showPrintForm := True;
+{ путь к каталогу с файлами - командами прошивки}
 // определяем путь до файла конфигурации
-f_print_config :=  ExtractFilePath(Application.ExeName) + 'print_config.ini';
+  f_print_config := ExtractFilePath(Application.ExeName) + 'print_config.ini';
 
+end;
+
+
+
+{методы доступа к private полям}
+ function TfrmMain.GetPath: string;
+begin
+ GetPath := ExtractFilePath(Application.ExeName);
 end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);
@@ -105,6 +123,7 @@ begin
   if (Key = VK_RETURN) then
     FindNextControl(ActiveControl, True, True, false).SetFocus;
 end;
+
 
 //**************************************************************************************************
 
