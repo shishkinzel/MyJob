@@ -13002,8 +13002,16 @@ object frmShowSoft: TfrmShowSoft
     TabOrder = 5
     Text = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1086' '#1085#1077' '#1074#1099#1073#1088#1072#1085#1086
   end
+  object chkOrd_13: TCheckBox
+    Left = 40
+    Top = 424
+    Width = 257
+    Height = 17
+    Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1080#1084#1074#1086#1083' '#1087#1077#1088#1077#1074#1086#1076#1072' '#1082#1072#1088#1077#1090#1082#1080' ('#1057#1050')#13'
+    TabOrder = 6
+  end
   object mmLoadSoft: TMainMenu
-    Left = 8
+    Left = 16
     Top = 64
     object mniFileLoadSoft: TMenuItem
       Caption = #1060#1072#1081#1083
@@ -13035,6 +13043,7 @@ object frmShowSoft: TfrmShowSoft
       end
       object mniReadingLostSoft: TMenuItem
         Caption = #1057#1095#1080#1090#1072#1090#1100
+        Enabled = False
         ShortCut = 16449
         OnClick = btnCountClick
       end
@@ -13049,6 +13058,29 @@ object frmShowSoft: TfrmShowSoft
       object mniReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089#1080#1090#1100
         OnClick = mniResetClick
+      end
+    end
+    object mniReport: TMenuItem
+      Caption = #1054#1090#1095#1077#1090
+      object mniRepApply: TMenuItem
+        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+        OnClick = mniRepApplyClick
+      end
+      object mniRepSep1: TMenuItem
+        Caption = '-'
+      end
+      object mniRepShow: TMenuItem
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        OnClick = mniRepShowClick
+      end
+      object mniRepPrint: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100
+      end
+      object mniRepSep2: TMenuItem
+        Caption = '-'
+      end
+      object mniRepReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
       end
     end
     object mniSettings: TMenuItem
@@ -13088,11 +13120,11 @@ object frmShowSoft: TfrmShowSoft
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Left = 608
-    Top = 424
+    Left = 624
+    Top = 400
   end
   object dlgColor: TColorDialog
-    Left = 584
-    Top = 432
+    Left = 592
+    Top = 400
   end
 end

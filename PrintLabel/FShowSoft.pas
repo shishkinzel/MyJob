@@ -36,6 +36,14 @@ type
     lbl_Place: TLabel;
     txtDevice: TStaticText;
     edtDevice: TEdit;
+    chkOrd_13: TCheckBox;
+    mniReport: TMenuItem;
+    mniRepApply: TMenuItem;
+    mniRepSep1: TMenuItem;
+    mniRepShow: TMenuItem;
+    mniRepPrint: TMenuItem;
+    mniRepSep2: TMenuItem;
+    mniRepReset: TMenuItem;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -47,6 +55,8 @@ type
     procedure mniResetClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure mniSetPlaceClick(Sender: TObject);
+    procedure mniRepApplyClick(Sender: TObject);
+    procedure mniRepShowClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -57,7 +67,10 @@ type
   public
         { Public declarations }
     fTextSoft: string;         // текст в окне
-    fText_rmp : string;        // выбор рабочего места программирования
+    fText_rmp: string;        // выбор рабочего места программирования
+
+    f_rmp: string;
+    f_rmp_place: string;
   end;
 
 var
@@ -66,7 +79,7 @@ var
 implementation
 
 uses
-  FSelection;
+  FSelection, F_FR_List, IdGlobal;
 
 
 
@@ -77,11 +90,15 @@ uses
 procedure TfrmShowSoft.btnCountClick(Sender: TObject);
 var
   i: Integer;
+  f_pos_first: Integer;
 begin
   fTextSoft := '';
   for i := 0 to mmoShowSoft.Lines.Count - 1 do
   begin
-    fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i];
+    if chkOrd_13.Checked then
+      fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i] + #13
+    else
+      fTextSoft := fTextSoft + mmoShowSoft.Lines.Strings[i];
 
   end;
   if fTextSoft <> '' then
@@ -91,19 +108,40 @@ begin
 // Сброс Memo после считывания
   mmoShowSoft.Clear;
   fTextSoft := TrimLeft(fTextSoft);
+  f_pos_first := Pos(f_str, fTextSoft) + 11;
+  Delete(fTextSoft, f_pos_first, 1);
+  Insert(f_rmp_place, fTextSoft, f_pos_first);
+  mmoShowSoft.Lines.Add(fTextSoft);
 end;
+
 
 //*************************************************
 {диалоги открытия и записи}
 procedure TfrmShowSoft.mniOpenLoadSoftClick(Sender: TObject);
+var
+  f_name_file: string;
+  f_name_path: string;
+  i: Integer;
 begin
-  dlgOpenLostSoft.InitialDir := frmMain.Path + dlgOpenLostSoft.InitialDir;
+//  + dlgOpenLostSoft.InitialDir
+  dlgOpenLostSoft.InitialDir := frmMain.Path + DIR_code;
+  f_name_path := dlgOpenLostSoft.InitialDir;
   if not (DirectoryExists(DIR_code)) then
     CreateDir(DIR_code);
-
   if dlgOpenLostSoft.Execute then
   begin
     mmoShowSoft.Lines.LoadFromFile(dlgOpenLostSoft.FileName);
+    f_name_file := dlgOpenLostSoft.FileName;
+    Fetch(f_name_file, f_name_path + '\');
+    f_name_file := Fetch(f_name_file, '.code_txt');
+    // цикл for in
+    for i := 1 to Length(f_name_file) do
+    begin
+      if f_name_file[i] = '_' then
+        f_name_file[i] := '-';
+
+    end;
+    edtDevice.Text := f_name_file;
   end
   else
   begin
@@ -138,12 +176,34 @@ procedure TfrmShowSoft.mniSetPlaceClick(Sender: TObject);
 var
 f_setPlace : Integer;
 begin
-   f_setPlace := StrToIntDef(InputBox('Выбор рабочего места', 'Введите от 1 до 3','1'),1);
-
+  f_setPlace := StrToIntDef(InputBox('Выбор рабочего места', 'Введите от 1 до 3', '1'), 1);
+  if f_setPlace in [1..3] then
+  begin
+    case f_setPlace of
+      1:
+        begin
+          f_rmp := 'РМП № 1';
+          f_rmp_place := '6';
+          lbl_Place.Caption := 'Рабочее место № 1';
+        end;
+      2:
+        begin
+          f_rmp := 'РМП № 2';
+          f_rmp_place := '8';
+          lbl_Place.Caption := 'Рабочее место № 2';
+        end;
+      3:
+        begin
+          f_rmp := 'РМП № 3';
+          f_rmp_place := '7';
+          lbl_Place.Caption := 'Рабочее место № 3';
+        end;
+    end;
+    mniSetPlace.Enabled := False;
+    mniReadingLostSoft.Enabled := True;
+  end;
 
 end;
-
-
 
 procedure TfrmShowSoft.mniResetClick(Sender: TObject);
 begin
@@ -154,10 +214,15 @@ btnApply.Enabled := False;
 end;
 
 
-
 procedure TfrmShowSoft.mniClearClick(Sender: TObject);
 begin
   mmoShowSoft.Clear;
+  mniSetPlace.Enabled := True;
+  mniReadingLostSoft.Enabled := False;
+// востанавливаем надписи по умолчанию
+  lbl_Place.Caption := 'Рабочее место не выбрано';
+  edtDevice.Text := 'Устройство не выбрано';
+
 end;
 
 procedure TfrmShowSoft.mniColorBackGroundClick(Sender: TObject);
@@ -171,8 +236,26 @@ begin
 if dlgFont.Execute then
   mmoShowSoft.Font := dlgFont.Font;
 end;
-// закрытие окна
 
+{формирование отчета}
+procedure TfrmShowSoft.mniRepApplyClick(Sender: TObject);
+var
+  i: Integer;
+begin
+
+end;
+ {просмотр отчета}
+
+procedure TfrmShowSoft.mniRepShowClick(Sender: TObject);
+begin
+  frmFR_List.Top := 5;
+  frmFR_List.Left := 5;
+  Self.SetFocus;
+  frmFR_List.Show;
+  frmFR_List.frxRe.ShowReport();
+end;
+
+// закрытие окна
 procedure TfrmShowSoft.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   mmoShowSoft.Clear;
