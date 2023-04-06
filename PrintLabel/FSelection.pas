@@ -29,6 +29,7 @@ type
     procedure btnLabelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnPrint_QRClick(Sender: TObject);
+    procedure btnSOFTClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,16 +76,33 @@ begin
 end;
 
 
-
-
 procedure TfrmSelection.btnPrint_QRClick(Sender: TObject);
 begin
-frmShowSoft.Show;
+  frmShowSoft := TfrmShowSoft.Create(nil);
+  frmSelection.Hide;
+  frmShowSoft.ShowModal;
+  if frmShowSoft.ModalResult = mrOk then
+  begin
+    frmShowSoft.Free;
+    frmMain.Show;
+  end;
+end;
+
+procedure TfrmSelection.btnSOFTClick(Sender: TObject);
+begin
+  frmPrintSection := TfrmPrintSection.Create(nil);
+   frmPrintSection.Menu := nil;
+  frmPrintSection.ShowModal;
+  // Утечка памяти!!!!!!!!!!!
+//  frmSelection.Free;
 end;
 
 procedure TfrmSelection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmSelection.Free;
+  frmSelection.ModalResult := mrOk;
+
+//  frmSelection.Free;
+
   frmMain.Show;
 end;
 // прорисовка формы

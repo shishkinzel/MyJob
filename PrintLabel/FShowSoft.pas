@@ -57,6 +57,8 @@ type
     procedure mniSetPlaceClick(Sender: TObject);
     procedure mniRepApplyClick(Sender: TObject);
     procedure mniRepShowClick(Sender: TObject);
+    procedure mniRepPrintClick(Sender: TObject);
+    procedure mniRepResetClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -79,7 +81,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_List, IdGlobal;
+  FSelection, F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
 
 
 
@@ -112,7 +114,13 @@ begin
   Delete(fTextSoft, f_pos_first, 1);
   Insert(f_rmp_place, fTextSoft, f_pos_first);
   mmoShowSoft.Lines.Add(fTextSoft);
+// сброс кнопок
+  btnCount.Enabled := False;
+  mniReadingLostSoft.Enabled := False;
+// активация отчета
+  mniReport.Enabled := True;
 end;
+
 
 
 //*************************************************
@@ -123,13 +131,14 @@ var
   f_name_path: string;
   i: Integer;
 begin
-//  + dlgOpenLostSoft.InitialDir
+
   dlgOpenLostSoft.InitialDir := frmMain.Path + DIR_code;
   f_name_path := dlgOpenLostSoft.InitialDir;
   if not (DirectoryExists(DIR_code)) then
     CreateDir(DIR_code);
   if dlgOpenLostSoft.Execute then
   begin
+    mmoShowSoft.Clear;
     mmoShowSoft.Lines.LoadFromFile(dlgOpenLostSoft.FileName);
     f_name_file := dlgOpenLostSoft.FileName;
     Fetch(f_name_file, f_name_path + '\');
@@ -141,6 +150,13 @@ begin
         f_name_file[i] := '-';
 
     end;
+ // сбросить главное меню и кнопку
+    lbl_Place.Caption := 'Рабочее место не выбрано';
+    edtDevice.Text := 'Устройство не выбрано';
+    mniSetPlace.Enabled := True;
+    btnCount.Enabled := False;
+    mniReadingLostSoft.Enabled := False;
+
     edtDevice.Text := f_name_file;
   end
   else
@@ -201,6 +217,7 @@ begin
     end;
     mniSetPlace.Enabled := False;
     mniReadingLostSoft.Enabled := True;
+    btnCount.Enabled := True;
   end;
 
 end;
@@ -222,7 +239,8 @@ begin
 // востанавливаем надписи по умолчанию
   lbl_Place.Caption := 'Рабочее место не выбрано';
   edtDevice.Text := 'Устройство не выбрано';
-
+ // деактивация отчета
+  mniReport.Enabled := False;
 end;
 
 procedure TfrmShowSoft.mniColorBackGroundClick(Sender: TObject);
@@ -242,10 +260,13 @@ procedure TfrmShowSoft.mniRepApplyClick(Sender: TObject);
 var
   i: Integer;
 begin
+  (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := f_rmp;
+  (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := fTextSoft;
+  (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := fTextSoft;
+  (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := edtDevice.Text;
 
 end;
- {просмотр отчета}
-
+{просмотр отчета}
 procedure TfrmShowSoft.mniRepShowClick(Sender: TObject);
 begin
   frmFR_List.Top := 5;
@@ -254,12 +275,29 @@ begin
   frmFR_List.Show;
   frmFR_List.frxRe.ShowReport();
 end;
+{печать отчета}
+procedure TfrmShowSoft.mniRepPrintClick(Sender: TObject);
+begin
+  frmFR_List.frxRe.ShowReport();
+  frmFR_List.frxRe.Print;
+end;
+{сброс отчета}
+procedure TfrmShowSoft.mniRepResetClick(Sender: TObject);
+begin
+  frmFR_List.Close;
+  frmFR_List.frxRe.PreviewPages.Clear;
+
+end;
 
 // закрытие окна
 procedure TfrmShowSoft.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   mmoShowSoft.Clear;
+  btnApplyClick(nil);
+  frmShowSoft.ModalResult := mrOk;
+  frmSelection.ModalResult := mrOk;
 end;
+
 procedure TfrmShowSoft.btnApplyClick(Sender: TObject);
 begin
 Close;

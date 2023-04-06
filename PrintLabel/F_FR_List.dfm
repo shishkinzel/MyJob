@@ -26,10 +26,6 @@ object frmFR_List: TfrmFR_List
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = 112
-    ExplicitTop = 56
-    ExplicitWidth = 100
-    ExplicitHeight = 100
   end
   object frxRe: TfrxReport
     Version = '6.9.3'
@@ -41,7 +37,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45016.649589791700000000
+    ReportOptions.LastChange = 45022.436992754630000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -296,8 +292,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 495.118430000000000000
           Top = 396.850650000000000000
-          Width = 151.181102360000200000
-          Height = 151.181102360000200000
+          Width = 151.181102360000000000
+          Height = 151.181102360000000000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -310,7 +306,7 @@ object frmFR_List: TfrmFR_List
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 1.799775028095240000
+          Zoom = 1.799775028095238000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11

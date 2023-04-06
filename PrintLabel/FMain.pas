@@ -33,6 +33,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure seStepChange(Sender: TObject);
     procedure chkQR_SOFTClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -95,6 +96,14 @@ begin
   else
     f_size_sticker := False;
 end;
+{событие show формы}
+procedure TfrmMain.FormShow(Sender: TObject);
+var
+i : Integer;
+begin
+
+end;
+
 
 
 // работа над автоматическим переходом в окнах  ****************************************************
@@ -312,8 +321,15 @@ begin
   end;
 
   frmMain.Hide;
-  frmSelection.Show;
+  frmSelection.ShowModal;
+    // получение сообщения от формы FSelection о закрыти
+
+  if frmSelection.ModalResult = mrOk then
+  begin
+    frmSelection.Free;
+  end;
 end;
+
 
 // закрытие формы
 end.

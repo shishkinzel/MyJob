@@ -24,7 +24,6 @@ begin
   Application.CreateForm(TfrmTest, frmTest);
   Application.CreateForm(TfrmFR_Label, frmFR_Label);
   Application.CreateForm(TfrmListDevice, frmListDevice);
-  Application.CreateForm(TfrmShowSoft, frmShowSoft);
   Application.CreateForm(TfrmFR_List, frmFR_List);
   Application.Run;
 end.

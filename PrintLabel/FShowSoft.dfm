@@ -14,6 +14,9 @@ object frmShowSoft: TfrmShowSoft
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  DesignSize = (
+    740
+    460)
   PixelsPerInch = 96
   TextHeight = 13
   object fonShowSoft: TImage
@@ -12918,6 +12921,7 @@ object frmShowSoft: TfrmShowSoft
     Top = 64
     Width = 740
     Height = 153
+    Anchors = [akLeft, akTop, akRight]
     Color = cl3DDkShadow
     TabOrder = 0
   end
@@ -12926,7 +12930,9 @@ object frmShowSoft: TfrmShowSoft
     Top = 354
     Width = 120
     Height = 27
+    Anchors = [akLeft, akTop, akBottom]
     Caption = #1057#1095#1080#1090#1072#1090#1100
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -12941,6 +12947,7 @@ object frmShowSoft: TfrmShowSoft
     Top = 354
     Width = 120
     Height = 27
+    Anchors = [akLeft, akTop, akBottom]
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -13062,6 +13069,7 @@ object frmShowSoft: TfrmShowSoft
     end
     object mniReport: TMenuItem
       Caption = #1054#1090#1095#1077#1090
+      Enabled = False
       object mniRepApply: TMenuItem
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
         OnClick = mniRepApplyClick
@@ -13075,12 +13083,14 @@ object frmShowSoft: TfrmShowSoft
       end
       object mniRepPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100
+        OnClick = mniRepPrintClick
       end
       object mniRepSep2: TMenuItem
         Caption = '-'
       end
       object mniRepReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
+        OnClick = mniRepResetClick
       end
     end
     object mniSettings: TMenuItem
