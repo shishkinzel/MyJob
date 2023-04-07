@@ -151,6 +151,10 @@
             <Form>frmFR_List</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="F_FR_Table.pas">
+            <Form>frmFR_Table</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

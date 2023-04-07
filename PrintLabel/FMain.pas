@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
   // ***************************** подсоединёные формы
-  FdbmPrintLabel, FSelection, Data.DB, System.ImageList, Vcl.ImgList;
+  FdbmPrintLabel, FSelection, Data.DB, System.ImageList, Vcl.ImgList, F_FR_Table;
 
 type
   TfrmMain = class(TForm)
@@ -324,7 +324,7 @@ begin
   frmSelection.ShowModal;
     // получение сообщения от формы FSelection о закрыти
 
-  if frmSelection.ModalResult = mrOk then
+  if frmSelection.ModalResult > 0 then
   begin
     frmSelection.Free;
   end;

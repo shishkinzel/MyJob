@@ -56,6 +56,31 @@ type
     lbl_mac: TLabel;
     lbl_pac: TLabel;
     lbl_step: TLabel;
+    mmReport: TMainMenu;
+    mniSingleReport: TMenuItem;
+    mniSRApply: TMenuItem;
+    mniSRShow: TMenuItem;
+    mniSRSep1: TMenuItem;
+    mniSRSave: TMenuItem;
+    mniSRPrint: TMenuItem;
+    mniSRSep2: TMenuItem;
+    mniSRReset: TMenuItem;
+    mniTopaz: TMenuItem;
+    mniCorund: TMenuItem;
+    mniTopApply: TMenuItem;
+    mniTopShow: TMenuItem;
+    mniTopSep1: TMenuItem;
+    mniTopSave: TMenuItem;
+    mniTopPrint: TMenuItem;
+    mniTopSep2: TMenuItem;
+    mniTopReset: TMenuItem;
+    mniCorApply: TMenuItem;
+    mniCorShow: TMenuItem;
+    mniCorSep1: TMenuItem;
+    mniCorSave: TMenuItem;
+    mniCorPrint: TMenuItem;
+    mniCorSep2: TMenuItem;
+    mniCorReset: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -79,14 +104,14 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, frxClass, unit_ini, IniFiles;
+  FSelection, F_FR_Label, FMain, frxClass, unit_ini, IniFiles, F_FR_Table;
 
 {$R *.dfm}
 
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
  mniNResetLab4Click(Self);
-ModalResult := 0;
+ModalResult := mrOk;
 Close;
 end;
 //   изменение шрифта главного меню

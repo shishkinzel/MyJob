@@ -91,10 +91,14 @@ end;
 procedure TfrmSelection.btnSOFTClick(Sender: TObject);
 begin
   frmPrintSection := TfrmPrintSection.Create(nil);
-   frmPrintSection.Menu := nil;
+  frmPrintSection.Menu := nil;
+  frmPrintSection.Menu := frmPrintSection.mmReport;
   frmPrintSection.ShowModal;
-  // Утечка памяти!!!!!!!!!!!
-//  frmSelection.Free;
+  if frmPrintSection.ModalResult > 0 then
+  begin
+    frmPrintSection.Free;
+//    ModalResult := mrOk;
+  end;
 end;
 
 procedure TfrmSelection.FormClose(Sender: TObject; var Action: TCloseAction);
