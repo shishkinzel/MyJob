@@ -15345,10 +15345,12 @@ object frmPrintSection: TfrmPrintSection
       object mniSRApply: TMenuItem
         Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
         ImageIndex = 6
+        OnClick = mniSRApplyClick
       end
       object mniSRShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         ImageIndex = 1
+        OnClick = mniSRShowClick
       end
       object mniSRSep1: TMenuItem
         Caption = '-'

@@ -15,6 +15,7 @@ type
     frxExPDF: TfrxPDFExport;
     frdbTable: TfrxDBDataset;
     frxReTopaz: TfrxReport;
+    frxReTabList: TfrxReport;
   private
     { Private declarations }
   public
@@ -27,7 +28,7 @@ var
 implementation
 
 uses
-  FMain;
+  FMain, FdbmPrintLabel;
 {$R *.dfm}
 
 end.

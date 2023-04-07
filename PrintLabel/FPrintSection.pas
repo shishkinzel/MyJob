@@ -88,6 +88,8 @@ type
     procedure mniNResetLab4Click(Sender: TObject);
     procedure mniNPrintmacClick(Sender: TObject);
     procedure mniNPrintIDClick(Sender: TObject);
+    procedure mniSRShowClick(Sender: TObject);
+    procedure mniSRApplyClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -259,6 +261,7 @@ begin
   end;
 
 end;
+
 // вызываем печать
 
 procedure TfrmPrintSection.mniNPrintIDClick(Sender: TObject);
@@ -321,6 +324,25 @@ begin
   //label 100_150
   pmmiSh100_150.Enabled := True;
   pmmiPr100_150.Enabled := False;
+end;
+ {Работа с вторым пунктом меню}
+
+ // Простой отчет
+
+procedure TfrmPrintSection.mniSRApplyClick(Sender: TObject);
+begin
+  (frmFR_Table.frxReTabList.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+  (frmFR_Table.frxReTabList.FindObject('memmac') as TfrxMemoView).Text := frmMain.medtMAC.Text;
+  (frmFR_Table.frxReTabList.FindObject('memID') as TfrxMemoView).Text := frmMain.medtID.Text;
+  (frmFR_Table.frxReTabList.FindObject('memStep') as TfrxMemoView).Text := frmMain.seStep.Value.ToString;
+  (frmFR_Table.frxReTabList.FindObject('memQuantity') as TfrxMemoView).Text := frmMain.seCount.Value.ToString;
+
+end;
+
+procedure TfrmPrintSection.mniSRShowClick(Sender: TObject);
+begin
+  frmFR_Table.Show;
+  frmFR_Table.frxReTabList.ShowReport();
 end;
 
 end.
