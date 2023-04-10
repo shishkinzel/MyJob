@@ -90,6 +90,8 @@ type
     procedure mniNPrintIDClick(Sender: TObject);
     procedure mniSRShowClick(Sender: TObject);
     procedure mniSRApplyClick(Sender: TObject);
+    procedure mniTopApplyClick(Sender: TObject);
+    procedure mniTopShowClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -106,8 +108,8 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, frxClass, unit_ini, IniFiles, F_FR_Table;
-
+  FSelection, F_FR_Label, FMain, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel,
+  frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
 
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -343,6 +345,67 @@ procedure TfrmPrintSection.mniSRShowClick(Sender: TObject);
 begin
   frmFR_Table.Show;
   frmFR_Table.frxReTabList.ShowReport();
+end;
+{Семейство Топаз }
+// выполнить
+procedure TfrmPrintSection.mniTopApplyClick(Sender: TObject);
+var
+  f_step: Integer;
+  i: Integer;
+  f_hw: string;
+begin
+  i := 1;
+ // кодирум hw топаза
+  f_hw := InputBox('Введите Hard Ware модуля Топаз', 'Введите HW ', '00.01.10');
+  (frmFR_Table.frxReTopaz.FindObject('mem_hw') as TfrxMemoView).Text := f_hw;
+  (frmFR_Table.frxReTopaz.FindObject('bc_hw') as TfrxBarcode2DView).Text := f_hw;
+
+  f_step := StrToIntDef(InputBox('Шаг печати штрих-кода', 'Введите шаг печати от 1 до 10', '10'), 10);
+
+  if f_step in [1..10] then
+  begin
+    try
+  // пытаемся заполнить отчет
+      dbmPrintLabel.fdmtblPrint.First;
+      dbmPrintLabel.fdmtblReport.Close;
+      dbmPrintLabel.fdmtblReport.Open;
+      dbmPrintLabel.fdmtblReport.First;
+
+      while not dbmPrintLabel.fdmtblPrint.Eof do
+      begin
+        with dbmPrintLabel.fdmtblPrint do
+        begin
+          if i = 1 then
+          begin
+           {Записываем код из таблицы в отчет}
+              dbmPrintLabel.fdmtblReport.Insert;
+           dbmPrintLabel.fdmtblReport.Fields[0]:= Fields[0];
+           dbmPrintLabel.fdmtblReport.Fields[1]:= Fields[6];
+           dbmPrintLabel.fdmtblReport.Fields[2]:= Fields[4];
+           dbmPrintLabel.fdmtblReport.Post;
+           dbmPrintLabel.fdmtblReport.Next;
+          end;
+          Inc(i);
+          if i = (f_step + 1) then
+            i := 1;
+          Next
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        ShowMessage('Некорректный ввод!');
+        Abort
+      end;
+    end;
+
+  end;
+end;
+// просмотр
+procedure TfrmPrintSection.mniTopShowClick(Sender: TObject);
+begin
+  frmFR_Table.Show;
+  frmFR_Table.frxReTopaz.ShowReport();
 end;
 
 end.

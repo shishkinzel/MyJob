@@ -3,45 +3,7 @@ object dbmPrintLabel: TdbmPrintLabel
   Height = 215
   Width = 355
   object fdmtblPrint: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'id'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'id_blob'
-        DataType = ftBlob
-      end
-      item
-        Name = 'id_blob_scale'
-        DataType = ftBlob
-      end
-      item
-        Name = 'id_space'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'mac'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'mac_extended'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'id_mac'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'id_mac_blob'
-        DataType = ftBlob
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -84,5 +46,56 @@ object dbmPrintLabel: TdbmPrintLabel
     ShowText = False
     Left = 88
     Top = 24
+  end
+  object fdmtblReport: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'f0'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'f1'
+        DataType = ftString
+        Size = 150
+      end
+      item
+        Name = 'f2'
+        DataType = ftString
+        Size = 150
+      end
+      item
+        Name = 'f3'
+        DataType = ftString
+        Size = 200
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 16
+    Top = 80
+    object fdmtblReportf0: TStringField
+      FieldName = 'f0'
+      Size = 100
+    end
+    object fdmtblReportf1: TStringField
+      FieldName = 'f1'
+      Size = 150
+    end
+    object fdmtblReportf2: TStringField
+      FieldName = 'f2'
+      Size = 150
+    end
+    object fdmtblReportf3: TStringField
+      FieldName = 'f3'
+      Size = 200
+    end
   end
 end

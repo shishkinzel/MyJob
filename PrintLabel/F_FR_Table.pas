@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FPrintSection, frxClass, frxDBSet,
-  frxExportBaseDialog, frxExportPDF, frxBarcode, frxPreview;
+  frxExportBaseDialog, frxExportPDF, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 
 type
   TfrmFR_Table = class(TForm)
@@ -16,6 +16,7 @@ type
     frdbTable: TfrxDBDataset;
     frxReTopaz: TfrxReport;
     frxReTabList: TfrxReport;
+    frxDes: TfrxDesigner;
   private
     { Private declarations }
   public

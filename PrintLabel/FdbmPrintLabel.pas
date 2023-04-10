@@ -19,6 +19,11 @@ type
     ssPrintmac_extended: TStringField;
     ssPrintid_mac: TStringField;
     blid_mac_blob: TBlobField;
+    fdmtblReport: TFDMemTable;
+    fdmtblReportf0: TStringField;
+    fdmtblReportf1: TStringField;
+    fdmtblReportf2: TStringField;
+    fdmtblReportf3: TStringField;
   private
     { Private declarations }
   public
