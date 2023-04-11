@@ -15358,6 +15358,7 @@ object frmPrintSection: TfrmPrintSection
       object mniSRSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
         ImageIndex = 6
+        OnClick = mniSRSaveClick
       end
       object mniSRPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
@@ -15369,6 +15370,7 @@ object frmPrintSection: TfrmPrintSection
       object mniSRReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089' '#1086#1090#1095#1077#1090#1072
         ImageIndex = 5
+        OnClick = mniSRResetClick
       end
     end
     object mniTopaz: TMenuItem
@@ -15390,10 +15392,12 @@ object frmPrintSection: TfrmPrintSection
       object mniTopSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
         ImageIndex = 6
+        OnClick = mniTopSaveClick
       end
       object mniTopPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
         ImageIndex = 8
+        OnClick = mniTopPrintClick
       end
       object mniTopSep2: TMenuItem
         Caption = '-'
@@ -15401,6 +15405,7 @@ object frmPrintSection: TfrmPrintSection
       object mniTopReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089' '#1086#1090#1095#1077#1090#1072
         ImageIndex = 5
+        OnClick = mniSRResetClick
       end
     end
     object mniCorund: TMenuItem
@@ -15409,10 +15414,12 @@ object frmPrintSection: TfrmPrintSection
       object mniCorApply: TMenuItem
         Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
         ImageIndex = 6
+        OnClick = mniCorApplyClick
       end
       object mniCorShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         ImageIndex = 1
+        OnClick = mniCorShowClick
       end
       object mniCorSep1: TMenuItem
         Caption = '-'
@@ -15420,10 +15427,12 @@ object frmPrintSection: TfrmPrintSection
       object mniCorSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
         ImageIndex = 6
+        OnClick = mniCorSaveClick
       end
       object mniCorPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
         ImageIndex = 8
+        OnClick = mniCorPrintClick
       end
       object mniCorSep2: TMenuItem
         Caption = '-'
@@ -15431,6 +15440,7 @@ object frmPrintSection: TfrmPrintSection
       object mniCorReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 5
+        OnClick = mniSRResetClick
       end
     end
   end

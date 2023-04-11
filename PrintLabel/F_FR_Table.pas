@@ -17,6 +17,8 @@ type
     frxReTopaz: TfrxReport;
     frxReTabList: TfrxReport;
     frxDes: TfrxDesigner;
+    frdbTabList: TfrxDBDataset;
+    frdbTabCorund: TfrxDBDataset;
   private
     { Private declarations }
   public

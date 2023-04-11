@@ -92,6 +92,14 @@ type
     procedure mniSRApplyClick(Sender: TObject);
     procedure mniTopApplyClick(Sender: TObject);
     procedure mniTopShowClick(Sender: TObject);
+    procedure mniTopPrintClick(Sender: TObject);
+    procedure mniTopSaveClick(Sender: TObject);
+    procedure mniSRSaveClick(Sender: TObject);
+    procedure mniSRResetClick(Sender: TObject);
+    procedure mniCorApplyClick(Sender: TObject);
+    procedure mniCorShowClick(Sender: TObject);
+    procedure mniCorPrintClick(Sender: TObject);
+    procedure mniCorSaveClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -108,7 +116,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel,
+  FSelection, F_FR_Label, FMain, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
   frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
 
@@ -265,7 +273,6 @@ begin
 end;
 
 // вызываем печать
-
 procedure TfrmPrintSection.mniNPrintIDClick(Sender: TObject);
 begin
   frmFR_Label.frStic_id_40_12.Report.PrintOptions.Printer := f_print_924;
@@ -281,16 +288,6 @@ begin
   frmFR_Label.frStic_mac_40_12.ShowReport();
   frmFR_Label.frStic_mac_40_12.Print;
 end;
-
-
-
-
-
-
-
-
-
-
 
 
 // сбрасываем все
@@ -330,7 +327,7 @@ end;
  {Работа с вторым пунктом меню}
 
  // Простой отчет
-
+// выполнить
 procedure TfrmPrintSection.mniSRApplyClick(Sender: TObject);
 begin
   (frmFR_Table.frxReTabList.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
@@ -341,11 +338,20 @@ begin
 
 end;
 
+// просмотр
 procedure TfrmPrintSection.mniSRShowClick(Sender: TObject);
 begin
   frmFR_Table.Show;
   frmFR_Table.frxReTabList.ShowReport();
 end;
+// сохранить отчет в pdf
+procedure TfrmPrintSection.mniSRSaveClick(Sender: TObject);
+begin
+  frmFR_Table.frxReTabList.ShowReport();
+ frmFR_Table.frxReTabList.Export(frmFR_Table.frxExPDF);
+end;
+
+
 {Семейство Топаз }
 // выполнить
 procedure TfrmPrintSection.mniTopApplyClick(Sender: TObject);
@@ -354,7 +360,7 @@ var
   i: Integer;
   f_hw: string;
 begin
-  i := 1;
+  i := 0;
  // кодирум hw топаза
   f_hw := InputBox('Введите Hard Ware модуля Топаз', 'Введите HW ', '00.01.10');
   (frmFR_Table.frxReTopaz.FindObject('mem_hw') as TfrxMemoView).Text := f_hw;
@@ -366,29 +372,27 @@ begin
   begin
     try
   // пытаемся заполнить отчет
-      dbmPrintLabel.fdmtblPrint.First;
       dbmPrintLabel.fdmtblReport.Close;
       dbmPrintLabel.fdmtblReport.Open;
       dbmPrintLabel.fdmtblReport.First;
-
+      dbmPrintLabel.fdmtblPrint.First;
       while not dbmPrintLabel.fdmtblPrint.Eof do
       begin
         with dbmPrintLabel.fdmtblPrint do
         begin
-          if i = 1 then
+          if i = 0 then
           begin
            {Записываем код из таблицы в отчет}
-              dbmPrintLabel.fdmtblReport.Insert;
-           dbmPrintLabel.fdmtblReport.Fields[0]:= Fields[0];
-           dbmPrintLabel.fdmtblReport.Fields[1]:= Fields[6];
-           dbmPrintLabel.fdmtblReport.Fields[2]:= Fields[4];
-           dbmPrintLabel.fdmtblReport.Post;
-           dbmPrintLabel.fdmtblReport.Next;
+            dbmPrintLabel.fdmtblReport.Append;
+            dbmPrintLabel.fdmtblReport.Fields[0] := Fields[0];
+            dbmPrintLabel.fdmtblReport.Fields[1] := Fields[6];
+            dbmPrintLabel.fdmtblReport.Fields[2] := Fields[4];
+            dbmPrintLabel.fdmtblReport.Next;
           end;
           Inc(i);
-          if i = (f_step + 1) then
-            i := 1;
-          Next
+          if i = f_step then
+            i := 0;
+          Next;
         end;
       end;
     except
@@ -398,14 +402,114 @@ begin
         Abort
       end;
     end;
-
+//      frmTest.Show;
+    (frmFR_Table.frxReTopaz.FindObject('memNameDevice') as TfrxMemoView).Text := frmMain.edtPackage.Text;
+    (frmFR_Table.frxReTopaz.FindObject('memStep') as TfrxMemoView).Text := frmMain.seStep.Value.ToString;
   end;
 end;
-// просмотр
+//просмотр
 procedure TfrmPrintSection.mniTopShowClick(Sender: TObject);
 begin
   frmFR_Table.Show;
   frmFR_Table.frxReTopaz.ShowReport();
+end;
+// сохранить отчет в pdf
+procedure TfrmPrintSection.mniTopSaveClick(Sender: TObject);
+begin
+ frmFR_Table.frxReTopaz.ShowReport();
+ frmFR_Table.frxReTopaz.Export(frmFR_Table.frxExPDF);
+end;
+
+// печать
+procedure TfrmPrintSection.mniTopPrintClick(Sender: TObject);
+begin
+  frmFR_Table.frxReTopaz.ShowReport();
+  frmFR_Table.frxReTopaz.Print;
+end;
+
+{Семейство Корунд }
+// выполнить
+procedure TfrmPrintSection.mniCorApplyClick(Sender: TObject);
+var
+  f_step: Integer;
+  i: Integer;
+begin
+  i := 0;
+  f_step := StrToIntDef(InputBox('Шаг печати штрих-кода', 'Введите шаг печати от 1 до 5', '5'), 5);
+
+  if f_step in [1..5] then
+  begin
+    try
+  // пытаемся заполнить отчет
+      dbmPrintLabel.fdmtblReport.Close;
+      dbmPrintLabel.fdmtblReport.Open;
+      dbmPrintLabel.fdmtblReport.First;
+      dbmPrintLabel.fdmtblPrint.First;
+      while not dbmPrintLabel.fdmtblPrint.Eof do
+      begin
+        with dbmPrintLabel.fdmtblPrint do
+        begin
+          if i = 0 then
+          begin
+           {Записываем код из таблицы в отчет}
+            dbmPrintLabel.fdmtblReport.Append;
+            dbmPrintLabel.fdmtblReport.Fields[0] := Fields[6];
+            dbmPrintLabel.fdmtblReport.Next;
+          end;
+          Inc(i);
+          if i = f_step then
+            i := 0;
+          Next;
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        ShowMessage('Некорректный ввод!');
+        Abort
+      end;
+    end;
+//      frmTest.Show;
+    (frmFR_Table.frxReCor.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtPackage.Text;
+    (frmFR_Table.frxReCor.FindObject('memStepQR') as TfrxMemoView).Text := f_step.ToString;
+    (frmFR_Table.frxReCor.FindObject('memStepIter') as TfrxMemoView).Text := frmMain.seStep.Value.ToString;
+    (frmFR_Table.frxReCor.FindObject('memCounDev') as TfrxMemoView).Text := frmMain.seCount.Value.ToString;
+  end;
+end;
+
+//просмотр
+
+procedure TfrmPrintSection.mniCorShowClick(Sender: TObject);
+begin
+  frmFR_Table.Show;
+  frmFR_Table.frxReCor.ShowReport();
+end;
+
+// печать
+procedure TfrmPrintSection.mniCorPrintClick(Sender: TObject);
+begin
+  frmFR_Table.frxReCor.ShowReport();
+  frmFR_Table.frxReCor.Print;
+end;
+
+// сохранить отчет в pdf
+procedure TfrmPrintSection.mniCorSaveClick(Sender: TObject);
+begin
+  frmFR_Table.frxReCor.ShowReport();
+  frmFR_Table.frxReCor.Export(frmFR_Table.frxExPDF);
+end;
+
+{сброс всех отчетов}
+procedure TfrmPrintSection.mniSRResetClick(Sender: TObject);
+begin
+// закрываем отчеты
+  frmFR_Table.Close;
+ // очищаем отчеты
+  frmFR_Table.frxReCor.PreviewPages.Clear;
+  frmFR_Table.frxReTopaz.PreviewPages.Clear;
+  frmFR_Table.frxReTabList.PreviewPages.Clear;
+
+  frmFR_Table.frxReTabList.PreviewPagesList.Clear;
 end;
 
 end.

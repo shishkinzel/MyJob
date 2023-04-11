@@ -10,6 +10,8 @@ type
   TfrmTest = class(TForm)
     dsTest: TDataSource;
     dbgrdTest1: TDBGrid;
+    dbgrdReport: TDBGrid;
+    dsReport: TDataSource;
   private
     { Private declarations }
   public

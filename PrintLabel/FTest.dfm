@@ -17,7 +17,7 @@ object frmTest: TfrmTest
     Left = 0
     Top = 0
     Width = 1025
-    Height = 537
+    Height = 105
     Align = alTop
     DataSource = dsTest
     TabOrder = 0
@@ -27,9 +27,28 @@ object frmTest: TfrmTest
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object dbgrdReport: TDBGrid
+    Left = 0
+    Top = 105
+    Width = 1025
+    Height = 256
+    Align = alTop
+    DataSource = dsReport
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
   object dsTest: TDataSource
     DataSet = dbmPrintLabel.fdmtblPrint
     Left = 32
-    Top = 568
+    Top = 456
+  end
+  object dsReport: TDataSource
+    DataSet = dbmPrintLabel.fdmtblReport
+    Left = 200
+    Top = 480
   end
 end
