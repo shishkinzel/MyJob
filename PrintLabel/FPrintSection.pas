@@ -81,6 +81,9 @@ type
     mniCorPrint: TMenuItem;
     mniCorSep2: TMenuItem;
     mniCorReset: TMenuItem;
+    mniN43x25ST: TMenuItem;
+    mniN43x25Sh: TMenuItem;
+    mniN43x25Print: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -100,6 +103,8 @@ type
     procedure mniCorShowClick(Sender: TObject);
     procedure mniCorPrintClick(Sender: TObject);
     procedure mniCorSaveClick(Sender: TObject);
+    procedure mniN43x25ShClick(Sender: TObject);
+    procedure mniN43x25PrintClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -141,6 +146,11 @@ begin
   f_print_940 := IniOptions.f_print_940;
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
+// активируем печать этикеток при снятии галочки печать стикеров
+  if not (frmMain.chkStiker.Checked) then
+  begin
+    mniLabel.Visible := True;
+  end;
 end;
 
 procedure TfrmPrintSection.FormShow(Sender: TObject);
@@ -307,10 +317,13 @@ begin
   //label 30_20
   pmmiSh30_20.Enabled := True;
   pmmiPr30_20.Enabled := False;
+  //label 43_25
+  mniN43x25Sh.Enabled := True;
+  mniN43x25Print.Enabled := False;
   //label 58_40
   pmmiSh58_40.Enabled := True;
   pmmiPr58_40.Enabled := False;
-  //label 58_40_mac
+    //label 58_40_mac
   pmmiSh58_40_mac.Enabled := True;
   pmmiPr58_40_mac.Enabled := False;
 
@@ -323,6 +336,7 @@ begin
   //label 100_150
   pmmiSh100_150.Enabled := True;
   pmmiPr100_150.Enabled := False;
+
 end;
  {Работа с вторым пунктом меню}
 
@@ -511,6 +525,28 @@ begin
 
   frmFR_Table.frxReTabList.PreviewPagesList.Clear;
 end;
+{работа над печатью этикеток}
+//43x25  - пытаюсь создать дизайн
+// просмотр
+procedure TfrmPrintSection.mniN43x25ShClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_43_25.ShowReport();
+// гасим и зажигаем необходимые пункты меню
+  mniN43x25Print.Enabled := True;
+  mniN43x25Sh.Enabled := False;
+end;
+// печать
+
+procedure TfrmPrintSection.mniN43x25PrintClick(Sender: TObject);
+begin
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_43_25.Print;
+end;
+
 
 end.
 

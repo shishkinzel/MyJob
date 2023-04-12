@@ -314,13 +314,13 @@ begin
     end
     else
     begin
-      frmSelection.btnAdvacedLabel.Enabled := True;
+//      frmSelection.btnAdvacedLabel.Enabled := True;
       frmSelection.btnLabel.Enabled := True;
       MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
     end;
   end;
 
-  frmMain.Hide;
+//  frmMain.Hide;
   frmSelection.ShowModal;
     // получение сообщения от формы FSelection о закрыти
 

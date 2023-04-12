@@ -37,7 +37,7 @@ object frmFR_Table: TfrmFR_Table
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 45027.715397604170000000
+    ReportOptions.LastChange = 45028.389135613430000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -57,7 +57,7 @@ object frmFR_Table: TfrmFR_Table
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
-    object Page1: TfrxReportPage
+    object pOne: TfrxReportPage
       PaperWidth = 210.000000000000000000
       PaperHeight = 297.000000000000000000
       PaperSize = 9
@@ -84,7 +84,7 @@ object frmFR_Table: TfrmFR_Table
           Height = 68.031540000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -15
           Font.Name = 'Tahoma'
           Font.Style = [fsItalic]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -98,8 +98,8 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 86.929190000000000000
           Top = 11.338590000000000000
-          Width = 52.913385830000000000
-          Height = 52.913385830000000000
+          Width = 52.913385829999970000
+          Height = 52.913385829999970000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -115,7 +115,7 @@ object frmFR_Table: TfrmFR_Table
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 0.629921259880952400
+          Zoom = 0.629921259880951900
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack
@@ -141,7 +141,7 @@ object frmFR_Table: TfrmFR_Table
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo4: TfrxMemoView
+        object memStatusOne: TfrxMemoView
           AllowVectorExport = True
           Left = 559.370440000000000000
           Top = 18.897650000000000000
@@ -157,7 +157,7 @@ object frmFR_Table: TfrmFR_Table
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo5: TfrxMemoView
+        object memStatusTwo: TfrxMemoView
           AllowVectorExport = True
           Left = 612.283860000000000000
           Top = 18.897650000000000000
@@ -173,7 +173,7 @@ object frmFR_Table: TfrmFR_Table
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo6: TfrxMemoView
+        object memStatusThree: TfrxMemoView
           AllowVectorExport = True
           Left = 665.197280000000000000
           Top = 18.897650000000000000
@@ -198,14 +198,14 @@ object frmFR_Table: TfrmFR_Table
         Width = 718.110700000000000000
         object Page: TfrxMemoView
           AllowVectorExport = True
-          Left = 302.362400000000000000
+          Left = 612.283860000000000000
           Width = 75.590600000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
@@ -241,49 +241,52 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 3.779530000000000000
           Top = 3.779530000000000000
-          Width = 211.653680000000000000
+          Width = 181.417440000000000000
           Height = 26.456710000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' :')
           ParentFont = False
+          VAlign = vaCenter
         end
         object memNameDev: TfrxMemoView
           AllowVectorExport = True
-          Left = 219.212740000000000000
-          Top = 7.559060000000000000
-          Width = 377.953000000000000000
-          Height = 18.897650000000000000
+          Left = 196.535560000000000000
+          Top = 3.779530000000000000
+          Width = 400.630180000000000000
+          Height = 26.456710000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
+          Font.Name = 'Tahoma'
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             #1053#1077#1090' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072)
           ParentFont = False
+          VAlign = vaCenter
         end
         object memTitleStepQR: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
           Top = 34.015770000000000000
-          Width = 181.417440000000000000
+          Width = 170.078850000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             #1064#1072#1075' '#1087#1077#1095#1072#1090#1080' '#1096#1090#1088#1080#1093'-'#1082#1086#1076#1072' :')
           ParentFont = False
+          VAlign = vaCenter
         end
         object memStepQR: TfrxMemoView
           AllowVectorExport = True
@@ -294,40 +297,42 @@ object frmFR_Table: TfrmFR_Table
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
+          Font.Name = 'Tahoma'
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             '00')
           ParentFont = False
+          VAlign = vaCenter
         end
         object memTitleStepID: TfrxMemoView
           AllowVectorExport = True
           Left = 249.448980000000000000
           Top = 34.015770000000000000
-          Width = 109.606370000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Roboto'
-          Font.Style = []
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             #1064#1072#1075' '#1080#1090#1077#1088#1072#1094#1080#1080':')
           ParentFont = False
+          VAlign = vaCenter
         end
         object memStepIter: TfrxMemoView
           AllowVectorExport = True
-          Left = 366.614410000000000000
+          Left = 359.055350000000000000
           Top = 34.015770000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Roboto'
-          Font.Style = []
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             '00')
@@ -336,15 +341,15 @@ object frmFR_Table: TfrmFR_Table
         end
         object memTitleCountDevice: TfrxMemoView
           AllowVectorExport = True
-          Left = 449.764070000000000000
-          Top = 37.795300000000000000
+          Left = 415.748300000000000000
+          Top = 34.015770000000000000
           Width = 166.299320000000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074':')
@@ -353,15 +358,15 @@ object frmFR_Table: TfrmFR_Table
         end
         object memCounDev: TfrxMemoView
           AllowVectorExport = True
-          Left = 638.740570000000000000
+          Left = 585.827150000000000000
           Top = 34.015770000000000000
-          Width = 71.811070000000000000
+          Width = 49.133890000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = []
           Memo.UTF8W = (
             '000')
@@ -378,14 +383,13 @@ object frmFR_Table: TfrmFR_Table
         object Num: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
-          Top = -0.000000000000000007
           Width = 68.031540000000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
@@ -396,14 +400,13 @@ object frmFR_Table: TfrmFR_Table
         object MAC: TfrxMemoView
           AllowVectorExport = True
           Left = 75.590600000000000000
-          Top = -0.000000000000000007
           Width = 71.811070000000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
@@ -420,7 +423,7 @@ object frmFR_Table: TfrmFR_Table
           Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
@@ -437,7 +440,7 @@ object frmFR_Table: TfrmFR_Table
           Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Tahoma'
-          Font.Style = []
+          Font.Style = [fsItalic]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
@@ -589,8 +592,8 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 86.929190000000000000
           Top = 11.338590000000000000
-          Width = 49.133858270000000000
-          Height = 49.133858270000000000
+          Width = 49.133858270000010000
+          Height = 49.133858270000010000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -606,7 +609,7 @@ object frmFR_Table: TfrmFR_Table
           Rotation = 0
           ShowText = False
           HexData = '69006400'
-          Zoom = 0.584926884166666700
+          Zoom = 0.584926884166666800
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack
@@ -615,8 +618,8 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 650.079160000000000000
           Top = 11.338590000000000000
-          Width = 49.133858270000000000
-          Height = 49.133858270000000000
+          Width = 49.133858270000010000
+          Height = 49.133858270000010000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -632,7 +635,7 @@ object frmFR_Table: TfrmFR_Table
           Rotation = 0
           ShowText = False
           HexData = '6D0061006300'
-          Zoom = 0.584926884166666700
+          Zoom = 0.584926884166666800
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack
@@ -941,7 +944,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 34.015770000000000000
-        Top = 272.126160000000000000
+        Top = 264.567100000000000000
         Width = 718.110700000000000000
         DataSet = frdbTabList
         DataSetName = 'DBTableList'
@@ -1009,7 +1012,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 366.614410000000000000
+        Top = 355.275820000000000000
         Width = 718.110700000000000000
         object memPage: TfrxMemoView
           AllowVectorExport = True
@@ -1032,7 +1035,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 226.771800000000000000
+        Top = 222.992270000000000000
         Width = 718.110700000000000000
         object memTitleNumber: TfrxMemoView
           AllowVectorExport = True

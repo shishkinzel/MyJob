@@ -13361,6 +13361,7 @@ object frmSelection: TfrmSelection
     Caption = #1057#1075#1077#1085#1077#1088#1080#1088#1086#1074#1072#1090#1100' '#1086#1090#1095#1077#1090' '#1076#1083#1103' '#1079#1072#1083#1080#1074#1082#1080' '#1055#1054' '
     ImageIndex = 11
     Images = ilSelection
+    Enabled = False
     HotImageIndex = 2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy

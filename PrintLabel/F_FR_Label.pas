@@ -18,6 +18,9 @@ type
     frLabel_100_72: TfrxReport;
     frLabel_100_150: TfrxReport;
     frdbLabel: TfrxDBDataset;
+    frLabel_43_25: TfrxReport;
+    frdbLabSimple: TfrxDBDataset;
+    frdbLabSticker: TfrxDBDataset;
   private
     { Private declarations }
   public
