@@ -13270,15 +13270,17 @@ object frmPrintSection: TfrmPrintSection
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
           ImageIndex = 11
+          OnClick = pmmiPr30_20Click
         end
       end
       object mniN43x25ST: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25'
         ImageIndex = 16
         object mniN43x25Sh: TMenuItem
+          Tag = 4325
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
           ImageIndex = 6
-          OnClick = mniN43x25ShClick
+          OnClick = mniNShowmacClick
         end
         object mniN43x25Print: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
@@ -13300,6 +13302,7 @@ object frmPrintSection: TfrmPrintSection
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
           ImageIndex = 11
+          OnClick = pmmiPr58_40Click
         end
       end
       object mniNbig_mac: TMenuItem
@@ -13315,6 +13318,7 @@ object frmPrintSection: TfrmPrintSection
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
           ImageIndex = 11
+          OnClick = pmmiPr58_40_macClick
         end
       end
       object sepLab1: TMenuItem

@@ -23,6 +23,7 @@ type
     chkStiker: TCheckBox;
     chkQR_SOFT: TCheckBox;
     ilMain: TImageList;
+    btnDB: TBitBtn;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
     procedure btnStart_ResetClick(Sender: TObject);
     procedure btnSelectionClick(Sender: TObject);

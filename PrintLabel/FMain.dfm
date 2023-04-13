@@ -13893,6 +13893,29 @@ object frmMain: TfrmMain
     TabOrder = 7
     OnClick = btnSelectionClick
   end
+  object btnDB: TBitBtn
+    Tag = 302
+    Left = 480
+    Top = 213
+    Width = 220
+    Height = 40
+    Cursor = crHandPoint
+    Caption = #1041#1072#1079#1072' '#1076#1072#1085#1099#1093' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
+    DisabledImageIndex = 3
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = [fsItalic]
+    HotImageIndex = 13
+    ImageIndex = 5
+    Images = ilMain
+    ParentFont = False
+    PressedImageIndex = 7
+    SelectedImageIndex = 15
+    Spacing = 20
+    TabOrder = 10
+  end
   object ilMain: TImageList
     Tag = 101
     Height = 24

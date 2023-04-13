@@ -103,8 +103,11 @@ type
     procedure mniCorShowClick(Sender: TObject);
     procedure mniCorPrintClick(Sender: TObject);
     procedure mniCorSaveClick(Sender: TObject);
-    procedure mniN43x25ShClick(Sender: TObject);
+//    procedure mniN43x25ShClick(Sender: TObject);
     procedure mniN43x25PrintClick(Sender: TObject);
+    procedure pmmiPr30_20Click(Sender: TObject);
+    procedure pmmiPr58_40_macClick(Sender: TObject);
+    procedure pmmiPr58_40Click(Sender: TObject);
   private
     { Private declarations }
     var
@@ -212,11 +215,11 @@ begin
           begin
             if Self.CanFocus then
               self.SetFocus;
-                    // гасим и зажигаем необходимые пункты меню
+          // гасим и зажигаем необходимые пункты меню
             mniNShowmac.Enabled := False;
             mniNPrintmac.Enabled := True;
 
-                  // выбираем шрифт печати
+          // выбираем шрифт печати
             if frmMain.f_size_sticker then
               (frmFR_Label.frStic_mac_40_12.FindObject('mac') as TfrxMemoView).Font.Size := 11
             else
@@ -230,25 +233,52 @@ begin
           begin
             if Self.CanFocus then
               self.SetFocus;
-                    // гасим и зажигаем необходимые пункты меню
+          // гасим и зажигаем необходимые пункты меню
             pmmiSh30_20.Enabled := False;
             pmmiPr30_20.Enabled := True;
+
+          //  работаем с этикеткой 3020
+            (frmFR_Label.frLabel_30_20.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtPackage.Text;
+            frmFR_Label.Show;
+            frmFR_Label.frLabel_30_20.ShowReport();
+
+          end;
+        4325:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+          // гасим и зажигаем необходимые пункты меню
+            mniN43x25Print.Enabled := True;
+            mniN43x25Sh.Enabled := False;
+
+          //  работаем с этикеткой 4325
+            (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+            frmFR_Label.Show;
+            frmFR_Label.frLabel_43_25.ShowReport();
           end;
         5840:
           begin
             if Self.CanFocus then
               self.SetFocus;
-                    // гасим и зажигаем необходимые пункты меню
+          // гасим и зажигаем необходимые пункты меню
             pmmiSh58_40.Enabled := False;
             pmmiPr58_40.Enabled := True;
+          //  работаем с этикеткой 5840
+            (frmFR_Label.frLabel_58_40.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+            frmFR_Label.Show;
+            frmFR_Label.frLabel_58_40.ShowReport();
           end;
         5841:
           begin
             if Self.CanFocus then
               self.SetFocus;
-                    // гасим и зажигаем необходимые пункты меню
+          // гасим и зажигаем необходимые пункты меню
             pmmiSh58_40_mac.Enabled := False;
             pmmiPr58_40_mac.Enabled := True;
+          //  работаем с этикеткой 5841
+          (frmFR_Label.frLabel_58_40_adv.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+            frmFR_Label.Show;
+            frmFR_Label.frLabel_58_40_adv.ShowReport();
           end;
         5860:
           begin
@@ -283,6 +313,31 @@ begin
 end;
 
 // вызываем печать
+procedure TfrmPrintSection.pmmiPr30_20Click(Sender: TObject);
+begin
+
+  frmFR_Label.frLabel_30_20.ShowReport();
+  frmFR_Label.frLabel_30_20.Print;
+end;
+
+procedure TfrmPrintSection.mniN43x25PrintClick(Sender: TObject);
+begin
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_43_25.Print;
+end;
+
+procedure TfrmPrintSection.pmmiPr58_40Click(Sender: TObject);
+begin
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_58_40.Print;
+end;
+
+procedure TfrmPrintSection.pmmiPr58_40_macClick(Sender: TObject);
+begin
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_58_40_adv.Print;
+end;
+
 procedure TfrmPrintSection.mniNPrintIDClick(Sender: TObject);
 begin
   frmFR_Label.frStic_id_40_12.Report.PrintOptions.Printer := f_print_924;
@@ -427,6 +482,7 @@ begin
   frmFR_Table.Show;
   frmFR_Table.frxReTopaz.ShowReport();
 end;
+
 // сохранить отчет в pdf
 procedure TfrmPrintSection.mniTopSaveClick(Sender: TObject);
 begin
@@ -528,24 +584,17 @@ end;
 {работа над печатью этикеток}
 //43x25  - пытаюсь создать дизайн
 // просмотр
-procedure TfrmPrintSection.mniN43x25ShClick(Sender: TObject);
-var
-  i: Integer;
-begin
-  (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
-  frmFR_Label.Show;
-  frmFR_Label.frLabel_43_25.ShowReport();
-// гасим и зажигаем необходимые пункты меню
-  mniN43x25Print.Enabled := True;
-  mniN43x25Sh.Enabled := False;
-end;
-// печать
+//procedure TfrmPrintSection.mniN43x25ShClick(Sender: TObject);
 
-procedure TfrmPrintSection.mniN43x25PrintClick(Sender: TObject);
-begin
-  frmFR_Label.Show;
-  frmFR_Label.frLabel_43_25.Print;
-end;
+//begin
+//  (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+//  frmFR_Label.Show;
+//  frmFR_Label.frLabel_43_25.ShowReport();
+//// гасим и зажигаем необходимые пункты меню
+//  mniN43x25Print.Enabled := True;
+//  mniN43x25Sh.Enabled := False;
+//end;
+// печать
 
 
 end.
