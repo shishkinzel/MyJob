@@ -21,7 +21,6 @@ type
     seCount: TSpinEdit;
     btnSelection: TBitBtn;
     chkStiker: TCheckBox;
-    chkQR_SOFT: TCheckBox;
     ilMain: TImageList;
     btnDB: TBitBtn;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
@@ -33,8 +32,10 @@ type
     procedure edtPackageChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure seStepChange(Sender: TObject);
-    procedure chkQR_SOFTClick(Sender: TObject);
+//    procedure chkQR_SOFTClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure fonMainClick(Sender: TObject);
+    procedure btnDBClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -65,7 +66,7 @@ var
 implementation
 
 uses
-  FTest, FShowSoft, IdGlobal;
+  FTest, FShowSoft, FListDevece, IdGlobal;
 
 {$R *.dfm}
 
@@ -126,6 +127,11 @@ begin
   end;
 end;
 
+
+procedure TfrmMain.fonMainClick(Sender: TObject);
+begin
+
+end;
 
 // переход по нажатию кнопки "Ввод" - enter
 procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -252,8 +258,8 @@ begin
         edtDevice.SetFocus;
     end;
 // если включен чекбокс "Режим установки ПО" - включаем доступ к "Наименованию комплекта"
-    if chkQR_SOFT.Checked then
-      edtPackage.Enabled := True;
+//    if chkQR_SOFT.Checked then
+//      edtPackage.Enabled := True;
   end;
 
 end;
@@ -264,6 +270,7 @@ begin
   begin
     edtDevice.Enabled := True;
     edtPackage.Enabled := True;
+    btnDB.Enabled := True;
     if edtDevice.CanFocus then
       edtDevice.SetFocus;
   end
@@ -271,58 +278,61 @@ begin
   begin
     edtDevice.Enabled := False;
     edtPackage.Enabled := False;
+    btnDB.Enabled := False;
     if medtID.CanFocus then
       medtID.SetFocus;
   end;
 
 end;
 // включение расширенного режима
-procedure TfrmMain.chkQR_SOFTClick(Sender: TObject);
-begin
-     if chkQR_SOFT.Checked then
-     begin
-//      f_Soft := True;
-//    f_showPrintForm := False;
-    chkStiker.Enabled := False;
-    chkStiker.Checked := True;
-    edtPackage.Enabled := True;
-  end
-  else
-  begin
-//    f_showPrintForm := True;
-    chkStiker.Enabled := True;
-    edtPackage.Enabled := False;
-  end;
-end;
+//procedure TfrmMain.chkQR_SOFTClick(Sender: TObject);
+//begin
+//     if chkQR_SOFT.Checked then
+//     begin
+////      f_Soft := True;
+////    f_showPrintForm := False;
+//    chkStiker.Enabled := False;
+//    chkStiker.Checked := True;
+//    edtPackage.Enabled := True;
+//  end
+//  else
+//  begin
+////    f_showPrintForm := True;
+//    chkStiker.Enabled := True;
+//    edtPackage.Enabled := False;
+//  end;
+//end;
 
 
 
 // переход на форму выбора утилиты печати
+
 procedure TfrmMain.btnSelectionClick(Sender: TObject);
 begin
   frmSelection := TfrmSelection.Create(nil);
-
-  if chkQR_SOFT.Checked then
-  begin
-   MessageBox(Handle, Pchar('Прочие утилиты!'), cnAttention, MB_ICONINFORMATION + MB_OK);
-  end
-  else
-  begin
-   // проверяем состояния чекбокса - если стоит галочка не зажигаем печать этикеток
-    if chkStiker.Checked then
-    begin
-      MessageBox(Handle, Pchar('Доступна только печать стикеров!'), cnAttention, MB_ICONINFORMATION + MB_OK);
-    end
-    else
-    begin
-//      frmSelection.btnAdvacedLabel.Enabled := True;
-      frmSelection.btnLabel.Enabled := True;
-      MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
-    end;
-  end;
+  frmSelection.btnLabel.Enabled := True;
+//  if chkQR_SOFT.Checked then
+//  begin
+//   MessageBox(Handle, Pchar('Прочие утилиты!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+//  end
+//  else
+//  begin
+//   // проверяем состояния чекбокса - если стоит галочка не зажигаем печать этикеток
+//    if chkStiker.Checked then
+//    begin
+//      MessageBox(Handle, Pchar('Доступна только печать стикеров!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+//    end
+//    else
+//    begin
+////      frmSelection.btnAdvacedLabel.Enabled := True;
+//      frmSelection.btnLabel.Enabled := True;
+//      MessageBox(Handle, Pchar('Полный функционал для печати стикеров и этикеток!' + #10#13 + 'Проверте правильность заполнения полей!'), cnAttention, MB_ICONINFORMATION + MB_OK);
+//    end;
+//  end;
 
 //  frmMain.Hide;
   frmSelection.ShowModal;
+
     // получение сообщения от формы FSelection о закрыти
 
   if frmSelection.ModalResult > 0 then
@@ -330,6 +340,24 @@ begin
     frmSelection.Free;
   end;
 end;
+{переход на форму выбора устройств}
+
+
+procedure TfrmMain.btnDBClick(Sender: TObject);
+var
+i : Integer;
+begin
+ frmListDevice.ShowModal;
+
+ if ModalResult > 0 then
+ begin
+   frmListDevice.Close;
+ end;
+
+end;
+
+
+
 
 
 // закрытие формы
