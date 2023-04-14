@@ -35,10 +35,10 @@ type
     btnApply: TBitBtn;
     btnForm: TBitBtn;
     fdjsonOne: TFDStanStorageJSONLink;
-    fdmtblDev: TFDMemTable;
-    fdmtblDevnum: TFDAutoIncField;
-    ssDevnameDev: TStringField;
-    ssDevnamePack: TStringField;
+    fdDev: TFDMemTable;
+    fdDevnum: TFDAutoIncField;
+    fdDevnameDev: TStringField;
+    fdDevnamePack: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
@@ -74,7 +74,7 @@ StrUtils, IdGlobal, FMain;
 
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  fdmtblDev.SaveToFile(FTabDev, sfJSON);
+  fdDev.SaveToFile(FTabDev, sfJSON);
 end;
 
 procedure TfrmListDevice.FormCreate(Sender: TObject);
@@ -85,11 +85,11 @@ begin
 
   if not (FileExists(FTabDev)) then
   begin
-    fdmtblDev.EmptyDataSet;
-    fdmtblDev.SaveToFile(FTabDev, sfJSON);
+    fdDev.EmptyDataSet;
+    fdDev.SaveToFile(FTabDev, sfJSON);
   end;
-  fdmtblDev.Open;
-  fdmtblDev.LoadFromFile(FTabDev, sfJSON);
+  fdDev.Open;
+  fdDev.LoadFromFile(FTabDev, sfJSON);
 
 end;
 // показ формы

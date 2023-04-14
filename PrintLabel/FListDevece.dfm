@@ -12740,7 +12740,7 @@ object frmListDevice: TfrmListDevice
     end
   end
   object dsDev: TDataSource
-    DataSet = fdmtblDev
+    DataSet = fdDev
     Left = 696
     Top = 4
   end
@@ -15654,7 +15654,7 @@ object frmListDevice: TfrmListDevice
     Left = 9
     Top = 484
   end
-  object fdmtblDev: TFDMemTable
+  object fdDev: TFDMemTable
     Active = True
     FieldDefs = <
       item
@@ -15669,7 +15669,7 @@ object frmListDevice: TfrmListDevice
       item
         Name = 'namePack'
         DataType = ftString
-        Size = 100
+        Size = 150
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -15682,9 +15682,8 @@ object frmListDevice: TfrmListDevice
     StoreDefs = True
     Left = 609
     Top = 204
-    object fdmtblDevnum: TFDAutoIncField
+    object fdDevnum: TFDAutoIncField
       Alignment = taCenter
-      AutoGenerateValue = arDefault
       DisplayLabel = #8470
       DisplayWidth = 9
       FieldName = 'num'
@@ -15693,19 +15692,18 @@ object frmListDevice: TfrmListDevice
       AutoIncrementStep = 1
       IdentityInsert = True
     end
-    object ssDevnameDev: TStringField
+    object fdDevnameDev: TStringField
       Alignment = taCenter
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
       DisplayWidth = 66
       FieldName = 'nameDev'
       Size = 200
     end
-    object ssDevnamePack: TStringField
-      Alignment = taCenter
+    object fdDevnamePack: TStringField
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1082#1086#1084#1087#1083#1077#1082#1090#1072
       DisplayWidth = 33
       FieldName = 'namePack'
-      Size = 100
+      Size = 150
     end
   end
 end
