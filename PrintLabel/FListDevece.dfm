@@ -14,6 +14,7 @@ object frmListDevice: TfrmListDevice
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object fonListDev: TImage
@@ -12681,6 +12682,7 @@ object frmListDevice: TfrmListDevice
         Width = 513
         Height = 21
         TabOrder = 0
+        Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
       end
       object edtPack: TEdit
         Left = 32
@@ -12688,6 +12690,7 @@ object frmListDevice: TfrmListDevice
         Width = 273
         Height = 21
         TabOrder = 1
+        Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1082#1086#1084#1087#1083#1077#1082#1090#1072
       end
       object btnApply: TBitBtn
         Left = 48
@@ -12696,6 +12699,7 @@ object frmListDevice: TfrmListDevice
         Height = 25
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1090#1072#1073#1083#1080#1094#1091
         TabOrder = 2
+        OnClick = btnApplyClick
       end
       object btnForm: TBitBtn
         Left = 496
@@ -12734,6 +12738,7 @@ object frmListDevice: TfrmListDevice
         Width = 680
         Height = 25
         DataSource = dsDev
+        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbCancel]
         Align = alTop
         TabOrder = 0
       end

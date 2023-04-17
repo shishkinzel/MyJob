@@ -41,6 +41,8 @@ type
     fdDevnamePack: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure btnApplyClick(Sender: TObject);
 
 
   private
@@ -71,12 +73,6 @@ StrUtils, IdGlobal, FMain;
 {$R *.dfm}
 
 
-
-procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  fdDev.SaveToFile(FTabDev, sfJSON);
-end;
-
 procedure TfrmListDevice.FormCreate(Sender: TObject);
 var
   s: string;
@@ -92,7 +88,13 @@ begin
   fdDev.LoadFromFile(FTabDev, sfJSON);
 
 end;
+
 // показ формы
+procedure TfrmListDevice.FormShow(Sender: TObject);
+begin
+  if edtDev.CanFocus then
+    edtDev.SetFocus;
+end;
 
 
 {
@@ -161,8 +163,30 @@ begin
 end;
 
 }
+{добавляем запись в таблицу}
+
+
+procedure TfrmListDevice.btnApplyClick(Sender: TObject);
+begin
+ with dbgMain.DataSource.DataSet do
+ begin
+   Last;
+   Insert;
+   Fields[1].AsString := Trim(edtDev.Text);
+   Fields[2].AsString := Trim(edtPack.Text);
+   Post;
+ end;
+
+end;
 
 
 
+{закрытие формы}
+
+procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  fdDev.SaveToFile(FTabDev, sfJSON);
+  Self.ModalResult := mrOk;
+end;
 end.
 

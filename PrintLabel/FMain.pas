@@ -342,17 +342,18 @@ begin
 end;
 {переход на форму выбора устройств}
 
-
 procedure TfrmMain.btnDBClick(Sender: TObject);
 var
-i : Integer;
+  i: Integer;
 begin
- frmListDevice.ShowModal;
+  frmListDevice := TfrmListDevice.Create(nil);
 
- if ModalResult > 0 then
- begin
-   frmListDevice.Close;
- end;
+  frmListDevice.ShowModal;
+
+  if frmListDevice.ModalResult > 0 then
+  begin
+    frmListDevice.Free;
+  end;
 
 end;
 

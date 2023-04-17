@@ -24,7 +24,6 @@ begin
   Application.CreateForm(TdbmPrintLabel, dbmPrintLabel);
   Application.CreateForm(TfrmTest, frmTest);
   Application.CreateForm(TfrmFR_Label, frmFR_Label);
-  Application.CreateForm(TfrmListDevice, frmListDevice);
   Application.CreateForm(TfrmFR_List, frmFR_List);
   Application.CreateForm(TfrmFR_Table, frmFR_Table);
   Application.Run;

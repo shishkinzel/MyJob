@@ -141,8 +141,9 @@ const
   mac = ' --mac ';
   serial = ' --serial ';
 begin
-// создаем поток
-  barCodeStream := TMemoryStream.Create;
+// создаем поток         !!!! ќ“ Ћё„»Ћ –јЅќ“” — ”“»Ћ»“ќ… BARCODE »—ѕќЋ№«”ё ¬—“–ќ≈ЌЌџ≈
+     // ¬ќ«ћќ∆Ќќ—“» FastReport
+//  barCodeStream := TMemoryStream.Create;
 
   f_id_long := '';
   f_id_small := '';
@@ -196,23 +197,23 @@ begin
     fdtbl.Fields[3].AsString := f_id_long_all;
 // создаем поток и трансформируем в barcode
     // большой штрих-код
-    dbmPrintLabel.brcdPrintLabel.InputText := f_id_small_all;
-    dbmPrintLabel.brcdPrintLabel.Height := 15;
-    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
-    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-    barCodeStream.Position := 0;
-    (fdtbl.Fields[2] as TBlobField).LoadFromStream(barCodeStream);
-    barCodeStream.Clear;
+//    dbmPrintLabel.brcdPrintLabel.InputText := f_id_small_all;
+//    dbmPrintLabel.brcdPrintLabel.Height := 15;
+//    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
+//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+//    barCodeStream.Position := 0;
+//    (fdtbl.Fields[2] as TBlobField).LoadFromStream(barCodeStream);
+//    barCodeStream.Clear;
 
     // малый штрих-код
-    dbmPrintLabel.brcdPrintLabel.InputText := f_id_long_all;
-    dbmPrintLabel.brcdPrintLabel.Height := 25;
-    dbmPrintLabel.brcdPrintLabel.Scale := 0.5;
-    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
-    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-    barCodeStream.Position := 0;
-    (fdtbl.Fields[1] as TBlobField).LoadFromStream(barCodeStream);
-    barCodeStream.Clear;
+//    dbmPrintLabel.brcdPrintLabel.InputText := f_id_long_all;
+//    dbmPrintLabel.brcdPrintLabel.Height := 25;
+//    dbmPrintLabel.brcdPrintLabel.Scale := 0.5;
+//    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
+//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+//    barCodeStream.Position := 0;
+//    (fdtbl.Fields[1] as TBlobField).LoadFromStream(barCodeStream);
+//    barCodeStream.Clear;
 // увеличиваем серийный номер на единицу - последнюю триаду
     Inc(f_id_num);
 // mac-адреса дл€ записи в таблицу fdtbl
@@ -240,18 +241,18 @@ begin
 
     fdtbl.Fields[6].AsString := mac + fdtbl.Fields[4].AsString + serial + fdtbl.Fields[0].AsString;
       // qr-code дл€ заливки софта
-    dbmPrintLabel.brcdPrintLabel.InputText := fdtbl.Fields[6].AsString;
-    dbmPrintLabel.brcdPrintLabel.Height := 50;
-    dbmPrintLabel.brcdPrintLabel.Scale := 1;
-    dbmPrintLabel.brcdPrintLabel.Symbology := syQRCode;
-    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-    barCodeStream.Position := 0;
-    (fdtbl.Fields[7] as TBlobField).LoadFromStream(barCodeStream);
-    barCodeStream.Clear;
+//    dbmPrintLabel.brcdPrintLabel.InputText := fdtbl.Fields[6].AsString;
+//    dbmPrintLabel.brcdPrintLabel.Height := 50;
+//    dbmPrintLabel.brcdPrintLabel.Scale := 1;
+//    dbmPrintLabel.brcdPrintLabel.Symbology := syQRCode;
+//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+//    barCodeStream.Position := 0;
+//    (fdtbl.Fields[7] as TBlobField).LoadFromStream(barCodeStream);
+//    barCodeStream.Clear;
 // перемещаемс€ по таблице на шаг
     fdtbl.Next;
   end;
-  barCodeStream.Free;
+//  barCodeStream.Free;
 end;
 // чистим строковой массив
 
