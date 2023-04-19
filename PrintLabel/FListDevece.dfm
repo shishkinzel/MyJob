@@ -12708,6 +12708,7 @@ object frmListDevice: TfrmListDevice
         Height = 25
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1085#1072' '#1092#1086#1088#1084#1091
         TabOrder = 3
+        OnClick = btnFormClick
       end
     end
     object pnlTabl: TPanel
@@ -12728,7 +12729,10 @@ object frmListDevice: TfrmListDevice
         ColumnDefValues.Title.Alignment = taCenter
         DataSource = dsDev
         DynProps = <>
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
         TabOrder = 1
+        OnDblClick = dbgMainDblClick
         object RowDetailData: TRowDetailPanelControlEh
         end
       end
@@ -12738,7 +12742,7 @@ object frmListDevice: TfrmListDevice
         Width = 680
         Height = 25
         DataSource = dsDev
-        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbEdit, nbCancel]
+        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbCancel, nbRefresh]
         Align = alTop
         TabOrder = 0
       end
@@ -15698,7 +15702,6 @@ object frmListDevice: TfrmListDevice
       IdentityInsert = True
     end
     object fdDevnameDev: TStringField
-      Alignment = taCenter
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
       DisplayWidth = 66
       FieldName = 'nameDev'

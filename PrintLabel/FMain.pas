@@ -353,9 +353,16 @@ begin
   if frmListDevice.ModalResult > 0 then
   begin
     frmListDevice.Free;
+    if frmMain.medtID.CanFocus then
+      frmMain.medtID.SetFocus;
   end;
 
 end;
+
+
+
+
+
 
 
 

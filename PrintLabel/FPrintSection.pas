@@ -84,6 +84,13 @@ type
     mniN43x25ST: TMenuItem;
     mniN43x25Sh: TMenuItem;
     mniN43x25Print: TMenuItem;
+    mniServeceMain: TMenuItem;
+    mniServeceSetting: TMenuItem;
+    mniServeceShow: TMenuItem;
+    mniServecePrint: TMenuItem;
+    mniServeceSep3: TMenuItem;
+    mniServeceSep1: TMenuItem;
+    mniServeceReset: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -108,11 +115,13 @@ type
     procedure pmmiPr30_20Click(Sender: TObject);
     procedure pmmiPr58_40_macClick(Sender: TObject);
     procedure pmmiPr58_40Click(Sender: TObject);
+    procedure mniServeceSettingClick(Sender: TObject);
   private
     { Private declarations }
     var
       f_print_924: string;
       f_print_940: string;
+      f_print_908: string;
       f_print_2824: string;
   public
     { Public declarations }
@@ -147,6 +156,7 @@ begin
   IniOptions.LoadFromFile(f_print_config);
   f_print_924 := IniOptions.f_print_924;
   f_print_940 := IniOptions.f_print_940;
+  f_print_908 := IniOptions.f_print_908;
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
 // активируем печать этикеток при снятии галочки печать стикеров
@@ -189,6 +199,7 @@ end;
 procedure TfrmPrintSection.mniNShowmacClick(Sender: TObject);
 var
   i: Integer;
+  f_fontSize : Integer;
 begin
   if not (Sender is TMenuItem) then
     exit;
@@ -252,6 +263,14 @@ begin
             mniN43x25Sh.Enabled := False;
 
           //  работаем с этикеткой 4325
+          // выбор шрифта от 6 до 10 пунктов
+            f_fontSize := StrToIntDef(InputBox('Ввод размера шрифта наименования устройства', 'Введите размер от 6 до 10', '8'), 8);
+            if f_fontSize in [6..10] then
+              ShowMessage('Размер шрифта: ' + IntToStr(f_fontSize))
+            else
+              f_fontSize := 8;
+
+            (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Font.Size := f_fontSize;
             (frmFR_Label.frLabel_43_25.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
             frmFR_Label.Show;
             frmFR_Label.frLabel_43_25.ShowReport();
@@ -315,6 +334,7 @@ end;
 // вызываем печать
 procedure TfrmPrintSection.pmmiPr30_20Click(Sender: TObject);
 begin
+   frmFR_Label.frLabel_30_20.Report.PrintOptions.Printer := f_print_940;
 
   frmFR_Label.frLabel_30_20.ShowReport();
   frmFR_Label.frLabel_30_20.Print;
@@ -322,18 +342,24 @@ end;
 
 procedure TfrmPrintSection.mniN43x25PrintClick(Sender: TObject);
 begin
+ frmFR_Label.frLabel_43_25.Report.PrintOptions.Printer := f_print_908;
+
   frmFR_Label.Show;
   frmFR_Label.frLabel_43_25.Print;
 end;
 
 procedure TfrmPrintSection.pmmiPr58_40Click(Sender: TObject);
 begin
+  frmFR_Label.frLabel_58_40.Report.PrintOptions.Printer := f_print_2824;
+
   frmFR_Label.Show;
   frmFR_Label.frLabel_58_40.Print;
 end;
 
 procedure TfrmPrintSection.pmmiPr58_40_macClick(Sender: TObject);
 begin
+   frmFR_Label.frLabel_58_40_adv.Report.PrintOptions.Printer := f_print_2824;
+
   frmFR_Label.Show;
   frmFR_Label.frLabel_58_40_adv.Print;
 end;
@@ -595,7 +621,12 @@ end;
 //  mniN43x25Sh.Enabled := False;
 //end;
 // печать
+ {добавление пункта меню - ремонт}
+  procedure TfrmPrintSection.mniServeceSettingClick(Sender: TObject);
+  var
+  f_count : Integer;   // количество печатываемых номерков
+begin
 
-
+end;
 end.
 

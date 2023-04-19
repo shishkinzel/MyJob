@@ -13450,6 +13450,36 @@ object frmPrintSection: TfrmPrintSection
         OnClick = mniNResetLab4Click
       end
     end
+    object mniServeceMain: TMenuItem
+      Caption = #1056#1077#1084#1086#1085#1090
+      ImageIndex = 0
+      object mniServeceSetting: TMenuItem
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+        ImageIndex = 8
+        OnClick = mniServeceSettingClick
+      end
+      object mniServeceSep1: TMenuItem
+        Caption = '-'
+      end
+      object mniServeceShow: TMenuItem
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        Enabled = False
+        ImageIndex = 4
+      end
+      object mniServecePrint: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100
+        Enabled = False
+        ImageIndex = 2
+      end
+      object mniServeceSep3: TMenuItem
+        Caption = '-'
+      end
+      object mniServeceReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        ImageIndex = 5
+        OnClick = mniNResetLab4Click
+      end
+    end
   end
   object ilPrintSelection_16: TImageList
     Left = 680

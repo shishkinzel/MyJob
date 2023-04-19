@@ -43,6 +43,11 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
+    procedure dbgMainDblClick(Sender: TObject);
+    procedure btnFormClick(Sender: TObject);
+
+
+
 
 
   private
@@ -86,6 +91,8 @@ begin
   end;
   fdDev.Open;
   fdDev.LoadFromFile(FTabDev, sfJSON);
+// настройка сетки грида
+//dbgMain.SelectedRows.CurrentRowSelected := True; // выделить текущую строку
 
 end;
 
@@ -97,79 +104,25 @@ begin
 end;
 
 
-{
-// опишем выделение цветом строку  в mmoDevice
-procedure TfrmListDevice.mmoDeviceClick(Sender: TObject);
-var
-Line : Integer;
-begin
-Line := mmoDevice.CaretPos.Y;
-// выделение строки в mmoDevice
- with (Sender as TMemo) do
-begin
-   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
-   SelStart:=Perform(EM_LINEINDEX, Line, 0);
-   SelLength:=Length(Lines[Line]);
-end;
-end;
-
-procedure TfrmListDevice.mmoDeviceDblClick(Sender: TObject);
-var
-  Line: Integer;
-begin
-  Line := mmoDevice.CaretPos.Y;
-  edtDev.Text := '';
-  edtDev.Text := mmoDevice.Lines.Strings[Line];
-  with (Sender as TMemo) do
-  begin
-    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
-    SelStart := Perform(EM_LINEINDEX, Line, 0);
-    SelLength := Length(Lines[Line]);
-  end;
-end;
-//**********************************
-
-// опишем выделение цветом строку  в mmoModule
-procedure TfrmListDevice.mmoModuleClick(Sender: TObject);
-var
-Line : Integer;
-begin
-Line := mmoModule.CaretPos.Y;
-// выделение строки в mmoModule
- with (Sender as TMemo) do
-begin
-   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
-   SelStart:=Perform(EM_LINEINDEX, Line, 0);
-   SelLength:=Length(Lines[Line]);
-end;
-end;
-}
-
-{
-// выделение цветом строки
-procedure TfrmListDevice.dbgrdDevDrawColumnCell(Sender: TObject; const Rect: TRect;
-  DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-    if gdFocused in State then
-    begin
-      with TDBGrid(Sender).Canvas do
-      begin
-        Font.Color := clYellow;
-        Font.Size := 10;
-        Brush.Color := clRed;
-      end;
-    end;
-    TDBGrid(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
-
-}
 {добавляем запись в таблицу}
 
 
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 begin
+
  with dbgMain.DataSource.DataSet do
  begin
+ // проверка на дублирования записи    лучше использовать messageBox
+   First;
+   while not fdDev.Eof do
+   begin
+     if (Fields[1].AsString = Trim(edtDev.Text)) or (Fields[2].AsString = Trim(edtPack.Text)) then
+     begin
+       ShowMessage('Данное устройство или комплект существует.' + #10#13 + 'Проверте правильность ввода');
+       Abort;
+     end;
+     Next;
+   end;
    Last;
    Insert;
    Fields[1].AsString := Trim(edtDev.Text);
@@ -179,10 +132,43 @@ begin
 
 end;
 
+// процедура выделения контуром
+
+
+
+
+
+{добавление на форму}
+procedure TfrmListDevice.btnFormClick(Sender: TObject);
+var
+f_quest : Word;
+f_param : TCloseAction;
+begin
+f_param := caNone;
+  with frmMain do
+  begin
+    edtDevice.Text := edtDev.Text;
+    edtPackage.Text := edtPack.Text;
+// вопрос о закрытии формы
+    f_quest := MessageBox(handle, PChar('Закрытие формы?'), PChar('Вы хотите закрыть форму выбора устройства!'), MB_YESNO + MB_ICONQUESTION);
+
+    case f_quest of
+      idyes:
+        FormClose(Self, f_param);
+    end;
+  end;
+
+end;
+{добавление в поля edit из таблицы}
+
+procedure TfrmListDevice.dbgMainDblClick(Sender: TObject);
+begin
+edtDev.Text := dbnMain.DataSource.DataSet.Fields[1].AsString;
+edtPack.Text := dbnMain.DataSource.DataSet.Fields[2].AsString;
+end;
 
 
 {закрытие формы}
-
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fdDev.SaveToFile(FTabDev, sfJSON);

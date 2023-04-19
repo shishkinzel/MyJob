@@ -21,6 +21,7 @@ type
     frLabel_43_25: TfrxReport;
     frdbLabSimple: TfrxDBDataset;
     frdbLabSticker: TfrxDBDataset;
+    frxLabel_30_10: TfrxReport;
   private
     { Private declarations }
   public
