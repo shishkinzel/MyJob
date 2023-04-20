@@ -159,11 +159,7 @@ begin
   f_print_908 := IniOptions.f_print_908;
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
-// активируем печать этикеток при снятии галочки печать стикеров
-  if not (frmMain.chkStiker.Checked) then
-  begin
-    mniLabel.Visible := True;
-  end;
+
 end;
 
 procedure TfrmPrintSection.FormShow(Sender: TObject);

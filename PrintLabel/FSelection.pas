@@ -136,9 +136,7 @@ begin
       end;
     end;
   end;
-    // открываем возможность печати расширенного отчета и формирования командной строки
-  if not (frmMain.chkStiker.Checked) then
-    btnSOFT.Enabled := True;
+
 end;
 
 end.

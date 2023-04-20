@@ -147,8 +147,7 @@ begin
 f_param := caNone;
   with frmMain do
   begin
-    edtDevice.Text := edtDev.Text;
-    edtPackage.Text := edtPack.Text;
+
 // вопрос о закрытии формы
     f_quest := MessageBox(handle, PChar('«акрытие формы?'), PChar('¬ы хотите закрыть форму выбора устройства!'), MB_YESNO + MB_ICONQUESTION);
 
