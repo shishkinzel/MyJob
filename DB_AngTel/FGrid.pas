@@ -15,9 +15,12 @@ type
     pnlDown: TPanel;
     splDown: TSplitter;
     pnlMain: TPanel;
-    dbGDev: TDBGridEh;
-    dbnEh: TDBNavigator;
-    dsEh: TDataSource;
+    dbG_Dev: TDBGridEh;
+    dbnav_Dev: TDBNavigator;
+    ds_Dev: TDataSource;
+    dbnav_DevAll: TDBNavigator;
+    dbG_DevAll: TDBGridEh;
+    ds_DevAll: TDataSource;
   private
     { Private declarations }
   public

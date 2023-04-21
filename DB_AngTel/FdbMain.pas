@@ -11,7 +11,8 @@ type
   TdbMain = class(TDataModule)
     fd_mem_Dev: TFDMemTable;
     conDev: TADOConnection;
-    tblDev: TADOTable;
+    tbl_Dev: TADOTable;
+    tbl_DevAll: TADOTable;
   private
     { Private declarations }
   public
