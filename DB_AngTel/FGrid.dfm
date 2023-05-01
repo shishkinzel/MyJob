@@ -3,7 +3,7 @@ object frmGrid: TfrmGrid
   Top = 0
   Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072' '#1074#1099#1087#1091#1097#1077#1085#1085#1086#1081' '#1087#1088#1086#1076#1091#1082#1094#1080#1080
   ClientHeight = 720
-  ClientWidth = 948
+  ClientWidth = 964
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +11,13 @@ object frmGrid: TfrmGrid
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object splTop: TSplitter
     Left = 0
     Top = 257
-    Width = 948
+    Width = 964
     Height = 2
     Cursor = crVSplit
     Align = alTop
@@ -26,7 +27,7 @@ object frmGrid: TfrmGrid
   object splDown: TSplitter
     Left = 0
     Top = 599
-    Width = 948
+    Width = 964
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -36,27 +37,25 @@ object frmGrid: TfrmGrid
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 948
+    Width = 964
     Height = 257
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 850
+    ExplicitWidth = 948
     object dbnav_DevAll: TDBNavigator
       Left = 1
       Top = 1
-      Width = 946
+      Width = 962
       Height = 25
       DataSource = ds_DevAll
       Align = alTop
       TabOrder = 0
-      ExplicitLeft = 240
-      ExplicitTop = 32
-      ExplicitWidth = 240
+      ExplicitWidth = 946
     end
     object dbG_DevAll: TDBGridEh
       Left = 1
       Top = 26
-      Width = 946
+      Width = 962
       Height = 230
       Align = alClient
       DataSource = ds_DevAll
@@ -69,27 +68,24 @@ object frmGrid: TfrmGrid
   object pnlDown: TPanel
     Left = 0
     Top = 602
-    Width = 948
+    Width = 964
     Height = 118
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 532
-    ExplicitWidth = 850
+    ExplicitWidth = 948
   end
   object pnlMain: TPanel
     Left = 0
     Top = 259
-    Width = 948
+    Width = 964
     Height = 340
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 43
-    ExplicitWidth = 850
-    ExplicitHeight = 486
+    ExplicitWidth = 948
     object dbG_Dev: TDBGridEh
       Left = 1
       Top = 26
-      Width = 946
+      Width = 962
       Height = 313
       Align = alClient
       DataSource = ds_Dev
@@ -101,12 +97,12 @@ object frmGrid: TfrmGrid
     object dbnav_Dev: TDBNavigator
       Left = 1
       Top = 1
-      Width = 946
+      Width = 962
       Height = 25
       DataSource = ds_Dev
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 848
+      ExplicitWidth = 946
     end
   end
   object ds_Dev: TDataSource

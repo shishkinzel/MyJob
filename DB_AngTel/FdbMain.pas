@@ -13,6 +13,11 @@ type
     conDev: TADOConnection;
     tbl_Dev: TADOTable;
     tbl_DevAll: TADOTable;
+    fd_mem_Devf_dev: TStringField;
+    fd_mem_Devf_id: TStringField;
+    fd_mem_Devf_mac: TStringField;
+    fd_mem_Devf_id_in: TIntegerField;
+    fd_mem_Devf_other: TStringField;
   private
     { Private declarations }
   public
@@ -27,7 +32,7 @@ function ArrayToString_MAC(var inArray: array of Byte): string;
 
 
 procedure IncArrayOne(var inArray: array of Byte);
-procedure Print_mac_id (const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable);
+procedure Print_mac_id (const s1,s2,s3 : string; const k1,k2 : Integer; fdtbl : TFDMemTable; out arr_Dev : array of string);
 procedure ClearArr(var f_arr : array of string);
 var
   dbMain: TdbMain;
@@ -112,8 +117,10 @@ end;
 
 // процедура вычисления mac-адреса с серийным номером и запись, конвертация в штрих код
 // и qr-код и запись в таблицу для формирования отчета печати этикетки.
-procedure Print_mac_id(const s1, s2: string; const k1, k2: Integer; fdtbl: TFDMemTable);
+procedure Print_mac_id(const s1, s2, s3 : string; const k1, k2: Integer; fdtbl: TFDMemTable; out arr_Dev : array of string);
 var
+  arr_DB : array[0 .. 5] of string ;
+
   f_mac, f_id, f_id_long, f_id_small: string;
   f_id_small_all, f_id_long_all : string;
   rangeLast, f_id_string : string;
@@ -124,16 +131,19 @@ var
   fd_tblPrint: TFDMemTable;
   i, j, k: Integer;
   tmp_id_1, tmp_id_2, tmp_mac_1, tmp_mac_2: string;
-  barCodeStream : TMemoryStream;
+  barCodeStream: TMemoryStream;
 const
   cnMAC = '68:EB:C5:';
-  mac = ' --mac ';
-  serial = ' --serial ';
 begin
+  for i := 0 to Length(arr_DB) - 1 do
+    arr_DB[i] := '';
+
+  arr_DB[0] := s3;
 
   f_id_long := '';
   f_id_small := '';
   rangeLast := '';
+
   f_id := s1;
   f_mac := s2;
   fstep := k1;
@@ -207,7 +217,7 @@ begin
       IncArrayOne(fbit);
     end;
 
-    fdtbl.Fields[6].AsString := mac + fdtbl.Fields[4].AsString + serial + fdtbl.Fields[0].AsString;
+    fdtbl.Fields[6].AsString := fdtbl.Fields[4].AsString + fdtbl.Fields[0].AsString;
 
 // перемещаемся по таблице на шаг
     fdtbl.Next;

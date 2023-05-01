@@ -8,10 +8,10 @@ object frmMain: TfrmMain
   ClientHeight = 359
   ClientWidth = 741
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clLime
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   Font.Style = []
   Icon.Data = {
     0000010001001818000000000000C80600001600000028000000180000003000
@@ -13056,6 +13056,7 @@ object frmMain: TfrmMain
     SelectedImageIndex = 15
     Spacing = 20
     TabOrder = 4
+    OnClick = btnStart_ResetClick
   end
   object seStep: TSpinEdit
     Tag = 4
@@ -13138,13 +13139,34 @@ object frmMain: TfrmMain
     SelectedImageIndex = 15
     Spacing = 20
     TabOrder = 6
+    OnClick = btnDBClick
   end
   object txtTitleDev: TStaticText
     Left = 20
     Top = 24
-    Width = 142
+    Width = 146
     Height = 17
     Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072':'
     TabOrder = 7
+  end
+  object dtpMain: TDateTimePicker
+    Left = 571
+    Top = 43
+    Width = 129
+    Height = 23
+    Date = 45047.000000000000000000
+    Time = 0.686642534725251600
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clLime
+    Font.Height = -13
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 8
+  end
+  object ds_fd_mem_Dev: TDataSource
+    DataSet = dbMain.fd_mem_Dev
+    Left = 8
+    Top = 128
   end
 end

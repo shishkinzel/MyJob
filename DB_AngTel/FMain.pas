@@ -25,12 +25,16 @@ type
     lbl_TitStep: TLabel;
     lbl_TitCount: TLabel;
     imgMain: TImage;
+    ds_fd_mem_Dev: TDataSource;
+    dtpMain: TDateTimePicker;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
 //    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
     procedure seStepChange(Sender: TObject);
 //    procedure chkQR_SOFTClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnStart_ResetClick(Sender: TObject);
+    procedure btnDBClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -49,7 +53,7 @@ type
 
     var
       f_myarray: array[0..5] of string;
-      f_size_sticker: Boolean;   // установка размера шрифта для печати стикера mac -false - 13 point
+
 
   end;
 
@@ -66,9 +70,12 @@ IdGlobal, FdbMain, FListDevece, FGrid;
 {$R *.dfm}
 
 // начальные установки в форме
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  f_size_sticker := False;          // шрифт 13 пунктов True - 11 пунктов
+// установка начальной даты
+  dtpMain.Date := Date - 1;
+
 // f_Soft := False;                  // активация дополнительного пункта меню
 //  f_showPrintForm := True;
 { путь к каталогу с файлами - командами прошивки}
@@ -76,6 +83,9 @@ begin
   f_print_config := ExtractFilePath(Application.ExeName) + 'print_config.ini';
 
 end;
+
+
+
 
 
 
@@ -87,10 +97,7 @@ end;
 
 procedure TfrmMain.seStepChange(Sender: TObject);
 begin
-  if seStep.Value > 1 then
-    f_size_sticker := True
-  else
-    f_size_sticker := False;
+
 end;
 {событие show формы}
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -143,6 +150,18 @@ begin
   if not (Key in ['0'..'9', 'a'..'f', 'A'..'F']) then
     Key := #0;
 end;
+
+
+procedure TfrmMain.btnDBClick(Sender: TObject);
+begin
+frmListDevice.Show;
+end;
+
+procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
+begin
+frmGrid.Show;
+end;
+
 
 {
 
@@ -283,8 +302,8 @@ end;    }
 //begin
 //     if chkQR_SOFT.Checked then
 //     begin
-////      f_Soft := True;
-////    f_showPrintForm := False;
+//      f_Soft := True;
+//    f_showPrintForm := False;
 //    chkStiker.Enabled := False;
 //    chkStiker.Checked := True;
 //    edtPackage.Enabled := True;
