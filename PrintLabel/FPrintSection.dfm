@@ -13453,6 +13453,7 @@ object frmPrintSection: TfrmPrintSection
     object mniServeceMain: TMenuItem
       Caption = #1056#1077#1084#1086#1085#1090
       ImageIndex = 0
+      Visible = False
       object mniServeceSetting: TMenuItem
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
         ImageIndex = 8
