@@ -69,7 +69,7 @@ implementation
 
 
 uses
-StrUtils, IdGlobal;
+StrUtils, IdGlobal, FdbMain;
 
 {$R *.dfm}
 

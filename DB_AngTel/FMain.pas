@@ -24,6 +24,7 @@ type
     lbl_TitMac: TLabel;
     lbl_TitStep: TLabel;
     lbl_TitCount: TLabel;
+    imgMain: TImage;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
 //    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
