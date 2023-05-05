@@ -41,7 +41,6 @@ object frmGrid: TfrmGrid
     Height = 257
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 948
     object dbnav_DevAll: TDBNavigator
       Left = 1
       Top = 1
@@ -50,7 +49,6 @@ object frmGrid: TfrmGrid
       DataSource = ds_DevAll
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 946
     end
     object dbG_DevAll: TDBGridEh
       Left = 1
@@ -72,7 +70,6 @@ object frmGrid: TfrmGrid
     Height = 118
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 948
   end
   object pnlMain: TPanel
     Left = 0
@@ -81,14 +78,13 @@ object frmGrid: TfrmGrid
     Height = 340
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 948
     object dbG_Dev: TDBGridEh
       Left = 1
       Top = 26
       Width = 962
       Height = 313
       Align = alClient
-      DataSource = ds_Dev
+      DataSource = frmMain.ds_fd_mem_Dev
       DynProps = <>
       TabOrder = 0
       object RowDetailData: TRowDetailPanelControlEh
@@ -99,16 +95,15 @@ object frmGrid: TfrmGrid
       Top = 1
       Width = 962
       Height = 25
-      DataSource = ds_Dev
+      DataSource = frmMain.ds_fd_mem_Dev
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 946
     end
   end
   object ds_Dev: TDataSource
     DataSet = dbMain.tbl_Dev
-    Left = 872
-    Top = 559
+    Left = 16
+    Top = 631
   end
   object ds_DevAll: TDataSource
     DataSet = dbMain.tbl_DevAll

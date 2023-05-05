@@ -28,7 +28,7 @@ type
 
 function HexStrToInt(const str: string): Integer;
 function ArrayToString(var inArray: array of Byte): string;
-function ArrayToString_MAC(var inArray: array of Byte): string;
+//function ArrayToString_MAC(var inArray: array of Byte): string;
 
 
 procedure IncArrayOne(var inArray: array of Byte);
@@ -100,20 +100,30 @@ s := '';
    Result := '68:EB:C5:' + s;
 end;
 
-function ArrayToString_MAC(var inArray: array of Byte): string;
-var
-s : string;
-i : Integer;
-begin
-s := '';
-   for I := 0 to 2 do
-   begin
-     s :=s + inArray[i].ToHexString + ':';
+// чистим строковой массив
 
-   end;
-        Delete(s, 9, 1);
-   Result := '--mac ' + '68:EB:C5:' + s;
+procedure ClearArr(var f_arr: array of string);
+var
+  i: Integer;
+begin
+  for i := 0 to Length(f_arr) - 1 do
+    f_arr[i] := '';
 end;
+
+//function ArrayToString_MAC(var inArray: array of Byte): string;
+//var
+//s : string;
+//i : Integer;
+//begin
+//s := '';
+//   for I := 0 to 2 do
+//   begin
+//     s :=s + inArray[i].ToHexString + ':';
+//
+//   end;
+//        Delete(s, 9, 1);
+//   Result := '--mac ' + '68:EB:C5:' + s;
+//end;
 
 // процедура вычислени€ mac-адреса с серийным номером и запись, конвертаци€ в штрих код
 // и qr-код и запись в таблицу дл€ формировани€ отчета печати этикетки.
@@ -135,8 +145,11 @@ var
 const
   cnMAC = '68:EB:C5:';
 begin
-  for i := 0 to Length(arr_DB) - 1 do
-    arr_DB[i] := '';
+//  for i := 0 to Length(arr_DB) - 1 do
+//    arr_DB[i] := '';
+
+// очищаем массив
+  ClearArr(arr_DB);
 
   arr_DB[0] := s3;
 
@@ -148,6 +161,7 @@ begin
   f_mac := s2;
   fstep := k1;
   fcount := k2;
+// провер€ем флаг шага mac-адреса
   if fstep = 1 then
     fstep_flag := False
   else
@@ -224,15 +238,7 @@ begin
   end;
 //  barCodeStream.Free;
 end;
-// чистим строковой массив
 
-procedure ClearArr(var f_arr: array of string);
-var
-  i: Integer;
-begin
-  for i := 0 to Length(f_arr) - 1 do
-    f_arr[i] := '';
-end;
 
 
 

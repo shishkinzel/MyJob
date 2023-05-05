@@ -81,6 +81,8 @@ begin
     Columns[2].Title.Alignment := taCenter;
     Columns[2].Width := 120;
 
+     Columns[3].Visible := False;
+     Columns[4].Visible := False;
   end;
 
 
