@@ -1,5 +1,7 @@
 object dbMain: TdbMain
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 215
   Width = 355
   object fd_mem_Dev: TFDMemTable
@@ -58,7 +60,6 @@ object dbMain: TdbMain
     end
   end
   object conDev: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Embarcadero\Proj' +
       'ects\MyJob\DB_AngTel\db\db_angtel.mdb;Persist Security Info=Fals' +
@@ -70,19 +71,69 @@ object dbMain: TdbMain
     Top = 8
   end
   object tbl_Dev: TADOTable
-    Active = True
     Connection = conDev
     CursorType = ctStatic
+    LockType = ltReadOnly
     TableName = 'dbDevice'
-    Left = 296
-    Top = 8
+    Left = 104
+    Top = 80
+    object tbl_Devkey: TIntegerField
+      FieldName = 'key'
+      Visible = False
+    end
+    object tbl_DevNameDev: TWideStringField
+      FieldName = 'NameDev'
+      Size = 150
+    end
+    object tbl_Devid: TFloatField
+      FieldName = 'id'
+    end
+    object tbl_Devmac: TWideStringField
+      FieldName = 'mac'
+    end
   end
   object tbl_DevAll: TADOTable
-    Active = True
     Connection = conDev
     CursorType = ctStatic
+    LockType = ltReadOnly
     TableName = 'dbDevAll'
-    Left = 296
-    Top = 64
+    Left = 104
+    Top = 144
+    object tbl_DevAllkey: TAutoIncField
+      FieldName = 'key'
+      ReadOnly = True
+      Visible = False
+    end
+    object tbl_DevAllnameDev: TWideStringField
+      FieldName = 'nameDev'
+      Size = 150
+    end
+    object tbl_DevAllid_first: TWideStringField
+      FieldName = 'id_first'
+    end
+    object tbl_DevAllid_last: TWideStringField
+      FieldName = 'id_last'
+    end
+    object tbl_DevAllmac_first: TWideStringField
+      FieldName = 'mac_first'
+      Size = 30
+    end
+    object tbl_DevAllmac_last: TWideStringField
+      FieldName = 'mac_last'
+      Size = 30
+    end
+    object tbl_DevAlldev_date: TDateTimeField
+      FieldName = 'dev_date'
+    end
+  end
+  object ds_DevAll: TDataSource
+    DataSet = tbl_DevAll
+    Left = 168
+    Top = 143
+  end
+  object ds_Dev: TDataSource
+    DataSet = tbl_Dev
+    Left = 160
+    Top = 79
   end
 end

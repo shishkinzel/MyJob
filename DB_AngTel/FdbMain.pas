@@ -18,6 +18,21 @@ type
     fd_mem_Devf_mac: TStringField;
     fd_mem_Devf_id_in: TIntegerField;
     fd_mem_Devf_other: TStringField;
+    tbl_Devkey: TIntegerField;
+    tbl_DevNameDev: TWideStringField;
+    tbl_Devid: TFloatField;
+    tbl_Devmac: TWideStringField;
+    tbl_DevAllkey: TAutoIncField;
+    tbl_DevAllnameDev: TWideStringField;
+    tbl_DevAllid_first: TWideStringField;
+    tbl_DevAllid_last: TWideStringField;
+    tbl_DevAllmac_first: TWideStringField;
+    tbl_DevAllmac_last: TWideStringField;
+    tbl_DevAlldev_date: TDateTimeField;
+    ds_DevAll: TDataSource;
+    ds_Dev: TDataSource;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +47,8 @@ function ArrayToString(var inArray: array of Byte): string;
 
 
 procedure IncArrayOne(var inArray: array of Byte);
-procedure Print_mac_id (const s1,s2,s3 : string; const k1,k2 : Integer; fdtbl : TFDMemTable; out arr_Dev : array of string);
+procedure Print_mac_id (const s1,s2,s3 : string; const k1,k2 : Integer; const f_date : TDate;
+fdtbl : TFDMemTable; out arr_Dev : array of string);
 procedure ClearArr(var f_arr : array of string);
 var
   dbMain: TdbMain;
@@ -127,9 +143,11 @@ end;
 
 // процедура вычисления mac-адреса с серийным номером и запись, конвертация в штрих код
 // и qr-код и запись в таблицу для формирования отчета печати этикетки.
-procedure Print_mac_id(const s1, s2, s3 : string; const k1, k2: Integer; fdtbl: TFDMemTable; out arr_Dev : array of string);
+procedure Print_mac_id(const s1, s2, s3 : string; const k1, k2: Integer; const f_date : TDate;
+ fdtbl: TFDMemTable; out arr_Dev : array of string);
 var
   arr_DB : array[0 .. 5] of string ;
+  fs_date : TDate;
 
   f_mac, f_id, f_id_long, f_id_small: string;
   f_id_small_all, f_id_long_all : string;
@@ -147,6 +165,7 @@ const
 begin
 //  for i := 0 to Length(arr_DB) - 1 do
 //    arr_DB[i] := '';
+  fs_date := f_date;
 
 // очищаем массив
   ClearArr(arr_DB);
@@ -242,6 +261,20 @@ end;
 
 
 
+
+procedure TdbMain.DataModuleCreate(Sender: TObject);
+begin
+conDev.Connected := True;
+tbl_Dev.Active := True;
+tbl_DevAll.Active := True;
+end;
+
+procedure TdbMain.DataModuleDestroy(Sender: TObject);
+begin
+ conDev.Connected := False;
+ tbl_Dev.Active := False;
+tbl_DevAll.Active := False;
+end;
 
 end.
 

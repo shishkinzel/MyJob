@@ -46,7 +46,7 @@ object frmGrid: TfrmGrid
       Top = 1
       Width = 962
       Height = 25
-      DataSource = ds_DevAll
+      DataSource = dbMain.ds_DevAll
       Align = alTop
       TabOrder = 0
     end
@@ -56,7 +56,7 @@ object frmGrid: TfrmGrid
       Width = 962
       Height = 230
       Align = alClient
-      DataSource = ds_DevAll
+      DataSource = dbMain.ds_DevAll
       DynProps = <>
       TabOrder = 1
       object RowDetailData: TRowDetailPanelControlEh
@@ -102,12 +102,7 @@ object frmGrid: TfrmGrid
   end
   object ds_Dev: TDataSource
     DataSet = dbMain.tbl_Dev
-    Left = 16
-    Top = 631
-  end
-  object ds_DevAll: TDataSource
-    DataSet = dbMain.tbl_DevAll
-    Left = 872
-    Top = 223
+    Left = 24
+    Top = 543
   end
 end

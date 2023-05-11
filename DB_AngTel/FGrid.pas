@@ -19,7 +19,6 @@ type
     dbnav_Dev: TDBNavigator;
     ds_Dev: TDataSource;
     dbnav_DevAll: TDBNavigator;
-    ds_DevAll: TDataSource;
     dbG_DevAll: TDBGridEh;
     procedure FormShow(Sender: TObject);
   private
