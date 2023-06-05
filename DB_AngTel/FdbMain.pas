@@ -49,6 +49,7 @@ function ArrayToString(var inArray: array of Byte): string;
 procedure IncArrayOne(var inArray: array of Byte);
 procedure Print_mac_id (const s1,s2,s3 : string; const k1,k2 : Integer; const f_date : TDate;
 fdtbl : TFDMemTable; out arr_Dev : array of string);
+procedure Fill_Tab(arr_Dev : array of string; f_fill_tab : TDataSource);
 procedure ClearArr(var f_arr : array of string);
 var
   dbMain: TdbMain;
@@ -56,7 +57,7 @@ var
 implementation
 
 uses
-IdGlobal, FMain, FGrid;
+IdGlobal, FMain, FGrid, FTest;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -149,7 +150,7 @@ var
   arr_DB : array[0 .. 5] of string ;
   fs_date : TDate;
 
-  f_mac, f_id, f_id_long, f_id_small: string;
+  f_mac, f_id, f_id_long, f_id_small, f_mac_adv : string;
   f_id_small_all, f_id_long_all : string;
   rangeLast, f_id_string : string;
   fstep, fcount: Integer;
@@ -159,7 +160,7 @@ var
   fd_tblPrint: TFDMemTable;
   i, j, k: Integer;
   tmp_id_1, tmp_id_2, tmp_mac_1, tmp_mac_2: string;
-  barCodeStream: TMemoryStream;
+
 const
   cnMAC = '68:EB:C5:';
 begin
@@ -167,10 +168,6 @@ begin
 //    arr_DB[i] := '';
   fs_date := f_date;
 
-// очищаем массив
-  ClearArr(arr_DB);
-
-  arr_DB[0] := s3;
 
   f_id_long := '';
   f_id_small := '';
@@ -197,12 +194,10 @@ begin
   f_id_num := StrToIntDef(f_id, -1000);
   if ((f_id_num + fcount) > 999) or ((f_id_num + fcount) < 0) then
   begin
-    barCodeStream.Free;
     raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств!' + #10#13 + 'Или ошибка ввода серийного номера!');
-
   end;
 // работаем с mac-адресом
-    Delete(f_mac, 1, 9);
+    Delete(f_mac, 1, 9);  // удаляем первые 9 символов  <68:EB:C5:>
   for i := 0 to 1 do
   begin
     fbit[i] := HexStrToInt(Trim(Fetch(f_mac, ':')));
@@ -218,17 +213,19 @@ begin
     f_id_small_all := '';
     f_id_long_all := '';
     fdtbl.Append;
+// наименование устройства
+    fdtbl.Fields[0].AsString := s3;  // запись в таблицу наименование устройства
 // серийные номера
-     f_id_string := Format('%.3d', [f_id_num]);
-    f_id_small_all := f_id_small + f_id_string;
-    f_id_long_all := f_id_long + f_id_string;
-    fdtbl.Fields[0].AsString := f_id_small_all;
-    fdtbl.Fields[3].AsString := f_id_long_all;
+    f_id_string := Format('%.3d', [f_id_num]);
+    f_id_small_all := f_id_small + f_id_string;  // серийный номер без разбивки на триады
+    f_id_long_all := f_id_long + f_id_string;    // серийный номер с разбивкой на триады
+    fdtbl.Fields[1].AsString := f_id_small_all;  // запись в таблицу
+//    fdtbl.Fields[3].AsString := f_id_long_all;
 
 // увеличиваем серийный номер на единицу - последнюю триаду
     Inc(f_id_num);
 // mac-адреса для записи в таблицу fdtbl
-    fdtbl.Fields[4].AsString := ArrayToString(fbit);
+    f_mac_adv := ArrayToString(fbit);
     if fstep_flag then
     begin
       while fstep > 0 do
@@ -238,7 +235,7 @@ begin
         if fstep = 1 then
         begin
           rangeLast := '-' + IntToHex(fbit[2]);
-          fdtbl.Fields[5].AsString := fdtbl.Fields[4].AsString + rangeLast;
+          fdtbl.Fields[2].AsString := f_mac_adv + rangeLast;
         end;
       end;
 
@@ -246,21 +243,40 @@ begin
     end
     else
     begin
-      fdtbl.Fields[5].AsString := ArrayToString(fbit);
+      fdtbl.Fields[2].AsString := f_mac_adv;
       IncArrayOne(fbit);
     end;
-
-    fdtbl.Fields[6].AsString := fdtbl.Fields[4].AsString + fdtbl.Fields[0].AsString;
 
 // перемещаемся по таблице на шаг
     fdtbl.Next;
   end;
-//  barCodeStream.Free;
+
+// заполняем массив для общей таблицы arr_Dev
+
+// очищаем массив
+  ClearArr(arr_DB);
+// заполняем массив
+  arr_DB[0] := s3;
+  fdtbl.First;
+  arr_DB[1] := fdtbl.Fields[1].AsString;
+  arr_DB[2] := fdtbl.Fields[2].AsString;
+  fdtbl.Last;
+  arr_DB[3] := fdtbl.Fields[1].AsString;
+  arr_DB[4] := fdtbl.Fields[2].AsString;
+
+  arr_DB[5] := DateToStr(fs_date);
+
+  for i := 0 to 5 do
+    arr_Dev[i] := arr_DB[i];
+
 end;
 
+procedure Fill_Tab(arr_Dev: array of string; f_fill_tab: TDataSource);
+var
+  arr_DB: array[0..5] of string;
+begin
 
-
-
+end;
 
 procedure TdbMain.DataModuleCreate(Sender: TObject);
 begin

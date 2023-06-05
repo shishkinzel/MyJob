@@ -27,6 +27,7 @@ type
     imgMain: TImage;
     ds_fd_mem_Dev: TDataSource;
     dtpMain: TDateTimePicker;
+    ds_Fill_Tab: TDataSource;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
 //    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
@@ -65,7 +66,7 @@ var
 implementation
 
 uses
-IdGlobal, FdbMain, FListDevece, FGrid;
+IdGlobal, FdbMain, FListDevece, FGrid, FTest;
 
 {$R *.dfm}
 
@@ -158,8 +159,18 @@ frmListDevice.Show;
 end;
 
 procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
+var
+  arr_DB: array[0..5] of string;
 begin
-frmGrid.Show;
+// вызываем процедуру считывания входных данных
+  Print_mac_id(medtID.Text, medtMAC.Text, lbl_NameDev.Caption, seStep.Value, seCount.Value, dtpMain.Date, dbMain.fd_mem_Dev, arr_DB);
+// вызываем процедуру заполнения основной таблицы
+  Fill_Tab(arr_DB, ds_Fill_Tab.DataSet.DataSource);
+
+
+
+
+  frmGrid.Show;
 end;
 
 

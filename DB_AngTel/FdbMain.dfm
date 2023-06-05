@@ -60,6 +60,7 @@ object dbMain: TdbMain
     end
   end
   object conDev: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Embarcadero\Proj' +
       'ects\MyJob\DB_AngTel\db\db_angtel.mdb;Persist Security Info=Fals' +
