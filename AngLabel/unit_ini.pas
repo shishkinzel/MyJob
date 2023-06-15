@@ -7,7 +7,7 @@ uses
 
 const
   csIniSectionPathPrint = 'SectionPathPrint';  //секция для хранения пути к принтерам
-
+   csIniSectionAccess = 'SectionAcess';        // секция доступа
   {Section : csIniSectionPathPrint}
 
 
@@ -21,6 +21,8 @@ type
   f_print_2824 : string;
   f_print_908 : string;
   f_print_576 : string;
+
+  f_access : string;         // переменная доступа
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);

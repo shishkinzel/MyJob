@@ -284,17 +284,21 @@ type
       ffirstIdDeviceBarCode: string; // для печати id в barcode
       macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
       f_sticker: Boolean;            // флаг для печати стикера верификации
+      // защита программы
+      f_access : Integer;
   public
   { Public declarations }
     const
       nameFile = 'id_mac_iterator.txt';
       nameBarCodeFile = 'bar_code.txt';
       nameFileBarCodeLong = 'bar_code_long.txt';
+      // сообщение в табло ошибка
+      f_err = 'Внимание!! Ошибка!!' + #10#13 + 'Необходимо обновить динамические библиотеки!!!' +  #10#13 + 'Обратитесь к разработчику';
     var
       barCodeStream: TMemoryStream;
       idMAC: array[0..2] of Byte;
       idMACBarCode: array[0..2] of Byte;
-// переменные для чтения конфигурации притеров по умолчанию
+// переменные для чтения конфигурации принтеров по умолчанию
       f_print_924: string;
       f_print_940: string;
       f_print_2824: string;
@@ -326,6 +330,9 @@ procedure TfrmMAC.FormCreate(Sender: TObject);
 var
   f_ini: TIniFile;
 begin
+// проверка на валидность работы программы
+  f_access := 0;
+
   utilityMAC := True;
   f_sticker := False;
   AssignFile(fileId, nameFile);
