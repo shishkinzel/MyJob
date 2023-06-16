@@ -285,7 +285,7 @@ type
       macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
       f_sticker: Boolean;            // флаг для печати стикера верификации
       // защита программы
-      f_access : Integer;
+      f_access : string;
   public
   { Public declarations }
     const
@@ -331,7 +331,7 @@ var
   f_ini: TIniFile;
 begin
 // проверка на валидность работы программы
-  f_access := 0;
+  f_access := '';
 
   utilityMAC := True;
   f_sticker := False;
@@ -367,6 +367,15 @@ begin
   f_print_2824 := IniOptions.f_print_2824;
   f_print_908 := IniOptions.f_print_908;
   f_print_576 := IniOptions.f_print_576;
+// защита приложения
+  f_access := IniOptions.f_access;
+{  if f_access <> '@Zel05101966' then
+  begin
+//    raise Exception.Create(f_err);
+    ShowMessage(f_err);
+    Self.Free;
+    Self.Close;
+  end;   }
 // очищаем память
   f_ini.Free;
 
