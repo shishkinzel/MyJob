@@ -49,7 +49,7 @@ function ArrayToString(var inArray: array of Byte): string;
 procedure IncArrayOne(var inArray: array of Byte);
 procedure Print_mac_id (const s1,s2,s3 : string; const k1,k2 : Integer; const f_date : TDate;
 fdtbl : TFDMemTable; out arr_Dev : array of string);
-procedure Fill_Tab(arr_Dev : array of string; f_fill_tab : TDataSource);
+procedure Fill_Tab(arr_Dev : array of string; f_fill_tab : TADOTable);
 procedure ClearArr(var f_arr : array of string);
 var
   dbMain: TdbMain;
@@ -259,9 +259,9 @@ begin
   arr_DB[0] := s3;
   fdtbl.First;
   arr_DB[1] := fdtbl.Fields[1].AsString;
-  arr_DB[2] := fdtbl.Fields[2].AsString;
+  arr_DB[3] := fdtbl.Fields[2].AsString;
   fdtbl.Last;
-  arr_DB[3] := fdtbl.Fields[1].AsString;
+  arr_DB[2] := fdtbl.Fields[1].AsString;
   arr_DB[4] := fdtbl.Fields[2].AsString;
 
   arr_DB[5] := DateToStr(fs_date);
@@ -271,11 +271,29 @@ begin
 
 end;
 
-procedure Fill_Tab(arr_Dev: array of string; f_fill_tab: TDataSource);
+procedure Fill_Tab(arr_Dev: array of string; f_fill_tab : TADOTable);
 var
+  i: Integer;
   arr_DB: array[0..5] of string;
 begin
+  with f_fill_tab do
+  begin
+    Close;
+    ReadOnly := False;
+    Open;
+    Last;
 
+    Append;
+  end;
+
+  for i := 0 to 5 do
+  begin
+    f_fill_tab.Fields[i + 1].AsString := arr_Dev[i];
+  end;
+
+  f_fill_tab.Post;
+//  f_fill_tab.Close;
+//  f_fill_tab.ReadOnly := True;
 end;
 
 procedure TdbMain.DataModuleCreate(Sender: TObject);

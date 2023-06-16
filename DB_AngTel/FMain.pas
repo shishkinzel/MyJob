@@ -165,7 +165,7 @@ begin
 // вызываем процедуру считывания входных данных
   Print_mac_id(medtID.Text, medtMAC.Text, lbl_NameDev.Caption, seStep.Value, seCount.Value, dtpMain.Date, dbMain.fd_mem_Dev, arr_DB);
 // вызываем процедуру заполнения основной таблицы
-  Fill_Tab(arr_DB, ds_Fill_Tab.DataSet.DataSource);
+  Fill_Tab(arr_DB, dbMain.tbl_DevAll);
 
 
 
