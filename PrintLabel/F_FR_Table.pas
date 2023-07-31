@@ -19,6 +19,8 @@ type
     frxDes: TfrxDesigner;
     frdbTabList: TfrxDBDataset;
     frdbTabCorund: TfrxDBDataset;
+    frxTabQR_standart: TfrxReport;
+    frxTabQR_advanced: TfrxReport;
   private
     { Private declarations }
   public

@@ -11,7 +11,7 @@ type
   TfrmShowSoft = class(TForm)
     mmoShowSoft: TMemo;
     btnCount: TButton;
-    btnApply: TButton;
+    btnClose: TButton;
     mmLoadSoft: TMainMenu;
     mniFileLoadSoft: TMenuItem;
     mniOpenLoadSoft: TMenuItem;
@@ -44,6 +44,9 @@ type
     mniRepPrint: TMenuItem;
     mniRepSep2: TMenuItem;
     mniRepReset: TMenuItem;
+    btnApply: TButton;
+    mniSeparator4: TMenuItem;
+    mniApply: TMenuItem;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -53,12 +56,13 @@ type
     procedure mniFontClick(Sender: TObject);
     procedure mniColorBackGroundClick(Sender: TObject);
     procedure mniResetClick(Sender: TObject);
-    procedure btnApplyClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
     procedure mniSetPlaceClick(Sender: TObject);
     procedure mniRepApplyClick(Sender: TObject);
     procedure mniRepShowClick(Sender: TObject);
     procedure mniRepPrintClick(Sender: TObject);
     procedure mniRepResetClick(Sender: TObject);
+    procedure btnApplyClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -81,7 +85,8 @@ var
 implementation
 
 uses
-  FSelection, F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
+  FSelection, FPrintSection,  // подключение форм
+  F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
 
 
 
@@ -107,6 +112,10 @@ begin
     ShowMessage('Информация считана' + #13 + 'Можно закрыть окно')
   else
     ShowMessage('Вы ничего не ввели' + #13 + 'Можно закрыть окно');
+// активация кнопки "Выполнить"  и пункта меню
+  btnApply.Enabled := True;
+  mniApply.Enabled := True;
+
 // Сброс Memo после считывания
   mmoShowSoft.Clear;
   fTextSoft := TrimLeft(fTextSoft);
@@ -227,6 +236,9 @@ begin
 mmoShowSoft.Enabled := False;
 btnCount.Enabled := False;
 btnApply.Enabled := False;
+// деактивация кнопки "Выполнить"  и пункта меню
+  btnApply.Enabled := False;
+  mniApply.Enabled := False;
 
 end;
 
@@ -293,12 +305,28 @@ end;
 procedure TfrmShowSoft.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   mmoShowSoft.Clear;
-  btnApplyClick(nil);
+  btnCloseClick(nil);
   frmShowSoft.ModalResult := mrOk;
   frmSelection.ModalResult := mrOk;
 end;
 
+// сформировать отчет с qr-кодом
 procedure TfrmShowSoft.btnApplyClick(Sender: TObject);
+var
+i : Integer;
+begin
+  frmPrintSection := TfrmPrintSection.Create(nil);
+  frmPrintSection.Menu := nil;
+  frmPrintSection.Menu := frmPrintSection.mmPrintQR;
+  frmPrintSection.ShowModal;
+  if frmPrintSection.ModalResult > 0 then
+  begin
+    frmPrintSection.Free;
+//    ModalResult := mrOk;
+  end;
+end;
+
+procedure TfrmShowSoft.btnCloseClick(Sender: TObject);
 begin
 Close;
 end;

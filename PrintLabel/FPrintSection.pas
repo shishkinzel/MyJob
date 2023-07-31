@@ -91,6 +91,9 @@ type
     mniServeceSep3: TMenuItem;
     mniServeceSep1: TMenuItem;
     mniServeceReset: TMenuItem;
+    mmPrintQR: TMainMenu;
+    mniPrQR_Standart: TMenuItem;
+    mniPrQR_Advanced: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -133,7 +136,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
+  FSelection, F_FR_Label, FMain, FShowSoft, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
   frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
 

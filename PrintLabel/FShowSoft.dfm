@@ -12942,7 +12942,7 @@ object frmShowSoft: TfrmShowSoft
     TabOrder = 1
     OnClick = btnCountClick
   end
-  object btnApply: TButton
+  object btnClose: TButton
     Left = 562
     Top = 354
     Width = 120
@@ -12957,7 +12957,7 @@ object frmShowSoft: TfrmShowSoft
     ModalResult = 8
     ParentFont = False
     TabOrder = 2
-    OnClick = btnApplyClick
+    OnClick = btnCloseClick
   end
   object txtPlace: TStaticText
     Left = 8
@@ -13017,6 +13017,23 @@ object frmShowSoft: TfrmShowSoft
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1080#1084#1074#1086#1083' '#1087#1077#1088#1077#1074#1086#1076#1072' '#1082#1072#1088#1077#1090#1082#1080' ('#1057#1050')#13'
     TabOrder = 6
   end
+  object btnApply: TButton
+    Left = 312
+    Top = 354
+    Width = 120
+    Height = 27
+    Anchors = [akLeft, akTop, akBottom]
+    Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 7
+    OnClick = btnApplyClick
+  end
   object mmLoadSoft: TMainMenu
     Left = 16
     Top = 64
@@ -13038,7 +13055,7 @@ object frmShowSoft: TfrmShowSoft
       object mniExitLoadSoft: TMenuItem
         Caption = #1042#1099#1093#1086#1076
         ShortCut = 16465
-        OnClick = btnApplyClick
+        OnClick = btnCloseClick
       end
     end
     object mniApplyLoadSoft: TMenuItem
@@ -13058,6 +13075,15 @@ object frmShowSoft: TfrmShowSoft
         Caption = #1054#1095#1080#1089#1090#1080#1090#1100
         ShortCut = 16466
         OnClick = mniClearClick
+      end
+      object mniSeparator4: TMenuItem
+        Caption = '-'
+      end
+      object mniApply: TMenuItem
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        Enabled = False
+        ShortCut = 16453
+        OnClick = btnApplyClick
       end
       object mniSeparator3: TMenuItem
         Caption = '-'

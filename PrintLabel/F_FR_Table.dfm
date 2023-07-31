@@ -944,7 +944,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 34.015770000000000000
-        Top = 264.567100000000000000
+        Top = 272.126160000000000000
         Width = 718.110700000000000000
         DataSet = frdbTabList
         DataSetName = 'DBTableList'
@@ -1012,7 +1012,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 355.275820000000000000
+        Top = 366.614410000000000000
         Width = 718.110700000000000000
         object memPage: TfrxMemoView
           AllowVectorExport = True
@@ -1035,7 +1035,7 @@ object frmFR_Table: TfrmFR_Table
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 222.992270000000000000
+        Top = 226.771800000000000000
         Width = 718.110700000000000000
         object memTitleNumber: TfrxMemoView
           AllowVectorExport = True
@@ -1334,5 +1334,147 @@ object frmFR_Table: TfrmFR_Table
     BCDToCurrency = False
     Left = 16
     Top = 374
+  end
+  object frxTabQR_standart: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    Preview = frxPrV
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45138.646076898150000000
+    ReportOptions.LastChange = 45138.647927013890000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 144
+    Top = 38
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pOne: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+      object rTitle: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+      end
+      object masterDate: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 102.047310000000000000
+        Width = 718.110700000000000000
+        RowCount = 0
+      end
+      object pFooter: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 185.196970000000000000
+        Width = 718.110700000000000000
+        object mPage: TfrxMemoView
+          AllowVectorExport = True
+          Left = 642.520100000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page#]')
+        end
+      end
+    end
+  end
+  object frxTabQR_advanced: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    Preview = frxPrV
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45138.646076898150000000
+    ReportOptions.LastChange = 45138.650560092600000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 248
+    Top = 38
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pOne: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+      object rTitle: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+      end
+      object masterDate: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 102.047310000000000000
+        Width = 718.110700000000000000
+        RowCount = 0
+      end
+      object pFooter: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 185.196970000000000000
+        Width = 718.110700000000000000
+        object mPage: TfrxMemoView
+          AllowVectorExport = True
+          Left = 642.520100000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page#]')
+        end
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@ object frmPrintSection: TfrmPrintSection
   Top = 0
   BorderStyle = bsSingle
   Caption = #1043#1083#1072#1074#1085#1072#1103' '#1092#1086#1088#1084#1072' '#1087#1077#1095#1072#1090#1080' '#1101#1090#1080#1082#1077#1090#1086#1082
-  ClientHeight = 480
+  ClientHeight = 500
   ClientWidth = 740
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object frmPrintSection: TfrmPrintSection
     Left = 0
     Top = 0
     Width = 740
-    Height = 480
+    Height = 500
     Align = alClient
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000002E40000
@@ -15494,6 +15494,16 @@ object frmPrintSection: TfrmPrintSection
         ImageIndex = 5
         OnClick = mniSRResetClick
       end
+    end
+  end
+  object mmPrintQR: TMainMenu
+    Left = 184
+    Top = 24
+    object mniPrQR_Standart: TMenuItem
+      Caption = #1057#1090#1072#1085#1076#1072#1088#1090#1085#1099#1081' '#1073#1083#1072#1085#1082
+    end
+    object mniPrQR_Advanced: TMenuItem
+      Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1081' '#1073#1083#1072#1085#1082
     end
   end
 end
