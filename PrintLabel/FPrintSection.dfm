@@ -13247,10 +13247,97 @@ object frmPrintSection: TfrmPrintSection
     Font.Style = [fsItalic]
     ParentFont = False
   end
+  object lbledtOne: TLabeledEdit
+    Left = 352
+    Top = 32
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Cursor = crHandPoint
+    EditLabel.BiDiMode = bdLeftToRight
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
+    EditLabel.ParentBiDiMode = False
+    Enabled = False
+    TabOrder = 0
+    Text = 'ap-map'
+    Visible = False
+  end
+  object lbledtTwo: TLabeledEdit
+    Left = 352
+    Top = 80
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
+    Enabled = False
+    TabOrder = 1
+    Text = 'pyenv activate ap-dev'
+    Visible = False
+  end
+  object lbledtThree: TLabeledEdit
+    Left = 352
+    Top = 128
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 3'
+    Enabled = False
+    TabOrder = 2
+    Text = 'exit'
+    Visible = False
+  end
+  object lbledtSix: TLabeledEdit
+    Left = 592
+    Top = 128
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 6'
+    Enabled = False
+    TabOrder = 3
+    Text = 'root'
+    Visible = False
+  end
+  object lbledtFive: TLabeledEdit
+    Left = 592
+    Top = 80
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 5'
+    Enabled = False
+    TabOrder = 4
+    Text = 'angtel'
+    Visible = False
+  end
+  object lbledtFour: TLabeledEdit
+    Left = 592
+    Top = 32
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    EditLabel.Width = 54
+    EditLabel.Height = 13
+    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 4'
+    Enabled = False
+    TabOrder = 5
+    Text = 'admin'
+    Visible = False
+  end
   object mmPrintSection: TMainMenu
     Images = ilPrintSelection_16
-    Left = 48
-    Top = 8
+    Left = 16
+    Top = 256
     object mniLabel: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1072
       SubMenuImages = ilPrintSelection_24_sub
@@ -15389,8 +15476,8 @@ object frmPrintSection: TfrmPrintSection
   end
   object mmReport: TMainMenu
     Images = ilPrintSelection_16
-    Left = 112
-    Top = 8
+    Left = 64
+    Top = 256
     object mniSingleReport: TMenuItem
       Caption = #1055#1088#1086#1089#1090#1086#1081' '#1086#1090#1095#1077#1090
       ImageIndex = 0
@@ -15497,13 +15584,14 @@ object frmPrintSection: TfrmPrintSection
     end
   end
   object mmPrintQR: TMainMenu
-    Left = 184
-    Top = 24
+    Left = 104
+    Top = 256
     object mniPrQR_Standart: TMenuItem
       Caption = #1057#1090#1072#1085#1076#1072#1088#1090#1085#1099#1081' '#1073#1083#1072#1085#1082
     end
     object mniPrQR_Advanced: TMenuItem
       Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1081' '#1073#1083#1072#1085#1082
+      OnClick = mniPrQR_AdvancedClick
     end
   end
 end

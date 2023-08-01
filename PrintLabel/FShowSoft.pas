@@ -47,6 +47,7 @@ type
     btnApply: TButton;
     mniSeparator4: TMenuItem;
     mniApply: TMenuItem;
+    chkScript: TCheckBox;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -63,6 +64,7 @@ type
     procedure mniRepPrintClick(Sender: TObject);
     procedure mniRepResetClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
+    procedure chkScriptClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -130,6 +132,21 @@ begin
   mniReport.Enabled := True;
 end;
 
+// печать скрипта
+procedure TfrmShowSoft.chkScriptClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  if chkScript.Enabled then
+  begin
+        //  TODO
+  end
+  else
+  begin
+       //  TODO
+  end;
+
+end;
 
 
 //*************************************************
@@ -318,6 +335,14 @@ begin
   frmPrintSection := TfrmPrintSection.Create(nil);
   frmPrintSection.Menu := nil;
   frmPrintSection.Menu := frmPrintSection.mmPrintQR;
+// показываем пункты
+  frmPrintSection.lbledtOne.Visible := True;
+  frmPrintSection.lbledtTwo.Visible := True;
+  frmPrintSection.lbledtThree.Visible := True;
+  frmPrintSection.lbledtFour.Visible := True;
+  frmPrintSection.lbledtFive.Visible := True;
+  frmPrintSection.lbledtSix.Visible := True;
+
   frmPrintSection.ShowModal;
   if frmPrintSection.ModalResult > 0 then
   begin

@@ -94,6 +94,12 @@ type
     mmPrintQR: TMainMenu;
     mniPrQR_Standart: TMenuItem;
     mniPrQR_Advanced: TMenuItem;
+    lbledtOne: TLabeledEdit;
+    lbledtTwo: TLabeledEdit;
+    lbledtThree: TLabeledEdit;
+    lbledtSix: TLabeledEdit;
+    lbledtFive: TLabeledEdit;
+    lbledtFour: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -119,6 +125,8 @@ type
     procedure pmmiPr58_40_macClick(Sender: TObject);
     procedure pmmiPr58_40Click(Sender: TObject);
     procedure mniServeceSettingClick(Sender: TObject);
+    procedure mniPrQR_AdvancedClick(Sender: TObject);
+
   private
     { Private declarations }
     var
@@ -128,6 +136,13 @@ type
       f_print_2824: string;
   public
     { Public declarations }
+    var
+    f_pos1 : string;         // переменные для qr-кода
+    f_pos2 : string;         // переменные для qr-кода
+    f_pos3 : string;         // переменные для qr-кода
+    f_pos4 : string;         // переменные для qr-кода
+    f_pos5 : string;         // переменные для qr-кода
+    f_pos6 : string;         // переменные для qr-кода
   end;
 
 var
@@ -142,9 +157,24 @@ uses
 
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- mniNResetLab4Click(Self);
-ModalResult := mrOk;
-Close;
+// убираем пункты
+  frmPrintSection.lbledtOne.Visible := False;
+  frmPrintSection.lbledtTwo.Visible := False;
+  frmPrintSection.lbledtThree.Visible := False;
+  frmPrintSection.lbledtFour.Visible := False;
+  frmPrintSection.lbledtFive.Visible := False;
+  frmPrintSection.lbledtSix.Visible := False;
+
+  frmPrintSection.lbledtOne.Enabled := False;
+  frmPrintSection.lbledtTwo.Enabled := False;
+  frmPrintSection.lbledtThree.Enabled := False;
+  frmPrintSection.lbledtFour.Enabled := False;
+  frmPrintSection.lbledtFive.Enabled := False;
+  frmPrintSection.lbledtSix.Enabled := False;
+
+  mniNResetLab4Click(Self);
+  ModalResult := mrOk;
+  Close;
 end;
 //   изменение шрифта главного меню
 
@@ -162,6 +192,13 @@ begin
   f_print_908 := IniOptions.f_print_908;
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
+// присваиваем переменным f_posX - начальные значения
+  f_pos1 := lbledtOne.Text;
+  f_pos2 := lbledtTwo.Text;
+  f_pos3 := lbledtThree.Text;
+  f_pos4 := lbledtFour.Text;
+  f_pos5 := lbledtFive.Text;
+  f_pos6 := lbledtSix.Text;
 
 end;
 
@@ -192,6 +229,7 @@ begin
   end;
 
 end;
+
 
 // вызываем отчеты
 
@@ -329,6 +367,19 @@ begin
   end;
 
 end;
+
+procedure TfrmPrintSection.mniPrQR_AdvancedClick(Sender: TObject);
+begin
+  frmPrintSection.lbledtOne.Enabled := True;
+  frmPrintSection.lbledtTwo.Enabled := True;
+  frmPrintSection.lbledtThree.Enabled := True;
+  frmPrintSection.lbledtFour.Enabled := True;
+  frmPrintSection.lbledtFive.Enabled := True;
+  frmPrintSection.lbledtSix.Enabled := True;
+end;
+
+
+
 
 // вызываем печать
 procedure TfrmPrintSection.pmmiPr30_20Click(Sender: TObject);

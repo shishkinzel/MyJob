@@ -13034,6 +13034,15 @@ object frmShowSoft: TfrmShowSoft
     TabOrder = 7
     OnClick = btnApplyClick
   end
+  object chkScript: TCheckBox
+    Left = 392
+    Top = 424
+    Width = 113
+    Height = 17
+    Caption = #1055#1077#1095#1072#1090#1100' '#1089#1082#1088#1080#1087#1090#1072
+    TabOrder = 8
+    OnClick = chkScriptClick
+  end
   object mmLoadSoft: TMainMenu
     Left = 16
     Top = 64
@@ -13156,11 +13165,11 @@ object frmShowSoft: TfrmShowSoft
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Left = 624
-    Top = 400
+    Left = 680
+    Top = 272
   end
   object dlgColor: TColorDialog
-    Left = 592
-    Top = 400
+    Left = 632
+    Top = 272
   end
 end
