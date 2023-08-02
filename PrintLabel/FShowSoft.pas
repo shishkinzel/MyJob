@@ -335,6 +335,7 @@ begin
   frmPrintSection := TfrmPrintSection.Create(nil);
   frmPrintSection.Menu := nil;
   frmPrintSection.Menu := frmPrintSection.mmPrintQR;
+
 // показываем пункты
   frmPrintSection.lbledtOne.Visible := True;
   frmPrintSection.lbledtTwo.Visible := True;

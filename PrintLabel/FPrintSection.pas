@@ -100,6 +100,18 @@ type
     lbledtSix: TLabeledEdit;
     lbledtFive: TLabeledEdit;
     lbledtFour: TLabeledEdit;
+    mniPrQR_StApply: TMenuItem;
+    mniPrQR_StShow: TMenuItem;
+    mniPrQR_Separator1: TMenuItem;
+    mniPrQR_StPrint: TMenuItem;
+    mniPrQR_Separator2: TMenuItem;
+    mniPrQR_StReset: TMenuItem;
+    mniPrQR_AdApply: TMenuItem;
+    mniPrQR__AdShow: TMenuItem;
+    mniPrQR_Separator3: TMenuItem;
+    mniPrQR__AdPrint: TMenuItem;
+    mniPrQR_Separator4: TMenuItem;
+    mniPrQR__AdReset: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -15584,14 +15584,75 @@ object frmPrintSection: TfrmPrintSection
     end
   end
   object mmPrintQR: TMainMenu
+    Images = ilPrintSelection_16
     Left = 104
     Top = 256
     object mniPrQR_Standart: TMenuItem
       Caption = #1057#1090#1072#1085#1076#1072#1088#1090#1085#1099#1081' '#1073#1083#1072#1085#1082
+      SubMenuImages = ilPrintSelection_24_sub
+      ImageIndex = 0
+      object mniPrQR_StApply: TMenuItem
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 13
+      end
+      object mniPrQR_StShow: TMenuItem
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 6
+      end
+      object mniPrQR_Separator1: TMenuItem
+        Caption = '-'
+        SubMenuImages = ilPrintSelection_24_sub
+      end
+      object mniPrQR_StPrint: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 11
+      end
+      object mniPrQR_Separator2: TMenuItem
+        Caption = '-'
+        SubMenuImages = ilPrintSelection_24_sub
+      end
+      object mniPrQR_StReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 12
+      end
     end
     object mniPrQR_Advanced: TMenuItem
       Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1081' '#1073#1083#1072#1085#1082
+      SubMenuImages = ilPrintSelection_24_sub
+      ImageIndex = 1
       OnClick = mniPrQR_AdvancedClick
+      object mniPrQR_AdApply: TMenuItem
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 13
+      end
+      object mniPrQR__AdShow: TMenuItem
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 6
+      end
+      object mniPrQR_Separator3: TMenuItem
+        Caption = '-'
+        SubMenuImages = ilPrintSelection_24_sub
+      end
+      object mniPrQR__AdPrint: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 11
+      end
+      object mniPrQR_Separator4: TMenuItem
+        Caption = '-'
+        SubMenuImages = ilPrintSelection_24_sub
+      end
+      object mniPrQR__AdReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        SubMenuImages = ilPrintSelection_24_sub
+        ImageIndex = 12
+      end
     end
   end
 end
