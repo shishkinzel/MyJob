@@ -153,7 +153,12 @@ f_param := caNone;
 
     case f_quest of
       idyes:
-        FormClose(Self, f_param);
+        begin
+          frmMain.edtDevice.Text := edtDev.Text;
+          frmMain.edtPackage.Text := edtPack.Text;
+          FormClose(Self, f_param);
+        end;
+
     end;
   end;
 

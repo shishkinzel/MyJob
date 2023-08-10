@@ -65,11 +65,11 @@ type
     procedure mniRepResetClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure chkScriptClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     const
      f_str = 'department-';
-
       DIR_code = 'DIR_code';
 
   public
@@ -77,8 +77,11 @@ type
     fTextSoft: string;         // текст в окне
     fText_rmp: string;        // выбор рабочего места программировани€
 
-    f_rmp: string;
-    f_rmp_place: string;
+    f_rmp: string;            // текст - номер места программировани€
+    f_rmp_place: string;      // код дл€ места програмировани€ 6 .. 8
+
+    f_nameDevice: string;    // им€ выбраного устройства
+
   end;
 
 var
@@ -93,6 +96,14 @@ uses
 
 
 {$R *.dfm}
+
+
+// показ формы
+procedure TfrmShowSoft.FormShow(Sender: TObject);
+begin
+  f_nameDevice := frmMain.edtDevice.Text;
+  edtDevice.Text := f_nameDevice;          // считываем наименование устройства
+end;
 
 //*************** —ейчас работаю
 {считать с memo}
@@ -121,10 +132,19 @@ begin
 // —брос Memo после считывани€
   mmoShowSoft.Clear;
   fTextSoft := TrimLeft(fTextSoft);
-  f_pos_first := Pos(f_str, fTextSoft) + 11;
-  Delete(fTextSoft, f_pos_first, 1);
-  Insert(f_rmp_place, fTextSoft, f_pos_first);
-  mmoShowSoft.Lines.Add(fTextSoft);
+// коррекци€ команды дл€ рабочего места "department- " 6..8
+  if not (chkScript.Checked) then        // если скрип не выбран
+  begin
+    f_pos_first := Pos(f_str, fTextSoft) + 11;
+    if f_pos_first <> 11 then
+    begin
+      Delete(fTextSoft, f_pos_first, 1);
+      Insert(f_rmp_place, fTextSoft, f_pos_first);
+
+    end;
+    mmoShowSoft.Lines.Add(fTextSoft);
+  end;
+
 // сброс кнопок
   btnCount.Enabled := False;
   mniReadingLostSoft.Enabled := False;
@@ -132,21 +152,37 @@ begin
   mniReport.Enabled := True;
 end;
 
+
 // печать скрипта
 procedure TfrmShowSoft.chkScriptClick(Sender: TObject);
 var
   i: Integer;
 begin
-  if chkScript.Enabled then
+  if chkScript.Checked then        // работа со скриптом
   begin
         //  TODO
+    mniSetPlace.Visible := False;          // гасим пункт - "–абочее место"
+    mniReadingLostSoft.Enabled := True;
+    chkOrd_13.Checked := True;
+    // гасим выбор рабочего места
+    lbl_Place.Caption := 'ѕоле не заполн€етс€';
+    lbl_Place.Enabled := False;
   end
   else
   begin
        //  TODO
+    mniSetPlace.Visible := True;
+    mniReadingLostSoft.Enabled := False;
+    chkOrd_13.Checked := False;
+        // зажигаем выбор рабочего места
+    lbl_Place.Caption := '–абочее место не выбрано';
+    lbl_Place.Enabled := True;
+    mniSetPlace.Enabled := True;
   end;
 
 end;
+
+
 
 
 //*************************************************
@@ -326,6 +362,8 @@ begin
   frmShowSoft.ModalResult := mrOk;
   frmSelection.ModalResult := mrOk;
 end;
+
+
 
 // сформировать отчет с qr-кодом
 procedure TfrmShowSoft.btnApplyClick(Sender: TObject);

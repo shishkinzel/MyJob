@@ -14,6 +14,7 @@ object frmShowSoft: TfrmShowSoft
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnShow = FormShow
   DesignSize = (
     740
     460)
@@ -13105,6 +13106,7 @@ object frmShowSoft: TfrmShowSoft
     object mniReport: TMenuItem
       Caption = #1054#1090#1095#1077#1090
       Enabled = False
+      Visible = False
       object mniRepApply: TMenuItem
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
         OnClick = mniRepApplyClick

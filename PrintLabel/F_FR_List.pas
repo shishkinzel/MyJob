@@ -11,6 +11,8 @@ type
     frxPrV: TfrxPreview;
     frxRe: TfrxReport;
     frxBarCode: TfrxBarCodeObject;
+    frxTabQR_advanced: TfrxReport;
+    frxTabQR_standart: TfrxReport;
 
 //    memData : TfrxMemoView ;
   private
@@ -24,7 +26,7 @@ var
 
 implementation
  uses
- FShowSoft;
+ FShowSoft, FPrintSection;
 {$R *.dfm}
 
 end.

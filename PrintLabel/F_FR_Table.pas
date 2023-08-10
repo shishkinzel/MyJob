@@ -9,7 +9,6 @@ uses
 
 type
   TfrmFR_Table = class(TForm)
-    frxPrV: TfrxPreview;
     frxReCor: TfrxReport;
     frxBarCode: TfrxBarCodeObject;
     frxExPDF: TfrxPDFExport;
@@ -19,8 +18,7 @@ type
     frxDes: TfrxDesigner;
     frdbTabList: TfrxDBDataset;
     frdbTabCorund: TfrxDBDataset;
-    frxTabQR_standart: TfrxReport;
-    frxTabQR_advanced: TfrxReport;
+    frxPrV: TfrxPreview;
   private
     { Private declarations }
   public

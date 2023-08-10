@@ -15595,11 +15595,13 @@ object frmPrintSection: TfrmPrintSection
         Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 13
+        OnClick = mniPrQR_StApplyClick
       end
       object mniPrQR_StShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 6
+        OnClick = mniPrQR_StShowClick
       end
       object mniPrQR_Separator1: TMenuItem
         Caption = '-'

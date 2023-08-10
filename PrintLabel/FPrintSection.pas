@@ -138,6 +138,8 @@ type
     procedure pmmiPr58_40Click(Sender: TObject);
     procedure mniServeceSettingClick(Sender: TObject);
     procedure mniPrQR_AdvancedClick(Sender: TObject);
+    procedure mniPrQR_StApplyClick(Sender: TObject);
+    procedure mniPrQR_StShowClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -163,7 +165,7 @@ var
 implementation
 
 uses
-  FSelection, F_FR_Label, FMain, FShowSoft, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
+  FSelection, F_FR_Label, F_FR_List, FMain, FShowSoft, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
   frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
 
@@ -389,8 +391,6 @@ begin
   frmPrintSection.lbledtFive.Enabled := True;
   frmPrintSection.lbledtSix.Enabled := True;
 end;
-
-
 
 
 // вызываем печать
@@ -690,5 +690,29 @@ end;
 begin
 
 end;
+
+{
+ –азработка отчета дл€ печати qr-кода, стандартный и расширенный бланк
+}
+
+// стандартный бланк - выполнить
+procedure TfrmPrintSection.mniPrQR_StApplyClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
+  (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
+  (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
+  (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
+end;
+
+
+// просмотр стандартный блок
+procedure TfrmPrintSection.mniPrQR_StShowClick(Sender: TObject);
+begin
+  frmFR_List.Show;
+  frmFR_List.frxRe.ShowReport();
+end;
+
 end.
 
