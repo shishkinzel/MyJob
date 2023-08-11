@@ -140,6 +140,11 @@ type
     procedure mniPrQR_AdvancedClick(Sender: TObject);
     procedure mniPrQR_StApplyClick(Sender: TObject);
     procedure mniPrQR_StShowClick(Sender: TObject);
+    procedure mniPrQR_StPrintClick(Sender: TObject);
+    procedure mniPrQR_AdApplyClick(Sender: TObject);
+    procedure mniPrQR__AdShowClick(Sender: TObject);
+    procedure mniPrQR__AdPrintClick(Sender: TObject);
+    procedure mniPrQR_StResetClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -381,6 +386,7 @@ begin
   end;
 
 end;
+
 
 procedure TfrmPrintSection.mniPrQR_AdvancedClick(Sender: TObject);
 begin
@@ -697,9 +703,11 @@ end;
 
 // стандартный бланк - выполнить
 procedure TfrmPrintSection.mniPrQR_StApplyClick(Sender: TObject);
-var
-  i: Integer;
 begin
+ // гасим и зажигаем необходимые пункты меню
+  mniPrQR_StApply.Enabled := False;
+  mniPrQR_StShow.Enabled := True;
+
   (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
   (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
   (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
@@ -707,11 +715,59 @@ begin
 end;
 
 
-// просмотр стандартный блок
+
+
+// просмотр стандартный бланк
 procedure TfrmPrintSection.mniPrQR_StShowClick(Sender: TObject);
 begin
+ // гасим и зажигаем необходимые пункты меню
+  mniPrQR_StPrint.Enabled := True;
   frmFR_List.Show;
   frmFR_List.frxRe.ShowReport();
+end;
+
+
+// печать стандартный бланк
+
+procedure TfrmPrintSection.mniPrQR_StPrintClick(Sender: TObject);
+begin
+  frmFR_List.frxRe.ShowReport();
+  frmFR_List.frxRe.Print;
+end;
+
+// расширенный бланк - выполнить
+procedure TfrmPrintSection.mniPrQR_AdApplyClick(Sender: TObject);
+begin
+
+  (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
+  (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
+  (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
+  (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
+end;
+
+// просмотр расширенный бланк
+
+procedure TfrmPrintSection.mniPrQR__AdShowClick(Sender: TObject);
+begin
+  frmFR_List.Show;
+  frmFR_List.frxRe_adv.ShowReport();
+end;
+
+// печать расширенный бланк
+procedure TfrmPrintSection.mniPrQR__AdPrintClick(Sender: TObject);
+begin
+  frmFR_List.frxRe_adv.ShowReport();
+  frmFR_List.frxRe_adv.Print;
+end;
+
+
+
+// сброс стандартного и расширенного бланка
+procedure TfrmPrintSection.mniPrQR_StResetClick(Sender: TObject);
+var
+  i: Integer;
+begin
+
 end;
 
 end.

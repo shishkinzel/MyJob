@@ -11,8 +11,7 @@ type
     frxPrV: TfrxPreview;
     frxRe: TfrxReport;
     frxBarCode: TfrxBarCodeObject;
-    frxTabQR_advanced: TfrxReport;
-    frxTabQR_standart: TfrxReport;
+    frxRe_adv: TfrxReport;
 
 //    memData : TfrxMemoView ;
   private

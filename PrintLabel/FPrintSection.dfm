@@ -13248,9 +13248,9 @@ object frmPrintSection: TfrmPrintSection
     ParentFont = False
   end
   object lbledtOne: TLabeledEdit
-    Left = 352
+    Left = 299
     Top = 32
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
@@ -13260,76 +13260,82 @@ object frmPrintSection: TfrmPrintSection
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
     EditLabel.ParentBiDiMode = False
     Enabled = False
+    MaxLength = 25
     TabOrder = 0
     Text = 'ap-map'
     Visible = False
   end
   object lbledtTwo: TLabeledEdit
-    Left = 352
+    Left = 299
     Top = 80
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
     EditLabel.Height = 13
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
     Enabled = False
+    MaxLength = 25
     TabOrder = 1
     Text = 'pyenv activate ap-dev'
     Visible = False
   end
   object lbledtThree: TLabeledEdit
-    Left = 352
+    Left = 299
     Top = 128
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
     EditLabel.Height = 13
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 3'
     Enabled = False
+    MaxLength = 25
     TabOrder = 2
     Text = 'exit'
     Visible = False
   end
   object lbledtSix: TLabeledEdit
-    Left = 592
+    Left = 539
     Top = 128
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
     EditLabel.Height = 13
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 6'
     Enabled = False
+    MaxLength = 25
     TabOrder = 3
     Text = 'root'
     Visible = False
   end
   object lbledtFive: TLabeledEdit
-    Left = 592
+    Left = 539
     Top = 80
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
     EditLabel.Height = 13
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 5'
     Enabled = False
+    MaxLength = 25
     TabOrder = 4
     Text = 'angtel'
     Visible = False
   end
   object lbledtFour: TLabeledEdit
-    Left = 592
+    Left = 539
     Top = 32
-    Width = 121
+    Width = 165
     Height = 21
     Alignment = taRightJustify
     EditLabel.Width = 54
     EditLabel.Height = 13
     EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 4'
     Enabled = False
+    MaxLength = 25
     TabOrder = 5
     Text = 'admin'
     Visible = False
@@ -15600,17 +15606,21 @@ object frmPrintSection: TfrmPrintSection
       object mniPrQR_StShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
         ImageIndex = 6
         OnClick = mniPrQR_StShowClick
       end
       object mniPrQR_Separator1: TMenuItem
         Caption = '-'
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
       end
       object mniPrQR_StPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
         ImageIndex = 11
+        OnClick = mniCorApplyClick
       end
       object mniPrQR_Separator2: TMenuItem
         Caption = '-'
@@ -15620,6 +15630,7 @@ object frmPrintSection: TfrmPrintSection
         Caption = #1057#1073#1088#1086#1089
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 12
+        OnClick = mniPrQR_StResetClick
       end
     end
     object mniPrQR_Advanced: TMenuItem
@@ -15631,20 +15642,26 @@ object frmPrintSection: TfrmPrintSection
         Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 13
+        OnClick = mniPrQR_AdApplyClick
       end
       object mniPrQR__AdShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
         ImageIndex = 6
+        OnClick = mniPrQR__AdShowClick
       end
       object mniPrQR_Separator3: TMenuItem
         Caption = '-'
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
       end
       object mniPrQR__AdPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100
         SubMenuImages = ilPrintSelection_24_sub
+        Enabled = False
         ImageIndex = 11
+        OnClick = mniPrQR__AdPrintClick
       end
       object mniPrQR_Separator4: TMenuItem
         Caption = '-'
@@ -15654,6 +15671,7 @@ object frmPrintSection: TfrmPrintSection
         Caption = #1057#1073#1088#1086#1089
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 12
+        OnClick = mniPrQR_StResetClick
       end
     end
   end
