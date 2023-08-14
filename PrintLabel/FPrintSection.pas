@@ -94,12 +94,6 @@ type
     mmPrintQR: TMainMenu;
     mniPrQR_Standart: TMenuItem;
     mniPrQR_Advanced: TMenuItem;
-    lbledtOne: TLabeledEdit;
-    lbledtTwo: TLabeledEdit;
-    lbledtThree: TLabeledEdit;
-    lbledtSix: TLabeledEdit;
-    lbledtFive: TLabeledEdit;
-    lbledtFour: TLabeledEdit;
     mniPrQR_StApply: TMenuItem;
     mniPrQR_StShow: TMenuItem;
     mniPrQR_Separator1: TMenuItem;
@@ -112,6 +106,13 @@ type
     mniPrQR__AdPrint: TMenuItem;
     mniPrQR_Separator4: TMenuItem;
     mniPrQR__AdReset: TMenuItem;
+    pnlAdv: TPanel;
+    lbledtOne: TLabeledEdit;
+    lbledtTwo: TLabeledEdit;
+    lbledtThree: TLabeledEdit;
+    lbledtFour: TLabeledEdit;
+    lbledtFive: TLabeledEdit;
+    lbledtSix: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -387,16 +388,18 @@ begin
 
 end;
 
-
 procedure TfrmPrintSection.mniPrQR_AdvancedClick(Sender: TObject);
 begin
-  frmPrintSection.lbledtOne.Enabled := True;
-  frmPrintSection.lbledtTwo.Enabled := True;
-  frmPrintSection.lbledtThree.Enabled := True;
-  frmPrintSection.lbledtFour.Enabled := True;
-  frmPrintSection.lbledtFive.Enabled := True;
-  frmPrintSection.lbledtSix.Enabled := True;
+  pnlAdv.Enabled := True;
+  if lbledtOne.CanFocus then
+    lbledtOne.SetFocus;
 end;
+
+
+
+
+
+
 
 
 // вызываем печать
@@ -734,16 +737,33 @@ begin
   frmFR_List.frxRe.ShowReport();
   frmFR_List.frxRe.Print;
 end;
-
 // расширенный бланк - выполнить
 procedure TfrmPrintSection.mniPrQR_AdApplyClick(Sender: TObject);
 begin
+  // гасим и зажигаем необходимые пункты
+  mniPrQR_AdApply.Enabled := False;
+  pnlAdv.Enabled := False;
 
-  (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
+   // присваиваем переменным f_posX - начальные значения
+  f_pos1 := lbledtOne.Text;
+  f_pos2 := lbledtTwo.Text;
+  f_pos3 := lbledtThree.Text;
+  f_pos4 := lbledtFour.Text;
+  f_pos5 := lbledtFive.Text;
+  f_pos6 := lbledtSix.Text;
+
+
+
+  // считываем стандартные поля
   (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
   (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
   (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
-end;
+
+  // прописываем переменные в короткие qr-кода
+   (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp
+
+  end;
+
 
 // просмотр расширенный бланк
 
@@ -759,15 +779,26 @@ begin
   frmFR_List.frxRe_adv.ShowReport();
   frmFR_List.frxRe_adv.Print;
 end;
-
-
-
 // сброс стандартного и расширенного бланка
+
 procedure TfrmPrintSection.mniPrQR_StResetClick(Sender: TObject);
 var
   i: Integer;
 begin
+     // гасим и зажигаем необходимые пункты
+  mniPrQR_StApply.Enabled := True;
+  mniPrQR_StShow.Enabled := False;
 
+  mniPrQR_AdApply.Enabled := True;
+  pnlAdv.Enabled := True;
+
+  // присваиваем TLabelEdit - начальные значения
+  lbledtOne.Text := 'ap-map';
+  lbledtTwo.Text := 'pyenv activate ap-dev';
+  lbledtThree.Text := 'exit';
+  lbledtFour.Text := 'admin';
+  lbledtFive.Text := 'angtel';
+  lbledtSix.Text := 'root';
 end;
 
 end.

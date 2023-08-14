@@ -26,7 +26,6 @@ object frmFR_List: TfrmFR_List
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitHeight = 590
   end
   object frxRe: TfrxReport
     Version = '6.9.3'
@@ -145,8 +144,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 45.354360000000000000
-          Width = 37.795275590000040000
-          Height = 37.795275590000040000
+          Width = 84.000000000000000000
+          Height = 84.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -192,8 +191,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 268.346630000000000000
           Top = 181.417440000000000000
-          Width = 52.913385830000000000
-          Height = 52.913385830000000000
+          Width = 100.000000000000000000
+          Height = 100.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -394,7 +393,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45149.669901724530000000
+    ReportOptions.LastChange = 45152.453409733800000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -753,7 +752,7 @@ object frmFR_List: TfrmFR_List
           ParentFont = False
           VAlign = vaCenter
         end
-        object Barcode2D1: TfrxBarcode2DView
+        object bcExit: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 37.795300000000000000
           Top = 778.583180000000000000
@@ -772,11 +771,16 @@ object frmFR_List: TfrmFR_List
           ShowText = False
           HexData = '6500780069007400'
           Zoom = 0.600000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = []
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack
         end
-        object Barcode2D2: TfrxBarcode2DView
+        object bcRoot: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
           Top = 778.583180000000000000
@@ -795,6 +799,11 @@ object frmFR_List: TfrmFR_List
           ShowText = False
           HexData = '72006F006F007400'
           Zoom = 0.600000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = []
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack

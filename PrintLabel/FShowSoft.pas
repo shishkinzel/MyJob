@@ -164,6 +164,7 @@ begin
     mniSetPlace.Visible := False;          // гасим пункт - "–абочее место"
     mniReadingLostSoft.Enabled := True;
     chkOrd_13.Checked := True;
+    btnCount.Enabled := True;
     // гасим выбор рабочего места
     lbl_Place.Caption := 'ѕоле не заполн€етс€';
     lbl_Place.Enabled := False;
@@ -174,6 +175,7 @@ begin
     mniSetPlace.Visible := True;
     mniReadingLostSoft.Enabled := False;
     chkOrd_13.Checked := False;
+    btnCount.Enabled := False;
         // зажигаем выбор рабочего места
     lbl_Place.Caption := '–абочее место не выбрано';
     lbl_Place.Enabled := True;

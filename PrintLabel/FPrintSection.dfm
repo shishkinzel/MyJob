@@ -13247,98 +13247,100 @@ object frmPrintSection: TfrmPrintSection
     Font.Style = [fsItalic]
     ParentFont = False
   end
-  object lbledtOne: TLabeledEdit
-    Left = 299
-    Top = 32
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Cursor = crHandPoint
-    EditLabel.BiDiMode = bdLeftToRight
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
-    EditLabel.ParentBiDiMode = False
+  object pnlAdv: TPanel
+    Left = 291
+    Top = 8
+    Width = 441
+    Height = 153
     Enabled = False
-    MaxLength = 25
     TabOrder = 0
-    Text = 'ap-map'
-    Visible = False
-  end
-  object lbledtTwo: TLabeledEdit
-    Left = 299
-    Top = 80
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
-    Enabled = False
-    MaxLength = 25
-    TabOrder = 1
-    Text = 'pyenv activate ap-dev'
-    Visible = False
-  end
-  object lbledtThree: TLabeledEdit
-    Left = 299
-    Top = 128
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 3'
-    Enabled = False
-    MaxLength = 25
-    TabOrder = 2
-    Text = 'exit'
-    Visible = False
-  end
-  object lbledtSix: TLabeledEdit
-    Left = 539
-    Top = 128
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 6'
-    Enabled = False
-    MaxLength = 25
-    TabOrder = 3
-    Text = 'root'
-    Visible = False
-  end
-  object lbledtFive: TLabeledEdit
-    Left = 539
-    Top = 80
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 5'
-    Enabled = False
-    MaxLength = 25
-    TabOrder = 4
-    Text = 'angtel'
-    Visible = False
-  end
-  object lbledtFour: TLabeledEdit
-    Left = 539
-    Top = 32
-    Width = 165
-    Height = 21
-    Alignment = taRightJustify
-    EditLabel.Width = 54
-    EditLabel.Height = 13
-    EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 4'
-    Enabled = False
-    MaxLength = 25
-    TabOrder = 5
-    Text = 'admin'
-    Visible = False
+    object lbledtOne: TLabeledEdit
+      Left = 16
+      Top = 16
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Cursor = crHandPoint
+      EditLabel.BiDiMode = bdLeftToRight
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
+      EditLabel.ParentBiDiMode = False
+      MaxLength = 25
+      TabOrder = 0
+      Text = 'ap-map'
+      Visible = False
+    end
+    object lbledtTwo: TLabeledEdit
+      Left = 16
+      Top = 56
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
+      MaxLength = 25
+      TabOrder = 1
+      Text = 'pyenv activate ap-dev'
+      Visible = False
+    end
+    object lbledtThree: TLabeledEdit
+      Left = 16
+      Top = 95
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 3'
+      MaxLength = 25
+      TabOrder = 2
+      Text = 'exit'
+      Visible = False
+    end
+    object lbledtFour: TLabeledEdit
+      Left = 251
+      Top = 16
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 4'
+      MaxLength = 25
+      TabOrder = 3
+      Text = 'admin'
+      Visible = False
+    end
+    object lbledtFive: TLabeledEdit
+      Left = 252
+      Top = 56
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 5'
+      MaxLength = 25
+      TabOrder = 4
+      Text = 'angtel'
+      Visible = False
+    end
+    object lbledtSix: TLabeledEdit
+      Left = 252
+      Top = 95
+      Width = 165
+      Height = 21
+      Alignment = taRightJustify
+      EditLabel.Width = 54
+      EditLabel.Height = 13
+      EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 6'
+      MaxLength = 25
+      TabOrder = 5
+      Text = 'root'
+      Visible = False
+    end
   end
   object mmPrintSection: TMainMenu
     Images = ilPrintSelection_16
