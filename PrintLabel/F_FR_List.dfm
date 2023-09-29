@@ -37,7 +37,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45149.641372743060000000
+    ReportOptions.LastChange = 45198.631282395800000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -136,7 +136,7 @@ object frmFR_List: TfrmFR_List
           HAlign = haCenter
           Memo.UTF8W = (
             #1040#1082#1090#1080#1074#1072#1094#1080#1103' USB-blaster'
-            'ap-map')
+            'ap map')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -144,8 +144,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 45.354360000000000000
-          Width = 84.000000000000000000
-          Height = 84.000000000000000000
+          Width = 37.795275590000040000
+          Height = 37.795275590000040000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -156,7 +156,7 @@ object frmFR_List: TfrmFR_List
           Frame.Typ = []
           Rotation = 0
           ShowText = False
-          HexData = '610070002D006D0061007000'
+          HexData = '6100700020006D0061007000'
           Zoom = 0.449943757023810000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -191,8 +191,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 268.346630000000000000
           Top = 181.417440000000000000
-          Width = 100.000000000000000000
-          Height = 100.000000000000000000
+          Width = 52.913385830000000000
+          Height = 52.913385830000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -292,8 +292,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 495.118430000000000000
           Top = 396.850650000000000000
-          Width = 151.181102360000000000
-          Height = 151.181102360000000000
+          Width = 151.181102360000200000
+          Height = 151.181102360000200000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -306,7 +306,7 @@ object frmFR_List: TfrmFR_List
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 1.799775028095238000
+          Zoom = 1.799775028095240000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -393,7 +393,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45152.453409733800000000
+    ReportOptions.LastChange = 45198.633069641200000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -458,7 +458,7 @@ object frmFR_List: TfrmFR_List
           HAlign = haCenter
           Memo.UTF8W = (
             #1040#1082#1090#1080#1074#1072#1094#1080#1103' USB-blaster'
-            'ap-map')
+            'ap map')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -478,7 +478,7 @@ object frmFR_List: TfrmFR_List
           Frame.Typ = []
           Rotation = 0
           ShowText = False
-          HexData = '610070002D006D0061007000'
+          HexData = '6100700020006D0061007000'
           Zoom = 0.600000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
