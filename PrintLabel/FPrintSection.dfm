@@ -15622,7 +15622,7 @@ object frmPrintSection: TfrmPrintSection
         SubMenuImages = ilPrintSelection_24_sub
         Enabled = False
         ImageIndex = 11
-        OnClick = mniCorApplyClick
+        OnClick = mniPrQR_StPrintClick
       end
       object mniPrQR_Separator2: TMenuItem
         Caption = '-'

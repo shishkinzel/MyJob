@@ -744,6 +744,8 @@ begin
   mniPrQR_AdApply.Enabled := False;
   pnlAdv.Enabled := False;
 
+  mniPrQR__AdShow.Enabled := True;
+
    // присваиваем переменным f_posX - начальные значения
   f_pos1 := lbledtOne.Text;
   f_pos2 := lbledtTwo.Text;

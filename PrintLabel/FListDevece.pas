@@ -39,12 +39,14 @@ type
     fdDevnum: TFDAutoIncField;
     fdDevnameDev: TStringField;
     fdDevnamePack: TStringField;
+    btnReset: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure dbgMainDblClick(Sender: TObject);
     procedure btnFormClick(Sender: TObject);
+    procedure btnResetClick(Sender: TObject);
 
 
 
@@ -56,6 +58,8 @@ type
       csDev = 'Наименование устройства на СГП';
       csMod = 'Наименование модуля на СК';
 
+      csDev_ed = 'Введите наименование устройства';
+      csMod_ed = 'Введите наименование комплекта';
     var
       fileDevice: TextFile;
       fileModule: TextFile;
@@ -105,10 +109,14 @@ end;
 
 
 {добавляем запись в таблицу}
-
-
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 begin
+ // проверить наличие изменений в полях ввода
+  if not (edtDev.Modified and edtPack.Modified) then
+    Abort;
+
+  if (edtDev.Text = '') or (edtPack.Text = '') then
+    Abort;
 
  with dbgMain.DataSource.DataSet do
  begin
@@ -163,6 +171,16 @@ f_param := caNone;
   end;
 
 end;
+
+// сбросить данные из полей ввода
+procedure TfrmListDevice.btnResetClick(Sender: TObject);
+var
+i : Integer;
+begin
+  edtDev.Text := csDev_ed;
+  edtPack.Text := csMod_ed;
+end;
+
 {добавление в поля edit из таблицы}
 
 procedure TfrmListDevice.dbgMainDblClick(Sender: TObject);

@@ -12710,6 +12710,15 @@ object frmListDevice: TfrmListDevice
         TabOrder = 3
         OnClick = btnFormClick
       end
+      object btnReset: TBitBtn
+        Left = 280
+        Top = 208
+        Width = 120
+        Height = 25
+        Caption = #1057#1073#1088#1086#1089#1080#1090#1100' '#1076#1072#1085#1085#1099#1077
+        TabOrder = 4
+        OnClick = btnResetClick
+      end
     end
     object pnlTabl: TPanel
       Left = 1

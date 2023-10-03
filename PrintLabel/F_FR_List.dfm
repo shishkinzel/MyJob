@@ -614,8 +614,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 495.118430000000000000
           Top = 396.850650000000000000
-          Width = 151.181102360000000000
-          Height = 151.181102360000000000
+          Width = 151.181102360000200000
+          Height = 151.181102360000200000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -628,7 +628,7 @@ object frmFR_List: TfrmFR_List
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 1.799775028095238000
+          Zoom = 1.799775028095240000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
