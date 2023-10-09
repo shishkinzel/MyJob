@@ -144,8 +144,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 45.354360000000000000
-          Width = 37.795275590000040000
-          Height = 37.795275590000040000
+          Width = 84.000000000000000000
+          Height = 84.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -191,8 +191,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 268.346630000000000000
           Top = 181.417440000000000000
-          Width = 52.913385830000000000
-          Height = 52.913385830000000000
+          Width = 100.000000000000000000
+          Height = 100.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -393,7 +393,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45198.633069641200000000
+    ReportOptions.LastChange = 45208.454669884260000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -489,7 +489,7 @@ object frmFR_List: TfrmFR_List
           QuietZone = 0
           ColorBar = clBlack
         end
-        object memTitle_pyton: TfrxMemoView
+        object memTitle_python: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
           Top = 166.299320000000000000
@@ -508,7 +508,7 @@ object frmFR_List: TfrmFR_List
           ParentFont = False
           VAlign = vaCenter
         end
-        object bq_pyton: TfrxBarcode2DView
+        object bq_python: TfrxBarcode2DView
           AllowVectorExport = True
           ShiftMode = smDontShift
           Left = 264.567100000000000000
@@ -610,12 +610,12 @@ object frmFR_List: TfrmFR_List
             #1052#1077#1089#1090#1086' '#1076#1083#1103' QR-'#1082#1086#1076#1072)
           ParentFont = False
         end
-        object bcPlace: TfrxBarcode2DView
+        object bq_Place: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 495.118430000000000000
           Top = 396.850650000000000000
-          Width = 151.181102360000200000
-          Height = 151.181102360000200000
+          Width = 151.181102360000000000
+          Height = 151.181102360000000000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -628,7 +628,7 @@ object frmFR_List: TfrmFR_List
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 1.799775028095240000
+          Zoom = 1.799775028095238000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -672,7 +672,7 @@ object frmFR_List: TfrmFR_List
           ParentFont = False
           VAlign = vaCenter
         end
-        object bcAdmin: TfrxBarcode2DView
+        object bq_Admin: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
           Top = 79.370130000000000000
@@ -695,7 +695,7 @@ object frmFR_List: TfrmFR_List
           QuietZone = 0
           ColorBar = clBlack
         end
-        object bcAngtel: TfrxBarcode2DView
+        object bq_Angtel: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
           Top = 185.196970000000000000
@@ -752,7 +752,7 @@ object frmFR_List: TfrmFR_List
           ParentFont = False
           VAlign = vaCenter
         end
-        object bcExit: TfrxBarcode2DView
+        object bq_Exit: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 37.795300000000000000
           Top = 778.583180000000000000
@@ -780,7 +780,7 @@ object frmFR_List: TfrmFR_List
           QuietZone = 0
           ColorBar = clBlack
         end
-        object bcRoot: TfrxBarcode2DView
+        object bq_Root: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
           Top = 778.583180000000000000
