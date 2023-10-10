@@ -12727,24 +12727,6 @@ object frmListDevice: TfrmListDevice
       Height = 197
       Align = alClient
       TabOrder = 2
-      object dbgMain: TDBGridEh
-        Left = 1
-        Top = 26
-        Width = 680
-        Height = 170
-        Cursor = crHandPoint
-        Align = alClient
-        ColumnDefValues.Layout = tlCenter
-        ColumnDefValues.Title.Alignment = taCenter
-        DataSource = dsDev
-        DynProps = <>
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
-        TabOrder = 1
-        OnDblClick = dbgMainDblClick
-        object RowDetailData: TRowDetailPanelControlEh
-        end
-      end
       object dbnMain: TDBNavigator
         Left = 1
         Top = 1
@@ -12754,6 +12736,20 @@ object frmListDevice: TfrmListDevice
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbCancel, nbRefresh]
         Align = alTop
         TabOrder = 0
+      end
+      object dbgMain: TDBGrid
+        Left = 1
+        Top = 26
+        Width = 680
+        Height = 170
+        Align = alClient
+        DataSource = dsDev
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
       end
     end
   end

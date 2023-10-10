@@ -8,9 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
-  FireDAC.Stan.StorageJSON;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON;
 
 type
   TfrmListDevice = class(TForm)
@@ -26,7 +24,6 @@ type
     splDown: TSplitter;
     pnlTabl: TPanel;
     dbnMain: TDBNavigator;
-    dbgMain: TDBGridEh;
     txtTitle: TStaticText;
     lbl_TitleDev: TLabel;
     lbl_TitlePack: TLabel;
@@ -40,6 +37,7 @@ type
     fdDevnameDev: TStringField;
     fdDevnamePack: TStringField;
     btnReset: TBitBtn;
+    dbgMain: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
