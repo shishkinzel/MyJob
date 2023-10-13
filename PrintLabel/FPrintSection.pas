@@ -84,13 +84,6 @@ type
     mniN43x25ST: TMenuItem;
     mniN43x25Sh: TMenuItem;
     mniN43x25Print: TMenuItem;
-    mniServeceMain: TMenuItem;
-    mniServeceSetting: TMenuItem;
-    mniServeceShow: TMenuItem;
-    mniServecePrint: TMenuItem;
-    mniServeceSep3: TMenuItem;
-    mniServeceSep1: TMenuItem;
-    mniServeceReset: TMenuItem;
     mmPrintQR: TMainMenu;
     mniPrQR_Standart: TMenuItem;
     mniPrQR_Advanced: TMenuItem;

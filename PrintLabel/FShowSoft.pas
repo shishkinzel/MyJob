@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FMain,
-   Vcl.StdCtrls, Vcl.Menus, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+   Vcl.StdCtrls, Vcl.Menus, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.ComCtrls;
 
 type
   TfrmShowSoft = class(TForm)
@@ -48,6 +48,24 @@ type
     mniSeparator4: TMenuItem;
     mniApply: TMenuItem;
     chkScript: TCheckBox;
+    mniExtra_Main: TMenuItem;
+    mniExtra_Servece: TMenuItem;
+    mniExtra_Date: TMenuItem;
+    mniExtra_Scope: TMenuItem;
+    mniExtra_Separator1: TMenuItem;
+    mniExtra_Show: TMenuItem;
+    mniExtra_Print: TMenuItem;
+    mniExtra_Separator2: TMenuItem;
+    mniExtra_Reset: TMenuItem;
+    mniExtra_OpenCalendar: TMenuItem;
+    mniExtra_DataSeparator1: TMenuItem;
+    mniExtra_Apply: TMenuItem;
+    mniExtra_DataSeparator2: TMenuItem;
+    mniExtra_DataSeparator3: TMenuItem;
+    mniExtra_DateShow: TMenuItem;
+    mniExtra_DatePrint: TMenuItem;
+    mniExtra_DateReset: TMenuItem;
+    dtpDate: TDateTimePicker;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -66,6 +84,7 @@ type
     procedure btnApplyClick(Sender: TObject);
     procedure chkScriptClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure mniExtra_OpenCalendarClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -391,7 +410,16 @@ begin
 //    ModalResult := mrOk;
   end;
 end;
+//**************************************************************************************************
+// Работа с дополнительными функциями
 
+procedure TfrmShowSoft.mniExtra_OpenCalendarClick(Sender: TObject);
+begin
+  dtpDate.Visible := True;
+end;
+
+
+//**************************************************************************************************
 procedure TfrmShowSoft.btnCloseClick(Sender: TObject);
 begin
 Close;

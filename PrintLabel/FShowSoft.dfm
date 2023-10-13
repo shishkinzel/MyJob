@@ -13044,6 +13044,22 @@ object frmShowSoft: TfrmShowSoft
     TabOrder = 8
     OnClick = chkScriptClick
   end
+  object dtpDate: TDateTimePicker
+    Left = 496
+    Top = 240
+    Width = 186
+    Height = 27
+    Date = 45212.000000000000000000
+    Time = 0.735969409724930300
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 9
+    Visible = False
+  end
   object mmLoadSoft: TMainMenu
     Left = 16
     Top = 64
@@ -13141,6 +13157,58 @@ object frmShowSoft: TfrmShowSoft
         OnClick = mniColorBackGroundClick
       end
     end
+    object mniExtra_Main: TMenuItem
+      Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
+      object mniExtra_Servece: TMenuItem
+        Caption = #1056#1077#1084#1086#1085#1090
+        object mniExtra_Scope: TMenuItem
+          Caption = #1042#1074#1077#1089#1090#1080' '#1076#1080#1072#1087#1072#1079#1086#1085
+        end
+        object mniExtra_Separator1: TMenuItem
+          Caption = '-'
+        end
+        object mniExtra_Show: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+        end
+        object mniExtra_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+        end
+        object mniExtra_Separator2: TMenuItem
+          Caption = '-'
+        end
+        object mniExtra_Reset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+        end
+      end
+      object mniExtra_Date: TMenuItem
+        Caption = #1057#1090#1080#1082#1077#1088' '#1076#1072#1090#1099
+        object mniExtra_OpenCalendar: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1082#1072#1083#1077#1085#1076#1072#1088#1100
+          OnClick = mniExtra_OpenCalendarClick
+        end
+        object mniExtra_DataSeparator1: TMenuItem
+          Caption = '-'
+        end
+        object mniExtra_Apply: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        end
+        object mniExtra_DataSeparator2: TMenuItem
+          Caption = '-'
+        end
+        object mniExtra_DateShow: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+        end
+        object mniExtra_DatePrint: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+        end
+        object mniExtra_DataSeparator3: TMenuItem
+          Caption = '-'
+        end
+        object mniExtra_DateReset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+        end
+      end
+    end
   end
   object dlgSaveLoadSoft: TSaveDialog
     DefaultExt = 'code_txt'
@@ -13167,11 +13235,9 @@ object frmShowSoft: TfrmShowSoft
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Left = 680
-    Top = 272
+    Left = 592
   end
   object dlgColor: TColorDialog
-    Left = 632
-    Top = 272
+    Left = 544
   end
 end

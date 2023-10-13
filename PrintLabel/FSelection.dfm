@@ -13335,7 +13335,7 @@ object frmSelection: TfrmSelection
     Height = 40
     Cursor = crHandPoint
     DisabledImageIndex = 1
-    Caption = #1043#1077#1085#1077#1088#1072#1090#1086#1088' QR-'#1082#1086#1076#1072
+    Caption = #1043#1077#1085#1077#1088#1072#1090#1086#1088' QR-'#1082#1086#1076#1072' '#1080' '#1076#1088#1091#1075#1080#1077' '#1091#1090#1080#1083#1080#1090#1099
     ImageIndex = 19
     Images = ilSelection
     HotImageIndex = 2

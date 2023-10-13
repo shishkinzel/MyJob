@@ -12750,6 +12750,7 @@ object frmListDevice: TfrmListDevice
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = dbgMainDblClick
       end
     end
   end

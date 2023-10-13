@@ -13351,7 +13351,6 @@ object frmPrintSection: TfrmPrintSection
       SubMenuImages = ilPrintSelection_24_sub
       Enabled = False
       ImageIndex = 0
-      Visible = False
       object mniNlittle: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30_20'
         ImageIndex = 0
@@ -13542,37 +13541,6 @@ object frmPrintSection: TfrmPrintSection
       object mniNResetLab4: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         ImageIndex = 13
-        OnClick = mniNResetLab4Click
-      end
-    end
-    object mniServeceMain: TMenuItem
-      Caption = #1056#1077#1084#1086#1085#1090
-      ImageIndex = 0
-      Visible = False
-      object mniServeceSetting: TMenuItem
-        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-        ImageIndex = 8
-        OnClick = mniServeceSettingClick
-      end
-      object mniServeceSep1: TMenuItem
-        Caption = '-'
-      end
-      object mniServeceShow: TMenuItem
-        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-        Enabled = False
-        ImageIndex = 4
-      end
-      object mniServecePrint: TMenuItem
-        Caption = #1055#1077#1095#1072#1090#1100
-        Enabled = False
-        ImageIndex = 2
-      end
-      object mniServeceSep3: TMenuItem
-        Caption = '-'
-      end
-      object mniServeceReset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        ImageIndex = 5
         OnClick = mniNResetLab4Click
       end
     end

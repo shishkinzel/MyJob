@@ -115,6 +115,7 @@ procedure TfrmSelection.FormShow(Sender: TObject);
 var
   i: Integer;
 begin
+
 // Заполняем поля "Введеные данные устройства"
   for i := 0 to Self.ComponentCount - 1 do
   begin

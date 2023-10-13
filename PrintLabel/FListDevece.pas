@@ -140,10 +140,6 @@ end;
 
 // процедура выделения контуром
 
-
-
-
-
 {добавление на форму}
 procedure TfrmListDevice.btnFormClick(Sender: TObject);
 var

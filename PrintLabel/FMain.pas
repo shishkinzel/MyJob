@@ -279,6 +279,7 @@ begin
     edtDevice.Enabled := False;
     edtPackage.Enabled := False;
     btnDB.Enabled := False;
+
     if medtID.CanFocus then
       medtID.SetFocus;
   end;
@@ -310,7 +311,10 @@ end;
 procedure TfrmMain.btnSelectionClick(Sender: TObject);
 begin
   frmSelection := TfrmSelection.Create(nil);
-  frmSelection.btnLabel.Enabled := True;
+  if chkStiker.Checked  then
+    frmSelection.btnLabel.Enabled := False
+    else
+    frmSelection.btnLabel.Enabled := True;
 //  if chkQR_SOFT.Checked then
 //  begin
 //   MessageBox(Handle, Pchar('Прочие утилиты!'), cnAttention, MB_ICONINFORMATION + MB_OK);
