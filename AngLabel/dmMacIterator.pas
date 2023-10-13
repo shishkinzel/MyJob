@@ -3,7 +3,7 @@ unit dmMacIterator;
 interface
 
 uses
-  System.SysUtils, System.Classes;
+   System.StrUtils, System.SysUtils, System.Classes;
 
 type
   TDataModuleMacIterator = class(TDataModule)
@@ -18,6 +18,14 @@ type
     function ArrayToStringShort(var inArray: array of Byte): string;
     function ArrayToStringLong(var inArray: array of Byte): string;
     function ArrayToStringLongMAC(var inArray: array of Byte): string;
+    {-------------------------------------------------------------------------------
+  Функция: ReciveDate   - переворачивает дату в формате dd.mm.yyyy -> yyyy.mm.dd
+  Автор:    igor
+  Дата:  2023.10.13
+  Входные параметры: var v_date : string
+  Результат:    string
+-------------------------------------------------------------------------------}
+    function ReciveDate(var v_date : string) : string;
   end;
 
 
@@ -28,7 +36,7 @@ var
 implementation
 
 uses
-  MacAdressIterator;
+  MacAdressIterator, IdGlobal;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
@@ -128,6 +136,30 @@ begin
   inArray[0] := T2;
 end;
 
+function TDataModuleMacIterator.ReciveDate(var v_date: string): string;
+var
+  f_arr: array[0..2] of string;
+  tmp: string;
+  i: Integer;
+begin
+  tmp := v_date;
+  for i := 0 to 2 do
+  begin
+    f_arr[i] := Trim(Fetch(tmp, '.'))
+  end;
+
+  tmp := '';
+
+  for i := 2 downto 0 do
+  begin
+    tmp := tmp + f_arr[i] + '.';
+  end;
+
+  Delete(tmp, System.Length(tmp), 1);
+
+  Result := tmp;
+
+end;
 
 end.
 

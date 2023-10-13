@@ -12,6 +12,7 @@ type
     frpStickCheck: TfrxReport;
     rpLabService: TfrxReport;
     frdbService: TfrxDBDataset;
+    rpLabDate: TfrxReport;
   private
     { Private declarations }
   public

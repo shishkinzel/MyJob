@@ -557,6 +557,23 @@ object frmMAC: TfrmMAC
     TabOrder = 14
     OnClick = chkPrintTabClick
   end
+  object dtpMacAdress: TDateTimePicker
+    Left = 501
+    Top = 12
+    Width = 186
+    Height = 27
+    Date = 45212.000000000000000000
+    Time = 0.341203831019811300
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 16
+    Visible = False
+    OnClick = dtpMacAdressClick
+  end
   object mmMAC: TMainMenu
     Left = 16
     Top = 8
@@ -574,11 +591,45 @@ object frmMAC: TfrmMAC
       object mniSeparator0: TMenuItem
         Caption = '-'
       end
+      object mniDate_Main: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100' '#1089#1090#1080#1082#1077#1088' '#1076#1072#1090#1099
+        object mniDate_Calendar: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1082#1072#1083#1077#1085#1076#1072#1088#1100
+          OnClick = mniDate_CalendarClick
+        end
+        object mniDate_Apply: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          OnClick = mniDate_ApplyClick
+        end
+        object mniPrint_DateSeparator1: TMenuItem
+          Caption = '-'
+        end
+        object mniDate_Show: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          Enabled = False
+          OnClick = mniDate_ShowClick
+        end
+        object mniDate_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniDate_PrintClick
+        end
+        object mniPrint_DateSeparator2: TMenuItem
+          Caption = '-'
+        end
+        object mniDate_Reset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          OnClick = mniResetRangeClick
+        end
+      end
       object mniService: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1072#1090#1100' '#1085#1086#1084#1077#1088#1082#1080' '#1076#1083#1103' '#1088#1077#1084#1086#1085#1090#1072
         object mniRange: TMenuItem
           Caption = #1042#1074#1077#1089#1090#1080' '#1076#1080#1072#1087#1072#1079#1086#1085
           OnClick = mniRangeClick
+        end
+        object mniServeceSeparator1: TMenuItem
+          Caption = '-'
         end
         object mniSh_range: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
@@ -1038,8 +1089,8 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 464
-    Top = 8
+    Left = 16
+    Top = 208
     object fdmtblTitlenameDevice: TStringField
       DisplayWidth = 9
       FieldName = 'nameDevice'
@@ -1103,8 +1154,8 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 648
-    Top = 8
+    Left = 160
+    Top = 208
     object smlntfldBarCodeNumber: TSmallintField
       FieldName = 'Number'
       MaxValue = 999
@@ -1279,8 +1330,8 @@ object frmMAC: TfrmMAC
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 552
-    Top = 8
+    Left = 96
+    Top = 208
     object fmTab_Gen_ORnumber: TIntegerField
       DisplayWidth = 7
       FieldName = 'number'

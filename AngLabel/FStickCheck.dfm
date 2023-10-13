@@ -48,8 +48,8 @@ object frmStickCheck: TfrmStickCheck
       'begin'
       ''
       'end.')
-    Left = 32
-    Top = 118
+    Left = 16
+    Top = 30
     Datasets = <
       item
         DataSetName = 'db_Shild'
@@ -116,8 +116,8 @@ object frmStickCheck: TfrmStickCheck
       'begin'
       ''
       'end.')
-    Left = 32
-    Top = 190
+    Left = 16
+    Top = 94
     Datasets = <
       item
         DataSet = frdbService
@@ -182,7 +182,73 @@ object frmStickCheck: TfrmStickCheck
     CloseDataSource = False
     DataSet = frmMAC.fdService
     BCDToCurrency = False
-    Left = 32
-    Top = 294
+    Left = 16
+    Top = 174
+  end
+  object rpLabDate: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = fpStickCheck
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = '\\Angwork_print\TE200_576'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44758.573734583300000000
+    ReportOptions.LastChange = 45212.685614212960000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 88
+    Top = 94
+    Datasets = <
+      item
+        DataSet = frdbService
+        DataSetName = 'frxService'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pLabDate: TfrxReportPage
+      PaperWidth = 27.000000000000000000
+      PaperHeight = 9.900000000000000000
+      PaperSize = 256
+      LeftMargin = 0.500000000000000000
+      RightMargin = 0.500000000000000000
+      TopMargin = 0.750000000000000000
+      BottomMargin = 0.500000000000000000
+      Frame.Typ = []
+      Frame.Width = 0.100000000000000000
+      MirrorMode = []
+      object memDate: TfrxMemoView
+        Align = baClient
+        AllowVectorExport = True
+        Width = 98.267780000000000000
+        Height = 32.692934500000000000
+        StretchMode = smMaxHeight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -24
+        Font.Name = 'Monochrome'
+        Font.Style = []
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          '0000.00.00')
+        ParentFont = False
+        WordWrap = False
+        VAlign = vaCenter
+      end
+    end
   end
 end

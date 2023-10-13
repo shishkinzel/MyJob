@@ -12,7 +12,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
   FfrAdvacedLabel, FStickCheck,
-  FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls;
+  FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls, Vcl.ComCtrls;
 
 
 type
@@ -197,6 +197,16 @@ type
     fdServicenumber: TStringField;
     mniSeparator01: TMenuItem;
     mniResetRange: TMenuItem;
+    dtpMacAdress: TDateTimePicker;
+    mniDate_Main: TMenuItem;
+    mniDate_Apply: TMenuItem;
+    mniPrint_DateSeparator1: TMenuItem;
+    mniServeceSeparator1: TMenuItem;
+    mniDate_Show: TMenuItem;
+    mniDate_Print: TMenuItem;
+    mniPrint_DateSeparator2: TMenuItem;
+    mniDate_Reset: TMenuItem;
+    mniDate_Calendar: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -259,6 +269,11 @@ type
     procedure mniSh_rangeClick(Sender: TObject);
     procedure mniPr_rangeClick(Sender: TObject);
     procedure mniResetRangeClick(Sender: TObject);
+    procedure mniDate_CalendarClick(Sender: TObject);
+    procedure mniDate_ApplyClick(Sender: TObject);
+    procedure mniDate_ShowClick(Sender: TObject);
+    procedure mniDate_PrintClick(Sender: TObject);
+    procedure dtpMacAdressClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -381,7 +396,6 @@ begin
 
 // назначаем переменной  f_power - запись по умолчанию
   f_power := 'Значение ИП не выбранно';
-
 end;
 
 procedure TfrmMAC.FormShow(Sender: TObject);
@@ -1570,6 +1584,7 @@ begin
 end;
 
 // экспорт для Топаз
+
 procedure TfrmMAC.mniDOC_IDandMACClick(Sender: TObject);
 begin
   frmFR_IDandMAC.reportIDandMAC.ShowReport();
@@ -2004,6 +2019,8 @@ end;
 // просмотр
 
 procedure TfrmMAC.mniSh_rangeClick(Sender: TObject);
+var
+  f_checked: Integer;
 begin
      // задаем место открытие окна
   frmStickCheck.Top := 5;
@@ -2013,14 +2030,13 @@ begin
   mniPr_range.Enabled := True;
 
   // позже реализуем выбор шрифта       &&&&&&&&&&&&&&&&&&&&&&&&??????????????????????
-   {  TODO
-   }
+
+//     f_checked := StrToIntDef(InputBox('Ввод размера шрифта','Введите размер шрифта','14'), 14);
+
   frmStickCheck.Show;
   frmStickCheck.rpLabService.ShowReport();
 
 end;
-
-
 // печать
 procedure TfrmMAC.mniPr_rangeClick(Sender: TObject);
 begin
@@ -2034,11 +2050,19 @@ end;
 // сброс
 procedure TfrmMAC.mniResetRangeClick(Sender: TObject);
 begin
- // гасим и зажигаем необхдимые пункты меня
+ // гасим и зажигаем необходимые пункты меня
   mniRange.Enabled := True;
   mniSh_range.Enabled := False;
   mniPr_range.Enabled := False;
   mniResetRange.Enabled := False;
+ // дата
+    dtpMacAdress.Visible := False;
+
+    mniDate_Apply.Enabled := True;
+    mniDate_Show.Enabled := False;
+    mniDate_Print.Enabled := False;
+    mniDate_Calendar.Enabled := True;
+
 
  // закрытие отчетов
     frmStickCheck.Close;
@@ -2046,11 +2070,72 @@ begin
     frmStickCheck.rpLabService.PreviewPages.Clear;
 
 end;
+// конец блока печати номера ремонта ***************************************************************
+//**************************************************************************************************
+// начало блока печати стикера даты
+procedure TfrmMAC.mniDate_CalendarClick(Sender: TObject);
+begin
+  dtpMacAdress.Visible := True;
+end;
+// apply
+
+procedure TfrmMAC.mniDate_ApplyClick(Sender: TObject);
+begin
+  dtpMacAdress.Visible := False;     // выключаем календарь
+
+  mniDate_Apply.Enabled := False;
+  mniDate_Show.Enabled := True;
+  mniDate_Print.Enabled := True;
+end;
+// show
+procedure TfrmMAC.mniDate_ShowClick(Sender: TObject);
+var
+  f_checked: Integer;
+  f_date : string;
+begin
+// задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+
+  f_date := DateToStr(dtpMacAdress.Date);
+
+    f_date := DataModuleMacIterator.ReciveDate(f_date);
+
+  if f_date = '' then
+    f_date := '0000.00.00';
 
 
+  f_checked := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 16 до 22', '18'), 18);
+
+// проверка
+  if not (f_checked in [16..22]) then
+    f_checked := 18;
+
+  (frmStickCheck.rpLabDate.FindObject('memDate') as TfrxMemoView).Font.Size := f_checked;
+  (frmStickCheck.rpLabDate.FindObject('memDate') as TfrxMemoView).Text := f_date;
+
+  frmStickCheck.Show;
+  frmStickCheck.rpLabDate.ShowReport();
+end;
+// print
+
+procedure TfrmMAC.mniDate_PrintClick(Sender: TObject);
+begin
+// задаем принтер по умолчанию
+  frmStickCheck.rpLabDate.Report.PrintOptions.Printer := f_print_576;
+
+  frmStickCheck.rpLabDate.ShowReport();
+  frmStickCheck.rpLabDate.Print;
+end;
+//  выбор даты в календаре
+procedure TfrmMAC.dtpMacAdressClick(Sender: TObject);
+begin
+  mniDate_Calendar.Enabled := False;
+end;
 
 
-// конец блока печати номера ремонта ************************************************
+// конец блока печати стикера даты   ***************************************************************
+
 
 // открытие формы со списком модулей и устройств
 
