@@ -22,6 +22,9 @@ type
     frdbLabSimple: TfrxDBDataset;
     frdbLabSticker: TfrxDBDataset;
     frxLabel_30_10: TfrxReport;
+    frp_LabService: TfrxReport;
+    frp_LabDate: TfrxReport;
+    fdb_LabService: TfrxDBDataset;
   private
     { Private declarations }
   public
@@ -34,7 +37,7 @@ var
 implementation
 
 uses
-  FPrintSection, FdbmPrintLabel;
+  FPrintSection, FdbmPrintLabel, FShowSoft;
 
 {$R *.dfm}
 

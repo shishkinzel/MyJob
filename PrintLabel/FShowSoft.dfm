@@ -13240,4 +13240,28 @@ object frmShowSoft: TfrmShowSoft
   object dlgColor: TColorDialog
     Left = 544
   end
+  object fdSevice: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'number'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 32
+    Top = 240
+    object fdSevicenumber: TStringField
+      FieldName = 'number'
+      Size = 10
+    end
+  end
 end
