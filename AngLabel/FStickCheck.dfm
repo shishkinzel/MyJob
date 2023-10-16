@@ -52,6 +52,7 @@ object frmStickCheck: TfrmStickCheck
     Top = 30
     Datasets = <
       item
+        DataSet = frmShild.db_Shild
         DataSetName = 'db_Shild'
       end>
     Variables = <>
