@@ -13163,21 +13163,27 @@ object frmShowSoft: TfrmShowSoft
         Caption = #1056#1077#1084#1086#1085#1090
         object mniExtra_Scope: TMenuItem
           Caption = #1042#1074#1077#1089#1090#1080' '#1076#1080#1072#1087#1072#1079#1086#1085
+          OnClick = mniExtra_ScopeClick
         end
         object mniExtra_Separator1: TMenuItem
           Caption = '-'
         end
         object mniExtra_Show: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          Enabled = False
+          OnClick = mniExtra_ShowClick
         end
         object mniExtra_Print: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniExtra_PrintClick
         end
         object mniExtra_Separator2: TMenuItem
           Caption = '-'
         end
         object mniExtra_Reset: TMenuItem
           Caption = #1057#1073#1088#1086#1089
+          OnClick = mniExtra_ResetClick
         end
       end
       object mniExtra_Date: TMenuItem
@@ -13191,15 +13197,18 @@ object frmShowSoft: TfrmShowSoft
         end
         object mniExtra_Apply: TMenuItem
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          Enabled = False
         end
         object mniExtra_DataSeparator2: TMenuItem
           Caption = '-'
         end
         object mniExtra_DateShow: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          Enabled = False
         end
         object mniExtra_DatePrint: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
         end
         object mniExtra_DataSeparator3: TMenuItem
           Caption = '-'
@@ -13240,7 +13249,7 @@ object frmShowSoft: TfrmShowSoft
   object dlgColor: TColorDialog
     Left = 544
   end
-  object fdSevice: TFDMemTable
+  object fdService: TFDMemTable
     Active = True
     FieldDefs = <
       item
@@ -13259,7 +13268,7 @@ object frmShowSoft: TfrmShowSoft
     StoreDefs = True
     Left = 32
     Top = 240
-    object fdSevicenumber: TStringField
+    object fdServicenumber: TStringField
       FieldName = 'number'
       Size = 10
     end

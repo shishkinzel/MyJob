@@ -68,8 +68,8 @@ type
     mniExtra_DatePrint: TMenuItem;
     mniExtra_DateReset: TMenuItem;
     dtpDate: TDateTimePicker;
-    fdSevice: TFDMemTable;
-    fdSevicenumber: TStringField;
+    fdService: TFDMemTable;
+    fdServicenumber: TStringField;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -89,8 +89,15 @@ type
     procedure chkScriptClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mniExtra_OpenCalendarClick(Sender: TObject);
+    procedure mniExtra_ScopeClick(Sender: TObject);
+    procedure mniExtra_ResetClick(Sender: TObject);
+    procedure mniExtra_ShowClick(Sender: TObject);
+    procedure mniExtra_PrintClick(Sender: TObject);
   private
     { Private declarations }
+
+    f_print_576: string;   // для печати даты и номера ремонта
+
     const
      f_str = 'department-';
       DIR_code = 'DIR_code';
@@ -113,7 +120,7 @@ var
 implementation
 
 uses
-  FSelection, FPrintSection,  // подключение форм
+  FSelection, FPrintSection, F_FR_Label, unit_ini, // подключение форм
   F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
 
 
@@ -124,9 +131,14 @@ uses
 // показ формы
 procedure TfrmShowSoft.FormShow(Sender: TObject);
 begin
+// подключаем принтер по умолчанию
+  IniOptions.LoadFromFile(f_print_config);
+  f_print_576 := IniOptions.f_print_576;
+
   f_nameDevice := frmMain.edtDevice.Text;
   edtDevice.Text := f_nameDevice;          // считываем наименование устройства
 end;
+
 
 //*************** Сейчас работаю
 {считать с memo}
@@ -420,8 +432,99 @@ end;
 procedure TfrmShowSoft.mniExtra_OpenCalendarClick(Sender: TObject);
 begin
   dtpDate.Visible := True;
+     mniExtra_Apply.Enabled := True;
+end;
+// блок печати номера ремонта и даты для паспорта на устройство ************************************
+
+procedure TfrmShowSoft.mniExtra_ScopeClick(Sender: TObject);  // ввод диапазона
+var
+  f_range: Integer;
+  f_startNumber: Integer;
+  i: Integer;
+begin
+// выбираем начальный номер и диапазон
+  f_startNumber := StrToIntDef(InputBox('Ввод начального номера ремонта', 'Введите номер ремонта', '1'), 1);
+  f_range := StrToIntDef(InputBox('Ввод диапазона ремонта', 'Введите диапазон от 1 до 100', '0'), 0);
+// открываем таблицу для записи
+  with fdService do
+  begin
+    Close;
+    Open;
+    First;
+    if f_range in [1..100] then
+    begin
+      for i := 0 to f_range - 1 do
+      begin
+        Append;
+        Fields[0].AsString := IntToStr(f_startNumber + i);
+        Next;
+      end;
+      mniExtra_Scope.Enabled := False;
+      mniExtra_Show.Enabled := True;
+    end
+    else
+    begin
+      ShowMessage('Некорректный ввод');
+    end;
+
+  end;
+end;
+// просмотр
+procedure TfrmShowSoft.mniExtra_ShowClick(Sender: TObject);
+var
+  f_checked: Integer;
+begin
+  // задаем место открытие окна
+  frmFR_Label.Top := 5;
+  frmFR_Label.Left := 5;
+  // гасим и зажигаем необходимые пункты меню
+  mniExtra_Show.Enabled := False;
+  mniExtra_Print.Enabled := True;
+
+   // выбираем шрифт печати
+  f_checked := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 16 до 22', '18'), 18);
+
+  // проверка
+  if not (f_checked in [16..22]) then
+  begin
+       f_checked := 18;
+       ShowMessage('Размер шрифта установлен по умолчанию - 18');
+  end;
+
+   // устанавливаем шрифт
+   (frmFR_Label.frp_LabService.FindObject('memText') as TfrxMemoView).Font.Size := f_checked;
+
+   // выводим отчет
+   frmFR_Label.Show;
+   frmFR_Label.frp_LabService.ShowReport();
+
+end;
+// печать
+
+procedure TfrmShowSoft.mniExtra_PrintClick(Sender: TObject);
+begin
+    // задаем принтер по умолчанию
+  frmFR_Label.frp_LabService.Report.PrintOptions.Printer := f_print_576;
+
+  frmFR_Label.frp_LabService.ShowReport();
+  frmFR_Label.frp_LabService.Print;
 end;
 
+
+// общий сброс Дополнительных окон
+procedure TfrmShowSoft.mniExtra_ResetClick(Sender: TObject);
+begin
+ // гасим и зажигаем необходимые пункты меню
+  mniExtra_Scope.Enabled := True;
+  mniExtra_Show.Enabled := False;
+
+
+end;
+
+
+
+
+// конец блока номера ремонта и даты ***************************************************************
 
 //**************************************************************************************************
 procedure TfrmShowSoft.btnCloseClick(Sender: TObject);
@@ -430,4 +533,6 @@ Close;
 end;
 
 end.
+
+
 

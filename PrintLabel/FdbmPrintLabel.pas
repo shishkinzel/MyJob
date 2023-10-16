@@ -35,7 +35,14 @@ type
 function HexStrToInt(const str: string): Integer;
 function ArrayToString(var inArray: array of Byte): string;
 function ArrayToString_MAC(var inArray: array of Byte): string;
-
+{-------------------------------------------------------------------------------
+  Функция: ReciveDate
+  Автор:    igor
+  Дата:  2023.10.16
+  Входные параметры: var v_date : string
+  Результат:    string
+-------------------------------------------------------------------------------}
+function ReciveDate(var v_date : string) : string;
 
 procedure IncArrayOne(var inArray: array of Byte);
 procedure Print_mac_id (const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable);
@@ -264,7 +271,30 @@ begin
     f_arr[i] := '';
 end;
 
+function ReciveDate(var v_date: string): string;
+var
+  f_arr: array[0..2] of string;
+  tmp: string;
+  i: Integer;
+begin
+  tmp := v_date;
+  for i := 0 to 2 do
+  begin
+    f_arr[i] := Trim(Fetch(tmp, '.'))
+  end;
 
+  tmp := '';
+
+  for i := 2 downto 0 do
+  begin
+    tmp := tmp + f_arr[i] + '.';
+  end;
+
+  Delete(tmp, System.Length(tmp), 1);
+
+  Result := tmp;
+
+end;
 
 
 end.

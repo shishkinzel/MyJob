@@ -139,7 +139,6 @@ type
     procedure mniPrQR__AdShowClick(Sender: TObject);
     procedure mniPrQR__AdPrintClick(Sender: TObject);
     procedure mniPrQR_StResetClick(Sender: TObject);
-
   private
     { Private declarations }
     var
@@ -147,15 +146,16 @@ type
       f_print_940: string;
       f_print_908: string;
       f_print_2824: string;
+
   public
-    { Public declarations }
+        { Public declarations }
     var
-    f_pos1 : string;         // переменные для qr-кода
-    f_pos2 : string;         // переменные для qr-кода
-    f_pos3 : string;         // переменные для qr-кода
-    f_pos4 : string;         // переменные для qr-кода
-    f_pos5 : string;         // переменные для qr-кода
-    f_pos6 : string;         // переменные для qr-кода
+      f_pos1: string;         // переменные для qr-кода
+      f_pos2: string;         // переменные для qr-кода
+      f_pos3: string;         // переменные для qr-кода
+      f_pos4: string;         // переменные для qr-кода
+      f_pos5: string;         // переменные для qr-кода
+      f_pos6: string;         // переменные для qr-кода
   end;
 
 var
@@ -192,8 +192,8 @@ end;
 //   изменение шрифта главного меню
 
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
-var
-  f_ini: TIniFile;
+//var
+//  f_ini: TIniFile;
 begin
   Screen.MenuFont.Size := 14;
   Screen.MenuFont.Name := 'Roboto';
