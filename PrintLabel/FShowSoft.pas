@@ -466,6 +466,9 @@ begin
     begin
       ShowMessage('Некорректный ввод');
     end;
+    if frmShowSoft.CanFocus then
+    frmShowSoft.SetFocus;
+
 
   end;
 end;
@@ -498,6 +501,9 @@ begin
    frmFR_Label.Show;
    frmFR_Label.frp_LabService.ShowReport();
 
+   if frmShowSoft.CanFocus then
+      frmShowSoft.SetFocus;
+
 end;
 // печать
 
@@ -517,7 +523,13 @@ begin
  // гасим и зажигаем необходимые пункты меню
   mniExtra_Scope.Enabled := True;
   mniExtra_Show.Enabled := False;
+  mniExtra_Print.Enabled := False;
 
+  // прописываем сброс отчетов
+  // сбрасываем отчеты
+  frmFR_Label.Close;
+  frmFR_Label.frp_LabService.PreviewPages.Clear;
+  frmFR_Label.frp_LabDate.PreviewPages.Clear;
 
 end;
 

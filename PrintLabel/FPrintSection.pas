@@ -388,13 +388,6 @@ begin
     lbledtOne.SetFocus;
 end;
 
-
-
-
-
-
-
-
 // вызываем печать
 procedure TfrmPrintSection.pmmiPr30_20Click(Sender: TObject);
 begin
