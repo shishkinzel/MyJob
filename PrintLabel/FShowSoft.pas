@@ -93,6 +93,10 @@ type
     procedure mniExtra_ResetClick(Sender: TObject);
     procedure mniExtra_ShowClick(Sender: TObject);
     procedure mniExtra_PrintClick(Sender: TObject);
+    procedure dtpDateClick(Sender: TObject);
+    procedure mniExtra_ApplyClick(Sender: TObject);
+    procedure mniExtra_DateShowClick(Sender: TObject);
+    procedure mniExtra_DatePrintClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -120,7 +124,7 @@ var
 implementation
 
 uses
-  FSelection, FPrintSection, F_FR_Label, unit_ini, // подключение форм
+  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, // подключение форм
   F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
 
 
@@ -218,9 +222,6 @@ begin
   end;
 
 end;
-
-
-
 
 //*************************************************
 {диалоги открытия и записи}
@@ -429,11 +430,6 @@ end;
 //**************************************************************************************************
 // Работа с дополнительными функциями
 
-procedure TfrmShowSoft.mniExtra_OpenCalendarClick(Sender: TObject);
-begin
-  dtpDate.Visible := True;
-     mniExtra_Apply.Enabled := True;
-end;
 // блок печати номера ремонта и даты для паспорта на устройство ************************************
 
 procedure TfrmShowSoft.mniExtra_ScopeClick(Sender: TObject);  // ввод диапазона
@@ -516,7 +512,6 @@ begin
   frmFR_Label.frp_LabService.Print;
 end;
 
-
 // общий сброс Дополнительных окон
 procedure TfrmShowSoft.mniExtra_ResetClick(Sender: TObject);
 begin
@@ -524,6 +519,10 @@ begin
   mniExtra_Scope.Enabled := True;
   mniExtra_Show.Enabled := False;
   mniExtra_Print.Enabled := False;
+  // дата
+   mniExtra_OpenCalendar.Enabled := True;
+   mniExtra_DatePrint.Enabled := False;
+
 
   // прописываем сброс отчетов
   // сбрасываем отчеты
@@ -532,9 +531,88 @@ begin
   frmFR_Label.frp_LabDate.PreviewPages.Clear;
 
 end;
+// начало блока печати стикера даты
 
+procedure TfrmShowSoft.mniExtra_OpenCalendarClick(Sender: TObject);
+begin
+  dtpDate.Visible := True;
+  dtpDate.Date := Now;
+end;
 
+procedure TfrmShowSoft.dtpDateClick(Sender: TObject);
+begin
+  mniExtra_OpenCalendar.Enabled := False;
+  mniExtra_Apply.Enabled := True;
 
+end;
+// команды выполнить
+
+procedure TfrmShowSoft.mniExtra_ApplyClick(Sender: TObject);
+var
+  f_date: string;
+  f_checked: Integer;
+  f_font_style: Integer;
+  f_checked_style: Boolean;
+begin
+// закроем календарь
+  dtpDate.Visible := False;
+
+  f_date := DateToStr(dtpDate.Date);
+
+  f_date := ReverseDate(f_date);
+
+  if f_date = '' then
+    f_date := '0000.00.00';
+
+  f_checked := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 10 до 14', '14'), 14);
+  f_font_style := StrToIntDef(InputBox('Ввод толщины шрифта', 'Введите толщину шрифта 1[Bold] или 0', '0'), 0);
+// проверка
+  if not (f_checked in [10..14]) then
+    f_checked := 14;
+
+  if f_font_style in [0..1] then
+  begin
+    case f_font_style of
+      0:
+        (frmFR_Label.frp_LabDate.FindObject('memDate') as TfrxMemoView).Font.Style := [];
+      1:
+        (frmFR_Label.frp_LabDate.FindObject('memDate') as TfrxMemoView).Font.Style := [fsBold];
+    end;
+  end
+  else
+    (frmFR_Label.frp_LabDate.FindObject('memDate') as TfrxMemoView).Font.Style := [];
+// установить переменные в отчет -размер шрифта и дату в формате yyyy.mm.dd
+
+  (frmFR_Label.frp_LabDate.FindObject('memDate') as TfrxMemoView).Font.Size := f_checked;
+
+  (frmFR_Label.frp_LabDate.FindObject('memDate') as TfrxMemoView).Text := f_date;
+  // гасим ненужные окна и зажигаем нужные
+  mniExtra_Apply.Enabled := False;
+  mniExtra_DateShow.Enabled := True;
+  mniExtra_DatePrint.Enabled := True;
+end;
+ // предосмотр
+procedure TfrmShowSoft.mniExtra_DateShowClick(Sender: TObject);
+begin
+  // задаем место открытие окна
+  frmFR_Label.Top := 5;
+  frmFR_Label.Left := 5;
+// гасим ненужные окна
+  mniExtra_DateShow.Enabled := False;
+
+  frmFR_Label.Show;
+  frmFR_Label.frp_LabDate.ShowReport();
+
+end;
+// печать
+procedure TfrmShowSoft.mniExtra_DatePrintClick(Sender: TObject);
+begin
+   // задаем принтер по умолчанию
+  frmFR_Label.frp_LabDate.Report.PrintOptions.Printer := f_print_576;
+
+  frmFR_Label.frp_LabDate.ShowReport();
+  frmFR_Label.frp_LabDate.Print;
+end;
 
 // конец блока номера ремонта и даты ***************************************************************
 
@@ -545,6 +623,3 @@ Close;
 end;
 
 end.
-
-
-

@@ -33,20 +33,69 @@ type
 
 
 function HexStrToInt(const str: string): Integer;
+ {-------------------------------------------------------------------------------
+  Функция: HexStrToInt
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: const str: string
+  Результат:    Integer
+-------------------------------------------------------------------------------}
+
 function ArrayToString(var inArray: array of Byte): string;
+{-------------------------------------------------------------------------------
+  Функция: ArrayToString
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: var inArray: array of Byte
+  Результат:    string
+-------------------------------------------------------------------------------}
+
 function ArrayToString_MAC(var inArray: array of Byte): string;
 {-------------------------------------------------------------------------------
-  Функция: ReciveDate
+  Функция: ArrayToString_MAC
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: var inArray: array of Byte
+  Результат:    string
+-------------------------------------------------------------------------------}
+
+function ReverseDate(var v_date : string) : string;
+{-------------------------------------------------------------------------------
+  Функция: ReverseDate
+  Меняем формат даты с dd.mm.yyyy на yyyy.mm.dd
   Автор:    igor
   Дата:  2023.10.16
   Входные параметры: var v_date : string
   Результат:    string
 -------------------------------------------------------------------------------}
-function ReciveDate(var v_date : string) : string;
 
 procedure IncArrayOne(var inArray: array of Byte);
+{-------------------------------------------------------------------------------
+  Процедура: IncArrayOne
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: var inArray: array of Byte
+  Результат:    Нет
+-------------------------------------------------------------------------------}
+
 procedure Print_mac_id (const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable);
+{-------------------------------------------------------------------------------
+  Процедура: Print_mac_id
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: const s1,s2 : string; const k1,k2 : Integer; fdtbl : TFDMemTable
+  Результат:    Нет
+-------------------------------------------------------------------------------}
+
 procedure ClearArr(var f_arr : array of string);
+{-------------------------------------------------------------------------------
+  Процедура: ClearArr
+  Автор:    igor
+  Дата:  2023.10.23
+  Входные параметры: var f_arr : array of string
+  Результат:    Нет
+-------------------------------------------------------------------------------}
+
 var
   dbmPrintLabel: TdbmPrintLabel;
 
@@ -63,10 +112,7 @@ uses
 function HexStrToInt(const str: string): Integer;
 begin
   Result := StrToIntDef('$' + str, 0);
-
 end;
-
-
 // работа с массивом байт - для mac-адреса
   procedure IncArrayOne(var inArray: array of Byte);
 const
@@ -148,10 +194,11 @@ const
   mac = ' --mac ';
   serial = ' --serial ';
 begin
+{___________________________________________________________________________________________________
 // создаем поток         !!!! ОТКЛЮЧИЛ РАБОТУ С УТИЛИТОЙ BARCODE ИСПОЛЬЗУЮ ВСТРОЕННЫЕ
      // ВОЗМОЖНОСТИ FastReport
-//  barCodeStream := TMemoryStream.Create;
-
+  barCodeStream := TMemoryStream.Create;
+___________________________________________________________________________________________________}
   f_id_long := '';
   f_id_small := '';
   rangeLast := '';
@@ -202,28 +249,32 @@ begin
     f_id_long_all := f_id_long + f_id_string;
     fdtbl.Fields[0].AsString := f_id_small_all;
     fdtbl.Fields[3].AsString := f_id_long_all;
+{___________________________________________________________________________________________________
+              Старый код использовался с модулем Barcode
 // создаем поток и трансформируем в barcode
     // большой штрих-код
-//    dbmPrintLabel.brcdPrintLabel.InputText := f_id_small_all;
-//    dbmPrintLabel.brcdPrintLabel.Height := 15;
-//    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
-//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-//    barCodeStream.Position := 0;
-//    (fdtbl.Fields[2] as TBlobField).LoadFromStream(barCodeStream);
-//    barCodeStream.Clear;
+    dbmPrintLabel.brcdPrintLabel.InputText := f_id_small_all;
+    dbmPrintLabel.brcdPrintLabel.Height := 15;
+    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
+    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (fdtbl.Fields[2] as TBlobField).LoadFromStream(barCodeStream);
+    barCodeStream.Clear;
 
     // малый штрих-код
-//    dbmPrintLabel.brcdPrintLabel.InputText := f_id_long_all;
-//    dbmPrintLabel.brcdPrintLabel.Height := 25;
-//    dbmPrintLabel.brcdPrintLabel.Scale := 0.5;
-//    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
-//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-//    barCodeStream.Position := 0;
-//    (fdtbl.Fields[1] as TBlobField).LoadFromStream(barCodeStream);
-//    barCodeStream.Clear;
+    dbmPrintLabel.brcdPrintLabel.InputText := f_id_long_all;
+    dbmPrintLabel.brcdPrintLabel.Height := 25;
+    dbmPrintLabel.brcdPrintLabel.Scale := 0.5;
+    dbmPrintLabel.brcdPrintLabel.Symbology := syCode128;
+    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (fdtbl.Fields[1] as TBlobField).LoadFromStream(barCodeStream);
+    barCodeStream.Clear;
 // увеличиваем серийный номер на единицу - последнюю триаду
     Inc(f_id_num);
-// mac-адреса для записи в таблицу fdtbl
+
+___________________________________________________________________________________________________}
+//  mac-адреса для записи в таблицу fdtbl
     fdtbl.Fields[4].AsString := ArrayToString(fbit);
     if fstep_flag then
     begin
@@ -247,15 +298,18 @@ begin
     end;
 
     fdtbl.Fields[6].AsString := mac + fdtbl.Fields[4].AsString + serial + fdtbl.Fields[0].AsString;
+  {_________________________________________________________________________________________________
+        Старый код использовался с модулем Barcode
       // qr-code для заливки софта
-//    dbmPrintLabel.brcdPrintLabel.InputText := fdtbl.Fields[6].AsString;
-//    dbmPrintLabel.brcdPrintLabel.Height := 50;
-//    dbmPrintLabel.brcdPrintLabel.Scale := 1;
-//    dbmPrintLabel.brcdPrintLabel.Symbology := syQRCode;
-//    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
-//    barCodeStream.Position := 0;
-//    (fdtbl.Fields[7] as TBlobField).LoadFromStream(barCodeStream);
-//    barCodeStream.Clear;
+    dbmPrintLabel.brcdPrintLabel.InputText := fdtbl.Fields[6].AsString;
+    dbmPrintLabel.brcdPrintLabel.Height := 50;
+    dbmPrintLabel.brcdPrintLabel.Scale := 1;
+    dbmPrintLabel.brcdPrintLabel.Symbology := syQRCode;
+    dbmPrintLabel.brcdPrintLabel.Bitmap.SaveToStream(barCodeStream);
+    barCodeStream.Position := 0;
+    (fdtbl.Fields[7] as TBlobField).LoadFromStream(barCodeStream);
+    barCodeStream.Clear;
+  _________________________________________________________________________________________________}
 // перемещаемся по таблице на шаг
     fdtbl.Next;
   end;
@@ -271,7 +325,7 @@ begin
     f_arr[i] := '';
 end;
 
-function ReciveDate(var v_date: string): string;
+function ReverseDate(var v_date: string): string;
 var
   f_arr: array[0..2] of string;
   tmp: string;

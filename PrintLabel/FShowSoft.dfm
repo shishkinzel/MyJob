@@ -13059,6 +13059,7 @@ object frmShowSoft: TfrmShowSoft
     ParentFont = False
     TabOrder = 9
     Visible = False
+    OnClick = dtpDateClick
   end
   object mmLoadSoft: TMainMenu
     Left = 16
@@ -13198,6 +13199,7 @@ object frmShowSoft: TfrmShowSoft
         object mniExtra_Apply: TMenuItem
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
           Enabled = False
+          OnClick = mniExtra_ApplyClick
         end
         object mniExtra_DataSeparator2: TMenuItem
           Caption = '-'
@@ -13205,16 +13207,19 @@ object frmShowSoft: TfrmShowSoft
         object mniExtra_DateShow: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
           Enabled = False
+          OnClick = mniExtra_DateShowClick
         end
         object mniExtra_DatePrint: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
+          OnClick = mniExtra_DatePrintClick
         end
         object mniExtra_DataSeparator3: TMenuItem
           Caption = '-'
         end
         object mniExtra_DateReset: TMenuItem
           Caption = #1057#1073#1088#1086#1089
+          OnClick = mniExtra_ResetClick
         end
       end
     end
