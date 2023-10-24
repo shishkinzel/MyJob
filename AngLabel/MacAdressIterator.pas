@@ -2099,7 +2099,7 @@ begin
 
   f_date := DateToStr(dtpMacAdress.Date);
 
-    f_date := DataModuleMacIterator.ReciveDate(f_date);
+    f_date := DataModuleMacIterator.ReverseDate(f_date);
 
   if f_date = '' then
     f_date := '0000.00.00';

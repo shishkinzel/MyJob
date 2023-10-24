@@ -117,8 +117,8 @@ object frmStickCheck: TfrmStickCheck
       'begin'
       ''
       'end.')
-    Left = 16
-    Top = 94
+    Left = 32
+    Top = 110
     Datasets = <
       item
         DataSet = frdbService
@@ -196,7 +196,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 45212.685614212960000000
+    ReportOptions.LastChange = 45223.628925891200000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -209,11 +209,7 @@ object frmStickCheck: TfrmStickCheck
       'end.')
     Left = 88
     Top = 94
-    Datasets = <
-      item
-        DataSet = frdbService
-        DataSetName = 'frxService'
-      end>
+    Datasets = <>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
@@ -221,6 +217,11 @@ object frmStickCheck: TfrmStickCheck
       Width = 1000.000000000000000000
     end
     object pLabDate: TfrxReportPage
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'Times'
+      Font.Style = []
       PaperWidth = 27.000000000000000000
       PaperHeight = 9.900000000000000000
       PaperSize = 256

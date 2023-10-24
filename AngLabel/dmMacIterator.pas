@@ -19,13 +19,13 @@ type
     function ArrayToStringLong(var inArray: array of Byte): string;
     function ArrayToStringLongMAC(var inArray: array of Byte): string;
     {-------------------------------------------------------------------------------
-  Функция: ReciveDate   - переворачивает дату в формате dd.mm.yyyy -> yyyy.mm.dd
+  Функция: ReverseDate   - переворачивает дату в формате dd.mm.yyyy -> yyyy.mm.dd
   Автор:    igor
   Дата:  2023.10.13
   Входные параметры: var v_date : string
   Результат:    string
 -------------------------------------------------------------------------------}
-    function ReciveDate(var v_date : string) : string;
+    function ReverseDate(var v_date : string) : string;
   end;
 
 
@@ -136,7 +136,7 @@ begin
   inArray[0] := T2;
 end;
 
-function TDataModuleMacIterator.ReciveDate(var v_date: string): string;
+function TDataModuleMacIterator.ReverseDate(var v_date: string): string;
 var
   f_arr: array[0..2] of string;
   tmp: string;
