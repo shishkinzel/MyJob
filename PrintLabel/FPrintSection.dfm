@@ -13158,10 +13158,7 @@ object frmPrintSection: TfrmPrintSection
       5ECEEE2843683E7618CAAE07CBA19E912CFC9F3FD3A6259FC8FB909554623EB5
       67E767F743B9AAE8C09D8A039879FDFA0DF9FF00ADF77C92C95A31F200000000
       49454E44AE426082}
-    ExplicitLeft = 656
-    ExplicitTop = 352
-    ExplicitWidth = 105
-    ExplicitHeight = 105
+    ExplicitTop = 8
   end
   object lbl_count: TLabel
     Tag = 105
@@ -13248,6 +13245,7 @@ object frmPrintSection: TfrmPrintSection
     ParentFont = False
   end
   object pnlAdv: TPanel
+    Tag = 201
     Left = 291
     Top = 8
     Width = 441
@@ -13267,11 +13265,12 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
       EditLabel.ParentBiDiMode = False
       MaxLength = 25
-      TabOrder = 0
+      TabOrder = 1
       Text = 'ap-map'
       Visible = False
     end
     object lbledtTwo: TLabeledEdit
+      Tag = 1
       Left = 16
       Top = 56
       Width = 165
@@ -13281,11 +13280,12 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.Height = 13
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
       MaxLength = 25
-      TabOrder = 1
+      TabOrder = 0
       Text = 'pyenv activate ap-dev'
       Visible = False
     end
     object lbledtThree: TLabeledEdit
+      Tag = 2
       Left = 16
       Top = 95
       Width = 165
@@ -13300,6 +13300,7 @@ object frmPrintSection: TfrmPrintSection
       Visible = False
     end
     object lbledtFour: TLabeledEdit
+      Tag = 3
       Left = 251
       Top = 16
       Width = 165
@@ -13314,6 +13315,7 @@ object frmPrintSection: TfrmPrintSection
       Visible = False
     end
     object lbledtFive: TLabeledEdit
+      Tag = 4
       Left = 252
       Top = 56
       Width = 165
@@ -13328,6 +13330,7 @@ object frmPrintSection: TfrmPrintSection
       Visible = False
     end
     object lbledtSix: TLabeledEdit
+      Tag = 5
       Left = 252
       Top = 95
       Width = 165
@@ -13340,6 +13343,21 @@ object frmPrintSection: TfrmPrintSection
       TabOrder = 5
       Text = 'root'
       Visible = False
+    end
+    object chkAdvance: TCheckBox
+      Tag = 101
+      Left = 312
+      Top = 128
+      Width = 113
+      Height = 17
+      Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
     end
   end
   object mmPrintSection: TMainMenu

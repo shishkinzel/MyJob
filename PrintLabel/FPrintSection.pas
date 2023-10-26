@@ -106,6 +106,7 @@ type
     lbledtFour: TLabeledEdit;
     lbledtFive: TLabeledEdit;
     lbledtSix: TLabeledEdit;
+    chkAdvance: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -156,6 +157,8 @@ type
       f_pos4: string;         // переменные для qr-кода
       f_pos5: string;         // переменные для qr-кода
       f_pos6: string;         // переменные для qr-кода
+
+      f_posAny : array [0 .. 5] of string;
   end;
 
 var
@@ -192,6 +195,8 @@ end;
 //   изменение шрифта главного меню
 
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
+var
+  i : Integer;
 //var
 //  f_ini: TIniFile;
 begin
@@ -206,23 +211,27 @@ begin
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
 // присваиваем переменным f_posX - начальные значения
-  f_pos1 := lbledtOne.Text;
-  f_pos2 := lbledtTwo.Text;
-  f_pos3 := lbledtThree.Text;
-  f_pos4 := lbledtFour.Text;
-  f_pos5 := lbledtFive.Text;
-  f_pos6 := lbledtSix.Text;
+//  f_pos1 := lbledtOne.Text;
+//  f_pos2 := lbledtTwo.Text;
+//  f_pos3 := lbledtThree.Text;
+//  f_pos4 := lbledtFour.Text;
+//  f_pos5 := lbledtFive.Text;
+//  f_pos6 := lbledtSix.Text;
 
-end;
-
+  // используем массив
+  for i := 0 to pnlAdv.ComponentCount - 1 do
+   begin
+     f_posAny[i] := (pnlAdv.Components[i] as TLabeledEdit).Text;
+   end;
+ end;
 procedure TfrmPrintSection.FormShow(Sender: TObject);
 var
   i: Integer;
-begin
-// Заполняем поля "Введеные данные устройства"
-  for i := 0 to Self.ComponentCount - 1 do
   begin
-    if (Self.Components[i] is TLabel) then
+    // Заполняем поля "Введеные данные устройства"
+    for I := 0 to Self.ComponentCount - 1 do
+    begin
+      if (Self.Components[I] is TLabel) then
     begin
       case (Self.Components[i] as TLabel).Tag of
         100:
@@ -790,4 +799,3 @@ begin
 end;
 
 end.
-
