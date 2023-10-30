@@ -384,13 +384,17 @@ begin
   f_print_576 := IniOptions.f_print_576;
 // защита приложения
   f_access := IniOptions.f_access;
-{  if f_access <> '@Zel05101966' then
+
+ // !!!!!!!!!!!!!
+ { if f_access <> '@Zel05101966' then
   begin
 //    raise Exception.Create(f_err);
     ShowMessage(f_err);
     Self.Free;
     Self.Close;
-  end;   }
+  end;
+}
+// !!!!!!!!!!!!!!!!!!!!
 // очищаем память
   f_ini.Free;
 
