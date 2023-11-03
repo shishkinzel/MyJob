@@ -26,8 +26,6 @@ object frmFR_Table: TfrmFR_Table
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitLeft = 8
-    ExplicitTop = -8
   end
   object frxReCor: TfrxReport
     Version = '6.9.3'
@@ -35,10 +33,10 @@ object frmFR_Table: TfrmFR_Table
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 45028.389135613430000000
+    ReportOptions.LastChange = 45233.460361782410000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -99,8 +97,8 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 86.929190000000000000
           Top = 11.338590000000000000
-          Width = 52.913385829999970000
-          Height = 52.913385829999970000
+          Width = 52.913385829999960000
+          Height = 52.913385829999960000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -506,7 +504,7 @@ object frmFR_Table: TfrmFR_Table
     PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44539.637803541700000000
-    ReportOptions.LastChange = 45027.664300879630000000
+    ReportOptions.LastChange = 45233.461450625000000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -901,10 +899,10 @@ object frmFR_Table: TfrmFR_Table
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44525.630604537000000000
-    ReportOptions.LastChange = 45027.690228993060000000
+    ReportOptions.LastChange = 45233.461884664350000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''

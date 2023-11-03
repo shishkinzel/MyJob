@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Angwork_print\te200_940" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44757,8591329282" ReportOptions.Description.Text="" ReportOptions.LastChange="45035,3745287732" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\printserver\TE200_908" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44757,8591329282" ReportOptions.Description.Text="" ReportOptions.LastChange="45233,4570566435" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
   <Datasets>
     <item DataSet="frdbLabSticker" DataSetName="dbLabelSticker"/>
   </Datasets>

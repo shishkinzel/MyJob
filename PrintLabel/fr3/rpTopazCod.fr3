@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="HP LaserJet 1018" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44539,6378035417" ReportOptions.Description.Text="" ReportOptions.LastChange="45027,6643008796" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="HP LaserJet 1018" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44539,6378035417" ReportOptions.Description.Text="" ReportOptions.LastChange="45233,461450625" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
   <Datasets>
     <item DataSet="frdbTable" DataSetName="DBTable"/>
   </Datasets>

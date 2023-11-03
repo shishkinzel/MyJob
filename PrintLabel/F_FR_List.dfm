@@ -34,10 +34,10 @@ object frmFR_List: TfrmFR_List
     Preview = frxPrV
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45198.631282395800000000
+    ReportOptions.LastChange = 45233.459425381950000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -144,8 +144,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 45.354360000000000000
-          Width = 84.000000000000000000
-          Height = 84.000000000000000000
+          Width = 37.795275590000040000
+          Height = 37.795275590000040000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -191,8 +191,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 268.346630000000000000
           Top = 181.417440000000000000
-          Width = 100.000000000000000000
-          Height = 100.000000000000000000
+          Width = 52.913385830000000000
+          Height = 52.913385830000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -390,10 +390,10 @@ object frmFR_List: TfrmFR_List
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
+    PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45209.656859884260000000
+    ReportOptions.LastChange = 45233.459868055560000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
