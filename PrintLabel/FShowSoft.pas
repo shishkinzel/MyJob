@@ -411,7 +411,7 @@ begin
   frmPrintSection := TfrmPrintSection.Create(nil);
   frmPrintSection.Menu := nil;
   frmPrintSection.Menu := frmPrintSection.mmPrintQR;
-  frmPrintSection.pnlAdv.Visible := True;               // активируем окно с расширенными настройками для печати
+
 
 // показываем пункты
   frmPrintSection.lbledtOne.Visible := True;

@@ -13250,7 +13250,6 @@ object frmPrintSection: TfrmPrintSection
     Top = 8
     Width = 441
     Height = 153
-    Enabled = False
     TabOrder = 0
     Visible = False
     object lbledtOne: TLabeledEdit
@@ -13359,6 +13358,7 @@ object frmPrintSection: TfrmPrintSection
       Font.Style = []
       ParentFont = False
       TabOrder = 6
+      OnClick = chkAdvanceClick
     end
   end
   object mmPrintSection: TMainMenu
@@ -15627,6 +15627,11 @@ object frmPrintSection: TfrmPrintSection
       SubMenuImages = ilPrintSelection_24_sub
       ImageIndex = 1
       OnClick = mniPrQR_AdvancedClick
+      object mniPrQR_Panel: TMenuItem
+        Caption = #1055#1072#1085#1077#1083#1100' '#1088#1072#1089#1096#1080#1088#1077#1085#1080#1103
+        ImageIndex = 8
+        OnClick = mniPrQR_PanelClick
+      end
       object mniPrQR_AdApply: TMenuItem
         Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
         SubMenuImages = ilPrintSelection_24_sub

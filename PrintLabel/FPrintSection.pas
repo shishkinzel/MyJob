@@ -107,6 +107,7 @@ type
     lbledtFive: TLabeledEdit;
     lbledtSix: TLabeledEdit;
     chkAdvance: TCheckBox;
+    mniPrQR_Panel: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -140,6 +141,8 @@ type
     procedure mniPrQR__AdShowClick(Sender: TObject);
     procedure mniPrQR__AdPrintClick(Sender: TObject);
     procedure mniPrQR_StResetClick(Sender: TObject);
+    procedure chkAdvanceClick(Sender: TObject);
+    procedure mniPrQR_PanelClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -171,6 +174,8 @@ uses
   frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
 
+
+
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 // убираем пункты
@@ -192,7 +197,7 @@ begin
   ModalResult := mrOk;
   Close;
 end;
-//   изменение шрифта главного меню
+
 
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
 var
@@ -200,6 +205,7 @@ var
 //var
 //  f_ini: TIniFile;
 begin
+//   изменение шрифта главного меню
   Screen.MenuFont.Size := 14;
   Screen.MenuFont.Name := 'Roboto';
  // принтеры по умолчанию
@@ -397,7 +403,6 @@ end;
 
 procedure TfrmPrintSection.mniPrQR_AdvancedClick(Sender: TObject);
 begin
-  pnlAdv.Enabled := True;
   if lbledtOne.CanFocus then
     lbledtOne.SetFocus;
 end;
@@ -450,7 +455,6 @@ begin
   frmFR_Label.frStic_mac_40_12.ShowReport();
   frmFR_Label.frStic_mac_40_12.Print;
 end;
-
 
 // сбрасываем все
 procedure TfrmPrintSection.mniNResetLab4Click(Sender: TObject);
@@ -729,32 +733,38 @@ begin
   frmFR_List.frxRe.ShowReport();
 end;
 
-
 // печать стандартный бланк
-
 procedure TfrmPrintSection.mniPrQR_StPrintClick(Sender: TObject);
 begin
   frmFR_List.frxRe.ShowReport();
   frmFR_List.frxRe.Print;
 end;
+
+{***********************************************************************************************************************}
+// показать панель расширения
+procedure TfrmPrintSection.mniPrQR_PanelClick(Sender: TObject);
+begin
+  pnlAdv.Visible := True;               // активируем окно с расширенными настройками для печати
+  mniPrQR_Panel.Enabled := False;
+
+  if pnlAdv.CanFocus then
+    pnlAdv.SetFocus;
+end;
+
+
+
+
+
+
+
+
 // расширенный бланк - выполнить
 procedure TfrmPrintSection.mniPrQR_AdApplyClick(Sender: TObject);
 begin
   // гасим и зажигаем необходимые пункты
   mniPrQR_AdApply.Enabled := False;
-  pnlAdv.Enabled := False;
 
   mniPrQR__AdShow.Enabled := True;
-
-   // присваиваем переменным f_posX - начальные значения
-  f_pos1 := lbledtOne.Text;
-  f_pos2 := lbledtTwo.Text;
-  f_pos3 := lbledtThree.Text;
-  f_pos4 := lbledtFour.Text;
-  f_pos5 := lbledtFive.Text;
-  f_pos6 := lbledtSix.Text;
-
-
 
   // считываем стандартные поля
   (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
@@ -781,6 +791,27 @@ begin
   frmFR_List.frxRe_adv.ShowReport();
   frmFR_List.frxRe_adv.Print;
 end;
+{**********************************************************************************************************************}
+// действие чекбокса "Применить"
+
+procedure TfrmPrintSection.chkAdvanceClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  pnlAdv.Enabled := False;
+  // присваиваем переменным f_posX - начальные значения
+  f_pos1 := lbledtOne.Text;
+  f_pos2 := lbledtTwo.Text;
+  f_pos3 := lbledtThree.Text;
+  f_pos4 := lbledtFour.Text;
+  f_pos5 := lbledtFive.Text;
+  f_pos6 := lbledtSix.Text;
+
+end;
+
+
+{**********************************************************************************************************************}
+
 // сброс стандартного и расширенного бланка
 
 procedure TfrmPrintSection.mniPrQR_StResetClick(Sender: TObject);
@@ -793,6 +824,11 @@ begin
 
   mniPrQR_AdApply.Enabled := True;
   pnlAdv.Enabled := True;
+  pnlAdv.Visible := False;
+
+  chkAdvance.Checked := False;
+  mniPrQR_Panel.Enabled := True;
+
 
 // присваиваем TLabelEdit - начальные значения
   j := 0;
