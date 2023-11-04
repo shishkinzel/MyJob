@@ -196,7 +196,7 @@ end;
 
 procedure TfrmPrintSection.FormCreate(Sender: TObject);
 var
-  i : Integer;
+  i, j : Integer;
 //var
 //  f_ini: TIniFile;
 begin
@@ -211,19 +211,23 @@ begin
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
 // присваиваем переменным f_posX - начальные значения
-//  f_pos1 := lbledtOne.Text;
-//  f_pos2 := lbledtTwo.Text;
-//  f_pos3 := lbledtThree.Text;
-//  f_pos4 := lbledtFour.Text;
-//  f_pos5 := lbledtFive.Text;
-//  f_pos6 := lbledtSix.Text;
-
-  // используем массив
-  for i := 0 to pnlAdv.ComponentCount - 1 do
-   begin
-     f_posAny[i] := (pnlAdv.Components[i] as TLabeledEdit).Text;
-   end;
- end;
+  f_pos1 := lbledtOne.Text;
+  f_pos2 := lbledtTwo.Text;
+  f_pos3 := lbledtThree.Text;
+  f_pos4 := lbledtFour.Text;
+  f_pos5 := lbledtFive.Text;
+  f_pos6 := lbledtSix.Text;
+  // используем массив для сохранения исходных данных
+  j := 0;
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[i] is TLabeledEdit then
+    begin
+       f_posAny[j] :=  (Self.Components[i] as TLabeledEdit).Text;
+       Inc(j);
+    end;
+    end;
+  end;
 procedure TfrmPrintSection.FormShow(Sender: TObject);
 var
   i: Integer;
@@ -249,8 +253,9 @@ var
       end;
     end;
   end;
-
 end;
+
+
 
 
 // вызываем отчеты
@@ -780,7 +785,7 @@ end;
 
 procedure TfrmPrintSection.mniPrQR_StResetClick(Sender: TObject);
 var
-  i: Integer;
+  i, j : Integer;
 begin
      // гасим и зажигаем необходимые пункты
   mniPrQR_StApply.Enabled := True;
@@ -789,13 +794,17 @@ begin
   mniPrQR_AdApply.Enabled := True;
   pnlAdv.Enabled := True;
 
-  // присваиваем TLabelEdit - начальные значения
-  lbledtOne.Text := 'ap-map';
-  lbledtTwo.Text := 'pyenv activate ap-dev';
-  lbledtThree.Text := 'exit';
-  lbledtFour.Text := 'admin';
-  lbledtFive.Text := 'angtel';
-  lbledtSix.Text := 'root';
+// присваиваем TLabelEdit - начальные значения
+  j := 0;
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[i] is TLabeledEdit then
+    begin
+      (Self.Components[i] as TLabeledEdit).Text := f_posAny[j];
+      Inc(j);
+    end;
+  end;
 end;
 
 end.
+

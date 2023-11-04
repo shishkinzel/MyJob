@@ -13252,6 +13252,7 @@ object frmPrintSection: TfrmPrintSection
     Height = 153
     Enabled = False
     TabOrder = 0
+    Visible = False
     object lbledtOne: TLabeledEdit
       Left = 16
       Top = 16
@@ -13265,8 +13266,8 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
       EditLabel.ParentBiDiMode = False
       MaxLength = 25
-      TabOrder = 1
-      Text = 'ap-map'
+      TabOrder = 0
+      Text = 'ap map'
       Visible = False
     end
     object lbledtTwo: TLabeledEdit
@@ -13280,7 +13281,7 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.Height = 13
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
       MaxLength = 25
-      TabOrder = 0
+      TabOrder = 1
       Text = 'pyenv activate ap-dev'
       Visible = False
     end
