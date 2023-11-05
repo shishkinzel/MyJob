@@ -13358,7 +13358,7 @@ object frmPrintSection: TfrmPrintSection
       Font.Style = []
       ParentFont = False
       TabOrder = 6
-      OnClick = chkAdvanceClick
+      OnMouseUp = chkAdvanceMouseUp
     end
   end
   object mmPrintSection: TMainMenu

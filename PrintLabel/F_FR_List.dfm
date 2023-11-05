@@ -37,7 +37,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45233.459425381950000000
+    ReportOptions.LastChange = 45235.541834027780000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -144,8 +144,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 45.354360000000000000
-          Width = 37.795275590000040000
-          Height = 37.795275590000040000
+          Width = 84.000000000000000000
+          Height = 84.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -191,8 +191,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 268.346630000000000000
           Top = 181.417440000000000000
-          Width = 52.913385830000000000
-          Height = 52.913385830000000000
+          Width = 100.000000000000000000
+          Height = 100.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -288,12 +288,12 @@ object frmFR_List: TfrmFR_List
             #1052#1077#1089#1090#1086' '#1076#1083#1103' QR-'#1082#1086#1076#1072)
           ParentFont = False
         end
-        object bcPlace: TfrxBarcode2DView
+        object bq_Place: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 495.118430000000000000
           Top = 396.850650000000000000
-          Width = 151.181102360000200000
-          Height = 151.181102360000200000
+          Width = 151.181102360000000000
+          Height = 151.181102360000000000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -306,7 +306,7 @@ object frmFR_List: TfrmFR_List
           Rotation = 0
           ShowText = False
           HexData = '31003200330034003500360037003800'
-          Zoom = 1.799775028095240000
+          Zoom = 1.799775028095238000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -393,7 +393,7 @@ object frmFR_List: TfrmFR_List
     PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45015.443400532400000000
-    ReportOptions.LastChange = 45233.459868055560000000
+    ReportOptions.LastChange = 45235.587756886580000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -446,7 +446,7 @@ object frmFR_List: TfrmFR_List
         object memTitleUSB: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
-          Top = 90.708720000000000000
+          Top = 162.708720000000000000
           Width = 219.212740000000000000
           Height = 45.354360000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -465,7 +465,7 @@ object frmFR_List: TfrmFR_List
         object bq_ap_map: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 268.346630000000000000
-          Top = 79.370130000000000000
+          Top = 151.370130000000000000
           Width = 50.400000000000000000
           Height = 50.400000000000000000
           StretchMode = smActualHeight
@@ -489,10 +489,10 @@ object frmFR_List: TfrmFR_List
           QuietZone = 0
           ColorBar = clBlack
         end
-        object memTitle_python: TfrxMemoView
+        object memTitlepython: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
-          Top = 166.299320000000000000
+          Top = 238.299320000000000000
           Width = 219.212740000000000000
           Height = 71.811070000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -512,7 +512,7 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           ShiftMode = smDontShift
           Left = 264.567100000000000000
-          Top = 170.078850000000000000
+          Top = 242.078850000000000000
           Width = 60.000000000000000000
           Height = 60.000000000000000000
           StretchMode = smActualHeight
@@ -541,7 +541,7 @@ object frmFR_List: TfrmFR_List
         object memTextCode: TfrxMemoView
           AllowVectorExport = True
           Left = 11.338590000000000000
-          Top = 298.582870000000000000
+          Top = 370.582870000000000000
           Width = 400.630180000000000000
           Height = 438.425480000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -558,7 +558,7 @@ object frmFR_List: TfrmFR_List
         object memTitle_QR: TfrxMemoView
           AllowVectorExport = True
           Left = 11.338590000000000000
-          Top = 268.346630000000000000
+          Top = 340.346630000000000000
           Width = 400.630180000000000000
           Height = 30.236240000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -577,7 +577,7 @@ object frmFR_List: TfrmFR_List
         object memTitl_cod: TfrxMemoView
           AllowVectorExport = True
           Left = 411.968770000000000000
-          Top = 268.346630000000000000
+          Top = 340.346630000000000000
           Width = 298.582870000000000000
           Height = 30.236240000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -596,7 +596,7 @@ object frmFR_List: TfrmFR_List
         object memPlaceQR: TfrxMemoView
           AllowVectorExport = True
           Left = 411.968770000000000000
-          Top = 298.582870000000000000
+          Top = 370.393940000000000000
           Width = 298.582870000000000000
           Height = 362.834880000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -613,7 +613,7 @@ object frmFR_List: TfrmFR_List
         object bq_Place: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 495.118430000000000000
-          Top = 396.850650000000000000
+          Top = 468.850650000000000000
           Width = 151.181102360000000000
           Height = 151.181102360000000000
           StretchMode = smActualHeight
@@ -641,6 +641,7 @@ object frmFR_List: TfrmFR_List
         object memTitleDevice: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
+          Top = 72.000000000000000000
           Width = 219.212740000000000000
           Height = 71.811070000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -658,6 +659,7 @@ object frmFR_List: TfrmFR_List
         object memNameDevice: TfrxMemoView
           AllowVectorExport = True
           Left = 222.992270000000000000
+          Top = 72.000000000000000000
           Width = 404.409710000000000000
           Height = 71.811070000000000000
           StretchMode = smActualHeight
@@ -675,7 +677,7 @@ object frmFR_List: TfrmFR_List
         object bq_Admin: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
-          Top = 79.370130000000000000
+          Top = 151.370130000000000000
           Width = 50.400000000000000000
           Height = 50.400000000000000000
           StretchMode = smActualHeight
@@ -698,7 +700,7 @@ object frmFR_List: TfrmFR_List
         object bq_Angtel: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
-          Top = 185.196970000000000000
+          Top = 257.196970000000000000
           Width = 50.400000000000000000
           Height = 50.400000000000000000
           StretchMode = smActualHeight
@@ -721,9 +723,9 @@ object frmFR_List: TfrmFR_List
         object memAdmin: TfrxMemoView
           AllowVectorExport = True
           Left = 540.472790000000000000
-          Top = 90.708720000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+          Top = 150.740260000000000000
+          Width = 166.299320000000000000
+          Height = 49.133890000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -738,9 +740,9 @@ object frmFR_List: TfrmFR_List
         object memAngtel: TfrxMemoView
           AllowVectorExport = True
           Left = 540.472790000000000000
-          Top = 204.094620000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+          Top = 256.756030000000000000
+          Width = 166.299320000000000000
+          Height = 49.133858270000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -755,7 +757,7 @@ object frmFR_List: TfrmFR_List
         object bq_Exit: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 37.795300000000000000
-          Top = 778.583180000000000000
+          Top = 850.583180000000000000
           Width = 50.400000000000000000
           Height = 50.400000000000000000
           StretchMode = smActualHeight
@@ -783,7 +785,7 @@ object frmFR_List: TfrmFR_List
         object bq_Root: TfrxBarcode2DView
           AllowVectorExport = True
           Left = 453.543600000000000000
-          Top = 778.583180000000000000
+          Top = 850.583180000000000000
           Width = 50.400000000000000000
           Height = 50.400000000000000000
           StretchMode = smActualHeight
@@ -810,10 +812,10 @@ object frmFR_List: TfrmFR_List
         end
         object memExit: TfrxMemoView
           AllowVectorExport = True
-          Left = 151.181200000000000000
-          Top = 789.921770000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+          Left = 136.063080000000000000
+          Top = 850.583180000000000000
+          Width = 226.771800000000000000
+          Height = 49.133858270000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -827,10 +829,10 @@ object frmFR_List: TfrmFR_List
         end
         object memRoot: TfrxMemoView
           AllowVectorExport = True
-          Left = 566.929500000000000000
-          Top = 789.921770000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+          Left = 536.693260000000000000
+          Top = 850.583180000000000000
+          Width = 166.299320000000000000
+          Height = 49.133858270000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -839,6 +841,42 @@ object frmFR_List: TfrmFR_List
           Frame.Typ = []
           Memo.UTF8W = (
             'root')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object memTitlePlase: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = -3.779530000000000000
+          Width = 219.212740000000000000
+          Height = 71.811070000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          Font.Style = []
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #1056#1072#1073#1086#1095#1077#1077' '#1084#1077#1089#1090#1086' '#8470)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object memJobPlace: TfrxMemoView
+          AllowVectorExport = True
+          Left = 222.992270000000000000
+          Top = -3.779530000000000000
+          Width = 230.551330000000000000
+          Height = 71.811070000000000000
+          StretchMode = smActualHeight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          Font.Style = [fsItalic]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '             '#1055#1086#1083#1077' '#1085#1077' '#1079#1072#1087#1086#1083#1085#1077#1085#1086)
           ParentFont = False
           VAlign = vaCenter
         end

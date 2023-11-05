@@ -141,8 +141,8 @@ type
     procedure mniPrQR__AdShowClick(Sender: TObject);
     procedure mniPrQR__AdPrintClick(Sender: TObject);
     procedure mniPrQR_StResetClick(Sender: TObject);
-    procedure chkAdvanceClick(Sender: TObject);
     procedure mniPrQR_PanelClick(Sender: TObject);
+    procedure chkAdvanceMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     var
@@ -173,8 +173,6 @@ uses
   FSelection, F_FR_Label, F_FR_List, FMain, FShowSoft, unit_ini, IniFiles, F_FR_Table, FdbmPrintLabel, FTest,
   frxClass, frxBarcode, frxPreview, frxDesgn, frxBarcode2D;
 {$R *.dfm}
-
-
 
 procedure TfrmPrintSection.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -697,9 +695,10 @@ end;
 //end;
 // печать
  {добавление пункта меню - ремонт}
-  procedure TfrmPrintSection.mniServeceSettingClick(Sender: TObject);
-  var
-  f_count : Integer;   // количество печатываемых номерков
+
+procedure TfrmPrintSection.mniServeceSettingClick(Sender: TObject);
+var
+  f_count: Integer;   // количество печатываемых номерков
 begin
 
 end;
@@ -717,12 +716,9 @@ begin
 
   (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
   (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
-  (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
+  (frmFR_List.frxRe.FindObject('bq_Place') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
   (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
 end;
-
-
-
 
 // просмотр стандартный бланк
 procedure TfrmPrintSection.mniPrQR_StShowClick(Sender: TObject);
@@ -751,31 +747,34 @@ begin
     pnlAdv.SetFocus;
 end;
 
-
-
-
-
-
-
-
 // расширенный бланк - выполнить
 procedure TfrmPrintSection.mniPrQR_AdApplyClick(Sender: TObject);
 begin
   // гасим и зажигаем необходимые пункты
   mniPrQR_AdApply.Enabled := False;
-
   mniPrQR__AdShow.Enabled := True;
 
   // считываем стандартные поля
-  (frmFR_List.frxRe.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
-  (frmFR_List.frxRe.FindObject('bcPlace') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
-  (frmFR_List.frxRe.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
+  (frmFR_List.frxRe_adv.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
+  (frmFR_List.frxRe_adv.FindObject('memNameDevice') as TfrxMemoView).Text := frmShowSoft.f_nameDevice;
+  (frmFR_List.frxRe_adv.FindObject('bq_Place') as TfrxBarcode2DView).Text := frmShowSoft.fTextSoft;
+  (frmFR_List.frxRe_adv.FindObject('memTextCode') as TfrxMemoView).Text := frmShowSoft.fTextSoft;
 
   // прописываем переменные в короткие qr-кода
-   (frmFR_List.frxRe.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp
+  (frmFR_List.frxRe_adv.FindObject('memTitleUSB') as TfrxMemoView).Text := f_pos1;
+  (frmFR_List.frxRe_adv.FindObject('bq_ap_map') as TfrxBarcode2DView).Text := f_pos1;
+  (frmFR_List.frxRe_adv.FindObject('memTitlePython') as TfrxMemoView).Text := f_pos2;
+  (frmFR_List.frxRe_adv.FindObject('bq_python') as TfrxBarcode2DView).Text := f_pos2;
+  (frmFR_List.frxRe_adv.FindObject('memExit') as TfrxMemoView).Text := f_pos3;
+  (frmFR_List.frxRe_adv.FindObject('bq_Exit') as TfrxBarcode2DView).Text := f_pos3;
+  (frmFR_List.frxRe_adv.FindObject('memAdmin') as TfrxMemoView).Text := f_pos4;
+  (frmFR_List.frxRe_adv.FindObject('bq_Admin') as TfrxBarcode2DView).Text := f_pos4;
+  (frmFR_List.frxRe_adv.FindObject('memAngtel') as TfrxMemoView).Text := f_pos5;
+  (frmFR_List.frxRe_adv.FindObject('bq_Angtel') as TfrxBarcode2DView).Text := f_pos5;
+  (frmFR_List.frxRe_adv.FindObject('memRoot') as TfrxMemoView).Text := f_pos6;
+  (frmFR_List.frxRe_adv.FindObject('bq_Root') as TfrxBarcode2DView).Text := f_pos6;
 
-  end;
-
+end;
 
 // просмотр расширенный бланк
 
@@ -794,12 +793,12 @@ end;
 {**********************************************************************************************************************}
 // действие чекбокса "Применить"
 
-procedure TfrmPrintSection.chkAdvanceClick(Sender: TObject);
+procedure TfrmPrintSection.chkAdvanceMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
-  i: Integer;
+  i, j: Integer;
+  f_question: Integer;
 begin
-  pnlAdv.Enabled := False;
-  // присваиваем переменным f_posX - начальные значения
+  // присваиваем переменным f_posX - знечения из labEdit
   f_pos1 := lbledtOne.Text;
   f_pos2 := lbledtTwo.Text;
   f_pos3 := lbledtThree.Text;
@@ -807,8 +806,29 @@ begin
   f_pos5 := lbledtFive.Text;
   f_pos6 := lbledtSix.Text;
 
+  f_question := Application.MessageBox(PChar('Вы хотите применить изменения?'), 'Потверждение', MB_YESNO + MB_ICONQUESTION);
+  case f_question of
+    6:
+      begin
+        pnlAdv.Visible := False;
+        mniPrQR_Panel.Visible := False;
+      end;
+    7:
+      begin
+        chkAdvance.Checked := False;
+        // присваиваем TLabelEdit - начальные значения
+        j := 0;
+        for i := 0 to Self.ComponentCount - 1 do
+        begin
+          if Self.Components[i] is TLabeledEdit then
+          begin
+            (Self.Components[i] as TLabeledEdit).Text := f_posAny[j];
+            Inc(j);
+          end;
+        end;
+      end;
+  end;
 end;
-
 
 {**********************************************************************************************************************}
 
@@ -816,7 +836,7 @@ end;
 
 procedure TfrmPrintSection.mniPrQR_StResetClick(Sender: TObject);
 var
-  i, j : Integer;
+  i, j: Integer;
 begin
      // гасим и зажигаем необходимые пункты
   mniPrQR_StApply.Enabled := True;
@@ -828,7 +848,7 @@ begin
 
   chkAdvance.Checked := False;
   mniPrQR_Panel.Enabled := True;
-
+  mniPrQR_Panel.Visible := True;
 
 // присваиваем TLabelEdit - начальные значения
   j := 0;
