@@ -2,8 +2,8 @@ object frmFR_List: TfrmFR_List
   Left = 0
   Top = 0
   Caption = #1054#1090#1095#1077#1090' '#1076#1083#1103' '#1082#1086#1084#1072#1085#1076#1085#1086#1081' '#1089#1090#1088#1086#1082#1080
-  ClientHeight = 761
-  ClientWidth = 883
+  ClientHeight = 700
+  ClientWidth = 840
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,10 +14,11 @@ object frmFR_List: TfrmFR_List
   PixelsPerInch = 96
   TextHeight = 13
   object frxPrV: TfrxPreview
-    Left = 0
-    Top = 0
-    Width = 883
-    Height = 761
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 834
+    Height = 694
     Align = alClient
     OutlineVisible = False
     OutlineWidth = 120
@@ -26,6 +27,10 @@ object frmFR_List: TfrmFR_List
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 883
+    ExplicitHeight = 761
   end
   object frxRe: TfrxReport
     Version = '6.9.3'
@@ -388,6 +393,7 @@ object frmFR_List: TfrmFR_List
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
+    Preview = frxPrV
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'HP LaserJet 1018'
@@ -466,8 +472,8 @@ object frmFR_List: TfrmFR_List
           AllowVectorExport = True
           Left = 268.346630000000000000
           Top = 151.370130000000000000
-          Width = 50.400000000000000000
-          Height = 50.400000000000000000
+          Width = 84.000000000000000000
+          Height = 84.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
@@ -513,8 +519,8 @@ object frmFR_List: TfrmFR_List
           ShiftMode = smDontShift
           Left = 264.567100000000000000
           Top = 242.078850000000000000
-          Width = 60.000000000000000000
-          Height = 60.000000000000000000
+          Width = 100.000000000000000000
+          Height = 100.000000000000000000
           StretchMode = smActualHeight
           BarType = bcCodeQR
           BarProperties.Encoding = qrAuto
