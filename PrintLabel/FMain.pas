@@ -34,7 +34,6 @@ type
     procedure seStepChange(Sender: TObject);
 //    procedure chkQR_SOFTClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure fonMainClick(Sender: TObject);
     procedure btnDBClick(Sender: TObject);
 
   private
@@ -125,12 +124,6 @@ begin
     if medtID.CanFocus then
       medtID.SetFocus;
   end;
-end;
-
-
-procedure TfrmMain.fonMainClick(Sender: TObject);
-begin
-
 end;
 
 // переход по нажатию кнопки "¬вод" - enter
