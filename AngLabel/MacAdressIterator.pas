@@ -2080,6 +2080,7 @@ end;
 procedure TfrmMAC.mniDate_CalendarClick(Sender: TObject);
 begin
   dtpMacAdress.Visible := True;
+  dtpMacAdress.Date := Now;
 end;
 // apply
 
