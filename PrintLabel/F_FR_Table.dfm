@@ -590,8 +590,8 @@ object frmFR_Table: TfrmFR_Table
           AllowVectorExport = True
           Left = 86.929190000000000000
           Top = 11.338590000000000000
-          Width = 49.133858270000010000
-          Height = 49.133858270000010000
+          Width = 49.133858270000000000
+          Height = 49.133858270000000000
           StretchMode = smActualHeight
           AutoSize = False
           BarType = bcCodeQR
@@ -607,7 +607,7 @@ object frmFR_Table: TfrmFR_Table
           Rotation = 0
           ShowText = False
           HexData = '69006400'
-          Zoom = 0.584926884166666800
+          Zoom = 0.584926884166666700
           FontScaled = True
           QuietZone = 0
           ColorBar = clBlack

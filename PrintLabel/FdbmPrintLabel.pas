@@ -24,6 +24,7 @@ type
     fdmtblReportf1: TStringField;
     fdmtblReportf2: TStringField;
     fdmtblReportf3: TStringField;
+    sslPrintmac_lower: TStringField;
   private
     { Private declarations }
   public
@@ -191,6 +192,8 @@ var
   barCodeStream : TMemoryStream;
 const
   cnMAC = '68:EB:C5:';
+// mac-адрес для Топазов в нижнем регистре     поле номер - 8
+  cnMAC_lower = '68:eb:c5:';
   mac = ' --mac ';
   serial = ' --serial ';
 begin
@@ -299,6 +302,7 @@ ________________________________________________________________________________
     end;
 
     fdtbl.Fields[6].AsString := mac + fdtbl.Fields[4].AsString + serial + fdtbl.Fields[0].AsString;
+    fdtbl.Fields[8].AsString :=   fdtbl.Fields[4].AsString.ToLower;
   {_________________________________________________________________________________________________
         Старый код использовался с модулем Barcode
       // qr-code для заливки софта

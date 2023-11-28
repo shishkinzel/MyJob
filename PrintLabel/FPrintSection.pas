@@ -554,7 +554,7 @@ begin
             dbmPrintLabel.fdmtblReport.Append;
             dbmPrintLabel.fdmtblReport.Fields[0] := Fields[0];
             dbmPrintLabel.fdmtblReport.Fields[1] := Fields[6];
-            dbmPrintLabel.fdmtblReport.Fields[2] := Fields[4];
+            dbmPrintLabel.fdmtblReport.Fields[2] := Fields[8];
             dbmPrintLabel.fdmtblReport.Next;
           end;
           Inc(i);
@@ -602,8 +602,15 @@ procedure TfrmPrintSection.mniCorApplyClick(Sender: TObject);
 var
   f_step: Integer;
   i: Integer;
+// задание регистров букв mac-адреса
+  f_lower : Integer;
+  f_mac_lower : string;
 begin
   i := 0;
+  f_mac_lower := '';
+// выбираем регистр букв в mac-адресе
+  f_lower := MessageDlg('Хотите оставить в верхнем регистре?', mtConfirmation, mbYesNo, 0);
+
   f_step := StrToIntDef(InputBox('Шаг печати штрих-кода', 'Введите шаг печати от 1 до 5', '5'), 5);
 
   if f_step in [1..5] then
@@ -622,7 +629,22 @@ begin
           begin
            {Записываем код из таблицы в отчет}
             dbmPrintLabel.fdmtblReport.Append;
-            dbmPrintLabel.fdmtblReport.Fields[0] := Fields[6];
+            case f_lower of
+              6:
+              begin
+                dbmPrintLabel.fdmtblReport.Fields[0] := Fields[6];
+              end;
+              7:
+              begin
+                f_mac_lower := Fields[6].AsString;
+                dbmPrintLabel.fdmtblReport.Fields[0].AsString := f_mac_lower.ToLower;
+              end
+              else
+              begin
+                dbmPrintLabel.fdmtblReport.Fields[0] := Fields[6];
+              end;
+            end;
+
             dbmPrintLabel.fdmtblReport.Next;
           end;
           Inc(i);
@@ -668,7 +690,7 @@ begin
   frmFR_Table.frxReCor.Export(frmFR_Table.frxExPDF);
 end;
 
-{сброс всех отчетов}
+{ сброс всех отчетов }
 procedure TfrmPrintSection.mniSRResetClick(Sender: TObject);
 begin
 // закрываем отчеты
@@ -863,4 +885,3 @@ begin
 end;
 
 end.
-

@@ -197,7 +197,7 @@ begin
   // зажигаем кнопку  "Выбор утилиты печати"
     btnSelection.Enabled := True;
 
-//        frmTest.Show;
+  //        frmTest.Show;
   // гасим поля ввода данных
     for i := 0 to Self.ComponentCount - 1 do
     begin

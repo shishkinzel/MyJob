@@ -41,6 +41,9 @@ object dbmPrintLabel: TdbmPrintLabel
     object blid_mac_blob: TBlobField
       FieldName = 'id_mac_blob'
     end
+    object sslPrintmac_lower: TStringField
+      FieldName = 'mac_lower'
+    end
   end
   object brcdPrintLabel: TBarcode
     ShowText = False
