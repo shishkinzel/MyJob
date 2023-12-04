@@ -17,24 +17,32 @@ uses
   dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinTheBezier, dxSkinsDefaultPainters, dxSkinValentine,
   dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark, dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinWXI, dxSkinXmas2008Blue, dxCore, dxRibbonCustomizationForm, cxTextEdit, cxContainer, cxEdit, dxSkinsForm,
-  dxStatusBar, dxRibbonStatusBar, cxLabel, dxGallery, dxGalleryControl, dxRibbonBackstageViewGalleryControl;
+  dxStatusBar, dxRibbonStatusBar, cxLabel, dxGallery, dxGalleryControl, dxRibbonBackstageViewGalleryControl,
+  Vcl.Menus, Vcl.StdCtrls, cxButtons, dxScreenTip;
 
 type
   TfrmDevExpressTest = class(TdxRibbonForm)
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar1: TdxBar;
-    dxRibbon1: TdxRibbon;
-    dxRibbon1Tab1: TdxRibbonTab;
-    dxRibbonBackstageView1: TdxRibbonBackstageView;
+    dxrbn_One: TdxRibbon;
+    dxrbntb_TabOne: TdxRibbonTab;
+    dxrbnbckstgvw_One: TdxRibbonBackstageView;
     dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet;
     dxRibbonStatusBar1: TdxRibbonStatusBar;
-    dxRibbonBackstageViewGalleryControl1: TdxRibbonBackstageViewGalleryControl;
-    cxLabel1: TcxLabel;
+    dxrbnbckstgvwglrycntrl_One: TdxRibbonBackstageViewGalleryControl;
+    cxlbl_One: TcxLabel;
     dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup;
     dxSkinController1: TdxSkinController;
     dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem;
     dxBarManager1Bar2: TdxBar;
     cxBarEditItem1: TcxBarEditItem;
+    btnTest: TcxButton;
+    dxrbntb_TabTwo: TdxRibbonTab;
+    dxrbntb_TabThree: TdxRibbonTab;
+    dxrbnbckstgvwglrycntrl_OneGroup1: TdxRibbonBackstageViewGalleryGroup;
+    dxrbnbckstgvwglrytm_OneGroup1Item1: TdxRibbonBackstageViewGalleryItem;
+    dxscrntprpstry_One: TdxScreenTipRepository;
+    dxscrntp__OneScreenTip1: TdxScreenTip;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
