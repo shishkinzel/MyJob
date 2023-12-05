@@ -8,9 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
-  FireDAC.Stan.StorageJSON, FMain;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON, FMain;
 
 type
   TfrmListDevice = class(TForm)
@@ -24,7 +22,6 @@ type
     splDown: TSplitter;
     pnlTabl: TPanel;
     dbnMain: TDBNavigator;
-    dbgMain: TDBGridEh;
     txtTitle: TStaticText;
     lbl_TitleDev: TLabel;
     edtDev: TEdit;
@@ -104,27 +101,9 @@ end;
 
 
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
+var
+i : Integer;
 begin
-
- with dbgMain.DataSource.DataSet do
- begin
- // проверка на дублирования записи    лучше использовать messageBox
-   First;
- {  while not fdDev.Eof do
-   begin
-     if (Fields[1].AsString = Trim(edtDev.Text)) or (Fields[2].AsString = Trim(edtPack.Text)) then
-     begin
-       ShowMessage('Данное устройство или комплект существует.' + #10#13 + 'Проверте правильность ввода');
-       Abort;
-     end;
-     Next;
-   end;
-   Last;
-   Insert;
-   Fields[1].AsString := Trim(edtDev.Text);
-   Fields[2].AsString := Trim(edtPack.Text);
-   Post;  }
- end;
 
 end;
 

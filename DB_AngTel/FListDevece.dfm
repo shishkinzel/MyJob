@@ -121,24 +121,6 @@ object frmListDevice: TfrmListDevice
       Height = 337
       Align = alClient
       TabOrder = 2
-      object dbgMain: TDBGridEh
-        Left = 1
-        Top = 26
-        Width = 680
-        Height = 310
-        Cursor = crHandPoint
-        Align = alClient
-        ColumnDefValues.Layout = tlCenter
-        ColumnDefValues.Title.Alignment = taCenter
-        DataSource = dsDev
-        DynProps = <>
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghEnterAsTab, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
-        TabOrder = 1
-        OnDblClick = dbgMainDblClick
-        object RowDetailData: TRowDetailPanelControlEh
-        end
-      end
       object dbnMain: TDBNavigator
         Left = 1
         Top = 1

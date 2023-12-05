@@ -18,10 +18,6 @@ type
     fd_mem_Devf_mac: TStringField;
     fd_mem_Devf_id_in: TIntegerField;
     fd_mem_Devf_other: TStringField;
-    tbl_Devkey: TIntegerField;
-    tbl_DevNameDev: TWideStringField;
-    tbl_Devid: TFloatField;
-    tbl_Devmac: TWideStringField;
     tbl_DevAllkey: TAutoIncField;
     tbl_DevAllnameDev: TWideStringField;
     tbl_DevAllid_first: TWideStringField;

@@ -5,7 +5,32 @@ object dbMain: TdbMain
   Height = 215
   Width = 355
   object fd_mem_Dev: TFDMemTable
-    FieldDefs = <>
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'f_dev'
+        DataType = ftString
+        Size = 300
+      end
+      item
+        Name = 'f_id'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'f_mac'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'f_id_in'
+        DataType = ftInteger
+      end
+      item
+        Name = 'f_other'
+        DataType = ftString
+        Size = 20
+      end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -53,22 +78,9 @@ object dbMain: TdbMain
     TableName = 'dbDevice'
     Left = 104
     Top = 80
-    object tbl_Devkey: TIntegerField
-      FieldName = 'key'
-      Visible = False
-    end
-    object tbl_DevNameDev: TWideStringField
-      FieldName = 'NameDev'
-      Size = 150
-    end
-    object tbl_Devid: TFloatField
-      FieldName = 'id'
-    end
-    object tbl_Devmac: TWideStringField
-      FieldName = 'mac'
-    end
   end
   object tbl_DevAll: TADOTable
+    Active = True
     Connection = conDev
     CursorType = ctStatic
     LockType = ltReadOnly

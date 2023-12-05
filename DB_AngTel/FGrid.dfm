@@ -80,8 +80,6 @@ object frmGrid: TfrmGrid
     Height = 318
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 259
-    ExplicitHeight = 340
     object dbnav_Dev: TDBNavigator
       Left = 1
       Top = 1
