@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Angwork_print\te200_940" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44757,8591329282" ReportOptions.Description.Text="" ReportOptions.LastChange="44978,6788460069" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frmFRBigLabel.dbBigLabel" DataSetName="dbLabel"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="lbSmall" HGuides.Text="" VGuides.Text="" PaperWidth="29,5" PaperHeight="19,5" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="154,96073" Left="0" Top="18,89765" Width="111,496135" ColumnWidth="0" ColumnGap="0" DataSet="frmFRBigLabel.dbBigLabel" DataSetName="dbLabel" RowCount="0">
+      <TfrxMemoView Name="mDevice" AllowVectorExport="True" Left="1,88976378" Top="0" Width="109,60629921" Height="22,6771653543307" StretchMode="smActualHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Roboto" Font.Style="0" Frame.Typ="0" Frame.Width="0,1" HAlign="haCenter" ParentFont="False" WordWrap="False" VAlign="vaCenter" Text="Module"/>
+      <TfrxPictureView Name="pBarCode" AllowVectorExport="True" Left="5,66929134" Top="22,67716535" Width="105,82677165" Height="18,8976378" AutoSize="True" Center="True" DataField="bcSmall" DataSet="frmFRBigLabel.dbBigLabel" DataSetName="dbLabel" Frame.Typ="0" Frame.Width="0,1" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+      <TfrxMemoView Name="dbLabelsn" IndexTag="1" AllowVectorExport="True" Left="15,1181102362205" Top="43,4645669291339" Width="86,92911677" Height="22,67716535" StretchMode="smActualHeight" AutoWidth="True" DataField="sn" DataSet="frmFRBigLabel.dbBigLabel" DataSetName="dbLabel" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Roboto" Font.Style="0" Frame.Typ="0" Frame.Width="0,1" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[dbLabel.&#34;sn&#34;]"/>
+      <TfrxMemoView Name="mSerialNumber" AllowVectorExport="True" Left="3,77952756" Top="47,244094488189" Width="15,11811024" Height="15,11812" Font.Charset="204" Font.Color="0" Font.Height="-8" Font.Name="Roboto" Font.Style="0" Frame.Typ="0" Frame.Width="0,1" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="s/n"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>
