@@ -16,7 +16,7 @@ object frmGrid: TfrmGrid
   TextHeight = 13
   object splTop: TSplitter
     Left = 0
-    Top = 257
+    Top = 279
     Width = 964
     Height = 2
     Cursor = crVSplit
@@ -38,7 +38,7 @@ object frmGrid: TfrmGrid
     Left = 0
     Top = 0
     Width = 964
-    Height = 257
+    Height = 279
     Align = alTop
     TabOrder = 0
     object dbnav_DevAll: TDBNavigator
@@ -50,17 +50,19 @@ object frmGrid: TfrmGrid
       Align = alTop
       TabOrder = 0
     end
-    object dbG_DevAll: TDBGridEh
+    object dbG_DevAll: TDBGrid
       Left = 1
       Top = 26
       Width = 962
-      Height = 230
+      Height = 252
       Align = alClient
       DataSource = dbMain.ds_DevAll
-      DynProps = <>
       TabOrder = 1
-      object RowDetailData: TRowDetailPanelControlEh
-      end
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
     end
   end
   object pnlDown: TPanel
@@ -73,35 +75,39 @@ object frmGrid: TfrmGrid
   end
   object pnlMain: TPanel
     Left = 0
-    Top = 259
+    Top = 281
     Width = 964
-    Height = 340
+    Height = 318
     Align = alClient
     TabOrder = 2
-    object dbG_Dev: TDBGridEh
-      Left = 1
-      Top = 26
-      Width = 962
-      Height = 313
-      Align = alClient
-      DataSource = frmMain.ds_fd_mem_Dev
-      DynProps = <>
-      TabOrder = 0
-      object RowDetailData: TRowDetailPanelControlEh
-      end
-    end
+    ExplicitTop = 259
+    ExplicitHeight = 340
     object dbnav_Dev: TDBNavigator
       Left = 1
       Top = 1
       Width = 962
       Height = 25
-      DataSource = frmMain.ds_fd_mem_Dev
+      DataSource = dbMain.ds_Dev
       Align = alTop
+      TabOrder = 0
+    end
+    object dbG_Dev: TDBGrid
+      Left = 1
+      Top = 26
+      Width = 962
+      Height = 291
+      Align = alClient
+      DataSource = dbMain.ds_Dev
       TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
     end
   end
   object ds_Dev: TDataSource
-    DataSet = dbMain.tbl_Dev
+    DataSet = dbMain.fd_mem_Dev
     Left = 24
     Top = 543
   end

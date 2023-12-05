@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
   DynVarsEh, Data.DB, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmGrid = class(TForm)
@@ -15,11 +15,11 @@ type
     pnlDown: TPanel;
     splDown: TSplitter;
     pnlMain: TPanel;
-    dbG_Dev: TDBGridEh;
     dbnav_Dev: TDBNavigator;
     ds_Dev: TDataSource;
     dbnav_DevAll: TDBNavigator;
-    dbG_DevAll: TDBGridEh;
+    dbG_DevAll: TDBGrid;
+    dbG_Dev: TDBGrid;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -41,7 +41,6 @@ procedure TfrmGrid.FormShow(Sender: TObject);
 var
 i : Integer;
 begin
-  dbG_DevAll.UseMultiTitle := True;
   with dbG_DevAll do
   begin
     Columns[0].Title.Caption := 'Наименование устройства';
