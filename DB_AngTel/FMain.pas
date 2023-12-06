@@ -155,7 +155,14 @@ end;
 
 procedure TfrmMain.btnDBClick(Sender: TObject);
 begin
-frmListDevice.Show;
+frmListDevice := TfrmListDevice.Create(nil);
+frmListDevice.ShowModal;
+
+if frmListDevice.ModalResult = mrOk  then
+begin
+  frmListDevice.Free;
+end;
+
 end;
 
 procedure TfrmMain.btnStart_ResetClick(Sender: TObject);

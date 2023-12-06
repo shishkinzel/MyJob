@@ -1,15 +1,6 @@
 ﻿[tbl_Dev]
 Coordinates=193,10,61,146
 
-[fd_mem_Devf_dev]
-Coordinates=201,1,122,36
-
-[fd_mem_Devf_id]
-Coordinates=201,56,111,36
-
-[fd_mem_Devf_id_in]
-Coordinates=201,111,129,36
-
 [conDev]
 Coordinates=33,231,58,36
 
@@ -21,41 +12,14 @@ Coordinates=10,10,73,212
 Visible=True
 LayerNames=NewLayer0;NewLayer1
 
-[fd_mem_Devf_other]
-Coordinates=201,166,131,36
-
-[fd_mem_Devf_mac]
-Coordinates=201,221,125,36
-
-[tbl_DevAllmac_last]
-Coordinates=370,353,124,36
-
-[tbl_DevAlldev_date]
-Coordinates=569,1,126,36
-
 [frmGrid.ds_Dev]
 Coordinates=370,1,105,36
-
-[tbl_DevAllid_first]
-Coordinates=0,336,111,36
 
 [frmMain.ds_fd_mem_Dev]
 Coordinates=370,166,161,36
 
-[tbl_DevAllid_last]
-Coordinates=569,56,110,36
-
-[tbl_DevAllmac_first]
-Coordinates=569,111,125,36
-
-[tbl_DevAllkey]
-Coordinates=569,166,93,36
-
-[tbl_DevAllnameDev]
-Coordinates=569,276,127,36
-
 []
-Coordinates=122,372,78,36
+Coordinates=569,166,93,36
 
 [Module Settings]
 ModelLayerNames=NewLayer0;NewLayer1

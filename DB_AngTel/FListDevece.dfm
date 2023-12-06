@@ -2,7 +2,7 @@ object frmListDevice: TfrmListDevice
   Left = 0
   Top = 0
   Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
-  ClientHeight = 520
+  ClientHeight = 512
   ClientWidth = 684
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmListDevice: TfrmListDevice
     Left = 0
     Top = 0
     Width = 684
-    Height = 520
+    Height = 512
     Align = alClient
     TabOrder = 0
     object splTop: TSplitter
@@ -34,7 +34,7 @@ object frmListDevice: TfrmListDevice
     end
     object splDown: TSplitter
       Left = 1
-      Top = 381
+      Top = 365
       Width = 682
       Height = 3
       Cursor = crVSplit
@@ -75,50 +75,103 @@ object frmListDevice: TfrmListDevice
     end
     object pnlDown: TPanel
       Left = 1
-      Top = 384
+      Top = 368
       Width = 682
-      Height = 135
+      Height = 143
       Align = alBottom
       TabOrder = 1
       object lbl_TitleDev: TLabel
         Left = 20
-        Top = 24
-        Width = 134
-        Height = 13
+        Top = 28
+        Width = 162
+        Height = 15
         Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_Dev_number: TLabel
+        Left = 20
+        Top = 65
+        Width = 162
+        Height = 15
+        Caption = #1053#1086#1084#1077#1088' '#1084#1086#1076#1091#1083#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
       end
       object edtDev: TEdit
-        Left = 160
-        Top = 24
-        Width = 481
-        Height = 21
+        Left = 188
+        Top = 25
+        Width = 453
+        Height = 22
+        Alignment = taCenter
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Anonymous Pro'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
       end
       object btnApply: TBitBtn
         Left = 20
-        Top = 88
+        Top = 103
         Width = 120
         Height = 25
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1090#1072#1073#1083#1080#1094#1091
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btnApplyClick
       end
       object btnForm: TBitBtn
         Left = 521
-        Top = 88
+        Top = 103
         Width = 120
         Height = 25
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1085#1072' '#1092#1086#1088#1084#1091
-        TabOrder = 2
+        TabOrder = 3
         OnClick = btnFormClick
+      end
+      object medt_Dev_number: TMaskEdit
+        AlignWithMargins = True
+        Left = 188
+        Top = 60
+        Width = 38
+        Height = 24
+        Margins.Right = 10
+        Alignment = taRightJustify
+        BevelInner = bvSpace
+        BevelOuter = bvSpace
+        BevelKind = bkSoft
+        BiDiMode = bdLeftToRight
+        EditMask = '!999;0;'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Anonymous Pro'
+        Font.Style = []
+        MaxLength = 3
+        ParentBiDiMode = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        Text = ''
+        TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1084#1086#1076#1091#1083#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1080#1079' '#1089#1077#1088#1080#1081#1085#1086#1075#1086' '#1085#1086#1084#1077#1088#1072' '
       end
     end
     object pnlTabl: TPanel
       Left = 1
       Top = 44
       Width = 682
-      Height = 337
+      Height = 321
       Align = alClient
       TabOrder = 2
       object dbnMain: TDBNavigator
@@ -130,6 +183,20 @@ object frmListDevice: TfrmListDevice
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbRefresh]
         Align = alTop
         TabOrder = 0
+      end
+      object dbG_Dev_List: TDBGrid
+        Left = 1
+        Top = 26
+        Width = 680
+        Height = 294
+        Align = alClient
+        DataSource = dsDev
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
       end
     end
   end
@@ -3040,20 +3107,25 @@ object frmListDevice: TfrmListDevice
       000000000000}
   end
   object fdjsonOne: TFDStanStorageJSONLink
-    Left = 609
-    Top = 348
+    Left = 113
+    Top = 12
   end
   object fdDev: TFDMemTable
     Active = True
     FieldDefs = <
       item
-        Name = 'num'
+        Name = 'key'
         DataType = ftAutoInc
       end
       item
-        Name = 'nameDev'
+        Name = 'name'
         DataType = ftString
-        Size = 200
+        Size = 50
+      end
+      item
+        Name = 'id_mod'
+        DataType = ftString
+        Size = 3
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -3064,28 +3136,25 @@ object frmListDevice: TfrmListDevice
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 617
-    Top = 288
-    object fdDevnum: TFDAutoIncField
-      Alignment = taCenter
-      DisplayLabel = #8470
-      DisplayWidth = 11
-      FieldName = 'num'
+    Left = 17
+    Top = 8
+    object fdDevkey: TFDAutoIncField
+      FieldName = 'key'
       ProviderFlags = [pfInUpdate, pfInWhere]
-      AutoIncrementSeed = 1
-      AutoIncrementStep = 1
       IdentityInsert = True
     end
-    object fdDevnameDev: TStringField
-      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
-      DisplayWidth = 98
-      FieldName = 'nameDev'
-      Size = 200
+    object fdDevname: TStringField
+      FieldName = 'name'
+      Size = 50
+    end
+    object fdDevid_mod: TStringField
+      FieldName = 'id_mod'
+      Size = 3
     end
   end
   object dsDev: TDataSource
     DataSet = fdDev
-    Left = 649
-    Top = 284
+    Left = 57
+    Top = 12
   end
 end

@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON, FMain;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON, FMain, Vcl.Mask;
 
 type
   TfrmListDevice = class(TForm)
@@ -30,8 +30,12 @@ type
     fdjsonOne: TFDStanStorageJSONLink;
     fdDev: TFDMemTable;
     dsDev: TDataSource;
-    fdDevnum: TFDAutoIncField;
-    fdDevnameDev: TStringField;
+    dbG_Dev_List: TDBGrid;
+    lbl_Dev_number: TLabel;
+    medt_Dev_number: TMaskEdit;
+    fdDevkey: TFDAutoIncField;
+    fdDevname: TStringField;
+    fdDevid_mod: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -43,11 +47,15 @@ type
 
 
 
+
   private
     { Private declarations }
     const
       csDev = 'Наименование устройства на СГП';
       csMod = 'Наименование модуля на СК';
+
+      csDev_ed = 'Введите наименование устройства';
+      csMod_ed = 'Введите наименование комплекта';
 
     var
       fileDevice: TextFile;
@@ -69,23 +77,37 @@ uses
 StrUtils, IdGlobal, FdbMain;
 
 {$R *.dfm}
-
-
 procedure TfrmListDevice.FormCreate(Sender: TObject);
 var
   s: string;
 begin
 // проверка наличия файла  'dev_json.fds' - при отсутствии создать пустой
 
-  if not (FileExists(FTabDev)) then
+  Self.fdDev.Open;
+  if FileExists(FTabDev) then
   begin
-    fdDev.EmptyDataSet;
-    fdDev.SaveToFile(FTabDev, sfJSON);
+    Self.fdDev.LoadFromFile(FTabDev, sfJSON);
   end;
-  fdDev.Open;
-  fdDev.LoadFromFile(FTabDev, sfJSON);
+
 // настройка сетки грида
-//dbgMain.SelectedRows.CurrentRowSelected := True; // выделить текущую строку
+   Self.dbG_Dev_List.SelectedRows.CurrentRowSelected := True; // выделить текущую строку
+
+  with Self.dbG_Dev_List do
+  begin
+    Columns[0].Title.Alignment := taCenter;
+    Columns[0].Title.Caption := '№';
+    Columns[0].Width := 55;
+
+    Columns[1].Title.Alignment := taCenter;
+    Columns[1].Title.Caption := 'Наименование устройства';
+    Columns[1].Width := 500;
+
+    Columns[2].Title.Alignment := taCenter;
+    Columns[2].Title.Caption := 'Номер модуля';
+    Columns[2].Width := 85;
+  end;
+
+
 
 end;
 
@@ -96,16 +118,49 @@ begin
     edtDev.SetFocus;
 end;
 
+// выбор окна ввода номера модуля
 
 {добавляем запись в таблицу}
-
 
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 var
 i : Integer;
+s : string;
 begin
+// проверяем наличие модификации в полях
+
+    s := medt_Dev_number.Text;
+   if not(edtDev.Modified and medt_Dev_number.Modified) or (edtDev.Text = '') then
+   Abort;
+// проверка дублирования записи
+  with Self.fdDev.DataSource.DataSet do
+  begin
+    First;
+    while not Self.fdDev.Eof  do
+     begin
+        if Fields[1].AsString = Trim(edtDev.Text) then
+        begin
+         MessageBox(Handle, PWideChar('Данное устройство существует'), PWideChar('Проверте правильность ввода'), MB_OK + MB_ICONERROR );
+         Abort
+        end;
+        if  Fields[2].AsString = medt_Dev_number.Text then
+        begin
+         MessageBox(Handle, PWideChar('Данный номер уже введен'), PWideChar('Проверте правильность ввода'), MB_OK + MB_ICONERROR );
+         Abort
+        end;
+        Next
+    end;
+    Last;
+    Insert;
+    Fields[1].AsString := Trim(edtDev.Text);
+    Fields[2].AsString := Trim(medt_Dev_number.Text);
+    Post;
+  end;
+
+
 
 end;
+
 
 // процедура выделения контуром
 
@@ -145,8 +200,13 @@ end;
 {закрытие формы}
 procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+// сбрасываем данные в файл
   fdDev.SaveToFile(FTabDev, sfJSON);
+// закрываем БД
+  fdDev.Close;
+// закрытие модальной формы
   Self.ModalResult := mrOk;
 end;
+
 end.
 

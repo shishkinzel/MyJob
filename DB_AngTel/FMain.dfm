@@ -13165,13 +13165,11 @@ object frmMain: TfrmMain
     TabOrder = 8
   end
   object ds_fd_mem_Dev: TDataSource
-    DataSet = dbMain.fd_mem_Dev
-    Left = 8
-    Top = 128
+    Left = 80
+    Top = 320
   end
   object ds_Fill_Tab: TDataSource
-    DataSet = dbMain.tbl_DevAll
-    Left = 8
-    Top = 184
+    Left = 24
+    Top = 320
   end
 end

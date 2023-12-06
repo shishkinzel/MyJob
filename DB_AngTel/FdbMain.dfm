@@ -5,32 +5,7 @@ object dbMain: TdbMain
   Height = 215
   Width = 355
   object fd_mem_Dev: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'f_dev'
-        DataType = ftString
-        Size = 300
-      end
-      item
-        Name = 'f_id'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'f_mac'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'f_id_in'
-        DataType = ftInteger
-      end
-      item
-        Name = 'f_other'
-        DataType = ftString
-        Size = 20
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -42,22 +17,6 @@ object dbMain: TdbMain
     StoreDefs = True
     Left = 24
     Top = 16
-    object fd_mem_Devf_dev: TStringField
-      FieldName = 'f_dev'
-      Size = 300
-    end
-    object fd_mem_Devf_id: TStringField
-      FieldName = 'f_id'
-    end
-    object fd_mem_Devf_mac: TStringField
-      FieldName = 'f_mac'
-    end
-    object fd_mem_Devf_id_in: TIntegerField
-      FieldName = 'f_id_in'
-    end
-    object fd_mem_Devf_other: TStringField
-      FieldName = 'f_other'
-    end
   end
   object conDev: TADOConnection
     Connected = True
@@ -87,32 +46,6 @@ object dbMain: TdbMain
     TableName = 'dbDevAll'
     Left = 104
     Top = 144
-    object tbl_DevAllkey: TAutoIncField
-      FieldName = 'key'
-      ReadOnly = True
-      Visible = False
-    end
-    object tbl_DevAllnameDev: TWideStringField
-      FieldName = 'nameDev'
-      Size = 150
-    end
-    object tbl_DevAllid_first: TWideStringField
-      FieldName = 'id_first'
-    end
-    object tbl_DevAllid_last: TWideStringField
-      FieldName = 'id_last'
-    end
-    object tbl_DevAllmac_first: TWideStringField
-      FieldName = 'mac_first'
-      Size = 30
-    end
-    object tbl_DevAllmac_last: TWideStringField
-      FieldName = 'mac_last'
-      Size = 30
-    end
-    object tbl_DevAlldev_date: TDateTimeField
-      FieldName = 'dev_date'
-    end
   end
   object ds_DevAll: TDataSource
     DataSet = tbl_DevAll

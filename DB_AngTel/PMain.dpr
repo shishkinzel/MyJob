@@ -16,8 +16,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TdbMain, dbMain);
-  Application.CreateForm(TfrmListDevice, frmListDevice);
-  Application.CreateForm(TfrmGrid, frmGrid);
   Application.CreateForm(TfrmTest, frmTest);
   Application.Run;
 end.

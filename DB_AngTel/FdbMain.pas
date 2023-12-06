@@ -13,18 +13,6 @@ type
     conDev: TADOConnection;
     tbl_Dev: TADOTable;
     tbl_DevAll: TADOTable;
-    fd_mem_Devf_dev: TStringField;
-    fd_mem_Devf_id: TStringField;
-    fd_mem_Devf_mac: TStringField;
-    fd_mem_Devf_id_in: TIntegerField;
-    fd_mem_Devf_other: TStringField;
-    tbl_DevAllkey: TAutoIncField;
-    tbl_DevAllnameDev: TWideStringField;
-    tbl_DevAllid_first: TWideStringField;
-    tbl_DevAllid_last: TWideStringField;
-    tbl_DevAllmac_first: TWideStringField;
-    tbl_DevAllmac_last: TWideStringField;
-    tbl_DevAlldev_date: TDateTimeField;
     ds_DevAll: TDataSource;
     ds_Dev: TDataSource;
     procedure DataModuleCreate(Sender: TObject);

@@ -56,7 +56,6 @@ object frmGrid: TfrmGrid
       Width = 962
       Height = 252
       Align = alClient
-      DataSource = dbMain.ds_DevAll
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -105,7 +104,6 @@ object frmGrid: TfrmGrid
     end
   end
   object ds_Dev: TDataSource
-    DataSet = dbMain.fd_mem_Dev
     Left = 24
     Top = 543
   end
