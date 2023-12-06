@@ -80,6 +80,8 @@ object frmListDevice: TfrmListDevice
       Height = 143
       Align = alBottom
       TabOrder = 1
+      ExplicitLeft = 2
+      ExplicitTop = 370
       object lbl_TitleDev: TLabel
         Left = 20
         Top = 28
@@ -143,7 +145,7 @@ object frmListDevice: TfrmListDevice
         AlignWithMargins = True
         Left = 188
         Top = 60
-        Width = 38
+        Width = 37
         Height = 24
         Margins.Right = 10
         Alignment = taRightJustify
@@ -151,7 +153,7 @@ object frmListDevice: TfrmListDevice
         BevelOuter = bvSpace
         BevelKind = bkSoft
         BiDiMode = bdLeftToRight
-        EditMask = '!999;0;'
+        EditMask = '999;0; '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15

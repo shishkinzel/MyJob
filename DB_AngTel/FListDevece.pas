@@ -124,16 +124,15 @@ end;
 
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 var
-i : Integer;
-s : string;
+  i: Integer;
+  s: string;
 begin
 // проверяем наличие модификации в полях
-
-    s := medt_Dev_number.Text;
-   if not(edtDev.Modified and medt_Dev_number.Modified) or (edtDev.Text = '') then
-   Abort;
+	  s := Format('%.3d', [StrToInt(medt_Dev_number.Text)]);
+  if not (edtDev.Modified and medt_Dev_number.Modified) or (edtDev.Text = '') then
+    Abort;
 // проверка дублирования записи
-  with Self.fdDev.DataSource.DataSet do
+  with Self.dbG_Dev_List.DataSource.DataSet do
   begin
     First;
     while not Self.fdDev.Eof  do
