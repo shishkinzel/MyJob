@@ -1,7 +1,4 @@
-﻿[splTop]
-Coordinates=253,300,53,36
-
-[pnlTabl]
+﻿[pnlTabl]
 Coordinates=208,10,57,58
 
 [frmMain.ds_fd_mem_Dev]
@@ -9,9 +6,6 @@ Coordinates=481,78,161,36
 
 [dbMain.fd_mem_Dev]
 Coordinates=544,232,136,58
-
-[ilPictureBtn_24]
-Coordinates=129,404,101,36
 
 [btnApply]
 Coordinates=146,232,65,58
@@ -50,15 +44,6 @@ Coordinates=10,10,119,212
 [dbMain.tbl_Dev]
 Coordinates=221,232,104,58
 
-[ilPictureMainMenu]
-Coordinates=680,1,121,36
-
-[ilPictureBtn_16]
-Coordinates=680,56,101,36
-
-[splDown]
-Coordinates=116,300,64,36
-
 [dsDev]
 Coordinates=238,404,51,36
 
@@ -84,5 +69,5 @@ Coordinates=10,300,96,36
 Coordinates=482,10,108,58
 
 []
-Coordinates=680,221,91,36
+Coordinates=129,404,101,36
 

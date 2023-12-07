@@ -12,14 +12,9 @@ uses
 
 type
   TfrmListDevice = class(TForm)
-    ilPictureMainMenu: TImageList;
-    ilPictureBtn_24: TImageList;
-    ilPictureBtn_16: TImageList;
     pnlMain: TPanel;
     pnlTop: TPanel;
-    splTop: TSplitter;
     pnlDown: TPanel;
-    splDown: TSplitter;
     pnlTabl: TPanel;
     dbnMain: TDBNavigator;
     txtTitle: TStaticText;
@@ -36,15 +31,24 @@ type
     fdDevkey: TFDAutoIncField;
     fdDevname: TStringField;
     fdDevid_mod: TStringField;
+    pnlRight: TPanel;
+    chk_id: TCheckBox;
+    lbl_date: TLabel;
+    lbl_modify: TLabel;
+    lbl_num: TLabel;
+    edt_date: TEdit;
+    edt_modify: TEdit;
+    edt_num: TEdit;
+    txt_Right_title: TStaticText;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure dbG_Dev_ListDblClick(Sender: TObject);
     procedure btnFormClick(Sender: TObject);
-
-
-
+    procedure edt_dateKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
 
 
 
@@ -56,6 +60,7 @@ type
 
       csDev_ed = 'Введите наименование устройства';
       csMod_ed = 'Введите наименование комплекта';
+
 
     var
       fileDevice: TextFile;
@@ -95,11 +100,11 @@ begin
 
     Columns[1].Title.Alignment := taCenter;
     Columns[1].Title.Caption := 'Наименование устройства';
-    Columns[1].Width := 500;
+    Columns[1].Width := 480;
 
     Columns[2].Title.Alignment := taCenter;
-    Columns[2].Title.Caption := 'Номер модуля';
-    Columns[2].Width := 85;
+    Columns[2].Title.Caption := 'Артикул';
+    Columns[2].Width := 65;
   end;
 
   if FileExists(FTabDev) then
@@ -109,6 +114,22 @@ begin
 
 end;
 
+// переход по нажатию кнопки "Ввод" - enter
+procedure TfrmListDevice.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (Key = VK_RETURN) then
+    FindNextControl(ActiveControl, True, True, false).SetFocus;
+end;
+
+
+procedure TfrmListDevice.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+    if (Key = #13) then
+  begin
+    Key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
 
 // показ формы
 procedure TfrmListDevice.FormShow(Sender: TObject);
@@ -116,12 +137,11 @@ begin
   if edtDev.CanFocus then
     edtDev.SetFocus;
 
-
 end;
 
 // выбор окна ввода номера модуля
 
-{добавляем запись в таблицу}
+{ добавляем запись в таблицу }
 
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 var
@@ -161,7 +181,6 @@ begin
 
 end;
 
-
 // процедура выделения контуром
 
 
@@ -195,6 +214,18 @@ begin
   medt_Dev_number.Text := dbG_Dev_List.DataSource.DataSet.Fields[2].AsString;
 end;
 
+// работа с добавление полей в серийный номер
+procedure TfrmListDevice.edt_dateKeyPress(Sender: TObject; var Key: Char);
+var
+  i: Integer;
+begin
+  if not (Sender is TEdit) then
+    Abort;
+// вводим только цифры
+  if not (Key in ['0'..'9', #8]) then
+    Key := #0;
+end;
+
 
 {добавление в поля edit из таблицы}
 
@@ -213,4 +244,3 @@ end;
 
 
 end.
-

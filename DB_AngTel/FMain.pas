@@ -11,7 +11,6 @@ uses
 
 type
   TfrmMain = class(TForm)
-    medtID: TMaskEdit;
     medtMAC: TMaskEdit;
     btnStart_Reset: TBitBtn;
     seStep: TSpinEdit;
@@ -28,6 +27,10 @@ type
     ds_fd_mem_Dev: TDataSource;
     dtpMain: TDateTimePicker;
     ds_Fill_Tab: TDataSource;
+    ilPictureMainMenu: TImageList;
+    ilPictureBtn_16: TImageList;
+    ilPictureBtn_24: TImageList;
+    lbl_Num: TLabel;
     procedure medtMACKeyPress(Sender: TObject; var Key: Char);
 //    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
@@ -37,6 +40,8 @@ type
     procedure btnStart_ResetClick(Sender: TObject);
     procedure btnDBClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -74,8 +79,10 @@ IdGlobal, FdbMain, FListDevece, FGrid, FTest;
 // начальные установки в форме
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+i : Integer;
 begin
-frmListDevice.fdDev.Close;
+
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -96,6 +103,21 @@ end;
 
 
 
+procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+    if (Key = VK_RETURN) then
+    FindNextControl(ActiveControl, True, True, false).SetFocus;
+end;
+
+procedure TfrmMain.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if (Key = #13) then
+  begin
+    Key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
+
 {методы доступа к private полям}
  function TfrmMain.GetPath: string;
 begin
@@ -106,10 +128,11 @@ procedure TfrmMain.seStepChange(Sender: TObject);
 begin
 
 end;
-{событие show формы}
+
+{ событие show формы }
 procedure TfrmMain.FormShow(Sender: TObject);
 var
-i : Integer;
+  i: Integer;
 begin
 
 end;
@@ -166,7 +189,7 @@ frmListDevice.ShowModal;
 
 if frmListDevice.ModalResult = mrOk  then
   begin
-
+    frmListDevice.fdDev.Close;
     frmListDevice.Free;
   end;
 
@@ -177,7 +200,7 @@ var
   arr_DB: array[0..5] of string;
 begin
 // вызываем процедуру считывания входных данных
-  Print_mac_id(medtID.Text, medtMAC.Text, lbl_NameDev.Caption, seStep.Value, seCount.Value, dtpMain.Date, dbMain.fd_mem_Dev, arr_DB);
+//  Print_mac_id(medtID.Text, medtMAC.Text, lbl_NameDev.Caption, seStep.Value, seCount.Value, dtpMain.Date, dbMain.fd_mem_Dev, arr_DB);
 // вызываем процедуру заполнения основной таблицы
   Fill_Tab(arr_DB, dbMain.tbl_DevAll);
 
@@ -356,5 +379,3 @@ end;    }
 
 // закрытие формы
 end.
-
-
