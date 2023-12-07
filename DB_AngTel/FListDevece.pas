@@ -40,7 +40,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
-    procedure dbgMainDblClick(Sender: TObject);
+    procedure dbG_Dev_ListDblClick(Sender: TObject);
     procedure btnFormClick(Sender: TObject);
 
 
@@ -69,12 +69,10 @@ type
 
 var
   frmListDevice: TfrmListDevice;
-
 implementation
 
-
 uses
-StrUtils, IdGlobal, FdbMain;
+  StrUtils, IdGlobal, FdbMain;
 
 {$R *.dfm}
 procedure TfrmListDevice.FormCreate(Sender: TObject);
@@ -83,16 +81,13 @@ var
 begin
 // проверка наличия файла  'dev_json.fds' - при отсутствии создать пустой
 
-  Self.fdDev.Open;
-  if FileExists(FTabDev) then
-  begin
-    Self.fdDev.LoadFromFile(FTabDev, sfJSON);
-  end;
+  fdDev.Open;
+
 
 // настройка сетки грида
-   Self.dbG_Dev_List.SelectedRows.CurrentRowSelected := True; // выделить текущую строку
+  dbG_Dev_List.SelectedRows.CurrentRowSelected := True; // выделить текущую строку
 
-  with Self.dbG_Dev_List do
+  with dbG_Dev_List do
   begin
     Columns[0].Title.Alignment := taCenter;
     Columns[0].Title.Caption := '№';
@@ -107,15 +102,21 @@ begin
     Columns[2].Width := 85;
   end;
 
-
+  if FileExists(FTabDev) then
+  begin
+    fdDev.LoadFromFile(FTabDev, sfJSON);
+  end;
 
 end;
+
 
 // показ формы
 procedure TfrmListDevice.FormShow(Sender: TObject);
 begin
   if edtDev.CanFocus then
     edtDev.SetFocus;
+
+
 end;
 
 // выбор окна ввода номера модуля
@@ -128,14 +129,14 @@ var
   s: string;
 begin
 // проверяем наличие модификации в полях
-	  s := Format('%.3d', [StrToInt(medt_Dev_number.Text)]);
+//	  s := Format('%.3d', [StrToInt(medt_Dev_number.Text)]);
   if not (edtDev.Modified and medt_Dev_number.Modified) or (edtDev.Text = '') then
     Abort;
 // проверка дублирования записи
-  with Self.dbG_Dev_List.DataSource.DataSet do
+  with dbG_Dev_List.DataSource.DataSet do
   begin
     First;
-    while not Self.fdDev.Eof  do
+    while not fdDev.Eof  do
      begin
         if Fields[1].AsString = Trim(edtDev.Text) then
         begin
@@ -152,7 +153,7 @@ begin
     Last;
     Insert;
     Fields[1].AsString := Trim(edtDev.Text);
-    Fields[2].AsString := Trim(medt_Dev_number.Text);
+    Fields[2].AsString := Trim(Format('%.3d', [StrToInt(medt_Dev_number.Text)]));
     Post;
   end;
 
@@ -170,30 +171,32 @@ end;
 {добавление на форму}
 procedure TfrmListDevice.btnFormClick(Sender: TObject);
 var
-f_quest : Word;
-f_param : TCloseAction;
+  f_quest: Word;
 begin
-f_param := caNone;
-  with frmMain do
-  begin
-
-// вопрос о закрытии формы
-    f_quest := MessageBox(handle, PChar('Закрытие формы?'), PChar('Вы хотите закрыть форму выбора устройства!'), MB_YESNO + MB_ICONQUESTION);
-
-    case f_quest of
-      idyes:
-        FormClose(Self, f_param);
-    end;
+// вопрос о переносе на главную форму
+  f_quest := MessageBox(handle, PChar('Перенести на главную форму?'), PChar('Переносим!'), MB_YESNO + MB_ICONQUESTION);
+  case f_quest of
+    IDYES:
+      begin
+        frmMain.lbl_NameDev.Caption := dbG_Dev_List.Fields[1].AsString;
+        ShowMessage('Выполнено!!!!');
+        Self.Close;
+      end;
+    IDNO:
+      begin
+        ShowMessage('Отмена!!!!')
+      end;
   end;
-
 end;
-{добавление в поля edit из таблицы}
 
-procedure TfrmListDevice.dbgMainDblClick(Sender: TObject);
+procedure TfrmListDevice.dbG_Dev_ListDblClick(Sender: TObject);
 begin
-edtDev.Text := dbnMain.DataSource.DataSet.Fields[1].AsString;
-
+  edtDev.Text := dbG_Dev_List.DataSource.DataSet.Fields[1].AsString;
+  medt_Dev_number.Text := dbG_Dev_List.DataSource.DataSet.Fields[2].AsString;
 end;
+
+
+{добавление в поля edit из таблицы}
 
 
 {закрытие формы}
@@ -202,10 +205,12 @@ begin
 // сбрасываем данные в файл
   fdDev.SaveToFile(FTabDev, sfJSON);
 // закрываем БД
-  fdDev.Close;
+//  fdDev.Close;
 // закрытие модальной формы
   Self.ModalResult := mrOk;
 end;
+
+
 
 end.
 

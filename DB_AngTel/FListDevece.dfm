@@ -80,8 +80,6 @@ object frmListDevice: TfrmListDevice
       Height = 143
       Align = alBottom
       TabOrder = 1
-      ExplicitLeft = 2
-      ExplicitTop = 370
       object lbl_TitleDev: TLabel
         Left = 20
         Top = 28
@@ -199,6 +197,7 @@ object frmListDevice: TfrmListDevice
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = dbG_Dev_ListDblClick
       end
     end
   end

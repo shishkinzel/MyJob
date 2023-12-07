@@ -36,6 +36,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnStart_ResetClick(Sender: TObject);
     procedure btnDBClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -71,6 +72,11 @@ IdGlobal, FdbMain, FListDevece, FGrid, FTest;
 {$R *.dfm}
 
 // начальные установки в форме
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+frmListDevice.fdDev.Close;
+end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
@@ -159,9 +165,10 @@ frmListDevice := TfrmListDevice.Create(nil);
 frmListDevice.ShowModal;
 
 if frmListDevice.ModalResult = mrOk  then
-begin
-  frmListDevice.Free;
-end;
+  begin
+
+    frmListDevice.Free;
+  end;
 
 end;
 
