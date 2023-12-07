@@ -133,9 +133,12 @@ end;
 
 // показ формы
 procedure TfrmListDevice.FormShow(Sender: TObject);
+var
+i : Integer;
 begin
-  if edtDev.CanFocus then
-    edtDev.SetFocus;
+//  if edtDev.CanFocus then
+//    edtDev.SetFocus;
+
 
 end;
 
@@ -235,9 +238,7 @@ procedure TfrmListDevice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 // сбрасываем данные в файл
   fdDev.SaveToFile(FTabDev, sfJSON);
-// закрываем БД
-//  fdDev.Close;
-// закрытие модальной формы
+
   Self.ModalResult := mrOk;
 end;
 
