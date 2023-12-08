@@ -41,14 +41,47 @@ object frmTest: TfrmTest
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object pnl1: TPanel
+    Left = 576
+    Top = 361
+    Width = 449
+    Height = 339
+    Align = alRight
+    TabOrder = 2
+    object btnEd1: TButtonedEdit
+      Left = 120
+      Top = 64
+      Width = 121
+      Height = 21
+      TabOrder = 0
+    end
+    object edt_1: TEdit
+      Left = 120
+      Top = 24
+      Width = 121
+      Height = 21
+      MaxLength = 3
+      TabOrder = 1
+    end
+    object se1: TSpinEdit
+      Left = 312
+      Top = 24
+      Width = 121
+      Height = 22
+      MaxValue = 0
+      MinValue = 0
+      TabOrder = 2
+      Value = 0
+    end
+  end
   object dsTest: TDataSource
     DataSet = dbMain.fd_mem_Dev
-    Left = 32
-    Top = 456
+    Left = 16
+    Top = 384
   end
   object dsReport: TDataSource
     DataSet = dbMain.tbl_DevAll
-    Left = 200
-    Top = 480
+    Left = 64
+    Top = 384
   end
 end

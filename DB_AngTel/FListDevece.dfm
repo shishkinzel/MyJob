@@ -199,6 +199,7 @@ object frmListDevice: TfrmListDevice
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitTop = 45
       object lbl_date: TLabel
         Left = 41
         Top = 54

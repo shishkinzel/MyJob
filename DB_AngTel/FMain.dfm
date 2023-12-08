@@ -13113,6 +13113,7 @@ object frmMain: TfrmMain
     SelectedImageIndex = 15
     Spacing = 20
     TabOrder = 4
+    OnClick = btnSelectionClick
   end
   object btnDB: TBitBtn
     Tag = 302

@@ -42,6 +42,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btnSelectionClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -193,6 +194,11 @@ if frmListDevice.ModalResult = mrOk  then
     frmListDevice.Free;
   end;
 
+end;
+
+procedure TfrmMain.btnSelectionClick(Sender: TObject);
+begin
+frmTest.show;
 end;
 
 procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
