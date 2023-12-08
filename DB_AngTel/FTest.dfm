@@ -49,14 +49,14 @@ object frmTest: TfrmTest
     Align = alRight
     TabOrder = 2
     object btnEd1: TButtonedEdit
-      Left = 120
-      Top = 64
+      Left = 48
+      Top = 80
       Width = 121
       Height = 21
       TabOrder = 0
     end
     object edt_1: TEdit
-      Left = 120
+      Left = 48
       Top = 24
       Width = 121
       Height = 21
@@ -64,7 +64,7 @@ object frmTest: TfrmTest
       TabOrder = 1
     end
     object se1: TSpinEdit
-      Left = 312
+      Left = 224
       Top = 24
       Width = 121
       Height = 22
