@@ -2,7 +2,9 @@
 
 uses
   Vcl.Forms,
-  FMain in 'FMain.pas' {frm_NewComp};
+  FMain in 'FMain.pas' {frm_NewComp},
+  BtnBeep in '..\..\..\NewComponent\Class_button\BtnBeep.pas',
+  uListAdd in '..\..\..\NewComponent\Class_button\uListAdd.pas';
 
 {$R *.res}
 

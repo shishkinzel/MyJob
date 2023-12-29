@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8F03F6A8-5B67-4C03-B1D9-575EBC417FC1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PrNewComp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\NewComponent\Class_button\MyCompPackage.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PrNewComp">
+        <MSBuild Projects="PrNewComp.dproj"/>
+    </Target>
+    <Target Name="PrNewComp:Clean">
+        <MSBuild Projects="PrNewComp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PrNewComp:Make">
+        <MSBuild Projects="PrNewComp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MyCompPackage">
+        <MSBuild Projects="..\..\..\NewComponent\Class_button\MyCompPackage.dproj"/>
+    </Target>
+    <Target Name="MyCompPackage:Clean">
+        <MSBuild Projects="..\..\..\NewComponent\Class_button\MyCompPackage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MyCompPackage:Make">
+        <MSBuild Projects="..\..\..\NewComponent\Class_button\MyCompPackage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PrNewComp;MyCompPackage"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PrNewComp:Clean;MyCompPackage:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PrNewComp:Make;MyCompPackage:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

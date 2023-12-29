@@ -13,4 +13,23 @@ object frm_NewComp: Tfrm_NewComp
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object btnbp1: TButtonBeep
+    Left = 40
+    Top = 24
+    Width = 75
+    Height = 25
+    Caption = 'btnbp1'
+    TabOrder = 0
+    OnClick = btnbp1Click
+  end
+  object lstd_1: TListAdd
+    Left = 160
+    Top = 112
+    Width = 100
+    Height = 100
+  end
+  object bpwnd1: TBeepWnd
+    Left = 440
+    Top = 48
+  end
 end
