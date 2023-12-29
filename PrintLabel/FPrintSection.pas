@@ -94,11 +94,11 @@ type
     mniPrQR_Separator2: TMenuItem;
     mniPrQR_StReset: TMenuItem;
     mniPrQR_AdApply: TMenuItem;
-    mniPrQR__AdShow: TMenuItem;
+    mniPrQR_AdShow: TMenuItem;
     mniPrQR_Separator3: TMenuItem;
-    mniPrQR__AdPrint: TMenuItem;
+    mniPrQR_AdPrint: TMenuItem;
     mniPrQR_Separator4: TMenuItem;
-    mniPrQR__AdReset: TMenuItem;
+    mniPrQR_AdReset: TMenuItem;
     pnlAdv: TPanel;
     lbledtOne: TLabeledEdit;
     lbledtTwo: TLabeledEdit;
@@ -138,8 +138,8 @@ type
     procedure mniPrQR_StShowClick(Sender: TObject);
     procedure mniPrQR_StPrintClick(Sender: TObject);
     procedure mniPrQR_AdApplyClick(Sender: TObject);
-    procedure mniPrQR__AdShowClick(Sender: TObject);
-    procedure mniPrQR__AdPrintClick(Sender: TObject);
+    procedure mniPrQR_AdShowClick(Sender: TObject);
+    procedure mniPrQR_AdPrintClick(Sender: TObject);
     procedure mniPrQR_StResetClick(Sender: TObject);
     procedure mniPrQR_PanelClick(Sender: TObject);
     procedure chkAdvanceMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -774,7 +774,7 @@ procedure TfrmPrintSection.mniPrQR_AdApplyClick(Sender: TObject);
 begin
   // гасим и зажигаем необходимые пункты
   mniPrQR_AdApply.Enabled := False;
-  mniPrQR__AdShow.Enabled := True;
+  mniPrQR_AdShow.Enabled := True;
 
   // считываем стандартные поля
   (frmFR_List.frxRe_adv.FindObject('memJobPlace') as TfrxMemoView).Text := frmShowSoft.f_rmp;
@@ -797,17 +797,18 @@ begin
   (frmFR_List.frxRe_adv.FindObject('bq_Root') as TfrxBarcode2DView).Text := f_pos6;
 
 end;
-
 // просмотр расширенный бланк
 
-procedure TfrmPrintSection.mniPrQR__AdShowClick(Sender: TObject);
+procedure TfrmPrintSection.mniPrQR_AdShowClick(Sender: TObject);
 begin
+  mniPrQR_AdPrint.Enabled := True;
   frmFR_List.Show;
   frmFR_List.frxRe_adv.ShowReport();
 end;
 
+
 // печать расширенный бланк
-procedure TfrmPrintSection.mniPrQR__AdPrintClick(Sender: TObject);
+procedure TfrmPrintSection.mniPrQR_AdPrintClick(Sender: TObject);
 begin
   frmFR_List.frxRe_adv.ShowReport();
   frmFR_List.frxRe_adv.Print;
@@ -871,6 +872,9 @@ begin
   chkAdvance.Checked := False;
   mniPrQR_Panel.Enabled := True;
   mniPrQR_Panel.Visible := True;
+
+  mniPrQR_AdShow.Enabled := False;
+  mniPrQR_AdPrint.Enabled := False;
 
 // присваиваем TLabelEdit - начальные значения
   j := 0;

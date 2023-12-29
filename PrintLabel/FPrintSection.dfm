@@ -15638,30 +15638,30 @@ object frmPrintSection: TfrmPrintSection
         ImageIndex = 13
         OnClick = mniPrQR_AdApplyClick
       end
-      object mniPrQR__AdShow: TMenuItem
+      object mniPrQR_AdShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
         SubMenuImages = ilPrintSelection_24_sub
         Enabled = False
         ImageIndex = 6
-        OnClick = mniPrQR__AdShowClick
+        OnClick = mniPrQR_AdShowClick
       end
       object mniPrQR_Separator3: TMenuItem
         Caption = '-'
         SubMenuImages = ilPrintSelection_24_sub
         Enabled = False
       end
-      object mniPrQR__AdPrint: TMenuItem
+      object mniPrQR_AdPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100
         SubMenuImages = ilPrintSelection_24_sub
         Enabled = False
         ImageIndex = 11
-        OnClick = mniPrQR__AdPrintClick
+        OnClick = mniPrQR_AdPrintClick
       end
       object mniPrQR_Separator4: TMenuItem
         Caption = '-'
         SubMenuImages = ilPrintSelection_24_sub
       end
-      object mniPrQR__AdReset: TMenuItem
+      object mniPrQR_AdReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         SubMenuImages = ilPrintSelection_24_sub
         ImageIndex = 12
