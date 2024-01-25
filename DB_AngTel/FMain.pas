@@ -69,14 +69,15 @@ var
   frmMain: TfrmMain;
 //  f_showPrintForm: Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
   f_print_config: string;
+  // поля для ID - устройства и его наименования
+  f_ID, f_NameDevice: string;
 
 implementation
 
 uses
-IdGlobal, FdbMain, FListDevece, FGrid, FTest;
+  IdGlobal, FdbMain, FListDevece, FGrid, FTest;
 
 {$R *.dfm}
-
 // начальные установки в форме
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -13099,7 +13099,7 @@ object frmMain: TfrmMain
     Width = 220
     Height = 40
     Cursor = crHandPoint
-    Caption = #1042#1099#1073#1086#1088' '#1091#1090#1080#1083#1080#1090#1099' '#1087#1077#1095#1072#1090#1080
+    Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1041#1044
     DisabledImageIndex = 3
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

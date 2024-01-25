@@ -1,7 +1,6 @@
 object frmListDevice: TfrmListDevice
   Left = 0
   Top = 0
-  ActiveControl = se_Series
   Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
   ClientHeight = 514
   ClientWidth = 797
@@ -135,7 +134,8 @@ object frmListDevice: TfrmListDevice
         MaxValue = 999
         MinValue = 0
         TabOrder = 1
-        Value = 1
+        Value = 0
+        OnExit = se_NumModExit
       end
     end
     object pnlTabl: TPanel
@@ -177,6 +177,7 @@ object frmListDevice: TfrmListDevice
       Width = 142
       Height = 328
       Align = alRight
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBackground
       Font.Height = -11
@@ -184,7 +185,6 @@ object frmListDevice: TfrmListDevice
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitTop = 36
       object lbl_date: TLabel
         Left = 49
         Top = 38
@@ -305,6 +305,7 @@ object frmListDevice: TfrmListDevice
         ParentShowHint = False
         ShowHint = False
         TabOrder = 5
+        OnClick = chk_idClick
       end
       object txt_Right_title: TStaticText
         Left = 6
@@ -324,7 +325,7 @@ object frmListDevice: TfrmListDevice
         ParentFont = False
         TabOrder = 0
       end
-      object seDate: TSpinEdit
+      object se_Quarter: TSpinEdit
         Left = 22
         Top = 80
         Width = 35
@@ -335,7 +336,7 @@ object frmListDevice: TfrmListDevice
         TabOrder = 1
         Value = 1
       end
-      object SpinEdit1: TSpinEdit
+      object se_Year: TSpinEdit
         Left = 78
         Top = 80
         Width = 43

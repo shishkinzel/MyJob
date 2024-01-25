@@ -37,9 +37,9 @@ type
     lbl_modify: TLabel;
     lbl_num: TLabel;
     txt_Right_title: TStaticText;
-    seDate: TSpinEdit;
+    se_Quarter: TSpinEdit;
     lbl_Quarter: TLabel;
-    SpinEdit1: TSpinEdit;
+    se_Year: TSpinEdit;
     lbl_Year: TLabel;
     se_NumMod: TSpinEdit;
     se_Series: TSpinEdit;
@@ -53,6 +53,8 @@ type
     procedure edt_dateKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure chk_idClick(Sender: TObject);
+    procedure se_NumModExit(Sender: TObject);
 
 
 
@@ -65,19 +67,21 @@ type
       csDev_ed = 'Введите наименование устройства';
       csMod_ed = 'Введите наименование комплекта';
 
-
     var
       fileDevice: TextFile;
       fileModule: TextFile;
-      fCanClose : Boolean;
-  public
-    { Public declarations }
-    const
-      FTabDev = 'dev_json.fds';
-  end;
+      fCanClose: Boolean;
 
-var
-  frmListDevice: TfrmListDevice;
+      f_numModule: string;  // защищеная переменная номер модуля
+
+    public
+    { Public declarations }
+      const
+      FTabDev = 'dev_json.fds';
+    end;
+
+  var
+    frmListDevice: TfrmListDevice;
 implementation
 
 uses
@@ -147,6 +151,17 @@ begin
 
 
 end;
+// ухожу с компонента номер модуля
+procedure TfrmListDevice.se_NumModExit(Sender: TObject);
+var
+i : Integer;
+begin
+if se_NumMod.Value <> 0 then
+begin
+  pnlRight.Enabled := True;
+end;
+
+end;
 
 // выбор окна ввода номера модуля
 
@@ -155,27 +170,44 @@ end;
 procedure TfrmListDevice.btnApplyClick(Sender: TObject);
 var
   i: Integer;
-  s: string;
 begin
 // проверяем наличие модификации в полях
-//	  s := Format('%.3d', [StrToInt(medt_Dev_number.Text)]);
+	 f_numModule := Format('%.3d', [se_NumMod.Value]);
 
   end;
+
+// *********** формируем полный серийный номер устройства *****************************************
+
+procedure TfrmListDevice.chk_idClick(Sender: TObject);
+var
+i : Integer;
+f_date, f_series, f_number : string; // соответственно код даты, код модификации изделия и порядковый номер
+begin
+  f_date := IntToStr(se_Quarter.Value) + Format('%.2d', [se_Year.Value]);
+  f_series := Format('%.3d', [se_Series.Value]);
+  f_number := Format('%.3d', [se_Number.Value]);
+// инициализируем глобальную переменную ID и наименование устройства
+  f_ID := f_numModule + ' ' + f_date + ' ' + f_series + ' ' + f_number;
+  ShowMessage(f_ID);
+
+end;
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+// ShowMessage(f_series);
+// ShowMessage(f_number);
+
 
 
 // процедура выделения контуром
 
-
-
-
-
-{добавление на форму}
+{ добавление на форму }
 procedure TfrmListDevice.btnFormClick(Sender: TObject);
 var
   f_quest: Word;
 begin
-// вопрос о переносе на главную форму
-  f_quest := MessageBox(handle, PChar('Перенести на главную форму?'), PChar('Переносим!'), MB_YESNO + MB_ICONQUESTION);
+  // вопрос о переносе на главную форму
+  f_quest := MessageBox(handle, PChar('Перенести на главную форму?'),
+    PChar('Переносим!'), MB_YESNO + MB_ICONQUESTION);
   case f_quest of
     IDYES:
       begin
