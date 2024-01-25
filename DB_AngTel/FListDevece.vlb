@@ -59,9 +59,6 @@ Coordinates=479,232,55,58
 [btnForm]
 Coordinates=74,232,62,58
 
-[medt_Dev_number]
-Coordinates=275,10,123,58
-
 [dbG_Dev_List]
 Coordinates=10,300,96,36
 
@@ -69,5 +66,5 @@ Coordinates=10,300,96,36
 Coordinates=482,10,108,58
 
 []
-Coordinates=129,404,101,36
+Coordinates=275,10,123,58
 

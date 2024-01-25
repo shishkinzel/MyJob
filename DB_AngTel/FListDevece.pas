@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON, FMain, Vcl.Mask;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.StorageJSON, FMain, Vcl.Mask,
+  Vcl.Samples.Spin;
 
 type
   TfrmListDevice = class(TForm)
@@ -27,7 +28,6 @@ type
     dsDev: TDataSource;
     dbG_Dev_List: TDBGrid;
     lbl_Dev_number: TLabel;
-    medt_Dev_number: TMaskEdit;
     fdDevkey: TFDAutoIncField;
     fdDevname: TStringField;
     fdDevid_mod: TStringField;
@@ -36,10 +36,14 @@ type
     lbl_date: TLabel;
     lbl_modify: TLabel;
     lbl_num: TLabel;
-    edt_date: TEdit;
-    edt_modify: TEdit;
-    edt_num: TEdit;
     txt_Right_title: TStaticText;
+    seDate: TSpinEdit;
+    lbl_Quarter: TLabel;
+    SpinEdit1: TSpinEdit;
+    lbl_Year: TLabel;
+    se_NumMod: TSpinEdit;
+    se_Series: TSpinEdit;
+    se_Number: TSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -114,8 +118,10 @@ begin
 
 end;
 
+
 // переход по нажатию кнопки "Ввод" - enter
-procedure TfrmListDevice.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmListDevice.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   if (Key = VK_RETURN) then
     FindNextControl(ActiveControl, True, True, false).SetFocus;
@@ -136,8 +142,8 @@ procedure TfrmListDevice.FormShow(Sender: TObject);
 var
 i : Integer;
 begin
-//  if edtDev.CanFocus then
-//    edtDev.SetFocus;
+  if edtDev.CanFocus then
+    edtDev.SetFocus;
 
 
 end;
@@ -153,36 +159,9 @@ var
 begin
 // проверяем наличие модификации в полях
 //	  s := Format('%.3d', [StrToInt(medt_Dev_number.Text)]);
-  if not (edtDev.Modified and medt_Dev_number.Modified) or (edtDev.Text = '') then
-    Abort;
-// проверка дублирования записи
-  with dbG_Dev_List.DataSource.DataSet do
-  begin
-    First;
-    while not fdDev.Eof  do
-     begin
-        if Fields[1].AsString = Trim(edtDev.Text) then
-        begin
-         MessageBox(Handle, PWideChar('Данное устройство существует'), PWideChar('Проверте правильность ввода'), MB_OK + MB_ICONERROR );
-         Abort
-        end;
-        if  Fields[2].AsString = medt_Dev_number.Text then
-        begin
-         MessageBox(Handle, PWideChar('Данный номер уже введен'), PWideChar('Проверте правильность ввода'), MB_OK + MB_ICONERROR );
-         Abort
-        end;
-        Next
-    end;
-    Last;
-    Insert;
-    Fields[1].AsString := Trim(edtDev.Text);
-    Fields[2].AsString := Trim(Format('%.3d', [StrToInt(medt_Dev_number.Text)]));
-    Post;
+
   end;
 
-
-
-end;
 
 // процедура выделения контуром
 
@@ -214,7 +193,7 @@ end;
 procedure TfrmListDevice.dbG_Dev_ListDblClick(Sender: TObject);
 begin
   edtDev.Text := dbG_Dev_List.DataSource.DataSet.Fields[1].AsString;
-  medt_Dev_number.Text := dbG_Dev_List.DataSource.DataSet.Fields[2].AsString;
+
 end;
 
 // работа с добавление полей в серийный номер

@@ -1,6 +1,7 @@
 object frmListDevice: TfrmListDevice
   Left = 0
   Top = 0
+  ActiveControl = se_Series
   Caption = #1057#1087#1080#1089#1086#1082' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
   ClientHeight = 514
   ClientWidth = 797
@@ -125,32 +126,16 @@ object frmListDevice: TfrmListDevice
         TabOrder = 3
         OnClick = btnFormClick
       end
-      object medt_Dev_number: TMaskEdit
-        AlignWithMargins = True
+      object se_NumMod: TSpinEdit
         Left = 188
-        Top = 60
-        Width = 37
-        Height = 24
-        Margins.Right = 10
-        Alignment = taRightJustify
-        BevelInner = bvSpace
-        BevelOuter = bvSpace
-        BevelKind = bkSoft
-        BiDiMode = bdLeftToRight
-        EditMask = '999;0; '
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Anonymous Pro'
-        Font.Style = []
+        Top = 65
+        Width = 50
+        Height = 22
         MaxLength = 3
-        ParentBiDiMode = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
+        MaxValue = 999
+        MinValue = 0
         TabOrder = 1
-        Text = ''
-        TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1084#1086#1076#1091#1083#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1080#1079' '#1089#1077#1088#1080#1081#1085#1086#1075#1086' '#1085#1086#1084#1077#1088#1072' '
+        Value = 1
       end
     end
     object pnlTabl: TPanel
@@ -199,10 +184,10 @@ object frmListDevice: TfrmListDevice
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitTop = 45
+      ExplicitTop = 36
       object lbl_date: TLabel
-        Left = 41
-        Top = 54
+        Left = 49
+        Top = 38
         Width = 26
         Height = 13
         ParentCustomHint = False
@@ -260,6 +245,46 @@ object frmListDevice: TfrmListDevice
         ParentShowHint = False
         ShowHint = False
       end
+      object lbl_Quarter: TLabel
+        Left = 17
+        Top = 61
+        Width = 43
+        Height = 13
+        ParentCustomHint = False
+        BiDiMode = bdLeftToRight
+        Caption = #1050#1074#1072#1088#1090#1072#1083
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBackground
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentColor = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = False
+      end
+      object lbl_Year: TLabel
+        Left = 89
+        Top = 61
+        Width = 19
+        Height = 13
+        ParentCustomHint = False
+        BiDiMode = bdLeftToRight
+        Caption = #1043#1086#1076
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBackground
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentColor = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = False
+      end
       object chk_id: TCheckBox
         Left = 41
         Top = 288
@@ -279,67 +304,7 @@ object frmListDevice: TfrmListDevice
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 4
-      end
-      object edt_date: TEdit
-        Left = 41
-        Top = 73
-        Width = 37
-        Height = 22
-        ParentCustomHint = False
-        BiDiMode = bdLeftToRight
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Anonymous Pro'
-        Font.Style = []
-        MaxLength = 3
-        ParentBiDiMode = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 0
-        OnKeyPress = edt_dateKeyPress
-      end
-      object edt_modify: TEdit
-        Left = 41
-        Top = 142
-        Width = 37
-        Height = 22
-        ParentCustomHint = False
-        BiDiMode = bdLeftToRight
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Anonymous Pro'
-        Font.Style = []
-        MaxLength = 3
-        ParentBiDiMode = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 1
-        OnKeyPress = edt_dateKeyPress
-      end
-      object edt_num: TEdit
-        Left = 41
-        Top = 224
-        Width = 37
-        Height = 22
-        ParentCustomHint = False
-        BiDiMode = bdLeftToRight
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Anonymous Pro'
-        Font.Style = []
-        MaxLength = 3
-        ParentBiDiMode = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 2
-        OnKeyPress = edt_dateKeyPress
+        TabOrder = 5
       end
       object txt_Right_title: TStaticText
         Left = 6
@@ -357,7 +322,51 @@ object frmListDevice: TfrmListDevice
         Font.Name = 'Roboto'
         Font.Style = [fsItalic]
         ParentFont = False
+        TabOrder = 0
+      end
+      object seDate: TSpinEdit
+        Left = 22
+        Top = 80
+        Width = 35
+        Height = 22
+        MaxLength = 1
+        MaxValue = 4
+        MinValue = 1
+        TabOrder = 1
+        Value = 1
+      end
+      object SpinEdit1: TSpinEdit
+        Left = 78
+        Top = 80
+        Width = 43
+        Height = 22
+        MaxLength = 2
+        MaxValue = 99
+        MinValue = 0
+        TabOrder = 2
+        Value = 0
+      end
+      object se_Series: TSpinEdit
+        Left = 46
+        Top = 154
+        Width = 50
+        Height = 22
+        MaxLength = 3
+        MaxValue = 999
+        MinValue = 1
         TabOrder = 3
+        Value = 1
+      end
+      object se_Number: TSpinEdit
+        Left = 46
+        Top = 234
+        Width = 50
+        Height = 22
+        MaxLength = 3
+        MaxValue = 999
+        MinValue = 1
+        TabOrder = 4
+        Value = 1
       end
     end
   end
