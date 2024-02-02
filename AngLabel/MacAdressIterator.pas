@@ -913,7 +913,7 @@ begin
           DataModuleMacIterator.IncArrayOne(idMAC);
         stepMac := 1;
         range := stepIteration;
-        ss := s;
+        ss := s;                               // Внимание MAC-адрес
         Writeln(fileId);
       end;
    // закрытие файла
@@ -941,6 +941,8 @@ begin
 //    frmTestGrid.Show;           // активация тестовой формы
   end;
   ShowMessage(ss);
+// Сдесь нужно ловить последний mac-адрес
+
 end;
 
 // окончание блока выбора  **********************************************************
