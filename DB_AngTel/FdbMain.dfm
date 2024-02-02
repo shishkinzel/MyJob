@@ -19,11 +19,10 @@ object dbMain: TdbMain
     Top = 16
   end
   object conDev: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Embarcadero\Proj' +
       'ects\MyJob\DB_AngTel\db\db_angtel.mdb;Persist Security Info=Fals' +
-      'e;'
+      'e'
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
@@ -34,16 +33,13 @@ object dbMain: TdbMain
     Connection = conDev
     CursorType = ctStatic
     LockType = ltReadOnly
-    TableName = 'dbDevice'
     Left = 104
     Top = 80
   end
   object tbl_DevAll: TADOTable
-    Active = True
     Connection = conDev
     CursorType = ctStatic
     LockType = ltReadOnly
-    TableName = 'dbDevAll'
     Left = 104
     Top = 144
   end
