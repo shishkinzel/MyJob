@@ -1,15 +1,15 @@
 ﻿unit unit_ini;
 
 interface
-
 uses
   Classes, SysUtils, IniFiles, Forms, Windows;
 
 const
   csIniSectionPathPrint = 'SectionPathPrint';  //секция для хранения пути к принтерам
-   csIniSectionAccess = 'SectionAcess';        // секция доступа
-  {Section : csIniSectionPathPrint}
+  csIniSectionAccess = 'SectionAcess';        // секция доступа
+  csIniSectionMAC_Last = 'SectionMAC_Last';        // секция хранения последнего mac-адреса
 
+  {Section : csIniSectionPathPrint}
 
 type
   TIniOptions = class(TObject)
@@ -23,6 +23,8 @@ type
   f_print_576 : string;
 
   f_access : string;         // переменная доступа
+
+  f_LastMAC : string;         // переменная mac-адреса
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -51,6 +53,8 @@ begin
     f_print_2824 := Ini.ReadString(csIniSectionPathPrint, 'Print_TLP 2824', '\\PrintServer\TLP 2824');
 // защита приложения
     f_access := Ini.ReadString(csIniSectionAccess, 'Library_access', '000000000000');
+// mac-адрес
+     f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '68:EB:C5:00:00:00');
   end;
 end;
 

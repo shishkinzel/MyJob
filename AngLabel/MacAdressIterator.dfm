@@ -95,6 +95,7 @@ object frmMAC: TfrmMAC
   Position = poScreenCenter
   Visible = True
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
