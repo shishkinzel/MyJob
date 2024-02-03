@@ -220,7 +220,7 @@ object frmMAC: TfrmMAC
     ParentFont = False
   end
   object lblColon_1: TLabel
-    Left = 142
+    Left = 148
     Top = 181
     Width = 6
     Height = 19
@@ -233,7 +233,7 @@ object frmMAC: TfrmMAC
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 178
+    Left = 186
     Top = 180
     Width = 6
     Height = 19
@@ -263,6 +263,7 @@ object frmMAC: TfrmMAC
     Top = 301
     Width = 190
     Height = 16
+    Alignment = taCenter
     Caption = #1042#1074#1077#1076#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074' :'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -396,10 +397,11 @@ object frmMAC: TfrmMAC
     OnChange = medtNumberChange
   end
   object medtBit_4: TMaskEdit
-    Left = 116
+    Left = 118
     Top = 177
-    Width = 24
+    Width = 28
     Height = 27
+    Alignment = taCenter
     EditMask = '<aa;0; '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -413,10 +415,11 @@ object frmMAC: TfrmMAC
     OnChange = medtBit_4Change
   end
   object medtBit_5: TMaskEdit
-    Left = 152
+    Left = 156
     Top = 177
-    Width = 24
+    Width = 28
     Height = 27
+    Alignment = taCenter
     EditMask = '<aa;0; '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -430,10 +433,11 @@ object frmMAC: TfrmMAC
     OnChange = medtBit_5Change
   end
   object medtBit_6: TMaskEdit
-    Left = 188
+    Left = 194
     Top = 177
-    Width = 24
+    Width = 28
     Height = 27
+    Alignment = taCenter
     EditMask = '<aa;0; '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

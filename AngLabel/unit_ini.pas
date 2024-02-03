@@ -54,7 +54,7 @@ begin
 // защита приложения
     f_access := Ini.ReadString(csIniSectionAccess, 'Library_access', '000000000000');
 // mac-адрес
-     f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '68:EB:C5:00:00:00');
+     f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '00:00:00');
   end;
 end;
 
@@ -62,6 +62,7 @@ procedure TIniOptions.SaveSettings(Ini: TMemIniFile);
 begin
   if Ini <> nil then
   begin
+    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', f_LastMAC);
   end;
 end;
 

@@ -425,8 +425,16 @@ begin
       IDYES:
         begin
         // как загрузить адрес      { TODO 1 -owrite -cwrite : Запись mac-адреса в поле на форме }
+          chkAdvanceSetting.Checked := True;
+
+          medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
+          medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
+          medtBit_6.Text := Trim(f_LastMAC);
           ShowMessage('Загружаем');
           f_NoShowAddres := False;
+          medtBit_4.Enabled := False;
+          medtBit_5.Enabled := False;
+          medtBit_6.Enabled := False;
         end;
       IDNO:
         begin
@@ -639,7 +647,7 @@ var
   s1, tmp, tmp1, tmp2: string;
   bit0, bit1, bit2: string;
   img: BITMAP;
-  ss : string;
+  f_Last_macAddress : string;
 begin
 // установить шрифт отчета печати mac-адреса по умолчанию
   macSize := False;
@@ -766,7 +774,6 @@ begin
         fdmtblMac.Post;
         fdmtblMac.Next;
       end;
-      ss := tmp1;
       CloseFile(fileId);
     end
     else
@@ -913,7 +920,8 @@ begin
           DataModuleMacIterator.IncArrayOne(idMAC);
         stepMac := 1;
         range := stepIteration;
-        ss := s;                               // Внимание MAC-адрес
+        Trim(Fetch(s, '68:EB:C5:'));                         // Внимание MAC-адрес
+        f_Last_macAddress :=  s;
         Writeln(fileId);
       end;
    // закрытие файла
@@ -940,10 +948,13 @@ begin
     mniLabelAdvance.Enabled := True;
 //    frmTestGrid.Show;           // активация тестовой формы
   end;
-  ShowMessage(ss);
+  ShowMessage(f_Last_macAddress);
 // Сдесь нужно ловить последний mac-адрес
-
+  { TODO 1 -o12 -c12 : Оп{ TODO 1 -o12 -c12 : Описать функцию вычисление адреса, и возвращение последнего адреса плюс один в string }
+   f_LastMAC := DataModuleMacIterator.LastMAC_AddOne(f_Last_macAddress, stepIteration);
+   ShowMessage(f_LastMAC);
 end;
+
 
 // окончание блока выбора  **********************************************************
 
@@ -2224,12 +2235,12 @@ begin
   fdmtblTitle.Close;
   fdmtblBarCode.Close;
 end;
-
 procedure TfrmMAC.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var
   f_question: Word;
+  f_ini: TIniFile;
 begin
-  // отказ от записи в конфигурационный файл последнега адреса плюс 1
+    // отказ от записи в конфигурационный файл последнега адреса плюс 1
   if f_NoShowAddres then
   begin
     CanClose := True;
@@ -2237,11 +2248,24 @@ begin
   else
   begin
     f_question := MessageBox(handle, PChar('Сохранение MAC-адреса?'), PChar('Сохранить MAC-адрес в файл конфигурации!'), MB_YESNO + MB_ICONQUESTION);
-
     case f_question of
       IDYES:
         begin
+          // описать загрузку ini-файла конфигурации print_config.ini
+          if not( Length(f_LastMAC) = 8) then
+                begin
+                  CanClose := True;
+                  Exit
+                end;
+          f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
+          f_ini := TIniFile.Create(f_iniPath);
+          // Записываем файл конфигурации
+          IniOptions.f_LastMAC := f_LastMAC;
+          IniOptions.SaveToFile(f_iniPath);
           ShowMessage('Сохраняем');
+
+          // очищаем память
+          f_ini.Free;
         end;
       IDNO:
         begin
