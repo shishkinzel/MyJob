@@ -274,6 +274,7 @@ type
     procedure mniDate_ShowClick(Sender: TObject);
     procedure mniDate_PrintClick(Sender: TObject);
     procedure dtpMacAdressClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     var
@@ -299,8 +300,12 @@ type
       ffirstIdDeviceBarCode: string; // для печати id в barcode
       macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
       f_sticker: Boolean;            // флаг для печати стикера верификации
+      f_FirstShowForm : Boolean;     // флаг показа формы при открытии
+      f_NoShowAddres : Boolean;      // флаг ослеживания последнего адреса
       // защита программы
       f_access : string;
+      // mac-adress
+      f_LastMAC : string;              // последний mac-adress инкремент на 1
   public
   { Public declarations }
     const
@@ -313,6 +318,7 @@ type
       barCodeStream: TMemoryStream;
       idMAC: array[0..2] of Byte;
       idMACBarCode: array[0..2] of Byte;
+      LowMAC: array[0..2] of Byte;           // для работы с последним адресом
 // переменные для чтения конфигурации принтеров по умолчанию
       f_print_924: string;
       f_print_940: string;
@@ -347,6 +353,9 @@ var
 begin
 // проверка на валидность работы программы
   f_access := '';
+
+  f_FirstShowForm := True;
+  f_NoShowAddres := True;
 
   utilityMAC := True;
   f_sticker := False;
@@ -384,7 +393,8 @@ begin
   f_print_576 := IniOptions.f_print_576;
 // защита приложения
   f_access := IniOptions.f_access;
-
+// последний mac-адрес плюс 1
+  f_LastMAC := IniOptions.f_LastMAC;
  // !!!!!!!!!!!!!
  { if f_access <> '@Zel05101966' then
   begin
@@ -403,12 +413,30 @@ begin
 end;
 
 procedure TfrmMAC.FormShow(Sender: TObject);
+var
+  f_question: Word;
 begin
   chkPrintTabClick(Self);
+ // проверяем на первый показ формы
+  if f_FirstShowForm then
+  begin
+    f_question := MessageBox(handle, PChar('Загрузка MAC-адреса?'), PChar('Загрузить MAC-адрес из файла конфигурации!'), MB_YESNO + MB_ICONQUESTION);
+    case f_question of
+      IDYES:
+        begin
+        // как загрузить адрес      { TODO 1 -owrite -cwrite : Запись mac-адреса в поле на форме }
+          ShowMessage('Загружаем');
+          f_NoShowAddres := False;
+        end;
+      IDNO:
+        begin
+          ShowMessage('НеЗагружаем');
+        end;
+    end;
+    f_FirstShowForm := False;
+  end;
+
 end;
-
-
-
 
 // сокрытие лишних пунктов меню
 procedure TfrmMAC.chkAdvanceSettingClick(Sender: TObject);
@@ -611,6 +639,7 @@ var
   s1, tmp, tmp1, tmp2: string;
   bit0, bit1, bit2: string;
   img: BITMAP;
+  ss : string;
 begin
 // установить шрифт отчета печати mac-адреса по умолчанию
   macSize := False;
@@ -737,6 +766,7 @@ begin
         fdmtblMac.Post;
         fdmtblMac.Next;
       end;
+      ss := tmp1;
       CloseFile(fileId);
     end
     else
@@ -883,6 +913,7 @@ begin
           DataModuleMacIterator.IncArrayOne(idMAC);
         stepMac := 1;
         range := stepIteration;
+        ss := s;                               // Внимание MAC-адрес
         Writeln(fileId);
       end;
    // закрытие файла
@@ -909,6 +940,9 @@ begin
     mniLabelAdvance.Enabled := True;
 //    frmTestGrid.Show;           // активация тестовой формы
   end;
+  ShowMessage(ss);
+// Сдесь нужно ловить последний mac-адрес
+
 end;
 
 // окончание блока выбора  **********************************************************
@@ -2189,6 +2223,33 @@ begin
   fdmtblMac.Close;
   fdmtblTitle.Close;
   fdmtblBarCode.Close;
+end;
+
+procedure TfrmMAC.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+var
+  f_question: Word;
+begin
+  // отказ от записи в конфигурационный файл последнега адреса плюс 1
+  if f_NoShowAddres then
+  begin
+    CanClose := True;
+  end
+  else
+  begin
+    f_question := MessageBox(handle, PChar('Сохранение MAC-адреса?'), PChar('Сохранить MAC-адрес в файл конфигурации!'), MB_YESNO + MB_ICONQUESTION);
+
+    case f_question of
+      IDYES:
+        begin
+          ShowMessage('Сохраняем');
+        end;
+      IDNO:
+        begin
+          ShowMessage('НеСохраняем');
+        end;
+    end;
+    CanClose := True;
+  end;
 end;
 
 end.

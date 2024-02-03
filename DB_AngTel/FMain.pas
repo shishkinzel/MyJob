@@ -80,12 +80,6 @@ uses
 {$R *.dfm}
 // начальные установки в форме
 
-procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
-var
-i : Integer;
-begin
-
-end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
@@ -380,9 +374,14 @@ end;    }
 
 
 
-
-
-
-
 // закрытие формы
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i: Integer;
+begin
+
+end;
+
 end.
+
