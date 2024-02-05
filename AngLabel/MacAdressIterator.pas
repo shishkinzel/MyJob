@@ -301,7 +301,7 @@ type
       macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
       f_sticker: Boolean;            // флаг для печати стикера верификации
       f_FirstShowForm : Boolean;     // флаг показа формы при открытии
-      f_NoShowAddres : Boolean;      // флаг ослеживания последнего адреса
+      f_NoShowAddres : Boolean;      // флаг отслеживания последнего адреса
       // защита программы
       f_access : string;
       // mac-adress
@@ -957,132 +957,143 @@ end;
 
 
 // окончание блока выбора  **********************************************************
-
 // процедура сброса
-
 procedure TfrmMAC.btnRestartClick(Sender: TObject);
+var
+  f_True: Boolean;
+  f_ini: TIniFile;
+  f_question: Integer;
 begin
-
-// включаем выбор расширенного режима
-  chkAdvanceSetting.Enabled := True;
-
-  if not (chkPrintTab.Checked) then
+  if not (f_NoShowAddres) then    // проверка на открытие в режиме хранения mac-адреса
   begin
-    if utilityMAC then
-      edtDevice.SetFocus
-    else
-      medtBit_4.SetFocus;
-
-  // зажигаем пунк меню "Просмотр отчета" и гасим "Экспорт отчета" и "Печать"
-    mnifrView.Enabled := True;
-    mniExport.Enabled := False;
-    mnifrPrint.Enabled := False;
-
-    mniReport.Enabled := False;
-    mniApply.Enabled := True;
-    btnApply.Enabled := True;
-    btnRestart.Enabled := False;
-    btnStart.Enabled := False;
-    mniQRIDMAC.Enabled := False;
-
-// сбрасываем все окна
-    edtDevice.Clear;
-    medtBit_4.Clear;
-    medtBit_5.Clear;
-    medtBit_6.Clear;
-    medtModule.Clear;
-    medtDate.Clear;
-    medtGroup.Clear;
-    medtNumber.Clear;
-    seStepIterator.Value := 1;
-    seQuantity.Value := 1;
-    medtBit_4.Text := '00';
-    medtBit_5.Text := '00';
-    medtBit_6.Text := '00';
-  // для barCode
-    mniBarCodeLong.Enabled := False;
-    mniPreviewLong.Enabled := False;
-    mniExportBarCodeLong.Enabled := False;
-    mniPrintBarCodeLong.Enabled := False;
-  // зажигаем пунк -"Применить"
-    mniApplyBarCodeLong.Enabled := True;
-  // для ID&MAC
-    mniQRIDMAC.Enabled := False;
-    mniShow_IDandMAC.Enabled := False;
-    mniExport_IDandMAC.Enabled := False;
-    mniPrint_IDandMAC.Enabled := False;
-    mniReset_IDandMAC.Enabled := False;
-  // зажигаем пунк -"Применить"
-    mniApplay_IDandMAC.Enabled := True;
-// для серийного номера
-    if utilityMAC then
-    begin
-      medtModule.Text := '000';
-      medtDate.Text := '000';
-      medtGroup.Text := '000';
-      medtNumber.Text := '000';
-    end;
-// сброс команды прошивки из модуля FShowSoft
-    frmShowSoft.fTextSoft := '';
-// запрещение пунктов "Сброс" в главном меню
-    mniReset.Enabled := False;
-//    mniResetBarCode.Enabled := False;
-    mniResetBarCodeLong.Enabled := False;
-//    mniResetLoadSoft.Enabled := False;
-    mniFrReset.Enabled := False;
-    if utilityMAC then
-      edtDevice.SetFocus
-    else
-      medtBit_4.SetFocus;
-// сбрасываем отчеты
-   // закрытие отчетов
-    frmFRList.Close;
-   // очистка отчетов
-    frmFRList.frxrprtList.PreviewPages.Clear;
-
+    MessageBox(handle, PChar('Приложение будет закрыто!' + #10#13 + 'Для продолжения работы запустите приложение заново!'), PChar('Внимание'), MB_OK + MB_ICONWARNING);
+    Close;
   end
   else
   begin
-    mniLabel.Enabled := False;
-    mniLabelAdvance.Enabled := False;
-    chkPrintTab.Enabled := True;
-    ShowMessage('Сбрасываем отчеты');
-    btnApply.Enabled := True;
-    btnRestart.Enabled := False;
-    mniNStick.Enabled := False;
+
+// включаем выбор расширенного режима
+    chkAdvanceSetting.Enabled := True;
+
+    if not (chkPrintTab.Checked) then
+    begin
+      if utilityMAC then
+        edtDevice.SetFocus
+      else
+        medtBit_4.SetFocus;
+
+  // зажигаем пунк меню "Просмотр отчета" и гасим "Экспорт отчета" и "Печать"
+      mnifrView.Enabled := True;
+      mniExport.Enabled := False;
+      mnifrPrint.Enabled := False;
+
+      mniReport.Enabled := False;
+      mniApply.Enabled := True;
+      btnApply.Enabled := True;
+      btnRestart.Enabled := False;
+      btnStart.Enabled := False;
+      mniQRIDMAC.Enabled := False;
+
+// сбрасываем все окна
+      edtDevice.Clear;
+      medtBit_4.Clear;
+      medtBit_5.Clear;
+      medtBit_6.Clear;
+      medtModule.Clear;
+      medtDate.Clear;
+      medtGroup.Clear;
+      medtNumber.Clear;
+      seStepIterator.Value := 1;
+      seQuantity.Value := 1;
+      medtBit_4.Text := '00';
+      medtBit_5.Text := '00';
+      medtBit_6.Text := '00';
+  // для barCode
+      mniBarCodeLong.Enabled := False;
+      mniPreviewLong.Enabled := False;
+      mniExportBarCodeLong.Enabled := False;
+      mniPrintBarCodeLong.Enabled := False;
+  // зажигаем пунк -"Применить"
+      mniApplyBarCodeLong.Enabled := True;
+  // для ID&MAC
+      mniQRIDMAC.Enabled := False;
+      mniShow_IDandMAC.Enabled := False;
+      mniExport_IDandMAC.Enabled := False;
+      mniPrint_IDandMAC.Enabled := False;
+      mniReset_IDandMAC.Enabled := False;
+  // зажигаем пунк -"Применить"
+      mniApplay_IDandMAC.Enabled := True;
+// для серийного номера
+      if utilityMAC then
+      begin
+        medtModule.Text := '000';
+        medtDate.Text := '000';
+        medtGroup.Text := '000';
+        medtNumber.Text := '000';
+      end;
+// сброс команды прошивки из модуля FShowSoft
+      frmShowSoft.fTextSoft := '';
+// запрещение пунктов "Сброс" в главном меню
+      mniReset.Enabled := False;
+//    mniResetBarCode.Enabled := False;
+      mniResetBarCodeLong.Enabled := False;
+//    mniResetLoadSoft.Enabled := False;
+      mniFrReset.Enabled := False;
+      if utilityMAC then
+        edtDevice.SetFocus
+      else
+        medtBit_4.SetFocus;
+// сбрасываем отчеты
+   // закрытие отчетов
+      frmFRList.Close;
+   // очистка отчетов
+      frmFRList.frxrprtList.PreviewPages.Clear;
+
+    end
+    else
+    begin
+      mniLabel.Enabled := False;
+      mniLabelAdvance.Enabled := False;
+      chkPrintTab.Enabled := True;
+      ShowMessage('Сбрасываем отчеты');
+      btnApply.Enabled := True;
+      btnRestart.Enabled := False;
+      mniNStick.Enabled := False;
 // перезаряжаем печать стикера верификации
-  mniNSticker_show.Enabled := True;
-  mniNSticker_printer.Enabled := False;
+      mniNSticker_show.Enabled := True;
+      mniNSticker_printer.Enabled := False;
 
 // закрытие отчетов
-    frmFRBigLabel.Close;
-    frmFRSmallLabel.Close;
-    frmShild.Close;
-    frmFRList.Close;
-    frmStickCheck.Close;
+      frmFRBigLabel.Close;
+      frmFRSmallLabel.Close;
+      frmShild.Close;
+      frmFRList.Close;
+      frmStickCheck.Close;
 // очистка отчетов
-    frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
-    frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
-    frmShild.rpShild.PreviewPages.Clear;
-    frmFRList.frxrprtList.PreviewPages.Clear;
-    frmStickCheck.frpStickCheck.PreviewPages.Clear;
+      frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
+      frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
+      frmShild.rpShild.PreviewPages.Clear;
+      frmFRList.frxrprtList.PreviewPages.Clear;
+      frmStickCheck.frpStickCheck.PreviewPages.Clear;
 // гасим окна печати
-    mniPrintBig.Enabled := False;
-    mniPrintSmall.Enabled := False;
-    mniPrintShild.Enabled := False;
-    mni_Pr_43_25.Enabled := False;
-    mni_Pr_shild_43_25.Enabled := False;
-    mni_PrintSmall_new.Enabled := False;
+      mniPrintBig.Enabled := False;
+      mniPrintSmall.Enabled := False;
+      mniPrintShild.Enabled := False;
+      mni_Pr_43_25.Enabled := False;
+      mni_Pr_shild_43_25.Enabled := False;
+      mni_PrintSmall_new.Enabled := False;
 
 // зажигаем окна просмотра
-    mniShowBig.Enabled := True;
-    mniShowSmall.Enabled := True;
-    mniShowShild.Enabled := True;
-    mni_sh_43_25.Enabled := True;
-    mni_sh_shild_43_25.Enabled := True;
-    mni_ShowSmall_new.Enabled := True;
+      mniShowBig.Enabled := True;
+      mniShowSmall.Enabled := True;
+      mniShowShild.Enabled := True;
+      mni_sh_43_25.Enabled := True;
+      mni_sh_shild_43_25.Enabled := True;
+      mni_ShowSmall_new.Enabled := True;
+    end;
   end;
 end;
+
 
 // печать штрих кода *******************************************************
 procedure TfrmMAC.mniApplyBarCodeClick(Sender: TObject);
@@ -2252,15 +2263,22 @@ begin
       IDYES:
         begin
           // описать загрузку ini-файла конфигурации print_config.ini
-          if not( Length(f_LastMAC) = 8) then
-                begin
-                  CanClose := True;
-                  Exit
-                end;
+          if not (Length(f_LastMAC) = 8) then
+          begin
+            CanClose := True;
+            Exit
+          end;
           f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
           f_ini := TIniFile.Create(f_iniPath);
           // Записываем файл конфигурации
-          IniOptions.f_LastMAC := f_LastMAC;
+          IniOptions.f_LastMAC := f_LastMAC;     // последний mac-адрес плюс один
+          // сохраняем путь к принтерам по умолчанию
+           IniOptions.f_print_924 := f_print_924;
+           IniOptions.f_print_940 := f_print_940;
+           IniOptions.f_print_908 := f_print_908;
+           IniOptions.f_print_576 := f_print_576;
+           IniOptions.f_print_2824 := f_print_2824;
+
           IniOptions.SaveToFile(f_iniPath);
           ShowMessage('Сохраняем');
 
