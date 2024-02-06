@@ -396,14 +396,15 @@ begin
 // последний mac-адрес плюс 1
   f_LastMAC := IniOptions.f_LastMAC;
  // !!!!!!!!!!!!!
- { if f_access <> '@Zel05101966' then
+ {
+  if f_access <> '@Zel05101966' then
   begin
 //    raise Exception.Create(f_err);
     ShowMessage(f_err);
     Self.Free;
     Self.Close;
   end;
-}
+ }
 // !!!!!!!!!!!!!!!!!!!!
 // очищаем память
   f_ini.Free;

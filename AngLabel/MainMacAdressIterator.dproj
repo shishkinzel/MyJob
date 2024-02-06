@@ -88,6 +88,9 @@
         <Icon_MainIcon>MainMacAdressIterator_Icon11.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_1.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_1.png</UWP_DelphiLogo150>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Печать серийных нормеров и этикеток;FileVersion=2.0.0.0;InternalName=Shishkkin Igor;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=PrintLabel;ProductVersion=2.0.1.1;Comments=Itrator mac &amp; id </VerInfo_Keys>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -104,9 +107,10 @@
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_1.png</UWP_DelphiLogo150>
         <Icon_MainIcon>MainMacAdressIterator_Icon9.ico</Icon_MainIcon>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Shishkin_angtel;FileDescription=$(MSBuildProjectName);FileVersion=1.0.2.12;InternalName=AngLabel_shishkin;LegalCopyright=;LegalTrademarks=;OriginalFilename=AngLabel ver 1;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Программа генерации этикеток;FileVersion=2.0.2.12;InternalName=Шишкин Игорь Николаевич;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=AngLabel ;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=2.0.2.1;Comments=Itrator mac &amp; id </VerInfo_Keys>
         <VerInfo_Build>12</VerInfo_Build>
         <VerInfo_Release>2</VerInfo_Release>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -195,12 +199,12 @@
                     <Source Name="MainSource">MainMacAdressIterator.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfrxTee27.bpl">FastReport 6.0 Tee Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfsTee27.bpl">FastScript 1.9 Tee Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfrxIBX27.bpl">FastReport 6.0 IBX Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReport 6 VCL Enterprise\LibD27\dclfsIBX27.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
