@@ -9,14 +9,16 @@ uses
 
 type
   TdbMain = class(TDataModule)
-    fd_mem_Dev: TFDMemTable;
-    conDev: TADOConnection;
-    tbl_Dev: TADOTable;
-    tbl_DevAll: TADOTable;
-    ds_DevAll: TDataSource;
-    ds_Dev: TDataSource;
-    procedure DataModuleCreate(Sender: TObject);
-    procedure DataModuleDestroy(Sender: TObject);
+    db_memTab_Clobal: TFDMemTable;
+    ss_memTab_Clobal_name_dev: TStringField;
+    db_memTab_Clobal_date_dev: TDateField;
+    db_memTab_Clobal_id_dev: TLargeintField;
+    db_memTab_Clobal_mac_dev: TStringField;
+    db_memTab_Working: TFDMemTable;
+    dm_memTab_Working_name_dev: TStringField;
+    dm_memTab_Working_date_dev: TDateField;
+    dm_memTab_Working_id_dev: TLargeintField;
+    dm_memTab_Working_mac_dev: TStringField;
   private
     { Private declarations }
   public
@@ -278,20 +280,6 @@ begin
   f_fill_tab.Post;
 //  f_fill_tab.Close;
 //  f_fill_tab.ReadOnly := True;
-end;
-
-procedure TdbMain.DataModuleCreate(Sender: TObject);
-begin
-conDev.Connected := True;
-tbl_Dev.Active := True;
-tbl_DevAll.Active := True;
-end;
-
-procedure TdbMain.DataModuleDestroy(Sender: TObject);
-begin
- conDev.Connected := False;
- tbl_Dev.Active := False;
-tbl_DevAll.Active := False;
 end;
 
 end.

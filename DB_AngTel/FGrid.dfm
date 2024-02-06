@@ -41,21 +41,22 @@ object frmGrid: TfrmGrid
     Height = 279
     Align = alTop
     TabOrder = 0
-    object dbnav_DevAll: TDBNavigator
+    object dbnav_Global: TDBNavigator
       Left = 1
       Top = 1
       Width = 962
       Height = 25
-      DataSource = dbMain.ds_DevAll
+      DataSource = ds_Global
       Align = alTop
       TabOrder = 0
     end
-    object dbG_DevAll: TDBGrid
+    object dbG_Global: TDBGrid
       Left = 1
       Top = 26
       Width = 962
       Height = 252
       Align = alClient
+      DataSource = ds_Global
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -79,22 +80,22 @@ object frmGrid: TfrmGrid
     Height = 318
     Align = alClient
     TabOrder = 2
-    object dbnav_Dev: TDBNavigator
+    object dbnav_Working: TDBNavigator
       Left = 1
       Top = 1
       Width = 962
       Height = 25
-      DataSource = dbMain.ds_Dev
+      DataSource = ds_Working
       Align = alTop
       TabOrder = 0
     end
-    object dbG_Dev: TDBGrid
+    object dbG_Working: TDBGrid
       Left = 1
       Top = 26
       Width = 962
       Height = 291
       Align = alClient
-      DataSource = dbMain.ds_Dev
+      DataSource = ds_Working
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -103,8 +104,14 @@ object frmGrid: TfrmGrid
       TitleFont.Style = []
     end
   end
-  object ds_Dev: TDataSource
-    Left = 24
-    Top = 543
+  object ds_Working: TDataSource
+    DataSet = dbMain.db_memTab_Working
+    Left = 88
+    Top = 544
+  end
+  object ds_Global: TDataSource
+    DataSet = dbMain.db_memTab_Clobal
+    Left = 40
+    Top = 544
   end
 end

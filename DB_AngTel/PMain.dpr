@@ -17,6 +17,7 @@ begin
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TdbMain, dbMain);
   Application.CreateForm(TfrmTest, frmTest);
+  Application.CreateForm(TfrmGrid, frmGrid);
   Application.Run;
 end.
 

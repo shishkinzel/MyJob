@@ -13161,14 +13161,6 @@ object frmMain: TfrmMain
     ParentFont = False
     TabOrder = 7
   end
-  object ds_fd_mem_Dev: TDataSource
-    Left = 80
-    Top = 320
-  end
-  object ds_Fill_Tab: TDataSource
-    Left = 24
-    Top = 320
-  end
   object ilPictureMainMenu: TImageList
     Left = 713
     Top = 92

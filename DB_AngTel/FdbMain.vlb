@@ -1,25 +1,10 @@
-﻿[tbl_Dev]
-Coordinates=193,10,61,146
-
-[conDev]
-Coordinates=33,231,58,36
-
-[fd_mem_Dev]
-Coordinates=93,10,90,168
-
-[tbl_DevAll]
-Coordinates=10,10,73,212
-Visible=True
-LayerNames=NewLayer0;NewLayer1
-
-[frmGrid.ds_Dev]
+﻿[frmGrid.ds_Dev]
 Coordinates=370,1,105,36
 
-[frmMain.ds_fd_mem_Dev]
-Coordinates=370,166,161,36
-
 []
-Coordinates=569,166,93,36
+Coordinates=93,10,90,168
+Visible=True
+LayerNames=NewLayer0;NewLayer1
 
 [Module Settings]
 ModelLayerNames=NewLayer0;NewLayer1
@@ -29,4 +14,7 @@ EditingLayerName=NewLayer1
 [frmGrid.]
 Coordinates=201,276,119,36
 LayerNames=NewLayer1
+
+[frmMain.]
+Coordinates=370,166,161,36
 

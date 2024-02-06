@@ -24,9 +24,7 @@ type
     lbl_TitStep: TLabel;
     lbl_TitCount: TLabel;
     imgMain: TImage;
-    ds_fd_mem_Dev: TDataSource;
     dtpMain: TDateTimePicker;
-    ds_Fill_Tab: TDataSource;
     ilPictureMainMenu: TImageList;
     ilPictureBtn_16: TImageList;
     ilPictureBtn_24: TImageList;
@@ -193,7 +191,8 @@ end;
 
 procedure TfrmMain.btnSelectionClick(Sender: TObject);
 begin
-frmTest.show;
+//frmTest.show;
+ frmGrid.Show;
 end;
 
 procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
@@ -201,10 +200,6 @@ var
   arr_DB: array[0..5] of string;
 begin
 // вызываем процедуру считывания входных данных
-//  Print_mac_id(medtID.Text, medtMAC.Text, lbl_NameDev.Caption, seStep.Value, seCount.Value, dtpMain.Date, dbMain.fd_mem_Dev, arr_DB);
-// вызываем процедуру заполнения основной таблицы
-  Fill_Tab(arr_DB, dbMain.tbl_DevAll);
-
 
 
 
