@@ -54,19 +54,20 @@ begin
 // защита приложения
     f_access := Ini.ReadString(csIniSectionAccess, 'Library_access', '000000000000');
 // mac-адрес
-     f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '00:00:00');
+    f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '00:00:00');
   end;
 end;
+
 procedure TIniOptions.SaveSettings(Ini: TMemIniFile);
 begin
   if Ini <> nil then
   begin
   // принтеры
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_924', '\\PrintServer\TE200_924');
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_940', '\\PrintServer\TE200_940');
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', '\\PrintServer\TE200_908');
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', '\\PrintServer\TE200_576');
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824', '\\PrintServer\TLP 2824');
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_924', f_print_924);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_940', f_print_940);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', f_print_908);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', f_print_576);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824', f_print_2824);
   // mac-адрес
     Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', f_LastMAC);
   end;

@@ -425,7 +425,6 @@ begin
     case f_question of
       IDYES:
         begin
-        // как загрузить адрес      { TODO 1 -owrite -cwrite : Запись mac-адреса в поле на форме }
           chkAdvanceSetting.Checked := True;
 
           medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
@@ -439,7 +438,7 @@ begin
         end;
       IDNO:
         begin
-          ShowMessage('НеЗагружаем');
+          ShowMessage('Не Загружаем');
         end;
     end;
     f_FirstShowForm := False;
@@ -949,11 +948,11 @@ begin
     mniLabelAdvance.Enabled := True;
 //    frmTestGrid.Show;           // активация тестовой формы
   end;
-  ShowMessage(f_Last_macAddress);
+//  ShowMessage(f_Last_macAddress);
 // Сдесь нужно ловить последний mac-адрес
   { TODO 1 -o12 -c12 : Оп{ TODO 1 -o12 -c12 : Описать функцию вычисление адреса, и возвращение последнего адреса плюс один в string }
    f_LastMAC := DataModuleMacIterator.LastMAC_AddOne(f_Last_macAddress, stepIteration);
-   ShowMessage(f_LastMAC);
+//   ShowMessage(f_LastMAC);
 end;
 
 
@@ -2288,7 +2287,7 @@ begin
         end;
       IDNO:
         begin
-          ShowMessage('НеСохраняем');
+          ShowMessage('Не Сохраняем');
         end;
     end;
     CanClose := True;
