@@ -113,21 +113,6 @@ begin
     f_arr[i] := '';
 end;
 
-//function ArrayToString_MAC(var inArray: array of Byte): string;
-//var
-//s : string;
-//i : Integer;
-//begin
-//s := '';
-//   for I := 0 to 2 do
-//   begin
-//     s :=s + inArray[i].ToHexString + ':';
-//
-//   end;
-//        Delete(s, 9, 1);
-//   Result := '--mac ' + '68:EB:C5:' + s;
-//end;
-
 // процедура вычисления mac-адреса с серийным номером и запись, конвертация в штрих код
 // и qr-код и запись в таблицу для формирования отчета печати этикетки.
 procedure Print_mac_id(const s1, s2, s3 : string; const k1, k2: Integer; const f_date : TDate;

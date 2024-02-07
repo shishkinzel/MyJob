@@ -7,12 +7,12 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
   // ***************************** подсоединёные формы
-  Data.DB, System.ImageList, Vcl.ImgList;
+  Data.DB, System.ImageList, Vcl.ImgList, FDownload_Working;
 
 type
   TfrmMain = class(TForm)
     medtMAC: TMaskEdit;
-    btnStart_Reset: TBitBtn;
+    btn_Download: TBitBtn;
     seStep: TSpinEdit;
     seCount: TSpinEdit;
     btnSelection: TBitBtn;
@@ -35,7 +35,7 @@ type
     procedure seStepChange(Sender: TObject);
 //    procedure chkQR_SOFTClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btnStart_ResetClick(Sender: TObject);
+    procedure btn_DownloadClick(Sender: TObject);
     procedure btnDBClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -58,8 +58,7 @@ type
     property Path: string read GetPath;
 
     var
-      f_myarray: array[0..5] of string;
-
+      f_myarray: array[0..2] of Byte;
 
   end;
 
@@ -67,21 +66,26 @@ var
   frmMain: TfrmMain;
 //  f_showPrintForm: Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
   f_print_config: string;
-  // поля для ID - устройства и его наименования
-  f_ID, f_NameDevice: string;
+// поля для его наименования
+  f_NameDevice: string;
+// id-устройства
+  f_ID_Lower: string;      // младшая триада
+  f_ID_High: string;       // старшие триады
+// mac-адрес устройства
+  f_mac_dev: string;
 
 implementation
 
 uses
   IdGlobal, FdbMain, FListDevece, FGrid, FTest;
 
+
 {$R *.dfm}
 // начальные установки в форме
 
-
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-// установка начальной даты
+  // установка начальной даты
   dtpMain.Date := Date - 1;
 
 // f_Soft := False;                  // активация дополнительного пункта меню
@@ -195,15 +199,19 @@ begin
  frmGrid.Show;
 end;
 
-procedure TfrmMain.btnStart_ResetClick(Sender: TObject);
+// Загрузка данных
+procedure TfrmMain.btn_DownloadClick(Sender: TObject);
 var
-  arr_DB: array[0..5] of string;
+  arr_mac: array[0..2] of Byte;
+  f_id_lower : Integer;
+  i, j : Integer;
+  tmp, tmp1 : string;
 begin
-// вызываем процедуру считывания входных данных
+// кодим заполнение таблицы
+//frm_Download_Working.Show;
 
 
 
-  frmGrid.Show;
 end;
 
 
@@ -379,4 +387,3 @@ begin
 end;
 
 end.
-

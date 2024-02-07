@@ -65,6 +65,8 @@ object frmListDevice: TfrmListDevice
       Height = 143
       Align = alBottom
       TabOrder = 0
+      ExplicitLeft = 0
+      ExplicitTop = 371
       object lbl_TitleDev: TLabel
         Left = 20
         Top = 28
@@ -88,6 +90,19 @@ object frmListDevice: TfrmListDevice
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_TitMac: TLabel
+        Left = 265
+        Top = 67
+        Width = 124
+        Height = 13
+        Caption = 'MAC-'#1072#1076#1088#1077#1089' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBackground
+        Font.Height = -11
+        Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
       end
@@ -136,6 +151,48 @@ object frmListDevice: TfrmListDevice
         TabOrder = 1
         Value = 0
         OnExit = se_NumModExit
+      end
+      object medt_MAC: TMaskEdit
+        Tag = 3
+        Left = 395
+        Top = 65
+        Width = 110
+        Height = 23
+        CharCase = ecUpperCase
+        Enabled = False
+        EditMask = '\6\8\:\E\B\:\C\5\:AA:AA:AA;1; '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = []
+        MaxLength = 17
+        ParentFont = False
+        TabOrder = 4
+        Text = '68:EB:C5:00:00:00'
+        OnKeyPress = medt_MACKeyPress
+      end
+      object chk_MAC: TCheckBox
+        Left = 537
+        Top = 67
+        Width = 173
+        Height = 17
+        ParentCustomHint = False
+        BiDiMode = bdLeftToRight
+        Caption = #1042#1074#1077#1089#1090#1080' mac-'#1072#1076#1088#1077#1089' '#1074#1088#1091#1095#1085#1091#1102
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBackground
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentColor = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = False
+        TabOrder = 5
+        OnClick = chk_MACClick
       end
     end
     object pnlTabl: TPanel
@@ -354,7 +411,7 @@ object frmListDevice: TfrmListDevice
         Height = 22
         MaxLength = 3
         MaxValue = 999
-        MinValue = 1
+        MinValue = 0
         TabOrder = 3
         Value = 1
       end

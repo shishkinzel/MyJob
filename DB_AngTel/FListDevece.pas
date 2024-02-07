@@ -44,6 +44,9 @@ type
     se_NumMod: TSpinEdit;
     se_Series: TSpinEdit;
     se_Number: TSpinEdit;
+    medt_MAC: TMaskEdit;
+    lbl_TitMac: TLabel;
+    chk_MAC: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -55,6 +58,8 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure chk_idClick(Sender: TObject);
     procedure se_NumModExit(Sender: TObject);
+    procedure chk_MACClick(Sender: TObject);
+    procedure medt_MACKeyPress(Sender: TObject; var Key: Char);
 
 
 
@@ -151,6 +156,15 @@ begin
 
 
 end;
+
+ // ограничение ввода символов в mac-адрес
+procedure TfrmListDevice.medt_MACKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (Key in ['0'..'9', 'a'..'f', 'A'..'F']) then
+    Key := #0;
+end;
+
+
 // ухожу с компонента номер модуля
 procedure TfrmListDevice.se_NumModExit(Sender: TObject);
 var
@@ -182,20 +196,32 @@ procedure TfrmListDevice.chk_idClick(Sender: TObject);
 var
 i : Integer;
 f_date, f_series, f_number : string; // соответственно код даты, код модификации изделия и порядковый номер
+
 begin
-  f_date := IntToStr(se_Quarter.Value) + Format('%.2d', [se_Year.Value]);
-  f_series := Format('%.3d', [se_Series.Value]);
-  f_number := Format('%.3d', [se_Number.Value]);
+  if chk_id.Checked then
+  begin
+    f_numModule := Format('%.3d', [se_NumMod.Value]);
+    f_date := IntToStr(se_Quarter.Value) + Format('%.2d', [se_Year.Value]);
+    f_series := Format('%.3d', [se_Series.Value]);
+    f_number := Format('%.3d', [se_Number.Value]);
 // инициализируем глобальную переменную ID и наименование устройства
-  f_ID := f_numModule + ' ' + f_date + ' ' + f_series + ' ' + f_number;
-  ShowMessage(f_ID);
+    f_ID_High := f_numModule + ' ' + f_date + ' ' + f_series;
+    f_ID_Lower := f_number;
+    ShowMessage(f_ID_High);
+// инициализируем mac-адрес
+    f_mac_dev := medt_MAC.Text;
+    ShowMessage(f_mac_dev);
+  end
+  else
+  begin
+       ShowMessage('Reset');
+  end;
+
+
 
 end;
+
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-// ShowMessage(f_series);
-// ShowMessage(f_number);
-
 
 
 // процедура выделения контуром
@@ -239,6 +265,21 @@ begin
   if not (Key in ['0'..'9', #8]) then
     Key := #0;
 end;
+
+// ввод mac-адреса в ручном режиме
+procedure TfrmListDevice.chk_MACClick(Sender: TObject);
+begin
+  if chk_MAC.Checked then
+  begin
+    medt_MAC.Enabled := True;
+    if medt_MAC.CanFocus then
+      medt_MAC.SetFocus;
+  end
+  else
+    medt_MAC.Enabled := False;
+end;
+
+
 
 
 {добавление в поля edit из таблицы}

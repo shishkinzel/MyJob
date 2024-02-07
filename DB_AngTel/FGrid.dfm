@@ -106,7 +106,7 @@ object frmGrid: TfrmGrid
   end
   object ds_Working: TDataSource
     DataSet = dbMain.db_memTab_Working
-    Left = 88
+    Left = 96
     Top = 544
   end
   object ds_Global: TDataSource

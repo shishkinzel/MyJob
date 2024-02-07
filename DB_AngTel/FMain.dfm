@@ -13019,6 +13019,7 @@ object frmMain: TfrmMain
     Width = 110
     Height = 23
     CharCase = ecUpperCase
+    Enabled = False
     EditMask = '\6\8\:\E\B\:\C\5\:AA:AA:AA;1; '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -13031,7 +13032,7 @@ object frmMain: TfrmMain
     Text = '68:EB:C5:00:00:00'
     OnKeyPress = medtMACKeyPress
   end
-  object btnStart_Reset: TBitBtn
+  object btn_Download: TBitBtn
     Tag = 302
     Left = 480
     Top = 269
@@ -13052,7 +13053,7 @@ object frmMain: TfrmMain
     SelectedImageIndex = 15
     Spacing = 20
     TabOrder = 3
-    OnClick = btnStart_ResetClick
+    OnClick = btn_DownloadClick
   end
   object seStep: TSpinEdit
     Tag = 4
