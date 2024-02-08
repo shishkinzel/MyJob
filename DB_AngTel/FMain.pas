@@ -71,6 +71,7 @@ var
 // id-устройства
   f_ID_Lower: string;      // младшая триада
   f_ID_High: string;       // старшие триады
+  f_ID_Full : string;      // полный серийный номер
 // mac-адрес устройства
   f_mac_dev: string;
 

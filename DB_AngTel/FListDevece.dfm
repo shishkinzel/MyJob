@@ -64,9 +64,7 @@ object frmListDevice: TfrmListDevice
       Width = 795
       Height = 143
       Align = alBottom
-      TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 371
+      TabOrder = 1
       object lbl_TitleDev: TLabel
         Left = 20
         Top = 28
@@ -170,6 +168,7 @@ object frmListDevice: TfrmListDevice
         ParentFont = False
         TabOrder = 4
         Text = '68:EB:C5:00:00:00'
+        OnExit = medt_MACExit
         OnKeyPress = medt_MACKeyPress
       end
       object chk_MAC: TCheckBox
@@ -241,7 +240,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 0
       object lbl_date: TLabel
         Left = 49
         Top = 38

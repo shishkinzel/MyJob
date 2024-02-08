@@ -60,6 +60,7 @@ type
     procedure se_NumModExit(Sender: TObject);
     procedure chk_MACClick(Sender: TObject);
     procedure medt_MACKeyPress(Sender: TObject; var Key: Char);
+    procedure medt_MACExit(Sender: TObject);
 
 
 
@@ -164,6 +165,14 @@ begin
     Key := #0;
 end;
 
+//   ухожу с ввода mac-адреса в ручном режиме
+procedure TfrmListDevice.medt_MACExit(Sender: TObject);
+begin
+   f_mac_dev := medt_MAC.Text;
+   if pnlRight.CanFocus then
+   pnlRight.SetFocus;
+end;
+
 
 // ухожу с компонента номер модуля
 procedure TfrmListDevice.se_NumModExit(Sender: TObject);
@@ -207,6 +216,7 @@ begin
 // инициализируем глобальную переменную ID и наименование устройства
     f_ID_High := f_numModule + ' ' + f_date + ' ' + f_series;
     f_ID_Lower := f_number;
+    f_ID_Full := f_numModule + ' ' + f_date + ' ' + f_series + ' ' + f_number;
     ShowMessage(f_ID_High);
 // инициализируем mac-адрес
     f_mac_dev := medt_MAC.Text;
@@ -214,10 +224,8 @@ begin
   end
   else
   begin
-       ShowMessage('Reset');
+    ShowMessage('Reset');
   end;
-
-
 
 end;
 
@@ -238,6 +246,8 @@ begin
     IDYES:
       begin
         frmMain.lbl_NameDev.Caption := dbG_Dev_List.Fields[1].AsString;
+        frmMain.medtMAC.Text  := f_mac_dev;
+        frmMain.lbl_Num.Caption := f_ID_Full;
         ShowMessage('Выполнено!!!!');
         Self.Close;
       end;
@@ -251,8 +261,13 @@ end;
 procedure TfrmListDevice.dbG_Dev_ListDblClick(Sender: TObject);
 begin
   edtDev.Text := dbG_Dev_List.DataSource.DataSet.Fields[1].AsString;
-
+  se_NumMod.Value := dbG_Dev_List.DataSource.DataSet.Fields[2].AsInteger;
+  // гасим кнопку добавить в таблицу и активируем кнопку добавить на форму
+  btnApply.Enabled := False;
+  btnForm.Enabled := True;
+  pnlRight.Enabled := True;
 end;
+
 
 // работа с добавление полей в серийный номер
 procedure TfrmListDevice.edt_dateKeyPress(Sender: TObject; var Key: Char);
