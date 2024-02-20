@@ -17,7 +17,8 @@ uses
   FListDevece in 'FListDevece.pas' {frmListDevice},
   FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel},
   FStickCheck in 'FStickCheck.pas' {frmStickCheck},
-  unit_ini in 'unit_ini.pas';
+  unit_ini in 'unit_ini.pas',
+  FFamile_mac in 'FFamile_mac.pas' {frmFamily_mac};
 
 {$R *.res}
 

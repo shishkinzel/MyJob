@@ -596,6 +596,28 @@ object frmMAC: TfrmMAC
       object mniSeparator0: TMenuItem
         Caption = '-'
       end
+      object mniNStick: TMenuItem
+        Caption = #1055#1077#1095#1072#1090#1100' '#1089#1090#1080#1082#1077#1088' '#1074#1077#1088#1089#1080#1080
+        object mniNLabel30x10: TMenuItem
+          Caption = 'Label_30x10'
+          object mniNSticker_show: TMenuItem
+            Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+            OnClick = mniNSticker_showClick
+          end
+          object mniNSticker_printer: TMenuItem
+            Caption = #1055#1077#1095#1072#1090#1100
+            Enabled = False
+            OnClick = mniNSticker_printerClick
+          end
+        end
+        object mniNSeparator_stick: TMenuItem
+          Caption = '-'
+        end
+        object mniNStick_reset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          OnClick = btnRestartClick
+        end
+      end
       object mniDate_Main: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1089#1090#1080#1082#1077#1088' '#1076#1072#1090#1099
         object mniDate_Calendar: TMenuItem
@@ -814,29 +836,6 @@ object frmMAC: TfrmMAC
         Caption = '-'
       end
       object mniLbReset2: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        OnClick = btnRestartClick
-      end
-    end
-    object mniNStick: TMenuItem
-      Caption = 'Stick_check'
-      Enabled = False
-      object mniNLabel30x10: TMenuItem
-        Caption = 'Label_30x10'
-        object mniNSticker_show: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-          OnClick = mniNSticker_showClick
-        end
-        object mniNSticker_printer: TMenuItem
-          Caption = #1055#1077#1095#1072#1090#1100
-          Enabled = False
-          OnClick = mniNSticker_printerClick
-        end
-      end
-      object mniNSeparator_stick: TMenuItem
-        Caption = '-'
-      end
-      object mniNStick_reset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         OnClick = btnRestartClick
       end

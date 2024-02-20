@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
-  FfrAdvacedLabel, FStickCheck,
+  FfrAdvacedLabel, FStickCheck, FFamile_mac,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls, Vcl.ComCtrls;
 
 
@@ -326,7 +326,7 @@ type
       f_print_908: string;
       f_print_576: string;
 
-      f_iniPath: string;
+
 // питание устройства
       f_power: string;       // печать характеристик источника питания устройства
 // переменные для хранения bar-кода
@@ -336,9 +336,18 @@ type
       f_logo : Boolean;   // флаг печати логотипа
 
   end;
-
 var
   frmMAC: TfrmMAC;
+  f_iniPath: string;    // путь до файла конфигурации
+  global_f_mac: Byte = 0;    // глобальная переменная код семейства mac-адреса
+  {
+    Таблица mac-адресов, актуальная на 20/02/2024.
+1.	Семейство – Atlanta – 00:4C:1B – 1F:FF:FF  : код - 0;
+2.	Семейство – Топаз – 28:67:C0 – 2F:FF:FF    : код - 1;
+3.	Семейство – КСК – 30:62:A8– 37:FF:FF       : код - 2;
+4.	Семейство – Корунд – 38:00:00 – 3F:FF:FF   : код - 3;
+5.	Резерв - 40:00:00 – FF:FF:FF;
+  }
 
 implementation
 
@@ -394,6 +403,7 @@ begin
 // защита приложения
   f_access := IniOptions.f_access;
 // последний mac-адрес плюс 1
+ { TODO -oini -cLost : Сдесь нужно переработать чтение из конфигурационного файла }
   f_LastMAC := IniOptions.f_LastMAC;
  // !!!!!!!!!!!!!
  {
@@ -412,10 +422,10 @@ begin
 // назначаем переменной  f_power - запись по умолчанию
   f_power := 'Значение ИП не выбранно';
 end;
-
 procedure TfrmMAC.FormShow(Sender: TObject);
 var
   f_question: Word;
+  f_ini: TIniFile;
 begin
   chkPrintTabClick(Self);
  // проверяем на первый показ формы
@@ -425,7 +435,12 @@ begin
     case f_question of
       IDYES:
         begin
+          f_ini := TIniFile.Create(f_iniPath);
           chkAdvanceSetting.Checked := True;
+          // запускаем диалог выбора код семейства mac-адреса
+          ShowMessage('Показываем окно семейства устройств');
+          frmFamily_mac := TfrmFamily_mac.Create(nil);
+          frmFamily_mac.ShowModal;
 
           medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
@@ -435,6 +450,8 @@ begin
           medtBit_4.Enabled := False;
           medtBit_5.Enabled := False;
           medtBit_6.Enabled := False;
+          frmFamily_mac.Free;
+          f_ini.Free;
         end;
       IDNO:
         begin
@@ -445,6 +462,9 @@ begin
   end;
 
 end;
+
+
+
 
 // сокрытие лишних пунктов меню
 procedure TfrmMAC.chkAdvanceSettingClick(Sender: TObject);
@@ -481,7 +501,7 @@ begin
   // активация пункта меню печать этикетки
     mniLabel.Visible := True;
     mniListDevice.Visible := True;
-     mniNStick.Visible := True;
+//     mniNStick.Visible := True;
   // активируем checkbox "Расширенные настройки"
     chkAdvanceSetting.Enabled := True;
   // переименовываем надписи
@@ -535,7 +555,7 @@ begin
   // гасим пункт меню печать этикетки
     mniLabel.Visible := False;
     mniListDevice.Visible := False;
-    mniNStick.Visible := False;
+//    mniNStick.Visible := False;
   // деактивируем checkbox "Расширенные настройки"
     chkAdvanceSetting.Enabled := False;
     chkAdvanceSetting.Checked := False;
@@ -665,7 +685,7 @@ begin
   btnApply.Enabled := False;
   btnRestart.Enabled := True;
   mniQRIDMAC.Enabled := True;
-  mniNStick.Enabled := True;
+//  mniNStick.Enabled := True;
 // разрешения пунктов "Сброс" в главном меню
   mniReset.Enabled := True;
   mniResetBarCodeLong.Enabled := True;
@@ -1058,7 +1078,7 @@ begin
       ShowMessage('Сбрасываем отчеты');
       btnApply.Enabled := True;
       btnRestart.Enabled := False;
-      mniNStick.Enabled := False;
+//      mniNStick.Enabled := False;
 // перезаряжаем печать стикера верификации
       mniNSticker_show.Enabled := True;
       mniNSticker_printer.Enabled := False;
@@ -2021,26 +2041,35 @@ var
   f_checked: string;
 begin
 // запрос на вводимую запись
- f_checked := InputBox('Версия верификации устройства','Введите номер версии','v 3.8.15');
- (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
+  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', 'v 3.8.18');
+  (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
 
- frmStickCheck.Show;
- frmStickCheck.frpStickCheck.ShowReport();
+  // задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+
+  frmStickCheck.Show;
+  frmStickCheck.frpStickCheck.ShowReport();
 // гасим и зажигаем нужные окна
   mniNSticker_show.Enabled := False;
   mniNSticker_printer.Enabled := True;
 // переносим фокус на стикер верификации
-if Self.CanFocus then
-      Self.SetFocus;
+  if Self.CanFocus then
+    Self.SetFocus;
 
 end;
 // печать стикера верификации
-
 procedure TfrmMAC.mniNSticker_printerClick(Sender: TObject);
 begin
+
+  // задаем принтер по умолчанию
+  frmStickCheck.frpStickCheck.Report.PrintOptions.Printer := f_print_576;
+
+
   frmStickCheck.frpStickCheck.ShowReport();
   frmStickCheck.frpStickCheck.Print;
 end;
+
 
 // блок печати номера ремонта
 procedure TfrmMAC.mniRangeClick(Sender: TObject);
