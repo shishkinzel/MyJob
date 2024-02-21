@@ -304,8 +304,7 @@ type
       f_NoShowAddres : Boolean;      // флаг отслеживания последнего адреса
       // защита программы
       f_access : string;
-      // mac-adress
-      f_LastMAC : string;              // последний mac-adress инкремент на 1
+
   public
   { Public declarations }
     const
@@ -340,7 +339,7 @@ var
   frmMAC: TfrmMAC;
   f_iniPath: string;    // путь до файла конфигурации
   global_f_mac: Byte = 0;    // глобальная переменная код семейства mac-адреса
-  {
+{
     Таблица mac-адресов, актуальная на 20/02/2024.
 1.	Семейство – Atlanta – 00:4C:1B – 1F:FF:FF  : код - 0;
 2.	Семейство – Топаз – 28:67:C0 – 2F:FF:FF    : код - 1;
@@ -348,6 +347,14 @@ var
 4.	Семейство – Корунд – 38:00:00 – 3F:FF:FF   : код - 3;
 5.	Резерв - 40:00:00 – FF:FF:FF;
   }
+
+  f_LastMAC_atlanta: string;      // переменная mac-адреса  семейство Атланта
+  f_LastMAC_topaz: string;        // переменная mac-адреса  семейство Топаз
+  f_LastMAC_ksk: string;          // переменная mac-адреса  семейство КСК
+  f_LastMAC_corundum: string;     // переменная mac-адреса  семейство Корунд
+
+        // mac-adress
+  f_LastMAC: string;              // последний mac-adress инкремент на 1
 
 implementation
 
@@ -403,8 +410,11 @@ begin
 // защита приложения
   f_access := IniOptions.f_access;
 // последний mac-адрес плюс 1
- { TODO -oini -cLost : Сдесь нужно переработать чтение из конфигурационного файла }
-  f_LastMAC := IniOptions.f_LastMAC;
+{ TODO -oini -cLost : Сдесь нужно переработать чтение из конфигурационного файла }
+  f_LastMAC_atlanta := IniOptions.f_LastMAC_atlanta;
+  f_LastMAC_topaz := IniOptions.f_LastMAC_topaz;
+  f_LastMAC_ksk := IniOptions.f_LastMAC_ksk;
+  f_LastMAC_corundum := IniOptions.f_LastMAC_corundum;
  // !!!!!!!!!!!!!
  {
   if f_access <> '@Zel05101966' then
@@ -425,7 +435,6 @@ end;
 procedure TfrmMAC.FormShow(Sender: TObject);
 var
   f_question: Word;
-  f_ini: TIniFile;
 begin
   chkPrintTabClick(Self);
  // проверяем на первый показ формы
@@ -435,13 +444,13 @@ begin
     case f_question of
       IDYES:
         begin
-          f_ini := TIniFile.Create(f_iniPath);
           chkAdvanceSetting.Checked := True;
           // запускаем диалог выбора код семейства mac-адреса
           ShowMessage('Показываем окно семейства устройств');
           frmFamily_mac := TfrmFamily_mac.Create(nil);
           frmFamily_mac.ShowModal;
-
+          if ModalResult = mrOk then
+          begin
           medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_6.Text := Trim(f_LastMAC);
@@ -451,7 +460,14 @@ begin
           medtBit_5.Enabled := False;
           medtBit_6.Enabled := False;
           frmFamily_mac.Free;
-          f_ini.Free;
+        end
+        else
+        begin
+           f_FirstShowForm := False;
+           frmFamily_mac.Free;
+          ShowMessage('Не Загружаем');
+          Exit
+        end;
         end;
       IDNO:
         begin
@@ -2299,8 +2315,29 @@ begin
           end;
           f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
           f_ini := TIniFile.Create(f_iniPath);
-          // Записываем файл конфигурации
-          IniOptions.f_LastMAC := f_LastMAC;     // последний mac-адрес плюс один
+          // Записываем файл конфигурации  выбранного семейства изделий
+          case global_f_mac of
+            0:
+              begin
+                IniOptions.f_LastMAC_atlanta := f_LastMAC;
+              end;
+            1:
+              begin
+                IniOptions.f_LastMAC_topaz := f_LastMAC;
+              end;
+            2:
+              begin
+                IniOptions.f_LastMAC_ksk := f_LastMAC;
+              end;
+            3:
+              begin
+                IniOptions.f_LastMAC_corundum := f_LastMAC;
+              end
+          else
+            Abort
+          end;
+
+//          IniOptions.f_LastMAC := f_LastMAC;     // последний mac-адрес плюс один
           // сохраняем путь к принтерам по умолчанию
            IniOptions.f_print_924 := f_print_924;
            IniOptions.f_print_940 := f_print_940;

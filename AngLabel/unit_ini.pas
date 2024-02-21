@@ -24,7 +24,10 @@ type
 
   f_access : string;         // переменная доступа
 
-  f_LastMAC : string;         // переменная mac-адреса
+  f_LastMAC_atlanta : string;      // переменная mac-адреса  семейство Атланта
+  f_LastMAC_topaz : string;        // переменная mac-адреса  семейство Топаз
+  f_LastMAC_ksk : string;          // переменная mac-адреса  семейство КСК
+  f_LastMAC_corundum : string;     // переменная mac-адреса  семейство Корунд
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -54,7 +57,10 @@ begin
 // защита приложения
     f_access := Ini.ReadString(csIniSectionAccess, 'Library_access', '000000000000');
 // mac-адрес
-    f_LastMAC := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', '00:00:00');
+    f_LastMAC_atlanta := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_atlanta', '00:4C:1B');
+    f_LastMAC_topaz := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', '28:67:C0');
+    f_LastMAC_ksk := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_ksk', '30:62:A8');
+    f_LastMAC_corundum := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', '38:00:00');
   end;
 end;
 
@@ -69,7 +75,10 @@ begin
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', f_print_576);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824', f_print_2824);
   // mac-адрес
-    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement', f_LastMAC);
+    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_atlanta', f_LastMAC_atlanta);
+    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', f_LastMAC_topaz);
+    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_ksk', f_LastMAC_ksk);
+    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', f_LastMAC_corundum);
   end;
 end;
 
