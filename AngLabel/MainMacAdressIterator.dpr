@@ -18,7 +18,8 @@ uses
   FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel},
   FStickCheck in 'FStickCheck.pas' {frmStickCheck},
   unit_ini in 'unit_ini.pas',
-  FFamile_mac in 'FFamile_mac.pas' {frmFamily_mac};
+  FFamile_mac in 'FFamile_mac.pas' {frmFamily_mac},
+  FMessage in 'FMessage.pas' {frmMsg};
 
 {$R *.res}
 
@@ -41,5 +42,6 @@ begin
   Application.CreateForm(TfrmShild, frmShild);
   Application.CreateForm(TfrmAdvancedLabel, frmAdvancedLabel);
   Application.CreateForm(TfrmStickCheck, frmStickCheck);
+  Application.CreateForm(TfrmMsg, frmMsg);
   Application.Run;
 end.

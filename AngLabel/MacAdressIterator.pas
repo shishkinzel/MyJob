@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
   frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
-  FfrAdvacedLabel, FStickCheck, FFamile_mac,
+  FfrAdvacedLabel, FStickCheck, FFamile_mac, FMessage,
   FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls, Vcl.ComCtrls;
 
 
@@ -333,8 +333,17 @@ type
       f_pow: TBitmap;
 
       f_logo : Boolean;   // флаг печати логотипа
-
   end;
+
+const
+  // надписи семейств изделия
+  cs_atlanta = 'Атланта';
+  cs_topaz = 'Топаз';
+  cs_ksk = 'КСК';
+  cs_corundum = 'Корунд';
+  // надпись при загрузки адресов
+  cs_Title_famile = 'Загружаем текущий адрес семейства - ';
+
 var
   frmMAC: TfrmMAC;
   f_iniPath: string;    // путь до файла конфигурации
@@ -353,8 +362,10 @@ var
   f_LastMAC_ksk: string;          // переменная mac-адреса  семейство КСК
   f_LastMAC_corundum: string;     // переменная mac-адреса  семейство Корунд
 
-        // mac-adress
+  // mac-adress
   f_LastMAC: string;              // последний mac-adress инкремент на 1
+  // переменная семейства
+  f_VarFamile : string;
 
 implementation
 
@@ -447,6 +458,7 @@ begin
           chkAdvanceSetting.Checked := True;
           // запускаем диалог выбора код семейства mac-адреса
           ShowMessage('Показываем окно семейства устройств');
+          // 'Показываем окно семейства устройств'
           frmFamily_mac := TfrmFamily_mac.Create(nil);
           frmFamily_mac.ShowModal;
           if ModalResult = mrOk then
@@ -454,7 +466,7 @@ begin
           medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_6.Text := Trim(f_LastMAC);
-          ShowMessage('Загружаем');
+          ShowMessage(cs_Title_famile + f_VarFamile);
           f_NoShowAddres := False;
           medtBit_4.Enabled := False;
           medtBit_5.Enabled := False;

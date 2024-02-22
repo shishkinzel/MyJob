@@ -84,21 +84,25 @@ begin
         begin
           global_f_mac := 0;
           f_LastMAC := f_LastMAC_atlanta;
+          f_VarFamile := cs_atlanta;
         end;
       1:
         begin
           global_f_mac := 1;
           f_LastMAC := f_LastMAC_topaz;
+          f_VarFamile := cs_topaz;
         end;
       2:
         begin
           global_f_mac := 2;
           f_LastMAC := f_LastMAC_ksk;
+          f_VarFamile := cs_ksk;
         end;
       3:
         begin
           global_f_mac := 3;
           f_LastMAC := f_LastMAC_corundum;
+          f_VarFamile := cs_corundum;
         end;
     end;
   end

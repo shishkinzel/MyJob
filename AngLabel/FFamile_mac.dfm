@@ -142,7 +142,6 @@ object frmFamily_mac: TfrmFamily_mac
     ParentFont = False
     TabOrder = 5
     Transparent = False
-    ExplicitWidth = 564
   end
   object btn_Atlanta: TBitBtn
     Left = 224
