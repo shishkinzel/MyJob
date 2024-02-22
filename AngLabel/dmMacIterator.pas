@@ -3,7 +3,7 @@ unit dmMacIterator;
 interface
 
 uses
-   System.StrUtils, System.SysUtils, System.Classes;
+   System.StrUtils, System.SysUtils, System.Classes, Forms;
 
 type
   TDataModuleMacIterator = class(TDataModule)
@@ -11,7 +11,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-
     function HexStrToInt(const str: string): Integer;
     procedure IncArrayOne(var inArray: array of Byte);
     function ArrayToString(var inArray: array of Byte): string;
@@ -32,10 +31,12 @@ type
 var
   DataModuleMacIterator: TDataModuleMacIterator;
 
+  procedure MyFloatingMessage(f_flag: Integer; frm: TForm);
+
 implementation
 
 uses
-  MacAdressIterator, IdGlobal;
+  MacAdressIterator, FMessage, IdGlobal, VCL.StdCtrls, vcl.ComCtrls;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
@@ -198,6 +199,16 @@ begin
   st2 := Format('%.2x', [T2]);
   Result := st2 + ':' + st1 + ':' + st0;
 
+end;
+
+// процедура для всплывающих сообщений
+procedure MyFloatingMessage(f_flag: Integer; frm: TForm);
+begin
+  f_flagMsg := f_flag;
+  frm := TfrmMsg.Create(nil);
+  frm.ShowModal;
+  f_flagMsg := 0;
+  Application.ProcessMessages;
 end;
 
 end.

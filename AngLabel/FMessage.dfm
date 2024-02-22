@@ -22,8 +22,10 @@ object frmMsg: TfrmMsg
   object lblMsg: TLabel
     Left = 88
     Top = 50
-    Width = 6
-    Height = 23
+    Width = 382
+    Height = 71
+    AutoSize = False
+    Caption = #1057#1086#1086#1073#1097#1077#1085#1080#1077
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
@@ -93,8 +95,11 @@ object frmMsg: TfrmMsg
   object lblTitleMsg: TLabel
     Left = 24
     Top = 8
-    Width = 6
+    Width = 433
     Height = 25
+    Alignment = taCenter
+    AutoSize = False
+    Caption = #1047#1072#1075#1086#1083#1086#1074#1086#1082' '#1074#1089#1087#1083#1099#1074#1072#1102#1097#1077#1075#1086' '#1086#1082#1085#1072
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -21

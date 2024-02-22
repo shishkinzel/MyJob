@@ -343,7 +343,14 @@ const
   cs_corundum = 'Корунд';
   // надпись при загрузки адресов
   cs_Title_famile = 'Загружаем текущий адрес семейства - ';
-
+  // константы для сообщений
+  // Заголовок
+  cs_MsgTitleAttention = 'Внимание!';
+  cs_MsgTitleWarning = 'Предупреждение';
+  cs_MsgTitleInfo = 'Информация';
+  // Сообщение
+  cs_MsgShowFamile = 'Показываем окно семейства устройств!';
+  cs_MsgNoShowFamile = 'Не Загружаем mac-адреса';
 var
   frmMAC: TfrmMAC;
   f_iniPath: string;    // путь до файла конфигурации
@@ -356,6 +363,8 @@ var
 4.	Семейство – Корунд – 38:00:00 – 3F:FF:FF   : код - 3;
 5.	Резерв - 40:00:00 – FF:FF:FF;
   }
+
+  f_flagMsg : Byte;
 
   f_LastMAC_atlanta: string;      // переменная mac-адреса  семейство Атланта
   f_LastMAC_topaz: string;        // переменная mac-адреса  семейство Топаз
@@ -457,7 +466,8 @@ begin
         begin
           chkAdvanceSetting.Checked := True;
           // запускаем диалог выбора код семейства mac-адреса
-          ShowMessage('Показываем окно семейства устройств');
+//          ShowMessage('Показываем окно семейства устройств');
+            MyFloatingMessage(0, frmMAC);
           // 'Показываем окно семейства устройств'
           frmFamily_mac := TfrmFamily_mac.Create(nil);
           frmFamily_mac.ShowModal;
@@ -466,7 +476,8 @@ begin
           medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
           medtBit_6.Text := Trim(f_LastMAC);
-          ShowMessage(cs_Title_famile + f_VarFamile);
+//          ShowMessage(cs_Title_famile + f_VarFamile);
+            MyFloatingMessage(2, frmMAC);
           f_NoShowAddres := False;
           medtBit_4.Enabled := False;
           medtBit_5.Enabled := False;
@@ -477,13 +488,13 @@ begin
         begin
            f_FirstShowForm := False;
            frmFamily_mac.Free;
-          ShowMessage('Не Загружаем');
+         MyFloatingMessage(1, frmMAC);
           Exit
         end;
         end;
       IDNO:
         begin
-          ShowMessage('Не Загружаем');
+        MyFloatingMessage(1, frmMAC);
         end;
     end;
     f_FirstShowForm := False;
@@ -2351,21 +2362,22 @@ begin
 
 //          IniOptions.f_LastMAC := f_LastMAC;     // последний mac-адрес плюс один
           // сохраняем путь к принтерам по умолчанию
-           IniOptions.f_print_924 := f_print_924;
-           IniOptions.f_print_940 := f_print_940;
-           IniOptions.f_print_908 := f_print_908;
-           IniOptions.f_print_576 := f_print_576;
-           IniOptions.f_print_2824 := f_print_2824;
+          IniOptions.f_print_924 := f_print_924;
+          IniOptions.f_print_940 := f_print_940;
+          IniOptions.f_print_908 := f_print_908;
+          IniOptions.f_print_576 := f_print_576;
+          IniOptions.f_print_2824 := f_print_2824;
 
           IniOptions.SaveToFile(f_iniPath);
-          ShowMessage('Сохраняем');
-
+//          ShowMessage('Сохраняем');
+          MyFloatingMessage(3, frmMAC);
           // очищаем память
           f_ini.Free;
         end;
       IDNO:
         begin
-          ShowMessage('Не Сохраняем');
+//          ShowMessage('Не Сохраняем');
+          MyFloatingMessage(4, frmMAC);
         end;
     end;
     CanClose := True;
