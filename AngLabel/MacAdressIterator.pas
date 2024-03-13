@@ -379,7 +379,7 @@ var
 implementation
 
 uses
-  IdGlobal, frxClass, unit_ini, IniFiles;
+  IdGlobal, frxClass, unit_ini, storage_mac_ini, IniFiles;
 {$R *.dfm}
   // создание формы начальные настройки
 

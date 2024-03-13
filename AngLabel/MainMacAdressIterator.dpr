@@ -19,7 +19,8 @@ uses
   FStickCheck in 'FStickCheck.pas' {frmStickCheck},
   unit_ini in 'unit_ini.pas',
   FFamile_mac in 'FFamile_mac.pas' {frmFamily_mac},
-  FMessage in 'FMessage.pas' {frmMsg};
+  FMessage in 'FMessage.pas' {frmMsg},
+  storage_mac_ini in 'storage_mac_ini.pas';
 
 {$R *.res}
 
