@@ -311,6 +311,7 @@ type
       nameFile = 'id_mac_iterator.txt';
       nameBarCodeFile = 'bar_code.txt';
       nameFileBarCodeLong = 'bar_code_long.txt';
+
       // сообщение в табло ошибка
       f_err = 'Внимание!! Ошибка!!' + #10#13 + 'Необходимо обновить динамические библиотеки!!!' +  #10#13 + 'Обратитесь к разработчику';
     var
@@ -325,6 +326,9 @@ type
       f_print_908: string;
       f_print_576: string;
 
+// переменные времени валидации
+      f_date_valid : string;
+      f_time_valid : string;
 
 // питание устройства
       f_power: string;       // печать характеристик источника питания устройства
@@ -336,6 +340,9 @@ type
   end;
 
 const
+
+  path_mac = '\\userservice\d of ServeceUser\DB\storage_mac.ini';    // путь до файла конфигурации для mac адресов
+//  f_storage_mac =  'storage_mac.ini';
   // надписи семейств изделия
   cs_atlanta = 'Атланта';
   cs_topaz = 'Топаз';
@@ -354,6 +361,7 @@ const
 var
   frmMAC: TfrmMAC;
   f_iniPath: string;    // путь до файла конфигурации
+
   global_f_mac: Byte = 0;    // глобальная переменная код семейства mac-адреса
 {
     Таблица mac-адресов, актуальная на 20/02/2024.
@@ -382,13 +390,17 @@ uses
   IdGlobal, frxClass, unit_ini, storage_mac_ini, IniFiles;
 {$R *.dfm}
   // создание формы начальные настройки
-
 procedure TfrmMAC.FormCreate(Sender: TObject);
 var
-  f_ini: TIniFile;
+  f_ini, f_ini_mac: TIniFile;
 begin
 // проверка на валидность работы программы
   f_access := '';
+
+
+// инициализируем переменные времени
+  f_date_valid := DateToStr(now);
+  f_time_valid := TimeToStr(now);
 
   f_FirstShowForm := True;
   f_NoShowAddres := True;
@@ -418,9 +430,12 @@ begin
 // описать загрузку ini-файла конфигурации print_config.ini
   f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
   f_ini := TIniFile.Create(f_iniPath);
+  f_ini_mac := TIniFile.Create(path_mac);
+
 
 // чтение конфигурации
   IniOptions.LoadFromFile(f_iniPath);
+  IniOptions_mac.LoadFromFile(path_mac);
 // запись из файла конфигурации
   f_print_924 := IniOptions.f_print_924;
   f_print_940 := IniOptions.f_print_940;
@@ -430,11 +445,15 @@ begin
 // защита приложения
   f_access := IniOptions.f_access;
 // последний mac-адрес плюс 1
-{ TODO -oini -cLost : Сдесь нужно переработать чтение из конфигурационного файла }
-  f_LastMAC_atlanta := IniOptions.f_LastMAC_atlanta;
-  f_LastMAC_topaz := IniOptions.f_LastMAC_topaz;
-  f_LastMAC_ksk := IniOptions.f_LastMAC_ksk;
-  f_LastMAC_corundum := IniOptions.f_LastMAC_corundum;
+
+  f_LastMAC_atlanta := IniOptions_mac.f_LastMAC_atlanta;
+  f_LastMAC_topaz := IniOptions_mac.f_LastMAC_topaz;
+  f_LastMAC_ksk := IniOptions_mac.f_LastMAC_ksk;
+  f_LastMAC_corundum := IniOptions_mac.f_LastMAC_corundum;
+// Дата и время
+  f_date_valid := IniOptions_mac.f_date_valid;
+  f_time_valid := IniOptions_mac.f_time_valid;
+
  // !!!!!!!!!!!!!
  {
   if f_access <> '@Zel05101966' then
@@ -448,6 +467,7 @@ begin
 // !!!!!!!!!!!!!!!!!!!!
 // очищаем память
   f_ini.Free;
+  f_ini_mac.Free;
 
 // назначаем переменной  f_power - запись по умолчанию
   f_power := 'Значение ИП не выбранно';
@@ -2336,39 +2356,45 @@ begin
             CanClose := True;
             Exit
           end;
-          f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
-          f_ini := TIniFile.Create(f_iniPath);
+//          f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
+          f_ini := TIniFile.Create(path_mac);
           // Записываем файл конфигурации  выбранного семейства изделий
           case global_f_mac of
             0:
               begin
-                IniOptions.f_LastMAC_atlanta := f_LastMAC;
+                IniOptions_mac.f_LastMAC_atlanta := f_LastMAC;
               end;
             1:
               begin
-                IniOptions.f_LastMAC_topaz := f_LastMAC;
+                IniOptions_mac.f_LastMAC_topaz := f_LastMAC;
               end;
             2:
               begin
-                IniOptions.f_LastMAC_ksk := f_LastMAC;
+                IniOptions_mac.f_LastMAC_ksk := f_LastMAC;
               end;
             3:
               begin
-                IniOptions.f_LastMAC_corundum := f_LastMAC;
+                IniOptions_mac.f_LastMAC_corundum := f_LastMAC;
               end
           else
             Abort
           end;
 
 //          IniOptions.f_LastMAC := f_LastMAC;     // последний mac-адрес плюс один
-          // сохраняем путь к принтерам по умолчанию
+// сохраняем путь к принтерам по умолчанию
           IniOptions.f_print_924 := f_print_924;
           IniOptions.f_print_940 := f_print_940;
           IniOptions.f_print_908 := f_print_908;
           IniOptions.f_print_576 := f_print_576;
           IniOptions.f_print_2824 := f_print_2824;
 
+        // Дата
+           // инициализируем переменные времени
+          f_date_valid := DateToStr(now);
+          f_time_valid := TimeToStr(now);
+
           IniOptions.SaveToFile(f_iniPath);
+          IniOptions_mac.SaveToFile(path_mac);
 //          ShowMessage('Сохраняем');
           MyFloatingMessage(3, frmMAC);
           // очищаем память

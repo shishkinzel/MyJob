@@ -20,6 +20,9 @@ type
     lbl_ksk: TLabel;
     btn_Corundum: TBitBtn;
     lbl_Corundum: TLabel;
+    lbl_Title_date: TLabel;
+    lbl_date_valid: TLabel;
+    lbl_time_valid: TLabel;
     procedure btn_ResetClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -45,19 +48,26 @@ uses
 
 
 
-
  // создание формы и чтение конфигурационного файла
 
 procedure TfrmFamily_mac.FormCreate(Sender: TObject);
 var
   f_ini: TIniFile;
 begin
+// читаем валидную дату
+  lbl_date_valid.Caption := frmMAC.f_date_valid;
+  lbl_time_valid.Caption := frmMAC.f_time_valid;
+
+//    читаем значение mac-адресов
   lbl_Atlanta.Caption := cs_mac + f_LastMAC_atlanta;
   lbl_Topaz.Caption := cs_mac + f_LastMAC_topaz;
   lbl_ksk.Caption := cs_mac + f_LastMAC_ksk;
   lbl_Corundum.Caption := cs_mac + f_LastMAC_corundum;
 
 end;
+
+
+
 
 
 

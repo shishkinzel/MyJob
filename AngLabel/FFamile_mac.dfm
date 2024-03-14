@@ -4,7 +4,7 @@ object frmFamily_mac: TfrmFamily_mac
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = #1042#1099#1073#1086#1088' '#1083#1080#1085#1077#1081#1082#1080' mac-'#1072#1076#1088#1077#1089#1086#1074' '#1091#1089#1090#1088#1086#1081#1089#1090#1074
-  ClientHeight = 299
+  ClientHeight = 313
   ClientWidth = 495
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmFamily_mac: TfrmFamily_mac
   TextHeight = 13
   object lbl_Title_mac: TLabel
     Left = 29
-    Top = 72
+    Top = 88
     Width = 174
     Height = 20
     Alignment = taCenter
@@ -36,7 +36,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object lbl_Title_falmile: TLabel
     Left = 256
-    Top = 72
+    Top = 88
     Width = 206
     Height = 20
     Alignment = taCenter
@@ -51,7 +51,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object lbl_Atlanta: TLabel
     Left = 30
-    Top = 104
+    Top = 120
     Width = 201
     Height = 20
     AutoSize = False
@@ -65,7 +65,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object lbl_Topaz: TLabel
     Left = 30
-    Top = 139
+    Top = 155
     Width = 201
     Height = 20
     AutoSize = False
@@ -79,7 +79,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object lbl_ksk: TLabel
     Left = 30
-    Top = 174
+    Top = 190
     Width = 201
     Height = 20
     AutoSize = False
@@ -93,7 +93,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object lbl_Corundum: TLabel
     Left = 30
-    Top = 209
+    Top = 225
     Width = 201
     Height = 20
     AutoSize = False
@@ -105,9 +105,48 @@ object frmFamily_mac: TfrmFamily_mac
     Font.Style = [fsBold, fsItalic]
     ParentFont = False
   end
+  object lbl_Title_date: TLabel
+    Left = 11
+    Top = 53
+    Width = 250
+    Height = 20
+    Caption = #1042#1088#1077#1084#1103' '#1087#1086#1089#1083#1077#1076#1085#1077#1081' '#1074#1072#1083#1080#1076#1072#1094#1080#1080
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
+  object lbl_date_valid: TLabel
+    Left = 280
+    Top = 55
+    Width = 90
+    Height = 17
+    Caption = '00.00.0000'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
+  object lbl_time_valid: TLabel
+    Left = 400
+    Top = 55
+    Width = 72
+    Height = 17
+    Caption = '00:00:00'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
   object btn_Reset: TBitBtn
     Left = 32
-    Top = 256
+    Top = 272
     Width = 449
     Height = 25
     BiDiMode = bdRightToLeftReadingOnly
@@ -145,7 +184,7 @@ object frmFamily_mac: TfrmFamily_mac
   end
   object btn_Atlanta: TBitBtn
     Left = 224
-    Top = 100
+    Top = 116
     Width = 257
     Height = 27
     Caption = 'Atlanta'
@@ -161,7 +200,7 @@ object frmFamily_mac: TfrmFamily_mac
   object btn_Topaz: TBitBtn
     Tag = 1
     Left = 224
-    Top = 135
+    Top = 151
     Width = 257
     Height = 27
     Caption = 'Topaz'
@@ -177,7 +216,7 @@ object frmFamily_mac: TfrmFamily_mac
   object btn_ksk: TBitBtn
     Tag = 2
     Left = 224
-    Top = 170
+    Top = 186
     Width = 257
     Height = 27
     Caption = 'KCK'
@@ -193,7 +232,7 @@ object frmFamily_mac: TfrmFamily_mac
   object btn_Corundum: TBitBtn
     Tag = 3
     Left = 224
-    Top = 205
+    Top = 221
     Width = 257
     Height = 27
     Caption = 'Corundum'
