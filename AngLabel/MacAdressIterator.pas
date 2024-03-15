@@ -2390,8 +2390,8 @@ begin
 
         // Дата
            // инициализируем переменные времени
-          f_date_valid := DateToStr(now);
-          f_time_valid := TimeToStr(now);
+          IniOptions_mac.f_date_valid := DateToStr(now);
+          IniOptions_mac.f_time_valid  := TimeToStr(now);
 
           IniOptions.SaveToFile(f_iniPath);
           IniOptions_mac.SaveToFile(path_mac);

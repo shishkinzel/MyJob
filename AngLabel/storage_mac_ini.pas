@@ -49,7 +49,7 @@ begin
     f_LastMAC_corundum := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', '38:00:00');
 //  секция даты
     f_date_valid := Ini.ReadString(csIniSectionMAC_Date, 'Дата последней валидации', '01.01.2000');
-    f_date_valid := Ini.ReadString(csIniSectionMAC_Date, 'Время последней валидации', '00:00:00');
+    f_time_valid := Ini.ReadString(csIniSectionMAC_Date, 'Время последней валидации', '00:00:00');
   end;
 end;
 
@@ -64,7 +64,7 @@ begin
     Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', f_LastMAC_corundum);
 //  секция даты
     Ini.WriteString(csIniSectionMAC_Date, 'Дата последней валидации', f_date_valid);
-    Ini.WriteString(csIniSectionMAC_Date, 'Время последней валидации', f_date_valid);
+    Ini.WriteString(csIniSectionMAC_Date, 'Время последней валидации', f_time_valid);
   end;
 end;
 
