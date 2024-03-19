@@ -144,6 +144,66 @@ object frmFamily_mac: TfrmFamily_mac
     Font.Style = [fsBold, fsItalic]
     ParentFont = False
   end
+  object lbl_date_atlanta: TLabel
+    Left = 380
+    Top = 120
+    Width = 100
+    Height = 14
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '00.00.0000'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
+  object lbl_date_topaz: TLabel
+    Left = 380
+    Top = 155
+    Width = 100
+    Height = 14
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '00.00.0000'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
+  object lbl_date_ksk: TLabel
+    Left = 380
+    Top = 190
+    Width = 100
+    Height = 14
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '00.00.0000'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
+  object lbl_date_corundum: TLabel
+    Left = 380
+    Top = 225
+    Width = 100
+    Height = 14
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '00.00.0000'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+  end
   object btn_Reset: TBitBtn
     Left = 32
     Top = 272
@@ -185,7 +245,7 @@ object frmFamily_mac: TfrmFamily_mac
   object btn_Atlanta: TBitBtn
     Left = 224
     Top = 116
-    Width = 257
+    Width = 150
     Height = 27
     Caption = 'Atlanta'
     Font.Charset = DEFAULT_CHARSET
@@ -201,7 +261,7 @@ object frmFamily_mac: TfrmFamily_mac
     Tag = 1
     Left = 224
     Top = 151
-    Width = 257
+    Width = 150
     Height = 27
     Caption = 'Topaz'
     Font.Charset = DEFAULT_CHARSET
@@ -217,7 +277,7 @@ object frmFamily_mac: TfrmFamily_mac
     Tag = 2
     Left = 224
     Top = 186
-    Width = 257
+    Width = 150
     Height = 27
     Caption = 'KCK'
     Font.Charset = DEFAULT_CHARSET
@@ -233,7 +293,7 @@ object frmFamily_mac: TfrmFamily_mac
     Tag = 3
     Left = 224
     Top = 221
-    Width = 257
+    Width = 150
     Height = 27
     Caption = 'Corundum'
     Font.Charset = DEFAULT_CHARSET

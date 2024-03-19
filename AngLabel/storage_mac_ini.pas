@@ -1,13 +1,15 @@
 ﻿unit storage_mac_ini;
 
 interface
+
 uses
   Classes, SysUtils, IniFiles, Forms, Windows;
 
+    {Section : csIniSectionPathPrint}
 const
   csIniSectionMAC_Last = 'SectionMAC_Last';        // секция хранения последнего mac-адреса
   csIniSectionMAC_Date = 'SectionMAC_Date';        // секция хранения валидной даты
-  {Section : csIniSectionPathPrint}
+  csIniSectionMAC_Date_family = 'SectionMAC_Date_family';        // секция хранения валидной даты
 
 type
   TIniOptions = class(TObject)
@@ -21,6 +23,12 @@ type
   // переменные времени валидации
     f_date_valid: string;
     f_time_valid: string;
+
+  // переменные времени изменения по категориям
+    f_date_atlanta: string;      // переменная  даты - семейство Атланта
+    f_date_topaz: string;        // переменная  даты - семейство Топаз
+    f_date_ksk: string;          // переменная  даты - семейство КСК
+    f_date_corundum: string;     // переменная  даты - семейство Корунд
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -50,6 +58,11 @@ begin
 //  секция даты
     f_date_valid := Ini.ReadString(csIniSectionMAC_Date, 'Дата последней валидации', '01.01.2000');
     f_time_valid := Ini.ReadString(csIniSectionMAC_Date, 'Время последней валидации', '00:00:00');
+// секция даты по категориям
+    f_date_atlanta := Ini.ReadString(csIniSectionMAC_Date_family, 'Дата - семейство Атланта', '01.01.2024');
+    f_date_topaz := Ini.ReadString(csIniSectionMAC_Date_family, 'Дата - семейство Топаз', '01.01.2024');
+    f_date_ksk := Ini.ReadString(csIniSectionMAC_Date_family, 'Дата - семейство КСК', '01.01.2024');
+    f_date_corundum := Ini.ReadString(csIniSectionMAC_Date_family, 'Дата - семейство Корунд', '01.01.2024');
   end;
 end;
 
@@ -65,6 +78,11 @@ begin
 //  секция даты
     Ini.WriteString(csIniSectionMAC_Date, 'Дата последней валидации', f_date_valid);
     Ini.WriteString(csIniSectionMAC_Date, 'Время последней валидации', f_time_valid);
+// секция даты по категориям
+    Ini.WriteString(csIniSectionMAC_Date_family, 'Дата - семейство Атланта', f_date_atlanta);
+    Ini.WriteString(csIniSectionMAC_Date_family, 'Дата - семейство Топаз', f_date_topaz);
+    Ini.WriteString(csIniSectionMAC_Date_family, 'Дата - семейство КСК', f_date_ksk);
+    Ini.WriteString(csIniSectionMAC_Date_family, 'Дата - семейство Корунд', f_date_corundum);
   end;
 end;
 

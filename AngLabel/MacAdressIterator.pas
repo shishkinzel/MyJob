@@ -372,17 +372,22 @@ var
 5.	Резерв - 40:00:00 – FF:FF:FF;
   }
 
-  f_flagMsg : Byte;
-
+  f_flagMsg: Byte;
   f_LastMAC_atlanta: string;      // переменная mac-адреса  семейство Атланта
   f_LastMAC_topaz: string;        // переменная mac-адреса  семейство Топаз
   f_LastMAC_ksk: string;          // переменная mac-адреса  семейство КСК
   f_LastMAC_corundum: string;     // переменная mac-адреса  семейство Корунд
 
+  // переменные времени изменения по категориям
+  f_date_atlanta: string;      // переменная  даты - семейство Атланта
+  f_date_topaz: string;        // переменная  даты - семейство Топаз
+  f_date_ksk: string;          // переменная  даты - семейство КСК
+  f_date_corundum: string;     // переменная  даты - семейство Корунд
+
   // mac-adress
   f_LastMAC: string;              // последний mac-adress инкремент на 1
   // переменная семейства
-  f_VarFamile : string;
+  f_VarFamile: string;
 
 implementation
 
@@ -453,7 +458,11 @@ begin
 // Дата и время
   f_date_valid := IniOptions_mac.f_date_valid;
   f_time_valid := IniOptions_mac.f_time_valid;
-
+// читаем времени изменения по категориям
+   f_date_atlanta := IniOptions_mac.f_date_atlanta;
+   f_date_topaz := IniOptions_mac.f_date_topaz;
+   f_date_ksk := IniOptions_mac.f_date_ksk;
+   f_date_corundum := IniOptions_mac.f_date_corundum;
  // !!!!!!!!!!!!!
  {
   if f_access <> '@Zel05101966' then
@@ -2334,6 +2343,7 @@ begin
   fdmtblTitle.Close;
   fdmtblBarCode.Close;
 end;
+
 procedure TfrmMAC.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 var
   f_question: Word;
@@ -2363,18 +2373,22 @@ begin
             0:
               begin
                 IniOptions_mac.f_LastMAC_atlanta := f_LastMAC;
+                IniOptions_mac.f_date_atlanta := DateToStr(now);
               end;
             1:
               begin
                 IniOptions_mac.f_LastMAC_topaz := f_LastMAC;
+                IniOptions_mac.f_date_topaz := DateToStr(now);
               end;
             2:
               begin
                 IniOptions_mac.f_LastMAC_ksk := f_LastMAC;
+                IniOptions_mac.f_date_ksk := DateToStr(now);
               end;
             3:
               begin
                 IniOptions_mac.f_LastMAC_corundum := f_LastMAC;
+                IniOptions_mac.f_date_corundum := DateToStr(now);
               end
           else
             Abort
@@ -2391,7 +2405,7 @@ begin
         // Дата
            // инициализируем переменные времени
           IniOptions_mac.f_date_valid := DateToStr(now);
-          IniOptions_mac.f_time_valid  := TimeToStr(now);
+          IniOptions_mac.f_time_valid := TimeToStr(now);
 
           IniOptions.SaveToFile(f_iniPath);
           IniOptions_mac.SaveToFile(path_mac);

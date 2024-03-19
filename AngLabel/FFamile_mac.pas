@@ -23,6 +23,10 @@ type
     lbl_Title_date: TLabel;
     lbl_date_valid: TLabel;
     lbl_time_valid: TLabel;
+    lbl_date_atlanta: TLabel;
+    lbl_date_topaz: TLabel;
+    lbl_date_ksk: TLabel;
+    lbl_date_corundum: TLabel;
     procedure btn_ResetClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -63,6 +67,12 @@ begin
   lbl_Topaz.Caption := cs_mac + f_LastMAC_topaz;
   lbl_ksk.Caption := cs_mac + f_LastMAC_ksk;
   lbl_Corundum.Caption := cs_mac + f_LastMAC_corundum;
+
+// читаем времени изменения по категориям
+  lbl_date_atlanta.Caption := f_date_atlanta;
+  lbl_date_topaz.Caption := f_date_topaz;
+  lbl_date_ksk.Caption := f_date_ksk;
+  lbl_date_corundum.Caption := f_date_corundum;
 
 end;
 
