@@ -106,7 +106,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44979.657073865740000000
+    ReportOptions.LastChange = 45378.736032500000000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -136,7 +136,7 @@ object frmStickCheck: TfrmStickCheck
       PaperSize = 256
       LeftMargin = 0.500000000000000000
       RightMargin = 0.500000000000000000
-      TopMargin = 2.000000000000000000
+      TopMargin = 0.500000000000000000
       BottomMargin = 0.500000000000000000
       Frame.Typ = []
       Frame.Width = 0.100000000000000000
@@ -144,7 +144,7 @@ object frmStickCheck: TfrmStickCheck
       object mData: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 30.236220472440940000
         Top = 18.897650000000000000
         Width = 98.267780000000000000
         DataSet = frdbService
@@ -155,7 +155,7 @@ object frmStickCheck: TfrmStickCheck
           Align = baClient
           AllowVectorExport = True
           Width = 98.267780000000000000
-          Height = 22.677180000000000000
+          Height = 30.236220472440940000
           StretchMode = smMaxHeight
           AutoWidth = True
           DataField = 'number'
@@ -163,7 +163,7 @@ object frmStickCheck: TfrmStickCheck
           DataSetName = 'frxService'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -21
+          Font.Height = -29
           Font.Name = 'Roboto'
           Font.Style = []
           Frame.Typ = []
