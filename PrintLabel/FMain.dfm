@@ -13740,7 +13740,7 @@ object frmMain: TfrmMain
     Tag = 5
     Left = 558
     Top = 164
-    Width = 46
+    Width = 62
     Height = 24
     AutoSize = False
     Font.Charset = DEFAULT_CHARSET
@@ -13748,12 +13748,12 @@ object frmMain: TfrmMain
     Font.Height = -13
     Font.Name = 'Roboto'
     Font.Style = []
-    MaxLength = 3
-    MaxValue = 999
-    MinValue = 1
+    MaxLength = 4
+    MaxValue = 9999
+    MinValue = 0
     ParentFont = False
     TabOrder = 5
-    Value = 1
+    Value = 0
   end
   object chkStiker: TCheckBox
     Left = 36

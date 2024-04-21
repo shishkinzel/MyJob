@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Barcode;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Barcode, Vcl.Dialogs;
 
 type
   TdbmPrintLabel = class(TDataModule)
@@ -180,11 +180,12 @@ end;
 procedure Print_mac_id(const s1, s2: string; const k1, k2: Integer; fdtbl: TFDMemTable);
 var
   f_mac, f_id, f_id_long, f_id_small: string;
+  f_id_modification : string;    // переменная модификации изделия для формирования перехода через тысячу
   f_id_small_all, f_id_long_all : string;
-  rangeLast, f_id_string : string;
+  rangeLast, f_id_string, f_id_modification_string : string;
   fstep, fcount: Integer;
   fstep_flag : Boolean;
-  f_id_num: Integer;
+  f_id_num, f_id_modification_num: Integer;
   fbit: array[0..2] of Byte;
   fd_tblPrint: TFDMemTable;
   i, j, k: Integer;
@@ -205,8 +206,8 @@ ________________________________________________________________________________
   f_id_long := '';
   f_id_small := '';
   rangeLast := '';
-  f_id := s1;
-  f_mac := s2;
+  f_id := s1;            // начальный  серийный номер изделия
+  f_mac := s2;           // начальный  mac-адрес изделия
   fstep := k1;
   fcount := k2;
   if fstep = 1 then
@@ -218,8 +219,20 @@ ________________________________________________________________________________
   for i := 0 to 2 do
   begin
     tmp_id_1 := Trim(Fetch(f_id, '_'));
-    f_id_long := f_id_long + tmp_id_1 + ' ';
-    f_id_small := f_id_small + tmp_id_1;
+    if i < 2 then
+    begin
+      f_id_long := f_id_long + tmp_id_1 + ' ';
+      f_id_small := f_id_small + tmp_id_1;
+    end;
+    if i = 2 then
+    begin
+      f_id_modification := tmp_id_1;
+      f_id_modification_num := StrToIntDef(f_id_modification, -1);
+      if f_id_modification_num < 0 then
+      begin
+        raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств!' + #10#13 + 'Или ошибка ввода серийного номера!');
+      end;
+    end;
   end;
 // берем последнюю триаду проверяем на выход из диапазона 999
   f_id_num := StrToIntDef(f_id, -1000);
@@ -228,8 +241,8 @@ ________________________________________________________________________________
 //    barCodeStream.Free;
 // сдесь нужно реализовать переход на другой диапазон - инкремент в регулировочной партии
 
-    raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств!' + #10#13 + 'Или ошибка ввода серийного номера!');
-
+//    raise EIntOverflow.Create('Нарушение диапазона ввода числа устройств!' + #10#13 + 'Или ошибка ввода серийного номера!');
+      ShowMessage('Внимание, Серийный номер переходит' +#13#10 + 'в следующий диапазон модификации изделия')
   end;
 // работаем с mac-адресом
     Delete(f_mac, 1, 9);
@@ -249,9 +262,10 @@ ________________________________________________________________________________
     f_id_long_all := '';
     fdtbl.Append;
 // серийные номера
-     f_id_string := Format('%.3d', [f_id_num]);
-    f_id_small_all := f_id_small + f_id_string;
-    f_id_long_all := f_id_long + f_id_string;
+    f_id_string := Format('%.3d', [f_id_num]);
+    f_id_modification_string := Format('%.3d', [f_id_modification_num]);
+    f_id_small_all := f_id_small + f_id_modification_string + f_id_string;
+    f_id_long_all := f_id_long + f_id_modification_string + ' ' + f_id_string;
     fdtbl.Fields[0].AsString := f_id_small_all;
     fdtbl.Fields[3].AsString := f_id_long_all;
 {___________________________________________________________________________________________________
@@ -278,8 +292,15 @@ ________________________________________________________________________________
  ___________________________________________________________________________________________________}
 // увеличиваем серийный номер на единицу - последнюю триаду
     Inc(f_id_num);
+//***************************  новый код для перехода на другую серию модификации изделия ***********
+  // если f_id_num = 1000 мы присваиваим ему значение 000 и увеличиваем значение f_id_modification_num на единицу
+    if f_id_num = 1000 then
+    begin
+      f_id_num := 0;
+      Inc(f_id_modification_num);
+    end;
 
-
+//******************************************************************************
 //  mac-адреса для записи в таблицу fdtbl
     fdtbl.Fields[4].AsString := ArrayToString(fbit);
     if fstep_flag then
