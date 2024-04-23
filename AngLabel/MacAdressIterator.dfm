@@ -500,15 +500,15 @@ object frmMAC: TfrmMAC
   object seQuantity: TSpinEdit
     Left = 227
     Top = 295
-    Width = 55
+    Width = 64
     Height = 29
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
-    MaxLength = 3
-    MaxValue = 999
+    MaxLength = 4
+    MaxValue = 9999
     MinValue = 1
     ParentFont = False
     TabOrder = 5

@@ -731,6 +731,7 @@ end;
 procedure TfrmMAC.btnApplyClick(Sender: TObject);
 var
   i, stepMac, beginNumberDevice, range: Integer;
+  group_st : string;   // переменная для модификации партии
   s, numberS, rangeLast: string;
   s1, tmp, tmp1, tmp2: string;
   bit0, bit1, bit2: string;
@@ -798,8 +799,8 @@ begin
 //*******************************************************
   idModule := StrToIntDef(medtModule.Text, 0);
   idDate := StrToIntDef(medtDate.Text, 0);
-  idGroup := StrToIntDef(medtGroup.Text, 0);
-  idNumber := StrToIntDef(medtNumber.Text, 0);
+  idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
+  idNumber := StrToIntDef(medtNumber.Text, 0);  // номер по порядку
 
 // *******************************************************
   if not (chkPrintTab.Checked) then    // флажок печать этикетки снят
@@ -809,14 +810,31 @@ begin
     begin
 //   формирование файла
       Rewrite(fileId);
-      for i := 1 to quantity do
+      beginNumberDevice := idNumber;   // начальный номер   !!!!!!!!
+      for i := 0 to quantity - 1 do
       begin
-        beginNumberDevice := idNumber + (i - 1);
+  // реализуем возможность перехода через 1000
+        if beginNumberDevice = 1000 then
+        begin
+          beginNumberDevice := 0;
+          inc(idGroup);
+  //  организуем переход на другую модификацию устройства
+
+          numberDeviceHigh := '';    // обнуляем запись
+          fnumberDeviceHigh := '';   // обнуляем запись
+
+
+          group_st := Format('%.3d', [idGroup]);
+          numberDeviceHigh := medtModule.Text + medtDate.Text + group_st;    // формируем новые
+          fnumberDeviceHigh := medtModule.Text + ' ' + medtDate.Text + ' ' + group_st;
+
+        end;
+
         numberS := Format('  ' + '%.3d', [beginNumberDevice]);
-        s := Format('%.4d', [i]);
+        s := Format('%.4d', [i + 1]);
         Write(fileId, s);
-        Write(fileId,DataModuleMacIterator.ArrayToString(idMAC));
-        Write(fileId, fnumberDeviceHigh +  numberS);
+        Write(fileId, DataModuleMacIterator.ArrayToString(idMAC));
+        Write(fileId, fnumberDeviceHigh + numberS);
         while stepMac <= stepIteration do
         begin
           DataModuleMacIterator.IncArrayOne(idMAC);
@@ -824,6 +842,7 @@ begin
         end;
         stepMac := 1;
         Writeln(fileId);
+        inc(beginNumberDevice);
       end;
 // закрытие файла
       CloseFile(fileId);
@@ -924,22 +943,31 @@ begin
   //****************************** флажок активирован
   else
   begin
-   //   формирование файла для этикетки
+   //   формирование файла для этикетки   !!!! Возможность перехода через 999
     barCodeStream := TMemoryStream.Create;
     Rewrite(fileId);
-    for i := 1 to quantity do
+    beginNumberDevice := idNumber;
+    for i := 0 to (quantity - 1) do
     begin
-      beginNumberDevice := idNumber + (i - 1);
+//   вставляю новый код
+      if beginNumberDevice = 1000 then
+      begin
+        beginNumberDevice := 0;
+        Inc(idGroup);
+        medtGroup.Text := Format('%.3d', [idGroup])
+      end;
+
       numberS := Format('%.3d', [beginNumberDevice]);
       s := Format('%.4d', [i]);
       Write(fileId, s);
       s := ' |' + medtModule.Text + medtDate.Text + medtGroup.Text;
-      s1 := ' |' + medtModule.Text + ' ' + medtDate.Text  + ' ' + medtGroup.Text;
+      s1 := ' |' + medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text;
       Write(fileId, s);
       Write(fileId, numberS);
       Write(fileId, s1);
       Write(fileId, ' ' + numberS);
       Writeln(fileId);
+      Inc(beginNumberDevice);
     end;
 // закрытие файла
       CloseFile(fileId);
@@ -1096,6 +1124,7 @@ begin
       medtBit_4.Text := '00';
       medtBit_5.Text := '00';
       medtBit_6.Text := '00';
+
   // для barCode
       mniBarCodeLong.Enabled := False;
       mniPreviewLong.Enabled := False;
@@ -1111,6 +1140,19 @@ begin
       mniReset_IDandMAC.Enabled := False;
   // зажигаем пунк -"Применить"
       mniApplay_IDandMAC.Enabled := True;
+  // сбрасываем переменные для формирования серийного номера
+      ffirstIdDevice := '';
+      seQuantity.Text := '1';    // количество устройств
+      numberDeviceHigh := '';  // три старших разряда серийного номера
+      fnumberDeviceHigh :='';  // три старших разряда серийного номера с пробелами между триадами
+
+//*******************************************************
+  idModule := StrToIntDef(medtModule.Text, 0);
+  idDate := StrToIntDef(medtDate.Text, 0);
+  idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
+  idNumber := StrToIntDef(medtNumber.Text, 0);  // номер по порядку
+
+
 // для серийного номера
       if utilityMAC then
       begin
@@ -1140,6 +1182,10 @@ begin
     end
     else
     begin
+//      edtDevice.Text := '';
+//      edtMod.Text := '';
+      edtDevice.Clear;
+      edtMod.Clear;
       mniLabel.Enabled := False;
       mniLabelAdvance.Enabled := False;
       chkPrintTab.Enabled := True;
@@ -1178,28 +1224,51 @@ begin
       mni_sh_43_25.Enabled := True;
       mni_sh_shild_43_25.Enabled := True;
       mni_ShowSmall_new.Enabled := True;
+
+//   сбрасываем окна заполнения
+      medtModule.Text := '000';
+      medtDate.Text := '000';
+      medtGroup.Text := '000';
+      medtNumber.Text := '000';
+
+      seStepIterator.Value := 1;
+      seQuantity.Value := 1;
+      medtBit_4.Text := '00';
+      medtBit_5.Text := '00';
+      medtBit_6.Text := '00';
+//  сбрасываем наимеование устройств
+
+
     end;
   end;
 end;
 
 
+
+
+// необходимо организовать переход через 999!!!!!!!!!
 // печать штрих кода *******************************************************
 procedure TfrmMAC.mniApplyBarCodeClick(Sender: TObject);
 var
   beginNumberDevice, range, stepMac, stepBarCode, numberBarCode: Integer;
   numBarCodeFR: Integer;
+  group_st: string;   // переменная для модификации партии
   s, numberS, numberSLong, rangeLast: string;
   s1, tmp, tmp1: string;
 begin
+  numberDeviceHigh := '';    // обнуляем запись
+  numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;  // три старших разряда серийного номера
+  idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
+
 // отключаем пунк меню "Применить"
-   mniApplyBarCodeLong.Enabled := False;
+  mniApplyBarCodeLong.Enabled := False;
 // отключаем пункт QR-код семейство Топаз
   mniQRIDMAC.Enabled := False;
 // открываем таблицу для заполниния **************************************
   range := stepIteration;
   stepMac := 1;
   stepBarCode := 1;
-  numberBarCode := 1;
+  numberBarCode := 0;    // счетчик количества устройств
   numBarCodeFR := 1;
 // блокируем окно для Топаза
 //  mniQRIDMAC.Enabled := False;
@@ -1229,9 +1298,24 @@ begin
 //   формирование файла
   Rewrite(fileBarCode);
   Rewrite(fileBarCodeLong); // добавляем для длинного barcode
-  while numberBarCode <= quantity do
+
+  beginNumberDevice := idNumber;
+  while numberBarCode <= quantity - 1 do
   begin
-    beginNumberDevice := idNumber + (numberBarCode - 1);
+
+// пихаем код для перехода через 1000
+    if beginNumberDevice = 1000 then
+    begin
+      beginNumberDevice := 0;
+      inc(idGroup);
+    // организуем переход на другую модификацию устройства
+      numberDeviceHigh := '';    // обнуляем запись
+
+      group_st := Format('%.3d', [idGroup]);
+
+      numberDeviceHigh := medtModule.Text + medtDate.Text + group_st;    // формируем новые
+    end;
+
     numberS := Format(numberDeviceHigh + '%.3d', [beginNumberDevice]);
     numberSLong := Format(' --serial ' + numberDeviceHigh + '%.3d', [beginNumberDevice]);
     s := Format('%.3d', [numBarCodeFR]) + '|';
@@ -1252,6 +1336,7 @@ begin
       Inc(stepBarCode);
       Inc(numberBarCode);
       stepMac := 1;
+      inc(beginNumberDevice);
     end;
     stepBarCode := 1;
     Inc(numBarCodeFR);
@@ -1324,24 +1409,27 @@ begin
 
 end;
 
-
 // печать qr-кода и серийного номера для изделий семейства Топаз
 
 procedure TfrmMAC.mniApplay_IDandMACClick(Sender: TObject);
 var
   beginNumberDevice, range, stepMac, stepBarCode, numberBarCode: Integer;
   number, numBarCodeFR: Integer;
+  group_st: string;   // переменная для модификации партии
   numberS, numberSLong, rangeLast: string;
   s, s1, tmp, tmp1: string;
   hardWare: string;
 begin
-// гасим пунк -"Применить"
+  numberDeviceHigh := '';    // обнуляем запись
+  numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;  // три старших разряда серийного номера
+  idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
+
   mniApplay_IDandMAC.Enabled := False;
 // открываем таблицу для заполниния **************************************
   range := stepIteration;
   stepMac := 1;
   stepBarCode := 1;
-  numberBarCode := 1;
+  numberBarCode := 0;
   numBarCodeFR := 1;
  // блокируем окно для QR-код малый
   mniBarCodeLong.Enabled := False;
@@ -1358,7 +1446,7 @@ begin
   hardWare := InputBox('Введите Hard Ware модуля Топаз', 'Введите HW ', '00.01.10');
 
   stepPrintBarCode := StrToIntDef(InputBox('Шаг печати штрих-кода', 'Введите шаг печати от 5 до 10', '10'), 10);
-  if not (stepPrintBarCode in [5..10]) then
+  if not (stepPrintBarCode in [1..10]) then
   begin
     ShowMessage('Введите корректное значение из диапазона 5-10');
     mniApplyBarCodeClick(nil);
@@ -1389,9 +1477,21 @@ begin
 //   формирование файла
   Rewrite(fileBarCode);
   Rewrite(fileBarCodeLong); // добавляем для длинного barcode
-  while numberBarCode <= quantity do
+  beginNumberDevice := idNumber;
+  while numberBarCode <= quantity - 1 do
   begin
-    beginNumberDevice := idNumber + (numberBarCode - 1);
+
+// пихаем код для перехода через 1000
+    if beginNumberDevice = 1000 then
+    begin
+      beginNumberDevice := 0;
+      inc(idGroup);
+  //  организуем переход на другую модификацию устройства
+      numberDeviceHigh := '';    // обнуляем запись
+      group_st := Format('%.3d', [idGroup]);
+      numberDeviceHigh := medtModule.Text + medtDate.Text + group_st;    // формируем новые
+    end;
+
     numberS := Format(numberDeviceHigh + '%.3d', [beginNumberDevice]);
     numberSLong := Format(' --serial ' + numberDeviceHigh + '%.3d', [beginNumberDevice]);
     s := Format('%.3d', [numBarCodeFR]) + '|';
@@ -1412,11 +1512,13 @@ begin
       Inc(stepBarCode);
       Inc(numberBarCode);
       stepMac := 1;
+      inc(beginNumberDevice);
     end;
     stepBarCode := 1;
     Inc(numBarCodeFR);
     Writeln(fileBarCode);
     Writeln(fileBarCodeLong);
+
   end;
 // закрытие файла
   CloseFile(fileBarCode);
