@@ -3,7 +3,7 @@ object frmStickCheck: TfrmStickCheck
   Top = 0
   Caption = 'frStick_check'
   ClientHeight = 800
-  ClientWidth = 205
+  ClientWidth = 259
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmStickCheck: TfrmStickCheck
   object fpStickCheck: TfrxPreview
     Left = 0
     Top = 0
-    Width = 205
+    Width = 259
     Height = 800
     Align = alClient
     OutlineVisible = False
@@ -26,6 +26,7 @@ object frmStickCheck: TfrmStickCheck
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
+    ExplicitWidth = 205
   end
   object frpStickCheck: TfrxReport
     Version = '6.9.3'
@@ -249,6 +250,62 @@ object frmStickCheck: TfrmStickCheck
           '0000.00.00')
         ParentFont = False
         WordWrap = False
+        VAlign = vaCenter
+      end
+    end
+  end
+  object frpWrite_off: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = fpStickCheck
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = '\\Printserver\tlp 2824'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44757.609931226800000000
+    ReportOptions.LastChange = 45427.699309456020000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 152
+    Top = 46
+    Datasets = <
+      item
+        DataSetName = 'dbLabel'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object labWrite_off: TfrxReportPage
+      PaperWidth = 56.000000000000000000
+      PaperHeight = 40.000000000000000000
+      PaperSize = 256
+      Frame.Typ = []
+      MirrorMode = []
+      object memWrite_off: TfrxMemoView
+        AllowVectorExport = True
+        Left = 15.118120000000000000
+        Top = 11.338590000000000000
+        Width = 188.976500000000000000
+        Height = 124.724490000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -40
+        Font.Name = 'Anonymous Pro'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          #1053#1072
+          #1057#1087#1080#1089#1072#1085#1080#1077)
+        ParentFont = False
         VAlign = vaCenter
       end
     end

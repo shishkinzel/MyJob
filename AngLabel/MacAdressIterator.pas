@@ -207,6 +207,10 @@ type
     mniPrint_DateSeparator2: TMenuItem;
     mniDate_Reset: TMenuItem;
     mniDate_Calendar: TMenuItem;
+    mniServeceSeparator0: TMenuItem;
+    mniServece_Write_off: TMenuItem;
+    mniServece_Write_off_show: TMenuItem;
+    mniServece_Write_off_print: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -275,6 +279,8 @@ type
     procedure mniDate_PrintClick(Sender: TObject);
     procedure dtpMacAdressClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure mniServece_Write_off_showClick(Sender: TObject);
+    procedure mniServece_Write_off_printClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -1899,6 +1905,7 @@ begin
 end;
 
 // BarCode для большой этикетки ***********************************************
+
 procedure TfrmMAC.mniShowBigClick(Sender: TObject);
 begin
 // задаем место открытие окна
@@ -2524,6 +2531,39 @@ begin
     end;
     CanClose := True;
   end;
+end;
+
+// Печать этикетки списания
+
+procedure TfrmMAC.mniServece_Write_off_showClick(Sender: TObject);
+var
+  i: Integer;
+  f_checked: Integer;
+begin
+       // задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+  // гасим и зажигаем необходимые пункты меню
+  mniSh_range.Enabled := False;
+  mniPr_range.Enabled := True;
+
+  // позже реализуем выбор шрифта       &&&&&&&&&&&&&&&&&&&&&&&&??????????????????????
+
+//     f_checked := StrToIntDef(InputBox('Ввод размера шрифта','Введите размер шрифта','14'), 14);
+
+  frmStickCheck.Show;
+  frmStickCheck.frpWrite_off.ShowReport();
+
+end;
+ // Печать
+
+procedure TfrmMAC.mniServece_Write_off_printClick(Sender: TObject);
+begin
+   // задаем принтер по умолчанию
+  frmStickCheck.rpLabService.Report.PrintOptions.Printer := f_print_2824;
+
+  frmStickCheck.frpWrite_off.ShowReport();
+  frmStickCheck.frpWrite_off.Print;
 end;
 
 end.

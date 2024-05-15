@@ -13,6 +13,7 @@ type
     rpLabService: TfrxReport;
     frdbService: TfrxDBDataset;
     rpLabDate: TfrxReport;
+    frpWrite_off: TfrxReport;
   private
     { Private declarations }
   public

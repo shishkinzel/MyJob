@@ -655,6 +655,20 @@ object frmMAC: TfrmMAC
           Caption = #1042#1074#1077#1089#1090#1080' '#1076#1080#1072#1087#1072#1079#1086#1085
           OnClick = mniRangeClick
         end
+        object mniServeceSeparator0: TMenuItem
+          Caption = '-'
+        end
+        object mniServece_Write_off: TMenuItem
+          Caption = #1056#1077#1084#1086#1085#1090'-'#1089#1087#1080#1089#1072#1085#1080#1077
+          object mniServece_Write_off_show: TMenuItem
+            Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+            OnClick = mniServece_Write_off_showClick
+          end
+          object mniServece_Write_off_print: TMenuItem
+            Caption = #1055#1077#1095#1072#1090#1100
+            OnClick = mniServece_Write_off_printClick
+          end
+        end
         object mniServeceSeparator1: TMenuItem
           Caption = '-'
         end
