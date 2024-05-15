@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Angwork_print\te200_924" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44527,8304555903" ReportOptions.Description.Text="" ReportOptions.LastChange="45035,3761678241" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frdbLabSticker" DataSetName="dbLabelSticker"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="PageMAC" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" HGuides.Text="" VGuides.Text="" PaperWidth="40" PaperHeight="12" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="45,35433071" Left="0" Top="18,89765" Width="151,1812" ColumnWidth="0" ColumnGap="0" DataSet="frdbLabSticker" DataSetName="dbLabelSticker" RowCount="0">
+      <TfrxMemoView Name="mac" IndexTag="1" Align="baCenter" AllowVectorExport="True" ShiftMode="smDontShift" Left="0,94493071" Top="0" Width="149,29133858" Height="37,79527559" StretchMode="smMaxHeight" AutoWidth="True" DataField="Расширеный mac-адрес" DataSet="frdbLabSticker" DataSetName="dbLabelSticker" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Roboto Condensed" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[dbLabelSticker.&#34;Расширеный mac-адрес&#34;]"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>

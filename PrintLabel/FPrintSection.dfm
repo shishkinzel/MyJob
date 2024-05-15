@@ -13264,7 +13264,7 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.BiDiMode = bdLeftToRight
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 1'
       EditLabel.ParentBiDiMode = False
-      MaxLength = 25
+      MaxLength = 70
       TabOrder = 0
       Text = 'ap map'
       Visible = False
@@ -13279,7 +13279,7 @@ object frmPrintSection: TfrmPrintSection
       EditLabel.Width = 54
       EditLabel.Height = 13
       EditLabel.Caption = #1055#1086#1079#1080#1094#1080#1103' 2'
-      MaxLength = 25
+      MaxLength = 70
       TabOrder = 1
       Text = 'pyenv activate ap-dev'
       Visible = False
