@@ -15,6 +15,7 @@ type
     rp_43_25: TfrxReport;
     rp_43_25_qr: TfrxReport;
     rp_43_25_shild: TfrxReport;
+    rp_43_25_noMAC: TfrxReport;
   private
     { Private declarations }
   public

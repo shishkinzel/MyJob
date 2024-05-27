@@ -13,7 +13,7 @@ uses
   frmFReportGen_QR in 'frmFReportGen_QR.pas' {frmGen_OR},
   FFRBigLabel in 'FFRBigLabel.pas' {frmFRBigLabel},
   FFRSmallLabel in 'FFRSmallLabel.pas' {frmFRSmallLabel},
-  FShild in 'FShild.pas' {frmShild},
+  FMarking in 'FMarking.pas' {frmMarking},
   FListDevece in 'FListDevece.pas' {frmListDevice},
   FfrAdvacedLabel in 'FfrAdvacedLabel.pas' {frmAdvancedLabel},
   FStickCheck in 'FStickCheck.pas' {frmStickCheck},
@@ -40,7 +40,7 @@ begin
   Application.CreateForm(TfrmGen_OR, frmGen_OR);
   Application.CreateForm(TfrmFRBigLabel, frmFRBigLabel);
   Application.CreateForm(TfrmFRSmallLabel, frmFRSmallLabel);
-  Application.CreateForm(TfrmShild, frmShild);
+  Application.CreateForm(TfrmMarking, frmMarking);
   Application.CreateForm(TfrmAdvancedLabel, frmAdvancedLabel);
   Application.CreateForm(TfrmStickCheck, frmStickCheck);
   Application.CreateForm(TfrmMsg, frmMsg);

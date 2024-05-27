@@ -6,14 +6,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Mask, Vcl.Samples.Spin, dmMacIterator, FShild,
-  frmFastReportMac, FFRBigLabel, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList, Data.DB, Barcode,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, FFRSmallLabel, FListDevece,
-  frmFReportIDandMAC, frmFReportBarCodeLong,  FShowSoft, frmFReportGen_QR,
-  FfrAdvacedLabel, FStickCheck, FFamile_mac, FMessage,
-  FireDAC.Stan.StorageJSON, frmFastReportList, fTest,Vcl.DBCtrls, Vcl.ComCtrls;
-
+  frmFastReportMac, FFRBigLabel, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, System.ImageList, Vcl.ImgList,
+  Data.DB, Barcode, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus,
+  FFRSmallLabel, FListDevece, frmFReportIDandMAC, frmFReportBarCodeLong,
+  FShowSoft, frmFReportGen_QR, FfrAdvacedLabel, FStickCheck, FFamile_mac,
+  FMessage, Vcl.ComCtrls, FMarking, FireDAC.Stan.StorageJSON, frmFastReportList,
+  fTest, Vcl.DBCtrls;
 
 type
   TfrmMAC = class(TForm)
@@ -188,7 +188,7 @@ type
     mni_Shild_43_25_908_small: TMenuItem;
     mni_sh_shild_43_25_small: TMenuItem;
     mni_Pr_shild_43_25_small: TMenuItem;
-    mniSeparator0: TMenuItem;
+    mniMarking_Separator: TMenuItem;
     mniService: TMenuItem;
     mniRange: TMenuItem;
     mniSh_range: TMenuItem;
@@ -211,6 +211,19 @@ type
     mniServece_Write_off: TMenuItem;
     mniServece_Write_off_show: TMenuItem;
     mniServece_Write_off_print: TMenuItem;
+    mniNStick_Separator: TMenuItem;
+    mniMarking_All: TMenuItem;
+    mniMarking_lab_58x40: TMenuItem;
+    mniMarking_lab_40x12: TMenuItem;
+    mniMarking_lab_43x25: TMenuItem;
+    mniMarking_show_58x40: TMenuItem;
+    mniMarking_print_58x40: TMenuItem;
+    mniMarking_show_40x12: TMenuItem;
+    mniMarking_print_40x12: TMenuItem;
+    mniMarking_show_43x25: TMenuItem;
+    mniMarking_print_43x25: TMenuItem;
+    mniMarking_Separator2: TMenuItem;
+    mniMarking_Reset: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -281,6 +294,10 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure mniServece_Write_off_showClick(Sender: TObject);
     procedure mniServece_Write_off_printClick(Sender: TObject);
+    procedure mni_sh_shild_43_25_smallClick(Sender: TObject);
+    procedure mni_Pr_shild_43_25_smallClick(Sender: TObject);
+    procedure mniMarking_show_58x40Click(Sender: TObject);
+    procedure mniMarking_print_58x40Click(Sender: TObject);
   private
     { Private declarations }
     var
@@ -291,25 +308,25 @@ type
       idGroup: Integer;
       idNumber: Integer;             // начальный номер устройства
       fileId: TextFile;              // для хранения данные двух утилит
-      fileBarCode : TextFile;        // для хранения данных формирования штрих-кода
-      fileBarCodeLong : TextFile;    // для хранения данных формирования длинного штрих-кода
+      fileBarCode: TextFile;        // для хранения данных формирования штрих-кода
+      fileBarCodeLong: TextFile;    // для хранения данных формирования длинного штрих-кода
       utilityMAC: Boolean;           // флаг утилиты false - Печать МАС- адресов
       fnameDevice: string;           // наименование устройства
       ffirstOrderBit: string;        // начальный МАС-адрес для итерации
       fstepIterator: string;         // шаг итерации МАС-адреса
       ffirstIdDevice: string;        // начальный серийный номер комплекта
       fquantityDevice: string;       // количество устройств
-      stepPrintBarCode : Integer;     // шаг печати штрих-кода
-      numberDeviceHigh : string;     // три старших разряда серийного номера
-      fnumberDeviceHigh :  string;   // три старших разряда серийного номера с пробелами между триадами
-      fbitBarCode : string;           // для печати mac в barcode
+      stepPrintBarCode: Integer;     // шаг печати штрих-кода
+      numberDeviceHigh: string;     // три старших разряда серийного номера
+      fnumberDeviceHigh: string;   // три старших разряда серийного номера с пробелами между триадами
+      fbitBarCode: string;           // для печати mac в barcode
       ffirstIdDeviceBarCode: string; // для печати id в barcode
       macSize: Boolean;              // флаг для печати этикеток увеличенного mac-адреса
       f_sticker: Boolean;            // флаг для печати стикера верификации
-      f_FirstShowForm : Boolean;     // флаг показа формы при открытии
-      f_NoShowAddres : Boolean;      // флаг отслеживания последнего адреса
+      f_FirstShowForm: Boolean;     // флаг показа формы при открытии
+      f_NoShowAddres: Boolean;      // флаг отслеживания последнего адреса
       // защита программы
-      f_access : string;
+      f_access: string;
 
   public
   { Public declarations }
@@ -319,7 +336,7 @@ type
       nameFileBarCodeLong = 'bar_code_long.txt';
 
       // сообщение в табло ошибка
-      f_err = 'Внимание!! Ошибка!!' + #10#13 + 'Необходимо обновить динамические библиотеки!!!' +  #10#13 + 'Обратитесь к разработчику';
+      f_err = 'Внимание!! Ошибка!!' + #10#13 + 'Необходимо обновить динамические библиотеки!!!' + #10#13 + 'Обратитесь к разработчику';
     var
       barCodeStream: TMemoryStream;
       idMAC: array[0..2] of Byte;
@@ -333,8 +350,8 @@ type
       f_print_576: string;
 
 // переменные времени валидации
-      f_date_valid : string;
-      f_time_valid : string;
+      f_date_valid: string;
+      f_time_valid: string;
 
 // питание устройства
       f_power: string;       // печать характеристик источника питания устройства
@@ -342,11 +359,10 @@ type
       f_syte: TBitmap;
       f_pow: TBitmap;
 
-      f_logo : Boolean;   // флаг печати логотипа
+      f_logo: Boolean;   // флаг печати логотипа
   end;
 
 const
-
   path_mac = '\\userservice\d of ServeceUser\DB\storage_mac.ini';    // путь до файла конфигурации для mac адресов
 //  f_storage_mac =  'storage_mac.ini';
   // надписи семейств изделия
@@ -364,6 +380,7 @@ const
   // Сообщение
   cs_MsgShowFamile = 'Показываем окно семейства устройств!';
   cs_MsgNoShowFamile = 'Не Загружаем mac-адреса';
+
 var
   frmMAC: TfrmMAC;
   f_iniPath: string;    // путь до файла конфигурации
@@ -401,6 +418,7 @@ uses
   IdGlobal, frxClass, unit_ini, storage_mac_ini, IniFiles;
 {$R *.dfm}
   // создание формы начальные настройки
+
 procedure TfrmMAC.FormCreate(Sender: TObject);
 var
   f_ini, f_ini_mac: TIniFile;
@@ -465,10 +483,10 @@ begin
   f_date_valid := IniOptions_mac.f_date_valid;
   f_time_valid := IniOptions_mac.f_time_valid;
 // читаем времени изменения по категориям
-   f_date_atlanta := IniOptions_mac.f_date_atlanta;
-   f_date_topaz := IniOptions_mac.f_date_topaz;
-   f_date_ksk := IniOptions_mac.f_date_ksk;
-   f_date_corundum := IniOptions_mac.f_date_corundum;
+  f_date_atlanta := IniOptions_mac.f_date_atlanta;
+  f_date_topaz := IniOptions_mac.f_date_topaz;
+  f_date_ksk := IniOptions_mac.f_date_ksk;
+  f_date_corundum := IniOptions_mac.f_date_corundum;
  // !!!!!!!!!!!!!
  {
   if f_access <> '@Zel05101966' then
@@ -487,6 +505,7 @@ begin
 // назначаем переменной  f_power - запись по умолчанию
   f_power := 'Значение ИП не выбранно';
 end;
+
 procedure TfrmMAC.FormShow(Sender: TObject);
 var
   f_question: Word;
@@ -502,34 +521,34 @@ begin
           chkAdvanceSetting.Checked := True;
           // запускаем диалог выбора код семейства mac-адреса
 //          ShowMessage('Показываем окно семейства устройств');
-            MyFloatingMessage(0, frmMAC);
+          MyFloatingMessage(0, frmMAC);
           // 'Показываем окно семейства устройств'
           frmFamily_mac := TfrmFamily_mac.Create(nil);
           frmFamily_mac.ShowModal;
           if ModalResult = mrOk then
           begin
-          medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
-          medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
-          medtBit_6.Text := Trim(f_LastMAC);
+            medtBit_4.Text := Trim(Fetch(f_LastMAC, ':'));
+            medtBit_5.Text := Trim(Fetch(f_LastMAC, ':'));
+            medtBit_6.Text := Trim(f_LastMAC);
 //          ShowMessage(cs_Title_famile + f_VarFamile);
             MyFloatingMessage(2, frmMAC);
-          f_NoShowAddres := False;
-          medtBit_4.Enabled := False;
-          medtBit_5.Enabled := False;
-          medtBit_6.Enabled := False;
-          frmFamily_mac.Free;
-        end
-        else
-        begin
-           f_FirstShowForm := False;
-           frmFamily_mac.Free;
-         MyFloatingMessage(1, frmMAC);
-          Exit
-        end;
+            f_NoShowAddres := False;
+            medtBit_4.Enabled := False;
+            medtBit_5.Enabled := False;
+            medtBit_6.Enabled := False;
+            frmFamily_mac.Free;
+          end
+          else
+          begin
+            f_FirstShowForm := False;
+            frmFamily_mac.Free;
+            MyFloatingMessage(1, frmMAC);
+            Exit
+          end;
         end;
       IDNO:
         begin
-        MyFloatingMessage(1, frmMAC);
+          MyFloatingMessage(1, frmMAC);
         end;
     end;
     f_FirstShowForm := False;
@@ -581,10 +600,10 @@ begin
   // переименовываем надписи
     lblTitle.Caption := 'Печать этикетки';
     // изменяем размер окна модуля
-     edtDevice.Left := 230;
-     edtDevice.Width := 460;
-     lblDevice.Left := 10;
-     lblSGP.Visible := True;
+    edtDevice.Left := 230;
+    edtDevice.Width := 460;
+    lblDevice.Left := 10;
+    lblSGP.Visible := True;
   // гасим ненужные кнопки
     btnStart.Enabled := False;
     lblMAC.Caption := 'Название модуля:';
@@ -601,7 +620,7 @@ begin
       seStepIterator.Enabled := True;
     end
     else
-     begin
+    begin
   // деактивируем группу mac adress
       lblHighOrderBit.Enabled := False;
       medtBit_4.Enabled := False;
@@ -610,7 +629,7 @@ begin
 
       lblStepIterator.Enabled := False;
       seStepIterator.Enabled := False;
-     end;
+    end;
 
 
   // гасим печать mac -адресов
@@ -660,7 +679,7 @@ begin
     mniGen_QR.Visible := True;
     mniBarCodeLong.Visible := True;
 
-       mniQRIDMAC.Visible := True;    // добавил после доработки
+    mniQRIDMAC.Visible := True;    // добавил после доработки
   end;
 end;
 
@@ -668,7 +687,7 @@ end;
 procedure TfrmMAC.mniIteratorClick(Sender: TObject);
 begin
  // меняем название  "Печать_МАС_924" на "Печать"
-   mnifrPrint.Caption := 'Печать';
+  mnifrPrint.Caption := 'Печать';
 
 // включаем checkBox Печать этикетки
   chkPrintTab.Enabled := True;
@@ -737,12 +756,12 @@ end;
 procedure TfrmMAC.btnApplyClick(Sender: TObject);
 var
   i, stepMac, beginNumberDevice, range: Integer;
-  group_st : string;   // переменная для модификации партии
+  group_st: string;   // переменная для модификации партии
   s, numberS, rangeLast: string;
   s1, tmp, tmp1, tmp2: string;
   bit0, bit1, bit2: string;
   img: BITMAP;
-  f_Last_macAddress : string;
+  f_Last_macAddress: string;
 begin
 // установить шрифт отчета печати mac-адреса по умолчанию
   macSize := False;
@@ -800,7 +819,7 @@ begin
   ffirstIdDevice := medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text + ' ' + medtNumber.Text; // начальный серийный номер комплекта
   fquantityDevice := seQuantity.Text;    // количество устройств
   numberDeviceHigh := medtModule.Text + medtDate.Text + medtGroup.Text;  // три старших разряда серийного номера
-  fnumberDeviceHigh := medtModule.Text + ' ' + medtDate.Text  + ' ' + medtGroup.Text;  // три старших разряда серийного номера с пробелами между триадами
+  fnumberDeviceHigh := medtModule.Text + ' ' + medtDate.Text + ' ' + medtGroup.Text;  // три старших разряда серийного номера с пробелами между триадами
 
 //*******************************************************
   idModule := StrToIntDef(medtModule.Text, 0);
@@ -976,17 +995,17 @@ begin
       Inc(beginNumberDevice);
     end;
 // закрытие файла
-      CloseFile(fileId);
+    CloseFile(fileId);
     Reset(fileId);
     fdmtbLabel.Open;
     fdmtbLabel.Table.Clear;
 
     while (not EOF(fileId)) do
     begin
-    fdmtbLabel.Append;
-    Readln(fileId, s1);
-    tmp := Trim(Fetch(s1, '|'));
-    tmp := Trim(Fetch(s1, '|'));     // s1 - расширенный номер с пробелами
+      fdmtbLabel.Append;
+      Readln(fileId, s1);
+      tmp := Trim(Fetch(s1, '|'));
+      tmp := Trim(Fetch(s1, '|'));     // s1 - расширенный номер с пробелами
 // создаем поток и трансоформируем в barcode
       brcdMAC.InputText := tmp;
       brcdMAC.Scale := 1;
@@ -1009,15 +1028,15 @@ begin
 //      fdmtbLabel.FieldByName('snbig').AsString := s1;
 
       fdmtbLabel.Post;
-  end;
+    end;
     CloseFile(fileId);
 // разрушение потока
     barCodeStream.Free;
     brcdMAC.Scale := 1;
 // работа с расширенными настройками ******************************************
-   if chkAdvanceSetting.Checked  then
-   begin
-     Rewrite(fileId);
+    if chkAdvanceSetting.Checked then
+    begin
+      Rewrite(fileId);
       for i := 1 to quantity do
       begin
         s := DataModuleMacIterator.ArrayToStringShort(idMAC);
@@ -1043,7 +1062,7 @@ begin
         stepMac := 1;
         range := stepIteration;
         Trim(Fetch(s, '68:EB:C5:'));                         // Внимание MAC-адрес
-        f_Last_macAddress :=  s;
+        f_Last_macAddress := s;
         Writeln(fileId);
       end;
    // закрытие файла
@@ -1073,7 +1092,7 @@ begin
 //  ShowMessage(f_Last_macAddress);
 // Сдесь нужно ловить последний mac-адрес
   { TODO 1 -o12 -c12 : Оп{ TODO 1 -o12 -c12 : Описать функцию вычисление адреса, и возвращение последнего адреса плюс один в string }
-   f_LastMAC := DataModuleMacIterator.LastMAC_AddOne(f_Last_macAddress, stepIteration);
+  f_LastMAC := DataModuleMacIterator.LastMAC_AddOne(f_Last_macAddress, stepIteration);
 //   ShowMessage(f_LastMAC);
 end;
 
@@ -1103,7 +1122,6 @@ begin
         edtDevice.SetFocus
       else
         medtBit_4.SetFocus;
-
   // зажигаем пунк меню "Просмотр отчета" и гасим "Экспорт отчета" и "Печать"
       mnifrView.Enabled := True;
       mniExport.Enabled := False;
@@ -1150,14 +1168,13 @@ begin
       ffirstIdDevice := '';
       seQuantity.Text := '1';    // количество устройств
       numberDeviceHigh := '';  // три старших разряда серийного номера
-      fnumberDeviceHigh :='';  // три старших разряда серийного номера с пробелами между триадами
+      fnumberDeviceHigh := '';  // три старших разряда серийного номера с пробелами между триадами
 
 //*******************************************************
-  idModule := StrToIntDef(medtModule.Text, 0);
-  idDate := StrToIntDef(medtDate.Text, 0);
-  idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
-  idNumber := StrToIntDef(medtNumber.Text, 0);  // номер по порядку
-
+      idModule := StrToIntDef(medtModule.Text, 0);
+      idDate := StrToIntDef(medtDate.Text, 0);
+      idGroup := StrToIntDef(medtGroup.Text, 0);    // модификационная партия
+      idNumber := StrToIntDef(medtNumber.Text, 0);  // номер по порядку
 
 // для серийного номера
       if utilityMAC then
@@ -1209,12 +1226,15 @@ begin
       frmShild.Close;
       frmFRList.Close;
       frmStickCheck.Close;
+
 // очистка отчетов
       frmFRBigLabel.rpBigLabel.PreviewPages.Clear;
       frmFRSmallLabel.rpSmallLabel.PreviewPages.Clear;
       frmShild.rpShild.PreviewPages.Clear;
       frmFRList.frxrprtList.PreviewPages.Clear;
       frmStickCheck.frpStickCheck.PreviewPages.Clear;
+      frmFRBigLabel.rp_43_25_noMAC.PreviewPages.Clear;
+
 // гасим окна печати
       mniPrintBig.Enabled := False;
       mniPrintSmall.Enabled := False;
@@ -1222,6 +1242,7 @@ begin
       mni_Pr_43_25.Enabled := False;
       mni_Pr_shild_43_25.Enabled := False;
       mni_PrintSmall_new.Enabled := False;
+      mni_Pr_shild_43_25_small.Enabled := False;
 
 // зажигаем окна просмотра
       mniShowBig.Enabled := True;
@@ -1230,6 +1251,7 @@ begin
       mni_sh_43_25.Enabled := True;
       mni_sh_shild_43_25.Enabled := True;
       mni_ShowSmall_new.Enabled := True;
+      mni_sh_shild_43_25_small.Enabled := True;
 
 //   сбрасываем окна заполнения
       medtModule.Text := '000';
@@ -1637,6 +1659,7 @@ begin
   frmShowSoft.ShowModal;
 end;
 // генератор qr-кода
+
 procedure TfrmMAC.mniGen_QR_ApplyClick(Sender: TObject);
 var
   i: Integer;
@@ -1705,10 +1728,11 @@ begin
 end;
 /// Смотреть!!!!!!!
 // предосмотр отчета генератора QR-кода
+
 procedure TfrmMAC.mniGen_QR_ShowPrevClick(Sender: TObject);
 begin
 // заносим в поле mGen_qr_nameDevice -наименование устройства
-   (frmGen_OR.frR_Gen_QR.FindObject('mGen_qr_nameDevice') as TFrxMemoView).Text := edtDevice.text;
+  (frmGen_OR.frR_Gen_QR.FindObject('mGen_qr_nameDevice') as TFrxMemoView).Text := edtDevice.text;
 
 // гасим и зажигаем необходимые пункты меню
   mniShow_OR.Enabled := False;
@@ -1745,7 +1769,7 @@ begin
   frmGen_OR.frR_Gen_QR.PreviewPages.Clear;
 
 // гасим и зажигаем необходимые пункты меню
-    mniShow_OR.Enabled := True;
+  mniShow_OR.Enabled := True;
 
 // сбрасываем поле  frmShowSoft.fTextSoft
   frmShowSoft.fTextSoft := '';
@@ -1754,6 +1778,7 @@ end;
 // окончание блока генератора QR-кода **************************************************************
 
 // обработка кнопок главного меню  *****************************************************************
+
 procedure TfrmMAC.mnifrPrintClick(Sender: TObject);
 begin
 
@@ -1772,7 +1797,6 @@ begin
     frmFRList.frxrprtList.Print;
   end;
 end;
-
 
 procedure TfrmMAC.pdf1Click(Sender: TObject);
 begin
@@ -1820,7 +1844,6 @@ begin
   frmFR_IDandMAC.reportIDandMAC.Print;
 end;
 
-
 procedure TfrmMAC.mniPreviewLongClick(Sender: TObject);
 begin
   frmFRBarCodeLong.Show;
@@ -1828,8 +1851,8 @@ begin
   frmFRBarCodeLong.frPrevBarCodeLong.Clear;
 //   (frmFRSmallLabel.rpSmallLabel.FindObject('MTitle') as TFrxMemoView).Text := edtmod.text;
 // добавляем в отчет количество устройств
- (frmFRBarCodeLong.reportBarCodeLong.FindObject('LabelCountDevice') as TFrxMemoView).Text := quantity.ToString;
-  (frmFRBarCodeLong.reportBarCodeLong.FindObject('memStepIter') as TFrxMemoView).Text :=  stepIteration.ToString;
+  (frmFRBarCodeLong.reportBarCodeLong.FindObject('LabelCountDevice') as TFrxMemoView).Text := quantity.ToString;
+  (frmFRBarCodeLong.reportBarCodeLong.FindObject('memStepIter') as TFrxMemoView).Text := stepIteration.ToString;
   frmFRBarCodeLong.reportBarCodeLong.ShowReport();
 end;
 
@@ -1949,10 +1972,11 @@ begin
 
 end;
 // новая этикетка размер 43х25 *************************************************************
+
 procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
 var
-f_memPower : string;
-f_qr : string;
+  f_memPower: string;
+  f_qr: string;
 begin
   f_qr := 'www.angtel.ru';
 // задаем место открытие окна
@@ -2037,8 +2061,8 @@ end;
 
 procedure TfrmMAC.mni_sh_shild_43_25Click(Sender: TObject);
 var
-f_nameDevice : string;
-f_font_size : Integer;
+  f_nameDevice: string;
+  f_font_size: Integer;
 begin
 // задаем место открытие окна
   frmFRBigLabel.Top := 5;
@@ -2066,8 +2090,7 @@ begin
   mni_Pr_shild_43_25.Enabled := True;
 end;
 
-
- // печать
+// печать
 
 procedure TfrmMAC.mni_Pr_shild_43_25Click(Sender: TObject);
 begin
@@ -2076,7 +2099,6 @@ begin
   frmFRBigLabel.rp_43_25_shild.ShowReport();
   frmFRBigLabel.rp_43_25_shild.Print;
 end;
-
 
 
 // конец блока размер 43х25 ********************************************************************
@@ -2180,7 +2202,6 @@ begin
   mniExport.Enabled := True;
   mnifrPrint.Enabled := True;
 
-
   if utilityMAC then       // утилита mac адресов отключена true
        // утилита mac адресов отключена true
   begin
@@ -2236,12 +2257,12 @@ begin
 
 end;
 // печать стикера верификации
+
 procedure TfrmMAC.mniNSticker_printerClick(Sender: TObject);
 begin
 
   // задаем принтер по умолчанию
   frmStickCheck.frpStickCheck.Report.PrintOptions.Printer := f_print_576;
-
 
   frmStickCheck.frpStickCheck.ShowReport();
   frmStickCheck.frpStickCheck.Print;
@@ -2282,6 +2303,42 @@ begin
   end;
 //  frmTestGrid.Show;
 end;
+//  печать этикетки "На списание"  *****************************************************************
+
+procedure TfrmMAC.mniServece_Write_off_showClick(Sender: TObject);
+var
+  i: Integer;
+  f_checked: Integer;
+begin
+       // задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+  // гасим и зажигаем необходимые пункты меню
+  mniSh_range.Enabled := False;
+  mniPr_range.Enabled := True;
+
+  // позже реализуем выбор шрифта       &&&&&&&&&&&&&&&&&&&&&&&&??????????????????????
+
+//     f_checked := StrToIntDef(InputBox('Ввод размера шрифта','Введите размер шрифта','14'), 14);
+
+  frmStickCheck.Show;
+  frmStickCheck.frpWrite_off.ShowReport();
+
+end;
+ // Печать
+
+procedure TfrmMAC.mniServece_Write_off_printClick(Sender: TObject);
+begin
+   // задаем принтер по умолчанию
+  frmStickCheck.rpLabService.Report.PrintOptions.Printer := f_print_2824;
+
+  frmStickCheck.frpWrite_off.ShowReport();
+  frmStickCheck.frpWrite_off.Print;
+end;
+
+
+
+//**************************************************************************************************
 // просмотр
 
 procedure TfrmMAC.mniSh_rangeClick(Sender: TObject);
@@ -2304,6 +2361,7 @@ begin
 
 end;
 // печать
+
 procedure TfrmMAC.mniPr_rangeClick(Sender: TObject);
 begin
   // задаем принтер по умолчанию
@@ -2322,23 +2380,24 @@ begin
   mniPr_range.Enabled := False;
   mniResetRange.Enabled := False;
  // дата
-    dtpMacAdress.Visible := False;
+  dtpMacAdress.Visible := False;
 
-    mniDate_Apply.Enabled := True;
-    mniDate_Show.Enabled := False;
-    mniDate_Print.Enabled := False;
-    mniDate_Calendar.Enabled := True;
+  mniDate_Apply.Enabled := True;
+  mniDate_Show.Enabled := False;
+  mniDate_Print.Enabled := False;
+  mniDate_Calendar.Enabled := True;
 
 
  // закрытие отчетов
-    frmStickCheck.Close;
+  frmStickCheck.Close;
  // очистка отчетов
-    frmStickCheck.rpLabService.PreviewPages.Clear;
+  frmStickCheck.rpLabService.PreviewPages.Clear;
 
 end;
 // конец блока печати номера ремонта ***************************************************************
 //**************************************************************************************************
 // начало блока печати стикера даты
+
 procedure TfrmMAC.mniDate_CalendarClick(Sender: TObject);
 begin
   dtpMacAdress.Visible := True;
@@ -2355,10 +2414,11 @@ begin
   mniDate_Print.Enabled := True;
 end;
 // show
+
 procedure TfrmMAC.mniDate_ShowClick(Sender: TObject);
 var
   f_checked: Integer;
-  f_date : string;
+  f_date: string;
 begin
 // задаем место открытие окна
   frmStickCheck.Top := 5;
@@ -2366,11 +2426,10 @@ begin
 
   f_date := DateToStr(dtpMacAdress.Date);
 
-    f_date := DataModuleMacIterator.ReverseDate(f_date);
+  f_date := DataModuleMacIterator.ReverseDate(f_date);
 
   if f_date = '' then
     f_date := '0000.00.00';
-
 
   f_checked := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 16 до 22', '18'), 18);
 
@@ -2395,6 +2454,7 @@ begin
   frmStickCheck.rpLabDate.Print;
 end;
 //  выбор даты в календаре
+
 procedure TfrmMAC.dtpMacAdressClick(Sender: TObject);
 begin
   mniDate_Calendar.Enabled := False;
@@ -2410,18 +2470,18 @@ procedure TfrmMAC.mniLbShow_58_60Click(Sender: TObject);
 begin
   if not (Sender is TMenuItem) then
     Exit;
-  case (Sender as TMenuItem).Tag  of
+  case (Sender as TMenuItem).Tag of
     0:
       begin
-          ShowMessage('открыт 58х60');
+        ShowMessage('открыт 58х60');
       end;
     1:
       begin
-           ShowMessage('открыт 100х72');
+        ShowMessage('открыт 100х72');
       end;
     2:
       begin
-           ShowMessage('открыт 100х150');
+        ShowMessage('открыт 100х150');
       end;
 
   end;
@@ -2437,7 +2497,6 @@ begin
   frmListDevice := TfrmListDevice.Create(nil);
   frmListDevice.Show;
 end;
-
 
 // процедура закрытия формы
 procedure TfrmMAC.mniExitClick(Sender: TObject);
@@ -2533,41 +2592,137 @@ begin
   end;
 end;
 
-// Печать этикетки списания
 
-procedure TfrmMAC.mniServece_Write_off_showClick(Sender: TObject);
+// шильд без mac-адреса
+
+procedure TfrmMAC.mni_sh_shild_43_25_smallClick(Sender: TObject);
 var
-  i: Integer;
-  f_checked: Integer;
+  f_nameDevice: string;
+  f_font_size: Integer;
 begin
-       // задаем место открытие окна
-  frmStickCheck.Top := 5;
-  frmStickCheck.Left := 5;
-  // гасим и зажигаем необходимые пункты меню
-  mniSh_range.Enabled := False;
-  mniPr_range.Enabled := True;
+// задаем место открытие окна
+  frmFRBigLabel.Top := 5;
+  frmFRBigLabel.Left := 5;
 
-  // позже реализуем выбор шрифта       &&&&&&&&&&&&&&&&&&&&&&&&??????????????????????
+// запрашиваем размер шрифта для ввода наименования устройства
+  f_font_size := StrToIntDef(InputBox('Размер печати шрифта устройства', 'Введите размер от 6 до 12', '8'), 10);
+// проверяем корректность ввода шрифта
+  if f_font_size in [6..12] then
+    (frmFRBigLabel.rp_43_25_noMAC.FindObject('memNameDevice') as TFrxMemoView).Font.Size := f_font_size
+  else
+    (frmFRBigLabel.rp_43_25_noMAC.FindObject('memNameDevice') as TFrxMemoView).Font.Size := 8;
+  f_nameDevice := edtDevice.Text; // полное название устройства
 
-//     f_checked := StrToIntDef(InputBox('Ввод размера шрифта','Введите размер шрифта','14'), 14);
+ // присваеваем переменной memNameDevice  полное название устройства
+  (frmFRBigLabel.rp_43_25_noMAC.FindObject('memNameDevice') as TFrxMemoView).Text := f_nameDevice;
 
-  frmStickCheck.Show;
-  frmStickCheck.frpWrite_off.ShowReport();
+ // выводим на экран отчет
+  frmFRBigLabel.Show;
+  Self.SetFocus;
+  frmFRBigLabel.rp_43_25_noMAC.ShowReport();
 
+ // гасим и зажигаем нужные пункты меню
+  mni_sh_shild_43_25_small.Enabled := False;
+  mni_Pr_shild_43_25_small.Enabled := True;
 end;
- // Печать
 
-procedure TfrmMAC.mniServece_Write_off_printClick(Sender: TObject);
+// печать
+procedure TfrmMAC.mni_Pr_shild_43_25_smallClick(Sender: TObject);
 begin
    // задаем принтер по умолчанию
-  frmStickCheck.rpLabService.Report.PrintOptions.Printer := f_print_2824;
+  frmFRBigLabel.rp_43_25_noMAC.Report.PrintOptions.Printer := f_print_908;
+  frmFRBigLabel.rp_43_25_noMAC.ShowReport();
+  frmFRBigLabel.rp_43_25_noMAC.Print;
+end;
 
-  frmStickCheck.frpWrite_off.ShowReport();
-  frmStickCheck.frpWrite_off.Print;
+
+// печать этикетки маркировки изделия
+// просмотр
+
+procedure TfrmMAC.mniMarking_show_58x40Click(Sender: TObject);
+var
+  i: Integer;
+  f_size: Integer;
+  f_text : string;
+begin
+  f_size := 8;
+  if not (Sender is TMenuItem) then
+    exit;
+
+ // задаем место открытие окна
+  frmMarking.Top := 5;
+  frmMarking.Left := 5;
+  frmMarking.Show;
+  Self.SetFocus;
+  case (Sender as TMenuItem).Tag of
+    5840:
+      begin
+        ShowMessage('показываем 5840');
+      // гасим и зажигаем пункты на главном меню
+        mniMarking_show_58x40.Enabled := False;
+        mniMarking_print_58x40.Enabled := True;
+      // запрашиваем размер шрифта по умолчанию 8
+        f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер от 6 до 32', '8'), 8);
+
+        if f_size in [6..32] then
+          ShowMessage('Размер шрифта: ' + IntToStr(f_size))
+        else
+          f_size := 8;
+
+      // ввод необходимого текста
+        f_text := (InputBox('Ввод текста для печати', 'Введите надпись', 'Этикетка пустая'));
+
+      // заполняем отчет
+        (frmMarking.rp_lab_58x40.FindObject('memTitle') as TfrxMemoView).Font.Size := f_size;
+        (frmMarking.rp_lab_58x40.FindObject('memTitle') as TfrxMemoView).Text := f_text;
+
+      end;
+
+    4325:
+      begin
+        ShowMessage('показываем 4325');
+      // гасим и зажигаем пункты на главном меню
+        mniMarking_show_43x25.Enabled := False;
+        mniMarking_print_43x25.Enabled := True;
+      end;
+
+    4012:
+      begin
+        ShowMessage('показываем 4012');
+      // гасим и зажигаем пункты на главном меню
+        mniMarking_show_40x12.Enabled := False;
+        mniMarking_print_40x12.Enabled := True;
+      end;
+
+  end;
+end;
+// печать
+
+procedure TfrmMAC.mniMarking_print_58x40Click(Sender: TObject);
+var
+  i: Integer;
+begin
+  if not (Sender is TMenuItem) then
+    exit;
+
+  case (Sender as TMenuItem).Tag of
+    5840:
+      begin
+        ShowMessage('печатаем 5840');
+      end;
+
+    4325:
+      begin
+        ShowMessage('печатаем 4325');
+      end;
+
+    4012:
+      begin
+        ShowMessage('печатаем 4012');
+      end;
+
+  end;
 end;
 
 end.
-
-
-
 

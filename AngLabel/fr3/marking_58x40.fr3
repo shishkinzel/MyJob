@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Printserver\tlp 2824" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44757,6099312268" ReportOptions.Description.Text="" ReportOptions.LastChange="45439,5344906829" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSetName="dbLabel"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="lab_58x40" HGuides.Text="" VGuides.Text="" PaperWidth="56" PaperHeight="40" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxMemoView Name="memTitle" Align="baClient" AllowVectorExport="True" Left="0" Top="0" Width="211,65368" Height="151,1812" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Anonymous Pro" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="надпись"/>
+  </TfrxReportPage>
+</TfrxReport>
