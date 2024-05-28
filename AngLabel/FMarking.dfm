@@ -26,15 +26,6 @@ object frmMarking: TfrmMarking
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitWidth = 242
-  end
-  object db_Shild: TfrxDBDataset
-    UserName = 'db_Shild'
-    CloseDataSource = False
-    DataSet = frmMAC.fdmtbLabel
-    BCDToCurrency = False
-    Left = 8
-    Top = 134
   end
   object rp_lab_58x40: TfrxReport
     Version = '6.9.3'
@@ -90,7 +81,7 @@ object frmMarking: TfrmMarking
       end
     end
   end
-  object rp_lab_43_25: TfrxReport
+  object rp_lab_43x25: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -148,7 +139,7 @@ object frmMarking: TfrmMarking
       end
     end
   end
-  object rp_lab_40_12: TfrxReport
+  object rp_lab_40x12: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -157,12 +148,8 @@ object frmMarking: TfrmMarking
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = '\\Printserver\te200_924'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 44527.830455590300000000
-    ReportOptions.LastChange = 45439.535916469900000000
-    ReportOptions.VersionBuild = '1'
-    ReportOptions.VersionMajor = '0'
-    ReportOptions.VersionMinor = '0'
-    ReportOptions.VersionRelease = '1'
+    ReportOptions.CreateDate = 45440.413852685180000000
+    ReportOptions.LastChange = 45440.416816006950000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -171,10 +158,7 @@ object frmMarking: TfrmMarking
       'end.')
     Left = 200
     Top = 206
-    Datasets = <
-      item
-        DataSetName = 'dbLabelSticker'
-      end>
+    Datasets = <>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
@@ -182,21 +166,20 @@ object frmMarking: TfrmMarking
       Width = 1000.000000000000000000
     end
     object lab_40x12: TfrxReportPage
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -12
-      Font.Name = 'Arial'
-      Font.Style = []
       PaperWidth = 40.000000000000000000
       PaperHeight = 12.000000000000000000
       PaperSize = 256
+      LeftMargin = 1.000000000000000000
+      RightMargin = 1.000000000000000000
+      TopMargin = 1.000000000000000000
+      BottomMargin = 1.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object memTitle: TfrxMemoView
         Align = baClient
         AllowVectorExport = True
-        Width = 151.181200000000000000
-        Height = 45.354360000000000000
+        Width = 143.622140000000000000
+        Height = 37.795300000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11

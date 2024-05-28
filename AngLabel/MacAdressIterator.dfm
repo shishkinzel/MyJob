@@ -646,7 +646,7 @@ object frmMAC: TfrmMAC
         end
         object mniMarking_Reset: TMenuItem
           Caption = #1057#1073#1088#1086#1089
-          OnClick = btnRestartClick
+          OnClick = mniMarking_ResetClick
         end
       end
       object mniNStick_Separator: TMenuItem

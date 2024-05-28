@@ -298,6 +298,7 @@ type
     procedure mni_Pr_shild_43_25_smallClick(Sender: TObject);
     procedure mniMarking_show_58x40Click(Sender: TObject);
     procedure mniMarking_print_58x40Click(Sender: TObject);
+    procedure mniMarking_ResetClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -2649,15 +2650,9 @@ begin
   if not (Sender is TMenuItem) then
     exit;
 
- // задаем место открытие окна
-  frmMarking.Top := 5;
-  frmMarking.Left := 5;
-  frmMarking.Show;
-  Self.SetFocus;
   case (Sender as TMenuItem).Tag of
     5840:
       begin
-        ShowMessage('показываем 5840');
       // гасим и зажигаем пункты на главном меню
         mniMarking_show_58x40.Enabled := False;
         mniMarking_print_58x40.Enabled := True;
@@ -2676,25 +2671,69 @@ begin
         (frmMarking.rp_lab_58x40.FindObject('memTitle') as TfrxMemoView).Font.Size := f_size;
         (frmMarking.rp_lab_58x40.FindObject('memTitle') as TfrxMemoView).Text := f_text;
 
+      // выводим отчет
+        frmMarking.rp_lab_58x40.ShowReport();
+
       end;
 
     4325:
       begin
-        ShowMessage('показываем 4325');
       // гасим и зажигаем пункты на главном меню
         mniMarking_show_43x25.Enabled := False;
         mniMarking_print_43x25.Enabled := True;
+
+      // запрашиваем размер шрифта по умолчанию 8
+        f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер от 6 до 24', '8'), 8);
+
+        if f_size in [6..24] then
+          ShowMessage('Размер шрифта: ' + IntToStr(f_size))
+        else
+          f_size := 8;
+
+      // ввод необходимого текста
+        f_text := (InputBox('Ввод текста для печати', 'Введите надпись', 'Этикетка пустая'));
+
+      // заполняем отчет
+        (frmMarking.rp_lab_43x25.FindObject('memTitle') as TfrxMemoView).Font.Size := f_size;
+        (frmMarking.rp_lab_43x25.FindObject('memTitle') as TfrxMemoView).Text := f_text;
+
+      // выводим отчет
+        frmMarking.rp_lab_43x25.ShowReport();
       end;
 
     4012:
       begin
-        ShowMessage('показываем 4012');
+
       // гасим и зажигаем пункты на главном меню
         mniMarking_show_40x12.Enabled := False;
         mniMarking_print_40x12.Enabled := True;
+
+      // запрашиваем размер шрифта по умолчанию 8
+        f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер от 6 до 18', '8'), 8);
+
+        if f_size in [6..18] then
+          ShowMessage('Размер шрифта: ' + IntToStr(f_size))
+        else
+          f_size := 8;
+
+      // ввод необходимого текста
+        f_text := (InputBox('Ввод текста для печати', 'Введите надпись', 'Этикетка пустая'));
+
+      // заполняем отчет
+        (frmMarking.rp_lab_40x12.FindObject('memTitle') as TfrxMemoView).Font.Size := f_size;
+        (frmMarking.rp_lab_40x12.FindObject('memTitle') as TfrxMemoView).Text := f_text;
+
+      // выводим отчет
+        frmMarking.rp_lab_40x12.ShowReport();
       end;
 
   end;
+
+// задаем место открытие окна
+  frmMarking.Top := 5;
+  frmMarking.Left := 5;
+  frmMarking.Show;
+  Self.SetFocus;
 end;
 // печать
 
@@ -2708,20 +2747,54 @@ begin
   case (Sender as TMenuItem).Tag of
     5840:
       begin
-        ShowMessage('печатаем 5840');
+        frmMarking.rp_lab_58x40.Report.PrintOptions.Printer := f_print_2824;
+
+        frmMarking.Show;
+        frmMarking.rp_lab_58x40.Print;
       end;
 
     4325:
       begin
-        ShowMessage('печатаем 4325');
+        frmMarking.rp_lab_43x25.Report.PrintOptions.Printer := f_print_908;
+
+        frmMarking.Show;
+        frmMarking.rp_lab_43x25.Print;
       end;
 
     4012:
       begin
-        ShowMessage('печатаем 4012');
+        frmMarking.rp_lab_40x12.Report.PrintOptions.Printer := f_print_924;
+
+        frmMarking.Show;
+        frmMarking.rp_lab_40x12.Print;
       end;
 
   end;
+end;
+
+
+// сбрасываем отчеты
+procedure TfrmMAC.mniMarking_ResetClick(Sender: TObject);
+var
+  i: integer;
+begin
+// сбрасываем отчеты
+  frmMarking.Close;
+// очистка отчетов
+  frmMarking.rp_lab_58x40.PreviewPages.Clear;
+  frmMarking.rp_lab_43x25.PreviewPages.Clear;
+  frmMarking.rp_lab_40x12.PreviewPages.Clear;
+// гасим и зажигаем необходимые пункты меню
+
+  mniMarking_show_58x40.Enabled := True;
+  mniMarking_print_58x40.Enabled := False;
+
+  mniMarking_show_43x25.Enabled := True;
+  mniMarking_print_43x25.Enabled := False;
+
+  mniMarking_show_40x12.Enabled := True;
+  mniMarking_print_40x12.Enabled := False;
+
 end;
 
 end.

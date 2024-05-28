@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Printserver\te200_924" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44527,8304555903" ReportOptions.Description.Text="" ReportOptions.LastChange="45439,5359164699" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
-  <Datasets>
-    <item DataSetName="dbLabelSticker"/>
-  </Datasets>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Printserver\te200_924" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45440,4138526852" ReportOptions.Description.Text="" ReportOptions.LastChange="45440,4168160069" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
   <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
-  <TfrxReportPage Name="lab_40x12" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" HGuides.Text="" VGuides.Text="" PaperWidth="40" PaperHeight="12" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
-    <TfrxMemoView Name="memTitle" Align="baClient" AllowVectorExport="True" Left="0" Top="0" Width="151,1812" Height="45,35436" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Anonymous Pro" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="надпись"/>
+  <TfrxReportPage Name="lab_40x12" HGuides.Text="" VGuides.Text="" PaperWidth="40" PaperHeight="12" PaperSize="256" LeftMargin="1" RightMargin="1" TopMargin="1" BottomMargin="1" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxMemoView Name="memTitle" Align="baClient" AllowVectorExport="True" Left="0" Top="0" Width="143,62214" Height="37,7953" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Anonymous Pro" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="надпись"/>
   </TfrxReportPage>
 </TfrxReport>
