@@ -13750,10 +13750,10 @@ object frmMain: TfrmMain
     Font.Style = []
     MaxLength = 4
     MaxValue = 9999
-    MinValue = 0
+    MinValue = 1
     ParentFont = False
     TabOrder = 5
-    Value = 0
+    Value = 1
   end
   object chkStiker: TCheckBox
     Left = 36
