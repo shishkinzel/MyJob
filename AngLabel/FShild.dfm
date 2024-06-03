@@ -34,10 +34,10 @@ object frmShild: TfrmShild
     Preview = prShild
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = '\\Angwork_print\te200_924'
+    PrintOptions.Printer = '\\Printserver\te200_924'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44862.676166087960000000
+    ReportOptions.LastChange = 45446.609455995370000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -126,6 +126,11 @@ object frmShild: TfrmShild
   object db_Shild: TfrxDBDataset
     UserName = 'db_Shild'
     CloseDataSource = False
+    FieldAliases.Strings = (
+      'sn=sn'
+      'bcBig=bcBig'
+      'bcSmall=bcSmall'
+      'mac=mac')
     DataSet = frmMAC.fdmtbLabel
     BCDToCurrency = False
     Left = 8

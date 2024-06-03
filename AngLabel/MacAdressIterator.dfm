@@ -823,7 +823,7 @@ object frmMAC: TfrmMAC
         end
       end
       object mni_Shild_43_25_908_small: TMenuItem
-        Caption = #1064#1080#1083#1100#1076' 43_25'
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' '#1073#1077#1079' mac 43_25_908'
         object mni_sh_shild_43_25_small: TMenuItem
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
           OnClick = mni_sh_shild_43_25_smallClick

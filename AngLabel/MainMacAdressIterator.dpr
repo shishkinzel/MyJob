@@ -20,7 +20,8 @@ uses
   unit_ini in 'unit_ini.pas',
   FFamile_mac in 'FFamile_mac.pas' {frmFamily_mac},
   FMessage in 'FMessage.pas' {frmMsg},
-  storage_mac_ini in 'storage_mac_ini.pas';
+  storage_mac_ini in 'storage_mac_ini.pas',
+  FShild in 'FShild.pas' {frmShild};
 
 {$R *.res}
 
@@ -44,5 +45,6 @@ begin
   Application.CreateForm(TfrmAdvancedLabel, frmAdvancedLabel);
   Application.CreateForm(TfrmStickCheck, frmStickCheck);
   Application.CreateForm(TfrmMsg, frmMsg);
+  Application.CreateForm(TfrmShild, frmShild);
   Application.Run;
 end.
