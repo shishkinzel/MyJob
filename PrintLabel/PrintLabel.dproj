@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PrintLabel.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -139,10 +139,6 @@
             <Form>frmTest</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="F_FR_Label.pas">
-            <Form>frmFR_Label</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="FListDevece.pas">
             <Form>frmListDevice</Form>
             <FormType>dfm</FormType>
@@ -158,6 +154,10 @@
         </DCCReference>
         <DCCReference Include="F_FR_Table.pas">
             <Form>frmFR_Table</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="F_FR_Stick.pas">
+            <Form>frmFR_Stick</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.Buttons, Vcl.Samples.Spin,
   // ***************************** подсоединёные формы
-  FdbmPrintLabel, FSelection, Data.DB, System.ImageList, Vcl.ImgList, F_FR_Table;
+  FdbmPrintLabel, FSelection, Data.DB, System.ImageList, Vcl.ImgList, F_FR_Table, F_FR_Stick;
 
 type
   TfrmMain = class(TForm)

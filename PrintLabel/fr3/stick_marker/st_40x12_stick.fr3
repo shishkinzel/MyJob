@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Printserver\te200_924" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44758,5737345833" ReportOptions.Description.Text="" ReportOptions.LastChange="45449,3793285417" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="st_40x12_stick" HGuides.Text="" VGuides.Text="" PaperWidth="40" PaperHeight="12" PaperSize="256" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" Frame.Width="0,1" MirrorMode="0">
+    <TfrxMemoView Name="memTitle" Align="baClient" AllowVectorExport="True" Left="0" Top="0" Width="151,1812" Height="45,35436" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Anonymous Pro" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Этикетка пустая"/>
+  </TfrxReportPage>
+</TfrxReport>

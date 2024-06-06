@@ -13062,6 +13062,7 @@ object frmShowSoft: TfrmShowSoft
     OnClick = dtpDateClick
   end
   object mmLoadSoft: TMainMenu
+    Tag = 4012
     Left = 16
     Top = 64
     object mniFileLoadSoft: TMenuItem
@@ -13159,7 +13160,10 @@ object frmShowSoft: TfrmShowSoft
       end
     end
     object mniExtra_Main: TMenuItem
-      Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
+      Caption = #1055#1088#1086#1095#1080#1077' '#1089#1090#1080#1082#1077#1088#1099
+      object mniMarking_Separator_0: TMenuItem
+        Caption = '-'
+      end
       object mniExtra_Servece: TMenuItem
         Caption = #1056#1077#1084#1086#1085#1090
         object mniExtra_Scope: TMenuItem
@@ -13186,6 +13190,28 @@ object frmShowSoft: TfrmShowSoft
           Caption = #1057#1073#1088#1086#1089
           OnClick = mniExtra_ResetClick
         end
+      end
+      object mniMarking_utilization: TMenuItem
+        Caption = #1057#1087#1080#1089#1072#1085#1080#1077
+        object mniMarking_Show_utilization: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mniMarking_Show_utilizationClick
+        end
+        object mniMarking_Print_utilization: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mniMarking_Print_utilizationClick
+        end
+        object mniMarking_Separator_utilization: TMenuItem
+          Caption = '-'
+        end
+        object mniMarking_Reset_utilization: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          OnClick = mniMarking_Reset_utilizationClick
+        end
+      end
+      object mniMarking_Separator_1: TMenuItem
+        Caption = '-'
       end
       object mniExtra_Date: TMenuItem
         Caption = #1057#1090#1080#1082#1077#1088' '#1076#1072#1090#1099
@@ -13220,6 +13246,75 @@ object frmShowSoft: TfrmShowSoft
         object mniExtra_DateReset: TMenuItem
           Caption = #1057#1073#1088#1086#1089
           OnClick = mniExtra_ResetClick
+        end
+      end
+      object mniMarking_Separator_2: TMenuItem
+        Caption = '-'
+      end
+      object mniMarking_Information: TMenuItem
+        Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1086#1085#1085#1099#1077' '#1101#1090#1080#1082#1077#1090#1082#1080
+        object mniMarking_stick_58x40: TMenuItem
+          Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'40'
+          object mniMarking_Show_58x40: TMenuItem
+            Tag = 5840
+            Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Print_58x40: TMenuItem
+            Tag = 5840
+            Caption = #1055#1077#1095#1072#1090#1100
+            Enabled = False
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Separator_00: TMenuItem
+            Caption = '-'
+          end
+          object mniMarking_Reset_00: TMenuItem
+            Caption = #1057#1073#1088#1086#1089
+            OnClick = mniMarking_Reset_utilizationClick
+          end
+        end
+        object mniMarking_stick_43x25: TMenuItem
+          Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25'
+          object mniMarking_Show_43x25: TMenuItem
+            Tag = 4325
+            Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Print_43x25: TMenuItem
+            Tag = 4325
+            Caption = #1055#1077#1095#1072#1090#1100
+            Enabled = False
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Separator_01: TMenuItem
+            Caption = '-'
+          end
+          object mniMarking_Reset_01: TMenuItem
+            Caption = #1057#1073#1088#1086#1089
+            OnClick = mniMarking_Reset_utilizationClick
+          end
+        end
+        object mniMarking_stick_40x12: TMenuItem
+          Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 40'#1093'12'
+          object mniMarking_Show_40x12: TMenuItem
+            Tag = 4012
+            Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Print_40x12: TMenuItem
+            Tag = 4012
+            Caption = #1055#1077#1095#1072#1090#1100
+            Enabled = False
+            OnClick = mniMarking_Show_58x40Click
+          end
+          object mniMarking_Separator_02: TMenuItem
+            Caption = '-'
+          end
+          object mniMarking_Reset_02: TMenuItem
+            Caption = #1057#1073#1088#1086#1089
+            OnClick = mniMarking_Reset_utilizationClick
+          end
         end
       end
     end

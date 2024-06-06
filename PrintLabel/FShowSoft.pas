@@ -70,6 +70,30 @@ type
     dtpDate: TDateTimePicker;
     fdService: TFDMemTable;
     fdServicenumber: TStringField;
+    mniMarking_Separator_0: TMenuItem;
+    mniMarking_Separator_1: TMenuItem;
+    mniMarking_Separator_2: TMenuItem;
+    mniMarking_utilization: TMenuItem;
+    mniMarking_Print_utilization: TMenuItem;
+    mniMarking_Reset_utilization: TMenuItem;
+    mniMarking_Separator_utilization: TMenuItem;
+    mniMarking_Information: TMenuItem;
+    mniMarking_stick_58x40: TMenuItem;
+    mniMarking_stick_43x25: TMenuItem;
+    mniMarking_stick_40x12: TMenuItem;
+    mniMarking_Show_58x40: TMenuItem;
+    mniMarking_Print_58x40: TMenuItem;
+    mniMarking_Separator_00: TMenuItem;
+    mniMarking_Reset_00: TMenuItem;
+    mniMarking_Show_43x25: TMenuItem;
+    mniMarking_Print_43x25: TMenuItem;
+    mniMarking_Separator_01: TMenuItem;
+    mniMarking_Reset_01: TMenuItem;
+    mniMarking_Show_40x12: TMenuItem;
+    mniMarking_Print_40x12: TMenuItem;
+    mniMarking_Separator_02: TMenuItem;
+    mniMarking_Reset_02: TMenuItem;
+    mniMarking_Show_utilization: TMenuItem;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -97,13 +121,22 @@ type
     procedure mniExtra_ApplyClick(Sender: TObject);
     procedure mniExtra_DateShowClick(Sender: TObject);
     procedure mniExtra_DatePrintClick(Sender: TObject);
+    procedure mniMarking_Print_utilizationClick(Sender: TObject);
+    procedure mniMarking_Show_utilizationClick(Sender: TObject);
+    procedure mniMarking_Reset_utilizationClick(Sender: TObject);
+    procedure mniMarking_Show_58x40Click(Sender: TObject);
   private
     { Private declarations }
 
     f_print_576: string;   // для печати даты и номера ремонта
 
+    f_print_924: string;
+    f_print_940: string;
+    f_print_908: string;
+    f_print_2824: string;
+
     const
-     f_str = 'department-';
+      f_str = 'department-';
       DIR_code = 'DIR_code';
 
   public
@@ -125,7 +158,7 @@ implementation
 
 uses
   FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, // подключение форм
-  F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D;
+  F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D, F_FR_Stick;
 
 
 
@@ -138,6 +171,10 @@ begin
 // подключаем принтер по умолчанию
   IniOptions.LoadFromFile(f_print_config);
   f_print_576 := IniOptions.f_print_576;
+  f_print_924 := IniOptions.f_print_924;
+  f_print_940 := IniOptions.f_print_940;
+  f_print_908 := IniOptions.f_print_908;
+  f_print_2824 := IniOptions.f_print_2824;
 
   f_nameDevice := frmMain.edtDevice.Text;
   edtDevice.Text := f_nameDevice;          // считываем наименование устройства
@@ -357,6 +394,7 @@ begin
 if dlgFont.Execute then
   mmoShowSoft.Font := dlgFont.Font;
 end;
+
 
 {формирование отчета}
 procedure TfrmShowSoft.mniRepApplyClick(Sender: TObject);
@@ -617,10 +655,181 @@ end;
 
 // конец блока номера ремонта и даты ***************************************************************
 
+// начало блока списания для ремонта
+// просмотр
+procedure TfrmShowSoft.mniMarking_Show_utilizationClick(Sender: TObject);
+begin
+// открываем в нужном месте
+  frmFR_Stick.Top := 10;
+  frmFR_Stick.Left := 10;
+// гасим и зажигаем необходимые пункты меню
+   mniMarking_Show_utilization.Enabled := False;
+   mniMarking_Print_utilization.Enabled := True;
+// формируем и показываем отчет
+
+  frmFR_Stick.Show;
+  frmFR_Stick.rp_Label_58x40_servece.ShowReport();
+end;
+// печать
+
+procedure TfrmShowSoft.mniMarking_Print_utilizationClick(Sender: TObject);
+begin
+  frmFR_Stick.rp_Label_58x40_servece.PrintOptions.Printer := f_print_2824;
+
+  frmFR_Stick.Show;
+  frmFR_Stick.rp_Label_58x40_servece.Print;
+end;
+// блок трех стикеров
+
+procedure TfrmShowSoft.mniMarking_Show_58x40Click(Sender: TObject);
+var
+  f_size : Integer;
+  f_font_style : Integer;
+  f_text : string;
+begin
+  if (Sender as TMenuItem).Caption = 'Просмотр' then
+  begin
+    case (Sender as TMenuItem).Tag of
+      5840:
+        begin
+          ShowMessage('Показываем 5840');
+        // гасим и зажигаем необходимые пункты меню
+          mniMarking_Show_58x40.Enabled := False;        // наклейка 58х40
+          mniMarking_Print_58x40.Enabled := True;
+        //  выбираем шрифт и прочее
+          f_text := InputBox('Окно ввода текста', 'Введите текст', 'Ничего не введено');
+          f_font_style := StrToIntDef(InputBox('Ввод толщины шрифта', 'Введите толщину шрифта 1[Bold] или 0', '0'), 0);
+          f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 12 до 36', '14'), 14);
+
+        // установка толщины шрифта
+          if f_font_style in [0..1] then
+          begin
+            case f_font_style of
+              0:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+              1:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [fsBold];
+            end;
+          end
+          else
+            (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+
+        // установка размера шрифта
+        end;
+      4325:
+        begin
+          ShowMessage('Показываем 4325');
+        // гасим и зажигаем необходимые пункты меню
+          mniMarking_Show_43x25.Enabled := False;        // наклейка 43x25
+          mniMarking_Print_43x25.Enabled := True;
+        //  выбираем шрифт и прочее
+          f_text := InputBox('Окно ввода текста', 'Введите текст', 'Ничего не введено');
+          f_font_style := StrToIntDef(InputBox('Ввод толщины шрифта', 'Введите толщину шрифта 1[Bold] или 0', '0'), 0);
+          f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 12 до 24', '14'), 14);
+
+        // установка толщины шрифта
+          if f_font_style in [0..1] then
+          begin
+            case f_font_style of
+              0:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+              1:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [fsBold];
+            end;
+          end
+          else
+            (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+
+        end;
+      4012:
+        begin
+          ShowMessage('Показываем 4012');
+        // гасим и зажигаем необходимые пункты меню
+          mniMarking_Show_40x12.Enabled := False;         // наклейка 40x12
+          mniMarking_Print_40x12.Enabled := True;
+        //  выбираем шрифт и прочее
+          f_text := InputBox('Окно ввода текста', 'Введите текст', 'Ничего не введено');
+          f_font_style := StrToIntDef(InputBox('Ввод толщины шрифта', 'Введите толщину шрифта 1[Bold] или 0', '0'), 0);
+          f_size := StrToIntDef(InputBox('Ввод размера шрифта', 'Введите размер шрифта от 8 до 18', '10'), 10);
+
+        // установка толщины шрифта
+          if f_font_style in [0..1] then
+          begin
+            case f_font_style of
+              0:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+              1:
+                (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [fsBold];
+            end;
+          end
+          else
+            (frmFR_Label.frp_LabDate.FindObject('memTitle') as TfrxMemoView).Font.Style := [];
+
+        end;
+    end;
+  end;
+  if (Sender as TMenuItem).Caption = 'Печать' then
+  begin
+    case (Sender as TMenuItem).Tag of
+      5840:
+        begin
+          ShowMessage('Печатаем 5840');
+        end;
+      4325:
+        begin
+          ShowMessage('Печатаем 4325');
+        end;
+      4012:
+        begin
+          ShowMessage('Печатаем 4012');
+        end;
+    end;
+  end;
+end;
+
+
+
+
+// общий сброс для секции Stick
+procedure TfrmShowSoft.mniMarking_Reset_utilizationClick(Sender: TObject);
+begin
+ // гасим и зажигаем необходимые пункты меню
+  mniMarking_Show_utilization.Enabled := True;         // утилизация
+  mniMarking_Print_utilization.Enabled := False;
+
+  mniMarking_Show_58x40.Enabled := True;         // наклейка 58х40
+  mniMarking_Print_58x40.Enabled := False;
+
+  mniMarking_Show_43x25.Enabled := True;         // наклейка 43x25
+  mniMarking_Print_43x25.Enabled := False;
+
+  mniMarking_Show_40x12.Enabled := True;         // наклейка 40x12
+  mniMarking_Print_40x12.Enabled := False;
+
+// сбрасываем отчеты
+  frmFR_Stick.Close;
+  frmFR_Stick.rp_Label_58x40_servece.PreviewPages.Clear;   //  утилизация
+  frmFR_Stick.rp_Label_58x40_stick.PreviewPages.Clear;     //  наклейка 58х40
+  frmFR_Stick.rp_Label_43x25_stick.PreviewPages.Clear;     //  наклейка 43x25
+  frmFR_Stick.rp_Label_40x12_stick.PreviewPages.Clear;     //  наклейка 40x12
+
+end;
+
+
+
+
+
+
+
+
+// *************************************************************************************************
+
 //**************************************************************************************************
 procedure TfrmShowSoft.btnCloseClick(Sender: TObject);
 begin
 Close;
 end;
+
+
 
 end.
