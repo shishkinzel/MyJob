@@ -12,7 +12,8 @@ uses
   unit_ini in 'unit_ini.pas',
   F_FR_List in 'F_FR_List.pas' {frmFR_List},
   F_FR_Table in 'F_FR_Table.pas' {frmFR_Table},
-  F_FR_Stick in 'F_FR_Stick.pas' {frmFR_Stick};
+  F_FR_Stick in 'F_FR_Stick.pas' {frmFR_Stick},
+  F_FR_Label in 'F_FR_Label.pas' {frmFR_Label};
 
 {$R *.res}
 begin
@@ -27,6 +28,7 @@ begin
   Application.CreateForm(TfrmFR_List, frmFR_List);
   Application.CreateForm(TfrmFR_Table, frmFR_Table);
   Application.CreateForm(TfrmFR_Stick, frmFR_Stick);
+  Application.CreateForm(TfrmFR_Label, frmFR_Label);
   Application.Run;
 end.
 
