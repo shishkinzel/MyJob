@@ -902,7 +902,7 @@ object frmFR_Table: TfrmFR_Table
     PrintOptions.Printer = 'HP LaserJet 1018'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44525.630604537000000000
-    ReportOptions.LastChange = 45233.461884664350000000
+    ReportOptions.LastChange = 45460.637449942130000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -946,6 +946,27 @@ object frmFR_Table: TfrmFR_Table
         DataSet = frdbTabList
         DataSetName = 'DBTableList'
         RowCount = 0
+        object memBase: TfrxMemoView
+          AllowVectorExport = True
+          Width = 721.890230000000000000
+          Height = 34.015770000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clRed
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = []
+          Highlight.Condition = '<Line> mod 2 = 1'
+          Highlight.FillType = ftBrush
+          Highlight.Fill.BackColor = clAqua
+          Highlight.Frame.Typ = []
+          ParentFont = False
+        end
         object dbmem_mac: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
