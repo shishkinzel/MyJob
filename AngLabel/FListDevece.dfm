@@ -23,7 +23,7 @@ object frmListDevice: TfrmListDevice
   TextHeight = 13
   object spldown: TSplitter
     Left = 0
-    Top = 446
+    Top = 640
     Width = 801
     Height = 2
     Cursor = crVSplit
@@ -33,7 +33,7 @@ object frmListDevice: TfrmListDevice
   end
   object splup: TSplitter
     Left = 0
-    Top = 217
+    Top = 161
     Width = 801
     Height = 0
     Cursor = crVSplit
@@ -45,17 +45,23 @@ object frmListDevice: TfrmListDevice
     Left = 0
     Top = 0
     Width = 801
-    Height = 217
+    Height = 161
     Align = alTop
     TabOrder = 0
     OnClick = btnInMemoClick
     object lblBtnTitle: TLabel
       Left = 312
-      Top = 156
-      Width = 205
-      Height = 13
+      Top = 104
+      Width = 239
+      Height = 16
       Alignment = taCenter
       Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1080#1079' '#1087#1086#1083#1077#1081' '#1074#1074#1086#1076#1072' '#1074' :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object edtMod: TEdit
       Tag = 102
@@ -65,6 +71,7 @@ object frmListDevice: TfrmListDevice
       Height = 24
       Alignment = taCenter
       AutoSelect = False
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -82,6 +89,7 @@ object frmListDevice: TfrmListDevice
       Height = 24
       Alignment = taCenter
       AutoSelect = False
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -102,7 +110,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object txtMod: TStaticText
       Left = 12
@@ -119,7 +127,7 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
     end
     object txtNMod: TStaticText
       Left = 661
@@ -136,57 +144,31 @@ object frmListDevice: TfrmListDevice
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
-    end
-    object btnInMemo: TBitBtn
-      Left = 12
-      Top = 180
-      Width = 120
-      Height = 25
-      Caption = #1056#1077#1076#1072#1082#1090#1086#1088
-      ImageIndex = 1
-      Images = ilPictureBtn
-      TabOrder = 7
-      OnClick = btnInMemoClick
+      TabOrder = 5
     end
     object btnInTab: TBitBtn
-      Left = 365
-      Top = 180
+      Left = 12
+      Top = 126
       Width = 120
       Height = 25
       Caption = #1058#1072#1073#1083#1080#1094#1072
+      Enabled = False
       ImageIndex = 0
       Images = ilPictureBtn
-      TabOrder = 8
+      TabOrder = 6
       OnClick = btnInMemoClick
     end
     object btnInForm: TBitBtn
       Left = 661
-      Top = 180
+      Top = 126
       Width = 120
       Height = 25
       Caption = #1060#1086#1088#1084#1072
+      Enabled = False
       ImageIndex = 2
       Images = ilPictureBtn
-      TabOrder = 9
+      TabOrder = 7
       OnClick = btnInMemoClick
-    end
-    object txtPower: TStaticText
-      Left = 12
-      Top = 106
-      Width = 213
-      Height = 20
-      BevelInner = bvLowered
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086#1073' '#1080#1089#1090#1086#1095#1085#1080#1082#1077' '#1087#1080#1090#1072#1085#1080#1103
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 10
     end
     object btnedMod: TButtonedEdit
       Left = 661
@@ -194,50 +176,42 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 21
       Alignment = taRightJustify
+      Enabled = False
       MaxLength = 3
       NumbersOnly = True
-      TabOrder = 3
+      TabOrder = 2
       Text = '000'
       StyleName = 'choiceNum'
     end
-    object edtPower: TEdit
-      Tag = 103
-      Left = 11
-      Top = 132
-      Width = 769
-      Height = 24
+  end
+  object pnldown: TPanel
+    Left = 0
+    Top = 161
+    Width = 801
+    Height = 479
+    Align = alClient
+    TabOrder = 1
+    ExplicitTop = 448
+    ExplicitHeight = 194
+    object lblBtnTitleUp: TLabel
+      Left = 160
+      Top = 412
+      Width = 215
+      Height = 16
       Alignment = taCenter
-      AutoSelect = False
+      Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1080#1079' '#1090#1072#1073#1083#1080#1094#1099' '#1074' :'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = []
-      HideSelection = False
       ParentFont = False
-      TabOrder = 2
-    end
-  end
-  object pnldown: TPanel
-    Left = 0
-    Top = 448
-    Width = 801
-    Height = 194
-    Align = alBottom
-    TabOrder = 1
-    object lblBtnTitleUp: TLabel
-      Left = 160
-      Top = 135
-      Width = 185
-      Height = 13
-      Alignment = taCenter
-      Caption = #1055#1077#1088#1077#1084#1077#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1080#1079' '#1090#1072#1073#1083#1080#1094#1099' '#1074' :'
     end
     object dbgrdDev: TDBGrid
       Left = 1
       Top = 19
       Width = 799
-      Height = 110
+      Height = 387
       Align = alTop
       DataSource = dsDev
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
@@ -261,28 +235,21 @@ object frmListDevice: TfrmListDevice
           Expanded = False
           FieldName = 'ndev'
           Title.Alignment = taCenter
-          Width = 350
+          Width = 460
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nmod'
           Title.Alignment = taCenter
-          Width = 160
+          Width = 220
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'idmod'
           Title.Alignment = taCenter
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'power'
-          Title.Alignment = taCenter
-          Title.Caption = #1044#1072#1085#1085#1099#1077' '#1048#1055
-          Width = 180
+          Width = 50
           Visible = True
         end>
     end
@@ -292,150 +259,34 @@ object frmListDevice: TfrmListDevice
       Width = 799
       Height = 18
       DataSource = dsDev
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 1
     end
-    object btnTitleMemo: TBitBtn
-      Left = 56
-      Top = 160
-      Width = 120
-      Height = 25
-      Caption = #1056#1077#1076#1072#1082#1090#1086#1088
-      Enabled = False
-      TabOrder = 2
-      OnClick = btnTitleMemoClick
-    end
     object btnTitleIn: TBitBtn
-      Left = 381
-      Top = 160
+      Left = 12
+      Top = 437
       Width = 120
       Height = 25
       Caption = #1055#1086#1083#1077' '#1074#1074#1086#1076#1072
       Enabled = False
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnTitleInClick
     end
     object btnExit: TBitBtn
       Left = 662
-      Top = 160
+      Top = 437
       Width = 120
       Height = 25
       Caption = #1047#1072#1082#1088#1099#1090#1100
-      TabOrder = 4
+      TabOrder = 3
       OnClick = mniCloseClick
-    end
-  end
-  object pnlCentr: TPanel
-    Left = 0
-    Top = 217
-    Width = 801
-    Height = 229
-    Align = alClient
-    TabOrder = 2
-    object splcenter: TSplitter
-      Left = 427
-      Top = 1
-      Height = 227
-      ExplicitHeight = 269
-    end
-    object pnlleft: TPanel
-      Left = 1
-      Top = 1
-      Width = 426
-      Height = 227
-      Align = alLeft
-      TabOrder = 0
-      object bvlleft: TBevel
-        Left = 1
-        Top = 1
-        Width = 424
-        Height = 50
-        Align = alTop
-        Shape = bsFrame
-        ExplicitLeft = 104
-        ExplicitTop = 24
-        ExplicitWidth = 50
-      end
-      object txtLBl: TStaticText
-        Left = 88
-        Top = 16
-        Width = 196
-        Height = 23
-        BevelInner = bvLowered
-        BevelKind = bkFlat
-        BevelOuter = bvSpace
-        Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-      object mmoDevice: TMemo
-        Left = 1
-        Top = 51
-        Width = 424
-        Height = 175
-        Cursor = crHandPoint
-        Align = alClient
-        ReadOnly = True
-        TabOrder = 1
-        OnClick = mmoDeviceClick
-        OnDblClick = mmoDeviceDblClick
-      end
-    end
-    object pnlRight: TPanel
-      Left = 430
-      Top = 1
-      Width = 370
-      Height = 227
-      Align = alClient
-      TabOrder = 1
-      object bvlRight: TBevel
-        Left = 1
-        Top = 1
-        Width = 368
-        Height = 50
-        Align = alTop
-        Shape = bsFrame
-        ExplicitLeft = 3
-        ExplicitTop = 42
-        ExplicitWidth = 309
-      end
-      object txtRBl: TStaticText
-        Left = 112
-        Top = 16
-        Width = 168
-        Height = 23
-        Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1084#1086#1076#1091#1083#1103
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-      object mmoModule: TMemo
-        Left = 1
-        Top = 51
-        Width = 368
-        Height = 175
-        Cursor = crHandPoint
-        Align = alClient
-        ReadOnly = True
-        TabOrder = 1
-        OnClick = mmoModuleClick
-        OnDblClick = mmoModuleDblClick
-      end
     end
   end
   object mmDev: TMainMenu
     Images = ilPictureMainMenu
-    Left = 216
-    Top = 65528
+    Left = 152
+    Top = 112
     object mniFile: TMenuItem
       Caption = #1060#1072#1081#1083
       ImageIndex = 4
@@ -458,6 +309,10 @@ object frmListDevice: TfrmListDevice
     end
     object mniApply: TMenuItem
       Caption = #1044#1077#1081#1089#1090#1074#1080#1077
+      object mniApply_admin: TMenuItem
+        Caption = #1040#1076#1084#1080#1085#1080#1089#1090#1088#1080#1088#1086#1074#1072#1085#1080#1077
+        OnClick = mniApply_adminClick
+      end
     end
     object mniSearch: TMenuItem
       Caption = #1055#1086#1080#1089#1082
@@ -483,7 +338,7 @@ object frmListDevice: TfrmListDevice
   object dsDev: TDataSource
     DataSet = fdmtblDev
     Left = 8
-    Top = 228
+    Top = 356
   end
   object fdmtblDev: TFDMemTable
     Active = True
@@ -506,11 +361,6 @@ object frmListDevice: TfrmListDevice
         Name = 'idmod'
         DataType = ftString
         Size = 20
-      end
-      item
-        Name = 'power'
-        DataType = ftString
-        Size = 100
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -521,8 +371,8 @@ object frmListDevice: TfrmListDevice
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 64
-    Top = 228
+    Left = 8
+    Top = 412
     object fdmtblDevnum: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = #8470
@@ -552,14 +402,10 @@ object frmListDevice: TfrmListDevice
       DisplayWidth = 7
       FieldName = 'idmod'
     end
-    object fdmtblDevpower: TStringField
-      FieldName = 'power'
-      Size = 100
-    end
   end
   object ilPictureMainMenu: TImageList
-    Left = 33
-    Top = 284
+    Left = 225
+    Top = 596
     Bitmap = {
       494C010108004800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -965,8 +811,8 @@ object frmListDevice: TfrmListDevice
       000000000000}
   end
   object ilPictureBtn: TImageList
-    Left = 33
-    Top = 356
+    Left = 281
+    Top = 596
     Bitmap = {
       494C010103000C00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010

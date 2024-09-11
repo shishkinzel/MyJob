@@ -16,16 +16,6 @@ type
     splup: TSplitter;
     pnldown: TPanel;
     spldown: TSplitter;
-    pnlCentr: TPanel;
-    pnlleft: TPanel;
-    splcenter: TSplitter;
-    pnlRight: TPanel;
-    bvlleft: TBevel;
-    bvlRight: TBevel;
-    txtLBl: TStaticText;
-    txtRBl: TStaticText;
-    mmoDevice: TMemo;
-    mmoModule: TMemo;
     mmDev: TMainMenu;
     mniFile: TMenuItem;
     mniOpen: TMenuItem;
@@ -34,7 +24,6 @@ type
     mniOther: TMenuItem;
     dbgrdDev: TDBGrid;
     dbnvgrDev: TDBNavigator;
-    btnTitleMemo: TBitBtn;
     btnTitleIn: TBitBtn;
     btnExit: TBitBtn;
     dsDev: TDataSource;
@@ -43,7 +32,6 @@ type
     txtTDev: TStaticText;
     txtMod: TStaticText;
     txtNMod: TStaticText;
-    btnInMemo: TBitBtn;
     btnInTab: TBitBtn;
     btnInForm: TBitBtn;
     fdmtblDev: TFDMemTable;
@@ -51,7 +39,6 @@ type
     fdmtblDevndev: TStringField;
     fdmtblDevnmod: TStringField;
     lblBtnTitle: TLabel;
-    txtPower: TStaticText;
     lblBtnTitleUp: TLabel;
     fdmtblDevidmod: TStringField;
     mniClose: TMenuItem;
@@ -63,25 +50,25 @@ type
     mniSearchNumMod: TMenuItem;
     ilPictureMainMenu: TImageList;
     ilPictureBtn: TImageList;
-    fdmtblDevpower: TStringField;
-    edtPower: TEdit;
+    mniApply_admin: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure mniCloseClick(Sender: TObject);
     procedure btnInMemoClick(Sender: TObject);
-    procedure mmoDeviceClick(Sender: TObject);
-    procedure mmoDeviceDblClick(Sender: TObject);
-    procedure mmoModuleClick(Sender: TObject);
-    procedure mmoModuleDblClick(Sender: TObject);
+//    procedure mmoDeviceClick(Sender: TObject);
+//    procedure mmoDeviceDblClick(Sender: TObject);
+//    procedure mmoModuleClick(Sender: TObject);
+//    procedure mmoModuleDblClick(Sender: TObject);
     procedure btnTitleInClick(Sender: TObject);
     procedure dbgrdDevDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
       Column: TColumn; State: TGridDrawState);
-    procedure btnTitleMemoClick(Sender: TObject);
+//    procedure btnTitleMemoClick(Sender: TObject);
     procedure dbgrdDevMouseEnter(Sender: TObject);
     procedure dbgrdDevMouseLeave(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure mniApply_adminClick(Sender: TObject);
 
 
   private
@@ -130,36 +117,7 @@ begin
 
   fdmtblDev.Open;
   fdmtblDev.LoadFromFile(FTabDev, sfJSON);
-  AssignFile(fileDevice, FDevice);
-  AssignFile(fileModule, FModule);
 
-  if not FileExists(FDevice) then
-  begin
-    Rewrite(fileDevice);
-    CloseFile(fileDevice);
-  end;
-  if not FileExists(FModule) then
-  begin
-    Rewrite(fileModule);
-    CloseFile(fileModule);
-  end;
-
-  // читаем текстовые файлы
-  Reset(fileDevice);
-  Reset(fileModule);
-  while (not EOF(fileDevice)) do
-  begin
-    Readln(fileDevice, s);
-    mmoDevice.Lines.Add(s);
-  end;
-  CloseFile(fileDevice);
-
-    while (not EOF(fileModule)) do
-  begin
-    Readln(fileModule, s);
-    mmoModule.Lines.Add(s);
-  end;
-  CloseFile(fileModule);
 
 end;
 
@@ -175,91 +133,93 @@ end;
 
 
 // показ формы
-
 procedure TfrmListDevice.FormShow(Sender: TObject);
 var
-i : Integer;
+  i: Integer;
 begin
 //  frmListDevice.Top := 10;
 //  frmListDevice.Left := 750;
+  if btnExit.CanFocus then
+    btnExit.SetFocus;
 
 end;
+
 
 // опишем выделение цветом строку  в mmoDevice
-procedure TfrmListDevice.mmoDeviceClick(Sender: TObject);
-var
-Line : Integer;
-begin
-Line := mmoDevice.CaretPos.Y;
-// выделение строки в mmoDevice
- with (Sender as TMemo) do
-begin
-   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
-   SelStart:=Perform(EM_LINEINDEX, Line, 0);
-   SelLength:=Length(Lines[Line]);
-end;
-end;
+//procedure TfrmListDevice.mmoDeviceClick(Sender: TObject);
+//var
+//Line : Integer;
+//begin
+//Line := mmoDevice.CaretPos.Y;
+//// выделение строки в mmoDevice
+// with (Sender as TMemo) do
+//begin
+//   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
+//   SelStart:=Perform(EM_LINEINDEX, Line, 0);
+//   SelLength:=Length(Lines[Line]);
+//end;
+//end;
 
-procedure TfrmListDevice.mmoDeviceDblClick(Sender: TObject);
-var
-  Line: Integer;
-begin
-  Line := mmoDevice.CaretPos.Y;
-  edtDev.Text := '';
-  edtDev.Text := mmoDevice.Lines.Strings[Line];
-  with (Sender as TMemo) do
-  begin
-    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
-    SelStart := Perform(EM_LINEINDEX, Line, 0);
-    SelLength := Length(Lines[Line]);
-  end;
-end;
+//procedure TfrmListDevice.mmoDeviceDblClick(Sender: TObject);
+//var
+//  Line: Integer;
+//begin
+//  Line := mmoDevice.CaretPos.Y;
+//  edtDev.Text := '';
+//  edtDev.Text := mmoDevice.Lines.Strings[Line];
+//  with (Sender as TMemo) do
+//  begin
+//    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
+//    SelStart := Perform(EM_LINEINDEX, Line, 0);
+//    SelLength := Length(Lines[Line]);
+//  end;
+//end;
 //**********************************
 
 // опишем выделение цветом строку  в mmoModule
-procedure TfrmListDevice.mmoModuleClick(Sender: TObject);
-var
-Line : Integer;
-begin
-Line := mmoModule.CaretPos.Y;
-// выделение строки в mmoModule
- with (Sender as TMemo) do
-begin
-   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
-   SelStart:=Perform(EM_LINEINDEX, Line, 0);
-   SelLength:=Length(Lines[Line]);
-end;
-end;
+//procedure TfrmListDevice.mmoModuleClick(Sender: TObject);
+//var
+//Line : Integer;
+//begin
+//Line := mmoModule.CaretPos.Y;
+//// выделение строки в mmoModule
+// with (Sender as TMemo) do
+//begin
+//   Line:=Perform(EM_LINEFROMCHAR, SelStart, 0);
+//   SelStart:=Perform(EM_LINEINDEX, Line, 0);
+//   SelLength:=Length(Lines[Line]);
+//end;
+//end;
 
-procedure TfrmListDevice.mmoModuleDblClick(Sender: TObject);
-var
-  Line: Integer;
-  tmp, tmp1 : string;
-begin
-  btnedMod.Text := '000';
-  edtPower.Text := 'Нет данных';
-  Line := mmoModule.CaretPos.Y;
-  tmp := mmoModule.Lines.Strings[Line];
-  tmp1 := Trim(Fetch(tmp, '*'));
-  edtMod.Text := '';
-  edtMod.Text := tmp1;
-  if tmp <> '' then
-  begin
-    tmp1 := Trim(Fetch(tmp, '*'));
-    if tmp1 <> '' then
-      btnedMod.Text := tmp1;
-    if tmp <> '' then
-      edtPower.Text := tmp;
-  end;
+//procedure TfrmListDevice.mmoModuleDblClick(Sender: TObject);
+//var
+//  Line: Integer;
+//  tmp, tmp1 : string;
+//begin
+//  btnedMod.Text := '000';
+//  edtPower.Text := 'Нет данных';
+//  Line := mmoModule.CaretPos.Y;
+//  tmp := mmoModule.Lines.Strings[Line];
+//  tmp1 := Trim(Fetch(tmp, '*'));
+//  edtMod.Text := '';
+//  edtMod.Text := tmp1;
+//  if tmp <> '' then
+//  begin
+//    tmp1 := Trim(Fetch(tmp, '*'));
+//    if tmp1 <> '' then
+//      btnedMod.Text := tmp1;
+//    if tmp <> '' then
+//      edtPower.Text := tmp;
+//  end;
 
 
-  with (Sender as TMemo) do
-  begin
-    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
-    SelStart := Perform(EM_LINEINDEX, Line, 0);
-    SelLength := Length(Lines[Line]);
-  end;
-end;
+//  with (Sender as TMemo) do
+//  begin
+//    Line := Perform(EM_LINEFROMCHAR, SelStart, 0);
+//    SelStart := Perform(EM_LINEINDEX, Line, 0);
+//    SelLength := Length(Lines[Line]);
+//  end;
+//end;
 
 // обработка кнопок
 
@@ -269,7 +229,7 @@ var
   tmp, tmp1: string;
   devEdit, modEdit, modAll: string;
 begin
-// проверка ввода
+// проверка ввода  на пустые строки
   if (MatchText(edtDev.Text, ['', csDev])) or (MatchText(edtMod.Text, ['', csMod])) then
   begin
     ShowMessage('Проверте правильность ввода');
@@ -280,32 +240,33 @@ begin
   devEdit := Trim(edtDev.Text);
   modEdit := Trim(edtMod.Text);
   tmp := Format('%.3d', [StrToInt(btnedMod.Text)]);
-  tmp1 := Format('%.s', [edtPower.Text]);
+//  tmp1 := Format('%.s', [edtPower.Text]);
   modAll := modEdit + '*' + tmp + '*' + tmp1;
   if not (Sender is TBitBtn) then
     Exit;
 
-  if (Sender as TBitBtn).Name = btnInMemo.Name then  // нажата кнопка "Запись в Редактор"
+//  if (Sender as TBitBtn).Name = btnInMemo.Name then  // нажата кнопка "Запись в Редактор"
   // кнопка "Редактор" верхняя панель
+   if False then  // нажата кнопка "Запись в Редактор"
   begin
 //    ShowMessage('нажал кнопку Редактор');
-    for i := 0 to mmoDevice.Lines.Count - 1 do
-      if devEdit = mmoDevice.Lines.Strings[i] then
-      begin
-        ShowMessage('Данное устройство существует.' + #10#13 + 'Проверте правильность ввода');
-        Abort;
-      end;
-
-    for i := 0 to mmoModule.Lines.Count - 1 do
-      if modAll = mmoModule.Lines.Strings[i] then
-      begin
-        ShowMessage('Модуль уже существует.' + #10#13 + 'Проверте правильность ввода');
-        Abort;
-      end;
-  // если все прошло записываем в memo
-     mmoDevice.Lines.Add(devEdit);
-     mmoModule.Lines.Add(modAll);
-     ShowMessage('Вы сделали запись в редакторе!');
+//    for i := 0 to mmoDevice.Lines.Count - 1 do
+//      if devEdit = mmoDevice.Lines.Strings[i] then
+//      begin
+//        ShowMessage('Данное устройство существует.' + #10#13 + 'Проверте правильность ввода');
+//        Abort;
+//      end;
+//
+//    for i := 0 to mmoModule.Lines.Count - 1 do
+//      if modAll = mmoModule.Lines.Strings[i] then
+//      begin
+//        ShowMessage('Модуль уже существует.' + #10#13 + 'Проверте правильность ввода');
+//        Abort;
+//      end;
+//  // если все прошло записываем в memo
+//     mmoDevice.Lines.Add(devEdit);
+//     mmoModule.Lines.Add(modAll);
+//     ShowMessage('Вы сделали запись в редакторе!');
   end
   else if (Sender as TBitBtn).Name = btnInTab.Name then   // нажата кнопка "Запись в таблицу"
   begin
@@ -328,7 +289,6 @@ begin
       Fields[1].AsString := Trim(edtDev.Text);
       Fields[2].AsString := Trim(edtMod.Text);
       Fields[3].AsString := Trim(btnedMod.Text);
-      Fields[4].AsString := Trim(edtPower.Text);
     end;
     dbgrdDev.DataSource.DataSet.Post;
   end
@@ -341,7 +301,7 @@ begin
     frmMAC.edtDevice.Text := Trim(edtDev.Text);
     frmMAC.edtMod.Text := Trim(edtMod.Text);
     frmMAC.medtModule.Text := btnedMod.Text;
-    frmMAC.f_power := edtPower.Text;
+//    frmMAC.f_power := edtPower.Text;
 // вставить бокс для вопроса закрыть форму?
    ShowMessage('Вы перенесли данные!');
     frmMAC.seQuantity.TabOrder := 11;
@@ -373,7 +333,7 @@ procedure TfrmListDevice.dbgrdDevMouseEnter(Sender: TObject);
 var
   i: Integer;
 begin
-  btnTitleMemo.Enabled := True;
+//  btnTitleMemo.Enabled := True;
   btnTitleIn.Enabled := True;
 end;
 
@@ -384,7 +344,7 @@ var
 begin
   if dbgrdDev.SelectedRows.Count = 0 then
   begin
-    btnTitleMemo.Enabled := False;
+//    btnTitleMemo.Enabled := False;
     btnTitleIn.Enabled := False;
 
   end;
@@ -400,50 +360,39 @@ begin
   edtDev.Text := dbgrdDev.Fields[1].AsString;
   edtMod.Text := dbgrdDev.Fields[2].AsString;
   btnedMod.Text := dbgrdDev.Fields[3].AsString;
-  edtPower.Text := dbgrdDev.Fields[4].AsString;
+
   dbgrdDev.SelectedRows.Clear;
-  btnTitleMemo.Enabled := False;
+
   btnTitleIn.Enabled := False;
+  btnInForm.Enabled := True;
 end;
 
-// перенос из таблицы в редактор
-procedure TfrmListDevice.btnTitleMemoClick(Sender: TObject);
+// Активация режима администратора
+procedure TfrmListDevice.mniApply_adminClick(Sender: TObject);
 var
-  i: Integer;
-  f_dev_str, f_mod_str: string;
+  f_admin: string;
 begin
-  f_dev_str := dbgrdDev.Fields[1].AsString;
-  f_mod_str := dbgrdDev.Fields[2].AsString + '*' + dbgrdDev.Fields[3].AsString + '*' + dbgrdDev.Fields[4].AsString;
-// проверяем на повторяемость
-  for i := 0 to mmoDevice.Lines.Count - 1 do
-  begin
-    if f_dev_str = mmoDevice.Lines.Strings[i] then
-    begin
-      ShowMessage('Данное устройство уже внесено в редактор!');
-      Abort;
-    end;
-  end;
-  for i := 0 to mmoModule.Lines.Count - 1 do
-  begin
-    if f_mod_str = mmoModule.Lines.Strings[i] then
-    begin
-      ShowMessage('Данный модуль уже внесено в редактор!');
-      Abort;
-    end;
+  f_admin := LowerCase(Trim(InputBox('Ввод полномочий администрирования', 'Введите пароль', 'Нет')));
 
-  end;
-// если все хорошо пишем в редактор
-  mmoDevice.Lines.Add(f_dev_str);
-  mmoModule.Lines.Add(f_mod_str);
-// деактивируем кнопки и снимаем выделение строки
-  dbgrdDev.SelectedRows.Clear;
-  btnTitleMemo.Enabled := False;
-  btnTitleIn.Enabled := False;
+  if f_admin = 'admin' then
+  begin
+    ShowMessage('Все хорошо');
+  // активируем необходимые инструменты
+    dbnvgrDev.VisibleButtons := dbnvgrDev.VisibleButtons + [nbInsert, nbDelete, nbEdit, nbPost, nbCancel, nbRefresh];
+    btnInTab.Enabled := True;
+    btnInForm.Enabled := True;
 
+  end
+  else
+  begin
+    ShowMessage('У Вас нет административных прав');
+  end;
 end;
+
 
 // кнопка закрытия
 //**********************************
+
 procedure TfrmListDevice.mniCloseClick(Sender: TObject);
 begin
   Close;
@@ -470,16 +419,18 @@ begin
       6:
         begin
       // записываем файлы
-          Rewrite(fileDevice);
-          for i := 0 to mmoDevice.Lines.Count - 1 do
-            Writeln(fileDevice, mmoDevice.Lines[i]);
-          CloseFile(fileDevice);
-
-          Rewrite(fileModule);
-          for i := 0 to mmoDevice.Lines.Count - 1 do
-            Writeln(fileModule, mmoModule.Lines[i]);
-          CloseFile(fileModule);
-          CanClose := True;
+//          Rewrite(fileDevice);
+//          for i := 0 to mmoDevice.Lines.Count - 1 do
+//            Writeln(fileDevice, mmoDevice.Lines[i]);
+//          CloseFile(fileDevice);
+//
+//          Rewrite(fileModule);
+//          for i := 0 to mmoDevice.Lines.Count - 1 do
+//            Writeln(fileModule, mmoModule.Lines[i]);
+//          CloseFile(fileModule);
+//          CanClose := True;
+          fdmtblDev.SaveToFile(FTabDev, sfJSON);
+          fdmtblDev.Close;
         end;
       7:
         begin
@@ -489,9 +440,6 @@ begin
     end;
   end;
 
-
-  fdmtblDev.SaveToFile(FTabDev, sfJSON);
-  fdmtblDev.Close;
 end;
 //
 
