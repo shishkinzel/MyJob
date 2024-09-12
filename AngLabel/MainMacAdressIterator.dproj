@@ -88,12 +88,9 @@
         <Icon_MainIcon>MainMacAdressIterator_Icon11.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_1.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_1.png</UWP_DelphiLogo150>
-        <VerInfo_MajorVer>2</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Печать серийных нормеров и этикеток;FileVersion=2.2.6.1;InternalName=Shishkkin Igor;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=PrintLabel;ProductVersion=2.2.6.0;Comments=Itrator mac &amp; id </VerInfo_Keys>
+        <VerInfo_MajorVer>3</VerInfo_MajorVer>
+        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Печать серийных нормеров и этикеток;FileVersion=3.0.0.0;InternalName=Shishkkin Igor;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=PrintLabel;ProductVersion=3.0.0.0;Comments=Itrator mac &amp; id </VerInfo_Keys>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_MinorVer>2</VerInfo_MinorVer>
-        <VerInfo_Release>6</VerInfo_Release>
-        <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -110,10 +107,9 @@
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_1.png</UWP_DelphiLogo150>
         <Icon_MainIcon>MainMacAdressIterator_Icon9.ico</Icon_MainIcon>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Программа генерации этикеток;FileVersion=2.2.6.0;InternalName=Шишкин Игорь Николаевич;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=AngLabel ;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=2.2.6.0;Comments=Itrator mac &amp; id </VerInfo_Keys>
-        <VerInfo_MajorVer>2</VerInfo_MajorVer>
-        <VerInfo_MinorVer>2</VerInfo_MinorVer>
-        <VerInfo_Release>6</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Программа генерации этикеток;FileVersion=3.0.0.1;InternalName=Шишкин Игорь Николаевич;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=AngLabel ;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=3.0.0.0;Comments=Itrator mac &amp; id </VerInfo_Keys>
+        <VerInfo_MajorVer>3</VerInfo_MajorVer>
+        <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

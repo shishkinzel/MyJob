@@ -90,6 +90,22 @@ begin
         lblMsg.Caption := '       Не Сохраняем';
         tmrMsg.Interval := 1500;
       end;
+    5:
+      begin
+        lblMsg.WordWrap := False;
+
+        lblTitleMsg.Caption := cs_MsgTitleInfo;
+        lblMsg.Caption := '       Закрываем';
+        tmrMsg.Interval := 1500;
+      end;
+    6:
+      begin
+        lblMsg.WordWrap := False;
+
+        lblTitleMsg.Caption := cs_MsgTitleInfo;
+        lblMsg.Caption := '       Не Закрываем';
+        tmrMsg.Interval := 1500;
+      end;
   end;
 
 end;

@@ -191,10 +191,8 @@ object frmListDevice: TfrmListDevice
     Height = 479
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 448
-    ExplicitHeight = 194
     object lblBtnTitleUp: TLabel
-      Left = 160
+      Left = 12
       Top = 412
       Width = 215
       Height = 16
@@ -404,8 +402,8 @@ object frmListDevice: TfrmListDevice
     end
   end
   object ilPictureMainMenu: TImageList
-    Left = 225
-    Top = 596
+    Left = 745
+    Top = 316
     Bitmap = {
       494C010108004800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -811,8 +809,8 @@ object frmListDevice: TfrmListDevice
       000000000000}
   end
   object ilPictureBtn: TImageList
-    Left = 281
-    Top = 596
+    Left = 737
+    Top = 252
     Bitmap = {
       494C010103000C00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010

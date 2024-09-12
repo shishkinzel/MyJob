@@ -2412,15 +2412,17 @@ begin
 
   mniDate_Apply.Enabled := False;
   mniDate_Show.Enabled := True;
-  mniDate_Print.Enabled := True;
+//  mniDate_Print.Enabled := True;
 end;
 // show
-
 procedure TfrmMAC.mniDate_ShowClick(Sender: TObject);
 var
   f_checked: Integer;
   f_date: string;
 begin
+ // гасим или зажигаем нужные пункты меню
+  mniDate_Show.Enabled := False;
+  mniDate_Print.Enabled := True;
 // задаем место открытие окна
   frmStickCheck.Top := 5;
   frmStickCheck.Left := 5;

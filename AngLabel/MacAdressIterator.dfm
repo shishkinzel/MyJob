@@ -306,6 +306,7 @@ object frmMAC: TfrmMAC
     Top = 120
     Width = 200
     Height = 27
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -320,6 +321,7 @@ object frmMAC: TfrmMAC
     Top = 77
     Width = 300
     Height = 27
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
