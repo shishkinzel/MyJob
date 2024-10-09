@@ -268,6 +268,8 @@ object frmListDevice: TfrmListDevice
       Height = 25
       Caption = #1055#1086#1083#1077' '#1074#1074#1086#1076#1072
       Enabled = False
+      ImageIndex = 1
+      Images = ilPictureMainMenu
       TabOrder = 2
       OnClick = btnTitleInClick
     end
@@ -277,6 +279,8 @@ object frmListDevice: TfrmListDevice
       Width = 120
       Height = 25
       Caption = #1047#1072#1082#1088#1099#1090#1100
+      ImageIndex = 7
+      Images = ilPictureMainMenu
       TabOrder = 3
       OnClick = mniCloseClick
     end
