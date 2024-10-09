@@ -1,0 +1,53 @@
+{ 
+   "494224000150": {
+        "encryption": {
+            "device_key_private": "MIHcAgEBBEIAyj2PfQM0vPob9QaZyDn8IJKe2PANZvyaHj2Z9WB1/3LrXzTCuocfRMLz67wG8qqguayj8yL7H4grcJGPZtFyWqagBwYFK4EEACOhgYkDgYYABAGhaSyNnYCGEh2yxK8rSPJsUfx1Qi9XQkGZTyDrUBZoDo/DEDuQS27jbq6+Zy8XiWT5UnuhgIMJVAMyv6GoA8IJzQFL4kDqs4nE7sEzq6geKUO4hYV4d1k4Gu8KD4bEeEa9fagiYgKG534OriGlbubBagvSTvog5Bfqc0wS6nHhYVOGUg==",
+            "device_key_private_algorithm": "secp521r1",
+            "device_key_private_format": "ietf-crypto-types:ec-private-key-format",
+            "device_key_public": "ZWNkc2Etc2hhMi1uaXN0cDUyMSBBQUFBRTJWalpITmhMWE5vWVRJdGJtbHpkSEExTWpFQUFBQUlibWx6ZEhBMU1qRUFBQUNGQkFHaGFTeU5uWUNHRWgyeXhLOHJTUEpzVWZ4MVFpOVhRa0daVHlEclVCWm9Eby9ERUR1UVMyN2picTYrWnk4WGlXVDVVbnVoZ0lNSlZBTXl2NkdvQThJSnpRRkw0a0RxczRuRTdzRXpxNmdlS1VPNGhZVjRkMWs0R3U4S0Q0YkVlRWE5ZmFnaVlnS0c1MzRPcmlHbGJ1YkJhZ3ZTVHZvZzVCZnFjMHdTNm5IaFlWT0dVZz09",
+            "device_key_public_fingerprints": {
+                "md5": {
+                    "base64": "GDXy3UsQRyRBLwPL0+xQWQ==",
+                    "hex": "18:35:f2:dd:4b:10:47:24:41:2f:03:cb:d3:ec:50:59"
+                },
+                "sha1": {
+                    "base64": "HvTwKQIO1JIY8slcZi1lkdG1Aqs=",
+                    "hex": "1e:f4:f0:29:02:0e:d4:92:18:f2:c9:5c:66:2d:65:91:d1:b5:02:ab"
+                },
+                "sha256": {
+                    "base64": "yYIH3+tEmw9R9ErLHkW35uMgGlDe3tPf7yAn0WLHK30=",
+                    "hex": "c9:82:07:df:eb:44:9b:0f:51:f4:4a:cb:1e:45:b7:e6:e3:20:1a:50:de:de:d3:df:ef:20:27:d1:62:c7:2b:7d"
+                }
+            },
+            "device_key_public_format": "ietf-crypto-types:ssh-public-key-format",
+            "fs_cipher": "adiantum",
+            "fs_master_key": "g87gC2QTNRyQAxQz9HUlt4JsFY5qlqUXg6t9oFQtXr/XZ+aoMPYpo8B9LmgbTjdj3jRs8rVs15mnPC2wLMt6zg==",
+            "fs_master_key_algorithm": "fscrypt-kdf",
+            "fs_master_key_format": "ietf-crypto-types:octet-string-key-format",
+            "fs_padding": 32,
+            "fs_policy_version": 1,
+            "kdm": "qWOfS+VIN6s=",
+            "type": "software",
+            "u_boot_environment_cipher": "aes-128-cbc",
+            "u_boot_iv": "RltTg+3Jc0pI+p0/zqpO3Q==",
+            "u_boot_key": "ThRwpvB/RLWYFGTodRuneg==",
+            "u_boot_password": "dcf6-08f3-2bd0-d4f6-29e8-c152-6855-740f",
+            "u_boot_password_kdf": "pbkdf2hmac-sha256-512",
+            "u_boot_password_kdm": "qWOfS+VIN6s=",
+            "u_boot_password_salt": "RltTg+3Jc0pI+p0/zqpO3Q=="
+        },
+        "environment": {
+            "boot-password": "dcf6-08f3-2bd0-d4f6-29e8-c152-6855-740f",
+            "device-id-key": "ietf-crypto-types:ec-private-key-format,secp521r1,3081dc020101044200ca3d8f7d0334bcfa1bf50699c839fc20929ed8f00d66fc9a1e3d99f56075ff72eb5f34c2ba871f44c2f3ebbc06f2aaa0b9aca3f322fb1f882b70918f66d1725aa6a00706052b81040023a18189038186000401a1692c8d9d8086121db2c4af2b48f26c51fc75422f574241994f20eb5016680e8fc3103b904b6ee36eaebe672f178964f9527ba1808309540332bfa1a803c209cd014be240eab389c4eec133aba81e2943b88585787759381aef0a0f86c47846bd7da822620286e77e0eae21a56ee6c16a0bd24efa20e417ea734c12ea71e161538652",
+            "device-name": "msbs-mk",
+            "eth1addr": "68:EB:C5:30:BB:FB",
+            "eth2addr": "68:EB:C5:30:BB:FC",
+            "eth3addr": "68:EB:C5:30:BB:FD",
+            "ethaddr": "68:EB:C5:30:BB:FA",
+            "filesystem-key": "ietf-crypto-types:octet-string-key-format,fscrypt-kdf,83cee00b6413351c90031433f47525b7826c158e6a96a51783ab7da0542d5ebfd767e6a830f629a3c07d2e681b4e3763de346cf2b56cd799a73c2db02ccb7ace",
+            "serial#": "494224000150"
+        },
+        "selector": "msbs-mk!sapphire-3u_2.0",
+        "version": "3.8.18_20230329"
+    }
+}
