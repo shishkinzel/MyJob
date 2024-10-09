@@ -16,34 +16,27 @@ object frm_conJson: Tfrm_conJson
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object mmo_conJson: TMemo
-    Left = 88
-    Top = 351
-    Width = 911
-    Height = 153
-    TabOrder = 0
-  end
   object btn_conJson: TBitBtn
     Left = 24
     Top = 528
     Width = 75
     Height = 25
     Caption = #1057#1090#1072#1088#1090
-    TabOrder = 1
+    TabOrder = 0
     OnClick = btn_conJsonClick
   end
   object pnl_downConJson: TPanel
     Left = 0
     Top = 0
     Width = 1000
-    Height = 345
+    Height = 513
     Align = alTop
-    TabOrder = 2
+    TabOrder = 1
     object dbG_conJson: TDBGrid
       Left = 1
       Top = 26
       Width = 998
-      Height = 318
+      Height = 486
       Align = alClient
       DataSource = ds_conJson
       TabOrder = 0

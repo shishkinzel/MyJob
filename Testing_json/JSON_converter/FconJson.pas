@@ -12,7 +12,6 @@ uses
 
 type
   Tfrm_conJson = class(TForm)
-    mmo_conJson: TMemo;
     btn_conJson: TBitBtn;
     mm_conJson: TMainMenu;
     mni_conJsonFile: TMenuItem;
@@ -78,6 +77,10 @@ var
 begin
 
   JSON := TJSONObject.ParseJSONValue(fStringList.Text) as TJSONObject;
+
+  // открываем бд
+  db_memTab_conJson.Open;
+
                 // перебираем идентификаторы устройств
   for JP in JSON do
   begin
@@ -89,13 +92,22 @@ begin
     JSON.Values[JP.JsonString.Value].TryGetValue('version', ver);
 
     // печатаем
-    mmo_conJson.Lines.Add(JP.JsonString.Value);
-    mmo_conJson.Lines.Add(fname);
-    mmo_conJson.Lines.Add(ver);
-    mmo_conJson.Lines.Add(mac);
-    mmo_conJson.Lines.Add(serial);
-    mmo_conJson.Lines.Add(selector);
-
+//    mmo_conJson.Lines.Add(JP.JsonString.Value);
+//    mmo_conJson.Lines.Add(fname);
+//    mmo_conJson.Lines.Add(ver);
+//    mmo_conJson.Lines.Add(mac);
+//    mmo_conJson.Lines.Add(serial);
+//    mmo_conJson.Lines.Add(selector);
+    db_memTab_conJson.Insert;
+    with db_memTab_conJson.Fields do
+    begin
+      FieldByNumber(2).AsString := fname;
+      FieldByNumber(3).AsString := selector;
+      FieldByNumber(4).AsString := serial;
+      FieldByNumber(5).AsString := mac;
+      FieldByNumber(6).AsString := ver;
+    end;
+    db_memTab_conJson.Next;
   end;
   JSON.Free;
 
