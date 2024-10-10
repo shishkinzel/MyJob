@@ -66,9 +66,9 @@ end;
 procedure Tfrm_conJson_statistic.btn_conJsonClick(Sender: TObject);
 var
   JSON: TJSONObject;
-  JP: TJSONPair;
-  mac, ver, fname, serial, selector: string;
-  i: Integer;
+  JP, JP2: TJSONPair;
+  attempt, original, proposed, date, serial, selector: string;
+  maxid: Integer;
   ftemp_mac: string;
 begin
 
@@ -77,34 +77,32 @@ begin
   // открываем бд
   db_memTab_conJson_statistic.Open;
 
-                // перебираем идентификаторы устройств
+  // перебираем идентификаторы устройств
   for JP in JSON do
   begin
-  // начальные установки
-    i := 1;
-    // берем нужные поля по Идентификатору
-    JSON.Values[JP.JsonString.Value].TryGetValue('environment.ethaddr', mac);
-// пытаемся найти первый непустой mac - адрес
-    while mac = '' do
+    // ищем максимальный номер 1,2,3... внутри идентификатора
+    maxid := 0;
+    for JP2 in JP.JsonValue as TJSONObject do
     begin
-      ftemp_mac := 'environment.eth' + i.ToString + 'addr';
-      JSON.Values[JP.JsonString.Value].TryGetValue(ftemp_mac, mac);
-      Inc(i);
+      if maxid < JP2.JsonString.Value.ToInteger then
+        maxid := JP2.JsonString.Value.ToInteger;
     end;
-
-    JSON.Values[JP.JsonString.Value].TryGetValue('environment.device-name', fname);
-    JSON.Values[JP.JsonString.Value].TryGetValue('environment.serial#', serial);
-    JSON.Values[JP.JsonString.Value].TryGetValue('selector', selector);
-    JSON.Values[JP.JsonString.Value].TryGetValue('version', ver);
+    // берем нужные поля по Идентификатору и максимальному номеру
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.original-firmware-version', original);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.proposed-firmware-version', proposed);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.request-date', date);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.requested-serial', serial);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.selector', selector);
 
     db_memTab_conJson_statistic.Insert;
     with db_memTab_conJson_statistic.Fields do
     begin
-      FieldByNumber(2).AsString := fname;
+      FieldByNumber(2).AsString := maxid.ToString;
       FieldByNumber(3).AsString := selector;
       FieldByNumber(4).AsString := serial;
-      FieldByNumber(5).AsString := mac;
-      FieldByNumber(6).AsString := ver;
+      FieldByNumber(5).AsString := date;
+      FieldByNumber(6).AsString := original;
+      FieldByNumber(7).AsString := proposed;
     end;
     db_memTab_conJson_statistic.Next;
   end;

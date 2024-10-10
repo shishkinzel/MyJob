@@ -32,8 +32,6 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     Height = 513
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = -44
-    ExplicitWidth = 1000
     object dbG_conJson_statistic: TDBGrid
       Left = 1
       Top = 26
@@ -56,7 +54,6 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
       DataSource = ds_conJson_statistic
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 998
     end
   end
   object db_memTab_conJson_statistic: TFDMemTable
@@ -72,17 +69,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
         Size = 10
       end
       item
-        Name = 'original_version'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'proposed_version'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'request_date'
+        Name = 'selector'
         DataType = ftString
         Size = 50
       end
@@ -92,9 +79,19 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
         Size = 20
       end
       item
-        Name = 'selector'
+        Name = 'request_date'
         DataType = ftString
         Size = 50
+      end
+      item
+        Name = 'original_version'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'proposed_version'
+        DataType = ftString
+        Size = 20
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -108,28 +105,42 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     Left = 48
     Top = 136
     object db_memTab_conJson_statisticid_key_statistic: TAutoIncField
+      DisplayLabel = 'id_key_st'
+      DisplayWidth = 9
       FieldName = 'id_key_statistic'
     end
     object db_memTab_conJson_statisticattempt: TStringField
+      DisplayLabel = #1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080
+      DisplayWidth = 13
       FieldName = 'attempt'
       Size = 10
     end
-    object db_memTab_conJson_statisticoriginal_version: TStringField
-      FieldName = 'original_version'
-    end
-    object db_memTab_conJson_statisticproposed_version: TStringField
-      FieldName = 'proposed_version'
-    end
-    object db_memTab_conJson_statisticrequest_date: TStringField
-      FieldName = 'request_date'
+    object db_memTab_conJson_statisticselector: TStringField
+      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1080#1079#1076#1077#1083#1080#1103
+      DisplayWidth = 32
+      FieldName = 'selector'
       Size = 50
     end
     object db_memTab_conJson_statisticrequest_serial: TStringField
+      DisplayLabel = #1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088
+      DisplayWidth = 16
       FieldName = 'request_serial'
     end
-    object db_memTab_conJson_statisticselector: TStringField
-      FieldName = 'selector'
+    object db_memTab_conJson_statisticrequest_date: TStringField
+      DisplayLabel = #1044#1072#1090#1072' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1103
+      DisplayWidth = 32
+      FieldName = 'request_date'
       Size = 50
+    end
+    object db_memTab_conJson_statisticoriginal_version: TStringField
+      DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083#1100#1085#1099#1081
+      DisplayWidth = 20
+      FieldName = 'original_version'
+    end
+    object db_memTab_conJson_statisticproposed_version: TStringField
+      DisplayLabel = #1055#1088#1077#1076#1083#1086#1078#1077#1085#1085#1099#1081
+      DisplayWidth = 20
+      FieldName = 'proposed_version'
     end
   end
   object dlgOpen_conJson_statistic: TOpenDialog
