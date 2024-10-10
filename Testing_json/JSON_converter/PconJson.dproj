@@ -102,6 +102,10 @@
             <Form>frm_conJson</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="FconJson_statistic.pas">
+            <Form>frm_conJson_statistic</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

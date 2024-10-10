@@ -1,0 +1,220 @@
+{
+ "445124001912": {
+        "1": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 224.545277
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 41470878.715945
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 849359344
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 20.480862
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.0_20240425",
+            "request-date": "2024-04-25T06:47:44.937042+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 246.376005
+                }
+            },
+            "requested-serial": "445124001912",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        },
+        "2": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 26.256405
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 3708951.0752
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 816955888
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 220.266019
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.5_20240918",
+            "request-date": "2024-09-23T11:42:17.582274+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 246.794276
+                }
+            },
+            "requested-serial": "445124001912",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        }
+    },
+    "445124001913": {
+        "1": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 247.702774
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 21845304.51365
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 849379824
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 38.881574
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.0_20240425",
+            "request-date": "2024-04-25T06:47:46.328937+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 289.986815
+                }
+            },
+            "requested-serial": "445124001913",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        }
+    },
+    "445124001914": {
+        "1": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 239.39499
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 27932894.892319
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 849363440
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 30.407283
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.0_20240425",
+            "request-date": "2024-04-25T06:47:45.365415+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 272.091076
+                }
+            },
+            "requested-serial": "445124001914",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        },
+        "2": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 25.204743
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 673811.401398
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 816951792
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 1212.43391
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.5_20240918",
+            "request-date": "2024-10-02T16:05:25.000810+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 1238.226035
+                }
+            },
+            "requested-serial": "445124001914",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        }
+    },
+    "445124001915": {
+        "1": {
+            "current-firmware-version": "3.9.0",
+            "encryption-type": "software",
+            "firmware-generation": {
+                "time": {
+                    "units": "seconds",
+                    "value": 250.195699
+                }
+            },
+            "firmware-transfer": {
+                "rate": {
+                    "units": "bits/second",
+                    "value": 21145798.647407
+                },
+                "size": {
+                    "units": "bits",
+                    "value": 849375728
+                },
+                "time": {
+                    "units": "seconds",
+                    "value": 40.167588
+                }
+            },
+            "original-firmware-version": "3.9.0_20240322",
+            "proposed-firmware-version": "3.9.0_20240425",
+            "request-date": "2024-04-25T06:47:45.766379+03:00",
+            "request-handling": {
+                "time": {
+                    "units": "seconds",
+                    "value": 293.77698
+                }
+            },
+            "requested-serial": "445124001915",
+            "selector": "corundum-10t!corundum-10t_2.1"
+        }
+    }
+}

@@ -21,7 +21,7 @@ object frm_conJson: Tfrm_conJson
     Top = 528
     Width = 75
     Height = 25
-    Caption = #1057#1090#1072#1088#1090
+    Caption = #1057#1095#1080#1090#1072#1090#1100
     TabOrder = 0
     OnClick = btn_conJsonClick
   end
@@ -68,6 +68,13 @@ object frm_conJson: Tfrm_conJson
       object mni_conJsonSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
         OnClick = mni_conJsonSaveClick
+      end
+      object mni_OneSeparator: TMenuItem
+        Caption = '-'
+      end
+      object mni_conJson_statistic_transfer: TMenuItem
+        Caption = #1050#1086#1085#1074#1077#1088#1090#1072#1094#1080#1103' '#1092#1072#1081#1083#1072' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
+        OnClick = mni_conJson_statistic_transferClick
       end
     end
   end
