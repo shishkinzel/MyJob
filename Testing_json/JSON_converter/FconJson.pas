@@ -212,7 +212,7 @@ begin
       db_memTab_conJson.Open;
       db_memTab_conJson.LoadFromFile(f_Path_FileJson, sfJSON);
     end;
-    fStringList.Free;
+//    fStringList.Free;
   end;
 end;
 
@@ -239,7 +239,7 @@ end;
 
 procedure Tfrm_conJson.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  fStringList.Free;
+//  fStringList.Free;
   db_memTab_conJson.Active := False;
 end;
 
