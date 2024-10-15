@@ -106,6 +106,10 @@
             <Form>frm_conJson_statistic</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="FconJson_compositeTable.pas">
+            <Form>frm_CompositeTable</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

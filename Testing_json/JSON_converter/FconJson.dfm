@@ -2,8 +2,8 @@ object frm_conJson: Tfrm_conJson
   Left = 0
   Top = 0
   Caption = 'Converter'
-  ClientHeight = 699
-  ClientWidth = 1000
+  ClientHeight = 701
+  ClientWidth = 974
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,26 +17,33 @@ object frm_conJson: Tfrm_conJson
   PixelsPerInch = 96
   TextHeight = 13
   object btn_conJson: TBitBtn
-    Left = 24
-    Top = 528
-    Width = 75
-    Height = 25
-    Caption = #1057#1095#1080#1090#1072#1090#1100
+    Left = 280
+    Top = 632
+    Width = 500
+    Height = 40
+    Caption = #1053#1072#1095#1072#1090#1100' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1102
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     OnClick = btn_conJsonClick
   end
   object pnl_downConJson: TPanel
     Left = 0
     Top = 0
-    Width = 1000
-    Height = 513
+    Width = 974
+    Height = 593
     Align = alTop
     TabOrder = 1
     object dbG_conJson: TDBGrid
       Left = 1
       Top = 26
-      Width = 998
-      Height = 486
+      Width = 972
+      Height = 566
       Align = alClient
       DataSource = ds_conJson
       TabOrder = 0
@@ -49,7 +56,7 @@ object frm_conJson: Tfrm_conJson
     object dbnav_conJson: TDBNavigator
       Left = 1
       Top = 1
-      Width = 998
+      Width = 972
       Height = 25
       DataSource = ds_conJson
       Align = alTop
@@ -59,8 +66,24 @@ object frm_conJson: Tfrm_conJson
   object mm_conJson: TMainMenu
     Left = 8
     Top = 360
-    object mni_conJsonFile: TMenuItem
+    object mni_MainFile: TMenuItem
       Caption = #1060#1072#1081#1083
+      object mni_MainOpen: TMenuItem
+        Caption = #1054#1090#1082#1088#1099#1090#1100
+        OnClick = mni_MainOpenClick
+      end
+      object mni_MainSave: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      end
+      object mni_SeparatorOne_main: TMenuItem
+        Caption = '-'
+      end
+      object mni_MainReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+      end
+    end
+    object mni_conJsonFile_Converter: TMenuItem
+      Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100
         OnClick = mni_conJsonOpenClick
@@ -77,6 +100,13 @@ object frm_conJson: Tfrm_conJson
         OnClick = mni_conJson_statistic_transferClick
       end
     end
+    object mni_SQL_Form: TMenuItem
+      Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072
+      object mni_SQL_Form_direct: TMenuItem
+        Caption = #1055#1077#1088#1077#1081#1090#1080
+        OnClick = mni_SQL_Form_directClick
+      end
+    end
   end
   object dlgOpen_conJson: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
@@ -84,7 +114,9 @@ object frm_conJson: Tfrm_conJson
     Top = 360
   end
   object dlgSave_conJson: TSaveDialog
-    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    DefaultExt = 'fds'
+    FileName = 'device_json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 120
     Top = 360
@@ -172,5 +204,22 @@ object frm_conJson: Tfrm_conJson
     DataSet = db_memTab_conJson
     Left = 128
     Top = 216
+  end
+  object dlgOpen_MainFile: TOpenDialog
+    DefaultExt = 'fds'
+    FileName = 'device_json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    Left = 16
+    Top = 424
+  end
+  object dlgSave_MainFile: TSaveDialog
+    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 80
+    Top = 416
+  end
+  object fdjson_conJson: TFDStanStorageJSONLink
+    Left = 24
+    Top = 528
   end
 end

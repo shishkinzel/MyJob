@@ -2,8 +2,8 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
   Left = 0
   Top = 0
   Caption = 'Converter_statistic'
-  ClientHeight = 681
-  ClientWidth = 956
+  ClientHeight = 701
+  ClientWidth = 974
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,26 +17,33 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
   PixelsPerInch = 96
   TextHeight = 13
   object btn_conJson: TBitBtn
-    Left = 24
-    Top = 528
-    Width = 75
-    Height = 25
-    Caption = #1057#1095#1080#1090#1072#1090#1100
+    Left = 280
+    Top = 632
+    Width = 500
+    Height = 40
+    Caption = #1053#1072#1095#1072#1090#1100' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1102
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Anonymous Pro'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     OnClick = btn_conJsonClick
   end
   object pnl_downConJson: TPanel
     Left = 0
     Top = 0
-    Width = 956
-    Height = 513
+    Width = 974
+    Height = 585
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 956
     object dbG_conJson_statistic: TDBGrid
       Left = 1
       Top = 26
-      Width = 954
-      Height = 486
+      Width = 972
+      Height = 558
       Align = alClient
       DataSource = ds_conJson_statistic
       TabOrder = 0
@@ -49,11 +56,12 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     object dbnav_conJson_statistic: TDBNavigator
       Left = 1
       Top = 1
-      Width = 954
+      Width = 972
       Height = 25
       DataSource = ds_conJson_statistic
       Align = alTop
       TabOrder = 1
+      ExplicitWidth = 954
     end
   end
   object db_memTab_conJson_statistic: TFDMemTable
@@ -117,13 +125,13 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     end
     object db_memTab_conJson_statisticselector: TStringField
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1080#1079#1076#1077#1083#1080#1103
-      DisplayWidth = 32
+      DisplayWidth = 36
       FieldName = 'selector'
       Size = 50
     end
     object db_memTab_conJson_statisticrequest_serial: TStringField
       DisplayLabel = #1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088
-      DisplayWidth = 16
+      DisplayWidth = 19
       FieldName = 'request_serial'
     end
     object db_memTab_conJson_statisticrequest_date: TStringField
