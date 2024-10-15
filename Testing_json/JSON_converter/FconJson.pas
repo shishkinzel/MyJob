@@ -155,6 +155,8 @@ begin
     db_memTab_conJson.Next;
   end;
   btn_conJson.Enabled := False;
+
+  fStringList.Free;
 // уничтожаем объект JSON
   JSON.Free;
 
@@ -175,6 +177,7 @@ begin
     fStringList.LoadFromFile(f_Path_FileJson);
     btn_conJson.Enabled := True;
   end;
+
 end;
 
 procedure Tfrm_conJson.mni_conJsonSaveClick(Sender: TObject);
@@ -212,7 +215,7 @@ begin
       db_memTab_conJson.Open;
       db_memTab_conJson.LoadFromFile(f_Path_FileJson, sfJSON);
     end;
-//    fStringList.Free;
+    fStringList.Free;
   end;
 end;
 
@@ -233,14 +236,15 @@ i : Integer;
 begin
   frm_CompositeTable.Show;
 end;
-
-
 // Закрытие формы
-
 procedure Tfrm_conJson.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-//  fStringList.Free;
   db_memTab_conJson.Active := False;
+  if not (Assigned(fStringList)) then
+  begin
+    fStringList.Free;
+  end;
+
 end;
 
 end.
