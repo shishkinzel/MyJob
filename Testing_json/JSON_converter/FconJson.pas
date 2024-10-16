@@ -78,7 +78,7 @@ uses
     Реализация методов
 
  }
- // функция проверки валидности JSON файла
+// функция проверки валидности JSON файла
 function CheckJSON(Buffer: string): Boolean;
 var
   js: TJSONObject;
@@ -99,8 +99,6 @@ begin
 end;
 
 
-
-
 // создание формы
 
 procedure Tfrm_conJson.FormCreate(Sender: TObject);
@@ -117,6 +115,9 @@ var
   i: Integer;
   ftemp_mac: string;
 begin
+// формируем StringList
+    fStringList := TStringList.Create;
+    fStringList.LoadFromFile(fPath_jsonFile);
 
   JSON := TJSONObject.ParseJSONValue(fStringList.Text) as TJSONObject;
   // очищаем бд
@@ -156,6 +157,7 @@ begin
   end;
   btn_conJson.Enabled := False;
 
+ // уничтожаем StringList
   fStringList.Free;
 // уничтожаем объект JSON
   JSON.Free;
@@ -165,16 +167,11 @@ end;
 ____________________________________________________________________________________________________
 }
 procedure Tfrm_conJson.mni_conJsonOpenClick(Sender: TObject);
-var
-  i: Integer;
-  f_fileTemp: file;
-  f_Path_FileJson: string;
+
 begin
   if dlgOpen_conJson.Execute then
   begin
-    f_Path_FileJson := dlgOpen_conJson.FileName;
-    fStringList := TStringList.Create;
-    fStringList.LoadFromFile(f_Path_FileJson);
+    fPath_jsonFile:= dlgOpen_conJson.FileName;
     btn_conJson.Enabled := True;
   end;
 
@@ -182,8 +179,6 @@ end;
 
 procedure Tfrm_conJson.mni_conJsonSaveClick(Sender: TObject);
 var
-  i: Integer;
-  f_fileTemp: file;
   f_Path_FileJson: string;
 begin
   if dlgSave_conJson.Execute() then
@@ -200,22 +195,21 @@ ________________________________________________________________________________
  // открыть сохраненый конвертируемый файл
 procedure Tfrm_conJson.mni_MainOpenClick(Sender: TObject);
 var
-  i: Integer;
-  f_fileTemp: file;
   f_Path_FileJson: string;
+  f_StringList : TStringList;
 begin
   if dlgOpen_MainFile.Execute() then
   begin
     f_Path_FileJson := dlgOpen_MainFile.FileName;
-    fStringList := TStringList.Create;
-    fStringList.LoadFromFile(f_Path_FileJson);
-    if CheckJSON(fStringList.Text) then
+    f_StringList := TStringList.Create;
+    f_StringList.LoadFromFile(f_Path_FileJson);
+    if CheckJSON(f_StringList.Text) then
     begin
       db_memTab_conJson.Close;
       db_memTab_conJson.Open;
       db_memTab_conJson.LoadFromFile(f_Path_FileJson, sfJSON);
     end;
-    fStringList.Free;
+    f_StringList.Free;
   end;
 end;
 
@@ -231,20 +225,14 @@ end;
 
 // открытие сводной таблицы
 procedure Tfrm_conJson.mni_SQL_Form_directClick(Sender: TObject);
-var
-i : Integer;
 begin
   frm_CompositeTable.Show;
 end;
 // Закрытие формы
+
 procedure Tfrm_conJson.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   db_memTab_conJson.Active := False;
-  if not (Assigned(fStringList)) then
-  begin
-    fStringList.Free;
-  end;
-
 end;
 
 end.
