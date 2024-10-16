@@ -12,7 +12,6 @@ uses
 type
   Tfrm_CompositeTable = class(TForm)
     btn_conJson_CompositeTable: TBitBtn;
-    db_memTab_CompositeTable: TFDMemTable;
     dlgOpen_CompositeTable: TOpenDialog;
     dlgSave_CompositeTable: TSaveDialog;
     mm_CompositeTable: TMainMenu;
@@ -23,16 +22,6 @@ type
     dbG_conJson_statistic: TDBGrid;
     dbnav_conJson_statistic: TDBNavigator;
     ds_CompositeTable: TDataSource;
-    db_memTab_CompositeTableid_key: TAutoIncField;
-    db_memTab_CompositeTabledevice_name: TStringField;
-    db_memTab_CompositeTabledevice_selector: TStringField;
-    db_memTab_CompositeTableid_serial: TStringField;
-    db_memTab_CompositeTableethaddr: TStringField;
-    db_memTab_CompositeTabledevice_version: TStringField;
-    db_memTab_CompositeTableattempt: TStringField;
-    db_memTab_CompositeTablerequest_date: TStringField;
-    db_memTab_CompositeTableproposedl_version: TStringField;
-    db_memTab_CompositeTableoriginal_version: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -47,18 +36,22 @@ var
 implementation
 
 uses
-  FconJson;
+  FconJson, DMconJson;
 
 {$R *.dfm}
 
 procedure Tfrm_CompositeTable.FormCreate(Sender: TObject);
+var
+i : Integer;
 begin
-  db_memTab_CompositeTable.Open;
+
 end;
 
 procedure Tfrm_CompositeTable.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+i : Integer;
 begin
-  db_memTab_CompositeTable.Close;
+
 end;
 
 end.

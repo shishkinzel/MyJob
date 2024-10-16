@@ -19,19 +19,12 @@ type
     mni_conJsonSave: TMenuItem;
     dlgOpen_conJson: TOpenDialog;
     dlgSave_conJson: TSaveDialog;
-    db_memTab_conJson: TFDMemTable;
     ds_conJson: TDataSource;
     dbG_conJson: TDBGrid;
     dbnav_conJson: TDBNavigator;
     pnl_downConJson: TPanel;
-    db_memTab_conJsonId_key_db: TAutoIncField;
-    db_memTab_conJsondeviceName: TStringField;
-    db_memTab_conJsonselector: TStringField;
-    db_memTab_conJsonserialId: TStringField;
-    db_memTab_conJsonethaddr: TStringField;
-    db_memTab_conJsonversion: TStringField;
     mni_OneSeparator: TMenuItem;
-    mni_conJson_statistic_transfer: TMenuItem;
+    mni_Reset: TMenuItem;
     mni_MainFile: TMenuItem;
     mni_MainOpen: TMenuItem;
     mni_MainSave: TMenuItem;
@@ -41,6 +34,7 @@ type
     mni_MainReset: TMenuItem;
     mni_SQL_Form: TMenuItem;
     mni_SQL_Form_direct: TMenuItem;
+    mni_conJson_statistic_transfer: TMenuItem;
     fdjson_conJson: TFDStanStorageJSONLink;
     procedure btn_conJsonClick(Sender: TObject);
     procedure mni_conJsonOpenClick(Sender: TObject);
@@ -50,6 +44,7 @@ type
     procedure mni_conJson_statistic_transferClick(Sender: TObject);
     procedure mni_SQL_Form_directClick(Sender: TObject);
     procedure mni_MainOpenClick(Sender: TObject);
+    procedure mni_MainResetClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,7 +66,7 @@ var
 implementation
 
 uses
-  System.JSON, FconJson_statistic, FconJson_compositeTable;
+  System.JSON, FconJson_statistic, FconJson_compositeTable, DMconJson;
 
 {$R *.dfm}
 {
@@ -102,8 +97,10 @@ end;
 // создание формы
 
 procedure Tfrm_conJson.FormCreate(Sender: TObject);
+var
+i : Integer;
 begin
-  db_memTab_conJson.Active := True;
+
 
 end;
 
@@ -121,9 +118,9 @@ begin
 
   JSON := TJSONObject.ParseJSONValue(fStringList.Text) as TJSONObject;
   // очищаем бд
-    db_memTab_conJson.Close;
+    dm_conJson.db_memTab_conJson.Close;
   // открываем бд
-  db_memTab_conJson.Open;
+  dm_conJson.db_memTab_conJson.Open;
 //  db_memTab_conJson.EmptyDataSet;
                 // перебираем идентификаторы устройств
   for JP in JSON do
@@ -144,8 +141,8 @@ begin
     JSON.Values[JP.JsonString.Value].TryGetValue('environment.serial#', serial);
     JSON.Values[JP.JsonString.Value].TryGetValue('selector', selector);
     JSON.Values[JP.JsonString.Value].TryGetValue('version', ver);
-    db_memTab_conJson.Insert;
-    with db_memTab_conJson.Fields do
+    dm_conJson.db_memTab_conJson.Insert;
+    with dm_conJson.db_memTab_conJson.Fields do
     begin
       FieldByNumber(2).AsString := fname;
       FieldByNumber(3).AsString := selector;
@@ -153,7 +150,7 @@ begin
       FieldByNumber(5).AsString := mac;
       FieldByNumber(6).AsString := ver;
     end;
-    db_memTab_conJson.Next;
+    dm_conJson.db_memTab_conJson.Next;
   end;
   btn_conJson.Enabled := False;
 
@@ -161,18 +158,19 @@ begin
   fStringList.Free;
 // уничтожаем объект JSON
   JSON.Free;
-
+  mni_SQL_Form.Enabled := True;
 end;
 {        Открытие секции чтение и записи конвертируемых файлов
 ____________________________________________________________________________________________________
 }
 procedure Tfrm_conJson.mni_conJsonOpenClick(Sender: TObject);
-
 begin
   if dlgOpen_conJson.Execute then
   begin
-    fPath_jsonFile:= dlgOpen_conJson.FileName;
+    fPath_jsonFile := dlgOpen_conJson.FileName;
     btn_conJson.Enabled := True;
+    if btn_conJson.CanFocus then
+      btn_conJson.SetFocus;
   end;
 
 end;
@@ -185,7 +183,7 @@ begin
   begin
     f_Path_FileJson := dlgSave_conJson.FileName;
   end;
-  db_memTab_conJson.SaveToFile(f_Path_FileJson, sfJSON);
+  dm_conJson.db_memTab_conJson.SaveToFile(f_Path_FileJson, sfJSON);
 end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -205,15 +203,14 @@ begin
     f_StringList.LoadFromFile(f_Path_FileJson);
     if CheckJSON(f_StringList.Text) then
     begin
-      db_memTab_conJson.Close;
-      db_memTab_conJson.Open;
-      db_memTab_conJson.LoadFromFile(f_Path_FileJson, sfJSON);
+      dm_conJson.db_memTab_conJson.Close;
+      dm_conJson.db_memTab_conJson.Open;
+      dm_conJson.db_memTab_conJson.LoadFromFile(f_Path_FileJson, sfJSON);
     end;
     f_StringList.Free;
   end;
 end;
 
-// *************************************************************************************************
 
 // Переход на форму статистики
 
@@ -228,11 +225,32 @@ procedure Tfrm_conJson.mni_SQL_Form_directClick(Sender: TObject);
 begin
   frm_CompositeTable.Show;
 end;
+
+// обработка кнопки Сброс
+procedure Tfrm_conJson.mni_MainResetClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  dbG_conJson.DataSource.DataSet.Close;
+  dbG_conJson.DataSource.DataSet.Open;
+end;
+
+
+
+
+// *************************************************************************************************
+
+
+
+
+
 // Закрытие формы
 
 procedure Tfrm_conJson.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+i : Integer;
 begin
-  db_memTab_conJson.Active := False;
+
 end;
 
 end.

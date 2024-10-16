@@ -7,12 +7,11 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, Vcl.DBCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.StdCtrls, Vcl.Buttons;
+  Vcl.StdCtrls, Vcl.Buttons, FireDAC.Stan.StorageJSON;
 
 type
   Tfrm_conJson_statistic = class(TForm)
     btn_conJson: TBitBtn;
-    db_memTab_conJson_statistic: TFDMemTable;
     dlgOpen_conJson_statistic: TOpenDialog;
     dlgSave_conJson_statistic: TSaveDialog;
     mm_conJson_statistic: TMainMenu;
@@ -23,18 +22,23 @@ type
     dbG_conJson_statistic: TDBGrid;
     dbnav_conJson_statistic: TDBNavigator;
     ds_conJson_statistic: TDataSource;
-    db_memTab_conJson_statisticid_key_statistic: TAutoIncField;
-    db_memTab_conJson_statisticoriginal_version: TStringField;
-    db_memTab_conJson_statisticproposed_version: TStringField;
-    db_memTab_conJson_statisticrequest_date: TStringField;
-    db_memTab_conJson_statisticrequest_serial: TStringField;
-    db_memTab_conJson_statisticselector: TStringField;
-    db_memTab_conJson_statisticattempt: TStringField;
+    mni_MainFile: TMenuItem;
+    mni_MainOpen: TMenuItem;
+    mni_MainSave: TMenuItem;
+    mni_SeparatorOne_main: TMenuItem;
+    mni_MainReset: TMenuItem;
+    mni_SeparatorOne: TMenuItem;
+    mni_Reset: TMenuItem;
+    dlgOpen_MainFile: TOpenDialog;
+    dlgSave_MainFile: TSaveDialog;
+    fdjson_conJson: TFDStanStorageJSONLink;
     procedure mni_conJsonOpenClick(Sender: TObject);
     procedure mni_conJsonSaveClick(Sender: TObject);
     procedure btn_conJsonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure mni_MainOpenClick(Sender: TObject);
+    procedure mni_MainResetClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,15 +56,18 @@ var
 implementation
 
 uses
-  System.JSON, FconJson;
+  System.JSON, FconJson, DMconJson ;
 
 {$R *.dfm}
 
 
 // Создание формы
 procedure Tfrm_conJson_statistic.FormCreate(Sender: TObject);
+var
+i : Integer;
 begin
-  db_memTab_conJson_statistic.Active := True;
+
+
 end;
 
 procedure Tfrm_conJson_statistic.btn_conJsonClick(Sender: TObject);
@@ -71,11 +78,15 @@ var
   maxid: Integer;
   ftemp_mac: string;
 begin
+  // формируем StringList
+  fStringList := TStringList.Create;
+  fStringList.LoadFromFile(fPath_jsonFile);
 
   JSON := TJSONObject.ParseJSONValue(fStringList.Text) as TJSONObject;
-
+    // очищаем бд
+  dm_conJson.db_memTab_conJson_statistic.Close;
   // открываем бд
-  db_memTab_conJson_statistic.Open;
+  dm_conJson.db_memTab_conJson_statistic.Open;
 
   // перебираем идентификаторы устройств
   for JP in JSON do
@@ -94,8 +105,8 @@ begin
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.requested-serial', serial);
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.selector', selector);
 
-    db_memTab_conJson_statistic.Insert;
-    with db_memTab_conJson_statistic.Fields do
+    dm_conJson.db_memTab_conJson_statistic.Insert;
+    with dm_conJson.db_memTab_conJson_statistic.Fields do
     begin
       FieldByNumber(2).AsString := maxid.ToString;
       FieldByNumber(3).AsString := selector;
@@ -104,46 +115,88 @@ begin
       FieldByNumber(6).AsString := original;
       FieldByNumber(7).AsString := proposed;
     end;
-    db_memTab_conJson_statistic.Next;
+    dm_conJson.db_memTab_conJson_statistic.Next;
   end;
+  // уничтожаем StringList
+  fStringList.Free;
 
-// уничтожаем объект JSON
-    JSON.Free;
-
-
+  // уничтожаем объект JSON
+  JSON.Free;
+  frm_conJson.mni_SQL_Form_direct.Enabled := True;
 end;
 
 
-
+{        Открытие секции чтение и записи конвертируемых файлов
+____________________________________________________________________________________________________
+}
 procedure Tfrm_conJson_statistic.mni_conJsonOpenClick(Sender: TObject);
-var
-  i: Integer;
-  f_fileTemp: file;
-  f_Path_FileJson: string;
 begin
   if dlgOpen_conJson_statistic.Execute then
   begin
-    f_Path_FileJson := dlgOpen_conJson_statistic.FileName;
-    fStringList := TStringList.Create;
-    fStringList.LoadFromFile(f_Path_FileJson);
+    fPath_jsonFile := dlgOpen_conJson_statistic.FileName;
+    btn_conJson.Enabled := True;
+    if btn_conJson.CanFocus then
+      btn_conJson.SetFocus;
   end;
+  if frm_conJson_statistic.CanFocus then
+    frm_conJson_statistic.SetFocus;
 end;
 
 procedure Tfrm_conJson_statistic.mni_conJsonSaveClick(Sender: TObject);
 var
-  i: Integer;
-  f_fileTemp: file;
   f_Path_FileJson: string;
 begin
-  dlgSave_conJson_statistic.Execute();
+  if dlgSave_conJson_statistic.Execute() then
+  begin
+     f_Path_FileJson := dlgSave_conJson_statistic.FileName;
+  end;
+   dm_conJson.db_memTab_conJson_statistic.SaveToFile(f_Path_FileJson, sfJSON);
 end;
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+{        Открытие секции чтение и записи сконвертируемых файлов
+____________________________________________________________________________________________________
+}
+ // открыть сохраненый конвертируемый файл
+procedure Tfrm_conJson_statistic.mni_MainOpenClick(Sender: TObject);
+var
+  f_Path_FileJson: string;
+  f_StringList: TStringList;
+begin
+  if dlgOpen_MainFile.Execute() then
+  begin
+    f_Path_FileJson := dlgOpen_MainFile.FileName;
+    f_StringList := TStringList.Create;
+    f_StringList.LoadFromFile(f_Path_FileJson);
+    if CheckJSON(f_StringList.Text) then
+    begin
+      dm_conJson.db_memTab_conJson_statistic.Close;
+      dm_conJson.db_memTab_conJson_statistic.Open;
+      dm_conJson.db_memTab_conJson_statistic.LoadFromFile(f_Path_FileJson, sfJSON);
+    end;
+    f_StringList.Free;
+  end;
+end;
+
+// *************************************************************************************************
+
+// обработка кнопки Сброс
+procedure Tfrm_conJson_statistic.mni_MainResetClick(Sender: TObject);
+begin
+  dbG_conJson_statistic.DataSource.DataSet.Close;
+  dbG_conJson_statistic.DataSource.DataSet.Open;
+end;
+
 
 
 // Закрытие формы
 procedure Tfrm_conJson_statistic.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i: Integer;
 begin
-  fStringList.Free;
-  db_memTab_conJson_statistic.Active := False;
+
 end;
 
 end.

@@ -22,6 +22,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     Width = 500
     Height = 40
     Caption = #1053#1072#1095#1072#1090#1100' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1102
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -38,7 +39,6 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     Height = 585
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 956
     object dbG_conJson_statistic: TDBGrid
       Left = 1
       Top = 26
@@ -61,112 +61,43 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
       DataSource = ds_conJson_statistic
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 954
-    end
-  end
-  object db_memTab_conJson_statistic: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'id_key_statistic'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'attempt'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'selector'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'request_serial'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'request_date'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'original_version'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'proposed_version'
-        DataType = ftString
-        Size = 20
-      end>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 48
-    Top = 136
-    object db_memTab_conJson_statisticid_key_statistic: TAutoIncField
-      DisplayLabel = 'id_key_st'
-      DisplayWidth = 9
-      FieldName = 'id_key_statistic'
-    end
-    object db_memTab_conJson_statisticattempt: TStringField
-      DisplayLabel = #1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080
-      DisplayWidth = 13
-      FieldName = 'attempt'
-      Size = 10
-    end
-    object db_memTab_conJson_statisticselector: TStringField
-      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1080#1079#1076#1077#1083#1080#1103
-      DisplayWidth = 36
-      FieldName = 'selector'
-      Size = 50
-    end
-    object db_memTab_conJson_statisticrequest_serial: TStringField
-      DisplayLabel = #1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088
-      DisplayWidth = 19
-      FieldName = 'request_serial'
-    end
-    object db_memTab_conJson_statisticrequest_date: TStringField
-      DisplayLabel = #1044#1072#1090#1072' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1103
-      DisplayWidth = 32
-      FieldName = 'request_date'
-      Size = 50
-    end
-    object db_memTab_conJson_statisticoriginal_version: TStringField
-      DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083#1100#1085#1099#1081
-      DisplayWidth = 20
-      FieldName = 'original_version'
-    end
-    object db_memTab_conJson_statisticproposed_version: TStringField
-      DisplayLabel = #1055#1088#1077#1076#1083#1086#1078#1077#1085#1085#1099#1081
-      DisplayWidth = 20
-      FieldName = 'proposed_version'
     end
   end
   object dlgOpen_conJson_statistic: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    Left = 192
-    Top = 336
+    Left = 32
+    Top = 232
   end
   object dlgSave_conJson_statistic: TSaveDialog
-    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    DefaultExt = 'fds'
+    FileName = 'statistic_json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 424
-    Top = 352
+    Left = 168
+    Top = 232
   end
   object mm_conJson_statistic: TMainMenu
-    Left = 24
-    Top = 360
-    object mni_conJsonFile: TMenuItem
+    Left = 16
+    Top = 80
+    object mni_MainFile: TMenuItem
       Caption = #1060#1072#1081#1083
+      object mni_MainOpen: TMenuItem
+        Caption = #1054#1090#1082#1088#1099#1090#1100
+        OnClick = mni_MainOpenClick
+      end
+      object mni_MainSave: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      end
+      object mni_SeparatorOne_main: TMenuItem
+        Caption = '-'
+      end
+      object mni_MainReset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_MainResetClick
+      end
+    end
+    object mni_conJsonFile: TMenuItem
+      Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100
         OnClick = mni_conJsonOpenClick
@@ -175,11 +106,35 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
         OnClick = mni_conJsonSaveClick
       end
+      object mni_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_Reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_MainResetClick
+      end
     end
   end
   object ds_conJson_statistic: TDataSource
-    DataSet = db_memTab_conJson_statistic
-    Left = 128
-    Top = 216
+    DataSet = dm_conJson.db_memTab_conJson_statistic
+    Left = 936
+    Top = 64
+  end
+  object dlgOpen_MainFile: TOpenDialog
+    DefaultExt = 'fds'
+    FileName = 'device_json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    Left = 32
+    Top = 328
+  end
+  object dlgSave_MainFile: TSaveDialog
+    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 144
+    Top = 328
+  end
+  object fdjson_conJson: TFDStanStorageJSONLink
+    Left = 912
+    Top = 151
   end
 end

@@ -64,8 +64,8 @@ object frm_conJson: Tfrm_conJson
     end
   end
   object mm_conJson: TMainMenu
-    Left = 8
-    Top = 360
+    Left = 16
+    Top = 80
     object mni_MainFile: TMenuItem
       Caption = #1060#1072#1081#1083
       object mni_MainOpen: TMenuItem
@@ -79,7 +79,8 @@ object frm_conJson: Tfrm_conJson
         Caption = '-'
       end
       object mni_MainReset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+        Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_MainResetClick
       end
     end
     object mni_conJsonFile_Converter: TMenuItem
@@ -95,131 +96,58 @@ object frm_conJson: Tfrm_conJson
       object mni_OneSeparator: TMenuItem
         Caption = '-'
       end
-      object mni_conJson_statistic_transfer: TMenuItem
-        Caption = #1050#1086#1085#1074#1077#1088#1090#1072#1094#1080#1103' '#1092#1072#1081#1083#1072' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
-        OnClick = mni_conJson_statistic_transferClick
+      object mni_Reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089#13#10
+        OnClick = mni_MainResetClick
       end
     end
     object mni_SQL_Form: TMenuItem
-      Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072
+      Caption = #1055#1077#1088#1077#1093#1086#1076#1099
+      Enabled = False
+      object mni_conJson_statistic_transfer: TMenuItem
+        Caption = #1058#1072#1073#1083#1080#1094#1072' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
+        OnClick = mni_conJson_statistic_transferClick
+      end
       object mni_SQL_Form_direct: TMenuItem
-        Caption = #1055#1077#1088#1077#1081#1090#1080
+        Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072
+        Enabled = False
         OnClick = mni_SQL_Form_directClick
       end
     end
   end
   object dlgOpen_conJson: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    Left = 56
-    Top = 360
+    Left = 40
+    Top = 232
   end
   object dlgSave_conJson: TSaveDialog
     DefaultExt = 'fds'
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 120
-    Top = 360
-  end
-  object db_memTab_conJson: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'Id_key_db'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'deviceName'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'selector'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'serialId'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'ethaddr'
-        DataType = ftString
-        Size = 30
-      end
-      item
-        Name = 'version'
-        DataType = ftString
-        Size = 30
-      end>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 24
-    Top = 152
-    object db_memTab_conJsonId_key_db: TAutoIncField
-      Alignment = taCenter
-      DisplayLabel = 'Id_key'
-      DisplayWidth = 6
-      FieldName = 'Id_key_db'
-    end
-    object db_memTab_conJsondeviceName: TStringField
-      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
-      DisplayWidth = 32
-      FieldName = 'deviceName'
-      Size = 50
-    end
-    object db_memTab_conJsonselector: TStringField
-      DisplayLabel = #1052#1086#1076#1091#1083#1100' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
-      DisplayWidth = 52
-      FieldName = 'selector'
-      Size = 100
-    end
-    object db_memTab_conJsonserialId: TStringField
-      DisplayLabel = #1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088
-      DisplayWidth = 16
-      FieldName = 'serialId'
-    end
-    object db_memTab_conJsonethaddr: TStringField
-      DisplayLabel = 'mac-'#1072#1076#1088#1077#1089
-      DisplayWidth = 24
-      FieldName = 'ethaddr'
-      Size = 30
-    end
-    object db_memTab_conJsonversion: TStringField
-      DisplayLabel = #1042#1077#1088#1089#1080#1103
-      DisplayWidth = 24
-      FieldName = 'version'
-      Size = 30
-    end
+    Left = 176
+    Top = 240
   end
   object ds_conJson: TDataSource
-    DataSet = db_memTab_conJson
-    Left = 128
-    Top = 216
+    DataSet = dm_conJson.db_memTab_conJson
+    Left = 912
+    Top = 64
   end
   object dlgOpen_MainFile: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
-    Left = 16
-    Top = 424
+    Left = 32
+    Top = 328
   end
   object dlgSave_MainFile: TSaveDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 80
-    Top = 416
+    Left = 144
+    Top = 328
   end
   object fdjson_conJson: TFDStanStorageJSONLink
-    Left = 24
-    Top = 528
+    Left = 912
+    Top = 151
   end
 end
