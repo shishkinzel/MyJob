@@ -65,6 +65,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
   end
   object dlgOpen_conJson_statistic: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_json'
     Left = 32
     Top = 232
   end
@@ -72,6 +73,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     DefaultExt = 'fds'
     FileName = 'statistic_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 168
     Top = 232
@@ -124,11 +126,13 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     DefaultExt = 'fds'
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    InitialDir = 'lib_fds'
     Left = 32
     Top = 328
   end
   object dlgSave_MainFile: TSaveDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 144
     Top = 328

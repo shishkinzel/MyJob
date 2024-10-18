@@ -158,6 +158,7 @@ begin
   fStringList.Free;
 // уничтожаем объект JSON
   JSON.Free;
+  dm_conJson.db_memTab_conJson.Refresh;
   mni_SQL_Form.Enabled := True;
 end;
 {        Открытие секции чтение и записи конвертируемых файлов

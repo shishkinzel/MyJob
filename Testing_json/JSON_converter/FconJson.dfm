@@ -103,20 +103,19 @@ object frm_conJson: Tfrm_conJson
     end
     object mni_SQL_Form: TMenuItem
       Caption = #1055#1077#1088#1077#1093#1086#1076#1099
-      Enabled = False
       object mni_conJson_statistic_transfer: TMenuItem
         Caption = #1058#1072#1073#1083#1080#1094#1072' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
         OnClick = mni_conJson_statistic_transferClick
       end
       object mni_SQL_Form_direct: TMenuItem
         Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072
-        Enabled = False
         OnClick = mni_SQL_Form_directClick
       end
     end
   end
   object dlgOpen_conJson: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_json'
     Left = 40
     Top = 232
   end
@@ -124,6 +123,7 @@ object frm_conJson: Tfrm_conJson
     DefaultExt = 'fds'
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 176
     Top = 240
@@ -137,11 +137,13 @@ object frm_conJson: Tfrm_conJson
     DefaultExt = 'fds'
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    InitialDir = 'lib_fds'
     Left = 32
     Top = 328
   end
   object dlgSave_MainFile: TSaveDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    InitialDir = 'lib_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 144
     Top = 328

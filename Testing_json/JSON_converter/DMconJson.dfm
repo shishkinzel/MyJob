@@ -218,7 +218,7 @@ object dm_conJson: Tdm_conJson
         Size = 45
       end
       item
-        Name = 'proposedl_version'
+        Name = 'proposed_version'
         DataType = ftString
         Size = 45
       end>
@@ -230,11 +230,11 @@ object dm_conJson: Tdm_conJson
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    Adapter = fdtbldptr_dm_conJson
     StoreDefs = True
     Left = 104
     Top = 104
     object db_memTab_CompositeTableid_key: TAutoIncField
-      DisplayWidth = 6
       FieldName = 'id_key'
     end
     object db_memTab_CompositeTabledevice_name: TStringField
@@ -275,21 +275,104 @@ object dm_conJson: Tdm_conJson
     end
     object db_memTab_CompositeTablerequest_date: TStringField
       DisplayLabel = #1044#1072#1090#1072
-      DisplayWidth = 19
+      DisplayWidth = 24
       FieldName = 'request_date'
       Size = 60
     end
     object db_memTab_CompositeTableoriginal_version: TStringField
-      DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083#1100#1085#1072#1103
-      DisplayWidth = 16
+      DisplayLabel = #1058#1077#1082#1091#1097#1072#1103
+      DisplayWidth = 11
       FieldName = 'original_version'
       Size = 45
     end
-    object db_memTab_CompositeTableproposedl_version: TStringField
+    object db_memTab_CompositeTableproposed_version: TStringField
       DisplayLabel = #1055#1088#1077#1076#1083#1086#1078#1077#1085#1085#1072#1103
       DisplayWidth = 19
-      FieldName = 'proposedl_version'
+      FieldName = 'proposed_version'
       Size = 45
     end
+  end
+  object con_DB_MySQL: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=db_dev_st_angtel')
+    LoginPrompt = False
+    Left = 544
+    Top = 48
+  end
+  object fdtbldptr_dm_conJson: TFDTableAdapter
+    UpdateTableName = 'Table'
+    DatSTableName = 'db_memTab_CompositeTable'
+    SelectCommand = fdcmnd_Four
+    InsertCommand = fdcmnd_Three
+    UpdateCommand = fdcmnd_Five
+    DeleteCommand = fdcmnd_One
+    FetchRowCommand = fdcmnd_Two
+    Left = 696
+    Top = 32
+  end
+  object fdcmnd_One: TFDCommand
+    Connection = con_DB_MySQL
+    CatalogName = 'db_dev_st_angtel'
+    CommandText.Strings = (
+      'select * from db_comp_angte_tab')
+    Left = 696
+    Top = 136
+  end
+  object fdcmnd_Two: TFDCommand
+    Connection = con_DB_MySQL
+    CatalogName = 'db_dev_st_angtel'
+    Left = 696
+    Top = 184
+  end
+  object fdcmnd_Three: TFDCommand
+    Connection = con_DB_MySQL
+    CatalogName = 'db_dev_st_angtel'
+    Left = 696
+    Top = 232
+  end
+  object fdcmnd_Four: TFDCommand
+    Connection = con_DB_MySQL
+    CatalogName = 'db_dev_st_angtel'
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    CommandText.Strings = (
+      'SELECT * FROM db_comp_angtel_tab;')
+    Left = 696
+    Top = 304
+  end
+  object fdcmnd_Five: TFDCommand
+    Connection = con_DB_MySQL
+    CatalogName = 'db_dev_st_angtel'
+    Left = 696
+    Top = 368
+  end
+  object fdbtchmvtxtrdr_conJson: TFDBatchMoveTextReader
+    DataDef.Fields = <>
+    Left = 72
+    Top = 248
+  end
+  object fdbtchmvdtstrdr_conJson_reader: TFDBatchMoveDataSetReader
+    DataSet = db_memTab_CompositeTable
+    Left = 72
+    Top = 344
+  end
+  object fdbtchmvsqlwrtr_conJson_writer: TFDBatchMoveSQLWriter
+    Connection = con_DB_MySQL
+    TableName = 'db_dev_st_angtel.db_comp_angtel_tab'
+    Left = 256
+    Top = 344
+  end
+  object fdbtchmv_conJson_BatchMove: TFDBatchMove
+    Reader = fdbtchmvdtstrdr_conJson_reader
+    Writer = fdbtchmvsqlwrtr_conJson_writer
+    Mappings = <>
+    LogFileName = 'Data.log'
+    Left = 304
+    Top = 208
   end
 end

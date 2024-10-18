@@ -99,7 +99,7 @@ begin
         maxid := JP2.JsonString.Value.ToInteger;
     end;
     // берем нужные поля по Идентификатору и максимальному номеру
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.original-firmware-version', original);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.current-firmware-version', original);
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.proposed-firmware-version', proposed);
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.request-date', date);
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.requested-serial', serial);
@@ -119,7 +119,7 @@ begin
   end;
   // уничтожаем StringList
   fStringList.Free;
-
+   dm_conJson.db_memTab_conJson_statistic.Refresh;
   // уничтожаем объект JSON
   JSON.Free;
   frm_conJson.mni_SQL_Form_direct.Enabled := True;

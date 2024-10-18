@@ -5,7 +5,11 @@ interface
 uses
   System.SysUtils, System.Classes, FireDAC.Stan.StorageJSON, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
+  FireDAC.VCLUI.Wait, FireDAC.DApt, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
+  FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite, FireDAC.Comp.BatchMove.SQL,
+  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.Text;
 
 type
   Tdm_conJson = class(TDataModule)
@@ -25,7 +29,6 @@ type
     db_memTab_conJsonethaddr: TStringField;
     db_memTab_conJsonversion: TStringField;
     db_memTab_CompositeTable: TFDMemTable;
-    db_memTab_CompositeTableid_key: TAutoIncField;
     db_memTab_CompositeTabledevice_name: TStringField;
     db_memTab_CompositeTabledevice_selector: TStringField;
     db_memTab_CompositeTableid_serial: TStringField;
@@ -34,7 +37,19 @@ type
     db_memTab_CompositeTableattempt: TStringField;
     db_memTab_CompositeTablerequest_date: TStringField;
     db_memTab_CompositeTableoriginal_version: TStringField;
-    db_memTab_CompositeTableproposedl_version: TStringField;
+    db_memTab_CompositeTableproposed_version: TStringField;
+    db_memTab_CompositeTableid_key: TAutoIncField;
+    con_DB_MySQL: TFDConnection;
+    fdtbldptr_dm_conJson: TFDTableAdapter;
+    fdcmnd_One: TFDCommand;
+    fdcmnd_Two: TFDCommand;
+    fdcmnd_Three: TFDCommand;
+    fdcmnd_Four: TFDCommand;
+    fdcmnd_Five: TFDCommand;
+    fdbtchmvtxtrdr_conJson: TFDBatchMoveTextReader;
+    fdbtchmvdtstrdr_conJson_reader: TFDBatchMoveDataSetReader;
+    fdbtchmvsqlwrtr_conJson_writer: TFDBatchMoveSQLWriter;
+    fdbtchmv_conJson_BatchMove: TFDBatchMove;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -68,6 +83,7 @@ begin
   db_memTab_conJson.Active := False;
    db_memTab_CompositeTable.Active := False;
 end;
+
 
 end.
 
