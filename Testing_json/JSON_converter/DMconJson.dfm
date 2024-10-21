@@ -171,57 +171,7 @@ object dm_conJson: Tdm_conJson
     end
   end
   object db_memTab_CompositeTable: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'id_key'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'device_name'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'device_selector'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'id_serial'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'ethaddr'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'device_version'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'attempt'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'request_date'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'original_version'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'proposed_version'
-        DataType = ftString
-        Size = 45
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -230,7 +180,6 @@ object dm_conJson: Tdm_conJson
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Adapter = fdtbldptr_dm_conJson
     StoreDefs = True
     Left = 104
     Top = 104
@@ -292,78 +241,14 @@ object dm_conJson: Tdm_conJson
       Size = 45
     end
   end
-  object con_DB_MySQL: TFDConnection
-    Params.Strings = (
-      'ConnectionDef=db_dev_st_angtel')
-    LoginPrompt = False
-    Left = 544
-    Top = 48
-  end
-  object fdtbldptr_dm_conJson: TFDTableAdapter
-    UpdateTableName = 'Table'
-    DatSTableName = 'db_memTab_CompositeTable'
-    SelectCommand = fdcmnd_Four
-    InsertCommand = fdcmnd_Three
-    UpdateCommand = fdcmnd_Five
-    DeleteCommand = fdcmnd_One
-    FetchRowCommand = fdcmnd_Two
-    Left = 696
-    Top = 32
-  end
-  object fdcmnd_One: TFDCommand
-    Connection = con_DB_MySQL
-    CatalogName = 'db_dev_st_angtel'
-    CommandText.Strings = (
-      'select * from db_comp_angte_tab')
-    Left = 696
-    Top = 136
-  end
-  object fdcmnd_Two: TFDCommand
-    Connection = con_DB_MySQL
-    CatalogName = 'db_dev_st_angtel'
-    Left = 696
-    Top = 184
-  end
-  object fdcmnd_Three: TFDCommand
-    Connection = con_DB_MySQL
-    CatalogName = 'db_dev_st_angtel'
-    Left = 696
-    Top = 232
-  end
-  object fdcmnd_Four: TFDCommand
-    Connection = con_DB_MySQL
-    CatalogName = 'db_dev_st_angtel'
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    CommandText.Strings = (
-      'SELECT * FROM db_comp_angtel_tab;')
-    Left = 696
-    Top = 304
-  end
-  object fdcmnd_Five: TFDCommand
-    Connection = con_DB_MySQL
-    CatalogName = 'db_dev_st_angtel'
-    Left = 696
-    Top = 368
-  end
-  object fdbtchmvtxtrdr_conJson: TFDBatchMoveTextReader
-    DataDef.Fields = <>
-    Left = 72
-    Top = 248
-  end
   object fdbtchmvdtstrdr_conJson_reader: TFDBatchMoveDataSetReader
     DataSet = db_memTab_CompositeTable
     Left = 72
     Top = 344
   end
   object fdbtchmvsqlwrtr_conJson_writer: TFDBatchMoveSQLWriter
-    Connection = con_DB_MySQL
-    TableName = 'db_dev_st_angtel.db_comp_angtel_tab'
+    Connection = con_conJson
+    TableName = 'db_composite_tb'
     Left = 256
     Top = 344
   end
@@ -374,5 +259,40 @@ object dm_conJson: Tdm_conJson
     LogFileName = 'Data.log'
     Left = 304
     Top = 208
+  end
+  object con_conJson: TFDConnection
+    Params.Strings = (
+      'Database=db_angtel_composite'
+      'User_Name=root'
+      'Password=@Zel00000000'
+      'Server=localhost'
+      'DriverID=MySQL')
+    Connected = True
+    Left = 416
+    Top = 40
+  end
+  object fd_script_ClearDB: TFDScript
+    SQLScripts = <
+      item
+        Name = 'Clear db_composite_tb'
+        SQL.Strings = (
+          'TRUNCATE db_composite_tb')
+      end>
+    Connection = con_conJson
+    Transaction = fd_transaction_ClearDB
+    Params = <>
+    Macros = <>
+    Left = 600
+    Top = 104
+  end
+  object fd_transaction_ClearDB: TFDTransaction
+    Connection = con_conJson
+    Left = 680
+    Top = 24
+  end
+  object fd_dialog_ClearDB: TFDGUIxScriptDialog
+    Provider = 'Forms'
+    Left = 696
+    Top = 104
   end
 end

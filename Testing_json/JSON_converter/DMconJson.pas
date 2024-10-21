@@ -9,7 +9,9 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
   FireDAC.VCLUI.Wait, FireDAC.DApt, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
   FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite, FireDAC.Comp.BatchMove.SQL,
-  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.Text;
+  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.Text,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script, FireDAC.VCLUI.Script,
+  FireDAC.Comp.UI;
 
 type
   Tdm_conJson = class(TDataModule)
@@ -39,20 +41,16 @@ type
     db_memTab_CompositeTableoriginal_version: TStringField;
     db_memTab_CompositeTableproposed_version: TStringField;
     db_memTab_CompositeTableid_key: TAutoIncField;
-    con_DB_MySQL: TFDConnection;
-    fdtbldptr_dm_conJson: TFDTableAdapter;
-    fdcmnd_One: TFDCommand;
-    fdcmnd_Two: TFDCommand;
-    fdcmnd_Three: TFDCommand;
-    fdcmnd_Four: TFDCommand;
-    fdcmnd_Five: TFDCommand;
-    fdbtchmvtxtrdr_conJson: TFDBatchMoveTextReader;
     fdbtchmvdtstrdr_conJson_reader: TFDBatchMoveDataSetReader;
     fdbtchmvsqlwrtr_conJson_writer: TFDBatchMoveSQLWriter;
     fdbtchmv_conJson_BatchMove: TFDBatchMove;
+    con_conJson: TFDConnection;
+    fd_script_ClearDB: TFDScript;
+    fd_transaction_ClearDB: TFDTransaction;
+    fd_dialog_ClearDB: TFDGUIxScriptDialog;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-  private
+
     { Private declarations }
   public
     { Public declarations }
@@ -83,6 +81,8 @@ begin
   db_memTab_conJson.Active := False;
    db_memTab_CompositeTable.Active := False;
 end;
+
+
 
 
 end.

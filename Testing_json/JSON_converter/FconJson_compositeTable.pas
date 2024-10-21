@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, Vcl.DBCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, FireDAC.Stan.StorageJSON, FireDAC.Comp.BatchMove.Text;
+  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, FireDAC.Stan.StorageJSON,
+  FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.VCLUI.Script, FireDAC.Comp.UI;
 
 type
   Tfrm_CompositeTable = class(TForm)
@@ -30,7 +31,7 @@ type
     mni_msql_Connect: TMenuItem;
     mni_msql_SeparatorOne: TMenuItem;
     mni_msql_One: TMenuItem;
-    mni_msql_Two: TMenuItem;
+    mni_msql_ClearTable: TMenuItem;
     mni_msql_Three: TMenuItem;
     mni_msql_SeparatorTwo: TMenuItem;
     mni_msql_Reset: TMenuItem;
@@ -42,11 +43,14 @@ type
     procedure mni_CompositeTableResetClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_msql_OneClick(Sender: TObject);
+    procedure mni_msql_ClearTableClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
+  const
+  csScriptClear = 'TRUNCATE db_composite_tb';
 
 var
   frm_CompositeTable: Tfrm_CompositeTable;
@@ -156,7 +160,7 @@ end;
  }
 procedure Tfrm_CompositeTable.btn_conJson_CompositeTableClick(Sender: TObject);
 const
-  csNo = 'Нет данных';
+  csNo = 'No data';
 var
   i: integer;
   f_temp_idserial: string;
@@ -333,8 +337,6 @@ end;
 
 
 // Перенос БД в MySQL
-
-
 procedure Tfrm_CompositeTable.mni_msql_OneClick(Sender: TObject);
 var
 db_comp : TFDMemTable;
@@ -342,6 +344,21 @@ db_comp : TFDMemTable;
 begin
  db_comp := dm_conJson.db_memTab_CompositeTable;
  dm_conJson.fdbtchmv_conJson_BatchMove.Execute;
+end;
+// Очистка таблицы в MySQL
+procedure Tfrm_CompositeTable.mni_msql_ClearTableClick(Sender: TObject);
+var
+  i: Integer;
+  db_script: TFDScript;
+begin
+  db_script := dm_conJson.fd_script_ClearDB;
+  if db_script.ValidateAll then
+  begin
+//    ShowMessage('Скрипт валидный');
+    db_script.ExecuteAll;
+    ShowMessage('Таблица в MySQL - очищена');
+    mni_msql_One.Enabled := True;
+  end;
 end;
 
 
