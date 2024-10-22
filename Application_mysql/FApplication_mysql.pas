@@ -47,13 +47,13 @@ type
     procedure dtp_ts_ds_one_startChange(Sender: TObject);
     procedure dtp_ts_ds_one_endChange(Sender: TObject);
     procedure btn_ts_oneClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     var
-      p_date_start: TDateTime;
-      p_date_end: TDateTime;
+      p_date_start, p_date_end: TDateTime;
   end;
 
 var
@@ -65,12 +65,20 @@ uses
   dm_connection;
 
 {$R *.dfm}
+  procedure Tfrm_app_mysql.FormCreate(Sender: TObject);
+begin
+ p_date_start := Now;
+ p_date_end := Now;
+end;
+
  // выбор начальной даты выборки
 procedure Tfrm_app_mysql.dtp_ts_ds_one_startChange(Sender: TObject);
 begin
   p_date_start := dtp_ts_ds_one_start.DateTime;
 end;
- // выбор конечной даты выборки
+
+
+// выбор конечной даты выборки
 
 procedure Tfrm_app_mysql.dtp_ts_ds_one_endChange(Sender: TObject);
 begin
@@ -82,9 +90,10 @@ procedure Tfrm_app_mysql.btn_ts_oneClick(Sender: TObject);
 var
 i : Integer;
 begin
+
   dm_Application_mysql.fd_g_Date.Params[0].Value := p_date_start;
   dm_Application_mysql.fd_g_Date.Params[1].Value := p_date_end;
-  dm_Application_mysql.fd_g_Date.Open();
+    dm_Application_mysql.fd_g_Date.Open;
 
 end;
 

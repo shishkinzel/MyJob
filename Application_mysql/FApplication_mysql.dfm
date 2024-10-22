@@ -13,6 +13,7 @@ object frm_app_mysql: Tfrm_app_mysql
   Menu = mm_app_mysql
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object spl_up: TSplitter
@@ -73,14 +74,13 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 0
-          ExplicitTop = 445
           object dtp_ts_ds_one_start: TDateTimePicker
             Left = 3
             Top = 24
             Width = 186
             Height = 21
             Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Time = 45587.000000000000000000
             TabOrder = 0
             OnChange = dtp_ts_ds_one_startChange
           end
@@ -90,7 +90,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 186
             Height = 21
             Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Time = 0.999988425923220300
             TabOrder = 1
             OnChange = dtp_ts_ds_one_endChange
           end
@@ -153,8 +153,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 25
           Align = alTop
           TabOrder = 1
-          ExplicitLeft = 6
-          ExplicitTop = 11
         end
         object Panel1: TPanel
           Left = 0
@@ -163,7 +161,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 445
           object DateTimePicker1: TDateTimePicker
             Left = 3
             Top = 24
@@ -208,8 +205,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 25
           Align = alTop
           TabOrder = 1
-          ExplicitLeft = 6
-          ExplicitTop = 11
         end
         object Panel2: TPanel
           Left = 0
@@ -218,7 +213,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 445
           object DateTimePicker3: TDateTimePicker
             Left = 3
             Top = 24
@@ -263,8 +257,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 25
           Align = alTop
           TabOrder = 1
-          ExplicitLeft = 6
-          ExplicitTop = 11
         end
         object Panel3: TPanel
           Left = 0
@@ -273,7 +265,6 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 445
           object DateTimePicker5: TDateTimePicker
             Left = 3
             Top = 24

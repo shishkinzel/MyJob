@@ -21,26 +21,14 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 144
   end
   object fd_g_Date: TFDQuery
+    Active = True
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb '
-      'where request_date between :p_date_start and :p_date_end;')
+      
+        'where request_date BETWEEN '#39'p_start=:p_date_start'#39' and '#39'p_end=:p' +
+        '_date_end'#39';')
     Left = 840
     Top = 32
-    ParamData = <
-      item
-        Name = 'P_DATE_START'
-        DataType = ftDateTime
-        FDDataType = dtDateTime
-        ParamType = ptInput
-        Value = Null
-      end
-      item
-        Name = 'P_DATE_END'
-        DataType = ftDateTime
-        FDDataType = dtDateTime
-        ParamType = ptInput
-        Value = Null
-      end>
   end
 end
