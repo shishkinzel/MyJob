@@ -17,10 +17,8 @@ type
   Tdm_conJson = class(TDataModule)
     db_memTab_conJson_statistic: TFDMemTable;
     db_memTab_conJson_statisticid_key_statistic: TAutoIncField;
-    db_memTab_conJson_statisticattempt: TStringField;
     db_memTab_conJson_statisticselector: TStringField;
     db_memTab_conJson_statisticrequest_serial: TStringField;
-    db_memTab_conJson_statisticrequest_date: TStringField;
     db_memTab_conJson_statisticoriginal_version: TStringField;
     db_memTab_conJson_statisticproposed_version: TStringField;
     db_memTab_conJson: TFDMemTable;
@@ -36,8 +34,6 @@ type
     db_memTab_CompositeTableid_serial: TStringField;
     db_memTab_CompositeTableethaddr: TStringField;
     db_memTab_CompositeTabledevice_version: TStringField;
-    db_memTab_CompositeTableattempt: TStringField;
-    db_memTab_CompositeTablerequest_date: TStringField;
     db_memTab_CompositeTableoriginal_version: TStringField;
     db_memTab_CompositeTableproposed_version: TStringField;
     db_memTab_CompositeTableid_key: TAutoIncField;
@@ -48,8 +44,13 @@ type
     fd_script_ClearDB: TFDScript;
     fd_transaction_ClearDB: TFDTransaction;
     fd_dialog_ClearDB: TFDGUIxScriptDialog;
+    dtmfld_memTab_conJson_statisticrequest_date: TDateTimeField;
+    intgrfld_memTab_conJson_statisticattempt: TIntegerField;
+    intgrfld_memTab_CompositeTableattempt: TIntegerField;
+    dtmfld_memTab_CompositeTablerequest_date: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+
 
     { Private declarations }
   public
@@ -81,6 +82,7 @@ begin
   db_memTab_conJson.Active := False;
    db_memTab_CompositeTable.Active := False;
 end;
+
 
 
 

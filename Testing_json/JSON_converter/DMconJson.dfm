@@ -13,8 +13,7 @@ object dm_conJson: Tdm_conJson
       end
       item
         Name = 'attempt'
-        DataType = ftString
-        Size = 10
+        DataType = ftInteger
       end
       item
         Name = 'selector'
@@ -28,8 +27,7 @@ object dm_conJson: Tdm_conJson
       end
       item
         Name = 'request_date'
-        DataType = ftString
-        Size = 50
+        DataType = ftDateTime
       end
       item
         Name = 'original_version'
@@ -57,11 +55,8 @@ object dm_conJson: Tdm_conJson
       DisplayWidth = 9
       FieldName = 'id_key_statistic'
     end
-    object db_memTab_conJson_statisticattempt: TStringField
-      DisplayLabel = #1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080
-      DisplayWidth = 13
+    object intgrfld_memTab_conJson_statisticattempt: TIntegerField
       FieldName = 'attempt'
-      Size = 10
     end
     object db_memTab_conJson_statisticselector: TStringField
       DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1080#1079#1076#1077#1083#1080#1103
@@ -74,11 +69,8 @@ object dm_conJson: Tdm_conJson
       DisplayWidth = 19
       FieldName = 'request_serial'
     end
-    object db_memTab_conJson_statisticrequest_date: TStringField
-      DisplayLabel = #1044#1072#1090#1072' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1103
-      DisplayWidth = 32
+    object dtmfld_memTab_conJson_statisticrequest_date: TDateTimeField
       FieldName = 'request_date'
-      Size = 50
     end
     object db_memTab_conJson_statisticoriginal_version: TStringField
       DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083#1100#1085#1099#1081
@@ -171,7 +163,55 @@ object dm_conJson: Tdm_conJson
     end
   end
   object db_memTab_CompositeTable: TFDMemTable
-    FieldDefs = <>
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id_key'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'device_name'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_selector'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'id_serial'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'ethaddr'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'attempt'
+        DataType = ftInteger
+      end
+      item
+        Name = 'request_date'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'original_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'proposed_version'
+        DataType = ftString
+        Size = 45
+      end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -216,17 +256,11 @@ object dm_conJson: Tdm_conJson
       FieldName = 'device_version'
       Size = 45
     end
-    object db_memTab_CompositeTableattempt: TStringField
-      DisplayLabel = #1055#1086#1087#1099#1090#1082#1072
-      DisplayWidth = 7
+    object intgrfld_memTab_CompositeTableattempt: TIntegerField
       FieldName = 'attempt'
-      Size = 10
     end
-    object db_memTab_CompositeTablerequest_date: TStringField
-      DisplayLabel = #1044#1072#1090#1072
-      DisplayWidth = 24
+    object dtmfld_memTab_CompositeTablerequest_date: TDateTimeField
       FieldName = 'request_date'
-      Size = 60
     end
     object db_memTab_CompositeTableoriginal_version: TStringField
       DisplayLabel = #1058#1077#1082#1091#1097#1072#1103

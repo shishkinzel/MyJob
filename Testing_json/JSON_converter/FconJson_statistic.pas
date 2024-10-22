@@ -56,7 +56,7 @@ var
 implementation
 
 uses
-  System.JSON, FconJson, DMconJson ;
+  System.JSON, FconJson, DMconJson, DateUtils ;
 
 {$R *.dfm}
 
@@ -77,6 +77,7 @@ var
   attempt, original, proposed, date, serial, selector: string;
   maxid: Integer;
   ftemp_mac: string;
+  fdate : TDateTime;
 begin
   // формируем StringList
   fStringList := TStringList.Create;
@@ -105,13 +106,16 @@ begin
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.requested-serial', serial);
     JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.selector', selector);
 
+  // преобразовываем строку в дату
+    fdate := ISO8601ToDate(date, False);
+
     dm_conJson.db_memTab_conJson_statistic.Insert;
     with dm_conJson.db_memTab_conJson_statistic.Fields do
     begin
-      FieldByNumber(2).AsString := maxid.ToString;
+      FieldByNumber(2).AsInteger := maxid;
       FieldByNumber(3).AsString := selector;
       FieldByNumber(4).AsString := serial;
-      FieldByNumber(5).AsString := date;
+      FieldByNumber(5).AsDateTime := fdate;
       FieldByNumber(6).AsString := original;
       FieldByNumber(7).AsString := proposed;
     end;

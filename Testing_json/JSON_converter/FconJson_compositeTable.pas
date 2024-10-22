@@ -194,15 +194,15 @@ begin
     if db_st.Locate('request_serial', f_temp_idserial, []) then
     begin
  // при нахождении строки переписываем ее содержимое в результирующую таблицу
-      db_comp.Fields.FieldByNumber(7).AsString := db_st.Fields.FieldByNumber(2).AsString;
-      db_comp.Fields.FieldByNumber(8).AsString := db_st.Fields.FieldByNumber(5).AsString;
+      db_comp.Fields.FieldByNumber(7).AsInteger := db_st.Fields.FieldByNumber(2).AsInteger;
+      db_comp.Fields.FieldByNumber(8).AsDateTime  := db_st.Fields.FieldByNumber(5).AsDateTime ;
       db_comp.Fields.FieldByNumber(9).AsString := db_st.Fields.FieldByNumber(6).AsString;
       db_comp.Fields.FieldByNumber(10).AsString := db_st.Fields.FieldByNumber(7).AsString;
     end
     else
     begin
-      db_comp.Fields.FieldByNumber(7).AsString := '0';
-      db_comp.Fields.FieldByNumber(8).AsString := csNo;
+      db_comp.Fields.FieldByNumber(7).AsInteger := 0;
+      db_comp.Fields.FieldByNumber(8).AsDateTime := 1;
       db_comp.Fields.FieldByNumber(9).AsString := csNo;
       db_comp.Fields.FieldByNumber(10).AsString := csNo;
     end;
