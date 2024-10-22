@@ -12,6 +12,7 @@ object frm_app_mysql: Tfrm_app_mysql
   Font.Style = []
   Menu = mm_app_mysql
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object spl_up: TSplitter
@@ -47,8 +48,6 @@ object frm_app_mysql: Tfrm_app_mysql
     Height = 101
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 665
   end
   object pnl_Main: TPanel
     Left = 0
@@ -57,31 +56,243 @@ object frm_app_mysql: Tfrm_app_mysql
     Height = 585
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 400
-    ExplicitHeight = 101
     object pgc_app_mysql: TPageControl
       Left = 1
       Top = 1
       Width = 1008
       Height = 583
-      ActivePage = ts_four
+      ActivePage = ts_one
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 589
       object ts_one: TTabSheet
         Caption = 'ts_one'
+        object pnl_ts_one: TPanel
+          Left = 0
+          Top = 448
+          Width = 1000
+          Height = 107
+          Align = alBottom
+          TabOrder = 0
+          ExplicitTop = 445
+          object dtp_ts_ds_one_start: TDateTimePicker
+            Left = 3
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 0
+            OnChange = dtp_ts_ds_one_startChange
+          end
+          object dtp_ts_ds_one_end: TDateTimePicker
+            Left = 235
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 1
+            OnChange = dtp_ts_ds_one_endChange
+          end
+          object btn_ts_one: TBitBtn
+            Left = 512
+            Top = 24
+            Width = 281
+            Height = 25
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            TabOrder = 2
+            OnClick = btn_ts_oneClick
+          end
+        end
+        object dbnav_ts_One: TDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 25
+          DataSource = ds_ts_one
+          Align = alTop
+          TabOrder = 1
+        end
+        object dbG_ts_one: TDBGrid
+          Left = 0
+          Top = 31
+          Width = 1000
+          Height = 417
+          Align = alClient
+          DataSource = ds_ts_one
+          TabOrder = 2
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
       end
       object ts_two: TTabSheet
         Caption = 'ts_two'
         ImageIndex = 1
+        object DBGrid1: TDBGrid
+          Left = 0
+          Top = 31
+          Width = 1000
+          Height = 417
+          Align = alClient
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
+        object DBNavigator1: TDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 25
+          Align = alTop
+          TabOrder = 1
+          ExplicitLeft = 6
+          ExplicitTop = 11
+        end
+        object Panel1: TPanel
+          Left = 0
+          Top = 448
+          Width = 1000
+          Height = 107
+          Align = alBottom
+          TabOrder = 2
+          ExplicitTop = 445
+          object DateTimePicker1: TDateTimePicker
+            Left = 3
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 0
+          end
+          object DateTimePicker2: TDateTimePicker
+            Left = 235
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 1
+          end
+        end
       end
       object ts_three: TTabSheet
         Caption = 'ts_three'
         ImageIndex = 2
+        object DBGrid2: TDBGrid
+          Left = 0
+          Top = 31
+          Width = 1000
+          Height = 417
+          Align = alClient
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
+        object DBNavigator2: TDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 25
+          Align = alTop
+          TabOrder = 1
+          ExplicitLeft = 6
+          ExplicitTop = 11
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 448
+          Width = 1000
+          Height = 107
+          Align = alBottom
+          TabOrder = 2
+          ExplicitTop = 445
+          object DateTimePicker3: TDateTimePicker
+            Left = 3
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 0
+          end
+          object DateTimePicker4: TDateTimePicker
+            Left = 235
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 1
+          end
+        end
       end
       object ts_four: TTabSheet
         Caption = 'ts_four'
         ImageIndex = 3
+        object DBGrid3: TDBGrid
+          Left = 0
+          Top = 31
+          Width = 1000
+          Height = 417
+          Align = alClient
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
+        object DBNavigator3: TDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 25
+          Align = alTop
+          TabOrder = 1
+          ExplicitLeft = 6
+          ExplicitTop = 11
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 448
+          Width = 1000
+          Height = 107
+          Align = alBottom
+          TabOrder = 2
+          ExplicitTop = 445
+          object DateTimePicker5: TDateTimePicker
+            Left = 3
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 0
+          end
+          object DateTimePicker6: TDateTimePicker
+            Left = 235
+            Top = 24
+            Width = 186
+            Height = 21
+            Date = 45587.000000000000000000
+            Time = 0.682479155089822600
+            TabOrder = 1
+          end
+        end
       end
     end
   end
@@ -94,5 +305,10 @@ object frm_app_mysql: Tfrm_app_mysql
     object mni_msql_connect_db: TMenuItem
       Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' '#1089' '#1041#1044
     end
+  end
+  object ds_ts_one: TDataSource
+    DataSet = dm_Application_mysql.fd_g_Date
+    Left = 29
+    Top = 477
   end
 end
