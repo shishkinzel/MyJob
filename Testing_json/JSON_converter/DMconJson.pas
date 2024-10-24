@@ -48,6 +48,7 @@ type
     intgrfld_memTab_conJson_statisticattempt: TIntegerField;
     intgrfld_memTab_CompositeTableattempt: TIntegerField;
     dtmfld_memTab_CompositeTablerequest_date: TDateTimeField;
+    con_RemoteBase: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
 

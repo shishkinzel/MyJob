@@ -329,4 +329,14 @@ object dm_conJson: Tdm_conJson
     Left = 696
     Top = 104
   end
+  object con_RemoteBase: TFDConnection
+    Params.Strings = (
+      'Database=db_angtel_composite'
+      'User_Name=shishkinzel'
+      'Password=@Zel00000000'
+      'Server=172.17.17.76'
+      'DriverID=MySQL')
+    Left = 512
+    Top = 40
+  end
 end

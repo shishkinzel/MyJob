@@ -13,7 +13,9 @@ object frm_app_mysql: Tfrm_app_mysql
   Menu = mm_app_mysql
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object spl_up: TSplitter
@@ -41,6 +43,14 @@ object frm_app_mysql: Tfrm_app_mysql
     Height = 73
     Align = alTop
     TabOrder = 0
+    object txt_Title_operationWork: TStaticText
+      Left = 272
+      Top = 8
+      Width = 4
+      Height = 4
+      Alignment = taCenter
+      TabOrder = 0
+    end
   end
   object pnl_down: TPanel
     Left = 0
@@ -49,7 +59,6 @@ object frm_app_mysql: Tfrm_app_mysql
     Height = 101
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 665
     object chk_id_key: TCheckBox
       Left = 294
       Top = 53
@@ -141,7 +150,7 @@ object frm_app_mysql: Tfrm_app_mysql
     object txt_part_tab: TStaticText
       Left = 8
       Top = 8
-      Width = 638
+      Width = 116
       Height = 17
       Alignment = taCenter
       Caption = #1042#1099#1073#1086#1088' '#1087#1086#1083#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
@@ -192,23 +201,23 @@ object frm_app_mysql: Tfrm_app_mysql
             TabOrder = 1
             OnChange = dtp_ts_ds_one_endChange
           end
-          object btn_ts_one: TBitBtn
+          object btn_ts_one_Start: TBitBtn
             Left = 448
             Top = 24
             Width = 193
             Height = 25
             Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
             TabOrder = 2
-            OnClick = btn_ts_oneClick
+            OnClick = btn_ts_one_StartClick
           end
-          object btn_ts_Reset: TBitBtn
+          object btn_ts_one_Reset: TBitBtn
             Left = 680
             Top = 24
             Width = 193
             Height = 25
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
             TabOrder = 3
-            OnClick = btn_ts_ResetClick
+            OnClick = btn_ts_one_ResetClick
           end
         end
         object dbnav_ts_One: TDBNavigator
@@ -289,6 +298,15 @@ object frm_app_mysql: Tfrm_app_mysql
             Date = 45587.000000000000000000
             Time = 0.682479155089822600
             TabOrder = 1
+          end
+          object btn_ts_two_Start: TBitBtn
+            Left = 464
+            Top = 24
+            Width = 193
+            Height = 25
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            TabOrder = 2
+            OnClick = btn_ts_one_StartClick
           end
         end
       end
@@ -407,11 +425,41 @@ object frm_app_mysql: Tfrm_app_mysql
   object mm_app_mysql: TMainMenu
     Left = 24
     Top = 24
+    object mni_conn_connect_db: TMenuItem
+      Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' '#1089' '#1041#1044
+      object mni_conn_Connection: TMenuItem
+        Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077
+        OnClick = mni_conn_ConnectionClick
+      end
+      object mni_conn_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_conn_DB_internal: TMenuItem
+        Caption = #1040#1074#1090#1086#1085#1086#1084#1085#1072#1103' '#1041#1044
+        OnClick = mni_conn_DB_internalClick
+      end
+    end
     object mni_msql_File: TMenuItem
       Caption = #1060#1072#1081#1083
+      object mni_msql_MainOpen: TMenuItem
+        Caption = #1054#1090#1082#1088#1099#1090#1100
+      end
+      object mni_msql_MainSave: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      end
     end
-    object mni_msql_connect_db: TMenuItem
-      Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' '#1089' '#1041#1044
+    object mni_msql_OperationWork: TMenuItem
+      Caption = #1056#1077#1078#1080#1084' '#1088#1072#1073#1086#1090#1099' '#1089' '#1041#1044
+      Visible = False
+      object mni_msql_internal: TMenuItem
+        Caption = #1040#1074#1090#1086#1085#1086#1084#1085#1072#1103' '#1041#1044
+        OnClick = mni_msql_internalClick
+      end
+      object mni_msql_DB_server: TMenuItem
+        Caption = #1041#1044' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
+        Enabled = False
+        OnClick = mni_msql_DB_serverClick
+      end
     end
   end
   object ds_ts_one: TDataSource
@@ -420,6 +468,7 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 493
   end
   object ds_ts_two: TDataSource
+    DataSet = dm_Application_mysql.db_memTab_app_mysql
     Left = 77
     Top = 493
   end
