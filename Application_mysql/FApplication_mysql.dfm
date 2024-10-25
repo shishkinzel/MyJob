@@ -169,7 +169,7 @@ object frm_app_mysql: Tfrm_app_mysql
       Top = 1
       Width = 1008
       Height = 583
-      ActivePage = ts_one
+      ActivePage = ts_three
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
@@ -181,9 +181,23 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 0
+          object lbl_start_date: TLabel
+            Left = 16
+            Top = 32
+            Width = 12
+            Height = 13
+            Caption = #1086#1090
+          end
+          object lbl_end_date: TLabel
+            Left = 219
+            Top = 32
+            Width = 13
+            Height = 13
+            Caption = #1076#1086
+          end
           object dtp_ts_ds_one_start: TDateTimePicker
-            Left = 3
-            Top = 24
+            Left = 16
+            Top = 51
             Width = 186
             Height = 21
             Date = 45587.000000000000000000
@@ -192,8 +206,8 @@ object frm_app_mysql: Tfrm_app_mysql
             OnChange = dtp_ts_ds_one_startChange
           end
           object dtp_ts_ds_one_end: TDateTimePicker
-            Left = 235
-            Top = 24
+            Left = 219
+            Top = 51
             Width = 186
             Height = 21
             Date = 45587.000000000000000000
@@ -202,22 +216,32 @@ object frm_app_mysql: Tfrm_app_mysql
             OnChange = dtp_ts_ds_one_endChange
           end
           object btn_ts_one_Start: TBitBtn
-            Left = 448
-            Top = 24
-            Width = 193
-            Height = 25
+            Left = 450
+            Top = 51
+            Width = 180
+            Height = 21
             Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
             TabOrder = 2
             OnClick = btn_ts_one_StartClick
           end
           object btn_ts_one_Reset: TBitBtn
             Left = 680
-            Top = 24
-            Width = 193
-            Height = 25
+            Top = 51
+            Width = 180
+            Height = 21
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
             TabOrder = 3
             OnClick = btn_ts_one_ResetClick
+          end
+          object txt_Title_date: TStaticText
+            Left = 1
+            Top = 1
+            Width = 998
+            Height = 17
+            Align = alTop
+            Alignment = taCenter
+            Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
+            TabOrder = 4
           end
         end
         object dbnav_ts_One: TDBNavigator
@@ -281,32 +305,39 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          object DateTimePicker1: TDateTimePicker
-            Left = 3
+          object btn_ts_two_Start: TBitBtn
+            Left = 450
             Top = 24
-            Width = 186
+            Width = 180
             Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
             TabOrder = 0
           end
-          object DateTimePicker2: TDateTimePicker
-            Left = 235
+          object cbb_app_mysql: TComboBox
+            Left = 3
             Top = 24
-            Width = 186
+            Width = 391
             Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Style = csDropDownList
             TabOrder = 1
           end
-          object btn_ts_two_Start: TBitBtn
-            Left = 464
+          object btn_ts_two_Reset: TBitBtn
+            Left = 680
             Top = 24
-            Width = 193
-            Height = 25
-            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            Width = 180
+            Height = 21
+            Caption = #1057#1073#1088#1086#1089#1080#1090#1100
             TabOrder = 2
-            OnClick = btn_ts_one_StartClick
+          end
+          object txt_Title_device: TStaticText
+            Left = 1
+            Top = 1
+            Width = 998
+            Height = 17
+            Align = alTop
+            Alignment = taCenter
+            Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1091
+            TabOrder = 3
           end
         end
       end
@@ -345,23 +376,67 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          object DateTimePicker3: TDateTimePicker
-            Left = 3
+          object lbl_start_attempt: TLabel
+            Left = 24
             Top = 24
-            Width = 186
-            Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Width = 12
+            Height = 13
+            Caption = #1086#1090
+          end
+          object lbl_end_attempt: TLabel
+            Left = 104
+            Top = 24
+            Width = 13
+            Height = 13
+            Caption = #1076#1086
+          end
+          object txt_Title_attempt: TStaticText
+            Left = 1
+            Top = 1
+            Width = 998
+            Height = 17
+            Align = alTop
+            Alignment = taCenter
+            Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1087#1086#1087#1099#1090#1082#1072#1084' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1103' '#1055#1054
             TabOrder = 0
           end
-          object DateTimePicker4: TDateTimePicker
-            Left = 235
-            Top = 24
-            Width = 186
-            Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+          object se_startAttempt: TSpinEdit
+            Left = 24
+            Top = 43
+            Width = 60
+            Height = 22
+            MaxValue = 1
+            MinValue = 0
             TabOrder = 1
+            Value = 0
+          end
+          object se_endAttempt: TSpinEdit
+            Left = 104
+            Top = 43
+            Width = 60
+            Height = 22
+            MaxValue = 1
+            MinValue = 0
+            TabOrder = 2
+            Value = 0
+          end
+          object btn_ts_three_Reset: TBitBtn
+            Left = 688
+            Top = 32
+            Width = 180
+            Height = 21
+            Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            TabOrder = 3
+            OnClick = btn_ts_three_ResetClick
+          end
+          object btn_ts_three_start: TBitBtn
+            Left = 450
+            Top = 32
+            Width = 180
+            Height = 21
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            TabOrder = 4
+            OnClick = btn_ts_three_startClick
           end
         end
       end
@@ -400,23 +475,81 @@ object frm_app_mysql: Tfrm_app_mysql
           Height = 107
           Align = alBottom
           TabOrder = 2
-          object DateTimePicker5: TDateTimePicker
-            Left = 3
-            Top = 24
-            Width = 186
-            Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+          object lbl_end_id: TLabel
+            Left = 160
+            Top = 21
+            Width = 13
+            Height = 13
+            Caption = #1076#1086
+          end
+          object lbl_start_id: TLabel
+            Left = 13
+            Top = 21
+            Width = 12
+            Height = 13
+            Caption = #1086#1090
+          end
+          object txt_Title_id: TStaticText
+            Left = 1
+            Top = 1
+            Width = 998
+            Height = 17
+            Align = alTop
+            Alignment = taCenter
+            Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1089#1077#1088#1080#1081#1085#1086#1084#1091' '#1085#1086#1084#1077#1088#1091
             TabOrder = 0
           end
-          object DateTimePicker6: TDateTimePicker
-            Left = 235
-            Top = 24
-            Width = 186
+          object btn_ts_four_Reset: TBitBtn
+            Left = 696
+            Top = 40
+            Width = 180
             Height = 21
-            Date = 45587.000000000000000000
-            Time = 0.682479155089822600
+            Caption = #1057#1073#1088#1086#1089#1080#1090#1100
             TabOrder = 1
+            OnClick = btn_ts_four_ResetClick
+          end
+          object btn_ts_four_start: TBitBtn
+            Left = 458
+            Top = 40
+            Width = 180
+            Height = 21
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            TabOrder = 2
+            OnClick = btn_ts_four_startClick
+          end
+          object medt_four_start: TMaskEdit
+            Tag = 2
+            Left = 13
+            Top = 40
+            Width = 111
+            Height = 23
+            EditMask = '000_000_000_000;1; '
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Roboto'
+            Font.Style = []
+            MaxLength = 15
+            ParentFont = False
+            TabOrder = 3
+            Text = '000_000_000_000'
+          end
+          object medt_four_end: TMaskEdit
+            Tag = 2
+            Left = 160
+            Top = 40
+            Width = 111
+            Height = 23
+            EditMask = '000_000_000_000;1; '
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Roboto'
+            Font.Style = []
+            MaxLength = 15
+            ParentFont = False
+            TabOrder = 4
+            Text = '000_000_000_000'
           end
         end
       end
@@ -468,16 +601,17 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 493
   end
   object ds_ts_two: TDataSource
-    DataSet = dm_Application_mysql.db_memTab_app_mysql
     Left = 77
     Top = 493
   end
   object ds_ts_Three: TDataSource
+    DataSet = dm_Application_mysql.fd_g_range_attempt
     Left = 141
     Top = 493
   end
   object ds_ts_Four: TDataSource
-    Left = 197
+    DataSet = dm_Application_mysql.fd_g_ID
+    Left = 213
     Top = 493
   end
 end

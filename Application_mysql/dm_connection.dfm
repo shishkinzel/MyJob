@@ -1,5 +1,6 @@
 object dm_Application_mysql: Tdm_Application_mysql
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 723
   Width = 991
   object con_app_mysql: TFDConnection
@@ -24,8 +25,8 @@ object dm_Application_mysql: Tdm_Application_mysql
       'CROSS JOIN (SELECT @cnt := 0) AS dummy '
       'WHERE request_date BETWEEN :p_start and :p_end'
       'ORDER BY request_date ;')
-    Left = 840
-    Top = 32
+    Left = 736
+    Top = 24
     ParamData = <
       item
         Name = 'P_START'
@@ -114,28 +115,21 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 56
-    Top = 208
+    Left = 624
+    Top = 24
   end
   object fd_reader_db_composite_tb: TFDBatchMoveSQLReader
     Connection = con_app_mysql
     TableName = 'db_angtel_composite.db_composite_tb'
-    Left = 48
-    Top = 304
-  end
-  object fd_writer_db_composite_tb: TFDBatchMoveDataSetWriter
-    Direct = True
-    DataSet = db_memTab_app_mysql
-    Left = 48
-    Top = 384
+    Left = 104
+    Top = 208
   end
   object fd_move_db_composite_tb: TFDBatchMove
-    Reader = fd_reader_db_composite_tb
-    Writer = fd_writer_db_composite_tb
+    Reader = fd_reader_db_composite_tb_name
     Mappings = <>
     LogFileName = 'Data.log'
-    Left = 144
-    Top = 264
+    Left = 40
+    Top = 208
   end
   object fd_manager_app_mysql: TFDManager
     FormatOptions.AssignedValues = [fvMapRules]
@@ -144,5 +138,122 @@ object dm_Application_mysql: Tdm_Application_mysql
     Active = True
     Left = 336
     Top = 24
+  end
+  object fd_reader_db_composite_tb_name: TFDBatchMoveSQLReader
+    Connection = con_app_mysql
+    TableName = 'db_angtel_composite.db_composite_tb'
+    Left = 168
+    Top = 208
+  end
+  object fd_writer_name: TFDBatchMoveTextWriter
+    DataDef.Fields = <>
+    Left = 200
+    Top = 368
+  end
+  object fd_reader_name: TFDBatchMoveSQLReader
+    Connection = con_app_mysql
+    ReadSQL = 
+      'select distinct device_name from db_angtel_composite.db_composit' +
+      'e_tb order by device_name '
+    Left = 104
+    Top = 368
+  end
+  object fd_move_name: TFDBatchMove
+    Reader = fd_reader_name
+    Writer = fd_writer_name
+    Mappings = <>
+    LogFileName = 'Data.log'
+    Left = 24
+    Top = 368
+  end
+  object fd_g_attempt: TFDQuery
+    Connection = con_app_mysql
+    SQL.Strings = (
+      'select min(attempt) as att_min, max(attempt) as att_max '
+      'from db_angtel_composite.db_composite_tb;')
+    Left = 824
+    Top = 24
+  end
+  object fd_g_ID: TFDQuery
+    Connection = con_app_mysql
+    SQL.Strings = (
+      'SELECT (@cnt := @cnt + 1) AS '#39#8470#39','
+      'device_name as '#39#1048#1084#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#39','
+      'ethaddr, id_serial as '#39#1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088#39','
+      'device_version, attempt as '#39#1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080#39' ,'
+      'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '
+      
+        'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074#1077#1088#1089#1080#1103#39', proposed_version as '#39#1055#1088#1077#1076#1086 +
+        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+      'FROM db_angtel_composite.db_composite_tb'
+      'CROSS JOIN (SELECT @cnt := 0) AS dummy '
+      'WHERE id_serial BETWEEN :p_start and :p_end'
+      'ORDER BY id_serial ;')
+    Left = 584
+    Top = 104
+    ParamData = <
+      item
+        Name = 'P_START'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_END'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+  end
+  object fd_g_range_attempt: TFDQuery
+    Connection = con_app_mysql
+    SQL.Strings = (
+      'SELECT (@cnt := @cnt + 1) AS '#39#8470#39','#10
+      'device_name as '#39#1048#1084#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#39','
+      #10'ethaddr, id_serial as '#39#1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088#39
+      ','#10'device_version, attempt as '#39#1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080#39','
+      
+        #10'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '#10'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074 +
+        #1077#1088#1089#1080#1103#39','
+      ' proposed_version as '#39#1055#1088#1077#1076#1086#1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+      #10'FROM db_angtel_composite.db_composite_tb'
+      #10'CROSS JOIN (SELECT @cnt := 0) AS dummy '
+      #10'WHERE attempt BETWEEN :p_start and :p_end'
+      #10'ORDER BY attempt ;')
+    Left = 640
+    Top = 104
+    ParamData = <
+      item
+        Name = 'P_START'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Name = 'P_END'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object fd_g_device_name: TFDQuery
+    Connection = con_app_mysql
+    SQL.Strings = (
+      'SELECT (@cnt := @cnt + 1) AS '#39#8470#39','
+      'device_name as '#39#1048#1084#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#39','
+      'ethaddr, id_serial as '#39#1057#1077#1088#1080#1081#1085#1099#1081' '#1085#1086#1084#1077#1088#39','
+      'device_version, attempt as '#39#1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080#39' ,'
+      'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '
+      
+        'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074#1077#1088#1089#1080#1103#39', proposed_version as '#39#1055#1088#1077#1076#1086 +
+        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+      'FROM db_angtel_composite.db_composite_tb'
+      'CROSS JOIN (SELECT @cnt := 0) AS dummy '
+      'WHERE device_name = :p_name'
+      'ORDER BY device_name ;')
+    Left = 712
+    Top = 104
+    ParamData = <
+      item
+        Name = 'P_NAME'
+        DataType = ftString
+        ParamType = ptInput
+      end>
   end
 end

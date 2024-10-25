@@ -7,7 +7,8 @@ uses
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
-  FireDAC.DApt, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove.SQL;
+  FireDAC.DApt, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove.SQL,
+  FireDAC.Comp.BatchMove.Text;
 
 type
   Tdm_Application_mysql = class(TDataModule)
@@ -27,9 +28,17 @@ type
     con_app_shishkinzel: TFDConnection;
     fd_g_fiooing_memTable: TFDQuery;
     fd_reader_db_composite_tb: TFDBatchMoveSQLReader;
-    fd_writer_db_composite_tb: TFDBatchMoveDataSetWriter;
     fd_move_db_composite_tb: TFDBatchMove;
     fd_manager_app_mysql: TFDManager;
+    fd_reader_db_composite_tb_name: TFDBatchMoveSQLReader;
+    fd_writer_name: TFDBatchMoveTextWriter;
+    fd_reader_name: TFDBatchMoveSQLReader;
+    fd_move_name: TFDBatchMove;
+    fd_g_attempt: TFDQuery;
+    fd_g_ID: TFDQuery;
+    fd_g_range_attempt: TFDQuery;
+    fd_g_device_name: TFDQuery;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,4 +57,11 @@ uses
 
 {$R *.dfm}
 
+
+procedure Tdm_Application_mysql.DataModuleCreate(Sender: TObject);
+begin
+  fd_writer_name.Stream:= frm_app_mysql.f_streem_name;
+end;
+
 end.
+
