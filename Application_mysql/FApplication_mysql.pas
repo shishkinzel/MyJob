@@ -84,6 +84,19 @@ type
     medt_four_end: TMaskEdit;
     lbl_end_id: TLabel;
     lbl_start_id: TLabel;
+    mni_msql_File_SeparatorOne: TMenuItem;
+    mni_msql_File_Reset: TMenuItem;
+    dlgOpen_File: TOpenDialog;
+    dlgSave_File: TSaveDialog;
+    ts_for: TTabSheet;
+    pnl_ts_five: TPanel;
+    StaticText1: TStaticText;
+    btn_ts_five_reset: TBitBtn;
+    btn_ts_five_start: TBitBtn;
+    dbnav_ts_five: TDBNavigator;
+    dbG_ts_five: TDBGrid;
+    ds_ts_five: TDataSource;
+    btn_down_select: TBitBtn;
     procedure dtp_ts_ds_one_startChange(Sender: TObject);
     procedure dtp_ts_ds_one_endChange(Sender: TObject);
     procedure btn_ts_one_StartClick(Sender: TObject);
@@ -99,6 +112,14 @@ type
     procedure btn_ts_four_ResetClick(Sender: TObject);
     procedure btn_ts_three_startClick(Sender: TObject);
     procedure btn_ts_three_ResetClick(Sender: TObject);
+    procedure mni_msql_MainOpenClick(Sender: TObject);
+    procedure mni_msql_MainSaveClick(Sender: TObject);
+    procedure btn_ts_two_StartClick(Sender: TObject);
+    procedure btn_ts_two_ResetClick(Sender: TObject);
+    procedure btn_ts_five_startClick(Sender: TObject);
+    procedure btn_ts_five_resetClick(Sender: TObject);
+    procedure chk_AllClick(Sender: TObject);
+    procedure btn_down_selectClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -121,23 +142,39 @@ uses
   IdGlobal, dm_connection, FireDAC.Comp.Client, FireDAC.Comp.BatchMove,
   FireDAC.Comp.BatchMove.Text;
 
+  const
+  csKey = 'id_key as № ';
+  csDeviceName = 'device_name "Наименование устройства" ';
+  csDeviceSelector = 'device_selector  "Состав модуля"';
+  csIDSerial = 'id_serial "Серийный номер"';
+  csethaddr = 'ethaddr as "Физический адрес"';
+  csDeviceVersion = 'device_version "Начальная версия"';
+  csAttempt = 'attempt "Номер попытки"';
+  csRequestData = 'request_date "Дата"';
+  csOriginalVersion = 'original_version "Текущая версия"';
+  csProposedVersion = 'proposed_version "Предложеная версия"';
+
 var
   f_table: TFDMemTable;
   f_move: TFDBatchMove;
   f_con_root : TFDConnection;
   f_con_shishkinzel : TFDConnection;
   f_writer_name : TFDBatchMoveTextWriter;
-
+  f_row_select : string;
 {$R *.dfm}
 procedure Tfrm_app_mysql.FormCreate(Sender: TObject);
 begin
+// начальные установки
   f_operation := False;
+  f_row_select := '';
   p_date_start := Now;
   p_date_end := Now;
+  dtp_ts_ds_one_start.Date := Now;
+  dtp_ts_ds_one_end.Date := Now;
   f_streem_name := TMemoryStream.Create;
 end;
-// показ формы
 
+// показ формы
 procedure Tfrm_app_mysql.FormShow(Sender: TObject);
 var
   i: Integer;
@@ -204,21 +241,6 @@ begin
   p_date_end := dtp_ts_ds_one_end.DateTime;
 end;
 
-// выполнить запрос
-procedure Tfrm_app_mysql.btn_ts_one_StartClick(Sender: TObject);
-var
-  i: Integer;
-begin
-  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
-  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
-  dm_Application_mysql.fd_g_Date.Open;
-
-end;
-
-procedure Tfrm_app_mysql.btn_ts_one_ResetClick(Sender: TObject);
-begin
-  dm_Application_mysql.fd_g_Date.Close;
-end;
 // описание режима работы БД
 
 procedure Tfrm_app_mysql.mni_msql_DB_serverClick(Sender: TObject);
@@ -238,11 +260,109 @@ begin
   f_operation := True;
 end;
 
-// выборка по количеству попыток
+
+ {
+  Диалоги открытия и закрытия файла БД
+ }
+// *************************************************************************************************
+procedure Tfrm_app_mysql.mni_msql_MainOpenClick(Sender: TObject);
+begin
+  if dlgOpen_File.Execute() then
+  begin
+    ShowMessage('Открываем диалог открытия файла');
+  end;
+end;
+
+procedure Tfrm_app_mysql.mni_msql_MainSaveClick(Sender: TObject);
+begin
+  if dlgSave_File.Execute() then
+  begin
+    ShowMessage('Открываем диалог сохранения файла');
+  end;
+end;
+//**************************************************************************************************
+
+{
+   СЕКЦИЯ ВЫБОРОК  #################################################################################
+}
+// 1. выборка по дате обновления  ------------------------------------------------------------------
+procedure Tfrm_app_mysql.btn_ts_one_StartClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // гасим и зажигаем необходимые кнопки
+  btn_ts_one_Start.Enabled := False;
+  btn_ts_one_Reset.Enabled := True;
+
+  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
+  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
+  dm_Application_mysql.fd_g_Date.Open;
+
+end;
+
+procedure Tfrm_app_mysql.btn_ts_one_ResetClick(Sender: TObject);
+begin
+  // гасим и зажигаем необходимые кнопки
+  btn_ts_one_Start.Enabled := True;
+  btn_ts_one_Reset.Enabled := False;
+
+  dm_Application_mysql.fd_g_Date.Close;
+    // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
+end;
+//**************************************************************************************************
+
+// 2. выборка по наименованию изделия --------------------------------------------------------------
+
+procedure Tfrm_app_mysql.btn_ts_two_StartClick(Sender: TObject);
+var
+  i: Integer;
+  f_name_device : string;
+begin
+   // гасим и зажигаем необходимые кнопки
+  btn_ts_two_Start.Enabled := False;
+  btn_ts_two_Reset.Enabled := True;
+
+
+  f_name_device := cbb_app_mysql.Text;
+
+  Fetch(f_name_device, '"');
+  f_name_device := Fetch(f_name_device, '"');
+
+  if f_name_device = '' then
+  begin
+    ShowMessage('Выберете наименование устройства');
+    Abort;
+  end;
+  dm_Application_mysql.fd_g_device_name.ParamByName('p_name').Value := f_name_device;
+  dm_Application_mysql.fd_g_device_name.Open;
+end;
+
+procedure Tfrm_app_mysql.btn_ts_two_ResetClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // гасим и зажигаем необходимые кнопки
+  btn_ts_two_Start.Enabled := True;
+  btn_ts_two_Reset.Enabled := False;
+
+  dm_Application_mysql.fd_g_device_name.Close;
+     // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
+end;
+//**************************************************************************************************
+// 3. выборка по количеству попыток ----------------------------------------------------------------
+
 procedure Tfrm_app_mysql.btn_ts_three_startClick(Sender: TObject);
 var
   p_att_start, p_att_end: Integer;
 begin
+ // гасим и зажигаем необходимые кнопки
+  btn_ts_three_start.Enabled := False;
+  btn_ts_three_Reset.Enabled := True;
+
  // формирования запроса
   dm_Application_mysql.fd_g_range_attempt.Params.ParamByName('p_start').Value := se_startAttempt.Value;
   dm_Application_mysql.fd_g_range_attempt.Params.ParamByName('p_end').Value := se_endAttempt.Value;
@@ -252,20 +372,27 @@ end;
 procedure Tfrm_app_mysql.btn_ts_three_ResetClick(Sender: TObject);
 begin
   dm_Application_mysql.fd_g_range_attempt.Close;
+
+   // гасим и зажигаем необходимые кнопки
+  btn_ts_three_start.Enabled := True;
+  btn_ts_three_Reset.Enabled := False;
+    // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
 end;
+//**************************************************************************************************
 
-
-
-
-
-
-// выборка по серийному номеру
+// 4. выборка по серийному номеру ------------------------------------------------------------------
 
 procedure Tfrm_app_mysql.btn_ts_four_startClick(Sender: TObject);
 var
   i: integer;
   tmp, tmp1: string;
 begin
+ // гасим и зажигаем необходимые кнопки
+  btn_ts_four_start.Enabled := False;
+  btn_ts_four_Reset.Enabled := True;
+
  // вытаскиваем первый сериный номер
   tmp := medt_four_start.Text;
   tmp1 := '';
@@ -284,7 +411,7 @@ begin
   p_id_end := tmp1 + tmp;
   if p_id_end < p_id_start then
   begin
-     p_id_end := p_id_start;
+    p_id_end := p_id_start;
   end;
  // формирования запроса
   dm_Application_mysql.fd_g_ID.Params.ParamByName('p_start').Value := p_id_start;
@@ -295,11 +422,170 @@ end;
 
 procedure Tfrm_app_mysql.btn_ts_four_ResetClick(Sender: TObject);
 begin
-   dm_Application_mysql.fd_g_ID.Close;
+  dm_Application_mysql.fd_g_ID.Close;
+    // гасим и зажигаем необходимые кнопки
+  btn_ts_four_start.Enabled := True;
+  btn_ts_four_Reset.Enabled := False;
+    // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
+end;
+//**************************************************************************************************
+
+//**************************************************************************************************
+
+// 5. выборка всей таблицы ------------------------------------------------------------------
+
+procedure Tfrm_app_mysql.btn_ts_five_startClick(Sender: TObject);
+var
+  i: Integer;
+  p_row, p_start, p_end : string;
+  p_sql : string;
+
+begin
+ // гасим и зажигаем необходимые кнопки
+  btn_ts_five_start.Enabled := False;
+  btn_ts_five_reset.Enabled := True;
+    // формирования запроса
+
+p_row :=  csDeviceName + ',' + csIDSerial;
+
+  p_start := '2024-05-10';
+  p_end := '2024-07-10';
+// формируем динамический запрос
+p_sql := 'SELECT (@cnt := @cnt + 1) "№",'
+                  + p_row +
+            ' FROM db_angtel_composite.db_composite_tb' +
+            ' CROSS JOIN (SELECT @cnt := 0) AS dummy ' +
+            ' WHERE request_date BETWEEN ' + '"' + p_start + '"' + ' and ' + '"' + p_end + '"' +
+            ' ORDER BY request_date ;' ;
+
+  with dm_Application_mysql.fd_g_select_row do
+  begin
+    SQL.Clear;
+    SQL.Add(p_sql);
+    Prepare;
+  end;
+  dm_Application_mysql.fd_g_select_row.Open;
+
+end;
+
+procedure Tfrm_app_mysql.btn_ts_five_resetClick(Sender: TObject);
+begin
+  dm_Application_mysql.fd_g_select_row.Close;
+        // гасим и зажигаем необходимые кнопки
+  btn_ts_five_start.Enabled := True;
+  btn_ts_five_reset.Enabled := False;
+  // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
+
 end;
 
 
 
+// Выборка стобцов таблицы
+procedure Tfrm_app_mysql.chk_AllClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  if chk_All.Checked then
+  begin
+    chk_id_key.Checked := True;
+    chk_ethaddr.Checked := True;
+    chk_attempt.Checked := True;
+    chk_id_serial.Checked := True;
+    chk_device_name.Checked := True;
+    chk_request_date.Checked := True;
+    chk_device_version.Checked := True;
+    chk_device_selector.Checked := True;
+    chk_original_version.Checked := True;
+    chk_proposed_version.Checked := True;
+  end
+  else
+  begin
+    chk_id_key.Checked := False;
+    chk_ethaddr.Checked := False;
+    chk_attempt.Checked := False;
+    chk_id_serial.Checked := False;
+    chk_device_name.Checked := False;
+    chk_request_date.Checked := False;
+    chk_device_version.Checked := False;
+    chk_device_selector.Checked := False;
+    chk_original_version.Checked := False;
+    chk_proposed_version.Checked := False;
+  end;
+end;
+
+// обработка нажатия кнопки выбор полей
+procedure Tfrm_app_mysql.btn_down_selectClick(Sender: TObject);
+var
+  i: Integer;
+  ff_stringlist: TStringList;
+begin
+
+  ff_stringlist := TStringList.Create;
+  pnl_down.Enabled := False;
+  pnl_Main.Enabled := True;
+// выборка по chechbox
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if self.Components[i] is TCheckBox then
+    begin
+      if (self.Components[i] as TCheckBox).Checked then
+      begin
+        ff_stringlist.Add((self.Components[i] as TCheckBox).Name);
+        case (self.Components[i] as TCheckBox).Tag of
+          100:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          101:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          102:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          103:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          104:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          105:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          106:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          107:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          108:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+          109:
+            begin
+              f_row_select := f_row_select + csDeviceName;
+            end;
+
+        end;
+      end;
+    end;
+  end;
+  ShowMessage('Все');
+end;
+
+
+//**************************************************************************************************
 procedure Tfrm_app_mysql.mni_conn_DB_internalClick(Sender: TObject);
 var
   i: Integer;

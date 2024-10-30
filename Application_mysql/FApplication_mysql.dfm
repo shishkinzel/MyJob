@@ -60,15 +60,18 @@ object frm_app_mysql: Tfrm_app_mysql
     Align = alBottom
     TabOrder = 1
     object chk_id_key: TCheckBox
-      Left = 294
-      Top = 53
+      Tag = 111
+      Left = 900
+      Top = 6
       Width = 102
       Height = 17
       Caption = #1055#1077#1088#1074#1080#1095#1085#1099#1081' '#1082#1083#1102#1095
+      Enabled = False
       TabOrder = 0
     end
     object chk_device_name: TCheckBox
-      Left = 8
+      Tag = 100
+      Left = 5
       Top = 30
       Width = 113
       Height = 17
@@ -76,6 +79,7 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 1
     end
     object chk_device_selector: TCheckBox
+      Tag = 106
       Left = 294
       Top = 30
       Width = 105
@@ -84,7 +88,8 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 2
     end
     object chk_id_serial: TCheckBox
-      Left = 8
+      Tag = 101
+      Left = 6
       Top = 53
       Width = 113
       Height = 17
@@ -92,7 +97,8 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 3
     end
     object chk_ethaddr: TCheckBox
-      Left = 8
+      Tag = 102
+      Left = 6
       Top = 76
       Width = 121
       Height = 17
@@ -100,6 +106,7 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 4
     end
     object chk_device_version: TCheckBox
+      Tag = 103
       Left = 135
       Top = 30
       Width = 121
@@ -108,22 +115,25 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 5
     end
     object chk_attempt: TCheckBox
-      Left = 425
-      Top = 30
+      Tag = 108
+      Left = 294
+      Top = 76
       Width = 104
       Height = 17
       Caption = #1053#1086#1084#1077#1088' '#1087#1086#1087#1099#1090#1082#1080
       TabOrder = 6
     end
     object chk_request_date: TCheckBox
-      Left = 294
-      Top = 76
+      Tag = 107
+      Left = 293
+      Top = 53
       Width = 105
       Height = 17
       Caption = #1044#1072#1090#1072
       TabOrder = 7
     end
     object chk_original_version: TCheckBox
+      Tag = 104
       Left = 135
       Top = 53
       Width = 113
@@ -132,6 +142,7 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 8
     end
     object chk_proposed_version: TCheckBox
+      Tag = 105
       Left = 135
       Top = 76
       Width = 140
@@ -140,12 +151,16 @@ object frm_app_mysql: Tfrm_app_mysql
       TabOrder = 9
     end
     object chk_All: TCheckBox
-      Left = 557
+      Tag = 110
+      Left = 477
       Top = 30
       Width = 105
       Height = 17
       Caption = #1042#1099#1073#1088#1072#1090#1100' '#1074#1089#1077
+      Checked = True
+      State = cbChecked
       TabOrder = 10
+      OnClick = chk_AllClick
     end
     object txt_part_tab: TStaticText
       Left = 8
@@ -156,6 +171,15 @@ object frm_app_mysql: Tfrm_app_mysql
       Caption = #1042#1099#1073#1086#1088' '#1087#1086#1083#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
       TabOrder = 11
     end
+    object btn_down_select: TBitBtn
+      Left = 477
+      Top = 64
+      Width = 468
+      Height = 21
+      Caption = #1042#1099#1073#1088#1072#1090#1100' '#1087#1086#1083#1103' '#1090#1072#1073#1083#1080#1094#1099
+      TabOrder = 12
+      OnClick = btn_down_selectClick
+    end
   end
   object pnl_Main: TPanel
     Left = 0
@@ -163,13 +187,14 @@ object frm_app_mysql: Tfrm_app_mysql
     Width = 1010
     Height = 585
     Align = alClient
+    Enabled = False
     TabOrder = 2
     object pgc_app_mysql: TPageControl
       Left = 1
       Top = 1
       Width = 1008
       Height = 583
-      ActivePage = ts_three
+      ActivePage = ts_for
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
@@ -230,6 +255,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 180
             Height = 21
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            Enabled = False
             TabOrder = 3
             OnClick = btn_ts_one_ResetClick
           end
@@ -312,6 +338,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Height = 21
             Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
             TabOrder = 0
+            OnClick = btn_ts_two_StartClick
           end
           object cbb_app_mysql: TComboBox
             Left = 3
@@ -327,7 +354,9 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 180
             Height = 21
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            Enabled = False
             TabOrder = 2
+            OnClick = btn_ts_two_ResetClick
           end
           object txt_Title_device: TStaticText
             Left = 1
@@ -426,6 +455,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 180
             Height = 21
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            Enabled = False
             TabOrder = 3
             OnClick = btn_ts_three_ResetClick
           end
@@ -505,6 +535,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 180
             Height = 21
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            Enabled = False
             TabOrder = 1
             OnClick = btn_ts_four_ResetClick
           end
@@ -553,6 +584,72 @@ object frm_app_mysql: Tfrm_app_mysql
           end
         end
       end
+      object ts_for: TTabSheet
+        Caption = #1042#1099#1074#1086#1076' '#1074#1089#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
+        ImageIndex = 4
+        object pnl_ts_five: TPanel
+          Left = 0
+          Top = 448
+          Width = 1000
+          Height = 107
+          Align = alBottom
+          TabOrder = 0
+          object StaticText1: TStaticText
+            Left = 1
+            Top = 1
+            Width = 998
+            Height = 17
+            Align = alTop
+            Alignment = taCenter
+            Caption = #1042#1099#1074#1086#1076' '#1074#1089#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
+            TabOrder = 0
+          end
+          object btn_ts_five_reset: TBitBtn
+            Left = 696
+            Top = 40
+            Width = 180
+            Height = 21
+            Caption = #1057#1073#1088#1086#1089#1080#1090#1100
+            Enabled = False
+            TabOrder = 1
+            OnClick = btn_ts_five_resetClick
+          end
+          object btn_ts_five_start: TBitBtn
+            Left = 458
+            Top = 40
+            Width = 180
+            Height = 21
+            Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+            TabOrder = 2
+            OnClick = btn_ts_five_startClick
+          end
+        end
+        object dbnav_ts_five: TDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 25
+          DataSource = ds_ts_five
+          VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+          Align = alTop
+          TabOrder = 1
+        end
+        object dbG_ts_five: TDBGrid
+          Left = 0
+          Top = 31
+          Width = 1000
+          Height = 417
+          Align = alClient
+          DataSource = ds_ts_five
+          TabOrder = 2
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
+      end
     end
   end
   object mm_app_mysql: TMainMenu
@@ -576,9 +673,17 @@ object frm_app_mysql: Tfrm_app_mysql
       Caption = #1060#1072#1081#1083
       object mni_msql_MainOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100
+        OnClick = mni_msql_MainOpenClick
       end
       object mni_msql_MainSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        OnClick = mni_msql_MainSaveClick
+      end
+      object mni_msql_File_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_msql_File_Reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089#1080#1090#1100
       end
     end
     object mni_msql_OperationWork: TMenuItem
@@ -601,6 +706,7 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 493
   end
   object ds_ts_two: TDataSource
+    DataSet = dm_Application_mysql.fd_g_device_name
     Left = 77
     Top = 493
   end
@@ -612,6 +718,19 @@ object frm_app_mysql: Tfrm_app_mysql
   object ds_ts_Four: TDataSource
     DataSet = dm_Application_mysql.fd_g_ID
     Left = 213
+    Top = 493
+  end
+  object dlgOpen_File: TOpenDialog
+    Left = 149
+    Top = 21
+  end
+  object dlgSave_File: TSaveDialog
+    Left = 205
+    Top = 21
+  end
+  object ds_ts_five: TDataSource
+    DataSet = dm_Application_mysql.fd_g_select_row
+    Left = 277
     Top = 493
   end
 end

@@ -5,7 +5,10 @@ object dm_Application_mysql: Tdm_Application_mysql
   Width = 991
   object con_app_mysql: TFDConnection
     ConnectionName = 'db_angtel_composite'
+    Params.Strings = (
+      'Port=3306')
     Connected = True
+    LoginDialog = fd_login_app_mysql
     LoginPrompt = False
     Left = 56
     Top = 48
@@ -20,12 +23,13 @@ object dm_Application_mysql: Tdm_Application_mysql
       'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '
       
         'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074#1077#1088#1089#1080#1103#39', proposed_version as '#39#1055#1088#1077#1076#1086 +
-        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39','
+      'device_selector as '#39#1057#1086#1089#1090#1072#1074' '#1084#1086#1076#1091#1083#1103#39'  '
       'FROM db_angtel_composite.db_composite_tb'
       'CROSS JOIN (SELECT @cnt := 0) AS dummy '
       'WHERE request_date BETWEEN :p_start and :p_end'
       'ORDER BY request_date ;')
-    Left = 736
+    Left = 600
     Top = 24
     ParamData = <
       item
@@ -115,8 +119,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 624
-    Top = 24
+    Left = 592
+    Top = 104
   end
   object fd_reader_db_composite_tb: TFDBatchMoveSQLReader
     Connection = con_app_mysql
@@ -171,8 +175,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     SQL.Strings = (
       'select min(attempt) as att_min, max(attempt) as att_max '
       'from db_angtel_composite.db_composite_tb;')
-    Left = 824
-    Top = 24
+    Left = 688
+    Top = 216
   end
   object fd_g_ID: TFDQuery
     Connection = con_app_mysql
@@ -184,13 +188,14 @@ object dm_Application_mysql: Tdm_Application_mysql
       'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '
       
         'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074#1077#1088#1089#1080#1103#39', proposed_version as '#39#1055#1088#1077#1076#1086 +
-        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39','
+      'device_selector as '#39#1057#1086#1089#1090#1072#1074' '#1084#1086#1076#1091#1083#1103#39'  '
       'FROM db_angtel_composite.db_composite_tb'
       'CROSS JOIN (SELECT @cnt := 0) AS dummy '
       'WHERE id_serial BETWEEN :p_start and :p_end'
       'ORDER BY id_serial ;')
-    Left = 584
-    Top = 104
+    Left = 824
+    Top = 32
     ParamData = <
       item
         Name = 'P_START'
@@ -213,13 +218,14 @@ object dm_Application_mysql: Tdm_Application_mysql
       
         #10'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '#10'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074 +
         #1077#1088#1089#1080#1103#39','
-      ' proposed_version as '#39#1055#1088#1077#1076#1086#1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+      'proposed_version as '#39#1055#1088#1077#1076#1086#1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39','
+      'device_selector as '#39#1057#1086#1089#1090#1072#1074' '#1084#1086#1076#1091#1083#1103#39'  '
       #10'FROM db_angtel_composite.db_composite_tb'
       #10'CROSS JOIN (SELECT @cnt := 0) AS dummy '
       #10'WHERE attempt BETWEEN :p_start and :p_end'
       #10'ORDER BY attempt ;')
-    Left = 640
-    Top = 104
+    Left = 744
+    Top = 24
     ParamData = <
       item
         Name = 'P_START'
@@ -242,18 +248,41 @@ object dm_Application_mysql: Tdm_Application_mysql
       'request_date as '#39#1044#1072#1090#1072' '#1079#1072#1087#1088#1086#1089#1072#39', '
       
         'original_version as '#39#1058#1077#1082#1091#1097#1072#1103' '#1074#1077#1088#1089#1080#1103#39', proposed_version as '#39#1055#1088#1077#1076#1086 +
-        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39' '
+        #1083#1078#1077#1085#1085#1072#1103' '#1074#1077#1088#1089#1080#1103#39','
+      'device_selector as '#39#1057#1086#1089#1090#1072#1074' '#1084#1086#1076#1091#1083#1103#39'  '
       'FROM db_angtel_composite.db_composite_tb'
       'CROSS JOIN (SELECT @cnt := 0) AS dummy '
       'WHERE device_name = :p_name'
-      'ORDER BY device_name ;')
-    Left = 712
-    Top = 104
+      'ORDER BY request_date ;')
+    Left = 672
+    Top = 24
     ParamData = <
       item
         Name = 'P_NAME'
         DataType = ftString
         ParamType = ptInput
       end>
+  end
+  object fd_login_app_mysql: TFDGUIxLoginDialog
+    Provider = 'Forms'
+    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
+    HistoryEnabled = True
+    HistoryStorage = hsFile
+    HistoryKey = 'D:\Embarcadero\Projects\MyJob\Application_mysql\registry.txt'
+    VisibleItems.Strings = (
+      'Server='#1057#1077#1088#1074#1077#1088' '
+      'Port='#1055#1086#1088#1090' '
+      'Database='#1041#1044' '
+      'User_Name='#1048#1084#1103' '
+      'Password='#1055#1072#1088#1086#1083#1100)
+    OnShow = fd_login_app_mysqlShow
+    OnLogin = fd_login_app_mysqlLogin
+    Left = 320
+    Top = 104
+  end
+  object fd_g_select_row: TFDQuery
+    Connection = con_app_mysql
+    Left = 600
+    Top = 208
   end
 end
