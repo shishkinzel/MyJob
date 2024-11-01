@@ -301,9 +301,9 @@ object dm_conJson: Tdm_conJson
       'Password=@Zel00000000'
       'Server=localhost'
       'DriverID=MySQL')
-    Connected = True
-    Left = 416
-    Top = 40
+    LoginPrompt = False
+    Left = 368
+    Top = 32
   end
   object fd_script_ClearDB: TFDScript
     SQLScripts = <
@@ -316,18 +316,18 @@ object dm_conJson: Tdm_conJson
     Transaction = fd_transaction_ClearDB
     Params = <>
     Macros = <>
-    Left = 600
-    Top = 104
+    Left = 648
+    Top = 24
   end
   object fd_transaction_ClearDB: TFDTransaction
     Connection = con_conJson
-    Left = 680
+    Left = 512
     Top = 24
   end
   object fd_dialog_ClearDB: TFDGUIxScriptDialog
     Provider = 'Forms'
-    Left = 696
-    Top = 104
+    Left = 704
+    Top = 448
   end
   object con_RemoteBase: TFDConnection
     Params.Strings = (
@@ -336,7 +336,7 @@ object dm_conJson: Tdm_conJson
       'Password=@Zel00000000'
       'Server=172.17.17.76'
       'DriverID=MySQL')
-    Left = 512
-    Top = 40
+    Left = 360
+    Top = 96
   end
 end

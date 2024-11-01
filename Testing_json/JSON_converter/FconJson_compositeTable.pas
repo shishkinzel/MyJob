@@ -202,7 +202,7 @@ begin
     else
     begin
       db_comp.Fields.FieldByNumber(7).AsInteger := 0;
-      db_comp.Fields.FieldByNumber(8).AsDateTime := 1;
+//      db_comp.Fields.FieldByNumber(8).AsDateTime := 1;
       db_comp.Fields.FieldByNumber(9).AsString := csNo;
       db_comp.Fields.FieldByNumber(10).AsString := csNo;
     end;
