@@ -1,10 +1,9 @@
 object frm_app_mysql: Tfrm_app_mysql
   Left = 0
   Top = 0
-  BorderStyle = bsDialog
   Caption = 'Application for MySQL'
-  ClientHeight = 775
-  ClientWidth = 1020
+  ClientHeight = 765
+  ClientWidth = 1010
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,7 +22,7 @@ object frm_app_mysql: Tfrm_app_mysql
   object spl_up: TSplitter
     Left = 0
     Top = 73
-    Width = 1020
+    Width = 1010
     Height = 3
     Cursor = crVSplit
     Align = alTop
@@ -31,21 +30,21 @@ object frm_app_mysql: Tfrm_app_mysql
   end
   object spl_down: TSplitter
     Left = 0
-    Top = 671
-    Width = 1020
+    Top = 661
+    Width = 1010
     Height = 3
     Cursor = crVSplit
     Align = alBottom
     ExplicitTop = 81
-    ExplicitWidth = 1010
   end
   object pnl_up: TPanel
     Left = 0
     Top = 0
-    Width = 1020
+    Width = 1010
     Height = 73
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 1020
     object txt_Title_operationWork: TStaticText
       Left = 272
       Top = 8
@@ -67,11 +66,13 @@ object frm_app_mysql: Tfrm_app_mysql
   end
   object pnl_down: TPanel
     Left = 0
-    Top = 674
-    Width = 1020
+    Top = 664
+    Width = 1010
     Height = 101
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 674
+    ExplicitWidth = 1020
     object chk_device_name: TCheckBox
       Tag = 101
       Left = 5
@@ -215,31 +216,34 @@ object frm_app_mysql: Tfrm_app_mysql
   object pnl_Main: TPanel
     Left = 0
     Top = 76
-    Width = 1020
-    Height = 595
+    Width = 1010
+    Height = 585
     Align = alClient
     Enabled = False
     TabOrder = 2
-    ExplicitHeight = 558
+    ExplicitWidth = 1020
+    ExplicitHeight = 595
     object pgc_app_mysql: TPageControl
       Left = 1
       Top = 1
-      Width = 1018
-      Height = 593
-      ActivePage = ts_two
+      Width = 1008
+      Height = 583
+      ActivePage = ts_three
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 556
+      ExplicitWidth = 1018
+      ExplicitHeight = 593
       object ts_one: TTabSheet
         Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
         object pnl_ts_one: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 0
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object lbl_start_date: TLabel
             Left = 16
             Top = 32
@@ -296,30 +300,32 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_date: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
             TabOrder = 4
+            ExplicitWidth = 1008
           end
         end
         object dbnav_ts_One: TDBNavigator
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_one
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 1004
         end
         object dbG_ts_one: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_one
           TabOrder = 2
@@ -337,8 +343,8 @@ object frm_app_mysql: Tfrm_app_mysql
         object dbG_ts_two: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_two
           TabOrder = 0
@@ -352,21 +358,23 @@ object frm_app_mysql: Tfrm_app_mysql
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_two
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 1004
         end
         object Panel1: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object btn_ts_two_Start: TBitBtn
             Left = 450
             Top = 24
@@ -397,12 +405,13 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_device: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1091
             TabOrder = 2
+            ExplicitWidth = 1008
           end
         end
       end
@@ -413,8 +422,8 @@ object frm_app_mysql: Tfrm_app_mysql
         object dbG_ts_three: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_Three
           TabOrder = 0
@@ -428,21 +437,23 @@ object frm_app_mysql: Tfrm_app_mysql
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_Three
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 1004
         end
         object Panel2: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object lbl_start_attempt: TLabel
             Left = 24
             Top = 24
@@ -460,12 +471,13 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_attempt: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1087#1086#1087#1099#1090#1082#1072#1084' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1103' '#1055#1054
             TabOrder = 0
+            ExplicitWidth = 1008
           end
           object se_startAttempt: TSpinEdit
             Left = 24
@@ -515,8 +527,8 @@ object frm_app_mysql: Tfrm_app_mysql
         object dbG_ts_four: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_Four
           TabOrder = 0
@@ -530,21 +542,23 @@ object frm_app_mysql: Tfrm_app_mysql
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_Four
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 1004
         end
         object Panel3: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object lbl_end_id: TLabel
             Left = 160
             Top = 21
@@ -562,12 +576,13 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_id: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1089#1077#1088#1080#1081#1085#1086#1084#1091' '#1085#1086#1084#1077#1088#1091
             TabOrder = 0
+            ExplicitWidth = 1008
           end
           object btn_ts_four_Reset: TBitBtn
             Left = 696
@@ -630,12 +645,13 @@ object frm_app_mysql: Tfrm_app_mysql
         OnShow = ts_fiveShow
         object pnl_ts_five: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 0
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object Label1: TLabel
             Left = 168
             Top = 29
@@ -653,12 +669,13 @@ object frm_app_mysql: Tfrm_app_mysql
           object StaticText1: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1092#1080#1079#1080#1095#1077#1089#1082#1086#1084#1091' '#1072#1076#1088#1077#1089#1091
             TabOrder = 0
+            ExplicitWidth = 1008
           end
           object btn_ts_five_reset: TBitBtn
             Left = 696
@@ -724,18 +741,19 @@ object frm_app_mysql: Tfrm_app_mysql
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_five
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 1004
         end
         object dbG_ts_five: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_five
           TabOrder = 2
@@ -752,8 +770,8 @@ object frm_app_mysql: Tfrm_app_mysql
         object dbG_ts_six: TDBGrid
           Left = 0
           Top = 31
-          Width = 1010
-          Height = 427
+          Width = 1000
+          Height = 417
           Align = alClient
           DataSource = ds_ts_six
           TabOrder = 0
@@ -765,21 +783,23 @@ object frm_app_mysql: Tfrm_app_mysql
         end
         object Panel4: TPanel
           Left = 0
-          Top = 458
-          Width = 1010
+          Top = 448
+          Width = 1000
           Height = 107
           Align = alBottom
           TabOrder = 1
-          ExplicitTop = 421
+          ExplicitTop = 458
+          ExplicitWidth = 1010
           object StaticText2: TStaticText
             Left = 1
             Top = 1
-            Width = 1008
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
             Caption = #1042#1099#1074#1086#1076' '#1074#1089#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
             TabOrder = 0
+            ExplicitWidth = 1008
           end
           object BitBtn1: TBitBtn
             Left = 696
@@ -805,12 +825,13 @@ object frm_app_mysql: Tfrm_app_mysql
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1004
+          Width = 994
           Height = 25
           DataSource = ds_ts_six
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 2
+          ExplicitWidth = 1004
         end
       end
     end
@@ -864,19 +885,19 @@ object frm_app_mysql: Tfrm_app_mysql
     end
   end
   object ds_ts_one: TDataSource
-    DataSet = dm_Application_mysql.fd_g_Date
+    DataSet = dm_Application_mysql.fd_g_All_row
     Left = 13
-    Top = 229
+    Top = 189
   end
   object ds_ts_two: TDataSource
-    DataSet = dm_Application_mysql.fd_g_device_name
-    Left = 93
-    Top = 229
+    DataSet = dm_Application_mysql.fd_g_All_row
+    Left = 69
+    Top = 189
   end
   object ds_ts_Three: TDataSource
-    DataSet = dm_Application_mysql.fd_g_range_attempt
-    Left = 165
-    Top = 237
+    DataSet = dm_Application_mysql.fd_g_All_row
+    Left = 13
+    Top = 253
   end
   object ds_ts_Four: TDataSource
     DataSet = dm_Application_mysql.fd_g_ID

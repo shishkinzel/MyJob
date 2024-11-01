@@ -179,8 +179,12 @@ uses
   // константы для сортировки
   csWhereBetween = 'WHERE request_date BETWEEN "';
   csWhereDeviceName = 'WHERE device_name =  "';
+  csWhereAttempt = 'WHERE attempt BETWEEN " ';
+
   csAnd = '" and "';
+  // константы для упорядочивания
   csOrderDate = '" ORDER BY request_date ;';
+  csOrderAttempt = '" ORDER BY attempt ;';
 {
 --------------конец блока динамического запроса ----------------------------------------------------
 }
@@ -333,45 +337,34 @@ end;
 procedure Tfrm_app_mysql.btn_ts_one_StartClick(Sender: TObject);
 var
   p_start, p_end : string;
-  f_sql : string;
+  f_sql: string;
 begin
-  // гасим и зажигаем необходимые кнопки
+ // проверка на валидность ввода дат
+  if p_date_start > p_date_end then
+  begin
+    ShowMessage('Введите правильный диапазон');
+    Abort
+  end;
+    // гасим и зажигаем необходимые кнопки
   btn_ts_one_Start.Enabled := False;
   btn_ts_one_Reset.Enabled := True;
 
+  p_start := FormatDateTime('YYYY-MM-DD', p_date_start);
+  p_end := FormatDateTime('YYYY-MM-DD', p_date_end);
   // формирования запроса
-  if flag_selectRow then
-  begin
-    dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
-    dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
-    dm_Application_mysql.fd_g_Date.Open;
-  end
-  else     // формирование динамического запроса
-  begin
-    // передподключаем источник данных dateset
-    ds_ts_one.DataSet := dm_Application_mysql.fd_g_All_row;
-      p_start := FormatDateTime( 'YYYY-MM-DD', p_date_start);
-      p_end   := FormatDateTime( 'YYYY-MM-DD', p_date_end);
-    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereBetween + p_start  + csAnd + p_end + csOrderDate;
-  // формируем sql - запрос
-     with dm_Application_mysql.fd_g_All_row do
-     begin
-       SQL.Clear;
-       SQL.Add(f_sql);
-       Prepare;
-       Open();
-     end;
-
-  end;
-
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereBetween + p_start + csAnd + p_end + csOrderDate;
+    with dm_Application_mysql.fd_g_All_row do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Open;
+    end;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_one_ResetClick(Sender: TObject);
 begin
   f_row_select := '';
-   ds_ts_one.DataSet := dm_Application_mysql.fd_g_Date;
-  dm_Application_mysql.fd_g_Date.Close;
-  dm_Application_mysql.fd_g_All_row.Close;;
+  dm_Application_mysql.fd_g_All_row.Close;
   // гасим и зажигаем необходимые кнопки
   btn_ts_one_Start.Enabled := True;
   btn_ts_one_Reset.Enabled := False;
@@ -418,17 +411,7 @@ begin
     Abort;
   end;
   // формирования запроса
-  if flag_selectRow then
-  begin
-  dm_Application_mysql.fd_g_device_name.ParamByName('p_name').Value := f_name_device;
-  dm_Application_mysql.fd_g_device_name.Open;
-  end
-  else     // формирование динамического запроса
-  begin
-    // передподключаем источник данных dateset
-    ds_ts_two.DataSet := dm_Application_mysql.fd_g_All_row;
     f_sql := csSelect + f_row_select + csFrom_Cross + csWhereDeviceName + f_name_device + csOrderDate;
-   // формируем sql - запрос
     with dm_Application_mysql.fd_g_All_row do
     begin
       SQL.Clear;
@@ -436,7 +419,6 @@ begin
       Prepare;
       Open();
     end;
-  end;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_two_ResetClick(Sender: TObject);
@@ -444,8 +426,6 @@ var
   i: Integer;
 begin
   f_row_select := '';
-  ds_ts_two.DataSet := dm_Application_mysql.fd_g_device_name;
-  dm_Application_mysql.fd_g_device_name.Close;
   dm_Application_mysql.fd_g_All_row.Close;
   // гасим и зажигаем необходимые кнопки
   btn_ts_two_Start.Enabled := True;
@@ -465,31 +445,38 @@ begin
   if se_startAttempt.CanFocus then
     se_startAttempt.SetFocus;
 end;
-
 procedure Tfrm_app_mysql.btn_ts_three_startClick(Sender: TObject);
 var
-  p_att_start, p_att_end: Integer;
+  f_sql: string;
+  p_att_start, p_att_end: string;
 begin
+ // проверка на валидность ввода попыток
+  if se_startAttempt.Value > se_endAttempt.Value then
+  begin
+    ShowMessage('Введите правильный диапазон');
+    Abort
+  end;
  // гасим и зажигаем необходимые кнопки
   btn_ts_three_start.Enabled := False;
   btn_ts_three_Reset.Enabled := True;
- // формирования запроса
-  if flag_selectRow then
-  begin
-    dm_Application_mysql.fd_g_range_attempt.Params.ParamByName('p_start').Value := se_startAttempt.Value;
-    dm_Application_mysql.fd_g_range_attempt.Params.ParamByName('p_end').Value := se_endAttempt.Value;
-    dm_Application_mysql.fd_g_range_attempt.Open;
-  end
-  else     // формирование динамического запроса
-  begin
 
-  end;
+  p_att_start := (se_startAttempt.Value).ToString;
+  p_att_end := (se_endAttempt.Value).ToString;
+
+ // формирования запроса
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereAttempt + p_att_start + csAnd + p_att_end + csOrderAttempt;
+    with dm_Application_mysql.fd_g_All_row do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Open;
+    end;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_three_ResetClick(Sender: TObject);
 begin
   f_row_select := '';
-  dm_Application_mysql.fd_g_range_attempt.Close;
+  dm_Application_mysql.fd_g_All_row.Close;
    // гасим и зажигаем необходимые кнопки
   btn_ts_three_start.Enabled := True;
   btn_ts_three_Reset.Enabled := False;
@@ -539,6 +526,10 @@ begin
   begin
     p_id_end := p_id_start;
   end;
+
+  if p_id_start > p_id_end then
+    p_id_end := p_id_start;
+
  // формирования запроса
   if flag_selectRow then
   begin
@@ -591,9 +582,9 @@ begin
    // формирования запроса
   if flag_selectRow then
   begin
-  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
-  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
-  dm_Application_mysql.fd_g_Date.Open;
+//  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
+//  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
+//  dm_Application_mysql.fd_g_Date.Open;
   end
   else     // формирование динамического запроса
   begin

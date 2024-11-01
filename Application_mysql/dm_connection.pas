@@ -13,7 +13,6 @@ uses
 type
   Tdm_Application_mysql = class(TDataModule)
     con_app_mysql: TFDConnection;
-    fd_g_Date: TFDQuery;
     db_memTab_app_mysql: TFDMemTable;
     db_memTab_app_mysqlid_key: TAutoIncField;
     db_memTab_app_mysqldevice_name: TStringField;
@@ -36,8 +35,6 @@ type
     fd_move_name: TFDBatchMove;
     fd_g_attempt: TFDQuery;
     fd_g_ID: TFDQuery;
-    fd_g_range_attempt: TFDQuery;
-    fd_g_device_name: TFDQuery;
     fd_login_app_mysql: TFDGUIxLoginDialog;
     fd_g_select_row: TFDQuery;
     fd_g_All_row: TFDQuery;
