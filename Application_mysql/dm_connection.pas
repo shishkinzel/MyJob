@@ -40,6 +40,8 @@ type
     fd_g_device_name: TFDQuery;
     fd_login_app_mysql: TFDGUIxLoginDialog;
     fd_g_select_row: TFDQuery;
+    fd_g_All_row: TFDQuery;
+    fd_g_Mac: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
     procedure fd_login_app_mysqlShow(Sender: TObject);
