@@ -136,7 +136,7 @@ type
     chkPrintTab: TCheckBox;
     edtMod: TEdit;
     mniLabel: TMenuItem;
-    mniLabelBig: TMenuItem;
+    mni_LabelBig_TE200_160: TMenuItem;
     mniLabelSmall: TMenuItem;
     mniShowBig: TMenuItem;
     mniPrintBig: TMenuItem;
@@ -224,6 +224,9 @@ type
     mniMarking_print_43x25: TMenuItem;
     mniMarking_Separator2: TMenuItem;
     mniMarking_Reset: TMenuItem;
+    mni_msql_N5840E2001601: TMenuItem;
+    mni_TE200_160_Show: TMenuItem;
+    mni_TE200_160_Print: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -299,6 +302,8 @@ type
     procedure mniMarking_show_58x40Click(Sender: TObject);
     procedure mniMarking_print_58x40Click(Sender: TObject);
     procedure mniMarking_ResetClick(Sender: TObject);
+    procedure mni_TE200_160_ShowClick(Sender: TObject);
+    procedure mni_TE200_160_PrintClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -349,6 +354,7 @@ type
       f_print_2824: string;
       f_print_908: string;
       f_print_576: string;
+      f_print_160: string;
 
 // переменные времени валидации
       f_date_valid: string;
@@ -472,6 +478,7 @@ begin
   f_print_2824 := IniOptions.f_print_2824;
   f_print_908 := IniOptions.f_print_908;
   f_print_576 := IniOptions.f_print_576;
+  f_print_160 := IniOptions.f_print_160;
 // защита приложения
   f_access := IniOptions.f_access;
 // последний mac-адрес плюс 1
@@ -1244,6 +1251,8 @@ begin
       mni_Pr_shild_43_25.Enabled := False;
       mni_PrintSmall_new.Enabled := False;
       mni_Pr_shild_43_25_small.Enabled := False;
+      mni_TE200_160_Print.Enabled := False;
+
 
 // зажигаем окна просмотра
       mniShowBig.Enabled := True;
@@ -1253,6 +1262,7 @@ begin
       mni_sh_shild_43_25.Enabled := True;
       mni_ShowSmall_new.Enabled := True;
       mni_sh_shild_43_25_small.Enabled := True;
+      mni_TE200_160_Show.Enabled := True;
 
 //   сбрасываем окна заполнения
       medtModule.Text := '000';
@@ -1972,6 +1982,51 @@ begin
   end;
 
 end;
+// этикетка 58х40 для принтера TE200_160
+
+procedure TfrmMAC.mni_TE200_160_ShowClick(Sender: TObject);
+begin
+// задаем место открытие окна
+  frmFRBigLabel.Top := 5;
+  frmFRBigLabel.Left := 5;
+  frmFRBigLabel.Show;
+  Self.SetFocus;
+
+  // гасим и зажигаем пункты на главном меню
+  mni_TE200_160_Print.Enabled := True;
+  mni_TE200_160_Show.Enabled := False;
+
+  (frmFRBigLabel.rp_TE200_160.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
+  (frmFRBigLabel.rp_TE200_160_mac.FindObject('lbBig') as TFrxMemoView).Text := edtDevice.text;
+  if chkAdvanceSetting.Checked then
+    frmFRBigLabel.rp_TE200_160_mac.ShowReport()
+  else
+    frmFRBigLabel.rp_TE200_160.ShowReport();
+end;
+// печать этикетки  58х40 для принтера TE200_160
+procedure TfrmMAC.mni_TE200_160_PrintClick(Sender: TObject);
+begin
+
+  if chkAdvanceSetting.Checked then
+  begin
+     // задаем принтер по умолчанию
+    frmFRBigLabel.rp_TE200_160_mac.Report.PrintOptions.Printer := f_print_160;
+
+    frmFRBigLabel.rp_TE200_160_mac.ShowReport();
+    frmFRBigLabel.rp_TE200_160_mac.Print;
+  end
+  else
+  begin
+     // задаем принтер по умолчанию
+    frmFRBigLabel.rp_TE200_160.Report.PrintOptions.Printer := f_print_160;
+
+    frmFRBigLabel.rp_TE200_160.ShowReport();
+    frmFRBigLabel.rp_TE200_160.Print;
+  end;
+
+end;
+
+
 // новая этикетка размер 43х25 *************************************************************
 
 procedure TfrmMAC.mni_sh_43_25Click(Sender: TObject);
@@ -2571,6 +2626,7 @@ begin
           IniOptions.f_print_940 := f_print_940;
           IniOptions.f_print_908 := f_print_908;
           IniOptions.f_print_576 := f_print_576;
+          IniOptions.f_print_160 := f_print_160;
           IniOptions.f_print_2824 := f_print_2824;
 
         // Дата
@@ -2628,6 +2684,7 @@ begin
   mni_sh_shild_43_25_small.Enabled := False;
   mni_Pr_shild_43_25_small.Enabled := True;
 end;
+
 
 // печать
 procedure TfrmMAC.mni_Pr_shild_43_25_smallClick(Sender: TObject);

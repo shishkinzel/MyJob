@@ -21,6 +21,7 @@ type
   f_print_2824 : string;
   f_print_908 : string;
   f_print_576 : string;
+  f_print_160 : string;
 
   f_access : string;         // переменная доступа
 
@@ -49,6 +50,7 @@ procedure TIniOptions.LoadSettings(Ini: TMemIniFile);
 begin
   if Ini <> nil then
   begin
+    f_print_160 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_160', '\\PrintServer\TE200_160');
     f_print_924 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_924', '\\PrintServer\TE200_924');
     f_print_940 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_940', '\\PrintServer\TE200_940');
     f_print_908 := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_908', '\\PrintServer\TE200_908');
@@ -69,6 +71,7 @@ begin
   if Ini <> nil then
   begin
   // принтеры
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_160', f_print_160);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_924', f_print_924);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_940', f_print_940);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', f_print_908);

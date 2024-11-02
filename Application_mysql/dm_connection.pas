@@ -34,7 +34,6 @@ type
     fd_reader_name: TFDBatchMoveSQLReader;
     fd_move_name: TFDBatchMove;
     fd_g_attempt: TFDQuery;
-    fd_g_ID: TFDQuery;
     fd_login_app_mysql: TFDGUIxLoginDialog;
     fd_g_select_row: TFDQuery;
     fd_g_All_row: TFDQuery;

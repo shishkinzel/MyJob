@@ -306,7 +306,6 @@ object frmMAC: TfrmMAC
     Top = 120
     Width = 200
     Height = 27
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -321,7 +320,6 @@ object frmMAC: TfrmMAC
     Top = 77
     Width = 300
     Height = 27
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -773,7 +771,7 @@ object frmMAC: TfrmMAC
       Caption = #1069#1090#1080#1082#1077#1090#1082#1072
       Enabled = False
       Visible = False
-      object mniLabelBig: TMenuItem
+      object mni_LabelBig_TE200_160: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'40_2824'
         object mniShowBig: TMenuItem
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
@@ -783,6 +781,18 @@ object frmMAC: TfrmMAC
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
           OnClick = mniPrintBigClick
+        end
+      end
+      object mni_msql_N5840E2001601: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'40_'#1058'E200_160'
+        object mni_TE200_160_Show: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_TE200_160_ShowClick
+        end
+        object mni_TE200_160_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_TE200_160_PrintClick
         end
       end
       object mniLabelSmall: TMenuItem
