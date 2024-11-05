@@ -820,7 +820,7 @@ object frm_app_mysql: Tfrm_app_mysql
         Caption = '-'
       end
       object mni_conn_DB_internal: TMenuItem
-        Caption = #1040#1074#1090#1086#1085#1086#1084#1085#1072#1103' '#1041#1044
+        Caption = #1056#1077#1078#1080#1084' '#1088#1072#1073#1086#1090#1099' '#1089' '#1041#1044
         OnClick = mni_conn_DB_internalClick
       end
     end
@@ -856,23 +856,23 @@ object frm_app_mysql: Tfrm_app_mysql
     end
   end
   object ds_ts_one: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_row
+    DataSet = dm_Application_mysql.fd_g_Select_MemTable
     Left = 13
     Top = 189
   end
   object ds_ts_two: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_row
+    DataSet = dm_Application_mysql.fd_g_Select_Two
     Left = 69
     Top = 189
   end
   object ds_ts_Three: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_row
-    Left = 13
-    Top = 253
+    DataSet = dm_Application_mysql.fd_g_Select_Three
+    Left = 117
+    Top = 189
   end
   object ds_ts_Four: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_row
-    Left = 77
+    DataSet = dm_Application_mysql.fd_g_Select_Four
+    Left = 13
     Top = 253
   end
   object dlgOpen_File: TOpenDialog
@@ -884,13 +884,13 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 21
   end
   object ds_ts_five: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_row
-    Left = 125
-    Top = 189
+    DataSet = dm_Application_mysql.fd_g_Select_Five
+    Left = 69
+    Top = 253
   end
   object ds_ts_six: TDataSource
     DataSet = dm_Application_mysql.fd_g_All_Table
-    Left = 157
+    Left = 133
     Top = 253
   end
 end

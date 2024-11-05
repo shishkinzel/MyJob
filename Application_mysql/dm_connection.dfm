@@ -14,7 +14,55 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 24
   end
   object db_memTab_app_mysql: TFDMemTable
-    FieldDefs = <>
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id_key'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'device_name'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_selector'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'id_serial'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'ethaddr'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'attempt'
+        DataType = ftInteger
+      end
+      item
+        Name = 'request_date'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'original_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'proposed_version'
+        DataType = ftString
+        Size = 45
+      end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -88,8 +136,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 48
-    Top = 160
+    Left = 152
+    Top = 88
   end
   object fd_manager_app_mysql: TFDManager
     FormatOptions.AssignedValues = [fvMapRules]
@@ -179,5 +227,54 @@ object dm_Application_mysql: Tdm_Application_mysql
         DataType = ftString
         ParamType = ptInput
       end>
+  end
+  object fd_g_Select_One: TFDQuery
+    Connection = con_app_mysql
+    Left = 536
+    Top = 8
+  end
+  object fd_g_Select_Two: TFDQuery
+    Connection = con_app_mysql
+    Left = 536
+    Top = 56
+  end
+  object fd_g_Select_Three: TFDQuery
+    Connection = con_app_mysql
+    Left = 536
+    Top = 104
+  end
+  object fd_g_Select_Four: TFDQuery
+    Connection = con_app_mysql
+    Left = 536
+    Top = 152
+  end
+  object fd_g_Select_Five: TFDQuery
+    Connection = con_app_mysql
+    Left = 535
+    Top = 200
+  end
+  object con_MemTable: TFDConnection
+    Params.Strings = (
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 24
+    Top = 168
+  end
+  object fd_loc_sql_Table: TFDLocalSQL
+    Connection = con_MemTable
+    DataSets = <
+      item
+        DataSet = db_memTab_app_mysql
+        Name = 'memTable'
+      end>
+    Left = 128
+    Top = 168
+  end
+  object fd_g_Select_MemTable: TFDQuery
+    Connection = con_MemTable
+    SQL.Strings = (
+      'SELECT * FROM memTable')
+    Left = 64
+    Top = 256
   end
 end
