@@ -63,7 +63,7 @@ type
     mni_conn_SeparatorOne: TMenuItem;
     mni_conn_DB_internal: TMenuItem;
     btn_ts_two_Start: TBitBtn;
-    cbb_app_mysql: TComboBox;
+    cbb_app_mysql: TComboBox;            // combobox для наименования устройств
     txt_Title_attempt: TStaticText;
     se_startAttempt: TSpinEdit;
     se_endAttempt: TSpinEdit;
@@ -100,8 +100,8 @@ type
     dbG_ts_six: TDBGrid;
     Panel4: TPanel;
     StaticText2: TStaticText;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    btn_ts_six_reset: TBitBtn;
+    btn_ts_six_start: TBitBtn;
     dbnav_ts_six: TDBNavigator;
     ds_ts_six: TDataSource;
     Label1: TLabel;
@@ -139,6 +139,10 @@ type
     procedure btn_pn_up_resetClick(Sender: TObject);
     procedure ts_threeShow(Sender: TObject);
     procedure ts_twoShow(Sender: TObject);
+    procedure ts_oneShow(Sender: TObject);
+    procedure ts_sixShow(Sender: TObject);
+    procedure btn_ts_six_startClick(Sender: TObject);
+    procedure btn_ts_six_resetClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -338,6 +342,11 @@ end;
    СЕКЦИЯ ВЫБОРОК  #################################################################################
 }
 // 1. выборка по дате обновления  ------------------------------------------------------------------
+procedure Tfrm_app_mysql.ts_oneShow(Sender: TObject);
+begin
+  dm_Application_mysql.fd_g_All_row.SQL.Clear;
+end;
+
 procedure Tfrm_app_mysql.btn_ts_one_StartClick(Sender: TObject);
 var
   p_start, p_end : string;
@@ -361,6 +370,7 @@ begin
     begin
       SQL.Clear;
       SQL.Add(f_sql);
+      Prepare;
       Open;
     end;
 end;
@@ -385,7 +395,7 @@ end;
 
 procedure Tfrm_app_mysql.ts_twoShow(Sender: TObject);
 begin
-
+  dm_Application_mysql.fd_g_All_row.SQL.Clear;
   if cbb_app_mysql.CanFocus then
   begin
     cbb_app_mysql.SetFocus;
@@ -446,9 +456,11 @@ end;
   // установить фокус на выбор попыток
 procedure Tfrm_app_mysql.ts_threeShow(Sender: TObject);
 begin
+  dm_Application_mysql.fd_g_All_row.SQL.Clear;
   if se_startAttempt.CanFocus then
     se_startAttempt.SetFocus;
 end;
+
 procedure Tfrm_app_mysql.btn_ts_three_startClick(Sender: TObject);
 var
   f_sql: string;
@@ -468,13 +480,14 @@ begin
   p_att_end := (se_endAttempt.Value).ToString;
 
  // формирования запроса
-    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereAttempt + p_att_start + csAnd + p_att_end + csOrderAttempt;
-    with dm_Application_mysql.fd_g_All_row do
-    begin
-      SQL.Clear;
-      SQL.Add(f_sql);
-      Open;
-    end;
+  f_sql := csSelect + f_row_select + csFrom_Cross + csWhereAttempt + p_att_start + csAnd + p_att_end + csOrderAttempt;
+  with dm_Application_mysql.fd_g_All_row do
+  begin
+    SQL.Clear;
+    SQL.Add(f_sql);
+    Prepare;
+    Open;
+  end;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_three_ResetClick(Sender: TObject);
@@ -495,10 +508,9 @@ end;
 
 procedure Tfrm_app_mysql.ts_fourShow(Sender: TObject);
 begin
-  begin
-    if medt_four_start.CanFocus then
-      medt_four_start.SetFocus;
-  end;
+  dm_Application_mysql.fd_g_All_row.SQL.Clear;
+  if medt_four_start.CanFocus then
+    medt_four_start.SetFocus;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_four_startClick(Sender: TObject);
@@ -547,6 +559,7 @@ begin
   begin
     SQL.Clear;
     SQL.Add(f_sql);
+    Prepare;
     Open;
   end;
 end;
@@ -570,7 +583,8 @@ end;
   // установить фокус на ввод физического адреса
 procedure Tfrm_app_mysql.ts_fiveShow(Sender: TObject);
 begin
-   if medt_five_start.CanFocus then
+  dm_Application_mysql.fd_g_All_row.SQL.Clear;
+  if medt_five_start.CanFocus then
   begin
     medt_five_start.SetFocus;
   end;
@@ -598,6 +612,7 @@ begin
   begin
     SQL.Clear;
     SQL.Add(f_sql);
+    Prepare;
     Open;
   end;
 end;
@@ -630,44 +645,46 @@ end;
 // 6. Вывод полной таблицы ---------------------------------------------------------------------------------------------
   // установить фокус на ввод физического адреса
 
-//procedure Tfrm_app_mysql.btn_ts_five_startClick(Sender: TObject);
-//var
-//  i: Integer;
-//  p_row, p_start, p_end : string;
-//  p_sql : string;
-//
-//begin
-// // гасим и зажигаем необходимые кнопки
-//  btn_ts_five_start.Enabled := False;
-//  btn_ts_five_reset.Enabled := True;
-//   // формирования запроса
-//  if flag_selectRow then
-//  begin
-//  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_start').Value := p_date_start;
-//  dm_Application_mysql.fd_g_Date.Params.ParamByName('p_end').Value := p_date_end;
-//  dm_Application_mysql.fd_g_Date.Open;
-//  end
-//  else     // формирование динамического запроса
-//  begin
-//
-//  end;
-//
-//end;
+procedure Tfrm_app_mysql.ts_sixShow(Sender: TObject);
+begin
+  if btn_ts_six_Start.CanFocus then
+    btn_ts_six_Start.SetFocus;
+end;
 
-//procedure Tfrm_app_mysql.btn_ts_five_resetClick(Sender: TObject);
-//begin
-//  dm_Application_mysql.fd_g_select_row.Close;
-//  // гасим и зажигаем необходимые кнопки
-//  btn_ts_five_start.Enabled := True;
-//  btn_ts_five_reset.Enabled := False;
-//  // активация панели выбора столбцов
-//  pnl_Main.Enabled := False;
-//  pnl_down.Enabled := True;
-//
-//end;
+procedure Tfrm_app_mysql.btn_ts_six_startClick(Sender: TObject);
+var
+  i: Integer;
+  p_row, p_start, p_end: string;
+  f_sql: string;
+begin
+   // гасим и зажигаем необходимые кнопки
+  btn_ts_six_start.Enabled := False;
+  btn_ts_six_reset.Enabled := True;
+   // формирования запроса
+  f_sql := 'SELECT * FROM db_angtel_composite.db_composite_tb';
+  with dm_Application_mysql.fd_g_All_Table do
+  begin
+    SQL.Clear;
+    SQL.Add(f_sql);
+    Prepare;
+    Open;
+  end;
 
-{
-------------------------------------------------------------------------------------------------------------------------
+end;
+
+procedure Tfrm_app_mysql.btn_ts_six_resetClick(Sender: TObject);
+begin
+  dm_Application_mysql.fd_g_All_Table.Close;
+   // гасим и зажигаем необходимые кнопки
+  btn_ts_six_start.Enabled := True;
+  btn_ts_six_reset.Enabled := False;
+  // активация панели выбора столбцов
+  pnl_Main.Enabled := False;
+  pnl_down.Enabled := True;
+end;
+
+
+{------------------------------------------------------------------------------------------------------------------------
 }
 // Выборка стобцов таблицы
 procedure Tfrm_app_mysql.chk_AllClick(Sender: TObject);
@@ -820,7 +837,6 @@ var
 begin
 
   f_table := dm_Application_mysql.db_memTab_app_mysql;
-  f_move := dm_Application_mysql.fd_move_db_composite_tb;
  // запись в таблицу памяти БД
 //  f_table.Open;
 //  f_move.Execute;

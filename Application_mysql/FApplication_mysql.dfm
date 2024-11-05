@@ -223,11 +223,12 @@ object frm_app_mysql: Tfrm_app_mysql
       Top = 1
       Width = 1008
       Height = 583
-      ActivePage = ts_five
+      ActivePage = ts_six
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
         Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
+        OnShow = ts_oneShow
         object pnl_ts_one: TPanel
           Left = 0
           Top = 448
@@ -265,7 +266,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Width = 186
             Height = 21
             Date = 45587.000000000000000000
-            Time = 0.999988425923220400
+            Time = 0.999988425923220300
             TabOrder = 1
             OnChange = dtp_ts_ds_one_endChange
           end
@@ -740,6 +741,7 @@ object frm_app_mysql: Tfrm_app_mysql
       object ts_six: TTabSheet
         Caption = #1042#1099#1074#1086#1076' '#1087#1086#1083#1085#1086#1081' '#1090#1072#1073#1083#1080#1094#1099
         ImageIndex = 5
+        OnShow = ts_sixShow
         object dbG_ts_six: TDBGrid
           Left = 0
           Top = 31
@@ -771,7 +773,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Caption = #1042#1099#1074#1086#1076' '#1074#1089#1077#1081' '#1090#1072#1073#1083#1080#1094#1099
             TabOrder = 0
           end
-          object BitBtn1: TBitBtn
+          object btn_ts_six_reset: TBitBtn
             Left = 696
             Top = 40
             Width = 180
@@ -779,16 +781,16 @@ object frm_app_mysql: Tfrm_app_mysql
             Caption = #1057#1073#1088#1086#1089#1080#1090#1100
             Enabled = False
             TabOrder = 1
-            OnClick = btn_ts_five_resetClick
+            OnClick = btn_ts_six_resetClick
           end
-          object BitBtn2: TBitBtn
+          object btn_ts_six_start: TBitBtn
             Left = 458
             Top = 40
             Width = 180
             Height = 21
             Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
             TabOrder = 2
-            OnClick = btn_ts_five_startClick
+            OnClick = btn_ts_six_startClick
           end
         end
         object dbnav_ts_six: TDBNavigator
@@ -887,8 +889,8 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 189
   end
   object ds_ts_six: TDataSource
-    DataSet = dm_Application_mysql.db_memTab_app_mysql
-    Left = 365
-    Top = 237
+    DataSet = dm_Application_mysql.fd_g_All_Table
+    Left = 157
+    Top = 253
   end
 end

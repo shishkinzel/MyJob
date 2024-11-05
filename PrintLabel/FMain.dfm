@@ -13637,7 +13637,8 @@ object frmMain: TfrmMain
       54D3BEDBFE37E38E98433E8697CC39ED76DAF322FF3F7BF2DE01113B533C0000
       000049454E44AE426082}
     Stretch = True
-    ExplicitTop = 10
+    ExplicitLeft = -8
+    ExplicitTop = -8
   end
   object edtPackage: TEdit
     Tag = 1

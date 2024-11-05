@@ -13,7 +13,7 @@ uses
 type
   Tdm_Application_mysql = class(TDataModule)
     con_app_mysql: TFDConnection;
-    db_memTab_app_mysql: TFDMemTable;
+    db_memTab_app_mysql: TFDMemTable;                    // Таблица для хранения запроса БД из MySQL
     db_memTab_app_mysqlid_key: TAutoIncField;
     db_memTab_app_mysqldevice_name: TStringField;
     db_memTab_app_mysqldevice_selector: TStringField;
@@ -25,17 +25,13 @@ type
     db_memTab_app_mysqloriginal_version: TStringField;
     db_memTab_app_mysqlproposed_version: TStringField;
     con_app_shishkinzel: TFDConnection;
-    fd_g_fiooing_memTable: TFDQuery;
-    fd_reader_db_composite_tb: TFDBatchMoveSQLReader;
-    fd_move_db_composite_tb: TFDBatchMove;
+    fd_g_All_Table: TFDQuery;
     fd_manager_app_mysql: TFDManager;
-    fd_reader_db_composite_tb_name: TFDBatchMoveSQLReader;
-    fd_writer_name: TFDBatchMoveTextWriter;
-    fd_reader_name: TFDBatchMoveSQLReader;
-    fd_move_name: TFDBatchMove;
-    fd_g_attempt: TFDQuery;
+    fd_writer_name: TFDBatchMoveTextWriter;                 // запись в combobox наименования устройств
+    fd_reader_name: TFDBatchMoveSQLReader;                  // запрос на чтение из таблицы
+    fd_move_name: TFDBatchMove;                             // перемещение device_name с сортировкой по устройству
+    fd_g_attempt: TFDQuery;                                 // запрос на выдачу кол-ва попыток min и max
     fd_login_app_mysql: TFDGUIxLoginDialog;
-    fd_g_select_row: TFDQuery;
     fd_g_All_row: TFDQuery;
     fd_g_Mac: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
