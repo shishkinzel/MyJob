@@ -896,7 +896,7 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 253
   end
   object ds_ts_six: TDataSource
-    DataSet = dm_Application_mysql.db_memTab_app_mysql
+    DataSet = dm_Application_mysql.fd_g_Select_six
     Left = 133
     Top = 253
   end

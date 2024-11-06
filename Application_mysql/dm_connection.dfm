@@ -14,55 +14,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 24
   end
   object db_memTab_app_mysql: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'id_key'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'device_name'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'device_selector'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'id_serial'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'ethaddr'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'device_version'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'attempt'
-        DataType = ftInteger
-      end
-      item
-        Name = 'request_date'
-        DataType = ftDateTime
-      end
-      item
-        Name = 'original_version'
-        DataType = ftString
-        Size = 45
-      end
-      item
-        Name = 'proposed_version'
-        DataType = ftString
-        Size = 45
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -136,8 +88,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 168
-    Top = 88
+    Left = 56
+    Top = 168
   end
   object fd_manager_app_mysql: TFDManager
     FormatOptions.AssignedValues = [fvMapRules]
@@ -295,8 +247,8 @@ object dm_Application_mysql: Tdm_Application_mysql
   end
   object fd_writer_MemTable: TFDBatchMoveDataSetWriter
     DataSet = db_memTab_app_mysql
-    Left = 96
-    Top = 424
+    Left = 104
+    Top = 416
   end
   object fd_g_Select_mt_two: TFDQuery
     Connection = con_MemTable
@@ -325,5 +277,15 @@ object dm_Application_mysql: Tdm_Application_mysql
       '')
     Left = 608
     Top = 240
+  end
+  object fd_g_Select_six: TFDQuery
+    Connection = con_app_mysql
+    Left = 423
+    Top = 264
+  end
+  object fd_g_Select_mt_six: TFDQuery
+    Connection = con_MemTable
+    Left = 607
+    Top = 296
   end
 end

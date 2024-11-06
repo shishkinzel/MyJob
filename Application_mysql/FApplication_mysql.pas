@@ -182,9 +182,19 @@ uses
 
 // константы для динамического запроса *************************************************************
   csSelect = 'SELECT (@cnt := @cnt + 1) "№",';
+// _________________________________________________________________________________________________
   csSelect_Table_Date = 'SELECT ROW_NUMBER() OVER (ORDER BY request_date) №,';
+  csSelect_Table_Attempt = 'SELECT ROW_NUMBER() OVER (ORDER BY attempt) №,';
+  csSelect_Table_Id = 'SELECT ROW_NUMBER() OVER (ORDER BY id_serial) №,';
+  csSelect_Table_Device = 'SELECT ROW_NUMBER() OVER (ORDER BY device_name) №,';
+  csSelect_Table_mac = 'SELECT ROW_NUMBER() OVER (ORDER BY ethaddr) №,';
+
+// ***************************************************************************************************
   csFrom_Cross = ' FROM db_angtel_composite.db_composite_tb CROSS JOIN (SELECT @cnt := 0) AS dummy ';
+
+// ***************************************************************************************************
   csFrom_Table = ' FROM memTable ';
+
   // константы для сортировки
   csWhereBetween = 'WHERE request_date BETWEEN "';
   csWhereDeviceName = 'WHERE device_name =  "';
@@ -268,7 +278,12 @@ begin
   se_endAttempt.MaxValue := StrToIntDef(f_max_att, -1);
   //  установка выбор наименование устройства в первую позицию
   cbb_app_mysql.ItemIndex := 1;
+  pgc_app_mysql.ActivePageIndex := 0;          // установка на первую вкладку
 end;
+
+
+
+
 
 
 
@@ -316,7 +331,7 @@ begin
   ds_ts_three.DataSet := dm_Application_mysql.fd_g_Select_three;
   ds_ts_four.DataSet := dm_Application_mysql.fd_g_Select_four;
   ds_ts_five.DataSet := dm_Application_mysql.fd_g_Select_five;
-
+  ds_ts_six.DataSet := dm_Application_mysql.fd_g_Select_six;
 end;
 
 procedure Tfrm_app_mysql.mni_msql_internalClick(Sender: TObject);
@@ -331,7 +346,9 @@ begin
   ds_ts_three.DataSet := dm_Application_mysql.fd_g_Select_mt_three;
   ds_ts_four.DataSet := dm_Application_mysql.fd_g_Select_mt_four;
   ds_ts_five.DataSet := dm_Application_mysql.fd_g_Select_mt_five;
+  ds_ts_six.DataSet := dm_Application_mysql.fd_g_Select_mt_six;
 end;
+
 
  {
   Диалоги открытия и закрытия файла БД
@@ -468,7 +485,7 @@ begin
        dm_Application_mysql.con_MemTable.Connected := True;
        dm_Application_mysql.fd_loc_sql_Table.Active := True;
 
-    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereDeviceName + f_name_device  + '";';  // работа с запросом
+    f_sql := csSelect_Table_Device + f_row_select + csFrom_Table + csWhereDeviceName + f_name_device + '" ;';  // работа с запросом
     with dm_Application_mysql.fd_g_Select_mt_two do
     begin
       SQL.Clear;
@@ -534,22 +551,39 @@ begin
 
   p_att_start := (se_startAttempt.Value).ToString;
   p_att_end := (se_endAttempt.Value).ToString;
-
  // формирования запроса
-  f_sql := csSelect + f_row_select + csFrom_Cross + csWhereAttempt + p_att_start + csAnd + p_att_end + csOrderAttempt;
-  with dm_Application_mysql.fd_g_Select_Three do
+  if f_operation then
   begin
-    SQL.Clear;
-    SQL.Add(f_sql);
-    Prepare;
-    Open;
+    dm_Application_mysql.con_MemTable.Connected := True;
+    dm_Application_mysql.fd_loc_sql_Table.Active := True;
+    f_sql := csSelect_Table_Attempt + f_row_select + csFrom_Table + csWhereAttempt + p_att_start + csAnd + p_att_end + '";';
+    with dm_Application_mysql.fd_g_Select_mt_Three do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
+  end
+  else
+  begin
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereAttempt + p_att_start + csAnd + p_att_end + csOrderAttempt;
+    with dm_Application_mysql.fd_g_Select_Three do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
   end;
+
 end;
 
 procedure Tfrm_app_mysql.btn_ts_three_ResetClick(Sender: TObject);
 begin
   f_row_select := '';
   dm_Application_mysql.fd_g_Select_Three.Close;
+   dm_Application_mysql.fd_g_Select_mt_Three.Close;
    // гасим и зажигаем необходимые кнопки
   btn_ts_three_start.Enabled := True;
   btn_ts_three_Reset.Enabled := False;
@@ -610,20 +644,36 @@ begin
     p_id_end := p_id_start;
 
  // формирования запроса
-  f_sql := csSelect + f_row_select + csFrom_Cross + csWhereSerial + p_id_start + csAnd + p_id_end + csOrderSerial;
-  with dm_Application_mysql.fd_g_Select_Four do
+  if f_operation then
   begin
-    SQL.Clear;
-    SQL.Add(f_sql);
-    Prepare;
-    Open;
+    f_sql := csSelect_Table_Id + f_row_select + csFrom_Table + csWhereSerial + p_id_start + csAnd + p_id_end + '";';
+    with dm_Application_mysql.fd_g_Select_mt_Four do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
+  end
+  else
+  begin
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereSerial + p_id_start + csAnd + p_id_end + csOrderSerial;
+    with dm_Application_mysql.fd_g_Select_Four do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
   end;
+
 end;
 
 procedure Tfrm_app_mysql.btn_ts_four_ResetClick(Sender: TObject);
 begin
   f_row_select := '';
   dm_Application_mysql.fd_g_Select_Four.Close;
+  dm_Application_mysql.fd_g_Select_mt_Four.Close;
     // гасим и зажигаем необходимые кнопки
   btn_ts_four_start.Enabled := True;
   btn_ts_four_Reset.Enabled := False;
@@ -663,20 +713,36 @@ begin
   btn_ts_five_start.Enabled := False;
   btn_ts_five_reset.Enabled := True;
    // формирования запроса
-  f_sql := csSelect + f_row_select + csFrom_Cross + csWhereMac + p_start_mac + csAnd + p_end_mac + csOrderMac;
-  with dm_Application_mysql.fd_g_Select_Five do
+  if f_operation then
   begin
-    SQL.Clear;
-    SQL.Add(f_sql);
-    Prepare;
-    Open;
+    f_sql := csSelect_Table_mac + f_row_select + csFrom_Table + csWhereMac + p_start_mac + csAnd + p_end_mac +  '";';
+    with dm_Application_mysql.fd_g_Select_mt_Five do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
+  end
+  else
+  begin
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereMac + p_start_mac + csAnd + p_end_mac + csOrderMac;
+    with dm_Application_mysql.fd_g_Select_Five do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
   end;
+
 end;
 
 procedure Tfrm_app_mysql.btn_ts_five_resetClick(Sender: TObject);
 begin
   f_row_select := '';
   dm_Application_mysql.fd_g_Select_Five.Close;
+  dm_Application_mysql.fd_g_Select_mt_Five.Close;
   // гасим и зажигаем необходимые кнопки
   btn_ts_five_start.Enabled := True;
   btn_ts_five_reset.Enabled := False;
@@ -717,26 +783,46 @@ begin
   btn_ts_six_start.Enabled := False;
   btn_ts_six_reset.Enabled := True;
    // формирования запроса
-  f_sql := 'SELECT * FROM db_angtel_composite.db_composite_tb';
-  with dm_Application_mysql.fd_g_All_Table do
+  if f_operation then
   begin
-    SQL.Clear;
-    SQL.Add(f_sql);
-    Prepare;
-    Open;
+    dm_Application_mysql.con_MemTable.Connected := True;
+    dm_Application_mysql.fd_loc_sql_Table.Active := True;
+    f_sql := csSelect_Table_Id + f_row_select + csFrom_Table + ';';
+    with dm_Application_mysql.fd_g_Select_mt_six do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
+  end
+  else
+  begin
+    f_sql := csSelect + f_row_select + csFrom_Cross + ';';
+    with dm_Application_mysql.fd_g_Select_six do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
   end;
 
 end;
 
 procedure Tfrm_app_mysql.btn_ts_six_resetClick(Sender: TObject);
 begin
-  dm_Application_mysql.fd_g_All_Table.Close;
+  f_row_select := '';
+  dm_Application_mysql.fd_g_Select_six.Close;
+  dm_Application_mysql.fd_g_Select_mt_six.Close;
+
    // гасим и зажигаем необходимые кнопки
   btn_ts_six_start.Enabled := True;
   btn_ts_six_reset.Enabled := False;
   // активация панели выбора столбцов
   pnl_Main.Enabled := False;
   pnl_down.Enabled := True;
+
 end;
 
 
