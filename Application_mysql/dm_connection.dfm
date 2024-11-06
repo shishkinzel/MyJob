@@ -136,7 +136,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 152
+    Left = 168
     Top = 88
   end
   object fd_manager_app_mysql: TFDManager
@@ -144,29 +144,29 @@ object dm_Application_mysql: Tdm_Application_mysql
     FormatOptions.OwnMapRules = True
     FormatOptions.MapRules = <>
     Active = True
-    Left = 312
-    Top = 24
+    Left = 264
+    Top = 112
   end
   object fd_writer_name: TFDBatchMoveTextWriter
     DataDef.Fields = <>
-    Left = 104
-    Top = 600
+    Left = 80
+    Top = 560
   end
   object fd_reader_name: TFDBatchMoveSQLReader
     Connection = con_app_mysql
     ReadSQL = 
       'select distinct device_name from db_angtel_composite.db_composit' +
       'e_tb order by device_name '
-    Left = 8
-    Top = 600
+    Left = 16
+    Top = 560
   end
   object fd_move_name: TFDBatchMove
     Reader = fd_reader_name
     Writer = fd_writer_name
     Mappings = <>
     LogFileName = 'Data.log'
-    Left = 32
-    Top = 528
+    Left = 24
+    Top = 496
   end
   object fd_g_attempt: TFDQuery
     Connection = con_app_mysql
@@ -230,51 +230,100 @@ object dm_Application_mysql: Tdm_Application_mysql
   end
   object fd_g_Select_One: TFDQuery
     Connection = con_app_mysql
-    Left = 536
-    Top = 8
+    Left = 424
+    Top = 16
   end
   object fd_g_Select_Two: TFDQuery
     Connection = con_app_mysql
-    Left = 536
-    Top = 56
+    Left = 424
+    Top = 64
   end
   object fd_g_Select_Three: TFDQuery
     Connection = con_app_mysql
-    Left = 536
-    Top = 104
+    Left = 424
+    Top = 112
   end
   object fd_g_Select_Four: TFDQuery
     Connection = con_app_mysql
-    Left = 536
-    Top = 152
+    Left = 424
+    Top = 160
   end
   object fd_g_Select_Five: TFDQuery
     Connection = con_app_mysql
-    Left = 535
-    Top = 200
+    Left = 423
+    Top = 208
   end
   object con_MemTable: TFDConnection
     Params.Strings = (
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
-    Left = 24
-    Top = 168
+    Left = 560
+    Top = 24
   end
   object fd_loc_sql_Table: TFDLocalSQL
     Connection = con_MemTable
+    Active = True
     DataSets = <
       item
         DataSet = db_memTab_app_mysql
         Name = 'memTable'
       end>
-    Left = 128
-    Top = 168
+    Left = 664
+    Top = 24
   end
-  object fd_g_Select_MemTable: TFDQuery
+  object fd_g_Select_mt_one: TFDQuery
     Connection = con_MemTable
     SQL.Strings = (
-      'SELECT * FROM memTable')
-    Left = 64
-    Top = 256
+      '')
+    Left = 608
+    Top = 72
+  end
+  object fd_move_MemTable: TFDBatchMove
+    Reader = fd_reader_MemTable
+    Writer = fd_writer_MemTable
+    Mappings = <>
+    LogFileName = 'Data.log'
+    Left = 24
+    Top = 344
+  end
+  object fd_reader_MemTable: TFDBatchMoveSQLReader
+    Connection = con_app_mysql
+    ReadSQL = 'SELECT *'#13#10'FROM db_angtel_composite.db_composite_tb;'#13#10
+    Left = 8
+    Top = 416
+  end
+  object fd_writer_MemTable: TFDBatchMoveDataSetWriter
+    DataSet = db_memTab_app_mysql
+    Left = 96
+    Top = 424
+  end
+  object fd_g_Select_mt_two: TFDQuery
+    Connection = con_MemTable
+    SQL.Strings = (
+      '')
+    Left = 608
+    Top = 120
+  end
+  object fd_g_Select_mt_three: TFDQuery
+    Connection = con_MemTable
+    SQL.Strings = (
+      '')
+    Left = 608
+    Top = 160
+  end
+  object fd_g_Select_mt_four: TFDQuery
+    Connection = con_MemTable
+    SQL.Strings = (
+      '')
+    Left = 608
+    Top = 200
+  end
+  object fd_g_Select_mt_five: TFDQuery
+    Connection = con_MemTable
+    SQL.Strings = (
+      '')
+    Left = 608
+    Top = 240
   end
 end

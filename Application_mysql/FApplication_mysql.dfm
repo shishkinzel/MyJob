@@ -853,10 +853,17 @@ object frm_app_mysql: Tfrm_app_mysql
         Enabled = False
         OnClick = mni_msql_DB_serverClick
       end
+      object mni_msql_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_msql_ResetWork: TMenuItem
+        Caption = #1057#1073#1088#1086#1089#1080#1090#1100' '#1088#1077#1078#1080#1084' '#1088#1072#1073#1086#1090#1099
+        OnClick = mni_msql_ResetWorkClick
+      end
     end
   end
   object ds_ts_one: TDataSource
-    DataSet = dm_Application_mysql.fd_g_Select_MemTable
+    DataSet = dm_Application_mysql.fd_g_Select_One
     Left = 13
     Top = 189
   end
@@ -889,7 +896,7 @@ object frm_app_mysql: Tfrm_app_mysql
     Top = 253
   end
   object ds_ts_six: TDataSource
-    DataSet = dm_Application_mysql.fd_g_All_Table
+    DataSet = dm_Application_mysql.db_memTab_app_mysql
     Left = 133
     Top = 253
   end

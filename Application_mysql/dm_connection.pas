@@ -42,7 +42,14 @@ type
     fd_g_Select_Five: TFDQuery;
     con_MemTable: TFDConnection;
     fd_loc_sql_Table: TFDLocalSQL;
-    fd_g_Select_MemTable: TFDQuery;                            // запрос в пятое вкладке
+    fd_g_Select_mt_one: TFDQuery;
+    fd_move_MemTable: TFDBatchMove;
+    fd_reader_MemTable: TFDBatchMoveSQLReader;
+    fd_writer_MemTable: TFDBatchMoveDataSetWriter;
+    fd_g_Select_mt_two: TFDQuery;
+    fd_g_Select_mt_three: TFDQuery;
+    fd_g_Select_mt_four: TFDQuery;
+    fd_g_Select_mt_five: TFDQuery;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
     procedure fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
     procedure fd_login_app_mysqlShow(Sender: TObject);
@@ -71,7 +78,7 @@ begin
   fd_writer_name.Stream := frm_app_mysql.f_streem_name;
   con_MemTable.Connected := True;
   fd_loc_sql_Table.Active := True;
-
+  fd_move_MemTable.Execute;
 end;
 
 

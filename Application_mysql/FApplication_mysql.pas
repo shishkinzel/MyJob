@@ -109,6 +109,8 @@ type
     medt_five_start: TMaskEdit;
     medt_five_end: TMaskEdit;
     btn_pn_up_reset: TBitBtn;
+    mni_msql_SeparatorOne: TMenuItem;
+    mni_msql_ResetWork: TMenuItem;
     procedure dtp_ts_ds_one_startChange(Sender: TObject);
     procedure dtp_ts_ds_one_endChange(Sender: TObject);
     procedure btn_ts_one_StartClick(Sender: TObject);
@@ -143,6 +145,7 @@ type
     procedure ts_sixShow(Sender: TObject);
     procedure btn_ts_six_startClick(Sender: TObject);
     procedure btn_ts_six_resetClick(Sender: TObject);
+    procedure mni_msql_ResetWorkClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -179,8 +182,9 @@ uses
 
 // константы для динамического запроса *************************************************************
   csSelect = 'SELECT (@cnt := @cnt + 1) "№",';
+  csSelect_Table_Date = 'SELECT ROW_NUMBER() OVER (ORDER BY request_date) №,';
   csFrom_Cross = ' FROM db_angtel_composite.db_composite_tb CROSS JOIN (SELECT @cnt := 0) AS dummy ';
-  csFrom_Table_Cross = ' FROM memTable CROSS JOIN (SELECT @cnt := 0) AS dummy ';
+  csFrom_Table = ' FROM memTable ';
   // константы для сортировки
   csWhereBetween = 'WHERE request_date BETWEEN "';
   csWhereDeviceName = 'WHERE device_name =  "';
@@ -194,6 +198,7 @@ uses
   csOrderAttempt = '" ORDER BY attempt ;';
   csOrderSerial = '" ORDER BY id_serial ;';
   csOrderMac = '" ORDER BY ethaddr ;';
+  csOrderNum = '" ORDER BY "№" ;';
 {
 --------------конец блока динамического запроса ----------------------------------------------------
 }
@@ -305,6 +310,12 @@ begin
   mni_msql_internal.Enabled := True;
   txt_Title_operationWork.Caption := 'Режим работы с удаленной БД';
   f_operation := False;
+    // переключение запросов
+  ds_ts_one.DataSet := dm_Application_mysql.fd_g_Select_one;
+  ds_ts_two.DataSet := dm_Application_mysql.fd_g_Select_two;
+  ds_ts_three.DataSet := dm_Application_mysql.fd_g_Select_three;
+  ds_ts_four.DataSet := dm_Application_mysql.fd_g_Select_four;
+  ds_ts_five.DataSet := dm_Application_mysql.fd_g_Select_five;
 
 end;
 
@@ -314,8 +325,13 @@ begin
   mni_msql_internal.Enabled := False;
   txt_Title_operationWork.Caption := 'Автономный режим работы с БД';
   f_operation := True;
+  // переключение запросов
+  ds_ts_one.DataSet := dm_Application_mysql.fd_g_Select_mt_one;
+  ds_ts_two.DataSet := dm_Application_mysql.fd_g_Select_mt_two;
+  ds_ts_three.DataSet := dm_Application_mysql.fd_g_Select_mt_three;
+  ds_ts_four.DataSet := dm_Application_mysql.fd_g_Select_mt_four;
+  ds_ts_five.DataSet := dm_Application_mysql.fd_g_Select_mt_five;
 end;
-
 
  {
   Диалоги открытия и закрытия файла БД
@@ -366,11 +382,14 @@ begin
   p_start := FormatDateTime('YYYY-MM-DD', p_date_start);
   p_end := FormatDateTime('YYYY-MM-DD', p_date_end);
   // формирования запроса
-  if True then
+  if f_operation then
   begin
-    f_sql := csSelect + f_row_select + csFrom_Table_Cross + csWhereBetween + p_start + csAnd + p_end + csOrderDate;
+       dm_Application_mysql.con_MemTable.Connected := True;
+       dm_Application_mysql.fd_loc_sql_Table.Active := True;
 
-    with dm_Application_mysql.fd_g_Select_MemTable do
+    f_sql := csSelect_Table_Date + f_row_select + csFrom_Table + csWhereBetween + p_start + csAnd + p_end + '";';
+
+    with dm_Application_mysql.fd_g_Select_mt_one do
     begin
       SQL.Clear;
       SQL.Add(f_sql);
@@ -396,7 +415,7 @@ procedure Tfrm_app_mysql.btn_ts_one_ResetClick(Sender: TObject);
 begin
   f_row_select := '';
   dm_Application_mysql.fd_g_Select_One.Close;
-  dm_Application_mysql.fd_g_Select_MemTable.Close;
+  dm_Application_mysql.fd_g_Select_mt_one.Close;
   // гасим и зажигаем необходимые кнопки
   btn_ts_one_Start.Enabled := True;
   btn_ts_one_Reset.Enabled := False;
@@ -443,6 +462,23 @@ begin
     Abort;
   end;
   // формирования запроса
+
+     if f_operation then
+  begin
+       dm_Application_mysql.con_MemTable.Connected := True;
+       dm_Application_mysql.fd_loc_sql_Table.Active := True;
+
+    f_sql := csSelect + f_row_select + csFrom_Cross + csWhereDeviceName + f_name_device  + '";';  // работа с запросом
+    with dm_Application_mysql.fd_g_Select_mt_two do
+    begin
+      SQL.Clear;
+      SQL.Add(f_sql);
+      Prepare;
+      Open;
+    end;
+  end
+  else
+  begin
     f_sql := csSelect + f_row_select + csFrom_Cross + csWhereDeviceName + f_name_device + csOrderDate;
     with dm_Application_mysql.fd_g_Select_Two do
     begin
@@ -451,6 +487,7 @@ begin
       Prepare;
       Open();
     end;
+  end;
 end;
 
 procedure Tfrm_app_mysql.btn_ts_two_ResetClick(Sender: TObject);
@@ -459,6 +496,7 @@ var
 begin
   f_row_select := '';
   dm_Application_mysql.fd_g_Select_Two.Close;
+  dm_Application_mysql.fd_g_Select_mt_Two.Close;
   // гасим и зажигаем необходимые кнопки
   btn_ts_two_Start.Enabled := True;
   btn_ts_two_Reset.Enabled := False;
@@ -849,15 +887,23 @@ begin
 end;
 
 //**************************************************************************************************
+
+//   Режимы работы БД
 procedure Tfrm_app_mysql.mni_conn_DB_internalClick(Sender: TObject);
 var
   i: Integer;
 begin
-
-  f_table := dm_Application_mysql.db_memTab_app_mysql;
  // Активация режима Работы с БД
   mni_conn_DB_internal.Enabled := False;
   mni_msql_OperationWork.Visible := True;
+end;
+
+//  Отмена режима работы
+procedure Tfrm_app_mysql.mni_msql_ResetWorkClick(Sender: TObject);
+begin
+   // Деактивация режима Работы с БД
+  mni_conn_DB_internal.Enabled := True;
+  mni_msql_OperationWork.Visible := False;
 end;
 
 // Закрытие формы
