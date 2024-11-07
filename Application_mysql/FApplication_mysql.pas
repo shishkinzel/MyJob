@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Mask;
+  Vcl.DBGrids, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Mask, FireDAC.Stan.StorageJSON,
+  FireDAC.Stan.Intf, DBLogDlg;
 
 type
   Tfrm_app_mysql = class(TForm)
@@ -85,8 +86,6 @@ type
     lbl_start_id: TLabel;
     mni_msql_File_SeparatorOne: TMenuItem;
     mni_msql_File_Reset: TMenuItem;
-    dlgOpen_File: TOpenDialog;
-    dlgSave_File: TSaveDialog;
     ts_five: TTabSheet;
     pnl_ts_five: TPanel;
     StaticText1: TStaticText;
@@ -111,6 +110,9 @@ type
     btn_pn_up_reset: TBitBtn;
     mni_msql_SeparatorOne: TMenuItem;
     mni_msql_ResetWork: TMenuItem;
+    dlgSave_File: TSaveDialog;
+    dlgOpen_File: TOpenDialog;
+    fdjson_app_mysql: TFDStanStorageJSONLink;
     procedure dtp_ts_ds_one_startChange(Sender: TObject);
     procedure dtp_ts_ds_one_endChange(Sender: TObject);
     procedure btn_ts_one_StartClick(Sender: TObject);
@@ -215,7 +217,7 @@ uses
 var
   f_table: TFDMemTable;
   f_move: TFDBatchMove;
-  f_con_root : TFDConnection;
+  f_con_user : TFDConnection;
   f_con_shishkinzel : TFDConnection;
   f_writer_name : TFDBatchMoveTextWriter;
   f_row_select : string;
@@ -281,22 +283,14 @@ begin
   pgc_app_mysql.ActivePageIndex := 0;          // установка на первую вкладку
 end;
 
-
-
-
-
-
-
-
 // соединение с БД
 procedure Tfrm_app_mysql.mni_conn_ConnectionClick(Sender: TObject);
 var
   i: Integer;
 begin
-  f_con_root := dm_Application_mysql.con_app_mysql;
-  f_con_shishkinzel := dm_Application_mysql.con_app_shishkinzel;
+  f_con_user := dm_Application_mysql.con_app_mysql;
 // соединение с БД
-
+    f_con_user.Open;
 
 end;
 {     Выбор начальной и конечной даты выборки---------------------------------------------------------------------------
@@ -355,20 +349,37 @@ end;
  }
 // *************************************************************************************************
 procedure Tfrm_app_mysql.mni_msql_MainOpenClick(Sender: TObject);
+var
+f_path_fds : string;
 begin
   if dlgOpen_File.Execute() then
   begin
-    ShowMessage('Открываем диалог открытия файла');
+   f_path_fds := dlgOpen_File.FileName;
+   dm_Application_mysql.db_memTab_app_mysql.Close;
+   dm_Application_mysql.db_memTab_app_mysql.Open;
+   dm_Application_mysql.db_memTab_app_mysql.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
 
 procedure Tfrm_app_mysql.mni_msql_MainSaveClick(Sender: TObject);
+var
+  f_path_fds: string;
 begin
   if dlgSave_File.Execute() then
   begin
-    ShowMessage('Открываем диалог сохранения файла');
+     f_path_fds := dlgSave_File.FileName;
   end;
+  if  dm_Application_mysql.db_memTab_app_mysql.RecordCount <> 0 then
+  begin
+       dm_Application_mysql.db_memTab_app_mysql.SaveToFile(f_path_fds, sfJSON);
+  end
+  else
+  begin
+    ShowMessage('Таблица пуста');
+  end;
+
 end;
+
 
 //**************************************************************************************************
 

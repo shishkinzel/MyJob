@@ -4,17 +4,69 @@ object dm_Application_mysql: Tdm_Application_mysql
   Height = 723
   Width = 991
   object con_app_mysql: TFDConnection
-    ConnectionName = 'db_angtel_composite'
     Params.Strings = (
+      'Database=db_angtel_composite'
+      'User_Name=user'
+      'Password=00000000'
+      'Server=172.17.17.76'
+      'DriverID=MySQL'
       'Port=3306')
-    Connected = True
+    ConnectedStoredUsage = [auDesignTime]
     LoginDialog = fd_login_app_mysql
-    LoginPrompt = False
+    OnLogin = con_app_mysqlLogin
     Left = 32
     Top = 24
   end
   object db_memTab_app_mysql: TFDMemTable
-    FieldDefs = <>
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id_key'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'device_name'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_selector'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'id_serial'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'ethaddr'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'device_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'attempt'
+        DataType = ftInteger
+      end
+      item
+        Name = 'request_date'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'original_version'
+        DataType = ftString
+        Size = 45
+      end
+      item
+        Name = 'proposed_version'
+        DataType = ftString
+        Size = 45
+      end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -24,8 +76,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 56
-    Top = 96
+    Left = 16
+    Top = 200
     object db_memTab_app_mysqlid_key: TAutoIncField
       FieldName = 'id_key'
     end
@@ -78,26 +130,12 @@ object dm_Application_mysql: Tdm_Application_mysql
       Size = 45
     end
   end
-  object con_app_shishkinzel: TFDConnection
-    ConnectionName = 'db_angtel_composite'
-    LoginPrompt = False
-    Left = 120
-    Top = 24
-  end
   object fd_g_All_Table: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 56
-    Top = 168
-  end
-  object fd_manager_app_mysql: TFDManager
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <>
-    Active = True
-    Left = 264
-    Top = 112
+    Left = 16
+    Top = 256
   end
   object fd_writer_name: TFDBatchMoveTextWriter
     DataDef.Fields = <>
@@ -121,37 +159,20 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 496
   end
   object fd_g_attempt: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     SQL.Strings = (
       'select min(attempt) as att_min, max(attempt) as att_max '
       'from db_angtel_composite.db_composite_tb;')
     Left = 920
     Top = 120
   end
-  object fd_login_app_mysql: TFDGUIxLoginDialog
-    Provider = 'Forms'
-    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
-    HistoryEnabled = True
-    HistoryStorage = hsFile
-    HistoryKey = 'D:\Embarcadero\Projects\MyJob\Application_mysql\registry.txt'
-    VisibleItems.Strings = (
-      'Server='#1057#1077#1088#1074#1077#1088' '
-      'Port='#1055#1086#1088#1090' '
-      'Database='#1041#1044' '
-      'User_Name='#1048#1084#1103' '
-      'Password='#1055#1072#1088#1086#1083#1100)
-    OnShow = fd_login_app_mysqlShow
-    OnLogin = fd_login_app_mysqlLogin
-    Left = 200
-    Top = 24
-  end
   object fd_g_All_row: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 920
     Top = 16
   end
   object fd_g_Mac: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     SQL.Strings = (
       'SELECT (@cnt := @cnt + 1) as '#39#8470#39','
       'device_name as '#39#1048#1084#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#39','
@@ -181,34 +202,33 @@ object dm_Application_mysql: Tdm_Application_mysql
       end>
   end
   object fd_g_Select_One: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 424
     Top = 16
   end
   object fd_g_Select_Two: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 424
     Top = 64
   end
   object fd_g_Select_Three: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 424
     Top = 112
   end
   object fd_g_Select_Four: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 424
     Top = 160
   end
   object fd_g_Select_Five: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 423
     Top = 208
   end
   object con_MemTable: TFDConnection
     Params.Strings = (
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 560
     Top = 24
@@ -279,7 +299,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 240
   end
   object fd_g_Select_six: TFDQuery
-    Connection = con_app_mysql
+    ConnectionName = 'db_angtel_composite'
     Left = 423
     Top = 264
   end
@@ -287,5 +307,37 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_MemTable
     Left = 607
     Top = 296
+  end
+  object fd_manager_app_mysql: TFDManager
+    DriverDefFileAutoLoad = False
+    ConnectionDefFileAutoLoad = False
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 192
+    Top = 17
+  end
+  object fd_login_app_mysql: TFDGUIxLoginDialog
+    Provider = 'Forms'
+    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
+    HistoryEnabled = True
+    HistoryStorage = hsFile
+    HistoryKey = 'D:\Embarcadero\Projects\MyJob\Application_mysql\registry.txt'
+    VisibleItems.Strings = (
+      'Server='#1057#1077#1088#1074#1077#1088
+      'Port='#1055#1086#1088#1090
+      'Database='#1041#1044
+      'User_Name='#1048#1084#1103
+      'Password='#1055#1072#1088#1086#1083#1100)
+    ChangeExpiredPassword = False
+    OnShow = fd_login_app_mysqlShow
+    Left = 40
+    Top = 104
+  end
+  object fdphysmysqldrvrlnk_Temp: TFDPhysMySQLDriverLink
+    VendorLib = 'D:\Embarcadero\Projects\MyJob\Application_mysql\libmysql.dll'
+    Left = 208
+    Top = 192
   end
 end

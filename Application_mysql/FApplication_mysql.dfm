@@ -298,6 +298,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
             TabOrder = 4
+            ExplicitWidth = 91
           end
         end
         object dbnav_ts_One: TDBNavigator
@@ -398,6 +399,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1091
             TabOrder = 2
+            ExplicitWidth = 124
           end
         end
       end
@@ -454,7 +456,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_attempt: TStaticText
             Left = 1
             Top = 1
-            Width = 998
+            Width = 197
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -555,7 +557,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_id: TStaticText
             Left = 1
             Top = 1
-            Width = 998
+            Width = 158
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -645,7 +647,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object StaticText1: TStaticText
             Left = 1
             Top = 1
-            Width = 998
+            Width = 171
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -882,14 +884,6 @@ object frm_app_mysql: Tfrm_app_mysql
     Left = 13
     Top = 253
   end
-  object dlgOpen_File: TOpenDialog
-    Left = 149
-    Top = 21
-  end
-  object dlgSave_File: TSaveDialog
-    Left = 205
-    Top = 21
-  end
   object ds_ts_five: TDataSource
     DataSet = dm_Application_mysql.fd_g_Select_Five
     Left = 69
@@ -899,5 +893,26 @@ object frm_app_mysql: Tfrm_app_mysql
     DataSet = dm_Application_mysql.fd_g_Select_six
     Left = 133
     Top = 253
+  end
+  object dlgSave_File: TSaveDialog
+    DefaultExt = 'fds'
+    FileName = 'db_angtel'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    InitialDir = 'lib_fds'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 120
+    Top = 16
+  end
+  object dlgOpen_File: TOpenDialog
+    DefaultExt = 'fds'
+    FileName = 'db_angtel'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
+    InitialDir = 'lib_fds'
+    Left = 72
+    Top = 16
+  end
+  object fdjson_app_mysql: TFDStanStorageJSONLink
+    Left = 216
+    Top = 23
   end
 end

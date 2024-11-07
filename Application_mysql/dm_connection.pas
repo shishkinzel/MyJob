@@ -9,7 +9,8 @@ uses
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
   FireDAC.DApt, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove.SQL,
   FireDAC.Comp.BatchMove.Text, FireDAC.VCLUI.Login, FireDAC.Comp.UI, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteVDataSet;
+  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteVDataSet, FireDAC.FMXUI.Login, DBLogDlg,
+  FireDAC.Phys.MSAcc, FireDAC.Phys.MSAccDef;
 
 type
   Tdm_Application_mysql = class(TDataModule)
@@ -25,14 +26,11 @@ type
     dtmfld_memTab_CompositeTablerequest_date: TDateTimeField;
     db_memTab_app_mysqloriginal_version: TStringField;
     db_memTab_app_mysqlproposed_version: TStringField;
-    con_app_shishkinzel: TFDConnection;
     fd_g_All_Table: TFDQuery;
-    fd_manager_app_mysql: TFDManager;
     fd_writer_name: TFDBatchMoveTextWriter;                 // запись в combobox наименования устройств
     fd_reader_name: TFDBatchMoveSQLReader;                  // запрос на чтение из таблицы
     fd_move_name: TFDBatchMove;                             // перемещение device_name с сортировкой по устройству
-    fd_g_attempt: TFDQuery;                                 // запрос на выдачу кол-ва попыток min и max
-    fd_login_app_mysql: TFDGUIxLoginDialog;
+    fd_g_attempt: TFDQuery;
     fd_g_All_row: TFDQuery;
     fd_g_Mac: TFDQuery;
     fd_g_Select_One: TFDQuery;                             // запрос в первой вкладке
@@ -51,9 +49,12 @@ type
     fd_g_Select_mt_four: TFDQuery;
     fd_g_Select_mt_five: TFDQuery;
     fd_g_Select_six: TFDQuery;
-    fd_g_Select_mt_six: TFDQuery;                            // запрос в пятое вкладке
+    fd_g_Select_mt_six: TFDQuery;
+    fd_manager_app_mysql: TFDManager;
+    fd_login_app_mysql: TFDGUIxLoginDialog;
+    fdphysmysqldrvrlnk_Temp: TFDPhysMySQLDriverLink;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
-    procedure fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
+    procedure con_app_mysqlLogin(AConnection: TFDCustomConnection; AParams: TFDConnectionDefParams);
     procedure fd_login_app_mysqlShow(Sender: TObject);
 
   private
@@ -73,7 +74,17 @@ uses
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
-
+// событие регистрации пользователя
+procedure Tdm_Application_mysql.con_app_mysqlLogin(AConnection: TFDCustomConnection; AParams: TFDConnectionDefParams);
+var
+  AUserName, APassword: string;
+begin
+//  if LoginDialogEx('<AngTel>', AUserName, APassword, false) then
+//  begin
+//    AParams.UserName := AUserName;
+//    AParams.Password := APassword;
+//  end;
+end;
 
 procedure Tdm_Application_mysql.DataModuleCreate(Sender: TObject);
 begin
@@ -83,20 +94,10 @@ begin
   fd_move_MemTable.Execute;
 end;
 
-
-
-
-// событие регистрации пользователя
-procedure Tdm_Application_mysql.fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
-var
-I : Integer;
-begin
-
-end;
 // событие вывода диалога на экран
 procedure Tdm_Application_mysql.fd_login_app_mysqlShow(Sender: TObject);
 var
-I : Integer;
+i : Integer;
 begin
 
 end;
