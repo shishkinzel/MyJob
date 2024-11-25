@@ -10,7 +10,8 @@ uses
   FireDAC.DApt, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove.SQL,
   FireDAC.Comp.BatchMove.Text, FireDAC.VCLUI.Login, FireDAC.Comp.UI, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteVDataSet, FireDAC.FMXUI.Login, DBLogDlg,
-  FireDAC.Phys.MSAcc, FireDAC.Phys.MSAccDef;
+  FireDAC.Phys.MSAcc, FireDAC.Phys.MSAccDef, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase,
+  FireDAC.Phys.FB, Vcl.Dialogs;
 
 type
   Tdm_Application_mysql = class(TDataModule)
@@ -51,11 +52,12 @@ type
     fd_g_Select_six: TFDQuery;
     fd_g_Select_mt_six: TFDQuery;
     fd_manager_app_mysql: TFDManager;
-    fd_login_app_mysql: TFDGUIxLoginDialog;
-    fdphysmysqldrvrlnk_Temp: TFDPhysMySQLDriverLink;                            // запрос в пятое вкладке
+    fd_login_app_mysql: TFDGUIxLoginDialog;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
     procedure con_app_mysqlLogin(AConnection: TFDCustomConnection; AParams: TFDConnectionDefParams);
     procedure fd_login_app_mysqlShow(Sender: TObject);
+    procedure fd_login_app_mysqlHide(Sender: TObject);
+    procedure fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
 
   private
     { Private declarations }
@@ -87,17 +89,43 @@ begin
 end;
 
 procedure Tdm_Application_mysql.DataModuleCreate(Sender: TObject);
+var
+i : Integer;
+f_result :Boolean;
 begin
+// как запустить авторизацию в mysql
+
+{
+_________________________________________________________________
+}
   fd_writer_name.Stream := frm_app_mysql.f_streem_name;
   con_MemTable.Connected := True;
   fd_loc_sql_Table.Active := True;
   fd_move_MemTable.Execute;
 end;
 
+
 // событие вывода диалога на экран
 procedure Tdm_Application_mysql.fd_login_app_mysqlShow(Sender: TObject);
 var
-i : Integer;
+  i: Integer;
+begin
+    ShowMessage('Здесь должен быть диалог авторизации');
+end;
+// событие регистрации пользователя
+
+procedure Tdm_Application_mysql.fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
+var
+  i: Integer;
+begin
+
+end;
+
+
+// событие исчезновения диалога
+procedure Tdm_Application_mysql.fd_login_app_mysqlHide(Sender: TObject);
+var
+  i: Integer;
 begin
 
 end;

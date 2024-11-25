@@ -11,7 +11,6 @@ object dm_Application_mysql: Tdm_Application_mysql
       'Server=172.17.17.76'
       'DriverID=MySQL'
       'Port=3306')
-    ConnectedStoredUsage = [auDesignTime]
     LoginDialog = fd_login_app_mysql
     OnLogin = con_app_mysqlLogin
     Left = 32
@@ -131,7 +130,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     end
   end
   object fd_g_All_Table: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
     Left = 16
@@ -159,7 +158,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 496
   end
   object fd_g_attempt: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     SQL.Strings = (
       'select min(attempt) as att_min, max(attempt) as att_max '
       'from db_angtel_composite.db_composite_tb;')
@@ -167,12 +166,12 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 120
   end
   object fd_g_All_row: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 920
     Top = 16
   end
   object fd_g_Mac: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     SQL.Strings = (
       'SELECT (@cnt := @cnt + 1) as '#39#8470#39','
       'device_name as '#39#1048#1084#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#39','
@@ -202,27 +201,27 @@ object dm_Application_mysql: Tdm_Application_mysql
       end>
   end
   object fd_g_Select_One: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 424
     Top = 16
   end
   object fd_g_Select_Two: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 424
     Top = 64
   end
   object fd_g_Select_Three: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 424
     Top = 112
   end
   object fd_g_Select_Four: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 424
     Top = 160
   end
   object fd_g_Select_Five: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 423
     Top = 208
   end
@@ -299,7 +298,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Top = 240
   end
   object fd_g_Select_six: TFDQuery
-    ConnectionName = 'db_angtel_composite'
+    Connection = con_app_mysql
     Left = 423
     Top = 264
   end
@@ -331,13 +330,10 @@ object dm_Application_mysql: Tdm_Application_mysql
       'User_Name='#1048#1084#1103
       'Password='#1055#1072#1088#1086#1083#1100)
     ChangeExpiredPassword = False
+    OnHide = fd_login_app_mysqlHide
     OnShow = fd_login_app_mysqlShow
+    OnLogin = fd_login_app_mysqlLogin
     Left = 40
     Top = 104
-  end
-  object fdphysmysqldrvrlnk_Temp: TFDPhysMySQLDriverLink
-    VendorLib = 'D:\Embarcadero\Projects\MyJob\Application_mysql\libmysql.dll'
-    Left = 208
-    Top = 192
   end
 end

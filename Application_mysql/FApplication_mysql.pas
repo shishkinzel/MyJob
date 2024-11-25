@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Mask, FireDAC.Stan.StorageJSON,
-  FireDAC.Stan.Intf, DBLogDlg;
+  FireDAC.Stan.Intf, DBLogDlg, Vcl.CustomizeDlg, Vcl.PlatformDefaultStyleActnCtrls, System.Actions,
+  Vcl.ActnList, Vcl.ActnMan;
 
 type
   Tfrm_app_mysql = class(TForm)
@@ -113,6 +114,7 @@ type
     dlgSave_File: TSaveDialog;
     dlgOpen_File: TOpenDialog;
     fdjson_app_mysql: TFDStanStorageJSONLink;
+    mni_conn_SeparatorTwo: TMenuItem;
     procedure dtp_ts_ds_one_startChange(Sender: TObject);
     procedure dtp_ts_ds_one_endChange(Sender: TObject);
     procedure btn_ts_one_StartClick(Sender: TObject);
@@ -148,6 +150,8 @@ type
     procedure btn_ts_six_startClick(Sender: TObject);
     procedure btn_ts_six_resetClick(Sender: TObject);
     procedure mni_msql_ResetWorkClick(Sender: TObject);
+
+
   private
     { Private declarations }
     var
@@ -253,7 +257,7 @@ begin
   // работаем с фокусом ввода
   if btn_down_select.CanFocus then
     btn_down_select.SetFocus;
-
+// режим соединения с БД
   if f_operation then
   begin
     txt_Title_operationWork.Caption := 'Автономный режим работы с БД';
@@ -262,6 +266,41 @@ begin
   begin
     txt_Title_operationWork.Caption := 'Режим работы с удаленной БД';
   end;
+ {   Отключаю возможность сканирования БД
+     Необходимо поработать со свойствами ofLine and onLine
+//  dm_Application_mysql.fd_move_name.Execute;
+//   // чтение из потока список устройств в БД
+//  f_streem_name.Position := 0;
+//  cbb_app_mysql.Items.LoadFromStream(f_streem_name);
+//  dm_Application_mysql.fd_move_name.Execute;
+//  f_streem_name.Free;
+//  // запрос на чтение значений min и max попыток
+//  dm_Application_mysql.fd_g_attempt.Open();
+//  f_min_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_min').AsString;
+//  f_max_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_max').AsString;
+//  dm_Application_mysql.fd_g_attempt.Close();
+//  // устанавливаем max и min значения в компонент spinEdit
+//  se_startAttempt.MinValue := StrToIntDef(f_min_att, -1);
+//  se_startAttempt.MaxValue := StrToIntDef(f_max_att, -1);
+//  se_endAttempt.MinValue := StrToIntDef(f_min_att, -1);
+//  se_endAttempt.MaxValue := StrToIntDef(f_max_att, -1);
+  //  установка выбор наименование устройства в первую позицию
+//  cbb_app_mysql.ItemIndex := 1;
+
+}
+  pgc_app_mysql.ActivePageIndex := 0;          // установка на первую вкладку
+end;
+
+// соединение с БД
+procedure Tfrm_app_mysql.mni_conn_ConnectionClick(Sender: TObject);
+var
+  f_file: TextFile;
+  f_min_att, f_max_att: string;
+begin
+
+// соединение с БД
+
+// Установка необходимых задач
   dm_Application_mysql.fd_move_name.Execute;
    // чтение из потока список устройств в БД
   f_streem_name.Position := 0;
@@ -278,19 +317,8 @@ begin
   se_startAttempt.MaxValue := StrToIntDef(f_max_att, -1);
   se_endAttempt.MinValue := StrToIntDef(f_min_att, -1);
   se_endAttempt.MaxValue := StrToIntDef(f_max_att, -1);
-  //  установка выбор наименование устройства в первую позицию
+    //  установка выбор наименование устройства в первую позицию
   cbb_app_mysql.ItemIndex := 1;
-  pgc_app_mysql.ActivePageIndex := 0;          // установка на первую вкладку
-end;
-
-// соединение с БД
-procedure Tfrm_app_mysql.mni_conn_ConnectionClick(Sender: TObject);
-var
-  i: Integer;
-begin
-  f_con_user := dm_Application_mysql.con_app_mysql;
-// соединение с БД
-    f_con_user.Open;
 
 end;
 {     Выбор начальной и конечной даты выборки---------------------------------------------------------------------------
@@ -988,7 +1016,7 @@ end;
 //   Режимы работы БД
 procedure Tfrm_app_mysql.mni_conn_DB_internalClick(Sender: TObject);
 var
-  i: Integer;
+i : Integer;
 begin
  // Активация режима Работы с БД
   mni_conn_DB_internal.Enabled := False;
@@ -1006,9 +1034,10 @@ end;
 // Закрытие формы
 procedure Tfrm_app_mysql.FormClose(Sender: TObject; var Action: TCloseAction);
 var
-i : Integer;
+  i: Integer;
 begin
 // f_streem_name.Free;
+
 end;
 
 end.
