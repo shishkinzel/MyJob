@@ -326,8 +326,8 @@ object dm_conJson: Tdm_conJson
   end
   object fd_dialog_ClearDB: TFDGUIxScriptDialog
     Provider = 'Forms'
-    Left = 704
-    Top = 448
+    Left = 664
+    Top = 336
   end
   object con_RemoteBase: TFDConnection
     Params.Strings = (
