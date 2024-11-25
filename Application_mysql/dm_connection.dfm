@@ -7,12 +7,9 @@ object dm_Application_mysql: Tdm_Application_mysql
     Params.Strings = (
       'Database=db_angtel_composite'
       'User_Name=user'
-      'Password=00000000'
       'Server=172.17.17.76'
-      'DriverID=MySQL'
       'Port=3306')
     LoginDialog = fd_login_app_mysql
-    OnLogin = con_app_mysqlLogin
     Left = 32
     Top = 24
   end
@@ -133,12 +130,12 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 16
-    Top = 256
+    Left = 96
+    Top = 200
   end
   object fd_writer_name: TFDBatchMoveTextWriter
     DataDef.Fields = <>
-    Left = 80
+    Left = 128
     Top = 560
   end
   object fd_reader_name: TFDBatchMoveSQLReader
@@ -146,16 +143,16 @@ object dm_Application_mysql: Tdm_Application_mysql
     ReadSQL = 
       'select distinct device_name from db_angtel_composite.db_composit' +
       'e_tb order by device_name '
-    Left = 16
-    Top = 560
+    Left = 40
+    Top = 552
   end
   object fd_move_name: TFDBatchMove
     Reader = fd_reader_name
     Writer = fd_writer_name
     Mappings = <>
     LogFileName = 'Data.log'
-    Left = 24
-    Top = 496
+    Left = 40
+    Top = 488
   end
   object fd_g_attempt: TFDQuery
     Connection = con_app_mysql
@@ -255,19 +252,19 @@ object dm_Application_mysql: Tdm_Application_mysql
     Writer = fd_writer_MemTable
     Mappings = <>
     LogFileName = 'Data.log'
-    Left = 24
-    Top = 344
+    Left = 56
+    Top = 336
   end
   object fd_reader_MemTable: TFDBatchMoveSQLReader
     Connection = con_app_mysql
     ReadSQL = 'SELECT *'#13#10'FROM db_angtel_composite.db_composite_tb;'#13#10
-    Left = 8
-    Top = 416
+    Left = 48
+    Top = 400
   end
   object fd_writer_MemTable: TFDBatchMoveDataSetWriter
     DataSet = db_memTab_app_mysql
-    Left = 104
-    Top = 416
+    Left = 168
+    Top = 400
   end
   object fd_g_Select_mt_two: TFDQuery
     Connection = con_MemTable
@@ -330,9 +327,6 @@ object dm_Application_mysql: Tdm_Application_mysql
       'User_Name='#1048#1084#1103
       'Password='#1055#1072#1088#1086#1083#1100)
     ChangeExpiredPassword = False
-    OnHide = fd_login_app_mysqlHide
-    OnShow = fd_login_app_mysqlShow
-    OnLogin = fd_login_app_mysqlLogin
     Left = 40
     Top = 104
   end

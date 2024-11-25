@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.BatchMove.Text, FireDAC.VCLUI.Login, FireDAC.Comp.UI, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteVDataSet, FireDAC.FMXUI.Login, DBLogDlg,
   FireDAC.Phys.MSAcc, FireDAC.Phys.MSAccDef, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase,
-  FireDAC.Phys.FB, Vcl.Dialogs;
+  FireDAC.Phys.FB, FireDAC.VCLUI.Error, FireDAC.Stan.Consts, Winapi.Windows;
 
 type
   Tdm_Application_mysql = class(TDataModule)
@@ -54,10 +54,7 @@ type
     fd_manager_app_mysql: TFDManager;
     fd_login_app_mysql: TFDGUIxLoginDialog;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
-    procedure con_app_mysqlLogin(AConnection: TFDCustomConnection; AParams: TFDConnectionDefParams);
-    procedure fd_login_app_mysqlShow(Sender: TObject);
-    procedure fd_login_app_mysqlHide(Sender: TObject);
-    procedure fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
+
 
   private
     { Private declarations }
@@ -77,24 +74,44 @@ uses
 
 {$R *.dfm}
 // событие регистрации пользователя
-procedure Tdm_Application_mysql.con_app_mysqlLogin(AConnection: TFDCustomConnection; AParams: TFDConnectionDefParams);
-var
-  AUserName, APassword: string;
-begin
-//  if LoginDialogEx('<AngTel>', AUserName, APassword, false) then
-//  begin
-//    AParams.UserName := AUserName;
-//    AParams.Password := APassword;
-//  end;
-end;
-
 procedure Tdm_Application_mysql.DataModuleCreate(Sender: TObject);
 var
-i : Integer;
-f_result :Boolean;
+  SL: TStringList;
+const
+  DialogCaption = 'Отказано в доступе к БД';
 begin
 // как запустить авторизацию в mysql
 
+{  Вариант подключения с помощью менеджера соединения }
+  SL := TStringList.Create;
+  SL.Add('DriverID=MySQL');
+  SL.Add('Server=172.17.17.76');
+  SL.Add('Port=3306');
+  SL.Add('CharacterSet=utf8');
+{  SL.Add('User_Name=admin');
+  SL.Add('password=admin');  }
+
+  fd_manager_app_mysql.AddConnectionDef('MySQL_AngTel', 'MySQL', SL);
+
+  con_app_mysql.LoginPrompt := True;
+  con_app_mysql.ConnectionDefName := 'MySQL_AngTel';
+  try
+    con_app_mysql.Open();
+  except
+    on E: EFDException do
+      if E.FDCode = er_FD_ClntDbLoginAborted then //пользователь выбрал кнопку <Cancel>
+        MessageBox(0, PChar('Пользователь отказался от соединения'), DialogCaption, MB_ICONSTOP + MB_OK); // user pressed Cancel button in Login dialog
+    on E: EFDDBEngineException do
+      case E.Kind of
+        ekUserPwdInvalid:
+          MessageBox(0, PChar('Проверьте логин/пароль!'), DialogCaption, MB_ICONERROR + MB_OK);
+        ekUserPwdExpired:
+          MessageBox(0, PChar('Пароль не верен!'), DialogCaption, MB_ICONERROR + MB_OK);
+        ekServerGone:
+          MessageBox(0, PChar('Нет доступа к серверу!'), DialogCaption, MB_ICONERROR + MB_OK);
+      else          //другие варианты ИС
+      end;
+  end;
 {
 _________________________________________________________________
 }
@@ -102,32 +119,6 @@ _________________________________________________________________
   con_MemTable.Connected := True;
   fd_loc_sql_Table.Active := True;
   fd_move_MemTable.Execute;
-end;
-
-
-// событие вывода диалога на экран
-procedure Tdm_Application_mysql.fd_login_app_mysqlShow(Sender: TObject);
-var
-  i: Integer;
-begin
-    ShowMessage('Здесь должен быть диалог авторизации');
-end;
-// событие регистрации пользователя
-
-procedure Tdm_Application_mysql.fd_login_app_mysqlLogin(ASender: TObject; var AResult: Boolean);
-var
-  i: Integer;
-begin
-
-end;
-
-
-// событие исчезновения диалога
-procedure Tdm_Application_mysql.fd_login_app_mysqlHide(Sender: TObject);
-var
-  i: Integer;
-begin
-
 end;
 
 end.
