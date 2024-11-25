@@ -35,6 +35,7 @@ type
 //    procedure chkQR_SOFTClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnDBClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -61,15 +62,23 @@ var
   frmMain: TfrmMain;
 //  f_showPrintForm: Boolean;   // активаци€ панели печати или генерации заливки ѕќ и qr-кода
   f_print_config: string;
+  // переменные дл€ чтени€ конфигурации принтеров по умолчанию
+  f_print_924: string;
+  f_print_940: string;
+  f_print_2824: string;
+  f_print_908: string;
+  f_print_576: string;
 
 implementation
 
 uses
-  FTest, FShowSoft, FListDevece, IdGlobal;
+  FTest, FShowSoft, FListDevece, IdGlobal, unit_ini, IniFiles;
+
 
 {$R *.dfm}
 
 // начальные установки в форме
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   ClearArr(f_myarray);
@@ -79,6 +88,9 @@ begin
 { путь к каталогу с файлами - командами прошивки}
 // определ€ем путь до файла конфигурации
   f_print_config := ExtractFilePath(Application.ExeName) + 'print_config.ini';
+  // создаем ini-файл
+
+
 
 end;
 
@@ -357,15 +369,25 @@ begin
 end;
 
 
-
-
-
-
-
-
-
-
 // закрытие формы
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  f_ini: TIniFile;
+  f_iniPath: string;
+begin
+  f_iniPath := ExtractFilePath(Application.ExeName) + 'print_config.ini';
+  f_ini := TIniFile.Create(f_iniPath);
+            // сохран€ем путь к принтерам по умолчанию
+  IniOptions.f_print_924 := f_print_924;
+  IniOptions.f_print_940 := f_print_940;
+  IniOptions.f_print_908 := f_print_908;
+  IniOptions.f_print_576 := f_print_576;
+  IniOptions.f_print_2824 := f_print_2824;
+  IniOptions.SaveToFile(f_iniPath);
+  f_ini.Free;
+
+end;
+
 end.
 
 
