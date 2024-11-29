@@ -266,28 +266,28 @@ begin
   begin
     txt_Title_operationWork.Caption := 'Режим работы с удаленной БД';
   end;
- {   Отключаю возможность сканирования БД
-     Необходимо поработать со свойствами ofLine and onLine
-//  dm_Application_mysql.fd_move_name.Execute;
-//   // чтение из потока список устройств в БД
-//  f_streem_name.Position := 0;
-//  cbb_app_mysql.Items.LoadFromStream(f_streem_name);
-//  dm_Application_mysql.fd_move_name.Execute;
-//  f_streem_name.Free;
-//  // запрос на чтение значений min и max попыток
-//  dm_Application_mysql.fd_g_attempt.Open();
-//  f_min_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_min').AsString;
-//  f_max_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_max').AsString;
-//  dm_Application_mysql.fd_g_attempt.Close();
-//  // устанавливаем max и min значения в компонент spinEdit
-//  se_startAttempt.MinValue := StrToIntDef(f_min_att, -1);
-//  se_startAttempt.MaxValue := StrToIntDef(f_max_att, -1);
-//  se_endAttempt.MinValue := StrToIntDef(f_min_att, -1);
-//  se_endAttempt.MaxValue := StrToIntDef(f_max_att, -1);
-  //  установка выбор наименование устройства в первую позицию
-//  cbb_app_mysql.ItemIndex := 1;
 
-}
+ //    Необходимо поработать со свойствами ofLine and onLine
+  dm_Application_mysql.fd_move_name.Execute;
+   // чтение из потока список устройств в БД
+  f_streem_name.Position := 0;
+  cbb_app_mysql.Items.LoadFromStream(f_streem_name);
+  dm_Application_mysql.fd_move_name.Execute;
+  f_streem_name.Free;
+  // запрос на чтение значений min и max попыток
+  dm_Application_mysql.fd_g_attempt.Open();
+  f_min_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_min').AsString;
+  f_max_att := dm_Application_mysql.fd_g_attempt.FieldByName('att_max').AsString;
+  dm_Application_mysql.fd_g_attempt.Close();
+  // устанавливаем max и min значения в компонент spinEdit
+  se_startAttempt.MinValue := StrToIntDef(f_min_att, -1);
+  se_startAttempt.MaxValue := StrToIntDef(f_max_att, -1);
+  se_endAttempt.MinValue := StrToIntDef(f_min_att, -1);
+  se_endAttempt.MaxValue := StrToIntDef(f_max_att, -1);
+  //  установка выбор наименование устройства в первую позицию
+  cbb_app_mysql.ItemIndex := 1;
+
+
   pgc_app_mysql.ActivePageIndex := 0;          // установка на первую вкладку
 end;
 
@@ -298,9 +298,9 @@ var
   f_min_att, f_max_att: string;
 begin
 
-// соединение с БД
+  mni_conn_Connection.Enabled := False;
 
-// Установка необходимых задач
+// Чтение начальных даных
   dm_Application_mysql.fd_move_name.Execute;
    // чтение из потока список устройств в БД
   f_streem_name.Position := 0;
@@ -1036,7 +1036,7 @@ procedure Tfrm_app_mysql.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i: Integer;
 begin
-// f_streem_name.Free;
+
 
 end;
 

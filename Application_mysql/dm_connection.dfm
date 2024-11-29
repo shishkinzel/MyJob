@@ -8,7 +8,8 @@ object dm_Application_mysql: Tdm_Application_mysql
       'Database=db_angtel_composite'
       'User_Name=user'
       'Server=172.17.17.76'
-      'Port=3306')
+      'Port=3306'
+      'Password=00000000')
     LoginDialog = fd_login_app_mysql
     Left = 32
     Top = 24
@@ -318,16 +319,22 @@ object dm_Application_mysql: Tdm_Application_mysql
     Provider = 'Forms'
     Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
     HistoryEnabled = True
-    HistoryStorage = hsFile
-    HistoryKey = 'D:\Embarcadero\Projects\MyJob\Application_mysql\registry.txt'
     VisibleItems.Strings = (
       'Server='#1057#1077#1088#1074#1077#1088
       'Port='#1055#1086#1088#1090
       'Database='#1041#1044
       'User_Name='#1048#1084#1103
       'Password='#1055#1072#1088#1086#1083#1100)
+    LoginRetries = -1
     ChangeExpiredPassword = False
     Left = 40
     Top = 104
+  end
+  object error_dialog_app_mysql: TFDGUIxErrorDialog
+    Provider = 'Forms'
+    Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1089#1086#1077#1076#1080#1085#1077#1085#1080#1077' FireDAC'
+    Enabled = False
+    Left = 200
+    Top = 112
   end
 end

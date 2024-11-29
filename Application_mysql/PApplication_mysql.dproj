@@ -86,6 +86,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Keys>CompanyName=shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=1.0.1.0;InternalName=application_composite;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=shishkin&amp;Igor;OriginalFilename=PApplication_mysql.exe;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Программа для просмотра БД Ангстрем Телеком , выпущеной продукции, и состояние апгрейда.</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -96,6 +99,11 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=1.0.1.0;InternalName=application_composite;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=shishkin&amp;Igor;OriginalFilename=PApplication_mysql.exe;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.1.0;Comments=Программа для просмотра БД Ангстрем Телеком , выпущеной продукции, и состояние апгрейда.</VerInfo_Keys>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

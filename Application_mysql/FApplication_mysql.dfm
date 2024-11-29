@@ -298,7 +298,6 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
             TabOrder = 4
-            ExplicitWidth = 91
           end
         end
         object dbnav_ts_One: TDBNavigator
@@ -399,7 +398,6 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1091
             TabOrder = 2
-            ExplicitWidth = 124
           end
         end
       end
@@ -557,7 +555,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_id: TStaticText
             Left = 1
             Top = 1
-            Width = 158
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -647,7 +645,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object StaticText1: TStaticText
             Left = 1
             Top = 1
-            Width = 171
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -768,7 +766,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object StaticText2: TStaticText
             Left = 1
             Top = 1
-            Width = 110
+            Width = 998
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -815,7 +813,8 @@ object frm_app_mysql: Tfrm_app_mysql
     object mni_conn_connect_db: TMenuItem
       Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' '#1089' '#1041#1044
       object mni_conn_Connection: TMenuItem
-        Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077
+        Caption = #1063#1090#1077#1085#1080#1077' '#1087#1077#1088#1074#1080#1095#1085#1099#1093' '#1076#1072#1085#1099#1093
+        Enabled = False
         OnClick = mni_conn_ConnectionClick
       end
       object mni_conn_SeparatorOne: TMenuItem
@@ -823,6 +822,7 @@ object frm_app_mysql: Tfrm_app_mysql
       end
       object mni_conn_DB_internal: TMenuItem
         Caption = #1056#1077#1078#1080#1084' '#1088#1072#1073#1086#1090#1099' '#1089' '#1041#1044
+        Enabled = False
         OnClick = mni_conn_DB_internalClick
       end
       object mni_conn_SeparatorTwo: TMenuItem
@@ -831,6 +831,7 @@ object frm_app_mysql: Tfrm_app_mysql
     end
     object mni_msql_File: TMenuItem
       Caption = #1060#1072#1081#1083
+      Enabled = False
       object mni_msql_MainOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100
         OnClick = mni_msql_MainOpenClick

@@ -52,7 +52,8 @@ type
     fd_g_Select_six: TFDQuery;
     fd_g_Select_mt_six: TFDQuery;
     fd_manager_app_mysql: TFDManager;
-    fd_login_app_mysql: TFDGUIxLoginDialog;                            // запрос в пятое вкладке
+    fd_login_app_mysql: TFDGUIxLoginDialog;
+    error_dialog_app_mysql: TFDGUIxErrorDialog;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
 
 
@@ -68,7 +69,7 @@ var
 implementation
 
 uses
-  FApplication_mysql;
+  FApplication_mysql, FireDac.Phys.MySQLWrapper;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -77,6 +78,7 @@ uses
 procedure Tdm_Application_mysql.DataModuleCreate(Sender: TObject);
 var
   SL: TStringList;
+  f_err : Boolean;
 const
   DialogCaption = 'Отказано в доступе к БД';
 begin
@@ -96,29 +98,60 @@ begin
   con_app_mysql.LoginPrompt := True;
   con_app_mysql.ConnectionDefName := 'MySQL_AngTel';
   try
+    f_err := True;
     con_app_mysql.Open();
   except
-    on E: EFDException do
-      if E.FDCode = er_FD_ClntDbLoginAborted then //пользователь выбрал кнопку <Cancel>
-        MessageBox(0, PChar('Пользователь отказался от соединения'), DialogCaption, MB_ICONSTOP + MB_OK); // user pressed Cancel button in Login dialog
+//    on E:EMySQLNativeException do
+//    begin
+//     MessageBox(0, PChar('Привет'), DialogCaption, MB_ICONSTOP + MB_OK);
+//    end;
     on E: EFDDBEngineException do
       case E.Kind of
         ekUserPwdInvalid:
-          MessageBox(0, PChar('Проверьте логин/пароль!'), DialogCaption, MB_ICONERROR + MB_OK);
+          begin
+            MessageBox(0, PChar('Проверьте логин/пароль!'), DialogCaption, MB_ICONERROR + MB_OK);
+            f_err := False;
+          end;
+
         ekUserPwdExpired:
           MessageBox(0, PChar('Пароль не верен!'), DialogCaption, MB_ICONERROR + MB_OK);
         ekServerGone:
           MessageBox(0, PChar('Нет доступа к серверу!'), DialogCaption, MB_ICONERROR + MB_OK);
       else          //другие варианты ИС
       end;
+    on E: EFDException do
+    begin
+      if E.FDCode = er_FD_ClntDbLoginAborted then //пользователь выбрал кнопку <Cancel>
+      begin
+        MessageBox(0, PChar('Пользователь отказался от соединения'), DialogCaption, MB_ICONSTOP + MB_OK); // user pressed Cancel button in Login dialog
+        frm_app_mysql.Close;
+        Abort
+      end;
+      if E.FDCode = er_FD_AccToManyLogins then // закончилось число попыток
+      begin
+        MessageBox(0, PChar('Программа будет закрыта'), DialogCaption, MB_ICONSTOP + MB_OK); // user pressed Cancel button in Login dialog
+        frm_app_mysql.Close;
+        Abort
+      end;
+
+    end;
+
   end;
 {
 _________________________________________________________________
 }
-  fd_writer_name.Stream := frm_app_mysql.f_streem_name;
-  con_MemTable.Connected := True;
-  fd_loc_sql_Table.Active := True;
-  fd_move_MemTable.Execute;
+  if f_err then
+  begin
+    fd_writer_name.Stream := frm_app_mysql.f_streem_name;
+    con_MemTable.Connected := True;
+    fd_loc_sql_Table.Active := True;
+    fd_move_MemTable.Execute;
+  end
+  else
+  begin
+    frm_app_mysql.Close;
+    Abort
+  end;
 end;
 
 end.
