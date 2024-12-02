@@ -7,13 +7,16 @@ uses
   expfilter in 'expfilter.pas',
   oofice in 'oofice.pas',
   uOpenOffice in 'uOpenOffice.pas',
-  xlsexport in 'xlsexport.pas';
+  xlsexport in 'xlsexport.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Aqua Light Slate');
   Application.CreateForm(Tfrm_ParserXLS, frm_ParserXLS);
   Application.CreateForm(Tdm_parserxls, dm_parserxls);
   Application.Run;

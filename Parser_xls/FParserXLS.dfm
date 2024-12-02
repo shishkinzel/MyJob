@@ -2,8 +2,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
   Left = 0
   Top = 0
   Caption = #1055#1072#1088#1089#1077#1088'_ Excel'
-  ClientHeight = 735
-  ClientWidth = 961
+  ClientHeight = 791
+  ClientWidth = 984
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,15 @@ object frm_ParserXLS: Tfrm_ParserXLS
   Font.Style = []
   Menu = mm_parserxls
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object spl_app: TSplitter
     Left = 0
     Top = 73
-    Width = 961
+    Width = 984
     Height = 3
     Cursor = crVSplit
     Align = alTop
@@ -26,8 +28,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
   end
   object spl_down: TSplitter
     Left = 0
-    Top = 621
-    Width = 961
+    Top = 677
+    Width = 984
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -37,69 +39,136 @@ object frm_ParserXLS: Tfrm_ParserXLS
   object pnl_App: TPanel
     Left = 0
     Top = 0
-    Width = 961
+    Width = 984
     Height = 73
     Align = alTop
     TabOrder = 0
   end
   object pnl_Down: TPanel
     Left = 0
-    Top = 624
-    Width = 961
+    Top = 680
+    Width = 984
     Height = 111
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = -1
+    ExplicitTop = 678
+    object lbl_tmc: TLabel
+      Left = 24
+      Top = 4
+      Width = 191
+      Height = 13
+      Caption = #1042#1074#1077#1076#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1072#1082#1090#1080#1074#1085#1099#1093' '#1103#1095#1077#1077#1082
+    end
+    object lbl_specification: TLabel
+      Left = 24
+      Top = 56
+      Width = 191
+      Height = 13
+      Caption = #1042#1074#1077#1076#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1072#1082#1090#1080#1074#1085#1099#1093' '#1103#1095#1077#1077#1082
+    end
+    object btn_pars_xls_tms_start: TBitBtn
+      Left = 340
+      Top = 17
+      Width = 240
+      Height = 25
+      Caption = #1053#1072#1095#1072#1090#1100' '#1095#1090#1077#1085#1080#1077' '#1092#1072#1081#1083#1072' - '#1050#1086#1076#1099' '#1058#1052#1062
+      Enabled = False
+      TabOrder = 0
+      OnClick = btn_pars_xls_tms_startClick
+    end
+    object btn_pars_xls_specification_start: TBitBtn
+      Left = 340
+      Top = 71
+      Width = 240
+      Height = 25
+      Caption = #1053#1072#1095#1072#1090#1100' '#1095#1090#1077#1085#1080#1077' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
+      Enabled = False
+      TabOrder = 1
+    end
+    object se_tmc: TSpinEdit
+      Left = 24
+      Top = 23
+      Width = 80
+      Height = 22
+      MaxLength = 5
+      MaxValue = 10000
+      MinValue = 1
+      TabOrder = 2
+      Value = 0
+    end
+    object se_specification: TSpinEdit
+      Left = 24
+      Top = 75
+      Width = 80
+      Height = 22
+      MaxLength = 5
+      MaxValue = 10000
+      MinValue = 1
+      TabOrder = 3
+      Value = 0
+    end
   end
   object pnl_Main: TPanel
     Left = 0
     Top = 76
-    Width = 961
-    Height = 545
+    Width = 984
+    Height = 601
     Align = alClient
     TabOrder = 2
     object pgc_xls: TPageControl
       Left = 1
       Top = 1
-      Width = 959
-      Height = 543
-      ActivePage = ts_two
+      Width = 982
+      Height = 599
+      ActivePage = ts_one
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
-        Caption = #1055#1077#1088#1074#1072#1103' '#1074#1082#1083#1072#1076#1082#1072
-        object mmo1: TMemo
+        Caption = #1050#1086#1076#1099' '#1058#1052#1062
+        object nv_one: TDBNavigator
           Left = 0
           Top = 0
-          Width = 951
-          Height = 515
-          Align = alClient
+          Width = 974
+          Height = 25
+          DataSource = ds_one
+          VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+          Align = alTop
           TabOrder = 0
-          ExplicitLeft = 664
-          ExplicitTop = 32
-          ExplicitWidth = 65
-          ExplicitHeight = 41
+        end
+        object grid_one: TDBGrid
+          Left = 0
+          Top = 25
+          Width = 974
+          Height = 546
+          Align = alClient
+          DataSource = ds_one
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
         end
       end
       object ts_two: TTabSheet
-        Caption = #1042#1090#1086#1088#1072#1103'  '#1074#1082#1083#1072#1076#1082#1072
+        Caption = #1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
         ImageIndex = 1
         object nv_two: TDBNavigator
           Left = 0
           Top = 0
-          Width = 951
+          Width = 974
           Height = 25
           DataSource = ds_two
+          VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           TabOrder = 0
-          ExplicitLeft = 120
-          ExplicitTop = 64
-          ExplicitWidth = 240
         end
         object grid_two: TDBGrid
           Left = 0
           Top = 25
-          Width = 951
-          Height = 490
+          Width = 974
+          Height = 546
           Align = alClient
           DataSource = ds_two
           TabOrder = 1
@@ -113,14 +182,124 @@ object frm_ParserXLS: Tfrm_ParserXLS
     end
   end
   object mm_parserxls: TMainMenu
-    Left = 48
-    Top = 16
-    object mni_main_File: TMenuItem
-      Caption = #1060#1072#1081#1083
+    Left = 8
+    Top = 8
+    object mni_db_job: TMenuItem
+      Caption = #1054#1090#1082#1088#1099#1090#1080#1077' '#1041#1044
+      object mni_db_job_file: TMenuItem
+        Caption = #1060#1072#1081#1083'_FDS'
+        object mni_db_job_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1058#1052#1062
+        end
+        object mni_db_job_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1058#1052#1062
+        end
+      end
+      object mni_db_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_parser: TMenuItem
+        Caption = #1055#1072#1088#1089#1077#1088' xls'
+        object mni_db_xls_pr_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
+          OnClick = mni_db_xls_pr_openClick
+        end
+        object mni_db_xls_pr_OLE: TMenuItem
+          Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1073#1098#1077#1082#1090' OLE'
+          Enabled = False
+          OnClick = mni_db_xls_pr_OLEClick
+        end
+        object mni_db_sp_pr_SeparatorOne: TMenuItem
+          Caption = '-'
+        end
+        object mni_db_json_pr_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
+        end
+      end
+      object mni_db_SeparatorTwo: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_job_reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_db_job_resetClick
+      end
+    end
+    object mni_db_specification: TMenuItem
+      Caption = #1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
+      object mni_db_sp_file: TMenuItem
+        Caption = #1060#1072#1081#1083'_FDS'
+        object mni_db_sp_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
+        end
+        object mni_db_sp_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
+        end
+      end
+      object mni_db_sp_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_sp_parser: TMenuItem
+        Caption = #1055#1072#1088#1089#1077#1088' xls'
+        object mni_db_sp_pr_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
+        end
+        object mni_db_sp_pr_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
+        end
+      end
+      object mni_db_sp_SeparatorTwo: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_sp_pr_reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+      end
     end
   end
   object ds_two: TDataSource
-    Left = 53
-    Top = 221
+    DataSet = dm_parserxls.mem_specification
+    Left = 61
+    Top = 149
+  end
+  object ds_one: TDataSource
+    DataSet = dm_parserxls.mem_db_angtelTMC
+    Left = 13
+    Top = 149
+  end
+  object dlg_db_job_open: TOpenDialog
+    DefaultExt = 'xlsx'
+    FileName = 'code_tmc.xls'
+    Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
+    InitialDir = 'file_xls'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 80
+    Top = 8
+  end
+  object dlg_db_job_save: TSaveDialog
+    Left = 136
+    Top = 8
+  end
+  object dlg_db_xls_pr_open: TOpenDialog
+    Left = 240
+    Top = 8
+  end
+  object dli_db_json_pr_save: TSaveDialog
+    Left = 280
+    Top = 8
+  end
+  object dlg_db_sp_open: TOpenDialog
+    Left = 344
+    Top = 8
+  end
+  object dlg_db_sp_save: TSaveDialog
+    Left = 400
+    Top = 8
+  end
+  object dlg_db_sp_pr_open: TOpenDialog
+    Left = 464
+    Top = 16
+  end
+  object dlg_db_sp_pr_save: TSaveDialog
+    Left = 520
+    Top = 16
   end
 end
