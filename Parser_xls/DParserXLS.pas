@@ -19,6 +19,12 @@ type
     strngfld_specification_quantity: TStringField;
     strngfld_specification_codetmc: TStringField;
     strngfld_specificationnote: TStringField;
+    mem_list_of_elements: TFDMemTable;
+    AutoIncField1: TAutoIncField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    strngfld_list_of_elements_position: TStringField;
   private
     { Private declarations }
   public

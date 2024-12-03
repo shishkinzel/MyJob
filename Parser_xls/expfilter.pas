@@ -25,7 +25,6 @@ type
 
 
 implementation
-
 { TUniExportFilter }
 
 constructor TUniExportFilter.Create(const AppPath: String);

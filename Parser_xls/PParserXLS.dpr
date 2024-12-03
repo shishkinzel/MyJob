@@ -14,6 +14,8 @@ uses
 {$R *.res}
 
 begin
+    ReportMemoryLeaksOnShutdown := True; // проверка очистки памяти
+
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Aqua Light Slate');
