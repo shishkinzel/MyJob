@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
-  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script;
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script, FireDAC.Comp.BatchMove.SQL,
+  FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.DataSet;
 
 type
   Tdm_parserxls = class(TDataModule)
@@ -29,6 +30,9 @@ type
     strngfld_list_of_elements_position: TStringField;
     con_db_angtel_assortment: TFDConnection;
     fd_script_clear: TFDScript;
+    mv_tmc: TFDBatchMove;
+    read_mv_tmc: TFDBatchMoveDataSetReader;
+    write_mv_tmc: TFDBatchMoveSQLWriter;
   private
     { Private declarations }
   public

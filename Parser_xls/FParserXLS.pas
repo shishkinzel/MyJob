@@ -72,7 +72,7 @@ type
     fd_json_link_TMC: TFDStanStorageJSONLink;
     btn_allReset: TBitBtn;
     mni_db_mysql_Job: TMenuItem;
-    mni_db_mysql_1: TMenuItem;
+    mni_db_mysql_transmission_tmc: TMenuItem;
     mni_db_mysql_2: TMenuItem;
     mni_db_mysql_SeparatorOne: TMenuItem;
     mni_db_mysql_Clear: TMenuItem;
@@ -91,6 +91,7 @@ type
     procedure mni_db_job_saveClick(Sender: TObject);
     procedure mni_db_jobClick(Sender: TObject);
     procedure mni_db_mysql_clear_tmcClick(Sender: TObject);
+    procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -386,6 +387,13 @@ end;
   Блок кода работы с базой MySQL
   **************************************************************************************************
  }
+// Трансляция базы "Код ТМЦ" в MySQL
+procedure Tfrm_ParserXLS.mni_db_mysql_transmission_tmcClick(Sender: TObject);
+begin
+  dm_parserxls.mv_tmc.Execute;
+  ShowMessage('Трансляция базы "Код ТМЦ" в MySQL - успешно завершена!');
+end;
+
 
 // очистка базы "Коды ТМЦ"
 procedure Tfrm_ParserXLS.mni_db_mysql_clear_tmcClick(Sender: TObject);
@@ -399,16 +407,6 @@ begin
     ShowMessage('Таблица в MySQL - очищена');
   end;
 end;
-
-
-
-
-
-
-
-
-
-
 
 
 //**************************************************************************************************

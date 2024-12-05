@@ -305,8 +305,9 @@ object frm_ParserXLS: Tfrm_ParserXLS
     end
     object mni_db_mysql_Job: TMenuItem
       Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
-      object mni_db_mysql_1: TMenuItem
-        Caption = '1'
+      object mni_db_mysql_transmission_tmc: TMenuItem
+        Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103' "'#1050#1086#1076' '#1058#1052#1062'" '#1074' MySQL'
+        OnClick = mni_db_mysql_transmission_tmcClick
       end
       object mni_db_mysql_2: TMenuItem
         Caption = '1'

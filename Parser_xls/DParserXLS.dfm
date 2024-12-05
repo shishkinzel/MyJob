@@ -148,6 +148,7 @@ object dm_parserxls: Tdm_parserxls
       'Server=172.17.17.58'
       'DriverID=MySQL'
       'CharacterSet=utf8')
+    Connected = True
     LoginPrompt = False
     Left = 48
     Top = 24
@@ -164,5 +165,24 @@ object dm_parserxls: Tdm_parserxls
     Macros = <>
     Left = 176
     Top = 32
+  end
+  object mv_tmc: TFDBatchMove
+    Reader = read_mv_tmc
+    Writer = write_mv_tmc
+    Mappings = <>
+    LogFileName = 'Data.log'
+    Left = 48
+    Top = 120
+  end
+  object read_mv_tmc: TFDBatchMoveDataSetReader
+    DataSet = mem_db_angtelTMC
+    Left = 16
+    Top = 184
+  end
+  object write_mv_tmc: TFDBatchMoveSQLWriter
+    Connection = con_db_angtel_assortment
+    TableName = 'tb_codetmc'
+    Left = 88
+    Top = 184
   end
 end
