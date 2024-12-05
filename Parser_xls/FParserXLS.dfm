@@ -303,6 +303,28 @@ object frm_ParserXLS: Tfrm_ParserXLS
         Enabled = False
       end
     end
+    object mni_db_mysql_Job: TMenuItem
+      Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
+      object mni_db_mysql_1: TMenuItem
+        Caption = '1'
+      end
+      object mni_db_mysql_2: TMenuItem
+        Caption = '1'
+      end
+      object mni_db_mysql_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_mysql_Clear: TMenuItem
+        Caption = #1054#1095#1080#1089#1090#1082#1072' '#1073#1072#1079#1099
+        object mni_db_mysql_clear_tmc: TMenuItem
+          Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1073#1072#1079#1091' "'#1050#1086#1076#1099' '#1058#1052#1062'"'
+          OnClick = mni_db_mysql_clear_tmcClick
+        end
+        object mni_db_mysql_22: TMenuItem
+          Caption = '2'
+        end
+      end
+    end
   end
   object ds_two: TDataSource
     DataSet = dm_parserxls.mem_specification

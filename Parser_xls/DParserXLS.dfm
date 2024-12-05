@@ -38,8 +38,8 @@ object dm_parserxls: Tdm_parserxls
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 80
-    Top = 16
+    Left = 808
+    Top = 88
     object atncfld_specification_num: TAutoIncField
       FieldName = 'num'
     end
@@ -69,8 +69,8 @@ object dm_parserxls: Tdm_parserxls
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 24
-    Top = 16
+    Left = 808
+    Top = 24
     object atncfld_db_angtelTMC_num: TAutoIncField
       FieldName = 'num'
     end
@@ -119,8 +119,8 @@ object dm_parserxls: Tdm_parserxls
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 160
-    Top = 16
+    Left = 808
+    Top = 144
     object AutoIncField1: TAutoIncField
       FieldName = 'num'
     end
@@ -139,5 +139,30 @@ object dm_parserxls: Tdm_parserxls
       FieldName = 'codetmc'
       Size = 10
     end
+  end
+  object con_db_angtel_assortment: TFDConnection
+    Params.Strings = (
+      'Database=db_angtel_assortment'
+      'User_Name=shishkinzel'
+      'Password=@Zel00000000'
+      'Server=172.17.17.58'
+      'DriverID=MySQL'
+      'CharacterSet=utf8')
+    LoginPrompt = False
+    Left = 48
+    Top = 24
+  end
+  object fd_script_clear: TFDScript
+    SQLScripts = <
+      item
+        Name = 'clear db_tmc'
+        SQL.Strings = (
+          'TRUNCATE tb_codetmc')
+      end>
+    Connection = con_db_angtel_assortment
+    Params = <>
+    Macros = <>
+    Left = 176
+    Top = 32
   end
 end

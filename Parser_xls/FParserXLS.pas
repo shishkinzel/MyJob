@@ -71,6 +71,13 @@ type
     mni_db_xls_sp_OLE: TMenuItem;
     fd_json_link_TMC: TFDStanStorageJSONLink;
     btn_allReset: TBitBtn;
+    mni_db_mysql_Job: TMenuItem;
+    mni_db_mysql_1: TMenuItem;
+    mni_db_mysql_2: TMenuItem;
+    mni_db_mysql_SeparatorOne: TMenuItem;
+    mni_db_mysql_Clear: TMenuItem;
+    mni_db_mysql_clear_tmc: TMenuItem;
+    mni_db_mysql_22: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -83,6 +90,7 @@ type
     procedure btn_allResetClick(Sender: TObject);
     procedure mni_db_job_saveClick(Sender: TObject);
     procedure mni_db_jobClick(Sender: TObject);
+    procedure mni_db_mysql_clear_tmcClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -98,6 +106,8 @@ var
 
 
 implementation
+uses
+  FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script;
 
 {$R *.dfm}
 
@@ -372,6 +382,36 @@ begin
 
 end;
 
+ { *************************************************************************************************
+  Блок кода работы с базой MySQL
+  **************************************************************************************************
+ }
+
+// очистка базы "Коды ТМЦ"
+procedure Tfrm_ParserXLS.mni_db_mysql_clear_tmcClick(Sender: TObject);
+var
+  db_script: TFDScript;
+begin
+  db_script := dm_parserxls.fd_script_clear;
+  if db_script.ValidateAll then
+  begin
+    db_script.ExecuteAll;
+    ShowMessage('Таблица в MySQL - очищена');
+  end;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+//**************************************************************************************************
 // закрытие формы
 procedure Tfrm_ParserXLS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

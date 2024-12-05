@@ -5,7 +5,9 @@ interface
 uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script;
 
 type
   Tdm_parserxls = class(TDataModule)
@@ -25,6 +27,8 @@ type
     StringField2: TStringField;
     StringField3: TStringField;
     strngfld_list_of_elements_position: TStringField;
+    con_db_angtel_assortment: TFDConnection;
+    fd_script_clear: TFDScript;
   private
     { Private declarations }
   public
