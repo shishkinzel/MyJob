@@ -163,8 +163,8 @@ object dm_parserxls: Tdm_parserxls
     Connection = con_db_angtel_assortment
     Params = <>
     Macros = <>
-    Left = 176
-    Top = 32
+    Left = 152
+    Top = 24
   end
   object mv_tmc: TFDBatchMove
     Reader = read_mv_tmc

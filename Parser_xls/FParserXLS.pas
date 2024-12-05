@@ -46,13 +46,13 @@ type
     mni_db_sp_open: TMenuItem;
     mni_db_sp_save: TMenuItem;
     mni_db_xls_sp_open: TMenuItem;
-    mni_db_sp_pr_save: TMenuItem;
+    mni_db_json_sp_pr_save: TMenuItem;
     dlg_db_job_xls_open: TOpenDialog;
     dlg_db_job_fds_save: TSaveDialog;
     dlg_db_fds_pr_open: TOpenDialog;
     dli_db_fds_pr_save: TSaveDialog;
-    dlg_db_sp_open: TOpenDialog;
-    dlg_db_sp_save: TSaveDialog;
+    dlg_db_sp_xls_open: TOpenDialog;
+    dlg_db_sp_fds_save: TSaveDialog;
     dlg_db_sp_pr_open: TOpenDialog;
     dlg_db_sp_pr_save: TSaveDialog;
     mni_db_sp_pr_SeparatorOne: TMenuItem;
@@ -92,6 +92,9 @@ type
     procedure mni_db_jobClick(Sender: TObject);
     procedure mni_db_mysql_clear_tmcClick(Sender: TObject);
     procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
+    procedure mni_db_xls_sp_openClick(Sender: TObject);
+    procedure mni_db_json_sp_pr_saveClick(Sender: TObject);
+    procedure mni_db_xls_sp_OLEClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -190,7 +193,8 @@ end;
   запись в файл json
   //////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
+// Блок работы с файлом "Коды ТМЦ"
+  // процедура выбора файла xls для чтения
 procedure Tfrm_ParserXLS.mni_db_xls_pr_openClick(Sender: TObject);
 var
 f_path_xls : string;
@@ -294,6 +298,62 @@ begin
     XLS.Free;
     f_free := False;
 end;
+
+// Блок работы с файлом "Спцификация"  *************************************************************
+  // процедура выбора файла xls для чтения
+procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
+var
+  f_path_xls: string;
+begin
+  if dlg_db_sp_xls_open.Execute() then
+  begin
+    f_path_xls := dlg_db_sp_xls_open.FileName;
+    f_filename_xls := ExtractFileName(f_path_xls);
+    mni_db_xls_sp_open.Enabled := False;
+    mni_db_xls_sp_OLE.Enabled := True;
+  end;
+end;
+ // сохраняем файл в формате json
+procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+  if dlg_db_sp_fds_save.Execute() then
+  begin
+    f_path_fds := dlg_db_sp_fds_save.FileName;
+  end;
+  if dm_parserxls.mem_specification.RecordCount <> 0 then
+  begin
+    dm_parserxls.mem_specification.SaveToFile(f_path_fds, sfJSON);
+  end
+  else
+  begin
+    ShowMessage('Таблица пуста');
+  end;
+end;
+ // создание объекта OLE
+procedure Tfrm_ParserXLS.mni_db_xls_sp_OLEClick(Sender: TObject);
+var
+  S: TStringArray;
+  tmp: string;
+  i, j: Integer;
+begin
+  if f_free then
+  begin
+    XLS.CloseFile('');
+    XLS.Free;
+    f_free := False;
+  end;
+   // создаем объект OLE
+  mni_db_xls_pr_OLE.Enabled := False;
+  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
+  XLS.OpenFile(f_filename_xls, false);
+  f_free := True;
+  btn_pars_xls_tms_start.Enabled := True;
+
+end;
+  // парсер specification из xls файла
+
 
 //**************************************************************************************************
 
@@ -414,11 +474,11 @@ end;
 procedure Tfrm_ParserXLS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if f_free then
-    begin
-      XLS.CloseFile('');
-      XLS.Free;
-    end;
+  begin
+    f_free := False;
+    XLS.CloseFile('');
+    XLS.Free;
+  end;
 end;
-
 
 end.

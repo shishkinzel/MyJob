@@ -129,7 +129,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 1
       Width = 982
       Height = 599
-      ActivePage = ts_one
+      ActivePage = ts_two
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
@@ -283,16 +283,19 @@ object frm_ParserXLS: Tfrm_ParserXLS
         Caption = #1055#1072#1088#1089#1077#1088' xls'
         object mni_db_xls_sp_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
+          OnClick = mni_db_xls_sp_openClick
         end
         object mni_db_xls_sp_OLE: TMenuItem
           Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1073#1098#1077#1082#1090' OLE'
           Enabled = False
+          OnClick = mni_db_xls_sp_OLEClick
         end
         object mni_db_sp_pr_12: TMenuItem
           Caption = '-'
         end
-        object mni_db_sp_pr_save: TMenuItem
+        object mni_db_json_sp_pr_save: TMenuItem
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
+          OnClick = mni_db_json_sp_pr_saveClick
         end
       end
       object mni_db_sp_SeparatorTwo: TMenuItem
@@ -372,11 +375,21 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Left = 280
     Top = 8
   end
-  object dlg_db_sp_open: TOpenDialog
+  object dlg_db_sp_xls_open: TOpenDialog
+    DefaultExt = 'xlsx'
+    FileName = 'specification.xls'
+    Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
+    InitialDir = 'file_xls'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 344
     Top = 8
   end
-  object dlg_db_sp_save: TSaveDialog
+  object dlg_db_sp_fds_save: TSaveDialog
+    DefaultExt = 'fds'
+    FileName = 'Specification'
+    Filter = 'JSON file (*.fds)|*.fds'
+    InitialDir = 'file_fds'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 400
     Top = 8
   end
