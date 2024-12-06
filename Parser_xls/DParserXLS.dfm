@@ -30,6 +30,9 @@ object dm_parserxls: Tdm_parserxls
         Size = 50
       end>
     IndexDefs = <>
+    Indexes = <
+      item
+      end>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -62,6 +65,28 @@ object dm_parserxls: Tdm_parserxls
   end
   object mem_db_angtelTMC: TFDMemTable
     Active = True
+    FieldDefs = <
+      item
+        Name = 'num'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'name'
+        DataType = ftString
+        Size = 400
+      end
+      item
+        Name = 'code'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'test'#13#10
+        Fields = 'name'
+      end>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -69,6 +94,7 @@ object dm_parserxls: Tdm_parserxls
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
     Left = 808
     Top = 24
     object atncfld_db_angtelTMC_num: TAutoIncField
@@ -159,6 +185,11 @@ object dm_parserxls: Tdm_parserxls
         Name = 'clear db_tmc'
         SQL.Strings = (
           'TRUNCATE tb_codetmc')
+      end
+      item
+        Name = 'clear db_specification'
+        SQL.Strings = (
+          'TRUNCATE tb_specification')
       end>
     Connection = con_db_angtel_assortment
     Params = <>

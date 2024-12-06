@@ -337,8 +337,9 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1073#1072#1079#1091' "'#1050#1086#1076#1099' '#1058#1052#1062'"'
           OnClick = mni_db_mysql_clear_tmcClick
         end
-        object mni_db_mysql_22: TMenuItem
-          Caption = '2'
+        object mni_db_mysql_clear_specification: TMenuItem
+          Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1073#1072#1079#1091' "'#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103'"'
+          OnClick = mni_db_mysql_clear_specificationClick
         end
       end
     end

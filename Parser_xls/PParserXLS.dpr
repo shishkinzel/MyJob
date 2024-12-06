@@ -9,7 +9,8 @@ uses
   uOpenOffice in 'uOpenOffice.pas',
   xlsexport in 'xlsexport.pas',
   Vcl.Themes,
-  Vcl.Styles;
+  Vcl.Styles,
+  CursorHelper in 'CursorHelper.pas';
 
 {$R *.res}
 
