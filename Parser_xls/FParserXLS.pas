@@ -29,13 +29,9 @@ type
     mni_db_job_file: TMenuItem;
     mni_db_SeparatorOne: TMenuItem;
     mni_db_job_parser: TMenuItem;
-    mni_db_SeparatorTwo: TMenuItem;
-    mni_db_job_reset: TMenuItem;
     mni_db_sp_file: TMenuItem;
     mni_db_sp_SeparatorOne: TMenuItem;
     mni_db_sp_parser: TMenuItem;
-    mni_db_sp_SeparatorTwo: TMenuItem;
-    mni_db_sp_pr_reset: TMenuItem;
     ds_one: TDataSource;
     nv_one: TDBNavigator;
     grid_one: TDBGrid;
@@ -56,19 +52,11 @@ type
     dlg_db_sp_pr_open: TOpenDialog;
     dlg_db_sp_pr_save: TSaveDialog;
     mni_db_sp_pr_SeparatorOne: TMenuItem;
-    mni_db_xls_pr_OLE: TMenuItem;
-    btn_pars_xls_tms_start: TBitBtn;
-    btn_pars_xls_specification_start: TBitBtn;
-    lbl_tmc: TLabel;
-    lbl_specification: TLabel;
-    se_tmc: TSpinEdit;
-    se_specification: TSpinEdit;
     ts_three: TTabSheet;
     nv_three: TDBNavigator;
     grid_three: TDBGrid;
     ds_three: TDataSource;
     mni_db_sp_pr_12: TMenuItem;
-    mni_db_xls_sp_OLE: TMenuItem;
     fd_json_link_TMC: TFDStanStorageJSONLink;
     btn_allReset: TBitBtn;
     mni_db_mysql_Job: TMenuItem;
@@ -82,9 +70,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
-    procedure mni_db_xls_pr_OLEClick(Sender: TObject);
-    procedure mni_db_job_resetClick(Sender: TObject);
-    procedure btn_pars_xls_tms_startClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mni_db_json_pr_saveClick(Sender: TObject);
     procedure mni_db_job_openClick(Sender: TObject);
@@ -95,9 +80,6 @@ type
     procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
     procedure mni_db_xls_sp_openClick(Sender: TObject);
     procedure mni_db_json_sp_pr_saveClick(Sender: TObject);
-    procedure mni_db_xls_sp_OLEClick(Sender: TObject);
-    procedure btn_pars_xls_specification_startClick(Sender: TObject);
-    procedure mni_db_sp_pr_resetClick(Sender: TObject);
     procedure btn_modificationClick(Sender: TObject);
     procedure mni_db_sp_openClick(Sender: TObject);
     procedure mni_db_mysql_clear_specificationClick(Sender: TObject);
@@ -205,16 +187,52 @@ end;
   // процедура выбора файла xls для чтения
 procedure Tfrm_ParserXLS.mni_db_xls_pr_openClick(Sender: TObject);
 var
-f_path_xls : string;
+  S: TStringArray;
+  f_count: Integer;
+  f_path_xls: string;
 begin
+  f_count := 0;
   if dlg_db_job_xls_open.Execute() then
   begin
-   f_path_xls := dlg_db_job_xls_open.FileName;
-   f_filename_xls := ExtractFileName(f_path_xls);
-   mni_db_xls_pr_open.Enabled := False;
-   mni_db_xls_pr_OLE.Enabled := True;
+    f_path_xls := dlg_db_job_xls_open.FileName;
+    f_filename_xls := ExtractFileName(f_path_xls);
   end;
+  TCursorHelper.ChangeToHourglass();
+// создаем объект OLE
+  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
+  XLS.OpenFile(f_filename_xls, false);
+  // Запускаем парсер
+
+  dm_parserxls.mem_db_angtelTMC.Close;
+  dm_parserxls.mem_db_angtelTMC.Open;
+  dm_parserxls.mem_db_angtelTMC.First;
+  dm_parserxls.mem_db_angtelTMC.DisableControls;
+
+  while True do
+  begin
+    S := XLS.ReadString(2);
+    begin
+      if (S[0] <> '') and (S[1] <> '') and (S[0] <> 'Наименование элемента') then
+      begin
+        dm_parserxls.mem_db_angtelTMC.Insert;
+        dm_parserxls.mem_db_angtelTMC.Fields[1].AsString := S[0];
+        dm_parserxls.mem_db_angtelTMC.Fields[2].AsString := S[1];
+        dm_parserxls.mem_db_angtelTMC.Next;
+        f_count := 0;
+      end;
+    end;
+    Inc(f_count);
+    if f_count = 30 then
+      Break;
+  end;
+  dm_parserxls.mem_db_angtelTMC.Refresh;
+  dm_parserxls.mem_db_angtelTMC.EnableControls;
+  grid_two.Refresh;
+  ShowMessage('Таблица "Коды ТМЦ" - cформирована');
+  XLS.CloseFile('');
+  XLS.Free;
 end;
+
 
 //  сохраняем файл в формате json
 procedure Tfrm_ParserXLS.mni_db_json_pr_saveClick(Sender: TObject);
@@ -235,164 +253,33 @@ begin
   end;
 end;
 
-// создание объекта OLE
-
-procedure Tfrm_ParserXLS.mni_db_xls_pr_OLEClick(Sender: TObject);
-var
-  S: TStringArray;
-  tmp: string;
-  i, j: Integer;
-begin
-  TCursorHelper.ChangeToHourglass();
-  mni_db_xls_pr_OLE.Enabled := False;
-  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
-  XLS.OpenFile(f_filename_xls, false);
-  f_free := True;
-  btn_pars_xls_tms_start.Enabled := True;
-end;
-// парсер codetmc из xls файла
-
-procedure Tfrm_ParserXLS.btn_pars_xls_tms_startClick(Sender: TObject);
-var
-  S: TStringArray;
-  tmp: string;
-  i: Integer;
-  f_sel: Integer;
-begin
-  TCursorHelper.ChangeToHourglass();
-
- //  получаем количество ячеек для парсинга
-  f_sel := se_tmc.Value;
-  if f_sel = 1 then
-  begin
-    ShowMessage('Введите количество активных ячеек');
-    Abort;
-  end;
-  dm_parserxls.mem_db_angtelTMC.Close;
-  dm_parserxls.mem_db_angtelTMC.Open;
-  dm_parserxls.mem_db_angtelTMC.First;
-  dm_parserxls.mem_db_angtelTMC.DisableControls;
-  i := 0;
-
-  while True do
-  begin
-    S := XLS.ReadString(2);
-    begin
-      if (S[0] <> '') and (S[1] <> '') and (S[0] <> 'Наименование элемента') then
-      begin
-        dm_parserxls.mem_db_angtelTMC.Insert;
-        dm_parserxls.mem_db_angtelTMC.Fields[1].AsString := S[0];
-        dm_parserxls.mem_db_angtelTMC.Fields[2].AsString := S[1];
-        dm_parserxls.mem_db_angtelTMC.Next;
-      end;
-    end;
-
-    inc(i);
-    if i = f_sel then
-      Break;
-  end;
-  dm_parserxls.mem_db_angtelTMC.Refresh;
-  mni_db_job_reset.Enabled := True;
-  dm_parserxls.mem_db_angtelTMC.EnableControls;
-
-  ShowMessage('Таблица "Коды ТМЦ" - cформирована');
-     // сбрасываем курсор
-  XLS.SetPosition(1, 1);
-
-  grid_two.Refresh;
-end;
-
-
-// закрыть и разрушить объект OLE
-procedure Tfrm_ParserXLS.mni_db_job_resetClick(Sender: TObject);
-begin
-  mni_db_xls_pr_open.Enabled := True;
-  btn_pars_xls_tms_start.Enabled := False;
-  mni_db_job_reset.Enabled := False;
-
-    XLS.CloseFile('');
-    XLS.Free;
-    f_free := False;
-end;
-
 // Блок работы с файлом "Спецификация"  *************************************************************
   // процедура выбора файла xls для чтения
 procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
 var
+  S: TStringArray;
+  f_count: Integer;
   f_path_xls: string;
 begin
+  f_count := 0;
   if dlg_db_sp_xls_open.Execute() then
   begin
     f_path_xls := dlg_db_sp_xls_open.FileName;
     f_filename_xls := ExtractFileName(f_path_xls);
-    mni_db_xls_sp_open.Enabled := False;
-    mni_db_xls_sp_OLE.Enabled := True;
   end;
-end;
- // сохраняем файл в формате json
-procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
-var
-  f_path_fds: string;
-begin
-  if dlg_db_sp_fds_save.Execute() then
-  begin
-    f_path_fds := dlg_db_sp_fds_save.FileName;
-  end;
-  if dm_parserxls.mem_specification.RecordCount <> 0 then
-  begin
-    dm_parserxls.mem_specification.SaveToFile(f_path_fds, sfJSON);
-  end
-  else
-  begin
-    ShowMessage('Таблица пуста');
-  end;
-end;
- // создание объекта OLE
-procedure Tfrm_ParserXLS.mni_db_xls_sp_OLEClick(Sender: TObject);
-var
-  S: TStringArray;
-  tmp: string;
-  i, j: Integer;
-begin
-  if f_free then
-  begin
-    XLS.CloseFile('');
-    XLS.Free;
-    f_free := False;
-  end;
+    // соединяем все события
+  // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
-   // создаем объект OLE
-  mni_db_xls_pr_OLE.Enabled := False;
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
-  f_free := True;
-  btn_pars_xls_specification_start.Enabled := True;
-
-end;
-  // парсер specification из xls файла
-
-procedure Tfrm_ParserXLS.btn_pars_xls_specification_startClick(Sender: TObject);
-var
-  S: TStringArray;
-  tmp: string;
-  i: Integer;
-  f_sel: Integer;
-begin
-  TCursorHelper.ChangeToHourglass();
- //  получаем количество ячеек для парсинга
-  f_sel := se_specification.Value;
-  if f_sel = 1 then
-  begin
-    ShowMessage('Введите количество активных ячеек');
-    Abort;
-  end;
+  // запускаем парсинг
 
   dm_parserxls.mem_specification.Close;
   dm_parserxls.mem_specification.Open;
   dm_parserxls.mem_specification.First;
   dm_parserxls.mem_specification.DisableControls;
-  i := 0;
-  while True do
+
+    while True do
   begin
     S := XLS.ReadString(18);
 
@@ -404,15 +291,16 @@ begin
         dm_parserxls.mem_specification.Fields[2].AsString := S[14];
         dm_parserxls.mem_specification.Fields[4].AsString := S[16];
         dm_parserxls.mem_specification.Next;
+        f_count := 0;
       end;
     end;
 
-    inc(i);
-    if i = f_sel then
+    inc(f_count);
+    if f_count = 30 then
       Break;
   end;
-  // формирование таблицы
-  with grid_two do
+
+    with grid_two do
   begin
     Columns[0].Width := 50;
     Columns[0].Title.Alignment := taCenter;
@@ -431,24 +319,28 @@ begin
     Columns[4].Title.Caption := 'Примечание';
   end;
   dm_parserxls.mem_specification.Refresh;
-  mni_db_sp_pr_reset.Enabled := True;
   dm_parserxls.mem_specification.EnableControls;
-   // сбрасываем курсор
-  XLS.SetPosition(1, 1);
-  btn_modification.Enabled := True;
-
-end;
-    // закрыть и разрушить объект OLE
-procedure Tfrm_ParserXLS.mni_db_sp_pr_resetClick(Sender: TObject);
-begin
-  mni_db_xls_sp_open.Enabled := True;
-  btn_pars_xls_specification_start.Enabled := False;
-  mni_db_sp_pr_reset.Enabled := False;
-  btn_modification.Enabled := False;
-
   XLS.CloseFile('');
   XLS.Free;
-  f_free := False;
+
+end;
+  // сохраняем файл в формате json
+procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+  if dlg_db_sp_fds_save.Execute() then
+  begin
+    f_path_fds := dlg_db_sp_fds_save.FileName;
+  end;
+  if dm_parserxls.mem_specification.RecordCount <> 0 then
+  begin
+    dm_parserxls.mem_specification.SaveToFile(f_path_fds, sfJSON);
+  end
+  else
+  begin
+    ShowMessage('Таблица пуста');
+  end;
 end;
 {---------------------------- Модификация файла "Спецификация" -------------------------------------
 }
@@ -567,19 +459,18 @@ begin
       begin
         ds_one.DataSet.Close;
         ds_one.DataSet.Open;
-        se_tmc.Value := 1;
       end;
     1:
       begin
         ds_two.DataSet.Close;
         ds_two.DataSet.Open;
-        se_specification.Value := 1;
+
       end;
     2:
       begin
         ds_three.DataSet.Close;
         ds_three.DataSet.Open;
-        se_specification.Value := 1;
+
       end;
 
   end;

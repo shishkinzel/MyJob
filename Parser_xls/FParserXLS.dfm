@@ -61,70 +61,14 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
-    object lbl_tmc: TLabel
-      Left = 24
-      Top = 4
-      Width = 191
-      Height = 13
-      Caption = #1042#1074#1077#1076#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1072#1082#1090#1080#1074#1085#1099#1093' '#1103#1095#1077#1077#1082
-    end
-    object lbl_specification: TLabel
-      Left = 24
-      Top = 56
-      Width = 191
-      Height = 13
-      Caption = #1042#1074#1077#1076#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1072#1082#1090#1080#1074#1085#1099#1093' '#1103#1095#1077#1077#1082
-    end
-    object btn_pars_xls_tms_start: TBitBtn
-      Left = 340
-      Top = 17
-      Width = 240
-      Height = 25
-      Caption = #1053#1072#1095#1072#1090#1100' '#1095#1090#1077#1085#1080#1077' '#1092#1072#1081#1083#1072' - '#1050#1086#1076#1099' '#1058#1052#1062
-      Enabled = False
-      TabOrder = 0
-      OnClick = btn_pars_xls_tms_startClick
-    end
-    object btn_pars_xls_specification_start: TBitBtn
-      Left = 340
-      Top = 71
-      Width = 240
-      Height = 25
-      Caption = #1053#1072#1095#1072#1090#1100' '#1095#1090#1077#1085#1080#1077' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
-      Enabled = False
-      TabOrder = 1
-      OnClick = btn_pars_xls_specification_startClick
-    end
-    object se_tmc: TSpinEdit
-      Left = 24
-      Top = 23
-      Width = 80
-      Height = 22
-      MaxLength = 5
-      MaxValue = 10000
-      MinValue = 1
-      TabOrder = 2
-      Value = 1
-    end
-    object se_specification: TSpinEdit
-      Left = 24
-      Top = 75
-      Width = 80
-      Height = 22
-      MaxLength = 4
-      MaxValue = 2500
-      MinValue = 1
-      TabOrder = 3
-      Value = 1
-    end
+    ExplicitTop = 678
     object btn_modification: TBitBtn
-      Left = 620
-      Top = 71
+      Left = 5
+      Top = 23
       Width = 240
       Height = 25
       Caption = #1053#1072#1095#1072#1090#1100' '#1084#1086#1076#1080#1092#1080#1082#1072#1094#1080#1102' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
-      Enabled = False
-      TabOrder = 4
+      TabOrder = 0
       OnClick = btn_modificationClick
     end
   end
@@ -252,11 +196,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
           OnClick = mni_db_xls_pr_openClick
         end
-        object mni_db_xls_pr_OLE: TMenuItem
-          Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1073#1098#1077#1082#1090' OLE'
-          Enabled = False
-          OnClick = mni_db_xls_pr_OLEClick
-        end
         object mni_db_sp_pr_SeparatorOne: TMenuItem
           Caption = '-'
         end
@@ -264,14 +203,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
           OnClick = mni_db_json_pr_saveClick
         end
-      end
-      object mni_db_SeparatorTwo: TMenuItem
-        Caption = '-'
-      end
-      object mni_db_job_reset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        Enabled = False
-        OnClick = mni_db_job_resetClick
       end
     end
     object mni_db_specification: TMenuItem
@@ -297,11 +228,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
           OnClick = mni_db_xls_sp_openClick
         end
-        object mni_db_xls_sp_OLE: TMenuItem
-          Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1073#1098#1077#1082#1090' OLE'
-          Enabled = False
-          OnClick = mni_db_xls_sp_OLEClick
-        end
         object mni_db_sp_pr_12: TMenuItem
           Caption = '-'
         end
@@ -309,14 +235,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
           OnClick = mni_db_json_sp_pr_saveClick
         end
-      end
-      object mni_db_sp_SeparatorTwo: TMenuItem
-        Caption = '-'
-      end
-      object mni_db_sp_pr_reset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        Enabled = False
-        OnClick = mni_db_sp_pr_resetClick
       end
     end
     object mni_db_mysql_Job: TMenuItem
