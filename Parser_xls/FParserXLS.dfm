@@ -93,6 +93,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Caption = #1053#1072#1095#1072#1090#1100' '#1095#1090#1077#1085#1080#1077' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
       Enabled = False
       TabOrder = 1
+      OnClick = btn_pars_xls_specification_startClick
     end
     object se_tmc: TSpinEdit
       Left = 24
@@ -110,11 +111,21 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 75
       Width = 80
       Height = 22
-      MaxLength = 5
-      MaxValue = 10000
+      MaxLength = 4
+      MaxValue = 2500
       MinValue = 1
       TabOrder = 3
       Value = 1
+    end
+    object btn_modification: TBitBtn
+      Left = 620
+      Top = 71
+      Width = 240
+      Height = 25
+      Caption = #1053#1072#1095#1072#1090#1100' '#1084#1086#1076#1080#1092#1080#1082#1072#1094#1080#1102' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
+      Enabled = False
+      TabOrder = 4
+      OnClick = btn_modificationClick
     end
   end
   object pnl_Main: TPanel
@@ -271,6 +282,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
         Caption = #1060#1072#1081#1083'_FDS'
         object mni_db_sp_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
+          OnClick = mni_db_sp_openClick
         end
         object mni_db_sp_save: TMenuItem
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
@@ -304,6 +316,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       object mni_db_sp_pr_reset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         Enabled = False
+        OnClick = mni_db_sp_pr_resetClick
       end
     end
     object mni_db_mysql_Job: TMenuItem
@@ -346,8 +359,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 80
-    Top = 8
+    Left = 16
+    Top = 376
   end
   object dlg_db_job_fds_save: TSaveDialog
     DefaultExt = 'fds'
@@ -355,16 +368,16 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'JSON file (*.fds)|*.fds'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 136
-    Top = 8
+    Left = 16
+    Top = 432
   end
   object dlg_db_fds_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'Code_TMC'
     Filter = 'JSON file (*.fds)|*.fds'
     InitialDir = 'file_fds'
-    Left = 240
-    Top = 8
+    Left = 104
+    Top = 392
   end
   object dli_db_fds_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -372,8 +385,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'JSON file (*.fds)|*.fds'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 280
-    Top = 8
+    Left = 104
+    Top = 448
   end
   object dlg_db_sp_xls_open: TOpenDialog
     DefaultExt = 'xlsx'
@@ -381,8 +394,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 344
-    Top = 8
+    Left = 248
+    Top = 368
   end
   object dlg_db_sp_fds_save: TSaveDialog
     DefaultExt = 'fds'
@@ -390,16 +403,21 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'JSON file (*.fds)|*.fds'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 400
-    Top = 8
+    Left = 240
+    Top = 440
   end
   object dlg_db_sp_pr_open: TOpenDialog
-    Left = 464
-    Top = 16
+    DefaultExt = 'fds'
+    FileName = 'specification'
+    Filter = 'JSON file (*.fds)|*.fds'
+    InitialDir = 'file_fds'
+    Left = 336
+    Top = 384
   end
   object dlg_db_sp_pr_save: TSaveDialog
-    Left = 520
-    Top = 16
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 328
+    Top = 448
   end
   object ds_three: TDataSource
     DataSet = dm_parserxls.mem_list_of_elements

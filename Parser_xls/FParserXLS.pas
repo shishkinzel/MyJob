@@ -78,6 +78,7 @@ type
     mni_db_mysql_Clear: TMenuItem;
     mni_db_mysql_clear_tmc: TMenuItem;
     mni_db_mysql_22: TMenuItem;
+    btn_modification: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -95,6 +96,10 @@ type
     procedure mni_db_xls_sp_openClick(Sender: TObject);
     procedure mni_db_json_sp_pr_saveClick(Sender: TObject);
     procedure mni_db_xls_sp_OLEClick(Sender: TObject);
+    procedure btn_pars_xls_specification_startClick(Sender: TObject);
+    procedure mni_db_sp_pr_resetClick(Sender: TObject);
+    procedure btn_modificationClick(Sender: TObject);
+    procedure mni_db_sp_openClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -107,11 +112,12 @@ var
   frm_ParserXLS: Tfrm_ParserXLS;
   XLS: TXLSExporter;
   f_filename_xls: string;
+  Animation: TAnimate;
 
 
 implementation
 uses
-  FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script;
+  FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.Comp.Client;
 
 {$R *.dfm}
 
@@ -242,14 +248,16 @@ begin
   btn_pars_xls_tms_start.Enabled := True;
 end;
 // парсер codetmc из xls файла
-
 procedure Tfrm_ParserXLS.btn_pars_xls_tms_startClick(Sender: TObject);
 var
   S : TStringArray;
   tmp : String;
-  i : Integer;
-  f_sel : Integer;
+  i: Integer;
+  f_sel: Integer;
 begin
+  // выключаем прорисовку экрана
+//  grid_one.DefaultDrawing := False;
+
  //  получаем количество ячеек для парсинга
   f_sel := se_tmc.Value;
   if f_sel = 1 then
@@ -263,17 +271,24 @@ begin
   dm_parserxls.mem_db_angtelTMC.First;
 
   i := 0;
+ //    Запускаем анимацию
+//  Animation := TAnimate.Create(Self);
+//  Animation.Parent := Self;
+//  Animation.FileName := 'spinner.avi';
+//  Animation.CommonAVI := aviNone;
+//  Animation.Open := True;
+ // **********************************
   while True do
   begin
-    S :=  XLS.ReadString(2);
+    S := XLS.ReadString(2);
     begin
-    if (S[0] <> '') and (S[1] <> '') and  (S[0] <> 'Наименование элемента')then
-    begin
-      dm_parserxls.mem_db_angtelTMC.Insert;
-      dm_parserxls.mem_db_angtelTMC.Fields[1].AsString := S[0];
-      dm_parserxls.mem_db_angtelTMC.Fields[2].AsString := S[1];
-      dm_parserxls.mem_db_angtelTMC.Next;
-    end;
+      if (S[0] <> '') and (S[1] <> '') and (S[0] <> 'Наименование элемента') then
+      begin
+        dm_parserxls.mem_db_angtelTMC.Insert;
+        dm_parserxls.mem_db_angtelTMC.Fields[1].AsString := S[0];
+        dm_parserxls.mem_db_angtelTMC.Fields[2].AsString := S[1];
+        dm_parserxls.mem_db_angtelTMC.Next;
+      end;
     end;
 
     inc(i);
@@ -282,9 +297,16 @@ begin
   end;
   dm_parserxls.mem_db_angtelTMC.Refresh;
   mni_db_job_reset.Enabled := True;
+//  Animation.Open := False;
+//  Animation.Free;
    // сбрасываем курсор
+  ShowMessage('Таблица "Коды ТМЦ" - cформирована');
   XLS.SetPosition(1, 1);
+//      grid_one.DefaultDrawing := False;
+//      grid_two.Refresh;
 end;
+
+
 
 
 // закрыть и разрушить объект OLE
@@ -299,7 +321,7 @@ begin
     f_free := False;
 end;
 
-// Блок работы с файлом "Спцификация"  *************************************************************
+// Блок работы с файлом "Спецификация"  *************************************************************
   // процедура выбора файла xls для чтения
 procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
 var
@@ -349,18 +371,137 @@ begin
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
   f_free := True;
-  btn_pars_xls_tms_start.Enabled := True;
+  btn_pars_xls_specification_start.Enabled := True;
 
 end;
   // парсер specification из xls файла
+procedure Tfrm_ParserXLS.btn_pars_xls_specification_startClick(Sender: TObject);
+var
+  S: TStringArray;
+  tmp: string;
+  i: Integer;
+  f_sel: Integer;
+begin
+ //  получаем количество ячеек для парсинга
+  f_sel := se_specification.Value;
+  if f_sel = 1 then
+  begin
+    ShowMessage('Введите количество активных ячеек');
+    Abort;
+  end;
 
+  dm_parserxls.mem_specification.Close;
+  dm_parserxls.mem_specification.Open;
+  dm_parserxls.mem_specification.First;
+  dm_parserxls.mem_specification.DisableControls;
+  i := 0;
+  while True do
+  begin
+    S := XLS.ReadString(18);
 
+    begin
+      if (S[7] <> '') and (S[14] <> '') and (S[7] <> 'Наименование') then
+      begin
+        dm_parserxls.mem_specification.Insert;
+        dm_parserxls.mem_specification.Fields[1].AsString := S[7];
+        dm_parserxls.mem_specification.Fields[2].AsString := S[14];
+        dm_parserxls.mem_specification.Fields[4].AsString := S[16];
+        dm_parserxls.mem_specification.Next;
+      end;
+    end;
+
+    inc(i);
+    if i = f_sel then
+      Break;
+  end;
+  // формирование таблицы
+      with grid_two do
+    begin
+      Columns[0].Width := 50;
+      Columns[0].Title.Alignment := taCenter;
+      Columns[0].Title.Caption := '№';
+      Columns[1].Width := 560;
+      Columns[1].Title.Alignment := taCenter;
+      Columns[1].Title.Caption := 'Наименование изделия';
+      Columns[2].Width := 40;
+      Columns[2].Title.Alignment := taCenter;
+      Columns[2].Title.Caption := 'Кол-во';
+      Columns[3].Width := 135;
+      Columns[3].Title.Alignment := taCenter;
+      Columns[3].Title.Caption := 'Код ТМЦ';
+      Columns[4].Width := 170;
+      Columns[4].Title.Alignment := taCenter;
+      Columns[4].Title.Caption := 'Примечание';
+    end;
+
+  dm_parserxls.mem_specification.Refresh;
+  mni_db_sp_pr_reset.Enabled := True;
+   // сбрасываем курсор
+  XLS.SetPosition(1, 1);
+  btn_modification.Enabled := True;
+   dm_parserxls.mem_specification.EnableControls;
+end;
+ // закрыть и разрушить объект OLE
+procedure Tfrm_ParserXLS.mni_db_sp_pr_resetClick(Sender: TObject);
+begin
+  mni_db_xls_sp_open.Enabled := True;
+  btn_pars_xls_specification_start.Enabled := False;
+  mni_db_sp_pr_reset.Enabled := False;
+  btn_modification.Enabled := False;
+
+  XLS.CloseFile('');
+  XLS.Free;
+  f_free := False;
+end;
+{---------------------------- Модификация файла "Спецификация" -------------------------------------
+}
+
+procedure Tfrm_ParserXLS.btn_modificationClick(Sender: TObject);
+var
+  tb_tmc, tb_sp: TFDMemTable;
+  f_stringOne, f_stringTwo : string;
+begin
+  tb_tmc := dm_parserxls.mem_db_angtelTMC;
+  tb_sp := dm_parserxls.mem_specification;
+  if tb_tmc.RecordCount = 0 then
+  begin
+    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
+    Abort;
+  end;
+   // останавливаем прорисовку таблицы
+   tb_sp.DisableControls;
+
+ // код модификации таблицы спецификация - добавляем код ТМЦ
+
+  tb_sp.First;
+  while not tb_sp.Eof do
+  begin
+    tb_tmc.First;
+    while not tb_tmc.Eof do
+    begin
+      f_stringOne := StringReplace(Trim( tb_sp.Fields[1].AsString), ' ', '', [rfReplaceAll]);
+      f_stringTwo := StringReplace(Trim(tb_tmc.Fields[1].AsString), ' ', '', [rfReplaceAll]);
+      if tb_sp.Fields[1].AsString = tb_tmc.Fields[1].AsString then
+      begin
+        tb_sp.Edit;
+        tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
+        Break;
+      end;
+      tb_tmc.Next;
+    end;
+    tb_sp.Next;
+  end;
+  tb_sp.EnableControls;
+  ShowMessage('Обработка закончена');
+end;
+//##################################################################################################
 //**************************************************************************************************
 
 {   Открытие блока работы с файлами fds
 
 }
-// открытие файла fds
+ // вкладка "Коды ТМЦ"
+ // открытие файла fds
 procedure Tfrm_ParserXLS.mni_db_job_openClick(Sender: TObject);
 var
   f_path_fds: string;
@@ -388,6 +529,18 @@ begin
   else
   begin
     ShowMessage('Таблица пуста');
+  end;
+end;
+ // вкладка спецификация
+ // открытие файла fds
+procedure Tfrm_ParserXLS.mni_db_sp_openClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+  if dlg_db_sp_pr_open.Execute() then
+  begin
+    f_path_fds := dlg_db_sp_pr_open.FileName;
+    dm_parserxls.mem_specification.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
 
@@ -453,7 +606,6 @@ begin
   dm_parserxls.mv_tmc.Execute;
   ShowMessage('Трансляция базы "Код ТМЦ" в MySQL - успешно завершена!');
 end;
-
 
 // очистка базы "Коды ТМЦ"
 procedure Tfrm_ParserXLS.mni_db_mysql_clear_tmcClick(Sender: TObject);
