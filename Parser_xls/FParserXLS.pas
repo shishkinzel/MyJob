@@ -66,11 +66,11 @@ type
     mni_db_mysql_Clear: TMenuItem;
     mni_db_mysql_clear_tmc: TMenuItem;
     mni_db_mysql_clear_specification: TMenuItem;
-    btn_modification: TBitBtn;
+    N1: TMenuItem;
+    mni_db_translation: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mni_db_json_pr_saveClick(Sender: TObject);
     procedure mni_db_job_openClick(Sender: TObject);
     procedure btn_allResetClick(Sender: TObject);
@@ -80,13 +80,11 @@ type
     procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
     procedure mni_db_xls_sp_openClick(Sender: TObject);
     procedure mni_db_json_sp_pr_saveClick(Sender: TObject);
-    procedure btn_modificationClick(Sender: TObject);
     procedure mni_db_sp_openClick(Sender: TObject);
     procedure mni_db_mysql_clear_specificationClick(Sender: TObject);
+    procedure mni_db_translationClick(Sender: TObject);
   private
     { Private declarations }
-    var
-      f_free : Boolean;
   public
     { Public declarations }
   end;
@@ -113,7 +111,6 @@ var
 begin
 // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
-   f_free := False;
 
 end;
 
@@ -123,58 +120,9 @@ end;
 procedure Tfrm_ParserXLS.FormShow(Sender: TObject);
 begin
 
-  with grid_one do
-  begin
-    Columns[0].Width := 50;
-    Columns[0].Title.Alignment := taCenter;
-    Columns[0].Title.Caption := '№';
-    Columns[1].Width := 765;
-    Columns[1].Title.Alignment := taCenter;
-    Columns[1].Title.Caption := 'Наименование изделия';
-    Columns[2].Width := 135;
-    Columns[2].Title.Alignment := taCenter;
-    Columns[2].Title.Caption := 'Код ТМЦ';
-
-  end;
-
-
-  with grid_two do
-  begin
-    Columns[0].Width := 50;
-    Columns[0].Title.Alignment := taCenter;
-    Columns[0].Title.Caption := '№';
-    Columns[1].Width := 560;
-    Columns[1].Title.Alignment := taCenter;
-    Columns[1].Title.Caption := 'Наименование изделия';
-    Columns[2].Width := 40;
-    Columns[2].Title.Alignment := taCenter;
-    Columns[2].Title.Caption := 'Кол-во';
-    Columns[3].Width := 135;
-    Columns[3].Title.Alignment := taCenter;
-    Columns[3].Title.Caption := 'Код ТМЦ';
-    Columns[4].Width := 170;
-    Columns[4].Title.Alignment := taCenter;
-    Columns[4].Title.Caption := 'Примечание';
-  end;
-
-    with grid_three do
-  begin
-    Columns[0].Width := 50;
-    Columns[0].Title.Alignment := taCenter;
-    Columns[0].Title.Caption := '№';
-    Columns[1].Width := 120;
-    Columns[1].Title.Alignment := taCenter;
-    Columns[1].Title.Caption := 'Поз. обозначение';
-    Columns[2].Width := 580;
-    Columns[2].Title.Alignment := taCenter;
-    Columns[2].Title.Caption := 'Наименование элемента';
-    Columns[3].Width := 40;
-    Columns[3].Title.Alignment := taCenter;
-    Columns[3].Title.Caption := 'Кол-во';
-    Columns[4].Width := 135;
-    Columns[4].Title.Alignment := taCenter;
-    Columns[4].Title.Caption := 'Код ТМЦ';
-  end;
+  DrawingGridOne(grid_one);
+  DrawingGridTwo(grid_two);
+  DrawingGridThree(grid_three);
 
 end;
 {
@@ -225,10 +173,10 @@ begin
     if f_count = 30 then
       Break;
   end;
+  DrawingGridOne(grid_one);
   dm_parserxls.mem_db_angtelTMC.Refresh;
   dm_parserxls.mem_db_angtelTMC.EnableControls;
   grid_two.Refresh;
-  ShowMessage('Таблица "Коды ТМЦ" - cформирована');
   XLS.CloseFile('');
   XLS.Free;
 end;
@@ -260,8 +208,14 @@ var
   S: TStringArray;
   f_count: Integer;
   f_path_xls: string;
+  tb_tmc, tb_sp, tb_el: TFDMemTable;
 begin
+// установка начальных значений и присвоение псевдонимов
   f_count := 0;
+  tb_tmc := dm_parserxls.mem_db_angtelTMC;
+  tb_sp := dm_parserxls.mem_specification;
+  tb_el := dm_parserxls.mem_list_of_elements;
+
   if dlg_db_sp_xls_open.Execute() then
   begin
     f_path_xls := dlg_db_sp_xls_open.FileName;
@@ -273,11 +227,14 @@ begin
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
   // запускаем парсинг
-
-  dm_parserxls.mem_specification.Close;
-  dm_parserxls.mem_specification.Open;
-  dm_parserxls.mem_specification.First;
-  dm_parserxls.mem_specification.DisableControls;
+  tb_sp.Close;
+  tb_sp.Open;
+  tb_sp.First;
+  tb_sp.DisableControls;
+  tb_el.Close;
+  tb_el.Open;
+  tb_el.First;
+  tb_el.DisableControls;
 
     while True do
   begin
@@ -286,11 +243,19 @@ begin
     begin
       if (S[7] <> '') and (S[14] <> '') and (S[7] <> 'Наименование') then
       begin
-        dm_parserxls.mem_specification.Insert;
-        dm_parserxls.mem_specification.Fields[1].AsString := S[7];
-        dm_parserxls.mem_specification.Fields[2].AsString := S[14];
-        dm_parserxls.mem_specification.Fields[4].AsString := S[16];
-        dm_parserxls.mem_specification.Next;
+        tb_sp.Insert;
+        tb_el.Insert;
+        tb_sp.Fields[1].AsString := S[7];
+        tb_sp.Fields[2].AsString := S[14];
+        tb_sp.Fields[4].AsString := S[16];
+
+
+        tb_el.Fields[1].AsString := S[3];
+        tb_el.Fields[2].AsString := S[7];
+        tb_el.Fields[3].AsString := S[14];
+
+        tb_sp.Next;
+        tb_el.Next;
         f_count := 0;
       end;
     end;
@@ -300,26 +265,12 @@ begin
       Break;
   end;
 
-    with grid_two do
-  begin
-    Columns[0].Width := 50;
-    Columns[0].Title.Alignment := taCenter;
-    Columns[0].Title.Caption := '№';
-    Columns[1].Width := 560;
-    Columns[1].Title.Alignment := taCenter;
-    Columns[1].Title.Caption := 'Наименование изделия';
-    Columns[2].Width := 40;
-    Columns[2].Title.Alignment := taCenter;
-    Columns[2].Title.Caption := 'Кол-во';
-    Columns[3].Width := 135;
-    Columns[3].Title.Alignment := taCenter;
-    Columns[3].Title.Caption := 'Код ТМЦ';
-    Columns[4].Width := 170;
-    Columns[4].Title.Alignment := taCenter;
-    Columns[4].Title.Caption := 'Примечание';
-  end;
-  dm_parserxls.mem_specification.Refresh;
-  dm_parserxls.mem_specification.EnableControls;
+  DrawingGridTwo(grid_two);
+  DrawingGridThree(grid_three);
+  tb_sp.Refresh;
+  tb_sp.EnableControls;
+  tb_el.EnableControls;
+  tb_el.Refresh;
   XLS.CloseFile('');
   XLS.Free;
 
@@ -345,37 +296,6 @@ end;
 {---------------------------- Модификация файла "Спецификация" -------------------------------------
 }
 
-procedure Tfrm_ParserXLS.btn_modificationClick(Sender: TObject);
-var
-  tb_tmc, tb_sp: TFDMemTable;
-  f_stringOne, f_stringTwo : string;
-begin
-  tb_tmc := dm_parserxls.mem_db_angtelTMC;
-  tb_sp := dm_parserxls.mem_specification;
-  if tb_tmc.RecordCount = 0 then
-  begin
-    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
-    Abort;
-  end;
-   // останавливаем прорисовку таблицы
-   tb_sp.DisableControls;
-
- // код модификации таблицы спецификация - добавляем код ТМЦ
-
-  tb_sp.First;
-  while not tb_sp.Eof do
-  begin
-    tb_tmc.Filtered := False;
-    tb_tmc.Filter := 'name = ' + QuotedStr(tb_sp.Fields[1].AsString);
-    tb_tmc.Filtered := True;
-    tb_sp.Edit;
-    tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
-    tb_sp.Post;
-    tb_sp.Next;
-  end;
-  tb_sp.EnableControls;
-  ShowMessage('Обработка закончена');
-end;
 //##################################################################################################
 //**************************************************************************************************
 
@@ -426,6 +346,38 @@ begin
   end;
 end;
 
+
+procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
+var
+  tb_tmc, tb_sp: TFDMemTable;
+  f_stringOne, f_stringTwo : string;
+begin
+  tb_tmc := dm_parserxls.mem_db_angtelTMC;
+  tb_sp := dm_parserxls.mem_specification;
+  if tb_tmc.RecordCount = 0 then
+  begin
+    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
+    Abort;
+  end;
+   // останавливаем прорисовку таблицы
+   tb_sp.DisableControls;
+
+ // код модификации таблицы спецификация - добавляем код ТМЦ
+
+  tb_sp.First;
+  while not tb_sp.Eof do
+  begin
+    tb_tmc.Filtered := False;
+    tb_tmc.Filter := 'name = ' + QuotedStr(tb_sp.Fields[1].AsString);
+    tb_tmc.Filtered := True;
+    tb_sp.Edit;
+    tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
+    tb_sp.Post;
+    tb_sp.Next;
+  end;
+  tb_sp.EnableControls;
+  ShowMessage('Обработка закончена');
+end;
 
 //**************************************************************************************************
 
@@ -518,14 +470,5 @@ end;
 
 //**************************************************************************************************
 // закрытие формы
-procedure Tfrm_ParserXLS.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if f_free then
-  begin
-    f_free := False;
-    XLS.CloseFile('');
-    XLS.Free;
-  end;
-end;
 
 end.

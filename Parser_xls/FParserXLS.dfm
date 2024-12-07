@@ -13,7 +13,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
   Menu = mm_parserxls
   OldCreateOrder = False
   Position = poScreenCenter
-  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -61,16 +60,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 678
-    object btn_modification: TBitBtn
-      Left = 5
-      Top = 23
-      Width = 240
-      Height = 25
-      Caption = #1053#1072#1095#1072#1090#1100' '#1084#1086#1076#1080#1092#1080#1082#1072#1094#1080#1102' '#1092#1072#1081#1083#1072' - '#1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
-      TabOrder = 0
-      OnClick = btn_modificationClick
-    end
   end
   object pnl_Main: TPanel
     Left = 0
@@ -229,6 +218,13 @@ object frm_ParserXLS: Tfrm_ParserXLS
           OnClick = mni_db_xls_sp_openClick
         end
         object mni_db_sp_pr_12: TMenuItem
+          Caption = '-'
+        end
+        object mni_db_translation: TMenuItem
+          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103' '
+          OnClick = mni_db_translationClick
+        end
+        object N1: TMenuItem
           Caption = '-'
         end
         object mni_db_json_sp_pr_save: TMenuItem

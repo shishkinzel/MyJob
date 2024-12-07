@@ -29,7 +29,10 @@ object dm_parserxls: Tdm_parserxls
         DataType = ftString
         Size = 50
       end>
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Options = [ixNonMaintained]
+      end>
     Indexes = <
       item
       end>
@@ -80,7 +83,11 @@ object dm_parserxls: Tdm_parserxls
         DataType = ftString
         Size = 10
       end>
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'test'#13#10
+        Fields = 'name'
+      end>
     Indexes = <
       item
         Active = True
@@ -174,7 +181,6 @@ object dm_parserxls: Tdm_parserxls
       'Server=172.17.17.58'
       'DriverID=MySQL'
       'CharacterSet=utf8')
-    Connected = True
     LoginPrompt = False
     Left = 48
     Top = 24
