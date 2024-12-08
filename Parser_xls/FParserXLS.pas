@@ -349,35 +349,43 @@ end;
 
 procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
 var
-  tb_tmc, tb_sp: TFDMemTable;
-  f_stringOne, f_stringTwo : string;
+  tb_tmc, tb_sp, tb_el: TFDMemTable;
+  f_stringOne, f_stringTwo: string;
 begin
   tb_tmc := dm_parserxls.mem_db_angtelTMC;
   tb_sp := dm_parserxls.mem_specification;
+  tb_el := dm_parserxls.mem_list_of_elements;
+
   if tb_tmc.RecordCount = 0 then
   begin
     ShowMessage('Отсутствует таблица "Коды ТМЦ"');
     Abort;
   end;
-   // останавливаем прорисовку таблицы
-   tb_sp.DisableControls;
-
+      // останавливаем прорисовку таблицы
+  tb_sp.DisableControls;
+  tb_el.DisableControls;
  // код модификации таблицы спецификация - добавляем код ТМЦ
 
   tb_sp.First;
+  tb_el.First;
   while not tb_sp.Eof do
   begin
     tb_tmc.Filtered := False;
     tb_tmc.Filter := 'name = ' + QuotedStr(tb_sp.Fields[1].AsString);
     tb_tmc.Filtered := True;
     tb_sp.Edit;
+    tb_el.Edit;
     tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
+    tb_el.Fields[4].AsString := tb_tmc.Fields[2].AsString;
     tb_sp.Post;
     tb_sp.Next;
+    tb_el.Post;
+    tb_el.Next;
   end;
   tb_sp.EnableControls;
-  ShowMessage('Обработка закончена');
+  tb_el.EnableControls;
 end;
+
 
 //**************************************************************************************************
 
