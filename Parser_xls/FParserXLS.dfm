@@ -245,7 +245,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = '-'
         end
         object mni_db_translation: TMenuItem
-          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103' '
+          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103
           OnClick = mni_db_translationClick
         end
         object N1: TMenuItem
@@ -272,6 +272,24 @@ object frm_ParserXLS: Tfrm_ParserXLS
       end
       object mni_db_loel_SeparatorOne: TMenuItem
         Caption = '-'
+      end
+      object mni_db_loel_parser: TMenuItem
+        Caption = #1055#1072#1088#1089#1077#1088' xls'
+        object mni_db_loel_pr_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
+        end
+        object mni_db_loel_pr_SeparatorOne: TMenuItem
+          Caption = '-'
+        end
+        object mni_db_loel_pr_translation: TMenuItem
+          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103
+        end
+        object mni_db_loel_pr_SeparatorTwo: TMenuItem
+          Caption = '-'
+        end
+        object mni_db_loel_pr_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
+        end
       end
     end
     object mni_db_mysql_Job: TMenuItem

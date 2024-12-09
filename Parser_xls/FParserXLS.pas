@@ -78,6 +78,12 @@ type
     lbl_title_find: TLabel;
     btn_find: TBitBtn;
     edt_find: TEdit;
+    mni_db_loel_parser: TMenuItem;
+    mni_db_loel_pr_open: TMenuItem;
+    mni_db_loel_pr_SeparatorOne: TMenuItem;
+    mni_db_loel_pr_translation: TMenuItem;
+    mni_db_loel_pr_SeparatorTwo: TMenuItem;
+    mni_db_loel_pr_save: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -299,6 +305,8 @@ begin
       begin
         tb_sp.Fields[1].AsString := S[12];
         tb_sp.Fields[2].AsString := S[17];
+        S := XLS.ReadString(18);
+        tb_sp.Fields[1].AsString := tb_sp.Fields[1].AsString + ' ' +  S[12];
         f_count := 0;
       end
       else
