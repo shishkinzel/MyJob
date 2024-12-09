@@ -195,10 +195,8 @@ begin
     if f_count = 30 then
       Break;
   end;
-  DrawingGridOne(grid_one);
   dm_parserxls.mem_db_angtelTMC.Refresh;
   dm_parserxls.mem_db_angtelTMC.EnableControls;
-  grid_two.Refresh;
   XLS.CloseFile('');
   XLS.Free;
 end;
@@ -418,6 +416,8 @@ begin
       // останавливаем прорисовку таблицы
   tb_sp.DisableControls;
   tb_el.DisableControls;
+  // запускаем колесико
+  TCursorHelper.ChangeToHourglass();
  // код модификации таблицы спецификация - добавляем код ТМЦ
 
   tb_sp.First;
@@ -439,8 +439,6 @@ begin
   tb_sp.EnableControls;
   tb_el.EnableControls;
   tb_tmc.Filtered := False;
-  ds_one.DataSet.Close;
-  ds_one.DataSet.Open;
 end;
 //**************************************************************************************************
 
@@ -465,10 +463,10 @@ begin
 
 end;
 
-
 // очищаем таблицы
 procedure Tfrm_ParserXLS.btn_allResetClick(Sender: TObject);
 begin
+
   case pgc_xls.ActivePageIndex of
     0:
       begin
@@ -485,7 +483,6 @@ begin
       begin
         ds_three.DataSet.Close;
         ds_three.DataSet.Open;
-
       end;
 
   end;

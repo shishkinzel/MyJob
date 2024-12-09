@@ -60,12 +60,10 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = 5
-    ExplicitTop = 672
     object lbl_title_find: TLabel
       Left = 12
       Top = 16
-      Width = 169
+      Width = 123
       Height = 13
       Alignment = taCenter
       Caption = #1055#1086#1080#1089#1082' '#1087#1086' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1102
@@ -82,7 +80,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Left = 12
       Top = 43
       Width = 350
-      Height = 24
+      Height = 21
       Alignment = taRightJustify
       TabOrder = 1
     end
@@ -99,7 +97,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 1
       Width = 982
       Height = 599
-      ActivePage = ts_three
+      ActivePage = ts_two
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
