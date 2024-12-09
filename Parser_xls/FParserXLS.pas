@@ -226,15 +226,16 @@ end;
 procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
 var
   S: TStringArray;
-  f_count: Integer;
+  f_count, f_pos: Integer;
   f_path_xls: string;
   tb_tmc, tb_sp, tb_el: TFDMemTable;
 begin
 // установка начальных значений и присвоение псевдонимов
   f_count := 0;
+  f_pos := 1;
   tb_tmc := dm_parserxls.mem_db_angtelTMC;
   tb_sp := dm_parserxls.mem_specification;
-  tb_el := dm_parserxls.mem_list_of_elements;
+//  tb_el := dm_parserxls.mem_list_of_elements;
 
   if dlg_db_sp_xls_open.Execute() then
   begin
@@ -251,11 +252,11 @@ begin
   tb_sp.Open;
   tb_sp.First;
   tb_sp.DisableControls;
-  tb_el.Close;
-  tb_el.Open;
-  tb_el.First;
-  tb_el.DisableControls;
-
+//  tb_el.Close;
+//  tb_el.Open;
+//  tb_el.First;
+//  tb_el.DisableControls;
+ {
     while True do
   begin
     S := XLS.ReadString(18);
@@ -284,13 +285,43 @@ begin
     if f_count = 30 then
       Break;
   end;
+ }
 
+ // пробуем новый сканер для Спецификации
+
+  while True do
+  begin
+    S := XLS.ReadString(18);
+    if (S[6] = f_pos.ToString) and (S[12] <> '') and (S[17] <> '') then
+    begin
+      tb_sp.Insert;
+      if S[6] = '1' then
+      begin
+        tb_sp.Fields[1].AsString := S[12];
+        tb_sp.Fields[2].AsString := S[17];
+        f_count := 0;
+      end
+      else
+      begin
+        tb_sp.Fields[1].AsString := S[12];
+        tb_sp.Fields[2].AsString := S[17];
+        f_count := 0;
+      end;
+      tb_sp.Next;
+      Inc(f_pos);
+    end;
+
+// пытаемся найти конец списка
+    inc(f_count);
+    if f_count = 50 then
+      Break;
+  end;
   DrawingGridTwo(grid_two);
   DrawingGridThree(grid_three);
   tb_sp.Refresh;
   tb_sp.EnableControls;
-  tb_el.EnableControls;
-  tb_el.Refresh;
+//  tb_el.EnableControls;
+//  tb_el.Refresh;
   XLS.CloseFile('');
   XLS.Free;
 
