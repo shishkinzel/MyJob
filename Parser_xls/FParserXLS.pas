@@ -68,6 +68,16 @@ type
     mni_db_mysql_clear_specification: TMenuItem;
     N1: TMenuItem;
     mni_db_translation: TMenuItem;
+    mni_db_loel: TMenuItem;
+    mni_db_loel_file: TMenuItem;
+    mni_db_loel_SeparatorOne: TMenuItem;
+    mni_db_loel_open: TMenuItem;
+    mni_db_loel_save: TMenuItem;
+    dlg_db_loel_open: TOpenDialog;
+    dlg_db_loel_save: TSaveDialog;
+    lbl_title_find: TLabel;
+    btn_find: TBitBtn;
+    edt_find: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -83,8 +93,12 @@ type
     procedure mni_db_sp_openClick(Sender: TObject);
     procedure mni_db_mysql_clear_specificationClick(Sender: TObject);
     procedure mni_db_translationClick(Sender: TObject);
+    procedure mni_db_loel_openClick(Sender: TObject);
+    procedure mni_db_loel_saveClick(Sender: TObject);
   private
     { Private declarations }
+    const
+    f_code_tmc = 'code_tmc.json';
   public
     { Public declarations }
   end;
@@ -94,7 +108,7 @@ var
   XLS: TXLSExporter;
   f_filename_xls: string;
   Animation: TAnimate;
-
+  f_path_code_tmc : string;
 
 implementation
 uses
@@ -109,8 +123,10 @@ var
   tmp : String;
   i,j : Integer;
 begin
-// начальные установки
+  // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
+  // загрузка таблицы Коды ТМЦ - если она существует
+   f_path_code_tmc := ExtractFilePath(Application.ExeName) + 'file_json\' + f_code_tmc;
 
 end;
 
@@ -123,6 +139,12 @@ begin
   DrawingGridOne(grid_one);
   DrawingGridTwo(grid_two);
   DrawingGridThree(grid_three);
+  // заполнение DataSet dbgrid
+  if FileExists(f_path_code_tmc) then
+  begin
+    dm_parserxls.mem_db_angtelTMC.LoadFromFile(f_path_code_tmc, sfJSON);
+    pgc_xls.ActivePageIndex := 1;
+  end;
 
 end;
 {
@@ -293,6 +315,7 @@ begin
     ShowMessage('Таблица пуста');
   end;
 end;
+
 {---------------------------- Модификация файла "Спецификация" -------------------------------------
 }
 
@@ -334,7 +357,8 @@ begin
   end;
 end;
  // вкладка спецификация
- // открытие файла fds
+// открытие файла fds
+
 procedure Tfrm_ParserXLS.mni_db_sp_openClick(Sender: TObject);
 var
   f_path_fds: string;
@@ -345,7 +369,37 @@ begin
     dm_parserxls.mem_specification.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
+ // вкладка "Перечень элементов"
+ // открытие файла fds
 
+procedure Tfrm_ParserXLS.mni_db_loel_openClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+  if dlg_db_loel_open.Execute() then
+  begin
+    f_path_fds := dlg_db_loel_open.FileName;
+    dm_parserxls.mem_list_of_elements.LoadFromFile(f_path_fds, sfJSON);
+  end;
+end;
+// запись файла fds
+
+procedure Tfrm_ParserXLS.mni_db_loel_saveClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+  if dlg_db_loel_save.Execute() then
+  begin
+    f_path_fds := dlg_db_loel_save.FileName;
+    dm_parserxls.mem_list_of_elements.SaveToFile(f_path_fds, sfJSON);
+  end;
+end;
+
+
+//**************************************************************************************************
+{
+    Трансляция таблицы - добавления поля Код ТМЦ
+}
 
 procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
 var
@@ -384,9 +438,10 @@ begin
   end;
   tb_sp.EnableControls;
   tb_el.EnableControls;
+  tb_tmc.Filtered := False;
+  ds_one.DataSet.Close;
+  ds_one.DataSet.Open;
 end;
-
-
 //**************************************************************************************************
 
 // перемещение по вкладкам позиции

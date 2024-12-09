@@ -60,6 +60,32 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = 5
+    ExplicitTop = 672
+    object lbl_title_find: TLabel
+      Left = 12
+      Top = 16
+      Width = 169
+      Height = 13
+      Alignment = taCenter
+      Caption = #1055#1086#1080#1089#1082' '#1087#1086' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1102
+    end
+    object btn_find: TBitBtn
+      Left = 696
+      Top = 43
+      Width = 240
+      Height = 24
+      Caption = #1055#1086#1080#1089#1082
+      TabOrder = 0
+    end
+    object edt_find: TEdit
+      Left = 12
+      Top = 43
+      Width = 350
+      Height = 24
+      Alignment = taRightJustify
+      TabOrder = 1
+    end
   end
   object pnl_Main: TPanel
     Left = 0
@@ -73,7 +99,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 1
       Width = 982
       Height = 599
-      ActivePage = ts_two
+      ActivePage = ts_three
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
@@ -233,6 +259,23 @@ object frm_ParserXLS: Tfrm_ParserXLS
         end
       end
     end
+    object mni_db_loel: TMenuItem
+      Caption = #1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074
+      object mni_db_loel_file: TMenuItem
+        Caption = #1060#1072#1081#1083' FDS'
+        object mni_db_loel_open: TMenuItem
+          Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' "'#1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074'"'
+          OnClick = mni_db_loel_openClick
+        end
+        object mni_db_loel_save: TMenuItem
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' "'#1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074'"'
+          OnClick = mni_db_loel_saveClick
+        end
+      end
+      object mni_db_loel_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+    end
     object mni_db_mysql_Job: TMenuItem
       Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
       object mni_db_mysql_transmission_tmc: TMenuItem
@@ -278,26 +321,26 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Top = 376
   end
   object dlg_db_job_fds_save: TSaveDialog
-    DefaultExt = 'fds'
-    FileName = 'Code_TMC'
-    Filter = 'JSON file (*.fds)|*.fds'
-    InitialDir = 'file_fds'
+    DefaultExt = 'json'
+    FileName = 'code_tmc'
+    Filter = 'JSON file (*.json)|*.json|FDS file (*.fds)|*.fds'
+    InitialDir = 'file_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 16
     Top = 432
   end
   object dlg_db_fds_pr_open: TOpenDialog
     DefaultExt = 'fds'
-    FileName = 'Code_TMC'
-    Filter = 'JSON file (*.fds)|*.fds'
+    FileName = 'code_tmc'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Left = 104
     Top = 392
   end
   object dli_db_fds_pr_save: TSaveDialog
     DefaultExt = 'fds'
-    FileName = 'Code_TMC'
-    Filter = 'JSON file (*.fds)|*.fds'
+    FileName = 'code_tmc'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 104
@@ -313,9 +356,9 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Top = 368
   end
   object dlg_db_sp_fds_save: TSaveDialog
-    DefaultExt = 'fds'
-    FileName = 'Specification'
-    Filter = 'JSON file (*.fds)|*.fds'
+    DefaultExt = 'json'
+    FileName = 'specification'
+    Filter = 'JSON file (*.json)|*.json|FDS file (*.fds)|*.fds'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 240
@@ -324,12 +367,16 @@ object frm_ParserXLS: Tfrm_ParserXLS
   object dlg_db_sp_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'specification'
-    Filter = 'JSON file (*.fds)|*.fds'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Left = 336
     Top = 384
   end
   object dlg_db_sp_pr_save: TSaveDialog
+    DefaultExt = 'fds'
+    FileName = 'specification'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
+    InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 328
     Top = 448
@@ -342,5 +389,22 @@ object frm_ParserXLS: Tfrm_ParserXLS
   object fd_json_link_TMC: TFDStanStorageJSONLink
     Left = 584
     Top = 8
+  end
+  object dlg_db_loel_open: TOpenDialog
+    DefaultExt = 'fds'
+    FileName = 'listofelements.fds'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
+    InitialDir = 'file_fds'
+    Left = 408
+    Top = 360
+  end
+  object dlg_db_loel_save: TSaveDialog
+    DefaultExt = 'fds'
+    FileName = 'listofelements'
+    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
+    InitialDir = 'file_fds'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 400
+    Top = 448
   end
 end
