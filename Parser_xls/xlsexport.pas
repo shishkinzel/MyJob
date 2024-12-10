@@ -1,7 +1,7 @@
 unit xlsexport;
 
 interface
-Uses Variants, expfilter;
+Uses Variants, expfilter, classes;
 
 const 
  Excel = 'Excel.Application';
@@ -26,6 +26,8 @@ Type
      function ReadCell  (X, Y : Integer) : String; override;
      function OpenFile (const FileName : String; Visible : Boolean) : Boolean;  override;
      procedure CloseFile (const SaveAsFileName : String);  override;
+     procedure GetSheets (T : TStrings);
+     property VExcel : Variant read VFile;
    end;
 
 implementation
@@ -40,6 +42,15 @@ begin
  if (SaveAsFileName <> '') then VFile.ActiveWorkBook.SaveAs (F_AppPath +  SaveAsFileName);
  VFile.Quit;
  VFile := Unassigned;
+end;
+
+procedure TXLSExporter.GetSheets(T: TStrings);
+var
+  I: Integer;
+begin
+  T.Clear;
+  for I := 1 to VFile.WorkBooks[1].WorkSheets.Count do
+    T.Add(VFile.WorkBooks[1].WorkSheets[i].Name);
 end;
 
 class function TXLSExporter.IsOLEObjectInstalled: boolean;    // проверка существования OLE-объекта CLSID - создан - true

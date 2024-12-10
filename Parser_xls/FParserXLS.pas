@@ -56,7 +56,6 @@ type
     nv_three: TDBNavigator;
     grid_three: TDBGrid;
     ds_three: TDataSource;
-    mni_db_sp_pr_12: TMenuItem;
     fd_json_link_TMC: TFDStanStorageJSONLink;
     btn_allReset: TBitBtn;
     mni_db_mysql_Job: TMenuItem;
@@ -67,7 +66,6 @@ type
     mni_db_mysql_clear_tmc: TMenuItem;
     mni_db_mysql_clear_specification: TMenuItem;
     N1: TMenuItem;
-    mni_db_translation: TMenuItem;
     mni_db_loel: TMenuItem;
     mni_db_loel_file: TMenuItem;
     mni_db_loel_SeparatorOne: TMenuItem;
@@ -84,6 +82,7 @@ type
     mni_db_loel_pr_translation: TMenuItem;
     mni_db_loel_pr_SeparatorTwo: TMenuItem;
     mni_db_loel_pr_save: TMenuItem;
+    lbl_template: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -98,9 +97,11 @@ type
     procedure mni_db_json_sp_pr_saveClick(Sender: TObject);
     procedure mni_db_sp_openClick(Sender: TObject);
     procedure mni_db_mysql_clear_specificationClick(Sender: TObject);
-    procedure mni_db_translationClick(Sender: TObject);
     procedure mni_db_loel_openClick(Sender: TObject);
     procedure mni_db_loel_saveClick(Sender: TObject);
+    procedure btn_findClick(Sender: TObject);
+    procedure mni_db_loel_pr_openClick(Sender: TObject);
+    procedure pgc_xlsChange(Sender: TObject);
   private
     { Private declarations }
     const
@@ -119,9 +120,19 @@ var
 implementation
 uses
   FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.Comp.Client,
-  CursorHelper;
+  CursorHelper, formSheet;
 
 {$R *.dfm}
+
+procedure Tfrm_ParserXLS.btn_findClick(Sender: TObject);
+begin
+  grid_one.DataSource.DataSet.Filtered := False;
+  if edt_find.Text <> '' then
+  begin
+   grid_one.DataSource.DataSet.Filter := 'name LIKE ' + QuotedStr( edt_find.Text);
+   grid_one.DataSource.DataSet.Filtered := true;
+  end;
+end;
 
 procedure Tfrm_ParserXLS.FormCreate(Sender: TObject);
 var
@@ -174,9 +185,10 @@ begin
     f_filename_xls := ExtractFileName(f_path_xls);
   end;
   TCursorHelper.ChangeToHourglass();
-// создаем объект OLE
+  // создаем объект OLE
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
+
   // Запускаем парсер
 
   dm_parserxls.mem_db_angtelTMC.Close;
@@ -208,6 +220,8 @@ begin
 end;
 
 
+
+
 //  сохраняем файл в формате json
 procedure Tfrm_ParserXLS.mni_db_json_pr_saveClick(Sender: TObject);
 var
@@ -228,72 +242,52 @@ begin
 end;
 
 // Блок работы с файлом "Спецификация"  *************************************************************
-  // процедура выбора файла xls для чтения
 procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
 var
   S: TStringArray;
+  i: Integer;
   f_count, f_pos: Integer;
   f_path_xls: string;
-  tb_tmc, tb_sp, tb_el: TFDMemTable;
+  tb_tmc, tb_sp: TFDMemTable;
+//  f_stringOne, f_stringTwo: string;
 begin
 // установка начальных значений и присвоение псевдонимов
   f_count := 0;
   f_pos := 1;
   tb_tmc := dm_parserxls.mem_db_angtelTMC;
   tb_sp := dm_parserxls.mem_specification;
-//  tb_el := dm_parserxls.mem_list_of_elements;
 
   if dlg_db_sp_xls_open.Execute() then
   begin
     f_path_xls := dlg_db_sp_xls_open.FileName;
     f_filename_xls := ExtractFileName(f_path_xls);
   end;
-    // соединяем все события
   // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
+  // читаем листы
+
+  XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
+  frmSelectSheet.cbb_workbooks.ItemIndex := 0;
+  if frmSelectSheet.cbb_workbooks.Items.Count > 1 then
+  begin
+    if formSheet.frmSelectSheet.ShowModal <> mrOk then
+    begin
+      XLS.Free;
+      Exit;
+    end
+    else
+    begin
+      XLS.VExcel.WorkBooks[1].Sheets.Item[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Activate;
+    end;
+  end;
+
   // запускаем парсинг
   tb_sp.Close;
   tb_sp.Open;
   tb_sp.First;
   tb_sp.DisableControls;
-//  tb_el.Close;
-//  tb_el.Open;
-//  tb_el.First;
-//  tb_el.DisableControls;
- {
-    while True do
-  begin
-    S := XLS.ReadString(18);
-
-    begin
-      if (S[7] <> '') and (S[14] <> '') and (S[7] <> 'Наименование') then
-      begin
-        tb_sp.Insert;
-        tb_el.Insert;
-        tb_sp.Fields[1].AsString := S[7];
-        tb_sp.Fields[2].AsString := S[14];
-        tb_sp.Fields[4].AsString := S[16];
-
-
-        tb_el.Fields[1].AsString := S[3];
-        tb_el.Fields[2].AsString := S[7];
-        tb_el.Fields[3].AsString := S[14];
-
-        tb_sp.Next;
-        tb_el.Next;
-        f_count := 0;
-      end;
-    end;
-
-    inc(f_count);
-    if f_count = 30 then
-      Break;
-  end;
- }
-
- // пробуем новый сканер для Спецификации
 
   while True do
   begin
@@ -306,7 +300,7 @@ begin
         tb_sp.Fields[1].AsString := S[12];
         tb_sp.Fields[2].AsString := S[17];
         S := XLS.ReadString(18);
-        tb_sp.Fields[1].AsString := tb_sp.Fields[1].AsString + ' ' +  S[12];
+        tb_sp.Fields[1].AsString := tb_sp.Fields[1].AsString + ' ' + S[12];
         f_count := 0;
       end
       else
@@ -324,17 +318,33 @@ begin
     if f_count = 50 then
       Break;
   end;
-  DrawingGridTwo(grid_two);
-  DrawingGridThree(grid_three);
-  tb_sp.Refresh;
+
+  // проводим трансляцию файла
+  tb_sp.First;
+  while not tb_sp.Eof do
+  begin
+    tb_tmc.Filtered := False;
+    tb_tmc.Filter := 'name = ' + QuotedStr(tb_sp.Fields[1].AsString);
+    tb_tmc.Filtered := True;
+
+    tb_sp.Edit;
+    tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
+    tb_sp.Post;
+    tb_sp.Next;
+  end;
   tb_sp.EnableControls;
-//  tb_el.EnableControls;
-//  tb_el.Refresh;
+  tb_tmc.Filtered := False;
+
+  DrawingGridTwo(grid_two);
+  tb_sp.Refresh;
+  tb_sp.First;
+
+  frmSelectSheet.cbb_workbooks.Clear;
   XLS.CloseFile('');
   XLS.Free;
-
 end;
-  // сохраняем файл в формате json
+
+// сохраняем файл в формате json
 procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
 var
   f_path_fds: string;
@@ -353,10 +363,111 @@ begin
   end;
 end;
 
-{---------------------------- Модификация файла "Спецификация" -------------------------------------
-}
 
-//##################################################################################################
+
+//  Вкладка - "Перечень элементов"   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+procedure Tfrm_ParserXLS.mni_db_loel_pr_openClick(Sender: TObject);
+var
+  S: TStringArray;
+  i: Integer;
+  f_count, f_pos: Integer;
+  f_path_xls: string;
+  tb_tmc, tb_el: TFDMemTable;
+begin
+// процедура выбора файла xls для чтения
+  f_count := 0;
+  f_pos := 1;
+  tb_tmc := dm_parserxls.mem_db_angtelTMC;
+  tb_el := dm_parserxls.mem_list_of_elements;
+
+  if dlg_db_sp_xls_open.Execute() then
+  begin
+    f_path_xls := dlg_db_sp_xls_open.FileName;
+    f_filename_xls := ExtractFileName(f_path_xls);
+  end;
+  // создаем объект OLE
+  TCursorHelper.ChangeToHourglass();
+
+  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
+  XLS.OpenFile(f_filename_xls, false);
+
+  XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
+  frmSelectSheet.cbb_workbooks.ItemIndex := 0;
+  if frmSelectSheet.cbb_workbooks.Items.Count > 1 then
+  begin
+    if formSheet.frmSelectSheet.ShowModal <> mrOk then
+    begin
+      XLS.Free;
+      Exit;
+    end
+    else
+    begin
+      XLS.VExcel.WorkBooks[1].Sheets.Item[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Activate;
+    end;
+  end;
+
+  tb_el.Close;
+  tb_el.Open;
+  tb_el.First;
+  tb_el.DisableControls;
+
+  while True do
+  begin
+    S := XLS.ReadString(18);
+
+    begin
+      if (S[7] <> '') and (S[14] <> '') and (S[7] <> 'Наименование') then
+      begin
+        tb_el.Insert;
+        tb_el.Fields[1].AsString := S[3];
+        tb_el.Fields[2].AsString := S[7];
+        tb_el.Fields[3].AsString := S[14];
+        tb_el.Next;
+        f_count := 0;
+      end;
+    end;
+
+    inc(f_count);
+    if f_count = 30 then
+      Break;
+  end;
+
+  // добавляем трансляцию
+  if tb_tmc.RecordCount = 0 then
+  begin
+    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
+    Abort;
+  end;
+
+  tb_el.First;
+  while not tb_el.Eof do
+  begin
+    tb_tmc.Filtered := False;
+    tb_tmc.Filter := 'name = ' + QuotedStr(tb_el.Fields[2].AsString);
+    tb_tmc.Filtered := True;
+
+    tb_el.Edit;
+    tb_el.Fields[4].AsString := tb_tmc.Fields[2].AsString;
+    tb_el.Post;
+    tb_el.Next;
+  end;
+
+  tb_el.EnableControls;
+  tb_tmc.Filtered := False;
+  DrawingGridThree(grid_three);
+
+  tb_el.Refresh;
+  tb_el.First;
+
+  frmSelectSheet.cbb_workbooks.Clear;
+  XLS.CloseFile('');
+  XLS.Free;
+end;
+
+
+
+
 //**************************************************************************************************
 
 {   Открытие блока работы с файлами fds
@@ -419,6 +530,7 @@ begin
     dm_parserxls.mem_list_of_elements.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
+
 // запись файла fds
 
 procedure Tfrm_ParserXLS.mni_db_loel_saveClick(Sender: TObject);
@@ -434,51 +546,41 @@ end;
 
 
 //**************************************************************************************************
-{
-    Трансляция таблицы - добавления поля Код ТМЦ
-}
-
-procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
-var
-  tb_tmc, tb_sp, tb_el: TFDMemTable;
-  f_stringOne, f_stringTwo: string;
-begin
-  tb_tmc := dm_parserxls.mem_db_angtelTMC;
-  tb_sp := dm_parserxls.mem_specification;
-  tb_el := dm_parserxls.mem_list_of_elements;
-
-  if tb_tmc.RecordCount = 0 then
-  begin
-    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
-    Abort;
-  end;
-      // останавливаем прорисовку таблицы
-  tb_sp.DisableControls;
-  tb_el.DisableControls;
-  // запускаем колесико
-  TCursorHelper.ChangeToHourglass();
- // код модификации таблицы спецификация - добавляем код ТМЦ
-
-  tb_sp.First;
-  tb_el.First;
-  while not tb_sp.Eof do
-  begin
-    tb_tmc.Filtered := False;
-    tb_tmc.Filter := 'name = ' + QuotedStr(tb_sp.Fields[1].AsString);
-    tb_tmc.Filtered := True;
-    tb_sp.Edit;
-    tb_el.Edit;
-    tb_sp.Fields[3].AsString := tb_tmc.Fields[2].AsString;
-    tb_el.Fields[4].AsString := tb_tmc.Fields[2].AsString;
-    tb_sp.Post;
-    tb_sp.Next;
-    tb_el.Post;
-    tb_el.Next;
-  end;
-  tb_sp.EnableControls;
-  tb_el.EnableControls;
-  tb_tmc.Filtered := False;
-end;
+// таблица "Перечень элементов"
+//procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
+//var
+//  tb_tmc, tb_el: TFDMemTable;
+//  f_stringOne, f_stringTwo: string;
+//begin
+//  tb_tmc := dm_parserxls.mem_db_angtelTMC;
+//  tb_el := dm_parserxls.mem_list_of_elements;
+//
+//
+//  if tb_tmc.RecordCount = 0 then
+//  begin
+//    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
+//    Abort;
+//  end;
+//      // останавливаем прорисовку таблицы
+//  tb_el.DisableControls;
+//  // запускаем колесико
+//  TCursorHelper.ChangeToHourglass();
+//  tb_el.First;
+//  while not tb_el.Eof do
+//  begin
+//    tb_tmc.Filtered := False;
+//    tb_tmc.Filter := 'name = ' + QuotedStr(tb_el.Fields[2].AsString);
+//    tb_tmc.Filtered := True;
+//
+//    tb_el.Edit;
+//    tb_el.Fields[4].AsString := tb_tmc.Fields[2].AsString;
+//    tb_el.Post;
+//    tb_el.Next;
+//  end;
+//
+//  tb_el.EnableControls;
+//  tb_tmc.Filtered := False;
+//end;
 //**************************************************************************************************
 
 // перемещение по вкладкам позиции
@@ -492,15 +594,54 @@ begin
   case (Sender as TMenuItem).Tag of
     1000:
       begin   // активировано "Открытие БД"
-          pgc_xls.ActivePageIndex := 0;
+        pgc_xls.ActivePageIndex := 0;
+        btn_find.Enabled := True;
+        edt_find.Enabled := True;
+
       end;
     1001:     // активировано "Спецификация"
       begin
-         pgc_xls.ActivePageIndex := 1;
+        pgc_xls.ActivePageIndex := 1;
+        btn_find.Enabled := False;
+        edt_find.Enabled := False;
+      end;
+    1002:     // активировано "Перечень элементов"
+      begin
+        pgc_xls.ActivePageIndex := 2;
+        btn_find.Enabled := False;
+        edt_find.Enabled := False;
       end;
   end;
 
 end;
+// работа с влкадками
+ procedure Tfrm_ParserXLS.pgc_xlsChange(Sender: TObject);
+begin
+     if not (Sender is TPageControl) then
+    Exit;
+      case (Sender as TPageControl).ActivePageIndex of
+    0:
+      begin   // активировано "Открытие БД"
+        pgc_xls.ActivePageIndex := 0;
+        btn_find.Enabled := True;
+        edt_find.Enabled := True;
+
+      end;
+    1:     // активировано "Спецификация"
+      begin
+        pgc_xls.ActivePageIndex := 1;
+        btn_find.Enabled := False;
+        edt_find.Enabled := False;
+      end;
+    2:     // активировано "Перечень элементов"
+      begin
+        pgc_xls.ActivePageIndex := 2;
+        btn_find.Enabled := False;
+        edt_find.Enabled := False;
+      end;
+  end;
+end;
+
 
 // очищаем таблицы
 procedure Tfrm_ParserXLS.btn_allResetClick(Sender: TObject);

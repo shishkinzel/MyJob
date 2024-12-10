@@ -115,6 +115,10 @@
         <DCCReference Include="uOpenOffice.pas"/>
         <DCCReference Include="xlsexport.pas"/>
         <DCCReference Include="CursorHelper.pas"/>
+        <DCCReference Include="formSheet.pas">
+            <Form>frmSelectSheet</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

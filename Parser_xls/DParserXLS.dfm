@@ -31,10 +31,12 @@ object dm_parserxls: Tdm_parserxls
       end>
     IndexDefs = <
       item
+        Name = 'mem_specificationIndex1'
         Options = [ixNonMaintained]
       end>
     Indexes = <
       item
+        Name = 'mem_specificationIndex1'
       end>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll

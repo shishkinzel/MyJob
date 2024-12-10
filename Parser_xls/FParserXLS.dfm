@@ -60,6 +60,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = -5
+    ExplicitTop = 672
     object lbl_title_find: TLabel
       Left = 12
       Top = 16
@@ -68,13 +70,23 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Alignment = taCenter
       Caption = #1055#1086#1080#1089#1082' '#1087#1086' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1102
     end
+    object lbl_template: TLabel
+      Left = 12
+      Top = 70
+      Width = 277
+      Height = 13
+      Alignment = taCenter
+      Caption = #1048#1089#1087#1086#1083#1100#1079#1091#1081#1090#1077' '#1089#1080#1084#1074#1086#1083' %  '#1076#1083#1103' '#1096#1072#1073#1083#1086#1085#1080#1079#1072#1094#1080#1080' '#1087#1086#1080#1089#1082#1072
+    end
     object btn_find: TBitBtn
-      Left = 696
+      Left = 392
       Top = 43
       Width = 240
       Height = 24
       Caption = #1055#1086#1080#1089#1082
+      Enabled = False
       TabOrder = 0
+      OnClick = btn_findClick
     end
     object edt_find: TEdit
       Left = 12
@@ -82,6 +94,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Width = 350
       Height = 21
       Alignment = taRightJustify
+      Enabled = False
       TabOrder = 1
     end
   end
@@ -97,10 +110,12 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 1
       Width = 982
       Height = 599
-      ActivePage = ts_two
+      ActivePage = ts_three
       Align = alClient
       TabOrder = 0
+      OnChange = pgc_xlsChange
       object ts_one: TTabSheet
+        Tag = 1000
         Caption = #1050#1086#1076#1099' '#1058#1052#1062
         object nv_one: TDBNavigator
           Left = 0
@@ -127,6 +142,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
         end
       end
       object ts_two: TTabSheet
+        Tag = 1001
         Caption = #1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
         ImageIndex = 1
         object nv_two: TDBNavigator
@@ -154,6 +170,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
         end
       end
       object ts_three: TTabSheet
+        Tag = 1002
         Caption = #1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074
         ImageIndex = 2
         object nv_three: TDBNavigator
@@ -241,13 +258,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
           OnClick = mni_db_xls_sp_openClick
         end
-        object mni_db_sp_pr_12: TMenuItem
-          Caption = '-'
-        end
-        object mni_db_translation: TMenuItem
-          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103
-          OnClick = mni_db_translationClick
-        end
         object N1: TMenuItem
           Caption = '-'
         end
@@ -258,7 +268,9 @@ object frm_ParserXLS: Tfrm_ParserXLS
       end
     end
     object mni_db_loel: TMenuItem
+      Tag = 1002
       Caption = #1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074
+      OnClick = mni_db_jobClick
       object mni_db_loel_file: TMenuItem
         Caption = #1060#1072#1081#1083' FDS'
         object mni_db_loel_open: TMenuItem
@@ -277,6 +289,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
         Caption = #1055#1072#1088#1089#1077#1088' xls'
         object mni_db_loel_pr_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
+          OnClick = mni_db_loel_pr_openClick
         end
         object mni_db_loel_pr_SeparatorOne: TMenuItem
           Caption = '-'

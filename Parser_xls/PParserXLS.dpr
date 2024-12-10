@@ -10,7 +10,8 @@ uses
   xlsexport in 'xlsexport.pas',
   Vcl.Themes,
   Vcl.Styles,
-  CursorHelper in 'CursorHelper.pas';
+  CursorHelper in 'CursorHelper.pas',
+  formSheet in 'formSheet.pas' {frmSelectSheet};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   TStyleManager.TrySetStyle('Aqua Light Slate');
   Application.CreateForm(Tfrm_ParserXLS, frm_ParserXLS);
   Application.CreateForm(Tdm_parserxls, dm_parserxls);
+  Application.CreateForm(TfrmSelectSheet, frmSelectSheet);
   Application.Run;
 end.
