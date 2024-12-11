@@ -60,8 +60,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Height = 111
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = -5
-    ExplicitTop = 672
     object lbl_title_find: TLabel
       Left = 12
       Top = 16
@@ -73,7 +71,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
     object lbl_template: TLabel
       Left = 12
       Top = 70
-      Width = 277
+      Width = 256
       Height = 13
       Alignment = taCenter
       Caption = #1048#1089#1087#1086#1083#1100#1079#1091#1081#1090#1077' '#1089#1080#1084#1074#1086#1083' %  '#1076#1083#1103' '#1096#1072#1073#1083#1086#1085#1080#1079#1072#1094#1080#1080' '#1087#1086#1080#1089#1082#1072
@@ -207,14 +205,10 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Caption = #1054#1090#1082#1088#1099#1090#1080#1077' '#1041#1044
       OnClick = mni_db_jobClick
       object mni_db_job_file: TMenuItem
-        Caption = #1060#1072#1081#1083'_FDS'
+        Caption = #1060#1072#1081#1083' json'
         object mni_db_job_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1058#1052#1062
           OnClick = mni_db_job_openClick
-        end
-        object mni_db_job_save: TMenuItem
-          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1058#1052#1062
-          OnClick = mni_db_job_saveClick
         end
       end
       object mni_db_SeparatorOne: TMenuItem
@@ -240,13 +234,10 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Caption = #1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
       OnClick = mni_db_jobClick
       object mni_db_sp_file: TMenuItem
-        Caption = #1060#1072#1081#1083'_FDS'
+        Caption = #1060#1072#1081#1083' json'
         object mni_db_sp_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
           OnClick = mni_db_sp_openClick
-        end
-        object mni_db_sp_save: TMenuItem
-          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080
         end
       end
       object mni_db_sp_SeparatorOne: TMenuItem
@@ -266,20 +257,23 @@ object frm_ParserXLS: Tfrm_ParserXLS
           OnClick = mni_db_json_sp_pr_saveClick
         end
       end
+      object mni_db_sp_SeparatorTwo: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_sp_xls_save: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1086#1088#1084#1072#1090#1077' Excel'
+        OnClick = mni_db_sp_xls_saveClick
+      end
     end
     object mni_db_loel: TMenuItem
       Tag = 1002
       Caption = #1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074
       OnClick = mni_db_jobClick
       object mni_db_loel_file: TMenuItem
-        Caption = #1060#1072#1081#1083' FDS'
+        Caption = #1060#1072#1081#1083' json'
         object mni_db_loel_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' "'#1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074'"'
           OnClick = mni_db_loel_openClick
-        end
-        object mni_db_loel_save: TMenuItem
-          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' "'#1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074'"'
-          OnClick = mni_db_loel_saveClick
         end
       end
       object mni_db_loel_SeparatorOne: TMenuItem
@@ -290,12 +284,6 @@ object frm_ParserXLS: Tfrm_ParserXLS
         object mni_db_loel_pr_open: TMenuItem
           Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' xls'
           OnClick = mni_db_loel_pr_openClick
-        end
-        object mni_db_loel_pr_SeparatorOne: TMenuItem
-          Caption = '-'
-        end
-        object mni_db_loel_pr_translation: TMenuItem
-          Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103
         end
         object mni_db_loel_pr_SeparatorTwo: TMenuItem
           Caption = '-'
@@ -346,25 +334,16 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 16
-    Top = 376
-  end
-  object dlg_db_job_fds_save: TSaveDialog
-    DefaultExt = 'json'
-    FileName = 'code_tmc'
-    Filter = 'JSON file (*.json)|*.json|FDS file (*.fds)|*.fds'
-    InitialDir = 'file_json'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 16
-    Top = 432
+    Left = 104
+    Top = 8
   end
   object dlg_db_fds_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'code_tmc'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
-    Left = 104
-    Top = 392
+    Left = 288
+    Top = 8
   end
   object dli_db_fds_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -372,8 +351,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 104
-    Top = 448
+    Left = 800
+    Top = 240
   end
   object dlg_db_sp_xls_open: TOpenDialog
     DefaultExt = 'xlsx'
@@ -381,8 +360,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 248
-    Top = 368
+    Left = 32
+    Top = 208
   end
   object dlg_db_sp_fds_save: TSaveDialog
     DefaultExt = 'json'
@@ -390,16 +369,16 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'JSON file (*.json)|*.json|FDS file (*.fds)|*.fds'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 240
-    Top = 440
+    Left = 32
+    Top = 264
   end
   object dlg_db_sp_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'specification'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
-    Left = 336
-    Top = 384
+    Left = 32
+    Top = 328
   end
   object dlg_db_sp_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -407,8 +386,8 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 328
-    Top = 448
+    Left = 688
+    Top = 176
   end
   object ds_three: TDataSource
     DataSet = dm_parserxls.mem_list_of_elements
@@ -424,16 +403,21 @@ object frm_ParserXLS: Tfrm_ParserXLS
     FileName = 'listofelements.fds'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
-    Left = 408
-    Top = 360
+    Left = 784
+    Top = 176
   end
-  object dlg_db_loel_save: TSaveDialog
+  object dlg_db_sp_xls_save: TSaveDialog
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Left = 120
+    Top = 256
+  end
+  object dlg_db_job_fds_save: TSaveDialog
     DefaultExt = 'fds'
-    FileName = 'listofelements'
+    FileName = 'code_tmc'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 400
-    Top = 448
+    Left = 192
+    Top = 8
   end
 end

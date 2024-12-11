@@ -36,15 +36,12 @@ type
     nv_one: TDBNavigator;
     grid_one: TDBGrid;
     mni_db_job_open: TMenuItem;
-    mni_db_job_save: TMenuItem;
     mni_db_xls_pr_open: TMenuItem;
     mni_db_json_pr_save: TMenuItem;
     mni_db_sp_open: TMenuItem;
-    mni_db_sp_save: TMenuItem;
     mni_db_xls_sp_open: TMenuItem;
     mni_db_json_sp_pr_save: TMenuItem;
     dlg_db_job_xls_open: TOpenDialog;
-    dlg_db_job_fds_save: TSaveDialog;
     dlg_db_fds_pr_open: TOpenDialog;
     dli_db_fds_pr_save: TSaveDialog;
     dlg_db_sp_xls_open: TOpenDialog;
@@ -70,26 +67,25 @@ type
     mni_db_loel_file: TMenuItem;
     mni_db_loel_SeparatorOne: TMenuItem;
     mni_db_loel_open: TMenuItem;
-    mni_db_loel_save: TMenuItem;
     dlg_db_loel_open: TOpenDialog;
-    dlg_db_loel_save: TSaveDialog;
+    dlg_db_sp_xls_save: TSaveDialog;
     lbl_title_find: TLabel;
     btn_find: TBitBtn;
     edt_find: TEdit;
     mni_db_loel_parser: TMenuItem;
     mni_db_loel_pr_open: TMenuItem;
-    mni_db_loel_pr_SeparatorOne: TMenuItem;
-    mni_db_loel_pr_translation: TMenuItem;
     mni_db_loel_pr_SeparatorTwo: TMenuItem;
     mni_db_loel_pr_save: TMenuItem;
     lbl_template: TLabel;
+    mni_db_sp_SeparatorTwo: TMenuItem;
+    mni_db_sp_xls_save: TMenuItem;
+    dlg_db_job_fds_save: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
     procedure mni_db_json_pr_saveClick(Sender: TObject);
     procedure mni_db_job_openClick(Sender: TObject);
     procedure btn_allResetClick(Sender: TObject);
-    procedure mni_db_job_saveClick(Sender: TObject);
     procedure mni_db_jobClick(Sender: TObject);
     procedure mni_db_mysql_clear_tmcClick(Sender: TObject);
     procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
@@ -98,14 +94,23 @@ type
     procedure mni_db_sp_openClick(Sender: TObject);
     procedure mni_db_mysql_clear_specificationClick(Sender: TObject);
     procedure mni_db_loel_openClick(Sender: TObject);
-    procedure mni_db_loel_saveClick(Sender: TObject);
     procedure btn_findClick(Sender: TObject);
     procedure mni_db_loel_pr_openClick(Sender: TObject);
     procedure pgc_xlsChange(Sender: TObject);
+    procedure mni_db_sp_xls_saveClick(Sender: TObject);
   private
     { Private declarations }
     const
-    f_code_tmc = 'code_tmc.json';
+      cs_code_tmc = 'code_tmc.json';
+      cs_codetmc = 'codetmc';    //   константа для хранения имя файла для таблицы "Код ТМЦ"
+      cs_sp = 'specification';   //   константа для хранения имя файла для таблицы "Спецификация"
+      cs_el = 'per_of_el';       //   константа для хранения имя файла для таблицы "Перечень элементов"
+// имя папок
+       cs_json_sp = 'file_json_sp';
+       cs_json_el = 'file_json_el';
+       cs_xls_el = 'file_xls_el';
+       cs_xls_sp = 'file_xls_sp';
+       cs_xls_sp_trans = 'file_xls_sp_trans';
   public
     { Public declarations }
   end;
@@ -115,12 +120,14 @@ var
   XLS: TXLSExporter;
   f_filename_xls: string;
   Animation: TAnimate;
-  f_path_code_tmc : string;
+  f_path_code_tmc: string;
+  f_nameList: string;      // глобальная переменная для храниния имя листа книги xls
 
 implementation
+
 uses
-  FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.Comp.Client,
-  CursorHelper, formSheet;
+  FireDAC.VCLUI.Script, FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script,
+  FireDAC.Comp.Client, CursorHelper, formSheet;
 
 {$R *.dfm}
 
@@ -143,7 +150,7 @@ begin
   // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
   // загрузка таблицы Коды ТМЦ - если она существует
-   f_path_code_tmc := ExtractFilePath(Application.ExeName) + 'file_json\' + f_code_tmc;
+   f_path_code_tmc := ExtractFilePath(Application.ExeName) + 'file_json\' + cs_code_tmc;
 
 end;
 
@@ -344,6 +351,22 @@ begin
   XLS.Free;
 end;
 
+// создание файла в формате Excel -  "Спецификация"
+{Warning **********************************************************                                }
+procedure Tfrm_ParserXLS.mni_db_sp_xls_saveClick(Sender: TObject);
+var
+f_path_xls : string;
+begin
+    if dlg_db_sp_xls_save.Execute() then
+  begin
+    f_path_xls := dlg_db_sp_xls_save.FileName;
+  end;
+// пишем код формирования файла xls
+
+end;
+
+
+
 // сохраняем файл в формате json
 procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
 var
@@ -465,14 +488,6 @@ begin
   XLS.Free;
 end;
 
-
-
-
-//**************************************************************************************************
-
-{   Открытие блока работы с файлами fds
-
-}
  // вкладка "Коды ТМЦ"
  // открытие файла fds
 procedure Tfrm_ParserXLS.mni_db_job_openClick(Sender: TObject);
@@ -486,25 +501,7 @@ begin
   end;
 end;
 
- // сохранения файла fds после редактирования
-procedure Tfrm_ParserXLS.mni_db_job_saveClick(Sender: TObject);
-var
-  f_path_fds: string;
-begin
-  if dli_db_fds_pr_save.Execute() then
-  begin
-    f_path_fds := dli_db_fds_pr_save.FileName;
-  end;
-  if dm_parserxls.mem_db_angtelTMC.RecordCount <> 0 then
-  begin
-    dm_parserxls.mem_db_angtelTMC.SaveToFile(f_path_fds, sfJSON);
-  end
-  else
-  begin
-    ShowMessage('Таблица пуста');
-  end;
-end;
- // вкладка спецификация
+ // вкладка "Спецификация" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // открытие файла fds
 
 procedure Tfrm_ParserXLS.mni_db_sp_openClick(Sender: TObject);
@@ -517,7 +514,8 @@ begin
     dm_parserxls.mem_specification.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
- // вкладка "Перечень элементов"
+
+// вкладка "Перечень элементов"
  // открытие файла fds
 
 procedure Tfrm_ParserXLS.mni_db_loel_openClick(Sender: TObject);
@@ -533,55 +531,7 @@ end;
 
 // запись файла fds
 
-procedure Tfrm_ParserXLS.mni_db_loel_saveClick(Sender: TObject);
-var
-  f_path_fds: string;
-begin
-  if dlg_db_loel_save.Execute() then
-  begin
-    f_path_fds := dlg_db_loel_save.FileName;
-    dm_parserxls.mem_list_of_elements.SaveToFile(f_path_fds, sfJSON);
-  end;
-end;
 
-
-//**************************************************************************************************
-// таблица "Перечень элементов"
-//procedure Tfrm_ParserXLS.mni_db_translationClick(Sender: TObject);
-//var
-//  tb_tmc, tb_el: TFDMemTable;
-//  f_stringOne, f_stringTwo: string;
-//begin
-//  tb_tmc := dm_parserxls.mem_db_angtelTMC;
-//  tb_el := dm_parserxls.mem_list_of_elements;
-//
-//
-//  if tb_tmc.RecordCount = 0 then
-//  begin
-//    ShowMessage('Отсутствует таблица "Коды ТМЦ"');
-//    Abort;
-//  end;
-//      // останавливаем прорисовку таблицы
-//  tb_el.DisableControls;
-//  // запускаем колесико
-//  TCursorHelper.ChangeToHourglass();
-//  tb_el.First;
-//  while not tb_el.Eof do
-//  begin
-//    tb_tmc.Filtered := False;
-//    tb_tmc.Filter := 'name = ' + QuotedStr(tb_el.Fields[2].AsString);
-//    tb_tmc.Filtered := True;
-//
-//    tb_el.Edit;
-//    tb_el.Fields[4].AsString := tb_tmc.Fields[2].AsString;
-//    tb_el.Post;
-//    tb_el.Next;
-//  end;
-//
-//  tb_el.EnableControls;
-//  tb_tmc.Filtered := False;
-//end;
-//**************************************************************************************************
 
 // перемещение по вкладкам позиции
 procedure Tfrm_ParserXLS.mni_db_jobClick(Sender: TObject);

@@ -26,7 +26,7 @@ Type
      function ReadCell  (X, Y : Integer) : String; override;
      function OpenFile (const FileName : String; Visible : Boolean) : Boolean;  override;
      procedure CloseFile (const SaveAsFileName : String);  override;
-     procedure GetSheets (T : TStrings);
+     procedure GetSheets (T : TStrings);   // процедура получения списка листов книги
      property VExcel : Variant read VFile;
    end;
 
