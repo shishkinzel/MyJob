@@ -108,12 +108,16 @@ type
 // имя папок
        cs_json_sp = 'file_json_sp';
        cs_json_el = 'file_json_el';
-       cs_xls_el = 'file_xls_el';
-       cs_xls_sp = 'file_xls_sp';
-       cs_xls_sp_trans = 'file_xls_sp_trans';
+      cs_xls_el = 'file_xls_el';
+      cs_xls_sp = 'file_xls_sp';
+      cs_xls_sp_trans = 'file_xls_sp_trans';
+
   public
     { Public declarations }
   end;
+
+resourcestring
+  rsESaveActiveSheet = 'Ошибка сохранения активного листа книги';
 
 var
   frm_ParserXLS: Tfrm_ParserXLS;
