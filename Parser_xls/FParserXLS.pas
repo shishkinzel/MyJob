@@ -80,6 +80,8 @@ type
     mni_db_sp_SeparatorTwo: TMenuItem;
     mni_db_sp_xls_save: TMenuItem;
     dlg_db_job_fds_save: TSaveDialog;
+    mni_db_loel_SeparatorTwo: TMenuItem;
+    mni_db_loel_xls_save: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mni_db_xls_pr_openClick(Sender: TObject);
@@ -98,9 +100,13 @@ type
     procedure mni_db_loel_pr_openClick(Sender: TObject);
     procedure pgc_xlsChange(Sender: TObject);
     procedure mni_db_sp_xls_saveClick(Sender: TObject);
+    procedure mni_db_loel_xls_saveClick(Sender: TObject);
   private
     { Private declarations }
     const
+      cs_template = 'template.xlsx'; // разметка листа xls
+      cs_template_el = 'template_el.xlsx'; // разметка листа xls
+
       cs_code_tmc = 'code_tmc.json';
       cs_codetmc = 'codetmc';    //   константа для хранения имя файла для таблицы "Код ТМЦ"
       cs_sp = 'specification';   //   константа для хранения имя файла для таблицы "Спецификация"
@@ -108,8 +114,8 @@ type
 // имя папок
        cs_json_sp = 'file_json_sp';
        cs_json_el = 'file_json_el';
-      cs_xls_el = 'file_xls_el';
-      cs_xls_sp = 'file_xls_sp';
+      cs_xls_el = 'file_xls_el/';
+      cs_xls_sp = 'file_xls_sp/';
       cs_xls_sp_trans = 'file_xls_sp_trans';
 
   public
@@ -146,10 +152,10 @@ begin
 end;
 
 procedure Tfrm_ParserXLS.FormCreate(Sender: TObject);
-var
-  S : TStringArray;
-  tmp : String;
-  i,j : Integer;
+//var
+//  S : TStringArray;
+//  tmp : String;
+//  i,j : Integer;
 begin
   // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
@@ -290,6 +296,7 @@ begin
     end
     else
     begin
+      f_nameList := XLS.VExcel.WorkBooks[1].WorkSheets[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Name;
       XLS.VExcel.WorkBooks[1].Sheets.Item[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Activate;
     end;
   end;
@@ -359,15 +366,79 @@ end;
 {Warning **********************************************************                                }
 procedure Tfrm_ParserXLS.mni_db_sp_xls_saveClick(Sender: TObject);
 var
-f_path_xls : string;
+  S: TStringArray;
+  f_count: Integer;
+  f_path_xls: string;
+  i: Integer;
+  tb_sp: TFDMemTable;
+  posY: Integer;
 begin
-    if dlg_db_sp_xls_save.Execute() then
+  tb_sp := dm_parserxls.mem_specification;
+  TCursorHelper.ChangeToHourglass();
+  tb_sp.DisableControls;
+    // создаем объект OLE
+  XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
+  XLS.OpenFile(cs_template, false);
+  grid_two.DataSource.DataSet.First;
+  posY := 2;
+  while (not grid_two.DataSource.DataSet.Eof) do
   begin
-    f_path_xls := dlg_db_sp_xls_save.FileName;
+    for i := 0 to grid_two.DataSource.DataSet.Fields.Count - 1 do
+    begin
+      XLS.VExcel.Cells[posY, i + 1].Value := grid_two.DataSource.DataSet.Fields[i].asstring;
+    end;
+    inc (posY);
+    grid_two.DataSource.DataSet.Next;
   end;
-// пишем код формирования файла xls
+  XLS.VExcel.Range ['A1'+':D'+IntToStr(posY-1)].Borders.Weight := 2;
+  XLS.VExcel.WorkBooks[1].WorkSheets[1].Name :=  f_nameList;
+  XLS.CloseFile(cs_xls_sp + f_nameList + '.xlsx');
+  XLS.Free;
+  tb_sp.EnableControls;
 
 end;
+
+// создание файла в формате Excel -  "Перечень элементов"
+{Warning **********************************************************                                }
+procedure Tfrm_ParserXLS.mni_db_loel_xls_saveClick(Sender: TObject);
+var
+  S: TStringArray;
+  f_count: Integer;
+  f_path_xls: string;
+  i: Integer;
+  tb_el: TFDMemTable;
+  posY: Integer;
+begin
+  tb_el := dm_parserxls.mem_list_of_elements;
+  TCursorHelper.ChangeToHourglass();
+  tb_el.DisableControls;
+      // создаем объект OLE
+  XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
+  XLS.OpenFile(cs_template_el, false);
+
+  grid_three.DataSource.DataSet.First;
+  posY := 2;
+  while (not grid_three.DataSource.DataSet.Eof) do
+  begin
+    for i := 0 to grid_three.DataSource.DataSet.Fields.Count - 1 do
+    begin
+      XLS.VExcel.Cells[posY, i + 1].Value := grid_three.DataSource.DataSet.Fields[i].asstring;
+    end;
+    inc(posY);
+    grid_three.DataSource.DataSet.Next;
+  end;
+  XLS.VExcel.Range['A1' + ':E' + IntToStr(posY - 1)].Borders.Weight := 2;
+  XLS.VExcel.WorkBooks[1].WorkSheets[1].Name := f_nameList;
+  XLS.CloseFile(cs_xls_el + f_nameList + '.xlsx');
+  XLS.Free;
+  tb_el.EnableControls;
+
+end;
+
+
+
+
+
 
 
 
@@ -430,6 +501,7 @@ begin
     end
     else
     begin
+      f_nameList := XLS.VExcel.WorkBooks[1].WorkSheets[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Name;
       XLS.VExcel.WorkBooks[1].Sheets.Item[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Activate;
     end;
   end;
@@ -492,7 +564,7 @@ begin
   XLS.Free;
 end;
 
- // вкладка "Коды ТМЦ"
+// вкладка "Коды ТМЦ"
  // открытие файла fds
 procedure Tfrm_ParserXLS.mni_db_job_openClick(Sender: TObject);
 var

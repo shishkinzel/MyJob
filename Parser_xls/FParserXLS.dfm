@@ -108,7 +108,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
       Top = 1
       Width = 982
       Height = 599
-      ActivePage = ts_three
+      ActivePage = ts_two
       Align = alClient
       TabOrder = 0
       OnChange = pgc_xlsChange
@@ -292,6 +292,13 @@ object frm_ParserXLS: Tfrm_ParserXLS
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
         end
       end
+      object mni_db_loel_SeparatorTwo: TMenuItem
+        Caption = '-'
+      end
+      object mni_db_loel_xls_save: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1086#1088#1084#1072#1090#1077' Excel'
+        OnClick = mni_db_loel_xls_saveClick
+      end
     end
     object mni_db_mysql_Job: TMenuItem
       Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
@@ -357,7 +364,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
   object dlg_db_sp_xls_open: TOpenDialog
     DefaultExt = 'xlsx'
     FileName = 'specification.xls'
-    Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
+    Filter = 'Excel (*.xlsx, *.xls)|*.xlsx; *.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 32
