@@ -338,21 +338,13 @@
     Top = 149
   end
   object dlg_db_job_xls_open: TOpenDialog
-    DefaultExt = 'xlsx'
-    FileName = 'code_tmc.xls'
-    Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
-    InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 32
-    Top = 216
+    Left = 200
+    Top = 16
   end
   object dlg_db_fds_pr_open: TOpenDialog
-    DefaultExt = 'fds'
-    FileName = 'code_tmc'
-    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
-    InitialDir = 'file_fds'
-    Left = 256
-    Top = 16
+    Left = 64
+    Top = 8
   end
   object dli_db_fds_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -360,25 +352,16 @@
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 800
-    Top = 240
+    Left = 728
+    Top = 184
   end
   object dlg_db_sp_xls_open: TOpenDialog
     DefaultExt = 'xlsx'
     FileName = 'specification.xls'
-    Filter = 'Excel (*.xlsx, *.xls)|*.xlsx; *.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 32
-    Top = 272
-  end
-  object dlg_db_sp_pr_open: TOpenDialog
-    DefaultExt = 'fds'
-    FileName = 'specification'
-    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
-    InitialDir = 'file_fds'
-    Left = 368
-    Top = 16
+    Left = 832
+    Top = 408
   end
   object dlg_db_sp_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -386,8 +369,8 @@
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 688
-    Top = 176
+    Left = 816
+    Top = 184
   end
   object ds_three: TDataSource
     DataSet = dm_parserxls.mem_list_of_elements
@@ -398,22 +381,14 @@
     Left = 584
     Top = 8
   end
-  object dlg_db_loel_open: TOpenDialog
-    DefaultExt = 'fds'
-    FileName = 'listofelements.fds'
-    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
-    InitialDir = 'file_fds'
-    Left = 784
-    Top = 176
-  end
   object dlg_db_sp_xls_save: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 472
-    Top = 200
+    Left = 816
+    Top = 248
   end
   object dlg_db_job_fds_save: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 72
+    Left = 120
     Top = 8
   end
 end

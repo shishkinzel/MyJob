@@ -45,7 +45,6 @@ type
     dlg_db_fds_pr_open: TOpenDialog;                //  для открытия файлов в формате json
     dli_db_fds_pr_save: TSaveDialog;
     dlg_db_sp_xls_open: TOpenDialog;               // для открытия xls фалов СП и ПЭ
-    dlg_db_sp_pr_open: TOpenDialog;                //  для открытия файлов в формате json
     dlg_db_sp_pr_save: TSaveDialog;
     mni_db_sp_pr_SeparatorOne: TMenuItem;
     ts_three: TTabSheet;
@@ -66,7 +65,6 @@ type
     mni_db_loel_file: TMenuItem;
     mni_db_loel_SeparatorOne: TMenuItem;
     mni_db_loel_open: TMenuItem;
-    dlg_db_loel_open: TOpenDialog;
     dlg_db_sp_xls_save: TSaveDialog;
     lbl_title_find: TLabel;
     btn_find: TBitBtn;
@@ -115,12 +113,14 @@ type
       cs_json = 'file_json\';
       cs_json_sp = 'file_json_sp\';
       cs_json_el = 'file_json_el\';
-      cs_xls_el = 'file_xls_el/';
-      cs_xls_sp = 'file_xls_sp/';
-      cs_xls_sp_trans = 'file_xls_sp_trans/';
+      cs_xls_codetmc = 'file_xls_codetmc\';
+      cs_xls_el = 'file_xls_el\';                // директория для хранения файлов перечень элементов
+      cs_xls_sp = 'file_xls_sp\';                // директория для хранения файлов спецификации
+      cs_xls_sp_trans = 'file_xls_sp_trans/';   // директория для хранения файлов спецификации - отранслированных
+      cs_xls_el_trans = 'file_xls_el_trans/';   // директория для хранения файлов перечень элементов - отранслированных
 
   public
-    { Public declarations }
+        { Public declarations }
   end;
 
 resourcestring
@@ -154,10 +154,6 @@ begin
 end;
 
 procedure Tfrm_ParserXLS.FormCreate(Sender: TObject);
-//var
-//  S : TStringArray;
-//  tmp : String;
-//  i,j : Integer;
 begin
   // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
@@ -198,16 +194,37 @@ var
   f_count: Integer;
   f_path_xls: string;
 begin
+   // установка начальных значений диалога
+  with dlg_db_job_xls_open do
+  begin
+    defaultExt := 'xlsx';
+    FileName := 'code_tmc.xls';
+    Filter := 'Excel (*.xlsx, *.xls)|*.xlsx; *.xls';
+    InitialDir := f_path_exe + cs_xls_codetmc;
+  end;
   f_count := 0;
   if dlg_db_job_xls_open.Execute() then
   begin
     f_path_xls := dlg_db_job_xls_open.FileName;
     f_filename_xls := ExtractFileName(f_path_xls);
+  end
+  else
+  begin
+    Abort
   end;
   TCursorHelper.ChangeToHourglass();
-  // создаем объект OLE
-  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
-  XLS.OpenFile(f_filename_xls, false);
+    // создаем объект OLE
+  try
+    XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + cs_xls_codetmc));
+    XLS.OpenFile(f_filename_xls, false);
+  except
+    begin
+      ShowMessage('Файл не найден');
+      XLS.Free;
+      Abort
+    end;
+
+  end;
 
   // Запускаем парсер
 
@@ -282,21 +299,43 @@ var
   tb_tmc, tb_sp: TFDMemTable;
 //  f_stringOne, f_stringTwo: string;
 begin
+// установка начальных значений диалога
+  with dlg_db_job_xls_open do
+  begin
+    defaultExt := 'xlsx';
+    FileName := cs_sp;
+    Filter := 'Excel (*.xlsx, *.xls)|*.xlsx; *.xls';
+    InitialDir := f_path_exe + cs_xls_sp;
+  end;
+
 // установка начальных значений и присвоение псевдонимов
   f_count := 0;
   f_pos := 1;
   tb_tmc := dm_parserxls.mem_db_angtelTMC;
   tb_sp := dm_parserxls.mem_specification;
 
-  if dlg_db_sp_xls_open.Execute() then
+  if dlg_db_job_xls_open.Execute() then
   begin
-    f_path_xls := dlg_db_sp_xls_open.FileName;
+    f_path_xls := dlg_db_job_xls_open.FileName;
     f_filename_xls := ExtractFileName(f_path_xls);
+  end
+  else
+  begin
+    Abort
   end;
-  // создаем объект OLE
+    // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
-  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
-  XLS.OpenFile(f_filename_xls, false);
+  try
+    XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + cs_xls_sp));
+    XLS.OpenFile(f_filename_xls, false);
+  except
+    begin
+      ShowMessage('Файл не найден');
+      XLS.Free;
+      Abort
+    end;
+  end;
+
   // читаем листы
 
   XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
@@ -407,7 +446,7 @@ begin
   end;
   XLS.VExcel.Range ['A1'+':D'+IntToStr(posY-1)].Borders.Weight := 2;
   XLS.VExcel.WorkBooks[1].WorkSheets[1].Name :=  f_nameList;
-  XLS.CloseFile(cs_xls_sp + f_nameList + '.xlsx');
+  XLS.CloseFile(cs_xls_sp_trans + f_nameList + '.xlsx');
   XLS.Free;
   tb_sp.EnableControls;
 
@@ -454,21 +493,42 @@ var
   f_path_xls: string;
   tb_tmc, tb_el: TFDMemTable;
 begin
+// установка начальных значений диалога
+  with dlg_db_job_xls_open do
+  begin
+    defaultExt := 'xlsx';
+    FileName := cs_el;
+    Filter := 'Excel (*.xlsx, *.xls)|*.xlsx; *.xls';
+    InitialDir := f_path_exe + cs_xls_el;
+  end;
+
 // процедура выбора файла xls для чтения
   f_count := 0;
   f_pos := 1;
   tb_tmc := dm_parserxls.mem_db_angtelTMC;
   tb_el := dm_parserxls.mem_list_of_elements;
 
-  if dlg_db_sp_xls_open.Execute() then
+  if dlg_db_job_xls_open.Execute() then
   begin
-    f_path_xls := dlg_db_sp_xls_open.FileName;
+    f_path_xls := dlg_db_job_xls_open.FileName;
     f_filename_xls := ExtractFileName(f_path_xls);
+  end
+  else
+  begin
+    Abort
   end;
   // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
-  XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
-  XLS.OpenFile(f_filename_xls, false);
+  try
+    XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
+    XLS.OpenFile(f_filename_xls, false);
+  except
+    begin
+      ShowMessage('Файл не найден');
+      XLS.Free;
+      Abort
+    end;
+  end;
 
   XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
   frmSelectSheet.cbb_workbooks.ItemIndex := 0;
@@ -576,7 +636,7 @@ begin
   end;
   XLS.VExcel.Range['A1' + ':E' + IntToStr(posY - 1)].Borders.Weight := 2;
   XLS.VExcel.WorkBooks[1].WorkSheets[1].Name := f_nameList;
-  XLS.CloseFile(cs_xls_el + f_nameList + '.xlsx');
+  XLS.CloseFile(cs_xls_el_trans + f_nameList + '.xlsx');
   XLS.Free;
   tb_el.EnableControls;
 
@@ -617,6 +677,15 @@ procedure Tfrm_ParserXLS.mni_db_job_openClick(Sender: TObject);
 var
   f_path_fds: string;
 begin
+  // установка начальных параметров
+  with dlg_db_fds_pr_open do
+  begin
+    defaultExt := 'json';
+    FileName := 'code_tmc.json';
+    Filter := 'JSON file (*.json)|*.json';
+    InitialDir := f_path_exe + cs_json;
+  end;
+
   if dlg_db_fds_pr_open.Execute() then
   begin
     f_path_fds := dlg_db_fds_pr_open.FileName;
@@ -631,12 +700,21 @@ procedure Tfrm_ParserXLS.mni_db_sp_openClick(Sender: TObject);
 var
   f_path_fds: string;
 begin
-  if dlg_db_sp_pr_open.Execute() then
+  // установка начальных параметров
+  with dlg_db_fds_pr_open do
   begin
-    f_path_fds := dlg_db_sp_pr_open.FileName;
+    defaultExt := 'json';
+    FileName := cs_sp;
+    Filter := 'JSON file (*.json)|*.json';
+    InitialDir := f_path_exe + cs_json_sp;
+  end;
+  if dlg_db_fds_pr_open.Execute() then
+  begin
+    f_path_fds := dlg_db_fds_pr_open.FileName;
     dm_parserxls.mem_specification.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
+
 
 // вкладка "Перечень элементов"
  // открытие файла fds
@@ -645,12 +723,21 @@ procedure Tfrm_ParserXLS.mni_db_loel_openClick(Sender: TObject);
 var
   f_path_fds: string;
 begin
-  if dlg_db_loel_open.Execute() then
+  // установка начальных параметров
+  with dlg_db_fds_pr_open do
   begin
-    f_path_fds := dlg_db_loel_open.FileName;
+    defaultExt := 'json';
+    FileName := cs_el;
+    Filter := 'JSON file (*.json)|*.json';
+    InitialDir := f_path_exe + cs_json_el;
+  end;
+  if dlg_db_fds_pr_open.Execute() then
+  begin
+    f_path_fds := dlg_db_fds_pr_open.FileName;
     dm_parserxls.mem_list_of_elements.LoadFromFile(f_path_fds, sfJSON);
   end;
 end;
+
 
 // запись файла fds
 
