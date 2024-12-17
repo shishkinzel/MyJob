@@ -1,4 +1,4 @@
-object frm_ParserXLS: Tfrm_ParserXLS
+﻿object frm_ParserXLS: Tfrm_ParserXLS
   Left = 0
   Top = 0
   Caption = #1055#1072#1088#1089#1077#1088'_ Excel'
@@ -203,7 +203,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
     object mni_db_job: TMenuItem
       Tag = 1000
       Caption = #1054#1090#1082#1088#1099#1090#1080#1077' '#1041#1044
-      OnClick = mni_db_jobClick
+      OnClick = с
       object mni_db_job_file: TMenuItem
         Caption = #1060#1072#1081#1083' json'
         object mni_db_job_open: TMenuItem
@@ -232,7 +232,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
     object mni_db_specification: TMenuItem
       Tag = 1001
       Caption = #1057#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1103
-      OnClick = mni_db_jobClick
+      OnClick = с
       object mni_db_sp_file: TMenuItem
         Caption = #1060#1072#1081#1083' json'
         object mni_db_sp_open: TMenuItem
@@ -268,7 +268,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
     object mni_db_loel: TMenuItem
       Tag = 1002
       Caption = #1055#1077#1088#1077#1095#1077#1085#1100' '#1101#1083#1077#1084#1077#1085#1090#1086#1074
-      OnClick = mni_db_jobClick
+      OnClick = с
       object mni_db_loel_file: TMenuItem
         Caption = #1060#1072#1081#1083' json'
         object mni_db_loel_open: TMenuItem
@@ -290,6 +290,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
         end
         object mni_db_loel_pr_save: TMenuItem
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1074' '#1092#1086#1088#1084#1072#1090#1077' json'
+          OnClick = mni_db_loel_pr_saveClick
         end
       end
       object mni_db_loel_SeparatorTwo: TMenuItem
@@ -302,6 +303,7 @@ object frm_ParserXLS: Tfrm_ParserXLS
     end
     object mni_db_mysql_Job: TMenuItem
       Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
+      Visible = False
       object mni_db_mysql_transmission_tmc: TMenuItem
         Caption = #1058#1088#1072#1085#1089#1083#1103#1094#1080#1103' "'#1050#1086#1076' '#1058#1052#1062'" '#1074' MySQL'
         OnClick = mni_db_mysql_transmission_tmcClick
@@ -341,16 +343,16 @@ object frm_ParserXLS: Tfrm_ParserXLS
     Filter = #1050#1085#1080#1075#1072' Excel (*.xlsx)|*.xlsx|'#1050#1085#1080#1075#1072' Excel 97-2003 (*.xls)|*.xls'
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 104
-    Top = 8
+    Left = 32
+    Top = 216
   end
   object dlg_db_fds_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'code_tmc'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
-    Left = 288
-    Top = 8
+    Left = 256
+    Top = 16
   end
   object dli_db_fds_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -368,24 +370,15 @@ object frm_ParserXLS: Tfrm_ParserXLS
     InitialDir = 'file_xls'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 32
-    Top = 208
-  end
-  object dlg_db_sp_fds_save: TSaveDialog
-    DefaultExt = 'json'
-    FileName = 'specification'
-    Filter = 'JSON file (*.json)|*.json|FDS file (*.fds)|*.fds'
-    InitialDir = 'file_fds'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 32
-    Top = 264
+    Top = 272
   end
   object dlg_db_sp_pr_open: TOpenDialog
     DefaultExt = 'fds'
     FileName = 'specification'
     Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
     InitialDir = 'file_fds'
-    Left = 32
-    Top = 328
+    Left = 368
+    Top = 16
   end
   object dlg_db_sp_pr_save: TSaveDialog
     DefaultExt = 'fds'
@@ -415,16 +408,12 @@ object frm_ParserXLS: Tfrm_ParserXLS
   end
   object dlg_db_sp_xls_save: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 120
-    Top = 256
+    Left = 472
+    Top = 200
   end
   object dlg_db_job_fds_save: TSaveDialog
-    DefaultExt = 'fds'
-    FileName = 'code_tmc'
-    Filter = 'FDS file (*.fds)|*.fds|JSON file (*.json)|*.json'
-    InitialDir = 'file_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 192
+    Left = 72
     Top = 8
   end
 end

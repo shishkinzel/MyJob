@@ -41,12 +41,11 @@ type
     mni_db_sp_open: TMenuItem;
     mni_db_xls_sp_open: TMenuItem;
     mni_db_json_sp_pr_save: TMenuItem;
-    dlg_db_job_xls_open: TOpenDialog;
-    dlg_db_fds_pr_open: TOpenDialog;
+    dlg_db_job_xls_open: TOpenDialog;               //  для открытия xls фалов код ТМЦ
+    dlg_db_fds_pr_open: TOpenDialog;                //  для открытия файлов в формате json
     dli_db_fds_pr_save: TSaveDialog;
-    dlg_db_sp_xls_open: TOpenDialog;
-    dlg_db_sp_fds_save: TSaveDialog;
-    dlg_db_sp_pr_open: TOpenDialog;
+    dlg_db_sp_xls_open: TOpenDialog;               // для открытия xls фалов СП и ПЭ
+    dlg_db_sp_pr_open: TOpenDialog;                //  для открытия файлов в формате json
     dlg_db_sp_pr_save: TSaveDialog;
     mni_db_sp_pr_SeparatorOne: TMenuItem;
     ts_three: TTabSheet;
@@ -79,7 +78,7 @@ type
     lbl_template: TLabel;
     mni_db_sp_SeparatorTwo: TMenuItem;
     mni_db_sp_xls_save: TMenuItem;
-    dlg_db_job_fds_save: TSaveDialog;
+    dlg_db_job_fds_save: TSaveDialog;                 // для записи json файлов
     mni_db_loel_SeparatorTwo: TMenuItem;
     mni_db_loel_xls_save: TMenuItem;
     procedure FormCreate(Sender: TObject);
@@ -88,7 +87,7 @@ type
     procedure mni_db_json_pr_saveClick(Sender: TObject);
     procedure mni_db_job_openClick(Sender: TObject);
     procedure btn_allResetClick(Sender: TObject);
-    procedure mni_db_jobClick(Sender: TObject);
+    procedure с(Sender: TObject);
     procedure mni_db_mysql_clear_tmcClick(Sender: TObject);
     procedure mni_db_mysql_transmission_tmcClick(Sender: TObject);
     procedure mni_db_xls_sp_openClick(Sender: TObject);
@@ -101,6 +100,7 @@ type
     procedure pgc_xlsChange(Sender: TObject);
     procedure mni_db_sp_xls_saveClick(Sender: TObject);
     procedure mni_db_loel_xls_saveClick(Sender: TObject);
+    procedure mni_db_loel_pr_saveClick(Sender: TObject);
   private
     { Private declarations }
     const
@@ -108,15 +108,16 @@ type
       cs_template_el = 'template_el.xlsx'; // разметка листа xls
 
       cs_code_tmc = 'code_tmc.json';
-      cs_codetmc = 'codetmc';    //   константа для хранения имя файла для таблицы "Код ТМЦ"
+      cs_codetmc = 'code_tmc';    //   константа для хранения имя файла для таблицы "Код ТМЦ"
       cs_sp = 'specification';   //   константа для хранения имя файла для таблицы "Спецификация"
       cs_el = 'per_of_el';       //   константа для хранения имя файла для таблицы "Перечень элементов"
 // имя папок
-       cs_json_sp = 'file_json_sp';
-       cs_json_el = 'file_json_el';
+      cs_json = 'file_json\';
+      cs_json_sp = 'file_json_sp\';
+      cs_json_el = 'file_json_el\';
       cs_xls_el = 'file_xls_el/';
       cs_xls_sp = 'file_xls_sp/';
-      cs_xls_sp_trans = 'file_xls_sp_trans';
+      cs_xls_sp_trans = 'file_xls_sp_trans/';
 
   public
     { Public declarations }
@@ -131,6 +132,7 @@ var
   f_filename_xls: string;
   Animation: TAnimate;
   f_path_code_tmc: string;
+  f_path_exe: string;      // глобальная переменная для храниния пути к исполняемому файлу
   f_nameList: string;      // глобальная переменная для храниния имя листа книги xls
 
 implementation
@@ -159,8 +161,9 @@ procedure Tfrm_ParserXLS.FormCreate(Sender: TObject);
 begin
   // начальные установки
    pgc_xls.ActivePageIndex := 0;       // установка на первую вкладку
+   f_path_exe :=  ExtractFilePath(Application.ExeName);
   // загрузка таблицы Коды ТМЦ - если она существует
-   f_path_code_tmc := ExtractFilePath(Application.ExeName) + 'file_json\' + cs_code_tmc;
+   f_path_code_tmc := f_path_exe + cs_code_tmc;
 
 end;
 
@@ -244,19 +247,30 @@ procedure Tfrm_ParserXLS.mni_db_json_pr_saveClick(Sender: TObject);
 var
   f_path_fds: string;
 begin
+  // установка параметров
+    with dlg_db_job_fds_save do
+    begin
+      DefaultExt := 'json';
+      FileName := cs_codetmc;
+      Filter := 'JSON file (*.json)|*.json';
+      InitialDir := f_path_exe + cs_json;
+    end;
   if dlg_db_job_fds_save.Execute() then
   begin
-     f_path_fds := dlg_db_job_fds_save.FileName;
+    f_path_fds := dlg_db_job_fds_save.FileName;
+
+    if dm_parserxls.mem_db_angtelTMC.RecordCount <> 0 then
+    begin
+      dm_parserxls.mem_db_angtelTMC.SaveToFile(f_path_fds, sfJSON);
+    end
+    else
+    begin
+      ShowMessage('Таблица пуста');
+    end;
   end;
-  if  dm_parserxls.mem_db_angtelTMC.RecordCount <> 0 then
-  begin
-       dm_parserxls.mem_db_angtelTMC.SaveToFile(f_path_fds, sfJSON);
-  end
-  else
-  begin
-    ShowMessage('Таблица пуста');
-  end;
+
 end;
+
 
 // Блок работы с файлом "Спецификация"  *************************************************************
 procedure Tfrm_ParserXLS.mni_db_xls_sp_openClick(Sender: TObject);
@@ -287,6 +301,7 @@ begin
 
   XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
   frmSelectSheet.cbb_workbooks.ItemIndex := 0;
+  f_nameList := XLS.VExcel.WorkBooks[1].WorkSheets[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Name;
   if frmSelectSheet.cbb_workbooks.Items.Count > 1 then
   begin
     if formSheet.frmSelectSheet.ShowModal <> mrOk then
@@ -398,67 +413,33 @@ begin
 
 end;
 
-// создание файла в формате Excel -  "Перечень элементов"
-{Warning **********************************************************                                }
-procedure Tfrm_ParserXLS.mni_db_loel_xls_saveClick(Sender: TObject);
-var
-  S: TStringArray;
-  f_count: Integer;
-  f_path_xls: string;
-  i: Integer;
-  tb_el: TFDMemTable;
-  posY: Integer;
-begin
-  tb_el := dm_parserxls.mem_list_of_elements;
-  TCursorHelper.ChangeToHourglass();
-  tb_el.DisableControls;
-      // создаем объект OLE
-  XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
-  XLS.OpenFile(cs_template_el, false);
-
-  grid_three.DataSource.DataSet.First;
-  posY := 2;
-  while (not grid_three.DataSource.DataSet.Eof) do
-  begin
-    for i := 0 to grid_three.DataSource.DataSet.Fields.Count - 1 do
-    begin
-      XLS.VExcel.Cells[posY, i + 1].Value := grid_three.DataSource.DataSet.Fields[i].asstring;
-    end;
-    inc(posY);
-    grid_three.DataSource.DataSet.Next;
-  end;
-  XLS.VExcel.Range['A1' + ':E' + IntToStr(posY - 1)].Borders.Weight := 2;
-  XLS.VExcel.WorkBooks[1].WorkSheets[1].Name := f_nameList;
-  XLS.CloseFile(cs_xls_el + f_nameList + '.xlsx');
-  XLS.Free;
-  tb_el.EnableControls;
-
-end;
-
-
-
-
-
-
-
-
 // сохраняем файл в формате json
 procedure Tfrm_ParserXLS.mni_db_json_sp_pr_saveClick(Sender: TObject);
 var
   f_path_fds: string;
 begin
-  if dlg_db_sp_fds_save.Execute() then
+   // установка параметров
+  with dlg_db_job_fds_save do
   begin
-    f_path_fds := dlg_db_sp_fds_save.FileName;
+    DefaultExt := 'json';
+    FileName := f_nameList;
+    Filter := 'JSON file (*.json)|*.json';
+    InitialDir := f_path_exe + cs_json_sp;
   end;
-  if dm_parserxls.mem_specification.RecordCount <> 0 then
+
+  if dlg_db_job_fds_save.Execute() then
   begin
-    dm_parserxls.mem_specification.SaveToFile(f_path_fds, sfJSON);
-  end
-  else
-  begin
-    ShowMessage('Таблица пуста');
+    f_path_fds := dlg_db_job_fds_save.FileName;
+    if dm_parserxls.mem_specification.RecordCount <> 0 then
+    begin
+      dm_parserxls.mem_specification.SaveToFile(f_path_fds, sfJSON);
+    end
+    else
+    begin
+      ShowMessage('Таблица пуста');
+    end;
   end;
+
 end;
 
 
@@ -486,12 +467,12 @@ begin
   end;
   // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
-
   XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
   XLS.OpenFile(f_filename_xls, false);
 
   XLS.GetSheets(frmSelectSheet.cbb_workbooks.Items);
   frmSelectSheet.cbb_workbooks.ItemIndex := 0;
+  f_nameList := XLS.VExcel.WorkBooks[1].WorkSheets[frmSelectSheet.cbb_workbooks.ItemIndex + 1].Name;
   if frmSelectSheet.cbb_workbooks.Items.Count > 1 then
   begin
     if formSheet.frmSelectSheet.ShowModal <> mrOk then
@@ -564,6 +545,72 @@ begin
   XLS.Free;
 end;
 
+// создание файла в формате Excel -  "Перечень элементов"
+{Warning **********************************************************                                }
+procedure Tfrm_ParserXLS.mni_db_loel_xls_saveClick(Sender: TObject);
+var
+  S: TStringArray;
+  f_count: Integer;
+  f_path_xls: string;
+  i: Integer;
+  tb_el: TFDMemTable;
+  posY: Integer;
+begin
+  tb_el := dm_parserxls.mem_list_of_elements;
+  TCursorHelper.ChangeToHourglass();
+  tb_el.DisableControls;
+      // создаем объект OLE
+  XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
+  XLS.OpenFile(cs_template_el, false);
+
+  grid_three.DataSource.DataSet.First;
+  posY := 2;
+  while (not grid_three.DataSource.DataSet.Eof) do
+  begin
+    for i := 0 to grid_three.DataSource.DataSet.Fields.Count - 1 do
+    begin
+      XLS.VExcel.Cells[posY, i + 1].Value := grid_three.DataSource.DataSet.Fields[i].asstring;
+    end;
+    inc(posY);
+    grid_three.DataSource.DataSet.Next;
+  end;
+  XLS.VExcel.Range['A1' + ':E' + IntToStr(posY - 1)].Borders.Weight := 2;
+  XLS.VExcel.WorkBooks[1].WorkSheets[1].Name := f_nameList;
+  XLS.CloseFile(cs_xls_el + f_nameList + '.xlsx');
+  XLS.Free;
+  tb_el.EnableControls;
+
+end;
+
+// запись файла в формате json -  "Перечень элементов"
+procedure Tfrm_ParserXLS.mni_db_loel_pr_saveClick(Sender: TObject);
+var
+  f_path_fds: string;
+begin
+   // установка параметров
+  with dlg_db_job_fds_save do
+  begin
+    DefaultExt := 'json';
+    FileName := f_nameList;
+    Filter := 'JSON file (*.json)|*.json';
+    InitialDir := f_path_exe + cs_json_el;
+  end;
+
+  if dlg_db_job_fds_save.Execute() then
+  begin
+    f_path_fds := dlg_db_job_fds_save.FileName;
+    if dm_parserxls.mem_list_of_elements.RecordCount <> 0 then
+    begin
+      dm_parserxls.mem_list_of_elements.SaveToFile(f_path_fds, sfJSON);
+    end
+    else
+    begin
+      ShowMessage('Таблица пуста');
+    end;
+  end;
+end;
+
+
 // вкладка "Коды ТМЦ"
  // открытие файла fds
 procedure Tfrm_ParserXLS.mni_db_job_openClick(Sender: TObject);
@@ -610,7 +657,7 @@ end;
 
 
 // перемещение по вкладкам позиции
-procedure Tfrm_ParserXLS.mni_db_jobClick(Sender: TObject);
+procedure Tfrm_ParserXLS.с(Sender: TObject);
 var
   i: Integer;
 begin
