@@ -43,9 +43,6 @@ type
     mni_db_json_sp_pr_save: TMenuItem;
     dlg_db_job_xls_open: TOpenDialog;               //  для открытия xls фалов код ТМЦ
     dlg_db_fds_pr_open: TOpenDialog;                //  для открытия файлов в формате json
-    dli_db_fds_pr_save: TSaveDialog;
-    dlg_db_sp_xls_open: TOpenDialog;               // для открытия xls фалов СП и ПЭ
-    dlg_db_sp_pr_save: TSaveDialog;
     mni_db_sp_pr_SeparatorOne: TMenuItem;
     ts_three: TTabSheet;
     nv_three: TDBNavigator;
@@ -65,7 +62,6 @@ type
     mni_db_loel_file: TMenuItem;
     mni_db_loel_SeparatorOne: TMenuItem;
     mni_db_loel_open: TMenuItem;
-    dlg_db_sp_xls_save: TSaveDialog;
     lbl_title_find: TLabel;
     btn_find: TBitBtn;
     edt_find: TEdit;
@@ -430,6 +426,12 @@ begin
   tb_sp := dm_parserxls.mem_specification;
   TCursorHelper.ChangeToHourglass();
   tb_sp.DisableControls;
+  if tb_sp.RecordCount = 0 then
+  begin
+    ShowMessage('Внимание, отсутствует файл!!!');
+    Abort
+  end;
+
     // создаем объект OLE
   XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
   XLS.OpenFile(cs_template, false);
@@ -520,7 +522,7 @@ begin
   // создаем объект OLE
   TCursorHelper.ChangeToHourglass();
   try
-    XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + 'file_xls\'));
+    XLS := TXLSExporter.Create((ExtractFilePath(Application.ExeName) + cs_xls_el));
     XLS.OpenFile(f_filename_xls, false);
   except
     begin
@@ -619,6 +621,11 @@ begin
   tb_el := dm_parserxls.mem_list_of_elements;
   TCursorHelper.ChangeToHourglass();
   tb_el.DisableControls;
+    if tb_el.RecordCount = 0 then
+  begin
+    ShowMessage('Внимание, отсутствует файл!!!');
+    Abort
+  end;
       // создаем объект OLE
   XLS := TXLSExporter.Create(ExtractFilePath(Application.ExeName));
   XLS.OpenFile(cs_template_el, false);

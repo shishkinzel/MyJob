@@ -83,6 +83,11 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>PconJson_Icon.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>..\..\PrintLabel\icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>..\..\PrintLabel\icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -96,7 +101,11 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=Converter_json;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=AdapterJson&amp;MySQL;ProductVersion=1.0.0.0;Comments=Прого для конвертации файлов json и трансляция в MySQL</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.1;InternalName=Converter_json;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=AdapterJson&amp;MySQL;ProductVersion=1.0.0.0;Comments=Прого для конвертации файлов json и трансляция в MySQL</VerInfo_Keys>
+        <Icon_MainIcon>PconJson_Icon1.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>..\..\PrintLabel\icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>..\..\PrintLabel\icon_shishkin\PNG\Label_igor_ver1_1_1.png</UWP_DelphiLogo150>
+        <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -146,9 +155,30 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="..\..\PrintLabel\icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\PconJson.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PconJson.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\PrintLabel\icon_shishkin\PNG\Label_igor_ver1_1_1.png" Configuration="Release" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\PrintLabel\icon_shishkin\PNG\Logo_shishkin_02_v02_p00.png" Configuration="Release" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
