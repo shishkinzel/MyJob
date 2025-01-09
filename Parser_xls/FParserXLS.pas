@@ -360,6 +360,7 @@ begin
   while True do
   begin
     S := XLS.ReadString(18);
+    {
     if (S[6] = f_pos.ToString) and (S[12] <> '') and (S[17] <> '') then
     begin
       tb_sp.Insert;
@@ -368,6 +369,7 @@ begin
         tb_sp.Fields[1].AsString := S[12];
         tb_sp.Fields[2].AsString := S[17];
         S := XLS.ReadString(18);
+        // определить заполнение второй €чейки
         tb_sp.Fields[1].AsString := tb_sp.Fields[1].AsString + ' ' + S[12];
         f_count := 0;
       end
@@ -379,11 +381,37 @@ begin
       end;
       tb_sp.Next;
       Inc(f_pos);
+   }
+// ѕроба пера #############################################################################
+    if (S[6] = f_pos.ToString) and (S[12] <> '') and (S[17] <> '') then
+    begin
+      tb_sp.Insert;
+      tb_sp.Fields[1].AsString := S[12];
+      tb_sp.Fields[2].AsString := S[17];
+      Inc(f_pos);
+      S := XLS.ReadString(18);
+    // определить заполнение второй €чейки
+      if (S[6] = '') and (S[12] <> '') and (S[17] = '') then
+      begin
+        tb_sp.Fields[1].AsString := tb_sp.Fields[1].AsString + ' ' + S[12];
+        f_count := 0;
+      end;
+      if (S[6] = f_pos.ToString) and (S[12] <> '') and (S[17] <> '') then
+      begin
+        tb_sp.Next;
+        tb_sp.Insert;
+        tb_sp.Fields[1].AsString := S[12];
+        tb_sp.Fields[2].AsString := S[17];
+        f_count := 0;
+        Inc(f_pos);
+      end;
+
     end;
 
+  //************************************************************************************************
 // пытаемс€ найти конец списка
     inc(f_count);
-    if f_count = 50 then
+    if f_count = 100 then
       Break;
   end;
 
