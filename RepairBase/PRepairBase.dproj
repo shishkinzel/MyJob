@@ -1,11 +1,11 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{5C3C97ED-B784-412A-B160-5259DA7639B5}</ProjectGuid>
+        <ProjectGuid>{B42EB181-ED7F-462A-B22D-6A478510ADBD}</ProjectGuid>
         <ProjectVersion>19.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>PParserXLS.dpr</MainSource>
+        <MainSource>PRepairBase.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -57,8 +57,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>PParserXLS</SanitizedProjectName>
-        <Custom_Styles>&quot;Aqua Light Slate|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AquaLightSlate.vsf&quot;</Custom_Styles>
+        <SanitizedProjectName>PRepairBase</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;fsDB27;vclFireDAC;bindcompvclsmp;emsclientfiredac;DataSnapFireDAC;tethering;svnui;FireDACADSDriver;frx27;DBXMSSQLDriver;fsTee27;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;frxIBX27;DBXOracleDriver;inetdb;fs27;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vcledge;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;frxTee27;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;frxDB27;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;bindcompvclwinx;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;frxIntIOIndy27;TeeDB;FireDAC;fsIBX27;emshosting;frxIntIO27;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;emsserverresource;DbxClientDriver;vclwinx;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;frxADO27;DBXInformixDriver;IndyIPClient;fsADO27;bindcompvcl;frxe27;TeeUI;dbxcds;VclSmp;frxDBX27;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;frxcs27;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -84,13 +83,6 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>PParserXLS_Icon.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png</UWP_DelphiLogo150>
-        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Программа парсинга Excel файлов;FileVersion=1.0.0.0;InternalName=Шишкин Игорь Николаевич;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=shishkin_angtel@rambler.ru;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Преобразование файлов СП и ПЭ - добавление Кода ТМЦ</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -101,36 +93,19 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>PParserXLS_Icon1.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png</UWP_DelphiLogo150>
-        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Программа парсинга Excel файлов;FileVersion=1.0.0.2;InternalName=Шишкин Игорь Николаевич;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=shishkin_angtel@rambler.ru;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Преобразование файлов СП и ПЭ - добавление Кода ТМЦ</VerInfo_Keys>
-        <VerInfo_Build>2</VerInfo_Build>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="FParserXLS.pas">
-            <Form>frm_ParserXLS</Form>
+        <DCCReference Include="FRepairBase.pas">
+            <Form>frmRepairBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="DParserXLS.pas">
-            <Form>dm_parserxls</Form>
+        <DCCReference Include="dmRepairBase.pas">
+            <Form>dm_RepairBase</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="expfilter.pas"/>
-        <DCCReference Include="oofice.pas"/>
-        <DCCReference Include="uOpenOffice.pas"/>
-        <DCCReference Include="xlsexport.pas"/>
-        <DCCReference Include="CursorHelper.pas"/>
-        <DCCReference Include="formSheet.pas">
-            <Form>frmSelectSheet</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -150,31 +125,13 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">PParserXLS.dpr</Source>
+                    <Source Name="MainSource">PRepairBase.dpr</Source>
                 </Source>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\PParserXLS.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\PRepairBase.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>PParserXLS.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Debug" Class="UWP_DelphiLogo44">
-                    <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo44x44.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Release" Class="UWP_DelphiLogo44">
-                    <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo44x44.png</RemoteName>
+                        <RemoteName>PRepairBase.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
