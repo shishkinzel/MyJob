@@ -14,6 +14,8 @@ type
     frdbService: TfrxDBDataset;
     rpLabDate: TfrxReport;
     frpWrite_off: TfrxReport;
+    frpModem: TfrxReport;
+    frpModem_s: TfrxReport;
   private
     { Private declarations }
   public

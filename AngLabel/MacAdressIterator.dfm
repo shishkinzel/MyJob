@@ -2,8 +2,8 @@ object frmMAC: TfrmMAC
   Left = 0
   Top = 0
   Caption = #1059#1090#1080#1083#1080#1090#1072' '#1076#1083#1103' '#1086#1092#1086#1088#1084#1083#1077#1085#1080#1103' '#1087#1088#1086#1076#1091#1082#1094#1080#1080' '#1040#1085#1075#1089#1090#1088#1077#1084'-'#1058#1077#1083#1077#1082#1086#1084
-  ClientHeight = 421
-  ClientWidth = 704
+  ClientHeight = 441
+  ClientWidth = 714
   Color = clHighlight
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -745,6 +745,35 @@ object frmMAC: TfrmMAC
           Caption = #1057#1073#1088#1086#1089
           Enabled = False
           OnClick = mniResetRangeClick
+        end
+      end
+      object mniModem: TMenuItem
+        Caption = #1052#1086#1076#1077#1084
+        object mniListModem: TMenuItem
+          Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30'#1093'10'
+          object mniListMaster: TMenuItem
+            Caption = #1042#1077#1076#1091#1097#1080#1081
+            OnClick = mniListShowClick
+          end
+          object mniListSlave: TMenuItem
+            Caption = #1042#1077#1076#1086#1084#1099#1081
+            OnClick = mniListSlaveClick
+          end
+          object mniListOne: TMenuItem
+            Caption = '-'
+          end
+          object mniListPrint: TMenuItem
+            Caption = #1055#1077#1095#1072#1090#1100
+            Enabled = False
+            OnClick = mniListPrintClick
+          end
+          object mniListTwo: TMenuItem
+            Caption = '-'
+          end
+          object mniLisReset: TMenuItem
+            Caption = #1057#1073#1088#1086#1089
+            OnClick = mniLisResetClick
+          end
         end
       end
       object mniSeparator1: TMenuItem

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\Angwork_print\TE200_576" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44758,5737345833" ReportOptions.Description.Text="" ReportOptions.LastChange="45750,6864272569" ReportOptions.VersionBuild="1" ReportOptions.VersionMajor="0" ReportOptions.VersionMinor="0" ReportOptions.VersionRelease="1" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="pMaster" HGuides.Text="" VGuides.Text="" PaperWidth="32" PaperHeight="24" PaperSize="256" LeftMargin="1" RightMargin="1" TopMargin="1" BottomMargin="1" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" Frame.Width="0,1" MirrorMode="0">
+    <TfrxMemoView Name="memMaster" Align="baCenter" AllowVectorExport="True" ShiftMode="smDontShift" Left="0" Top="7,55905512" Width="113,3859" Height="37,7953" StretchMode="smActualHeight" AutoWidth="True" Font.Charset="1" Font.Color="0" Font.Height="-23" Font.Name="Roboto" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" WordWrap="False" VAlign="vaCenter" Text="Ведущий"/>
+    <TfrxMemoView Name="memSlave" Align="baCenter" AllowVectorExport="True" ShiftMode="smDontShift" Left="0" Top="41,5748031496063" Width="113,3859" Height="37,7953" StretchMode="smActualHeight" AutoWidth="True" Font.Charset="1" Font.Color="0" Font.Height="-23" Font.Name="Roboto" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" WordWrap="False" VAlign="vaCenter" Text="Ведомый"/>
+  </TfrxReportPage>
+</TfrxReport>

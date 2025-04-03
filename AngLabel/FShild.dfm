@@ -84,7 +84,7 @@ object frmShild: TfrmShild
         object bcSmall: TfrxPictureView
           AllowVectorExport = True
           Width = 143.622140000000000000
-          Height = 18.897637795275590000
+          Height = 18.897637800000000000
           Center = True
           DataField = 'bcBig'
           DataSet = db_Shild

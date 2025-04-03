@@ -227,6 +227,14 @@ type
     mni_msql_N5840E2001601: TMenuItem;
     mni_TE200_160_Show: TMenuItem;
     mni_TE200_160_Print: TMenuItem;
+    mniModem: TMenuItem;
+    mniListModem: TMenuItem;
+    mniListPrint: TMenuItem;
+    mniListSlave: TMenuItem;
+    mniListMaster: TMenuItem;
+    mniListOne: TMenuItem;
+    mniListTwo: TMenuItem;
+    mniLisReset: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -304,6 +312,10 @@ type
     procedure mniMarking_ResetClick(Sender: TObject);
     procedure mni_TE200_160_ShowClick(Sender: TObject);
     procedure mni_TE200_160_PrintClick(Sender: TObject);
+    procedure mniListShowClick(Sender: TObject);
+    procedure mniListPrintClick(Sender: TObject);
+    procedure mniListSlaveClick(Sender: TObject);
+    procedure mniLisResetClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -333,6 +345,8 @@ type
       f_NoShowAddres: Boolean;      // флаг отслеживания последнего адреса
       // защита программы
       f_access: string;
+      // slave and master
+      f_master : Boolean;          // флаг Ведущий - Ведомый
 
   public
   { Public declarations }
@@ -432,7 +446,7 @@ var
 begin
 // проверка на валидность работы программы
   f_access := '';
-
+  f_master := True;
 
 // инициализируем переменные времени
   f_date_valid := DateToStr(now);
@@ -1243,6 +1257,7 @@ begin
       frmStickCheck.frpStickCheck.PreviewPages.Clear;
       frmFRBigLabel.rp_43_25_noMAC.PreviewPages.Clear;
 
+
 // гасим окна печати
       mniPrintBig.Enabled := False;
       mniPrintSmall.Enabled := False;
@@ -1263,6 +1278,7 @@ begin
       mni_ShowSmall_new.Enabled := True;
       mni_sh_shild_43_25_small.Enabled := True;
       mni_TE200_160_Show.Enabled := True;
+
 
 //   сбрасываем окна заполнения
       medtModule.Text := '000';
@@ -2295,7 +2311,7 @@ var
   f_checked: string;
 begin
 // запрос на вводимую запись
-  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', 'v 3.8.18');
+  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', 'v 3.9.13');
   (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
 
   // задаем место открытие окна
@@ -2521,7 +2537,91 @@ end;
 
 // конец блока печати стикера даты   ***************************************************************
 
+// Меню - "Ведущий"& "Ведомый"
 
+// master
+procedure TfrmMAC.mniListShowClick(Sender: TObject);
+begin
+// задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+// работа с меню
+  mniListSlave.Enabled := False;
+  mniListMaster.Enabled := False;
+  mniListPrint.Enabled := True;
+
+// показываем
+  frmStickCheck.Show;
+  frmStickCheck.frpModem.ShowReport();
+end;
+// slave
+procedure TfrmMAC.mniListSlaveClick(Sender: TObject);
+begin
+ // задаем место открытие окна
+  frmStickCheck.Top := 5;
+  frmStickCheck.Left := 5;
+// работа с меню
+  mniListSlave.Enabled := False;
+  mniListMaster.Enabled := False;
+  mniListPrint.Enabled := True;
+
+// переключение флага ведущего
+   f_master := False;
+
+// показываем
+  frmStickCheck.Show;
+  frmStickCheck.frpModem_s.ShowReport();
+end;
+
+
+// печать
+procedure TfrmMAC.mniListPrintClick(Sender: TObject);
+begin
+
+  frmStickCheck.frpModem.ShowReport();
+  if f_master then
+  begin
+  // задаем принтер по умолчанию
+    frmStickCheck.frpModem.Report.PrintOptions.Printer := f_print_576;
+    frmStickCheck.frpModem.Print;
+  end
+  else
+  begin
+      // задаем принтер по умолчанию
+    frmStickCheck.frpModem_s.Report.PrintOptions.Printer := f_print_576;
+    frmStickCheck.frpModem_s.Print;
+  end;
+
+end;
+// сброс  Меню - "Ведущий"& "Ведомый"
+
+procedure TfrmMAC.mniLisResetClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // работа с меню
+  mniListSlave.Enabled := True;
+  mniListMaster.Enabled := True;
+  mniListPrint.Enabled := False;
+ // сброс отчетов
+// закрытие отчетов
+  frmStickCheck.Close;
+
+// очистка отчетов
+  frmStickCheck.frpStickCheck.PreviewPages.Clear;
+
+  // сброс master
+  f_master := True;
+end;
+
+
+
+
+
+
+
+
+// **************** конец блока  Меню - "Ведущий"& "Ведомый"
 // открытие формы со списком модулей и устройств
 
 procedure TfrmMAC.mniLbShow_58_60Click(Sender: TObject);

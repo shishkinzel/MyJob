@@ -26,7 +26,6 @@ object frmStickCheck: TfrmStickCheck
     UseReportHints = True
     OutlineTreeSortType = dtsUnsorted
     HideScrolls = False
-    ExplicitWidth = 205
   end
   object frpStickCheck: TfrxReport
     Version = '6.9.3'
@@ -53,8 +52,6 @@ object frmStickCheck: TfrmStickCheck
     Top = 30
     Datasets = <
       item
-        DataSet = frmShild.db_Shild
-        DataSetName = 'db_Shild'
       end>
     Variables = <>
     Style = <>
@@ -306,6 +303,140 @@ object frmStickCheck: TfrmStickCheck
           #1053#1072
           #1057#1087#1080#1089#1072#1085#1080#1077)
         ParentFont = False
+        VAlign = vaCenter
+      end
+    end
+  end
+  object frpModem: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = fpStickCheck
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = '\\Angwork_print\TE200_576'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44758.573734583300000000
+    ReportOptions.LastChange = 45750.703175983800000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 160
+    Top = 134
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pLabDate: TfrxReportPage
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'Times'
+      Font.Style = []
+      PaperWidth = 27.000000000000000000
+      PaperHeight = 9.700000000000000000
+      PaperSize = 256
+      LeftMargin = 0.500000000000000000
+      RightMargin = 0.500000000000000000
+      TopMargin = 0.750000000000000000
+      BottomMargin = 0.500000000000000000
+      Frame.Typ = []
+      Frame.Width = 0.100000000000000000
+      MirrorMode = []
+      object memMaster: TfrxMemoView
+        Align = baClient
+        AllowVectorExport = True
+        Width = 98.267780000000000000
+        Height = 31.937028500000000000
+        StretchMode = smMaxHeight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -24
+        Font.Name = 'Roboto Condensed'
+        Font.Style = []
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          #1042#1077#1076#1091#1097#1080#1081)
+        ParentFont = False
+        WordWrap = False
+        VAlign = vaCenter
+      end
+    end
+  end
+  object frpModem_s: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = fpStickCheck
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = '\\Angwork_print\TE200_576'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44758.573734583300000000
+    ReportOptions.LastChange = 45750.703842719910000000
+    ReportOptions.VersionBuild = '1'
+    ReportOptions.VersionMajor = '0'
+    ReportOptions.VersionMinor = '0'
+    ReportOptions.VersionRelease = '1'
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 152
+    Top = 198
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pLabDate: TfrxReportPage
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'Times'
+      Font.Style = []
+      PaperWidth = 27.000000000000000000
+      PaperHeight = 9.700000000000000000
+      PaperSize = 256
+      LeftMargin = 0.500000000000000000
+      RightMargin = 0.500000000000000000
+      TopMargin = 0.750000000000000000
+      BottomMargin = 0.500000000000000000
+      Frame.Typ = []
+      Frame.Width = 0.100000000000000000
+      MirrorMode = []
+      object memMaster: TfrxMemoView
+        Align = baClient
+        AllowVectorExport = True
+        Width = 98.267780000000000000
+        Height = 31.937028500000000000
+        StretchMode = smMaxHeight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -24
+        Font.Name = 'Roboto Condensed'
+        Font.Style = []
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          #1042#1077#1076#1086#1084#1099#1081)
+        ParentFont = False
+        WordWrap = False
         VAlign = vaCenter
       end
     end
