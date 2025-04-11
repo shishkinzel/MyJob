@@ -4,7 +4,7 @@
         <ProjectVersion>19.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -89,9 +89,9 @@
         <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_1.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_1.png</UWP_DelphiLogo150>
         <VerInfo_MajorVer>4</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Печать серийных нормеров и этикеток;FileVersion=4.0.0.2;InternalName=Shishkkin Igor;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=PrintLabel;ProductVersion=4.0.0.2;Comments=Itrator mac &amp; id </VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Shishkin&amp;K;FileDescription=Печать серийных нормеров и этикеток;FileVersion=4.0.0.3;InternalName=Shishkkin Igor;LegalCopyright=Шишкин Игорь Николаевич;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=PrintLabel;ProductVersion=4.0.0.2;Comments=Itrator mac &amp; id </VerInfo_Keys>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Build>3</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>

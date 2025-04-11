@@ -34,10 +34,10 @@ object frmStickCheck: TfrmStickCheck
     Preview = fpStickCheck
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = '\\Angwork_print\TE200_576'
+    PrintOptions.Printer = '\\Printserver\te200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 44979.679096296300000000
+    ReportOptions.LastChange = 45758.419518842590000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -48,10 +48,12 @@ object frmStickCheck: TfrmStickCheck
       'begin'
       ''
       'end.')
-    Left = 16
+    Left = 32
     Top = 30
     Datasets = <
       item
+        DataSet = frdbService
+        DataSetName = 'frxService'
       end>
     Variables = <>
     Style = <>
@@ -74,7 +76,7 @@ object frmStickCheck: TfrmStickCheck
         Align = baCenter
         AllowVectorExport = True
         ShiftMode = smDontShift
-        Top = 7.559055118110236000
+        Top = 7.559055120000000000
         Width = 113.385900000000000000
         Height = 37.795300000000000000
         StretchMode = smActualHeight
@@ -87,7 +89,7 @@ object frmStickCheck: TfrmStickCheck
         Frame.Typ = []
         HAlign = haCenter
         Memo.UTF8W = (
-          'v 03.08.15')
+          'v 03.09.13')
         ParentFont = False
         WordWrap = False
         VAlign = vaCenter
@@ -181,7 +183,7 @@ object frmStickCheck: TfrmStickCheck
     CloseDataSource = False
     DataSet = frmMAC.fdService
     BCDToCurrency = False
-    Left = 16
+    Left = 32
     Top = 174
   end
   object rpLabDate: TfrxReport
@@ -317,7 +319,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 45750.703175983800000000
+    ReportOptions.LastChange = 45758.417408969910000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -337,7 +339,7 @@ object frmStickCheck: TfrmStickCheck
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
-    object pLabDate: TfrxReportPage
+    object pLabMaster: TfrxReportPage
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -19
@@ -384,7 +386,7 @@ object frmStickCheck: TfrmStickCheck
     PrintOptions.Printer = '\\Angwork_print\TE200_576'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44758.573734583300000000
-    ReportOptions.LastChange = 45750.703842719910000000
+    ReportOptions.LastChange = 45758.417759259260000000
     ReportOptions.VersionBuild = '1'
     ReportOptions.VersionMajor = '0'
     ReportOptions.VersionMinor = '0'
@@ -404,7 +406,7 @@ object frmStickCheck: TfrmStickCheck
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
-    object pLabDate: TfrxReportPage
+    object pLabSlave: TfrxReportPage
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -19

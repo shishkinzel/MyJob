@@ -8,6 +8,7 @@ const
   csIniSectionPathPrint = 'SectionPathPrint';  //секция для хранения пути к принтерам
   csIniSectionAccess = 'SectionAcess';        // секция доступа
   csIniSectionMAC_Last = 'SectionMAC_Last';        // секция хранения последнего mac-адреса
+  csIniSectionVersion = 'SectionVersion';     // секция хранения номера версии
 
   {Section : csIniSectionPathPrint}
 
@@ -29,6 +30,8 @@ type
   f_LastMAC_topaz : string;        // переменная mac-адреса  семейство Топаз
   f_LastMAC_ksk : string;          // переменная mac-адреса  семейство КСК
   f_LastMAC_corundum : string;     // переменная mac-адреса  семейство Корунд
+
+  f_vesrion : string;        // переменная версии устройств
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -63,6 +66,8 @@ begin
     f_LastMAC_topaz := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', '28:67:C0');
     f_LastMAC_ksk := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_ksk', '30:62:A8');
     f_LastMAC_corundum := Ini.ReadString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', '38:00:00');
+// версия устройства
+    f_vesrion := Ini.ReadString(csIniSectionVersion, 'Actual version', 'v 3.9.10');
   end;
 end;
 
@@ -82,6 +87,9 @@ begin
     Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', f_LastMAC_topaz);
     Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_ksk', f_LastMAC_ksk);
     Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', f_LastMAC_corundum);
+
+  // версия устройства
+    Ini.WriteString(csIniSectionVersion, 'Actual version', f_vesrion);
   end;
 end;
 

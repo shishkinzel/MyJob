@@ -370,6 +370,8 @@ type
       f_print_576: string;
       f_print_160: string;
 
+      f_vesrion : string;             // переменная чтения версии устройства из конфигурации
+
 // переменные времени валидации
       f_date_valid: string;
       f_time_valid: string;
@@ -495,6 +497,8 @@ begin
   f_print_160 := IniOptions.f_print_160;
 // защита приложения
   f_access := IniOptions.f_access;
+// актуальная версия изделия
+  f_vesrion := IniOptions.f_vesrion;
 // последний mac-адрес плюс 1
 
   f_LastMAC_atlanta := IniOptions_mac.f_LastMAC_atlanta;
@@ -2311,7 +2315,7 @@ var
   f_checked: string;
 begin
 // запрос на вводимую запись
-  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', 'v 3.9.13');
+  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', f_vesrion);
   (frmStickCheck.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
 
   // задаем место открытие окна
@@ -2319,7 +2323,9 @@ begin
   frmStickCheck.Left := 5;
 
   frmStickCheck.Show;
+
   frmStickCheck.frpStickCheck.ShowReport();
+
 // гасим и зажигаем нужные окна
   mniNSticker_show.Enabled := False;
   mniNSticker_printer.Enabled := True;
