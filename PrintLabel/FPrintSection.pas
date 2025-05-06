@@ -150,6 +150,7 @@ type
       f_print_940: string;
       f_print_908: string;
       f_print_2824: string;
+      f_print_160: string;
 
   public
         { Public declarations }
@@ -212,6 +213,7 @@ begin
   f_print_924 := IniOptions.f_print_924;
   f_print_940 := IniOptions.f_print_940;
   f_print_908 := IniOptions.f_print_908;
+  f_print_160 := IniOptions.f_print_160;
   f_print_2824 := IniOptions.f_print_2824;
 //  f_ini.Free;
 // присваиваем переменным f_posX - начальные значения
@@ -424,7 +426,7 @@ end;
 
 procedure TfrmPrintSection.pmmiPr58_40Click(Sender: TObject);
 begin
-  frmFR_Label.frLabel_58_40.Report.PrintOptions.Printer := f_print_2824;
+  frmFR_Label.frLabel_58_40.Report.PrintOptions.Printer := f_print_160;
 
   frmFR_Label.Show;
   frmFR_Label.frLabel_58_40.Print;
@@ -432,7 +434,7 @@ end;
 
 procedure TfrmPrintSection.pmmiPr58_40_macClick(Sender: TObject);
 begin
-   frmFR_Label.frLabel_58_40_adv.Report.PrintOptions.Printer := f_print_2824;
+   frmFR_Label.frLabel_58_40_adv.Report.PrintOptions.Printer := f_print_160;
 
   frmFR_Label.Show;
   frmFR_Label.frLabel_58_40_adv.Print;

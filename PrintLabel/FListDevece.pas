@@ -158,7 +158,8 @@ f_param := caNone;
         begin
           frmMain.edtDevice.Text := edtDev.Text;
           frmMain.edtPackage.Text := edtPack.Text;
-          FormClose(Self, f_param);
+//          FormClose(Self, f_param);
+          frmListDevice.ModalResult := 1;
         end;
 
     end;

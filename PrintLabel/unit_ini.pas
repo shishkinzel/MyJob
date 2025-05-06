@@ -21,6 +21,7 @@ type
     f_print_908: string;
     f_print_2824: string;
     f_print_576: string;
+    f_print_160: string;
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -48,6 +49,7 @@ begin
     f_print_940  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_940', '\\PrintServer\TE200_940');
     f_print_908  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_908', '\\PrintServert\TE200_908');
     f_print_576  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_576', '\\PrintServer\TE200_576');
+    f_print_160  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_160', '\\PrintServer\TE200_160');
     f_print_2824 := Ini.ReadString(csIniSectionPathPrint, 'Print_TLP 2824', '\\PrintServer\TLP 2824');
   end;
 end;
