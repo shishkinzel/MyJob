@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PParserXLS.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -164,14 +164,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Release" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Debug" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="F:\Графика\Logo_shishkin\Style_one\png\128x128\Group-_shishkin_blue-blue_128-_Оригинальный-размер_.png" Configuration="Release" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>
