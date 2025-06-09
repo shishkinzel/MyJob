@@ -6,11 +6,11 @@ object dm_Application_mysql: Tdm_Application_mysql
   object con_app_mysql: TFDConnection
     Params.Strings = (
       'Database=db_angtel_composite'
+      'Password=00000000'
+      'Server=172.17.17.151'
       'User_Name=user'
-      'Server=172.17.17.76'
-      'Port=3306'
-      'Password=00000000')
-    LoginDialog = fd_login_app_mysql
+      'DriverID=MySQL')
+    LoginPrompt = False
     Left = 32
     Top = 24
   end
@@ -73,8 +73,8 @@ object dm_Application_mysql: Tdm_Application_mysql
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 16
-    Top = 200
+    Left = 48
+    Top = 136
     object db_memTab_app_mysqlid_key: TAutoIncField
       FieldName = 'id_key'
     end
@@ -131,7 +131,7 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_app_mysql
     SQL.Strings = (
       'SELECT * FROM db_angtel_composite.db_composite_tb')
-    Left = 96
+    Left = 136
     Top = 200
   end
   object fd_writer_name: TFDBatchMoveTextWriter
@@ -226,8 +226,9 @@ object dm_Application_mysql: Tdm_Application_mysql
   object con_MemTable: TFDConnection
     Params.Strings = (
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
-    Left = 560
+    Left = 536
     Top = 24
   end
   object fd_loc_sql_Table: TFDLocalSQL
@@ -304,37 +305,5 @@ object dm_Application_mysql: Tdm_Application_mysql
     Connection = con_MemTable
     Left = 607
     Top = 296
-  end
-  object fd_manager_app_mysql: TFDManager
-    DriverDefFileAutoLoad = False
-    ConnectionDefFileAutoLoad = False
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <>
-    Active = True
-    Left = 192
-    Top = 17
-  end
-  object fd_login_app_mysql: TFDGUIxLoginDialog
-    Provider = 'Forms'
-    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1085#1072' '#1089#1077#1088#1074#1077#1088#1077
-    HistoryEnabled = True
-    VisibleItems.Strings = (
-      'Server='#1057#1077#1088#1074#1077#1088
-      'Port='#1055#1086#1088#1090
-      'Database='#1041#1044
-      'User_Name='#1048#1084#1103
-      'Password='#1055#1072#1088#1086#1083#1100)
-    LoginRetries = -1
-    ChangeExpiredPassword = False
-    Left = 40
-    Top = 104
-  end
-  object error_dialog_app_mysql: TFDGUIxErrorDialog
-    Provider = 'Forms'
-    Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1089#1086#1077#1076#1080#1085#1077#1085#1080#1077' FireDAC'
-    Enabled = False
-    Left = 200
-    Top = 112
   end
 end

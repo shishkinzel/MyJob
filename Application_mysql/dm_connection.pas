@@ -50,10 +50,7 @@ type
     fd_g_Select_mt_four: TFDQuery;
     fd_g_Select_mt_five: TFDQuery;
     fd_g_Select_six: TFDQuery;
-    fd_g_Select_mt_six: TFDQuery;
-    fd_manager_app_mysql: TFDManager;
-    fd_login_app_mysql: TFDGUIxLoginDialog;
-    error_dialog_app_mysql: TFDGUIxErrorDialog;                            // запрос в пятое вкладке
+    fd_g_Select_mt_six: TFDQuery;                            // запрос в пятое вкладке
     procedure DataModuleCreate(Sender: TObject);
 
 
@@ -85,18 +82,18 @@ begin
 // как запустить авторизацию в mysql
 
 {  Вариант подключения с помощью менеджера соединения }
-  SL := TStringList.Create;
-  SL.Add('DriverID=MySQL');
-  SL.Add('Server=172.17.17.76');
-  SL.Add('Port=3306');
-  SL.Add('CharacterSet=utf8');
+//  SL := TStringList.Create;
+//  SL.Add('DriverID=MySQL');
+//  SL.Add('Server=172.17.17.76');
+//  SL.Add('Port=3306');
+//  SL.Add('CharacterSet=utf8');
 {  SL.Add('User_Name=admin');
   SL.Add('password=admin');  }
 
-  fd_manager_app_mysql.AddConnectionDef('MySQL_AngTel', 'MySQL', SL);
 
-  con_app_mysql.LoginPrompt := True;
-  con_app_mysql.ConnectionDefName := 'MySQL_AngTel';
+{
+//  con_app_mysql.LoginPrompt := False;
+//  con_app_mysql.ConnectionDefName := 'MySQL_AngTel';
   try
     f_err := True;
     con_app_mysql.Open();
@@ -137,10 +134,11 @@ begin
     end;
 
   end;
+  }
 {
 _________________________________________________________________
 }
-  if f_err then
+  if True then
   begin
     fd_writer_name.Stream := frm_app_mysql.f_streem_name;
     con_MemTable.Connected := True;
