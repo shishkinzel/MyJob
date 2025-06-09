@@ -297,9 +297,9 @@ object dm_conJson: Tdm_conJson
   object con_conJson: TFDConnection
     Params.Strings = (
       'Database=db_angtel_composite'
-      'User_Name=root'
-      'Password=@Zel00000000'
-      'Server=localhost'
+      'User_Name=user'
+      'Password=00000000'
+      'Server=172.17.17.151'
       'DriverID=MySQL')
     LoginPrompt = False
     Left = 368
@@ -332,9 +332,9 @@ object dm_conJson: Tdm_conJson
   object con_RemoteBase: TFDConnection
     Params.Strings = (
       'Database=db_angtel_composite'
-      'User_Name=shishkinzel'
-      'Password=@Zel00000000'
-      'Server=172.17.17.76'
+      'User_Name=user'
+      'Password=00000000'
+      'Server=172.17.17.151'
       'DriverID=MySQL')
     Left = 360
     Top = 96
