@@ -25,6 +25,7 @@ type
     frp_LabService: TfrxReport;
     frp_LabDate: TfrxReport;
     fdb_LabService: TfrxDBDataset;
+    frLabel_43_25_no_mac: TfrxReport;
   private
     { Private declarations }
   public

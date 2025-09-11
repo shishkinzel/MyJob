@@ -12662,6 +12662,9 @@ object frmListDevice: TfrmListDevice
       Height = 275
       Align = alBottom
       TabOrder = 1
+      DesignSize = (
+        682
+        275)
       object lbl_TitleDev: TLabel
         Left = 8
         Top = 56
@@ -12681,6 +12684,7 @@ object frmListDevice: TfrmListDevice
         Top = 72
         Width = 513
         Height = 21
+        Anchors = [akLeft, akBottom]
         TabOrder = 0
         Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
       end
@@ -12689,6 +12693,7 @@ object frmListDevice: TfrmListDevice
         Top = 155
         Width = 273
         Height = 21
+        Anchors = [akLeft, akBottom]
         TabOrder = 1
         Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1082#1086#1084#1087#1083#1077#1082#1090#1072
       end
@@ -12697,6 +12702,7 @@ object frmListDevice: TfrmListDevice
         Top = 208
         Width = 120
         Height = 25
+        Anchors = [akLeft, akBottom]
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1090#1072#1073#1083#1080#1094#1091
         TabOrder = 2
         OnClick = btnApplyClick
@@ -12706,6 +12712,7 @@ object frmListDevice: TfrmListDevice
         Top = 208
         Width = 120
         Height = 25
+        Anchors = [akLeft, akBottom]
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1085#1072' '#1092#1086#1088#1084#1091
         TabOrder = 3
         OnClick = btnFormClick
@@ -12715,6 +12722,7 @@ object frmListDevice: TfrmListDevice
         Top = 208
         Width = 120
         Height = 25
+        Anchors = [akLeft, akBottom]
         Caption = #1057#1073#1088#1086#1089#1080#1090#1100' '#1076#1072#1085#1085#1099#1077
         TabOrder = 4
         OnClick = btnResetClick

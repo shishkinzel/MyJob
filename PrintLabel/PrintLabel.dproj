@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PrintLabel.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -89,9 +89,10 @@
         <UWP_DelphiLogo44>icon_shishkin\PNG\gr_logo_48_2.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_2.png</UWP_DelphiLogo150>
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=Shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=3.0.0.1;InternalName=shishkin_angtel@rambler.ru;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=3.0.0.1;Comments=Программа печати этикеток</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=3.0.1.2;InternalName=shishkin_angtel@rambler.ru;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=3.0.1.2;Comments=Программа печати этикеток</VerInfo_Keys>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Release>1</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -109,8 +110,9 @@
         <UWP_DelphiLogo150>icon_shishkin\PNG\gr_logo_144_2.png</UWP_DelphiLogo150>
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=3.0.0.1;InternalName=shishkin_angtel@rambler.ru;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=3.0.0.1;Comments=Программа генерации и печати отчетов и этикеток</VerInfo_Keys>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Shishkinzel;FileDescription=$(MSBuildProjectName);FileVersion=3.0.1.2;InternalName=shishkin_angtel@rambler.ru;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=3.0.1.2;Comments=Программа генерации и печати отчетов и этикеток</VerInfo_Keys>
+        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Release>1</VerInfo_Release>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

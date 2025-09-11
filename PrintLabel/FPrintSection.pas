@@ -108,6 +108,9 @@ type
     lbledtSix: TLabeledEdit;
     chkAdvance: TCheckBox;
     mniPrQR_Panel: TMenuItem;
+    mniN43x25ST_no_mac: TMenuItem;
+    mniN43x25Sh_no_mac: TMenuItem;
+    mniN43x25Print_no_mac: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -143,6 +146,7 @@ type
     procedure mniPrQR_StResetClick(Sender: TObject);
     procedure mniPrQR_PanelClick(Sender: TObject);
     procedure chkAdvanceMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure mniN43x25Print_no_macClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -261,9 +265,6 @@ var
   end;
 end;
 
-
-
-
 // вызываем отчеты
 
 procedure TfrmPrintSection.mniNShowmacClick(Sender: TObject);
@@ -345,6 +346,27 @@ begin
             frmFR_Label.Show;
             frmFR_Label.frLabel_43_25.ShowReport();
           end;
+        4324:
+          begin
+            if Self.CanFocus then
+              self.SetFocus;
+          // гасим и зажигаем необходимые пункты меню
+            mniN43x25Print_no_mac.Enabled := True;
+            mniN43x25Sh_no_mac.Enabled := False;
+
+          //  работаем с этикеткой 4325_no_mac
+          // выбор шрифта от 6 до 10 пунктов
+            f_fontSize := StrToIntDef(InputBox('Ввод размера шрифта наименования устройства', 'Введите размер от 6 до 10', '8'), 8);
+            if f_fontSize in [6..10] then
+              ShowMessage('Размер шрифта: ' + IntToStr(f_fontSize))
+            else
+              f_fontSize := 8;
+
+            (frmFR_Label.frLabel_43_25_no_mac.FindObject('memNameDev') as TfrxMemoView).Font.Size := f_fontSize;
+            (frmFR_Label.frLabel_43_25_no_mac.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
+            frmFR_Label.Show;
+            frmFR_Label.frLabel_43_25_no_mac.ShowReport();
+          end;
         5840:
           begin
             if Self.CanFocus then
@@ -416,13 +438,24 @@ begin
   frmFR_Label.frLabel_30_20.Print;
 end;
 
+// ********************************** Сдесь печать средней этикетки без mac
+procedure TfrmPrintSection.mniN43x25Print_no_macClick(Sender: TObject);
+begin
+  frmFR_Label.frLabel_43_25_no_mac.Report.PrintOptions.Printer := f_print_908;
+
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_43_25_no_mac.Print;
+end;
+//
+
 procedure TfrmPrintSection.mniN43x25PrintClick(Sender: TObject);
 begin
- frmFR_Label.frLabel_43_25.Report.PrintOptions.Printer := f_print_908;
+  frmFR_Label.frLabel_43_25.Report.PrintOptions.Printer := f_print_908;
 
   frmFR_Label.Show;
   frmFR_Label.frLabel_43_25.Print;
 end;
+
 
 procedure TfrmPrintSection.pmmiPr58_40Click(Sender: TObject);
 begin
@@ -476,6 +509,9 @@ begin
   //label 43_25
   mniN43x25Sh.Enabled := True;
   mniN43x25Print.Enabled := False;
+  //label 43_25_no_mac
+  mniN43x25Sh_no_mac.Enabled := True;
+  mniN43x25Print_no_mac.Enabled := False;
   //label 58_40
   pmmiSh58_40.Enabled := True;
   pmmiPr58_40.Enabled := False;
