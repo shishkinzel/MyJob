@@ -7,7 +7,7 @@ uses
 
 const
   csIniSectionPathPrint = 'SectionPathPrint';  //секция для хранения пути к принтерам
-
+    csIniSectionVersion = 'SectionVersion';     // секция хранения номера версии
   {Section : csIniSectionPathPrint}
 
 
@@ -22,6 +22,8 @@ type
     f_print_2824: string;
     f_print_576: string;
     f_print_160: string;
+
+    f_vesrion : string;        // переменная версии устройств
 
     procedure LoadSettings(Ini: TMemIniFile);
     procedure SaveSettings(Ini: TMemIniFile);
@@ -51,6 +53,9 @@ begin
     f_print_576  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_576', '\\PrintServer\TE200_576');
     f_print_160  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_160', '\\PrintServer\TE200_160');
     f_print_2824 := Ini.ReadString(csIniSectionPathPrint, 'Print_TLP 2824', '\\PrintServer\TLP 2824');
+    // версия устройства
+    f_vesrion    := Ini.ReadString(csIniSectionVersion, 'Actual version', 'v 3.9.10');
+
   end;
 end;
 
@@ -58,6 +63,21 @@ procedure TIniOptions.SaveSettings(Ini: TMemIniFile);
 begin
   if Ini <> nil then
   begin
+    // принтеры
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_160', f_print_160);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_924', f_print_924);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_940', f_print_940);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', f_print_908);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', f_print_576);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824', f_print_2824);
+//  // mac-адрес
+//    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_atlanta', f_LastMAC_atlanta);
+//    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', f_LastMAC_topaz);
+//    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_ksk', f_LastMAC_ksk);
+//    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_corundum', f_LastMAC_corundum);
+
+  // версия устройства
+    Ini.WriteString(csIniSectionVersion, 'Actual version', f_vesrion);
   end;
 end;
 

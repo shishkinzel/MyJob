@@ -13324,10 +13324,12 @@ object frmShowSoft: TfrmShowSoft
         Caption = #1057#1090#1080#1082#1077#1088' '#1074#1077#1088#1089#1080#1080
         object mniVersion_Apply: TMenuItem
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          OnClick = mniVersion_ApplyClick
         end
-        object mniVersion_Show: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        object mniVersion_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
+          OnClick = mniVersion_PrintClick
         end
         object mniVersion_Separator1: TMenuItem
           Caption = '-'
@@ -13335,6 +13337,7 @@ object frmShowSoft: TfrmShowSoft
         object mniVersion_Reset: TMenuItem
           Caption = #1057#1073#1088#1086#1089
           Enabled = False
+          OnClick = mniVersion_ResetClick
         end
       end
       object mniMarking_Separator_4: TMenuItem
@@ -13346,9 +13349,10 @@ object frmShowSoft: TfrmShowSoft
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
           OnClick = mniModem_ApplyClick
         end
-        object mniModem_Show: TMenuItem
-          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        object mniModem_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
+          OnClick = mniModem_PrintClick
         end
         object mniModem_Separator1: TMenuItem
           Caption = '-'

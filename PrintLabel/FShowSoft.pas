@@ -99,11 +99,11 @@ type
     mniMarking_Separator_4: TMenuItem;
     mniExtra_Modem: TMenuItem;
     mniVersion_Apply: TMenuItem;
-    mniVersion_Show: TMenuItem;
+    mniVersion_Print: TMenuItem;
     mniVersion_Separator1: TMenuItem;
     mniVersion_Reset: TMenuItem;
     mniModem_Apply: TMenuItem;
-    mniModem_Show: TMenuItem;
+    mniModem_Print: TMenuItem;
     mniModem_Separator1: TMenuItem;
     mniModem_Reset: TMenuItem;
     fdModem: TFDMemTable;
@@ -141,6 +141,10 @@ type
     procedure mniMarking_Show_58x40Click(Sender: TObject);
     procedure mniModem_ApplyClick(Sender: TObject);
     procedure mniModem_ResetClick(Sender: TObject);
+    procedure mniModem_PrintClick(Sender: TObject);
+    procedure mniVersion_ApplyClick(Sender: TObject);
+    procedure mniVersion_PrintClick(Sender: TObject);
+    procedure mniVersion_ResetClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -150,6 +154,8 @@ type
     f_print_940: string;
     f_print_908: string;
     f_print_2824: string;
+
+    f_vesrion : string;             // переменная чтения версии устройства из конфигурации
 
     const
       f_str = 'department-';
@@ -193,6 +199,9 @@ begin
   f_print_940 := IniOptions.f_print_940;
   f_print_908 := IniOptions.f_print_908;
   f_print_2824 := IniOptions.f_print_2824;
+
+  // актуальная версия изделия
+  f_vesrion := IniOptions.f_vesrion;
 
   f_nameDevice := frmMain.edtDevice.Text;
   edtDevice.Text := f_nameDevice;          // считываем наименование устройства
@@ -819,7 +828,7 @@ begin
   frmFR_Label.Left := 5;
 // гасим и зажигаем необходимые пункты меню
   mniModem_Apply.Enabled := False;
-  mniModem_Show.Enabled := True;
+  mniModem_Print.Enabled := True;
   mniModem_Reset.Enabled := True;
 
 // заполняем таблицу
@@ -835,23 +844,77 @@ begin
     Fields[0].AsString := f_slave;
     Post;
   end;
-
   frmFR_Label.Show;
   frmFR_Label.frp_Label_modem.ShowReport();
-
-
 end;
+//печать
+procedure TfrmShowSoft.mniModem_PrintClick(Sender: TObject);
+begin
+    // задаем принтер по умолчанию
+  frmFR_Label.frp_Label_modem.Report.PrintOptions.Printer := f_print_576;
 
-
-
+  frmFR_Label.frp_Label_modem.ShowReport();
+  frmFR_Label.frp_Label_modem.Print;
+end;
 
 // сброс для печати модемов
 procedure TfrmShowSoft.mniModem_ResetClick(Sender: TObject);
 begin
 // гасим и зажигаем необходимые пункты меню
   mniModem_Apply.Enabled := True;
-  mniModem_Show.Enabled := False;
+  mniModem_Print.Enabled := False;
   mniModem_Reset.Enabled := False;
+  // сбрасываем отчеты
+  frmFR_Label.Close;
+  frmFR_Label.frp_Label_modem.PreviewPages.Clear;
+end;
+// Дизайн этикетки версии
+// выполнить эскиз для печати этикеток версий
+
+procedure TfrmShowSoft.mniVersion_ApplyClick(Sender: TObject);
+var
+  f_checked: string;
+begin
+  // гасим и зажигаем необходимые пункты меню
+  mniVersion_Apply.Enabled := False;
+  mniVersion_Print.Enabled := True;
+  mniVersion_Reset.Enabled := True;
+
+  // запрос на вводимую запись
+  f_checked := InputBox('Версия верификации устройства', 'Введите номер версии', f_vesrion);
+  (frmFR_Stick.frpStickCheck.FindObject('memStickCheck') as TfrxMemoView).Text := f_checked;
+
+    // задаем место открытие окна
+  frmFR_Stick.Top := 5;
+  frmFR_Stick.Left := 5;
+
+  frmFR_Stick.Show;
+  frmFR_Stick.frpStickCheck.ShowReport();
+end;
+// печать этикетки версий
+
+procedure TfrmShowSoft.mniVersion_PrintClick(Sender: TObject);
+var
+  i: Integer;
+begin
+
+  // задаем принтер по умолчанию
+  frmFR_Stick.frpStickCheck.Report.PrintOptions.Printer := f_print_576;
+
+  frmFR_Stick.frpStickCheck.ShowReport();
+  frmFR_Stick.frpStickCheck.Print;
+end;
+// сброс
+
+procedure TfrmShowSoft.mniVersion_ResetClick(Sender: TObject);
+begin
+   // гасим и зажигаем необходимые пункты меню
+  mniVersion_Apply.Enabled := True;
+  mniVersion_Print.Enabled := False;
+  mniVersion_Reset.Enabled := False;
+    // сбрасываем отчеты
+  frmFR_Stick.Close;
+  frmFR_Stick.frpStickCheck.PreviewPages.Clear;
 end;
 
 

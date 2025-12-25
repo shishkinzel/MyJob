@@ -23,6 +23,7 @@ type
     frp_LabDate: TfrxReport;
     fdb_LabService: TfrxDBDataset;
     rp_Label_40x12_stick: TfrxReport;
+    frpStickCheck: TfrxReport;
   private
     { Private declarations }
   public

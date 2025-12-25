@@ -741,8 +741,8 @@ object frmFR_Stick: TfrmFR_Stick
       'begin'
       ''
       'end.')
-    Left = 152
-    Top = 350
+    Left = 136
+    Top = 302
     Datasets = <>
     Variables = <>
     Style = <>
@@ -769,7 +769,7 @@ object frmFR_Stick: TfrmFR_Stick
       object memDate: TfrxMemoView
         Align = baCenter
         AllowVectorExport = True
-        Left = 0.000000000000000003
+        Left = 0.000000000000000954
         Width = 98.267780000000000000
         Height = 32.692934500000000000
         Font.Charset = DEFAULT_CHARSET
@@ -847,6 +847,57 @@ object frmFR_Stick: TfrmFR_Stick
         HAlign = haCenter
         Memo.UTF8W = (
           #1069#1090#1080#1082#1077#1090#1082#1072' '#1087#1091#1089#1090#1072#1103)
+        ParentFont = False
+        VAlign = vaCenter
+      end
+    end
+  end
+  object frpStickCheck: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    Preview = prLabel
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 46016.728985347230000000
+    ReportOptions.LastChange = 46016.741144745370000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 192
+    Top = 360
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object pVer: TfrxReportPage
+      PaperWidth = 30.000000000000000000
+      PaperHeight = 10.000000000000000000
+      PaperSize = 256
+      Frame.Typ = []
+      MirrorMode = []
+      object memStickCheck: TfrxMemoView
+        Align = baCenter
+        AllowVectorExport = True
+        Left = 5.669295000000000000
+        Width = 102.047310000000000000
+        Height = 30.236240000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -21
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        HAlign = haCenter
+        Memo.UTF8W = (
+          'v 3.9.18')
         ParentFont = False
         VAlign = vaCenter
       end
