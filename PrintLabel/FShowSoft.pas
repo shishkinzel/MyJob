@@ -828,10 +828,9 @@ begin
     Close;
     Open;
     First;
-    Insert;
+    Append;
     Fields[0].AsString := f_master;
     Post;
-    Next;
     Append;
     Fields[0].AsString := f_slave;
     Post;
