@@ -15496,6 +15496,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniSRShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        Enabled = False
         ImageIndex = 1
         OnClick = mniSRShowClick
       end
@@ -15504,11 +15505,13 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniSRSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
+        Enabled = False
         ImageIndex = 6
         OnClick = mniSRSaveClick
       end
       object mniSRPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         ImageIndex = 8
       end
       object mniSRSep2: TMenuItem
@@ -15516,6 +15519,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniSRReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         ImageIndex = 5
         OnClick = mniSRResetClick
       end
@@ -15530,6 +15534,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniTopShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        Enabled = False
         ImageIndex = 1
         OnClick = mniTopShowClick
       end
@@ -15538,11 +15543,13 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniTopSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
+        Enabled = False
         ImageIndex = 6
         OnClick = mniTopSaveClick
       end
       object mniTopPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         ImageIndex = 8
         OnClick = mniTopPrintClick
       end
@@ -15551,6 +15558,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniTopReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         ImageIndex = 5
         OnClick = mniSRResetClick
       end
@@ -15565,6 +15573,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniCorShow: TMenuItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        Enabled = False
         ImageIndex = 1
         OnClick = mniCorShowClick
       end
@@ -15573,11 +15582,13 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniCorSave: TMenuItem
         Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1086#1090#1095#1077#1090
+        Enabled = False
         ImageIndex = 6
         OnClick = mniCorSaveClick
       end
       object mniCorPrint: TMenuItem
         Caption = #1055#1077#1095#1072#1090#1100' '#1086#1090#1095#1077#1090#1072
+        Enabled = False
         ImageIndex = 8
         OnClick = mniCorPrintClick
       end
@@ -15586,6 +15597,7 @@ object frmPrintSection: TfrmPrintSection
       end
       object mniCorReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
+        Enabled = False
         ImageIndex = 5
         OnClick = mniSRResetClick
       end

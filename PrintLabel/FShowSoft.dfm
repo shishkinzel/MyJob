@@ -13317,6 +13317,48 @@ object frmShowSoft: TfrmShowSoft
           end
         end
       end
+      object mniMarking_Separator_3: TMenuItem
+        Caption = '-'
+      end
+      object mniExtra_Version: TMenuItem
+        Caption = #1057#1090#1080#1082#1077#1088' '#1074#1077#1088#1089#1080#1080
+        object mniVersion_Apply: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        end
+        object mniVersion_Show: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          Enabled = False
+        end
+        object mniVersion_Separator1: TMenuItem
+          Caption = '-'
+        end
+        object mniVersion_Reset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          Enabled = False
+        end
+      end
+      object mniMarking_Separator_4: TMenuItem
+        Caption = '-'
+      end
+      object mniExtra_Modem: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1080' '#1076#1083#1103' '#1084#1086#1076#1077#1084#1086#1074
+        object mniModem_Apply: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          OnClick = mniModem_ApplyClick
+        end
+        object mniModem_Show: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          Enabled = False
+        end
+        object mniModem_Separator1: TMenuItem
+          Caption = '-'
+        end
+        object mniModem_Reset: TMenuItem
+          Caption = #1057#1073#1088#1086#1089
+          Enabled = False
+          OnClick = mniModem_ResetClick
+        end
+      end
     end
   end
   object dlgSaveLoadSoft: TSaveDialog
@@ -13370,6 +13412,22 @@ object frmShowSoft: TfrmShowSoft
     Top = 240
     object fdServicenumber: TStringField
       FieldName = 'number'
+      Size = 10
+    end
+  end
+  object fdModem: TFDMemTable
+    Active = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 40
+    Top = 304
+    object fldModem: TStringField
+      FieldName = 'modem'
       Size = 10
     end
   end

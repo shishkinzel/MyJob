@@ -536,6 +536,13 @@ end;
 // выполнить
 procedure TfrmPrintSection.mniSRApplyClick(Sender: TObject);
 begin
+// гасим и зажигаем необходимые пункты меню
+  mniSRApply.Enabled := False;
+  mniSRShow.Enabled := True;
+  mniSRSave.Enabled := True;
+  mniSRPrint.Enabled := True;
+  mniSRReset.Enabled := True;
+
   (frmFR_Table.frxReTabList.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtDevice.Text;
   (frmFR_Table.frxReTabList.FindObject('memmac') as TfrxMemoView).Text := frmMain.medtMAC.Text;
   (frmFR_Table.frxReTabList.FindObject('memID') as TfrxMemoView).Text := frmMain.medtID.Text;
@@ -543,6 +550,7 @@ begin
   (frmFR_Table.frxReTabList.FindObject('memQuantity') as TfrxMemoView).Text := frmMain.seCount.Value.ToString;
 
 end;
+
 
 // просмотр
 procedure TfrmPrintSection.mniSRShowClick(Sender: TObject);
@@ -566,6 +574,13 @@ var
   i: Integer;
   f_hw: string;
 begin
+ // активируем и деактивируем необходимые окна
+  mniTopApply.Enabled := False;
+  mniTopShow.Enabled := True;
+  mniTopSave.Enabled := True;
+  mniTopPrint.Enabled := True;
+  mniTopReset.Enabled := True;
+
   i := 0;
  // кодирум hw топаза
   f_hw := InputBox('Введите Hard Ware модуля Топаз', 'Введите HW ', '00.01.10');
@@ -641,9 +656,16 @@ var
   f_step: Integer;
   i: Integer;
 // задание регистров букв mac-адреса
-  f_lower : Integer;
-  f_mac_lower : string;
+  f_lower: Integer;
+  f_mac_lower: string;
 begin
+// активируем и деактивируем необходимые окна
+  mniCorApply.Enabled := False;
+  mniCorShow.Enabled := True;
+  mniCorSave.Enabled := True;
+  mniCorPrint.Enabled := True;
+  mniCorReset.Enabled := True;
+
   i := 0;
   f_mac_lower := '';
 // выбираем регистр букв в mac-адресе
@@ -731,9 +753,31 @@ end;
 { сброс всех отчетов }
 procedure TfrmPrintSection.mniSRResetClick(Sender: TObject);
 begin
+// гасим и зажигаем необходимые пункты меню
+  // простой отчет
+  mniSRApply.Enabled := True;
+  mniSRShow.Enabled := False;
+  mniSRSave.Enabled := False;
+  mniSRPrint.Enabled := False;
+  mniSRReset.Enabled := False;
+
+  // семейство Топаз
+  mniTopApply.Enabled := True;
+  mniTopShow.Enabled := False;
+  mniTopSave.Enabled := False;
+  mniTopPrint.Enabled := False;
+  mniTopReset.Enabled := False;
+
+  // семейство Корунд
+  mniCorApply.Enabled := True;
+  mniCorShow.Enabled := False;
+  mniCorSave.Enabled := False;
+  mniCorPrint.Enabled := False;
+  mniCorReset.Enabled := False;
+
 // закрываем отчеты
   frmFR_Table.Close;
- // очищаем отчеты
+  // очищаем отчеты
   frmFR_Table.frxReCor.PreviewPages.Clear;
   frmFR_Table.frxReTopaz.PreviewPages.Clear;
   frmFR_Table.frxReTabList.PreviewPages.Clear;

@@ -94,6 +94,20 @@ type
     mniMarking_Separator_02: TMenuItem;
     mniMarking_Reset_02: TMenuItem;
     mniMarking_Show_utilization: TMenuItem;
+    mniMarking_Separator_3: TMenuItem;
+    mniExtra_Version: TMenuItem;
+    mniMarking_Separator_4: TMenuItem;
+    mniExtra_Modem: TMenuItem;
+    mniVersion_Apply: TMenuItem;
+    mniVersion_Show: TMenuItem;
+    mniVersion_Separator1: TMenuItem;
+    mniVersion_Reset: TMenuItem;
+    mniModem_Apply: TMenuItem;
+    mniModem_Show: TMenuItem;
+    mniModem_Separator1: TMenuItem;
+    mniModem_Reset: TMenuItem;
+    fdModem: TFDMemTable;
+    fldModem: TStringField;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -125,6 +139,8 @@ type
     procedure mniMarking_Show_utilizationClick(Sender: TObject);
     procedure mniMarking_Reset_utilizationClick(Sender: TObject);
     procedure mniMarking_Show_58x40Click(Sender: TObject);
+    procedure mniModem_ApplyClick(Sender: TObject);
+    procedure mniModem_ResetClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -138,6 +154,8 @@ type
     const
       f_str = 'department-';
       DIR_code = 'DIR_code';
+      f_master = 'Ведущий';
+      f_slave  = 'Ведомый';
 
   public
         { Public declarations }
@@ -479,7 +497,7 @@ var
 begin
 // выбираем начальный номер и диапазон
   f_startNumber := StrToIntDef(InputBox('Ввод начального номера ремонта', 'Введите номер ремонта', '1'), 1);
-  f_range := StrToIntDef(InputBox('Ввод диапазона ремонта', 'Введите диапазон от 1 до 100', '0'), 0);
+  f_range := StrToIntDef(InputBox('Ввод диапазона ремонта', 'Введите диапазон от 1 до 100', '1'), 1);
 // открываем таблицу для записи
   with fdService do
   begin
@@ -670,6 +688,7 @@ begin
   frmFR_Stick.Show;
   frmFR_Stick.rp_Label_58x40_servece.ShowReport();
 end;
+
 // печать
 
 procedure TfrmShowSoft.mniMarking_Print_utilizationClick(Sender: TObject);
@@ -786,10 +805,58 @@ begin
     end;
   end;
 end;
+{
+Новый блок для работы с печатью Модемов и печатью стикера версий
+****************************************************************************************************
+}
+
+// выполнить эскиз для печати модемов
+
+procedure TfrmShowSoft.mniModem_ApplyClick(Sender: TObject);
+begin
+   // задаем место открытие окна
+  frmFR_Label.Top := 5;
+  frmFR_Label.Left := 5;
+// гасим и зажигаем необходимые пункты меню
+  mniModem_Apply.Enabled := False;
+  mniModem_Show.Enabled := True;
+  mniModem_Reset.Enabled := True;
+
+// заполняем таблицу
+  with fdModem do
+  begin
+    Close;
+    Open;
+    First;
+    Insert;
+    Fields[0].AsString := f_master;
+    Post;
+    Next;
+    Append;
+    Fields[0].AsString := f_slave;
+    Post;
+  end;
+
+  frmFR_Label.Show;
+  frmFR_Label.frp_Label_modem.ShowReport();
+
+
+end;
 
 
 
 
+// сброс для печати модемов
+procedure TfrmShowSoft.mniModem_ResetClick(Sender: TObject);
+begin
+// гасим и зажигаем необходимые пункты меню
+  mniModem_Apply.Enabled := True;
+  mniModem_Show.Enabled := False;
+  mniModem_Reset.Enabled := False;
+end;
+
+
+//##################################################################################################
 // общий сброс для секции Stick
 procedure TfrmShowSoft.mniMarking_Reset_utilizationClick(Sender: TObject);
 begin
