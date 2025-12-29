@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FMain,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
    Vcl.StdCtrls, Vcl.Menus, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.ComCtrls, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
@@ -148,15 +148,6 @@ type
   private
     { Private declarations }
 
-    f_print_576: string;   // для печати даты и номера ремонта
-
-    f_print_924: string;
-    f_print_940: string;
-    f_print_908: string;
-    f_print_2824: string;
-
-    f_vesrion : string;             // переменная чтения версии устройства из конфигурации
-
     const
       f_str = 'department-';
       DIR_code = 'DIR_code';
@@ -181,7 +172,7 @@ var
 implementation
 
 uses
-  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, // подключение форм
+  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, FMain, // подключение форм
   F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D, F_FR_Stick;
 
 
@@ -192,17 +183,6 @@ uses
 // показ формы
 procedure TfrmShowSoft.FormShow(Sender: TObject);
 begin
-// подключаем принтер по умолчанию
-  IniOptions.LoadFromFile(f_print_config);
-  f_print_576 := IniOptions.f_print_576;
-  f_print_924 := IniOptions.f_print_924;
-  f_print_940 := IniOptions.f_print_940;
-  f_print_908 := IniOptions.f_print_908;
-  f_print_2824 := IniOptions.f_print_2824;
-
-  // актуальная версия изделия
-  f_vesrion := IniOptions.f_vesrion;
-
   f_nameDevice := frmMain.edtDevice.Text;
   edtDevice.Text := f_nameDevice;          // считываем наименование устройства
 end;
@@ -464,7 +444,11 @@ begin
   btnCloseClick(nil);
   frmShowSoft.ModalResult := mrOk;
   frmSelection.ModalResult := mrOk;
+
 end;
+
+
+
 
 
 

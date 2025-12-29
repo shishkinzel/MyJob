@@ -69,7 +69,7 @@ begin
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_940', f_print_940);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', f_print_908);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', f_print_576);
-    Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824', f_print_2824);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824',  f_print_2824);
 //  // mac-адрес
 //    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_atlanta', f_LastMAC_atlanta);
 //    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', f_LastMAC_topaz);

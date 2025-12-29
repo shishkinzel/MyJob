@@ -149,12 +149,6 @@ type
     procedure mniN43x25Print_no_macClick(Sender: TObject);
   private
     { Private declarations }
-    var
-      f_print_924: string;
-      f_print_940: string;
-      f_print_908: string;
-      f_print_2824: string;
-      f_print_160: string;
 
   public
         { Public declarations }
@@ -196,6 +190,7 @@ begin
   frmPrintSection.lbledtFive.Enabled := False;
   frmPrintSection.lbledtSix.Enabled := False;
 
+
   mniNResetLab4Click(Self);
   ModalResult := mrOk;
   Close;
@@ -211,15 +206,6 @@ begin
 //   изменение шрифта главного меню
   Screen.MenuFont.Size := 14;
   Screen.MenuFont.Name := 'Roboto';
- // принтеры по умолчанию
-//  f_ini := TIniFile.Create(f_print_config);
-  IniOptions.LoadFromFile(f_print_config);
-  f_print_924 := IniOptions.f_print_924;
-  f_print_940 := IniOptions.f_print_940;
-  f_print_908 := IniOptions.f_print_908;
-  f_print_160 := IniOptions.f_print_160;
-  f_print_2824 := IniOptions.f_print_2824;
-//  f_ini.Free;
 // присваиваем переменным f_posX - начальные значения
   f_pos1 := lbledtOne.Text;
   f_pos2 := lbledtTwo.Text;

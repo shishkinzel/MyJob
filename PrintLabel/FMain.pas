@@ -63,11 +63,14 @@ var
 //  f_showPrintForm: Boolean;   // активация панели печати или генерации заливки ПО и qr-кода
   f_print_config: string;
   // переменные для чтения конфигурации принтеров по умолчанию
-  f_print_924: string;
-  f_print_940: string;
+  f_print_924 : string;
+  f_print_940 : string;
   f_print_2824: string;
-  f_print_908: string;
-  f_print_576: string;
+  f_print_908 : string;
+  f_print_576 : string;
+  f_print_160 : string;
+
+  f_vesrion: string;             // переменная чтения версии устройства из конфигурации
 
 implementation
 
@@ -90,6 +93,18 @@ begin
   f_print_config := ExtractFilePath(Application.ExeName) + 'print_config.ini';
   // создаем ini-файл
 
+// Заполняем переменные по умолчанию из ini- файла
+// подключаем принтер по умолчанию
+  IniOptions.LoadFromFile(f_print_config);
+  f_print_576 := IniOptions.f_print_576;
+  f_print_924 := IniOptions.f_print_924;
+  f_print_940 := IniOptions.f_print_940;
+  f_print_908 := IniOptions.f_print_908;
+  f_print_160 := IniOptions.f_print_160;
+  f_print_2824 := IniOptions.f_print_2824;
+
+  // актуальная версия изделия
+  f_vesrion := IniOptions.f_vesrion;
 
 
 end;
@@ -381,8 +396,12 @@ begin
   IniOptions.f_print_924 := f_print_924;
   IniOptions.f_print_940 := f_print_940;
   IniOptions.f_print_908 := f_print_908;
+  IniOptions.f_print_160 := f_print_160;
   IniOptions.f_print_576 := f_print_576;
   IniOptions.f_print_2824 := f_print_2824;
+// версия
+  IniOptions.f_vesrion := f_vesrion;
+
   IniOptions.SaveToFile(f_iniPath);
   f_ini.Free;
 
