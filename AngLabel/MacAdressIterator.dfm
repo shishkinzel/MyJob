@@ -798,7 +798,6 @@ object frmMAC: TfrmMAC
     end
     object mniLabel: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1072
-      Enabled = False
       Visible = False
       object mni_LabelBig_TE200_160: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 58'#1093'40_2824'
@@ -885,7 +884,6 @@ object frmMAC: TfrmMAC
     end
     object mniLabelAdvance: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1080'('#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077')'
-      Enabled = False
       Visible = False
       object mni_43_25: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43_25_908'
