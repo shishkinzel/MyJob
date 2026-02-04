@@ -111,6 +111,9 @@ type
     mniN43x25ST_no_mac: TMenuItem;
     mniN43x25Sh_no_mac: TMenuItem;
     mniN43x25Print_no_mac: TMenuItem;
+    mni_30_20_mac_Label: TMenuItem;
+    mni_30_20_mac_Show: TMenuItem;
+    mni_30_20_mac_Print: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -147,6 +150,8 @@ type
     procedure mniPrQR_PanelClick(Sender: TObject);
     procedure chkAdvanceMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure mniN43x25Print_no_macClick(Sender: TObject);
+    procedure mni_30_20_mac_ShowClick(Sender: TObject);
+    procedure mni_30_20_mac_PrintClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -474,6 +479,39 @@ begin
   frmFR_Label.frStic_mac_40_12.ShowReport();
   frmFR_Label.frStic_mac_40_12.Print;
 end;
+{&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+}
+// формируем этикетку 30х20 с mac-адресом
+ // show
+
+procedure TfrmPrintSection.mni_30_20_mac_ShowClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  if Self.CanFocus then
+    self.SetFocus;
+          // гасим и зажигаем необходимые пункты меню
+  mni_30_20_mac_Show.Enabled := False;
+  mni_30_20_mac_Print.Enabled := True;
+
+          //  работаем с этикеткой 3020
+  (frmFR_Label.frLabel_30_20_mac.FindObject('memNameDev') as TfrxMemoView).Text := frmMain.edtPackage.Text;
+  frmFR_Label.Show;
+  frmFR_Label.frLabel_30_20_mac.ShowReport();
+end;
+ // print
+
+procedure TfrmPrintSection.mni_30_20_mac_PrintClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  frmFR_Label.frLabel_30_20_mac.Report.PrintOptions.Printer := f_print_940;
+
+  frmFR_Label.frLabel_30_20_mac.ShowReport();
+  frmFR_Label.frLabel_30_20_mac.Print;
+end;
+{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ }
 
 // сбрасываем все
 procedure TfrmPrintSection.mniNResetLab4Click(Sender: TObject);
@@ -492,6 +530,9 @@ begin
   //label 30_20
   pmmiSh30_20.Enabled := True;
   pmmiPr30_20.Enabled := False;
+  //label 30_20_maac
+  mni_30_20_mac_Show.Enabled := True;
+  mni_30_20_mac_Print.Enabled := False;
   //label 43_25
   mniN43x25Sh.Enabled := True;
   mniN43x25Print.Enabled := False;
@@ -501,7 +542,7 @@ begin
   //label 58_40
   pmmiSh58_40.Enabled := True;
   pmmiPr58_40.Enabled := False;
-    //label 58_40_mac
+        //label 58_40_mac
   pmmiSh58_40_mac.Enabled := True;
   pmmiPr58_40_mac.Enabled := False;
 
@@ -514,6 +555,7 @@ begin
   //label 100_150
   pmmiSh100_150.Enabled := True;
   pmmiPr100_150.Enabled := False;
+
 
 end;
  {–абота с вторым пунктом меню}

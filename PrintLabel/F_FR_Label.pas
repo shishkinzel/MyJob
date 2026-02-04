@@ -28,6 +28,7 @@ type
     frLabel_43_25_no_mac: TfrxReport;
     fdb_Modem: TfrxDBDataset;
     frp_Label_modem: TfrxReport;
+    frLabel_30_20_mac: TfrxReport;
   private
     { Private declarations }
   public

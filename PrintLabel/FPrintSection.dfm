@@ -13386,21 +13386,39 @@ object frmPrintSection: TfrmPrintSection
           OnClick = pmmiPr30_20Click
         end
       end
+      object mni_30_20_mac_Label: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30_20_mac'
+        ImageIndex = 0
+        object mni_30_20_mac_Show: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          ImageIndex = 6
+          OnClick = mni_30_20_mac_ShowClick
+        end
+        object mni_30_20_mac_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          ImageIndex = 11
+          OnClick = mni_30_20_mac_PrintClick
+        end
+      end
       object mniN43x25ST_no_mac: TMenuItem
-        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25_no_mac'
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25'
+        ImageIndex = 16
         object mniN43x25Sh_no_mac: TMenuItem
           Tag = 4324
           Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          ImageIndex = 6
           OnClick = mniNShowmacClick
         end
         object mniN43x25Print_no_mac: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
+          ImageIndex = 11
           OnClick = mniN43x25Print_no_macClick
         end
       end
       object mniN43x25ST: TMenuItem
-        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25'
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43'#1093'25_mac'
         ImageIndex = 16
         object mniN43x25Sh: TMenuItem
           Tag = 4325
