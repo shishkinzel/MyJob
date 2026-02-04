@@ -235,6 +235,9 @@ type
     mniListOne: TMenuItem;
     mniListTwo: TMenuItem;
     mniLisReset: TMenuItem;
+    mni_30_20_mac_Label: TMenuItem;
+    mni_30_20_mac_Show: TMenuItem;
+    mni_30_20_mac_Print: TMenuItem;
     procedure btnApplyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRestartClick(Sender: TObject);
@@ -316,6 +319,8 @@ type
     procedure mniListPrintClick(Sender: TObject);
     procedure mniListSlaveClick(Sender: TObject);
     procedure mniLisResetClick(Sender: TObject);
+    procedure mni_30_20_mac_ShowClick(Sender: TObject);
+    procedure mni_30_20_mac_PrintClick(Sender: TObject);
   private
     { Private declarations }
     var
@@ -1271,6 +1276,9 @@ begin
       mni_PrintSmall_new.Enabled := False;
       mni_Pr_shild_43_25_small.Enabled := False;
       mni_TE200_160_Print.Enabled := False;
+      mni_30_20_mac_Print.Enabled  := False;
+
+
 
 
 // зажигаем окна просмотра
@@ -1282,6 +1290,7 @@ begin
       mni_ShowSmall_new.Enabled := True;
       mni_sh_shild_43_25_small.Enabled := True;
       mni_TE200_160_Show.Enabled := True;
+      mni_30_20_mac_Show.Enabled  := True;
 
 
 //   сбрасываем окна заполнения
@@ -2214,7 +2223,6 @@ begin
 
 end;
  // печать
-
 procedure TfrmMAC.mni_PrintSmall_newClick(Sender: TObject);
 begin
  // задаем принтер по умолчанию
@@ -2223,6 +2231,36 @@ begin
   frmFRSmallLabel.rpSmallLabel_new.ShowReport;
   frmFRSmallLabel.rpSmallLabel_new.Print;
 end;
+// маленькая этикетка с mac-адресом
+// просмотр
+
+procedure TfrmMAC.mni_30_20_mac_ShowClick(Sender: TObject);
+begin
+ // задаем место открытие окна
+  frmFRSmallLabel.Top := 5;
+  frmFRSmallLabel.Left := 5;
+
+  frmFRSmallLabel.Show;
+  self.SetFocus;
+
+  (frmFRSmallLabel.rpSmallLabel_mac.FindObject('mDevice') as TFrxMemoView).Text := edtmod.text;
+  frmFRSmallLabel.rpSmallLabel_mac.ShowReport();
+ // гасим и зажигаем пункты на главном меню
+  mni_30_20_mac_Print.Enabled  := True;
+  mni_30_20_mac_Show.Enabled  := False;
+
+end;
+ // печать
+
+procedure TfrmMAC.mni_30_20_mac_PrintClick(Sender: TObject);
+begin
+  // задаем принтер по умолчанию
+  frmFRSmallLabel.rpSmallLabel_mac.Report.PrintOptions.Printer := f_print_940;
+
+  frmFRSmallLabel.rpSmallLabel_mac.ShowReport;
+  frmFRSmallLabel.rpSmallLabel_mac.Print;
+end;
+
 
 // конец блока   новая маленькая этикетка 30_20
 

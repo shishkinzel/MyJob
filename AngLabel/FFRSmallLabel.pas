@@ -12,6 +12,7 @@ type
     rpSmallLabel: TfrxReport;
     dbSmallLabel: TfrxDBDataset;
     rpSmallLabel_new: TfrxReport;
+    rpSmallLabel_mac: TfrxReport;
   private
     { Private declarations }
   public

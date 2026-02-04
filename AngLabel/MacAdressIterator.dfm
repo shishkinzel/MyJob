@@ -885,6 +885,18 @@ object frmMAC: TfrmMAC
     object mniLabelAdvance: TMenuItem
       Caption = #1069#1090#1080#1082#1077#1090#1082#1080'('#1088#1072#1089#1096#1080#1088#1077#1085#1080#1077')'
       Visible = False
+      object mni_30_20_mac_Label: TMenuItem
+        Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 30_20_mac'
+        object mni_30_20_mac_Show: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+          OnClick = mni_30_20_mac_ShowClick
+        end
+        object mni_30_20_mac_Print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_30_20_mac_PrintClick
+        end
+      end
       object mni_43_25: TMenuItem
         Caption = #1069#1090#1080#1082#1077#1090#1082#1072' 43_25_908'
         object mni_sh_43_25: TMenuItem
