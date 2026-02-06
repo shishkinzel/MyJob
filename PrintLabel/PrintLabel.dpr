@@ -13,7 +13,9 @@ uses
   F_FR_List in 'F_FR_List.pas' {frmFR_List},
   F_FR_Table in 'F_FR_Table.pas' {frmFR_Table},
   F_FR_Stick in 'F_FR_Stick.pas' {frmFR_Stick},
-  F_FR_Label in 'F_FR_Label.pas' {frmFR_Label};
+  F_FR_Label in 'F_FR_Label.pas' {frmFR_Label},
+  FCom_Scripts in 'FCom_Scripts.pas' {F_Command},
+  FScr_Scripts in 'FScr_Scripts.pas' {F_Scripts};
 
 {$R *.res}
 begin
@@ -29,6 +31,7 @@ begin
   Application.CreateForm(TfrmFR_Table, frmFR_Table);
   Application.CreateForm(TfrmFR_Stick, frmFR_Stick);
   Application.CreateForm(TfrmFR_Label, frmFR_Label);
+  Application.CreateForm(TF_Scripts, F_Scripts);
   Application.Run;
 end.
 

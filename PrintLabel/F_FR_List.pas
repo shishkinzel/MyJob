@@ -12,6 +12,8 @@ type
     frxRe: TfrxReport;
     frxBarCode: TfrxBarCodeObject;
     frxRe_adv: TfrxReport;
+    frx_command: TfrxReport;
+    frx_scripts: TfrxReport;
 
 //    memData : TfrxMemoView ;
   private

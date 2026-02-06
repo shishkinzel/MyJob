@@ -108,6 +108,20 @@ type
     mniModem_Reset: TMenuItem;
     fdModem: TFDMemTable;
     fldModem: TStringField;
+    mni_q_main: TMenuItem;
+    mni_q_command: TMenuItem;
+    mni_q_scripts: TMenuItem;
+    mni_q_separator_one: TMenuItem;
+    mni_q_reset: TMenuItem;
+    mni_q_com_show: TMenuItem;
+    mni_q_com_execute: TMenuItem;
+    mni_q_com_separation_one: TMenuItem;
+    mni_q_com_print: TMenuItem;
+    mni_q_sripts_show: TMenuItem;
+    mni_q_sripts_execute: TMenuItem;
+    mni_q_main_separatorOne: TMenuItem;
+    mni_q_sripts_separatorOne: TMenuItem;
+    mni_q_sripts_print: TMenuItem;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -145,6 +159,10 @@ type
     procedure mniVersion_ApplyClick(Sender: TObject);
     procedure mniVersion_PrintClick(Sender: TObject);
     procedure mniVersion_ResetClick(Sender: TObject);
+    procedure mni_q_com_showClick(Sender: TObject);
+    procedure mni_q_com_executeClick(Sender: TObject);
+    procedure mni_q_com_printClick(Sender: TObject);
+    procedure mni_q_sripts_showClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -164,6 +182,11 @@ type
 
     f_nameDevice: string;    // им€ выбраного устройства
 
+    f_command_array: array[0..11] of string; // массив дл€ хранени€ команд при формировании q-кодов
+
+    f_st_ls1, f_st_ls2, f_st_ls3, f_st_ls4 : TStringList;   // переменна€ дл€ создани€ класс List, хранение форматировонного текста
+                              // дл€ скриптов
+
   end;
 
 var
@@ -172,7 +195,7 @@ var
 implementation
 
 uses
-  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, FMain, // подключение форм
+  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, FMain, FCom_Scripts, FScr_Scripts, // подключение форм
   F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D, F_FR_Stick;
 
 
@@ -928,6 +951,98 @@ begin
 
 end;
 
+// *************************************************************************************************
+{  !! ѕишем новый код дл€ q-кода
+}
+// дл€ блока команд
+procedure TfrmShowSoft.mni_q_com_showClick(Sender: TObject);
+begin
+ // гасим и зажигаем необходимые пункты
+  mni_q_com_show.Enabled := False;
+  mni_q_com_print.Enabled := False;
+  mni_q_com_execute.Enabled := True;
+//создаем модальную форму
+  F_Command := TF_Command.Create(Self);
+  F_Command.ShowModal;
+  F_Command.Free;
+  // получаем заполненый массив строк
+end;
+// вызываем и формируем fastreport
+procedure TfrmShowSoft.mni_q_com_executeClick(Sender: TObject);
+var
+  i: Integer;
+begin
+ // гасим и зажигаем необходимые пункты
+  mni_q_com_execute.Enabled := False;
+  mni_q_com_print.Enabled := True;
+  mni_q_com_show.Enabled := True;
+// прописываем переменные в короткие qr-кода и текстовые пол€
+  (frmFR_List.frx_command.FindObject('mem_pos1') as TfrxMemoView).Text := f_command_array[0];
+  (frmFR_List.frx_command.FindObject('bq_pos1') as TfrxBarcode2DView).Text := f_command_array[0];
+
+  (frmFR_List.frx_command.FindObject('mem_pos2') as TfrxMemoView).Text := f_command_array[1];
+  (frmFR_List.frx_command.FindObject('bq_pos2') as TfrxBarcode2DView).Text := f_command_array[1];
+
+  (frmFR_List.frx_command.FindObject('mem_pos3') as TfrxMemoView).Text := f_command_array[2];
+  (frmFR_List.frx_command.FindObject('bq_pos3') as TfrxBarcode2DView).Text := f_command_array[2];
+
+  (frmFR_List.frx_command.FindObject('mem_pos4') as TfrxMemoView).Text := f_command_array[3];
+  (frmFR_List.frx_command.FindObject('bq_pos4') as TfrxBarcode2DView).Text := f_command_array[3];
+
+  (frmFR_List.frx_command.FindObject('mem_pos5') as TfrxMemoView).Text := f_command_array[4];
+  (frmFR_List.frx_command.FindObject('bq_pos5') as TfrxBarcode2DView).Text := f_command_array[4];
+
+  (frmFR_List.frx_command.FindObject('mem_pos6') as TfrxMemoView).Text := f_command_array[5];
+  (frmFR_List.frx_command.FindObject('bq_pos6') as TfrxBarcode2DView).Text := f_command_array[5];
+
+  (frmFR_List.frx_command.FindObject('mem_pos7') as TfrxMemoView).Text := f_command_array[6];
+  (frmFR_List.frx_command.FindObject('bq_pos7') as TfrxBarcode2DView).Text := f_command_array[6];
+
+  (frmFR_List.frx_command.FindObject('mem_pos8') as TfrxMemoView).Text := f_command_array[7];
+  (frmFR_List.frx_command.FindObject('bq_pos8') as TfrxBarcode2DView).Text := f_command_array[7];
+
+  (frmFR_List.frx_command.FindObject('mem_pos9') as TfrxMemoView).Text := f_command_array[8];
+  (frmFR_List.frx_command.FindObject('bq_pos9') as TfrxBarcode2DView).Text := f_command_array[8];
+
+  (frmFR_List.frx_command.FindObject('mem_pos10') as TfrxMemoView).Text := f_command_array[9];
+  (frmFR_List.frx_command.FindObject('bq_pos10') as TfrxBarcode2DView).Text := f_command_array[9];
+
+  (frmFR_List.frx_command.FindObject('mem_pos11') as TfrxMemoView).Text := f_command_array[10];
+  (frmFR_List.frx_command.FindObject('bq_pos11') as TfrxBarcode2DView).Text := f_command_array[10];
+  (frmFR_List.frx_command.FindObject('mem_pos12') as TfrxMemoView).Text := f_command_array[11];
+  (frmFR_List.frx_command.FindObject('bq_pos12') as TfrxBarcode2DView).Text := f_command_array[11];
+// ѕросмотр результата
+  frmFR_List.Show;
+  frmFR_List.frx_command.ShowReport();
+end;
+// печать
+
+procedure TfrmShowSoft.mni_q_com_printClick(Sender: TObject);
+begin
+  frmFR_List.frx_command.ShowReport();
+  frmFR_List.frx_command.Print;
+end;
+// дл€ блока скриптов
+procedure TfrmShowSoft.mni_q_sripts_showClick(Sender: TObject);
+var
+  i: Integer;
+begin
+   // гасим и зажигаем необходимые пункты
+  mni_q_sripts_show.Enabled := False;
+  mni_q_sripts_print.Enabled := False;
+  mni_q_sripts_execute.Enabled := True;
+  // создаем объекты StringList -4 шт.
+  f_st_ls1 := TStringList.Create;
+  f_st_ls2 := TStringList.Create;
+  f_st_ls3 := TStringList.Create;
+  f_st_ls4 := TStringList.Create;
+
+  //создаем модальную форму
+  F_Scripts := TF_Scripts.Create(Self);
+  F_Scripts.ShowModal;
+  F_Scripts.Free;
+
+end;
 
 
 
@@ -935,6 +1050,21 @@ end;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+{ конец блока кода
+}
 // *************************************************************************************************
 
 //**************************************************************************************************

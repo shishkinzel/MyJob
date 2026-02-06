@@ -13364,6 +13364,58 @@ object frmShowSoft: TfrmShowSoft
         end
       end
     end
+    object mni_q_main: TMenuItem
+      Caption = #1060#1086#1088#1084#1080#1088#1086#1074#1072#1085#1080#1077' q-'#1082#1086#1076#1072
+      object mni_q_command: TMenuItem
+        Caption = #1050#1086#1084#1072#1085#1076#1099
+        object mni_q_com_show: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          OnClick = mni_q_com_showClick
+        end
+        object mni_q_com_execute: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          Enabled = False
+          OnClick = mni_q_com_executeClick
+        end
+        object mni_q_com_separation_one: TMenuItem
+          Caption = '-'
+          Enabled = False
+        end
+        object mni_q_com_print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_q_com_printClick
+        end
+      end
+      object mni_q_main_separatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_q_scripts: TMenuItem
+        Caption = #1057#1082#1088#1080#1087#1090#1099
+        object mni_q_sripts_show: TMenuItem
+          Caption = #1055#1086#1082#1072#1079#1072#1090#1100
+          OnClick = mni_q_sripts_showClick
+        end
+        object mni_q_sripts_execute: TMenuItem
+          Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+          Enabled = False
+        end
+        object mni_q_sripts_separatorOne: TMenuItem
+          Caption = '-'
+          Enabled = False
+        end
+        object mni_q_sripts_print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+        end
+      end
+      object mni_q_separator_one: TMenuItem
+        Caption = '-'
+      end
+      object mni_q_reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+      end
+    end
   end
   object dlgSaveLoadSoft: TSaveDialog
     DefaultExt = 'code_txt'
