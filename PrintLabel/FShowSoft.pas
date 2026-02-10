@@ -184,8 +184,10 @@ type
 
     f_command_array: array[0..11] of string; // массив для хранения команд при формировании q-кодов
 
-    f_st_ls1, f_st_ls2, f_st_ls3, f_st_ls4 : TStringList;   // переменная для создания класс List, хранение форматировонного текста
-                              // для скриптов
+    f_scripts_array: array[0..3] of string; // массив для хранения скриптов при формировании q-кодов
+
+    f_pos1_text, f_pos2_text, f_pos3_text, f_pos4_text : string;   // переменная для хранение форматировонного текста
+                                                       // для скриптов
 
   end;
 
@@ -1031,11 +1033,6 @@ begin
   mni_q_sripts_show.Enabled := False;
   mni_q_sripts_print.Enabled := False;
   mni_q_sripts_execute.Enabled := True;
-  // создаем объекты StringList -4 шт.
-  f_st_ls1 := TStringList.Create;
-  f_st_ls2 := TStringList.Create;
-  f_st_ls3 := TStringList.Create;
-  f_st_ls4 := TStringList.Create;
 
   //создаем модальную форму
   F_Scripts := TF_Scripts.Create(Self);

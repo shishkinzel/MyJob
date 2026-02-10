@@ -1,10 +1,10 @@
 object F_Command: TF_Command
   Left = 0
   Top = 0
-  BorderStyle = bsNone
+  BorderStyle = bsDialog
   Caption = #1060#1086#1088#1084#1072' '#1074#1074#1086#1076#1072' '#1076#1072#1085#1099#1093' '
-  ClientHeight = 350
-  ClientWidth = 736
+  ClientHeight = 321
+  ClientWidth = 730
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object F_Command: TF_Command
   object img_com_one: TImage
     Left = 0
     Top = 0
-    Width = 736
-    Height = 350
+    Width = 730
+    Height = 321
     Align = alClient
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000004B00000
