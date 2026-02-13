@@ -117,11 +117,19 @@ type
     mni_q_com_execute: TMenuItem;
     mni_q_com_separation_one: TMenuItem;
     mni_q_com_print: TMenuItem;
-    mni_q_sripts_show: TMenuItem;
-    mni_q_sripts_execute: TMenuItem;
+    mni_q_scripts_show: TMenuItem;
+    mni_q_scripts_execute: TMenuItem;
     mni_q_main_separatorOne: TMenuItem;
-    mni_q_sripts_separatorOne: TMenuItem;
-    mni_q_sripts_print: TMenuItem;
+    mni_q_scripts_print: TMenuItem;
+    mni_upg_soft_main: TMenuItem;
+    mni_upg_soft_separatorOne: TMenuItem;
+    mni_upg_soft_entry: TMenuItem;
+    mni_upg_soft_report: TMenuItem;
+    mni_upg_soft_separatorTwo: TMenuItem;
+    mni_upg_soft_print: TMenuItem;
+    fd_upg_soft: TFDMemTable;
+    strngfld_upg_softf_q: TStringField;
+    strngfld_upg_softf_st: TStringField;
     procedure btnCountClick(Sender: TObject);
 //    procedure mniExitLoadSoftClick(Sender: TObject);
     procedure mniSaveLoadSoftClick(Sender: TObject);
@@ -162,7 +170,13 @@ type
     procedure mni_q_com_showClick(Sender: TObject);
     procedure mni_q_com_executeClick(Sender: TObject);
     procedure mni_q_com_printClick(Sender: TObject);
-    procedure mni_q_sripts_showClick(Sender: TObject);
+    procedure mni_q_scripts_showClick(Sender: TObject);
+    procedure mni_q_scripts_executeClick(Sender: TObject);
+    procedure mni_upg_soft_entryClick(Sender: TObject);
+    procedure mni_upg_soft_reportClick(Sender: TObject);
+    procedure mni_q_resetClick(Sender: TObject);
+    procedure mni_upg_soft_printClick(Sender: TObject);
+    procedure mni_q_scripts_printClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -188,7 +202,7 @@ type
 
     f_pos1_text, f_pos2_text, f_pos3_text, f_pos4_text : string;   // переменная для хранение форматировонного текста
                                                        // для скриптов
-
+    f_counter : string;  // переменная счетчика количества устройств для апгрейда
   end;
 
 var
@@ -197,7 +211,8 @@ var
 implementation
 
 uses
-  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel, FMain, FCom_Scripts, FScr_Scripts, // подключение форм
+  FSelection, FPrintSection, F_FR_Label, unit_ini, FdbmPrintLabel,   // подключение форм
+  FMain, FCom_Scripts, FScr_Scripts, FUpg_soft, FTest,                      // подключение форм
   F_FR_List, IdGlobal, frxClass, frxPreview, frxBarcode, frxBarcode2D, F_FR_Stick;
 
 
@@ -969,10 +984,9 @@ begin
   F_Command.Free;
   // получаем заполненый массив строк
 end;
+
 // вызываем и формируем fastreport
 procedure TfrmShowSoft.mni_q_com_executeClick(Sender: TObject);
-var
-  i: Integer;
 begin
  // гасим и зажигаем необходимые пункты
   mni_q_com_execute.Enabled := False;
@@ -1018,52 +1032,140 @@ begin
   frmFR_List.frx_command.ShowReport();
 end;
 // печать
-
 procedure TfrmShowSoft.mni_q_com_printClick(Sender: TObject);
 begin
+// выбор принтера
+  frmFR_List.frx_command.Report.PrintOptions.Printer := f_print_a4;
+
   frmFR_List.frx_command.ShowReport();
   frmFR_List.frx_command.Print;
 end;
 // для блока скриптов
-procedure TfrmShowSoft.mni_q_sripts_showClick(Sender: TObject);
+procedure TfrmShowSoft.mni_q_scripts_showClick(Sender: TObject);
 var
   i: Integer;
 begin
    // гасим и зажигаем необходимые пункты
-  mni_q_sripts_show.Enabled := False;
-  mni_q_sripts_print.Enabled := False;
-  mni_q_sripts_execute.Enabled := True;
-
+  mni_q_scripts_show.Enabled := False;
+  mni_q_scripts_print.Enabled := False;
+  mni_q_scripts_execute.Enabled := True;
   //создаем модальную форму
   F_Scripts := TF_Scripts.Create(Self);
   F_Scripts.ShowModal;
   F_Scripts.Free;
-
+    // получаем заполненый массив строк
 end;
+// вызываем и формируем fastreport
 
+procedure TfrmShowSoft.mni_q_scripts_executeClick(Sender: TObject);
+begin
+ // гасим и зажигаем необходимые пункты
+  mni_q_scripts_execute.Enabled := False;
+  mni_q_scripts_print.Enabled := True;
+  mni_q_scripts_show.Enabled := True;
+  // прописываем переменные в скрипты qr-кода и текстовые поля и заполняем титульный заголовок
+  (frmFR_List.frx_scripts.FindObject('memTitle_pos1') as TfrxMemoView).Text := f_command_array[0];
+  (frmFR_List.frx_scripts.FindObject('memTitle_pos2') as TfrxMemoView).Text := f_command_array[1];
+  (frmFR_List.frx_scripts.FindObject('memTitle_pos3') as TfrxMemoView).Text := f_command_array[2];
+  (frmFR_List.frx_scripts.FindObject('memTitle_pos4') as TfrxMemoView).Text := f_command_array[3];
 
+  (frmFR_List.frx_scripts.FindObject('mem_pos1') as TfrxMemoView).Text := f_scripts_array[0];
+  (frmFR_List.frx_scripts.FindObject('mem_pos2') as TfrxMemoView).Text := f_scripts_array[1];
+  (frmFR_List.frx_scripts.FindObject('mem_pos3') as TfrxMemoView).Text := f_scripts_array[2];
+  (frmFR_List.frx_scripts.FindObject('mem_pos4') as TfrxMemoView).Text := f_scripts_array[3];
 
+  (frmFR_List.frx_scripts.FindObject('bq_pos1') as TfrxBarcode2DView).Text := f_scripts_array[0];
+  (frmFR_List.frx_scripts.FindObject('bq_pos2') as TfrxBarcode2DView).Text := f_scripts_array[1];
+  (frmFR_List.frx_scripts.FindObject('bq_pos3') as TfrxBarcode2DView).Text := f_scripts_array[2];
+  (frmFR_List.frx_scripts.FindObject('bq_pos4') as TfrxBarcode2DView).Text := f_scripts_array[3];
+  // Просмотр результата
+  frmFR_List.Show;
+  frmFR_List.frx_scripts.ShowReport();
+end;
+// печать
+procedure TfrmShowSoft.mni_q_scripts_printClick(Sender: TObject);
+begin
+// выбор принтера
+  frmFR_List.frx_scripts.Report.PrintOptions.Printer := f_print_a4;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  frmFR_List.frx_scripts.ShowReport();
+  frmFR_List.frx_scripts.Print;
+end;
 
 
 { конец блока кода
 }
 // *************************************************************************************************
+{  Формирование нового пункта меню для перепрошивки устройств в единичном экземпляре
+   для исключения ручного ввода данных устрйства при его перепрошивки -
+   количество разнообразных устройств не ограничено, формируем бланк А4 c q-кодом
+   и текстовым описанием физического адреса и серийного номера.
+}
+procedure TfrmShowSoft.mni_upg_soft_entryClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // гасим и зажигаем необходимые пункты
+  mni_upg_soft_entry.Enabled := False;
+  mni_upg_soft_report.Enabled := True;
+//создаем модальную форму
+  F_upg_soft := TF_upg_soft.Create(Self);
+  F_upg_soft.ShowModal;
+  F_upg_soft.Free;
+  // получаем заполненую таблицу
 
+end;
+// просмотр отчета
+procedure TfrmShowSoft.mni_upg_soft_reportClick(Sender: TObject);
+begin
+  // гасим и зажигаем необходимые пункты
+//  mni_upg_soft_entry.Enabled := False;
+  mni_upg_soft_report.Enabled := False;
+  mni_upg_soft_print.Enabled := True;
+// прописываем переменные в  текстовые поля
+  (frmFR_List.frx_upg_soft.FindObject('memCountDev') as TfrxMemoView).Text := f_counter;
+// Просмотр результата
+  frmFR_List.Show;
+  frmFR_List.frx_upg_soft.ShowReport();
+end;
+// печать
+
+procedure TfrmShowSoft.mni_upg_soft_printClick(Sender: TObject);
+begin
+// выбор принтера
+  frmFR_List.frx_upg_soft.Report.PrintOptions.Printer := f_print_a4;
+
+  frmFR_List.frx_upg_soft.ShowReport();
+  frmFR_List.frx_upg_soft.Print;
+end;
+
+{ Это общий сброс для этого пункта меню
+********************************************************************************
+}
+procedure TfrmShowSoft.mni_q_resetClick(Sender: TObject);
+begin
+// гасим и зажигаем необходимые пункты
+// секция Апгрейд
+  mni_upg_soft_entry.Enabled := True;
+  mni_upg_soft_report.Enabled := False;
+  mni_upg_soft_print.Enabled := False;
+
+  // секция Команды
+  mni_q_com_show.Enabled := True;
+  mni_q_com_execute.Enabled := False;
+  mni_q_com_print.Enabled := False;
+  // секция Скрипты
+  mni_q_scripts_show.Enabled := True;
+  mni_q_scripts_execute.Enabled := False;
+  mni_q_scripts_print.Enabled := False;
+
+end;
+
+
+
+
+{ конец блока кода @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+}
 //**************************************************************************************************
 procedure TfrmShowSoft.btnCloseClick(Sender: TObject);
 begin
@@ -1073,3 +1175,4 @@ end;
 
 
 end.
+

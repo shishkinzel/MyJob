@@ -22,6 +22,7 @@ type
     f_print_2824: string;
     f_print_576: string;
     f_print_160: string;
+    f_print_a4 : string;
 
     f_vesrion : string;        // переменная версии устройств
 
@@ -53,6 +54,7 @@ begin
     f_print_576  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_576', '\\PrintServer\TE200_576');
     f_print_160  := Ini.ReadString(csIniSectionPathPrint, 'Print_TE200_160', '\\PrintServer\TE200_160');
     f_print_2824 := Ini.ReadString(csIniSectionPathPrint, 'Print_TLP 2824', '\\PrintServer\TLP 2824');
+    f_print_a4 := Ini.ReadString(csIniSectionPathPrint, 'Print_A4', '\\JobPrime\HP LaserJet 1018');
     // версия устройства
     f_vesrion    := Ini.ReadString(csIniSectionVersion, 'Actual version', 'v 3.9.10');
 
@@ -70,6 +72,7 @@ begin
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_908', f_print_908);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TE200_576', f_print_576);
     Ini.WriteString(csIniSectionPathPrint, 'Print_TLP 2824',  f_print_2824);
+    Ini.WriteString(csIniSectionPathPrint, 'Print_A4',  f_print_a4);
 //  // mac-адрес
 //    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_atlanta', f_LastMAC_atlanta);
 //    Ini.WriteString(csIniSectionMAC_Last, 'MAC_LastOneIncrement_topaz', f_LastMAC_topaz);

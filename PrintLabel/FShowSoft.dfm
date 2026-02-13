@@ -13148,17 +13148,6 @@ object frmShowSoft: TfrmShowSoft
         OnClick = mniRepResetClick
       end
     end
-    object mniSettings: TMenuItem
-      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-      object mniFont: TMenuItem
-        Caption = #1064#1088#1080#1092#1090
-        OnClick = mniFontClick
-      end
-      object mniColorBackGround: TMenuItem
-        Caption = #1062#1074#1077#1090' '#1092#1086#1085#1072
-        OnClick = mniColorBackGroundClick
-      end
-    end
     object mniExtra_Main: TMenuItem
       Caption = #1055#1088#1086#1095#1080#1077' '#1089#1090#1080#1082#1077#1088#1099
       object mniMarking_Separator_0: TMenuItem
@@ -13392,21 +13381,47 @@ object frmShowSoft: TfrmShowSoft
       end
       object mni_q_scripts: TMenuItem
         Caption = #1057#1082#1088#1080#1087#1090#1099
-        object mni_q_sripts_show: TMenuItem
+        object mni_q_scripts_show: TMenuItem
           Caption = #1055#1086#1082#1072#1079#1072#1090#1100
-          OnClick = mni_q_sripts_showClick
+          OnClick = mni_q_scripts_showClick
         end
-        object mni_q_sripts_execute: TMenuItem
+        object mni_q_scripts_execute: TMenuItem
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
           Enabled = False
+          OnClick = mni_q_scripts_executeClick
         end
         object mni_q_sripts_separatorOne: TMenuItem
           Caption = '-'
           Enabled = False
         end
-        object mni_q_sripts_print: TMenuItem
+        object mni_q_scripts_print: TMenuItem
           Caption = #1055#1077#1095#1072#1090#1100
           Enabled = False
+          OnClick = mni_q_scripts_printClick
+        end
+      end
+      object mni_upg_soft_separatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_upg_soft_main: TMenuItem
+        Caption = #1040#1087#1075#1088#1077#1081#1076
+        object mni_upg_soft_entry: TMenuItem
+          Caption = #1060#1086#1088#1084#1072' '#1074#1074#1086#1076#1072' '#1076#1072#1085#1085#1099#1093
+          OnClick = mni_upg_soft_entryClick
+        end
+        object mni_upg_soft_report: TMenuItem
+          Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1086#1090#1095#1077#1090#1072
+          Enabled = False
+          OnClick = mni_upg_soft_reportClick
+        end
+        object mni_upg_soft_separatorTwo: TMenuItem
+          Caption = '-'
+          Enabled = False
+        end
+        object mni_upg_soft_print: TMenuItem
+          Caption = #1055#1077#1095#1072#1090#1100
+          Enabled = False
+          OnClick = mni_upg_soft_printClick
         end
       end
       object mni_q_separator_one: TMenuItem
@@ -13414,6 +13429,18 @@ object frmShowSoft: TfrmShowSoft
       end
       object mni_q_reset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_q_resetClick
+      end
+    end
+    object mniSettings: TMenuItem
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+      object mniFont: TMenuItem
+        Caption = #1064#1088#1080#1092#1090
+        OnClick = mniFontClick
+      end
+      object mniColorBackGround: TMenuItem
+        Caption = #1062#1074#1077#1090' '#1092#1086#1085#1072
+        OnClick = mniColorBackGroundClick
       end
     end
   end
@@ -13485,6 +13512,39 @@ object frmShowSoft: TfrmShowSoft
     object fldModem: TStringField
       FieldName = 'modem'
       Size = 10
+    end
+  end
+  object fd_upg_soft: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'f_q'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'f_st'
+        DataType = ftString
+        Size = 60
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 120
+    Top = 304
+    object strngfld_upg_softf_q: TStringField
+      FieldName = 'f_q'
+      Size = 60
+    end
+    object strngfld_upg_softf_st: TStringField
+      FieldName = 'f_st'
+      Size = 60
     end
   end
 end

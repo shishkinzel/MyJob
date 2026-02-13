@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, frxClass, frxPreview, frxBarcode, frxBarcode2D;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, frxClass, frxPreview, frxBarcode, frxBarcode2D,
+  frxDBSet;
 
 type
   TfrmFR_List = class(TForm)
@@ -14,6 +15,8 @@ type
     frxRe_adv: TfrxReport;
     frx_command: TfrxReport;
     frx_scripts: TfrxReport;
+    frx_upg_soft: TfrxReport;
+    fr_db_upg_soft: TfrxDBDataset;
 
 //    memData : TfrxMemoView ;
   private

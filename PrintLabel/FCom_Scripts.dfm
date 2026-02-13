@@ -1,6 +1,7 @@
 object F_Command: TF_Command
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = bsDialog
   Caption = #1060#1086#1088#1084#1072' '#1074#1074#1086#1076#1072' '#1076#1072#1085#1099#1093' '
   ClientHeight = 321

@@ -42,13 +42,13 @@ object frmTest: TfrmTest
     TitleFont.Style = []
   end
   object dsTest: TDataSource
-    DataSet = dbmPrintLabel.fdmtblPrint
+    DataSet = frmShowSoft.fd_upg_soft
     Left = 32
     Top = 456
   end
   object dsReport: TDataSource
     DataSet = dbmPrintLabel.fdmtblReport
-    Left = 200
-    Top = 480
+    Left = 112
+    Top = 456
   end
 end

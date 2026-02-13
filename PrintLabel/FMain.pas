@@ -69,6 +69,7 @@ var
   f_print_908 : string;
   f_print_576 : string;
   f_print_160 : string;
+  f_print_a4  : string;
 
   f_vesrion: string;             // переменна€ чтени€ версии устройства из конфигурации
 
@@ -102,6 +103,7 @@ begin
   f_print_908 := IniOptions.f_print_908;
   f_print_160 := IniOptions.f_print_160;
   f_print_2824 := IniOptions.f_print_2824;
+  f_print_a4 := IniOptions.f_print_a4;
 
   // актуальна€ верси€ издели€
   f_vesrion := IniOptions.f_vesrion;
@@ -399,6 +401,7 @@ begin
   IniOptions.f_print_160 := f_print_160;
   IniOptions.f_print_576 := f_print_576;
   IniOptions.f_print_2824 := f_print_2824;
+  IniOptions.f_print_a4 := f_print_a4;
 // верси€
   IniOptions.f_vesrion := f_vesrion;
 

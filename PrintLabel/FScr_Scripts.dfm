@@ -1,6 +1,7 @@
 object F_Scripts: TF_Scripts
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = bsDialog
   Caption = #1060#1086#1088#1084#1072' '#1074#1074#1086#1076#1072' '#1089#1082#1088#1080#1087#1090#1086#1074' '#1090#1077#1082#1089#1090#1072
   ClientHeight = 554
@@ -36855,24 +36856,18 @@ object F_Scripts: TF_Scripts
     Height = 201
     Lines.Strings = (
       'vlan database'
-      ' vlan 2-6'
-      'interface x15,wl1-2,wl1.sta1'
-      ' switchport mode access'
-      ' switchport access vlan 2'
-      'interface x12,x13'
-      ' switchport mode access'
-      ' switchport access vlan 4'
-      'interface x14,x16'
-      ' switchport mode access'
-      ' switchport access vlan 5'
-      'interface x17,x18'
-      ' switchport mode access'
-      ' switchport access vlan 6'
+      ' vlan 2'
+      ' interface wl1-2,wl1.sta1,ge1 '
+      'switchport mode access'
+      'switchport access vlan 2 '
       'switch'
-      ' no spanning-tree'
+      'no spanning-tree'
       'briss'
-      ' briss instance default'
-      ' no back-protection')
+      'briss instance default'
+      'no back-protection'
+      'show briss'
+      'show int com'
+      'show version')
     TabOrder = 1
   end
   object mmo_pos3: TMemo
@@ -36881,25 +36876,14 @@ object F_Scripts: TF_Scripts
     Width = 377
     Height = 201
     Lines.Strings = (
-      'vlan database'
-      ' vlan 2-6'
-      'interface x15,wl1-2,wl1.sta1'
-      ' switchport mode access'
-      ' switchport access vlan 2'
-      'interface x12,x13'
-      ' switchport mode access'
-      ' switchport access vlan 4'
-      'interface x14,x16'
-      ' switchport mode access'
-      ' switchport access vlan 5'
-      'interface x17,x18'
-      ' switchport mode access'
-      ' switchport access vlan 6'
       'switch'
-      ' no spanning-tree'
+      'no spanning-tree'
       'briss'
-      ' briss instance default'
-      ' no back-protection')
+      'briss instance default'
+      'no back-protection'
+      'show briss'
+      'show int com'
+      'show version')
     TabOrder = 2
   end
   object mmo_pos4: TMemo
@@ -36908,25 +36892,12 @@ object F_Scripts: TF_Scripts
     Width = 377
     Height = 201
     Lines.Strings = (
-      'vlan database'
-      ' vlan 2-6'
-      'interface x15,wl1-2,wl1.sta1'
-      ' switchport mode access'
-      ' switchport access vlan 2'
-      'interface x12,x13'
-      ' switchport mode access'
-      ' switchport access vlan 4'
-      'interface x14,x16'
-      ' switchport mode access'
-      ' switchport access vlan 5'
-      'interface x17,x18'
-      ' switchport mode access'
-      ' switchport access vlan 6'
       'switch'
       ' no spanning-tree'
       'briss'
       ' briss instance default'
-      ' no back-protection')
+      ' no back-protection'
+      '')
     TabOrder = 3
   end
   object btn_com_execute: TBitBtn
@@ -36935,6 +36906,7 @@ object F_Scripts: TF_Scripts
     Width = 120
     Height = 25
     Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+    ModalResult = 1
     TabOrder = 4
     OnClick = btn_com_executeClick
   end
@@ -36944,6 +36916,8 @@ object F_Scripts: TF_Scripts
     Width = 257
     Height = 17
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1080#1084#1074#1086#1083' '#1087#1077#1088#1077#1074#1086#1076#1072' '#1082#1072#1088#1077#1090#1082#1080' ('#1057#1050')#13'
+    Checked = True
+    State = cbChecked
     TabOrder = 5
   end
   object edt_pos1: TEdit
@@ -36958,10 +36932,10 @@ object F_Scripts: TF_Scripts
     Font.Style = []
     ParentFont = False
     TabOrder = 6
-    Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1089#1082#1088#1080#1087#1090#1072
+    Text = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1052#1057
   end
   object edt_pos2: TEdit
-    Left = 24
+    Left = 23
     Top = 253
     Width = 315
     Height = 21
@@ -36972,7 +36946,7 @@ object F_Scripts: TF_Scripts
     Font.Style = []
     ParentFont = False
     TabOrder = 7
-    Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1089#1082#1088#1080#1087#1090#1072
+    Text = #1057#1082#1088#1080#1087#1090' '#1076#1083#1103' '#1082#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1080' '#1052#1057#1041#1057'-'#1052#1050
   end
   object edt_pos3: TEdit
     Left = 440
@@ -36986,7 +36960,7 @@ object F_Scripts: TF_Scripts
     Font.Style = []
     ParentFont = False
     TabOrder = 8
-    Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1089#1082#1088#1080#1087#1090#1072
+    Text = #1057#1082#1088#1080#1087#1090' '#1076#1083#1103' '#1082#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1080' '#1052#1057#1041#1057'-'#1052
   end
   object edt_pos4: TEdit
     Left = 440
@@ -37000,6 +36974,6 @@ object F_Scripts: TF_Scripts
     Font.Style = []
     ParentFont = False
     TabOrder = 9
-    Text = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1089#1082#1088#1080#1087#1090#1072
+    Text = #1057#1082#1088#1080#1087#1090' '#1076#1083#1103' '#1086#1090#1082#1083#1102#1095#1077#1085#1080#1103' '#1080#1085#1090#1077#1088#1092#1077#1081#1089#1086#1074' '#1041#1052#1057
   end
 end

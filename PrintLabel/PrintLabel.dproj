@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PrintLabel.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -170,6 +170,10 @@
         </DCCReference>
         <DCCReference Include="FScr_Scripts.pas">
             <Form>F_Scripts</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="FUpg_soft.pas">
+            <Form>F_upg_soft</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

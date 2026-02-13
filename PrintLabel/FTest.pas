@@ -24,7 +24,7 @@ var
 implementation
 
 uses
-  FMain, FdbmPrintLabel;
+  FMain, FdbmPrintLabel, FShowSoft;
 
 {$R *.dfm}
 
