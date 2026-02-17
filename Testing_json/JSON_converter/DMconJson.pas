@@ -3,14 +3,21 @@
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.StorageJSON, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
-  FireDAC.VCLUI.Wait, FireDAC.DApt, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat,
+  System.SysUtils, System.Classes, FireDAC.Stan.StorageJSON, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.VCLUI.Wait, FireDAC.DApt, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat,
   FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite, FireDAC.Comp.BatchMove.SQL,
-  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove, FireDAC.Comp.BatchMove.Text,
-  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script, FireDAC.VCLUI.Script,
+  FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove,
+  FireDAC.Comp.BatchMove.Text,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.Comp.Script,
+  FireDAC.VCLUI.Script,
   FireDAC.Comp.UI;
 
 type
@@ -52,7 +59,6 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
 
-
     { Private declarations }
   public
     { Public declarations }
@@ -67,7 +73,6 @@ uses
   FconJson, FconJson_compositeTable, FconJson_statistic;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
-
 {$R *.dfm}
 
 procedure Tdm_conJson.DataModuleCreate(Sender: TObject);
@@ -81,12 +86,7 @@ procedure Tdm_conJson.DataModuleDestroy(Sender: TObject);
 begin
   db_memTab_conJson_statistic.Active := False;
   db_memTab_conJson.Active := False;
-   db_memTab_CompositeTable.Active := False;
+  db_memTab_CompositeTable.Active := False;
 end;
 
-
-
-
-
 end.
-

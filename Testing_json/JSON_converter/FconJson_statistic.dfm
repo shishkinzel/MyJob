@@ -71,7 +71,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
   end
   object dlgSave_conJson_statistic: TSaveDialog
     DefaultExt = 'fds'
-    FileName = 'statistic_json'
+    FileName = 'statistic'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
     InitialDir = 'lib_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
@@ -84,11 +84,11 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     object mni_MainFile: TMenuItem
       Caption = #1060#1072#1081#1083
       object mni_MainOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_MainOpenClick
       end
       object mni_MainSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' - null'
       end
       object mni_SeparatorOne_main: TMenuItem
         Caption = '-'
@@ -101,11 +101,11 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     object mni_conJsonFile: TMenuItem
       Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json'
         OnClick = mni_conJsonOpenClick
       end
       object mni_conJsonSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' fds_json'
         OnClick = mni_conJsonSaveClick
       end
       object mni_SeparatorOne: TMenuItem

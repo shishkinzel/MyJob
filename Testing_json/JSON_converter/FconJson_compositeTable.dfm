@@ -69,29 +69,29 @@ object frm_CompositeTable: Tfrm_CompositeTable
     FileName = 'composite_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     InitialDir = 'lib_fds'
-    Left = 48
-    Top = 288
+    Left = 56
+    Top = 184
   end
   object dlgSave_CompositeTable: TSaveDialog
     DefaultExt = 'fds'
-    FileName = 'composite_json'
+    FileName = 'composite'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     InitialDir = 'lib_fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 200
-    Top = 288
+    Left = 56
+    Top = 248
   end
   object mm_CompositeTable: TMainMenu
-    Left = 16
-    Top = 144
+    Left = 56
+    Top = 80
     object mni_conJsonFile: TMenuItem
       Caption = #1060#1072#1081#1083
       object mni_conJsonOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_conJsonOpenClick
       end
       object mni_conJsonSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_conJsonSaveClick
       end
       object mni_SeparatorOneCompositeTable: TMenuItem
@@ -105,7 +105,7 @@ object frm_CompositeTable: Tfrm_CompositeTable
     object mni_msql_Section: TMenuItem
       Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
       object mni_msql_Connect: TMenuItem
-        Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077
+        Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' - null'
       end
       object mni_msql_SeparatorOne: TMenuItem
         Caption = '-'
@@ -118,9 +118,6 @@ object frm_CompositeTable: Tfrm_CompositeTable
         Caption = #1055#1077#1088#1077#1085#1086#1089' '#1074'  MySQL'
         Enabled = False
         OnClick = mni_msql_OneClick
-      end
-      object mni_msql_Three: TMenuItem
-        Caption = '3'
       end
       object mni_msql_SeparatorTwo: TMenuItem
         Caption = '-'

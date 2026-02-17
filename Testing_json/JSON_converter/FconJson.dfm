@@ -300,11 +300,11 @@ object frm_conJson: Tfrm_conJson
     object mni_MainFile: TMenuItem
       Caption = #1060#1072#1081#1083
       object mni_MainOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_MainOpenClick
       end
       object mni_MainSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' null'
       end
       object mni_SeparatorOne_main: TMenuItem
         Caption = '-'
@@ -317,11 +317,11 @@ object frm_conJson: Tfrm_conJson
     object mni_conJsonFile_Converter: TMenuItem
       Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json'
         OnClick = mni_conJsonOpenClick
       end
       object mni_conJsonSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083' dlgSave_conJson'
         OnClick = mni_conJsonSaveClick
       end
       object mni_OneSeparator: TMenuItem
@@ -346,15 +346,14 @@ object frm_conJson: Tfrm_conJson
   end
   object dlgOpen_conJson: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    InitialDir = 'lib_json'
+    InitialDir = #39'lib_json'#39
     Left = 40
     Top = 232
   end
   object dlgSave_conJson: TSaveDialog
     DefaultExt = 'fds'
-    FileName = 'device_json'
+    FileName = 'device'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    InitialDir = 'lib_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 176
     Top = 240
@@ -366,9 +365,9 @@ object frm_conJson: Tfrm_conJson
   end
   object dlgOpen_MainFile: TOpenDialog
     DefaultExt = 'fds'
-    FileName = 'device_json'
+    FileName = 'device_fds'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
-    InitialDir = 'lib_fds'
+    InitialDir = ' lib_fds'
     Left = 32
     Top = 328
   end

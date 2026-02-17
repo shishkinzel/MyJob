@@ -5,11 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, Vcl.DBCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, FireDAC.Stan.StorageJSON,
-  FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.VCLUI.Script, FireDAC.Comp.UI;
+  FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.VCLUI.Script,
+  FireDAC.Comp.UI;
 
 type
   Tfrm_CompositeTable = class(TForm)
@@ -32,7 +34,6 @@ type
     mni_msql_SeparatorOne: TMenuItem;
     mni_msql_One: TMenuItem;
     mni_msql_ClearTable: TMenuItem;
-    mni_msql_Three: TMenuItem;
     mni_msql_SeparatorTwo: TMenuItem;
     mni_msql_Reset: TMenuItem;
     procedure FormCreate(Sender: TObject);
@@ -49,7 +50,8 @@ type
   public
     { Public declarations }
   end;
-  const
+
+const
   csScriptClear = 'TRUNCATE db_composite_tb';
 
 var
@@ -61,6 +63,7 @@ uses
   FconJson, DMconJson;
 
 {$R *.dfm}
+
 // создание формы
 procedure Tfrm_CompositeTable.FormCreate(Sender: TObject);
 var
@@ -147,31 +150,24 @@ begin
   end;
 end;
 
-
-
-
-
-
-
-
 {
- Произвести склейку двух таблиц по серийному номеру
+  Произвести склейку двух таблиц по серийному номеру
 
- }
+}
 procedure Tfrm_CompositeTable.btn_conJson_CompositeTableClick(Sender: TObject);
 const
   csNo = 'No data';
 var
-  i: integer;
+  i: Integer;
   f_temp_idserial: string;
   db_dev, db_st, db_comp: TFDMemTable;
 begin
-// назначаем  псевдонимы для баз данных таблиц изделия и статистики
+  // назначаем  псевдонимы для баз данных таблиц изделия и статистики
   db_dev := dm_conJson.db_memTab_conJson;
   db_st := dm_conJson.db_memTab_conJson_statistic;
   db_comp := dm_conJson.db_memTab_CompositeTable;
 
- // реализация поиска и заполнения таблицы db_memTab_CompositeTable
+  // реализация поиска и заполнения таблицы db_memTab_CompositeTable
   db_dev.Open;
   db_dev.First;
   db_comp.Open;
@@ -180,41 +176,49 @@ begin
 
   while not db_dev.Eof do
   begin
-// начинаем движение
+    // начинаем движение
     db_comp.Insert;
     db_st.First;
-    db_comp.Fields.FieldByNumber(2).AsString := db_dev.Fields.FieldByNumber(2).AsString;
-    db_comp.Fields.FieldByNumber(3).AsString := db_dev.Fields.FieldByNumber(3).AsString;
-    db_comp.Fields.FieldByNumber(5).AsString := db_dev.Fields.FieldByNumber(5).AsString;
-    db_comp.Fields.FieldByNumber(6).AsString := db_dev.Fields.FieldByNumber(6).AsString;
+    db_comp.Fields.FieldByNumber(2).AsString :=
+      db_dev.Fields.FieldByNumber(2).AsString;
+    db_comp.Fields.FieldByNumber(3).AsString :=
+      db_dev.Fields.FieldByNumber(3).AsString;
+    db_comp.Fields.FieldByNumber(5).AsString :=
+      db_dev.Fields.FieldByNumber(5).AsString;
+    db_comp.Fields.FieldByNumber(6).AsString :=
+      db_dev.Fields.FieldByNumber(6).AsString;
     f_temp_idserial := db_dev.Fields.FieldByNumber(4).AsString;
     db_comp.Fields.FieldByNumber(4).AsString := f_temp_idserial;
- // запускаем функцию поиска строки в таблице db_memTab_conJson_statistic
+    // запускаем функцию поиска строки в таблице db_memTab_conJson_statistic
 
     if db_st.Locate('request_serial', f_temp_idserial, []) then
     begin
- // при нахождении строки переписываем ее содержимое в результирующую таблицу
-      db_comp.Fields.FieldByNumber(7).AsInteger := db_st.Fields.FieldByNumber(2).AsInteger;
-      db_comp.Fields.FieldByNumber(8).AsDateTime  := db_st.Fields.FieldByNumber(5).AsDateTime ;
-      db_comp.Fields.FieldByNumber(9).AsString := db_st.Fields.FieldByNumber(6).AsString;
-      db_comp.Fields.FieldByNumber(10).AsString := db_st.Fields.FieldByNumber(7).AsString;
+      // при нахождении строки переписываем ее содержимое в результирующую таблицу
+      db_comp.Fields.FieldByNumber(7).AsInteger := db_st.Fields.FieldByNumber(2)
+        .AsInteger;
+      db_comp.Fields.FieldByNumber(8).AsDateTime :=
+        db_st.Fields.FieldByNumber(5).AsDateTime;
+      db_comp.Fields.FieldByNumber(9).AsString :=
+        db_st.Fields.FieldByNumber(6).AsString;
+      db_comp.Fields.FieldByNumber(10).AsString :=
+        db_st.Fields.FieldByNumber(7).AsString;
     end
     else
     begin
       db_comp.Fields.FieldByNumber(7).AsInteger := 0;
-//      db_comp.Fields.FieldByNumber(8).AsDateTime := 1;
+      // db_comp.Fields.FieldByNumber(8).AsDateTime := 1;
       db_comp.Fields.FieldByNumber(9).AsString := csNo;
       db_comp.Fields.FieldByNumber(10).AsString := csNo;
     end;
-// переход на новую строку
+    // переход на новую строку
     db_dev.Next;
     db_comp.Next;
   end;
   db_comp.Refresh;
 end;
 
-{  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Блок чтения и записи склеиных файлов - набор данный для размещения в БД MySQL
+{ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  Блок чтения и записи склеиных файлов - набор данный для размещения в БД MySQL
 
 }
 // процедура открытия файла fds
@@ -224,6 +228,7 @@ var
   f_Path_FileJson: string;
   f_StringList: TStringList;
 begin
+  dlgOpen_CompositeTable.InitialDir := fPath_exe + '\lib_fds';
   if dlgOpen_CompositeTable.Execute() then
   begin
     f_Path_FileJson := dlgOpen_CompositeTable.FileName;
@@ -321,30 +326,30 @@ var
   f_Path_FileJson: string;
   f_StringList: TStringList;
 begin
+  dlgSave_CompositeTable.InitialDir := fPath_exe + '\lib_fds';
   if dlgSave_CompositeTable.Execute() then
   begin
     f_Path_FileJson := dlgSave_CompositeTable.FileName;
+    dm_conJson.db_memTab_CompositeTable.SaveToFile(f_Path_FileJson, sfJSON);
   end;
-  dm_conJson.db_memTab_CompositeTable.SaveToFile(f_Path_FileJson, sfJSON);
+
 end;
 
 
-
-
 {
-----------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------------
 }
-
 
 // Перенос БД в MySQL
 procedure Tfrm_CompositeTable.mni_msql_OneClick(Sender: TObject);
 var
-db_comp : TFDMemTable;
+  db_comp: TFDMemTable;
 
 begin
- db_comp := dm_conJson.db_memTab_CompositeTable;
- dm_conJson.fdbtchmv_conJson_BatchMove.Execute;
+  db_comp := dm_conJson.db_memTab_CompositeTable;
+  dm_conJson.fdbtchmv_conJson_BatchMove.Execute;
 end;
+
 // Очистка таблицы в MySQL
 procedure Tfrm_CompositeTable.mni_msql_ClearTableClick(Sender: TObject);
 var
@@ -354,13 +359,12 @@ begin
   db_script := dm_conJson.fd_script_ClearDB;
   if db_script.ValidateAll then
   begin
-//    ShowMessage('Скрипт валидный');
+    // ShowMessage('Скрипт валидный');
     db_script.ExecuteAll;
     ShowMessage('Таблица в MySQL - очищена');
     mni_msql_One.Enabled := True;
   end;
 end;
-
 
 // Сброс таблицы
 procedure Tfrm_CompositeTable.mni_CompositeTableResetClick(Sender: TObject);
@@ -369,7 +373,8 @@ begin
   dbG_conJson_CompositeTable.DataSource.DataSet.Open;
 end;
 
-procedure Tfrm_CompositeTable.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure Tfrm_CompositeTable.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 var
   i: Integer;
 begin
@@ -377,4 +382,3 @@ begin
 end;
 
 end.
-

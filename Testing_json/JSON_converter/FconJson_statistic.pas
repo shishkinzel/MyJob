@@ -3,10 +3,14 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  Data.DB, Vcl.DBCtrls,
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
   Vcl.StdCtrls, Vcl.Buttons, FireDAC.Stan.StorageJSON;
 
 type
@@ -56,17 +60,15 @@ var
 implementation
 
 uses
-  System.JSON, FconJson, DMconJson, DateUtils ;
+  System.JSON, FconJson, DMconJson, DateUtils;
 
 {$R *.dfm}
-
 
 // Создание формы
 procedure Tfrm_conJson_statistic.FormCreate(Sender: TObject);
 var
-i : Integer;
+  i: Integer;
 begin
-
 
 end;
 
@@ -77,14 +79,14 @@ var
   attempt, original, proposed, date, serial, selector: string;
   maxid: Integer;
   ftemp_mac: string;
-  fdate : TDateTime;
+  fdate: TDateTime;
 begin
   // формируем StringList
   fStringList := TStringList.Create;
   fStringList.LoadFromFile(fPath_jsonFile);
 
   JSON := TJSONObject.ParseJSONValue(fStringList.Text) as TJSONObject;
-    // очищаем бд
+  // очищаем бд
   dm_conJson.db_memTab_conJson_statistic.Close;
   // открываем бд
   dm_conJson.db_memTab_conJson_statistic.Open;
@@ -100,13 +102,18 @@ begin
         maxid := JP2.JsonString.Value.ToInteger;
     end;
     // берем нужные поля по Идентификатору и максимальному номеру
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.current-firmware-version', original);
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.proposed-firmware-version', proposed);
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.request-date', date);
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.requested-serial', serial);
-    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.selector', selector);
+    JSON.Values[JP.JsonString.Value].TryGetValue
+      (maxid.ToString + '.current-firmware-version', original);
+    JSON.Values[JP.JsonString.Value].TryGetValue
+      (maxid.ToString + '.proposed-firmware-version', proposed);
+    JSON.Values[JP.JsonString.Value].TryGetValue
+      (maxid.ToString + '.request-date', date);
+    JSON.Values[JP.JsonString.Value].TryGetValue
+      (maxid.ToString + '.requested-serial', serial);
+    JSON.Values[JP.JsonString.Value].TryGetValue(maxid.ToString + '.selector',
+      selector);
 
-  // преобразовываем строку в дату
+    // преобразовываем строку в дату
     fdate := ISO8601ToDate(date, False);
 
     dm_conJson.db_memTab_conJson_statistic.Insert;
@@ -123,18 +130,18 @@ begin
   end;
   // уничтожаем StringList
   fStringList.Free;
-   dm_conJson.db_memTab_conJson_statistic.Refresh;
+  dm_conJson.db_memTab_conJson_statistic.Refresh;
   // уничтожаем объект JSON
   JSON.Free;
   frm_conJson.mni_SQL_Form_direct.Enabled := True;
 end;
 
-
-{        Открытие секции чтение и записи конвертируемых файлов
-____________________________________________________________________________________________________
+{ Открытие секции чтение и записи конвертируемых файлов
+  ____________________________________________________________________________________________________
 }
 procedure Tfrm_conJson_statistic.mni_conJsonOpenClick(Sender: TObject);
 begin
+  dlgOpen_conJson_statistic.InitialDir := fPath_exe + '\lib_json';
   if dlgOpen_conJson_statistic.Execute then
   begin
     fPath_jsonFile := dlgOpen_conJson_statistic.FileName;
@@ -150,25 +157,30 @@ procedure Tfrm_conJson_statistic.mni_conJsonSaveClick(Sender: TObject);
 var
   f_Path_FileJson: string;
 begin
+  dlgSave_conJson_statistic.InitialDir := fPath_exe + '\lib_fds';
   if dlgSave_conJson_statistic.Execute() then
   begin
-     f_Path_FileJson := dlgSave_conJson_statistic.FileName;
+    f_Path_FileJson := dlgSave_conJson_statistic.FileName;
+    dm_conJson.db_memTab_conJson_statistic.SaveToFile(f_Path_FileJson, sfJSON);
   end;
-   dm_conJson.db_memTab_conJson_statistic.SaveToFile(f_Path_FileJson, sfJSON);
+
 end;
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
-{        Открытие секции чтение и записи сконвертируемых файлов
-____________________________________________________________________________________________________
+
+// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+{ Открытие секции чтение и записи сконвертируемых файлов
+  ____________________________________________________________________________________________________
 }
- // открыть сохраненый конвертируемый файл
+// открыть сохраненый конвертируемый файл
 procedure Tfrm_conJson_statistic.mni_MainOpenClick(Sender: TObject);
 var
   f_Path_FileJson: string;
   f_StringList: TStringList;
 begin
+  dlgOpen_MainFile.InitialDir := fPath_exe + '\lib_fds';
   if dlgOpen_MainFile.Execute() then
   begin
     f_Path_FileJson := dlgOpen_MainFile.FileName;
@@ -178,7 +190,8 @@ begin
     begin
       dm_conJson.db_memTab_conJson_statistic.Close;
       dm_conJson.db_memTab_conJson_statistic.Open;
-      dm_conJson.db_memTab_conJson_statistic.LoadFromFile(f_Path_FileJson, sfJSON);
+      dm_conJson.db_memTab_conJson_statistic.LoadFromFile
+        (f_Path_FileJson, sfJSON);
     end;
     f_StringList.Free;
   end;
@@ -193,10 +206,9 @@ begin
   dbG_conJson_statistic.DataSource.DataSet.Open;
 end;
 
-
-
 // Закрытие формы
-procedure Tfrm_conJson_statistic.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure Tfrm_conJson_statistic.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 var
   i: Integer;
 begin
@@ -204,4 +216,3 @@ begin
 end;
 
 end.
-
