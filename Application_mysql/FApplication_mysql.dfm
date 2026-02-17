@@ -2338,7 +2338,7 @@ object frm_app_mysql: Tfrm_app_mysql
       Top = 1
       Width = 1008
       Height = 583
-      ActivePage = ts_six
+      ActivePage = ts_four
       Align = alClient
       TabOrder = 0
       object ts_one: TTabSheet
@@ -2413,6 +2413,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1076#1072#1090#1077
             TabOrder = 4
+            ExplicitWidth = 91
           end
         end
         object dbnav_ts_One: TDBNavigator
@@ -2513,6 +2514,7 @@ object frm_app_mysql: Tfrm_app_mysql
             Alignment = taCenter
             Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1091
             TabOrder = 2
+            ExplicitWidth = 124
           end
         end
       end
@@ -2569,7 +2571,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object txt_Title_attempt: TStaticText
             Left = 1
             Top = 1
-            Width = 998
+            Width = 197
             Height = 17
             Align = alTop
             Alignment = taCenter
@@ -2618,7 +2620,7 @@ object frm_app_mysql: Tfrm_app_mysql
         end
       end
       object ts_four: TTabSheet
-        Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1089#1077#1088#1081#1085#1086#1084#1091' '#1085#1086#1084#1077#1088#1091
+        Caption = #1042#1099#1073#1086#1088#1082#1072' '#1087#1086' '#1089#1077#1088#1080#1081#1085#1086#1084#1091' '#1085#1086#1084#1077#1088#1091
         ImageIndex = 3
         OnShow = ts_fourShow
         object dbG_ts_four: TDBGrid
@@ -2760,7 +2762,7 @@ object frm_app_mysql: Tfrm_app_mysql
           object StaticText1: TStaticText
             Left = 1
             Top = 1
-            Width = 998
+            Width = 171
             Height = 17
             Align = alTop
             Alignment = taCenter
