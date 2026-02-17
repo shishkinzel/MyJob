@@ -290,6 +290,7 @@ object frm_conJson: Tfrm_conJson
       Width = 972
       Height = 25
       DataSource = ds_conJson
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 1
     end
@@ -297,34 +298,24 @@ object frm_conJson: Tfrm_conJson
   object mm_conJson: TMainMenu
     Left = 16
     Top = 80
-    object mni_MainFile: TMenuItem
-      Caption = #1060#1072#1081#1083
+    object mni_conJsonFile_Converter: TMenuItem
+      Caption = #1050#1086#1085#1074#1077#1088#1090#1072#1094#1080#1103' DB_device'
       object mni_MainOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_MainOpenClick
       end
-      object mni_MainSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' null'
-      end
-      object mni_SeparatorOne_main: TMenuItem
+      object mni_device_SeparatorOne: TMenuItem
         Caption = '-'
       end
-      object mni_MainReset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        OnClick = mni_MainResetClick
-      end
-    end
-    object mni_conJsonFile_Converter: TMenuItem
-      Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json'
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json('#1076#1083#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080')'
         OnClick = mni_conJsonOpenClick
       end
       object mni_conJsonSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083' dlgSave_conJson'
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083' '#1074' fds'
         OnClick = mni_conJsonSaveClick
       end
-      object mni_OneSeparator: TMenuItem
+      object mni_device_SeparatorTwo: TMenuItem
         Caption = '-'
       end
       object mni_Reset: TMenuItem
@@ -332,31 +323,53 @@ object frm_conJson: Tfrm_conJson
         OnClick = mni_MainResetClick
       end
     end
-    object mni_SQL_Form: TMenuItem
-      Caption = #1055#1077#1088#1077#1093#1086#1076#1099
-      object mni_conJson_statistic_transfer: TMenuItem
-        Caption = #1058#1072#1073#1083#1080#1094#1072' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
-        OnClick = mni_conJson_statistic_transferClick
+    object mni_conJson_statistic_transfer: TMenuItem
+      Caption = #1050#1086#1085#1074#1077#1088#1090#1072#1094#1080#1103' DB_statistics'
+      object mni_statistics_show: TMenuItem
+        Caption = #1055#1077#1088#1077#1081#1090#1080' '#1085#1072' '#1092#1086#1088#1084#1091' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080
+        OnClick = mni_statistics_showClick
       end
-      object mni_SQL_Form_direct: TMenuItem
-        Caption = #1057#1074#1086#1076#1085#1072#1103' '#1090#1072#1073#1083#1080#1094#1072
-        OnClick = mni_SQL_Form_directClick
+    end
+    object mni_SQL_Form_direct: TMenuItem
+      Caption = #1060#1086#1088#1084#1080#1088#1086#1074#1072#1085#1080#1077' '#1089#1074#1086#1076#1085#1086#1081' '#1090#1072#1073#1083#1080#1094#1099
+      object mni_composite_show: TMenuItem
+        Caption = #1055#1077#1088#1077#1081#1090#1080' '#1085#1072' '#1092#1086#1088#1084#1091' '#1089#1074#1086#1076#1085#1086#1081' '#1090#1072#1073#1083#1080#1094#1099
+        OnClick = mni_composite_showClick
+      end
+    end
+    object mni_mysql_main: TMenuItem
+      Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
+      object mni_mysql_clear: TMenuItem
+        Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1090#1072#1073#1083#1080#1094#1091' '#1074' MySQL'
+        OnClick = mni_mysql_clearClick
+      end
+      object mni_mysql_transfer: TMenuItem
+        Caption = #1055#1077#1088#1077#1085#1086#1089' '#1074'  MySQL'
+        Enabled = False
+        OnClick = mni_mysql_transferClick
+      end
+      object mni_mysql_SeparatorOne: TMenuItem
+        Caption = '-'
+      end
+      object mni_mysql_reset: TMenuItem
+        Caption = #1057#1073#1088#1086#1089
+        OnClick = mni_mysql_resetClick
       end
     end
   end
   object dlgOpen_conJson: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
     InitialDir = #39'lib_json'#39
-    Left = 40
-    Top = 232
+    Left = 96
+    Top = 80
   end
   object dlgSave_conJson: TSaveDialog
     DefaultExt = 'fds'
     FileName = 'device'
-    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 176
-    Top = 240
+    Left = 304
+    Top = 80
   end
   object ds_conJson: TDataSource
     DataSet = dm_conJson.db_memTab_conJson
@@ -368,15 +381,8 @@ object frm_conJson: Tfrm_conJson
     FileName = 'device_fds'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     InitialDir = ' lib_fds'
-    Left = 32
-    Top = 328
-  end
-  object dlgSave_MainFile: TSaveDialog
-    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    InitialDir = 'lib_fds'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 144
-    Top = 328
+    Left = 208
+    Top = 80
   end
   object fdjson_conJson: TFDStanStorageJSONLink
     Left = 912

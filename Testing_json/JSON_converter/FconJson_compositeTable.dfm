@@ -60,6 +60,7 @@ object frm_CompositeTable: Tfrm_CompositeTable
       Width = 1208
       Height = 25
       DataSource = ds_CompositeTable
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 1
     end
@@ -100,30 +101,6 @@ object frm_CompositeTable: Tfrm_CompositeTable
       object mni_CompositeTableReset: TMenuItem
         Caption = #1057#1073#1088#1086#1089
         OnClick = mni_CompositeTableResetClick
-      end
-    end
-    object mni_msql_Section: TMenuItem
-      Caption = #1056#1072#1073#1086#1090#1072' '#1089' MySQL'
-      object mni_msql_Connect: TMenuItem
-        Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077' - null'
-      end
-      object mni_msql_SeparatorOne: TMenuItem
-        Caption = '-'
-      end
-      object mni_msql_ClearTable: TMenuItem
-        Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1090#1072#1073#1083#1080#1094#1091' '#1074' MySQL'
-        OnClick = mni_msql_ClearTableClick
-      end
-      object mni_msql_One: TMenuItem
-        Caption = #1055#1077#1088#1077#1085#1086#1089' '#1074'  MySQL'
-        Enabled = False
-        OnClick = mni_msql_OneClick
-      end
-      object mni_msql_SeparatorTwo: TMenuItem
-        Caption = '-'
-      end
-      object mni_msql_Reset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
       end
     end
   end

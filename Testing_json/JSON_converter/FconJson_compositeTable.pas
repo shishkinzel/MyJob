@@ -29,13 +29,6 @@ type
     fdjson_conJson_CompastiteTable: TFDStanStorageJSONLink;
     mni_SeparatorOneCompositeTable: TMenuItem;
     mni_CompositeTableReset: TMenuItem;
-    mni_msql_Section: TMenuItem;
-    mni_msql_Connect: TMenuItem;
-    mni_msql_SeparatorOne: TMenuItem;
-    mni_msql_One: TMenuItem;
-    mni_msql_ClearTable: TMenuItem;
-    mni_msql_SeparatorTwo: TMenuItem;
-    mni_msql_Reset: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_conJson_CompositeTableClick(Sender: TObject);
@@ -43,8 +36,6 @@ type
     procedure mni_conJsonSaveClick(Sender: TObject);
     procedure mni_CompositeTableResetClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure mni_msql_OneClick(Sender: TObject);
-    procedure mni_msql_ClearTableClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -215,7 +206,11 @@ begin
     db_comp.Next;
   end;
   db_comp.Refresh;
+// сообщаем о успешном завершении операции склейки и вопрос о сохренении в файл fds
+  btn_conJson_CompositeTable.Enabled := False;
+  ShowMessage('Композитная таблица создана !!!' + #13 + 'Можно загружать на сервер');
 end;
+
 
 { +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Блок чтения и записи склеиных файлов - набор данный для размещения в БД MySQL
@@ -335,42 +330,12 @@ begin
 
 end;
 
-
-{
-  ----------------------------------------------------------------------------------------------------
-}
-
-// Перенос БД в MySQL
-procedure Tfrm_CompositeTable.mni_msql_OneClick(Sender: TObject);
-var
-  db_comp: TFDMemTable;
-
-begin
-  db_comp := dm_conJson.db_memTab_CompositeTable;
-  dm_conJson.fdbtchmv_conJson_BatchMove.Execute;
-end;
-
-// Очистка таблицы в MySQL
-procedure Tfrm_CompositeTable.mni_msql_ClearTableClick(Sender: TObject);
-var
-  i: Integer;
-  db_script: TFDScript;
-begin
-  db_script := dm_conJson.fd_script_ClearDB;
-  if db_script.ValidateAll then
-  begin
-    // ShowMessage('Скрипт валидный');
-    db_script.ExecuteAll;
-    ShowMessage('Таблица в MySQL - очищена');
-    mni_msql_One.Enabled := True;
-  end;
-end;
-
 // Сброс таблицы
 procedure Tfrm_CompositeTable.mni_CompositeTableResetClick(Sender: TObject);
 begin
   dbG_conJson_CompositeTable.DataSource.DataSet.Close;
   dbG_conJson_CompositeTable.DataSource.DataSet.Open;
+  btn_conJson_CompositeTable.Enabled := True;
 end;
 
 procedure Tfrm_CompositeTable.FormClose(Sender: TObject;

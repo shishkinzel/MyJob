@@ -10,7 +10,9 @@ uses
   FireDAC.DApt.Intf,
   Data.DB, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
   FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, FireDAC.Stan.StorageJSON;
+  FireDAC.Comp.Client, FireDAC.Stan.StorageJSON,
+  FireDAC.Comp.BatchMove.Text, FireDAC.Comp.Script, FireDAC.VCLUI.Script,
+  FireDAC.Comp.UI;
 
 type
   Tfrm_conJson = class(TForm)
@@ -25,28 +27,33 @@ type
     dbG_conJson: TDBGrid;
     dbnav_conJson: TDBNavigator;
     pnl_downConJson: TPanel;
-    mni_OneSeparator: TMenuItem;
+    mni_device_SeparatorTwo: TMenuItem;
     mni_Reset: TMenuItem;
-    mni_MainFile: TMenuItem;
     mni_MainOpen: TMenuItem;
-    mni_MainSave: TMenuItem;
     dlgOpen_MainFile: TOpenDialog;
-    dlgSave_MainFile: TSaveDialog;
-    mni_SeparatorOne_main: TMenuItem;
-    mni_MainReset: TMenuItem;
-    mni_SQL_Form: TMenuItem;
     mni_SQL_Form_direct: TMenuItem;
     mni_conJson_statistic_transfer: TMenuItem;
     fdjson_conJson: TFDStanStorageJSONLink;
+    mni_device_SeparatorOne: TMenuItem;
+    mni_statistics_show: TMenuItem;
+    mni_composite_show: TMenuItem;
+    mni_mysql_main: TMenuItem;
+    mni_mysql_clear: TMenuItem;
+    mni_mysql_transfer: TMenuItem;
+    mni_mysql_SeparatorOne: TMenuItem;
+    mni_mysql_reset: TMenuItem;
     procedure btn_conJsonClick(Sender: TObject);
     procedure mni_conJsonOpenClick(Sender: TObject);
     procedure mni_conJsonSaveClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure mni_conJson_statistic_transferClick(Sender: TObject);
-    procedure mni_SQL_Form_directClick(Sender: TObject);
     procedure mni_MainOpenClick(Sender: TObject);
     procedure mni_MainResetClick(Sender: TObject);
+    procedure mni_statistics_showClick(Sender: TObject);
+    procedure mni_composite_showClick(Sender: TObject);
+    procedure mni_mysql_clearClick(Sender: TObject);
+    procedure mni_mysql_transferClick(Sender: TObject);
+    procedure mni_mysql_resetClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -175,7 +182,7 @@ begin
   // уничтожаем объект JSON
   JSON.Free;
   dm_conJson.db_memTab_conJson.Refresh;
-  mni_SQL_Form.Enabled := True;
+//  mni_SQL_Form.Enabled := True;
 end;
 
 { Открытие секции чтение и записи конвертируемых файлов
@@ -234,20 +241,15 @@ begin
     end;
     f_StringList.Free;
   end;
+  // сообщаем о загрузке файла БД
+  ShowMessage('Файл успешно загружен!!!' + #13 + 'Переходите к окну статистики');
 end;
 
 
 // Переход на форму статистики
-
-procedure Tfrm_conJson.mni_conJson_statistic_transferClick(Sender: TObject);
+procedure Tfrm_conJson.mni_statistics_showClick(Sender: TObject);
 begin
-  frm_conJson_statistic.Show;
-end;
-
-// открытие сводной таблицы
-procedure Tfrm_conJson.mni_SQL_Form_directClick(Sender: TObject);
-begin
-  frm_CompositeTable.Show;
+    frm_conJson_statistic.Show;
 end;
 
 // обработка кнопки Сброс
@@ -258,16 +260,89 @@ begin
   dbG_conJson.DataSource.DataSet.Close;
   dbG_conJson.DataSource.DataSet.Open;
 end;
+// переход на форму композиции
+// открытие сводной таблицы
+procedure Tfrm_conJson.mni_composite_showClick(Sender: TObject);
+var
+  f_quest: Integer;
+begin
+ // проверка заполняемости таблиц
+  if (dm_conJson.db_memTab_conJson.RecordCount <> 0) and (dm_conJson.db_memTab_conJson_statistic.RecordCount <> 0) then
+  begin
+    // показ формы
+    ShowMessage('Необходимые данные получены ' + #13 + 'Открываем форму для получения композита');
+    frm_CompositeTable.Show;
+  end
+  else
+  begin
+    ShowMessage('Необходимые данные  не получены ' + #13 + 'Форму открыть не могу!!!');
+    // вопрос о необходимости загрузки архива БД композитной таблицы
+    f_quest := MessageDlg('Вы хотите заполнить композитную таблицу' + #13 + 'из архива БД', mtConfirmation, [mbYes, mbNo], 1);
+    if f_quest = 6 then
+    begin
+       ShowMessage('Заполняем БД');
+       frm_CompositeTable.mni_conJsonOpenClick(Sender);
+    end;
+
+  end;
+
+end;
 
 
 
+// *****************************************************************************
+{  Работаем с БД MySQL
+********************************************************************************
+}
+// чистим таблицу
+procedure Tfrm_conJson.mni_mysql_clearClick(Sender: TObject);
+var
+  db_script: TFDScript;
+begin
+//  ShowMessage('Стадия отладки программы');
+// проверяем наличие данных в db_memTab_CompositeTable
 
-// *************************************************************************************************
+  if dm_conJson.db_memTab_CompositeTable.RecordCount <> 0 then
+  begin
+    db_script := dm_conJson.fd_script_ClearDB;
+    if db_script.ValidateAll then
+    begin
+      // переключаем необходимые пункты меню
+      mni_mysql_clear.Enabled := False;
+      mni_mysql_transfer.Enabled := True;
+      // чистим БД на сервере HostServer
+      db_script.ExecuteAll;
+      ShowMessage('Таблица в MySQL - очищена');
+    end;
+  end
+  else
+  begin
+    ShowMessage('Отказано в выполнении' + #13 + 'Данные в сводной таблице отсутствуют');
+  end;
+
+end;
 
 
+// Перенос БД в MySQL
+procedure Tfrm_conJson.mni_mysql_transferClick(Sender: TObject);
+var
+  db_comp: TFDMemTable;
+begin
+  db_comp := dm_conJson.db_memTab_CompositeTable;
+  dm_conJson.fdbtchmv_conJson_BatchMove.Execute;
+end;
+// cброс
 
+procedure Tfrm_conJson.mni_mysql_resetClick(Sender: TObject);
+begin
+// переключаем неоюходимые пункты меню
+  mni_mysql_clear.Enabled := True;
+  mni_mysql_transfer.Enabled := False;
+end;
 
-
+{ конец блока работы с БД MySQL
+********************************************************************************
+}
 // Закрытие формы
 
 procedure Tfrm_conJson.FormClose(Sender: TObject; var Action: TCloseAction);

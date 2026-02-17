@@ -59,6 +59,7 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
       Width = 972
       Height = 25
       DataSource = ds_conJson_statistic
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 1
     end
@@ -66,46 +67,36 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
   object dlgOpen_conJson_statistic: TOpenDialog
     Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
     InitialDir = 'lib_json'
-    Left = 32
-    Top = 232
+    Left = 152
+    Top = 72
   end
   object dlgSave_conJson_statistic: TSaveDialog
     DefaultExt = 'fds'
     FileName = 'statistic'
-    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds|'#1060#1072#1081#1083#1099' Json(*.json)|*.json'
+    Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     InitialDir = 'lib_json'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 168
-    Top = 232
+    Left = 400
+    Top = 64
   end
   object mm_conJson_statistic: TMainMenu
     Left = 16
     Top = 80
-    object mni_MainFile: TMenuItem
-      Caption = #1060#1072#1081#1083
+    object mni_conJsonFile: TMenuItem
+      Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_MainOpen: TMenuItem
         Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' fds'
         OnClick = mni_MainOpenClick
       end
-      object mni_MainSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' - null'
-      end
-      object mni_SeparatorOne_main: TMenuItem
+      object mni_statistics_separatorOne: TMenuItem
         Caption = '-'
       end
-      object mni_MainReset: TMenuItem
-        Caption = #1057#1073#1088#1086#1089
-        OnClick = mni_MainResetClick
-      end
-    end
-    object mni_conJsonFile: TMenuItem
-      Caption = #1057#1077#1082#1094#1080#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080
       object mni_conJsonOpen: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json'
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' json('#1076#1083#1103' '#1082#1086#1085#1074#1077#1088#1090#1072#1094#1080#1080')'
         OnClick = mni_conJsonOpenClick
       end
       object mni_conJsonSave: TMenuItem
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' fds_json'
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083' '#1074' fds'
         OnClick = mni_conJsonSaveClick
       end
       object mni_SeparatorOne: TMenuItem
@@ -127,15 +118,8 @@ object frm_conJson_statistic: Tfrm_conJson_statistic
     FileName = 'device_json'
     Filter = #1060#1072#1081#1083#1099' FDS (*.fds)|*.fds'
     InitialDir = 'lib_fds'
-    Left = 32
-    Top = 328
-  end
-  object dlgSave_MainFile: TSaveDialog
-    Filter = #1060#1072#1081#1083#1099' Json(*.json)|*.json'
-    InitialDir = 'lib_fds'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 144
-    Top = 328
+    Left = 296
+    Top = 72
   end
   object fdjson_conJson: TFDStanStorageJSONLink
     Left = 912

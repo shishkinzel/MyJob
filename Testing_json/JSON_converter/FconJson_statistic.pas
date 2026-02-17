@@ -26,16 +26,12 @@ type
     dbG_conJson_statistic: TDBGrid;
     dbnav_conJson_statistic: TDBNavigator;
     ds_conJson_statistic: TDataSource;
-    mni_MainFile: TMenuItem;
     mni_MainOpen: TMenuItem;
-    mni_MainSave: TMenuItem;
-    mni_SeparatorOne_main: TMenuItem;
-    mni_MainReset: TMenuItem;
     mni_SeparatorOne: TMenuItem;
     mni_Reset: TMenuItem;
     dlgOpen_MainFile: TOpenDialog;
-    dlgSave_MainFile: TSaveDialog;
     fdjson_conJson: TFDStanStorageJSONLink;
+    mni_statistics_separatorOne: TMenuItem;
     procedure mni_conJsonOpenClick(Sender: TObject);
     procedure mni_conJsonSaveClick(Sender: TObject);
     procedure btn_conJsonClick(Sender: TObject);
@@ -81,6 +77,8 @@ var
   ftemp_mac: string;
   fdate: TDateTime;
 begin
+// гасим кнопку
+   btn_conJson.Enabled := False;
   // формируем StringList
   fStringList := TStringList.Create;
   fStringList.LoadFromFile(fPath_jsonFile);
@@ -134,7 +132,11 @@ begin
   // уничтожаем объект JSON
   JSON.Free;
   frm_conJson.mni_SQL_Form_direct.Enabled := True;
+  // Сообщаем о готовности таблицы
+  ShowMessage('Поздравляем!!!' + #13 + 'Таблица сформирована');
+  Self.Close;
 end;
+
 
 { Открытие секции чтение и записи конвертируемых файлов
   ____________________________________________________________________________________________________
@@ -170,7 +172,6 @@ end;
 
 
 // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 { Открытие секции чтение и записи сконвертируемых файлов
   ____________________________________________________________________________________________________
 }
@@ -190,11 +191,14 @@ begin
     begin
       dm_conJson.db_memTab_conJson_statistic.Close;
       dm_conJson.db_memTab_conJson_statistic.Open;
-      dm_conJson.db_memTab_conJson_statistic.LoadFromFile
-        (f_Path_FileJson, sfJSON);
+      dm_conJson.db_memTab_conJson_statistic.LoadFromFile(f_Path_FileJson, sfJSON);
     end;
     f_StringList.Free;
+    // сообщаем о загрузке файла БД и закрываем окно
+    ShowMessage('Файл успешно загружен!!!' + #13 + 'Закрываем окно статистики');
+    Self.Close;
   end;
+
 end;
 
 // *************************************************************************************************
@@ -204,6 +208,8 @@ procedure Tfrm_conJson_statistic.mni_MainResetClick(Sender: TObject);
 begin
   dbG_conJson_statistic.DataSource.DataSet.Close;
   dbG_conJson_statistic.DataSource.DataSet.Open;
+  // зажигаем кнопку
+   btn_conJson.Enabled := True;
 end;
 
 // Закрытие формы
