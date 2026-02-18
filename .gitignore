@@ -70,6 +70,16 @@ Conv_json/
 lib_fds/
 lib_json/
 library/
+file_json/
+file_json_el/
+file_json_sp/
+file_xls_codetmc/
+file_xls_el/
+file_xls_el_trans/
+file_xls_sp/
+file_xls_sp_trans/
+Temp/
+
 # Delphi history and backups
 __history/
 __recovery/
