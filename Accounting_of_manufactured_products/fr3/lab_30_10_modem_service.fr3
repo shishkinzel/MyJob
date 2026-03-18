@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="\\printserver\TE200_576" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45035,664564919" ReportOptions.Description.Text="" ReportOptions.LastChange="46015,7269462384" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;//       ShowMessage('Hello, World');&#13;&#10;       memService.Text := 'Ведомый';&#13;&#10;       memService.Color := clRed;&#13;&#10;       memService.Font.Color := clWhite;&#13;&#10;&#13;&#10;end.">
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="p_lab_30_10_modem" HGuides.Text="" VGuides.Text="" PaperWidth="30" PaperHeight="10" PaperSize="256" LeftMargin="1" RightMargin="1" TopMargin="1" BottomMargin="1" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0" OnAfterPrint="pOneOnAfterPrint" OnBeforePrint="pOneOnBeforePrint">
+    <TfrxMasterData Name="md_lab_30_10_modem" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="18,89765" Width="105,82684" OnBeforePrint="mdOneOnBeforePrint" ColumnWidth="0" ColumnGap="0" RowCount="0">
+      <TfrxMemoView Name="mem_lab_30_10_modem" Align="baClient" AllowVectorExport="True" Left="0" Top="0" Width="105,82684" Height="22,67718" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Roboto Condensed" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Master"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>
